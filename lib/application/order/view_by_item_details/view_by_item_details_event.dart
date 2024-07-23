@@ -19,7 +19,7 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
   }) = _updateIsExpanded;
 
   const factory ViewByItemDetailsEvent.fetchOrdersInvoiceData({
-    required List<OrderHistoryItem> orderHistoryItems,
+    required OrderNumber orderNumber,
   }) = _FetchOrdersInvoiceData;
   const factory ViewByItemDetailsEvent.fetchOrderHistoryDetails({
     required LineNumber lineNumber,

@@ -1,0 +1,24 @@
+{
+    "query": "query GetInvoiceDetailsForOrder($invoicesByOrderRequest: invoicesByOrderRequest!) {
+        GetInvoiceDetailsForOrder(input: $invoicesByOrderRequest) {  
+            InvoiceNumber
+            InvoiceProcessingStatus
+            InvoiceDate
+            InvoiceTotalQty
+            InvoiceTotalPrice
+            InvoiceItems {
+                MaterialCode
+                MaterialDescription
+                Qty
+                UnitPrice
+            }
+        }
+    }",
+    "variables": {
+        "invoicesByOrderRequest": {
+            "orderNumber": "0200382280",
+            "soldTo": "0030082707",
+            "language": "EN"
+        }
+    }, 
+}

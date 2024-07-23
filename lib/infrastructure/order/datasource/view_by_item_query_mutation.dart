@@ -127,4 +127,24 @@ class ViewByItemQueryMutation {
     }
   ''';
   }
+
+  String getInvoiceDetailsForOrder() {
+    return '''
+     query GetInvoiceDetailsForOrder(\$invoicesByOrderRequest: invoicesByOrderRequest!) {
+      GetInvoiceDetailsForOrder(input: \$invoicesByOrderRequest) {
+          InvoiceNumber
+          InvoiceProcessingStatus
+          InvoiceDate
+          InvoiceTotalQty
+          InvoiceTotalPrice
+          InvoiceItems {
+              MaterialCode
+              MaterialDescription
+              Qty
+              UnitPrice
+          }
+      }
+    }
+    ''';
+  }
 }

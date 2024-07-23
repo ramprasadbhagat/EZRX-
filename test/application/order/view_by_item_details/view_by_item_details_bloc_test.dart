@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -44,6 +44,7 @@ void main() {
   final fakeInvoiceNumber = StringValue('fake-invoice-number');
 
   final viewByItemDetailsState = ViewByItemDetailsState.initial();
+  late final List<InvoiceDetail> invoiceDetails;
 
   group(
     'ViewByItemDetailsBloc Test => ',
@@ -52,6 +53,8 @@ void main() {
         fakeOrderStatusTracker =
             await OrderStatusTrackerLocalDataSource().getOrderStatusTracker();
         orderHistory = await ViewByItemLocalDataSource().getViewByItems();
+        invoiceDetails =
+            await ViewByItemLocalDataSource().getInvoiceDetailsForOrder();
         orderHistoryForFetchStatus = orderHistory.copyWith(
           orderHistoryItems: orderHistory.orderHistoryItems
               .map(
@@ -153,7 +156,7 @@ void main() {
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
-            isLoading: true,
+            isStatusLoading: true,
           ),
           viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
@@ -197,7 +200,7 @@ void main() {
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
-            isLoading: true,
+            isStatusLoading: true,
           ),
           viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
@@ -265,10 +268,10 @@ void main() {
           );
 
           when(
-            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
-              orderNumbers: orderHistory.orderHistoryItems
-                  .map((e) => e.orderNumber)
-                  .toList(),
+            () => (viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderHistoryItem.orderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeRootAdminUser.preferredLanguage,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -305,7 +308,7 @@ void main() {
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               orderHistoryItem: orderHistory.orderHistoryItems.first,
-              isLoading: true,
+              isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -348,10 +351,10 @@ void main() {
           );
 
           when(
-            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
-              orderNumbers: orderHistoryForFetchStatus.orderHistoryItems
-                  .map((e) => e.orderNumber)
-                  .toList(),
+            () => (viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderHistoryItem.orderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeRootAdminUser.preferredLanguage,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -399,7 +402,7 @@ void main() {
               orderHistory: orderHistoryForFetchStatus,
               orderHistoryItem:
                   orderHistoryForFetchStatus.orderHistoryItems.first,
-              isLoading: true,
+              isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -419,7 +422,7 @@ void main() {
               orderHistory: orderHistoryForFetchStatus,
               orderHistoryItem:
                   orderHistoryForFetchStatus.orderHistoryItems.first,
-              isLoading: true,
+              isStatusLoading: true,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
             viewByItemDetailsState.copyWith(
@@ -457,6 +460,15 @@ void main() {
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
           );
+          when(
+            () => (viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderHistoryItem.orderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeRootAdminUser.preferredLanguage,
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
         },
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.fetchOrderHistoryDetails(
@@ -467,6 +479,12 @@ void main() {
         expect: () => [
           seedState.copyWith(
             isDetailsLoading: true,
+          ),
+          seedState.copyWith(
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+          ),
+          seedState.copyWith(
+            isInvoiceLoading: true,
           ),
           seedState.copyWith(
             failureOrSuccessOption: optionOf(const Left(fakeError)),
@@ -583,10 +601,10 @@ void main() {
           );
 
           when(
-            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
-              orderNumbers: orderHistoryForFetchStatus.orderHistoryItems
-                  .map((e) => e.orderNumber)
-                  .toList(),
+            () => (viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderHistoryItem.orderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeRootAdminUser.preferredLanguage,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -635,7 +653,7 @@ void main() {
               orderHistory: orderHistoryForFetchStatus,
               orderHistoryItem:
                   orderHistoryForFetchStatus.orderHistoryItems.first,
-              isLoading: true,
+              isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -655,7 +673,7 @@ void main() {
               orderHistory: orderHistoryForFetchStatus,
               orderHistoryItem:
                   orderHistoryForFetchStatus.orderHistoryItems.first,
-              isLoading: true,
+              isStatusLoading: true,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
             viewByItemDetailsState.copyWith(
@@ -703,10 +721,10 @@ void main() {
           );
 
           when(
-            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
-              orderNumbers: orderHistoryForEmptyInvoiceNumber.orderHistoryItems
-                  .map((e) => e.orderNumber)
-                  .toList(),
+            () => (viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderHistoryItem.orderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeRootAdminUser.preferredLanguage,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -746,7 +764,7 @@ void main() {
               orderHistory: orderHistoryForEmptyInvoiceNumber,
               orderHistoryItem:
                   orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
-              isLoading: true,
+              isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -768,30 +786,27 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => viewByItemDetailsState.copyWith(orderHistory: orderHistory),
+        seed: () => seedState.copyWith(orderHistory: orderHistory),
         setUp: () {
           when(
-            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
-              orderNumbers: orderHistory.orderHistoryItems
-                  .map((e) => e.orderNumber)
-                  .toList(),
-            )),
-          ).thenAnswer(
-            (invocation) async => const Right(<StringValue, InvoiceData>{}),
-          );
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: orderHistory.orderHistoryItems.first.orderNumber,
+              customerCodeInfo: seedState.customerCodeInfo,
+              language: seedState.user.preferredLanguage,
+            ),
+          ).thenAnswer((invocation) async => Right(invoiceDetails));
         },
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.fetchOrdersInvoiceData(
-            orderHistoryItems: orderHistory.orderHistoryItems,
+            orderNumber: orderHistory.orderHistoryItems.first.orderNumber,
           ),
         ),
         expect: () => [
-          viewByItemDetailsState.copyWith(
-            orderHistory: orderHistory,
-            isLoading: true,
+          seedState.copyWith(
+            isInvoiceLoading: true,
           ),
-          viewByItemDetailsState.copyWith(
-            orderHistory: orderHistory,
+          seedState.copyWith(
+            invoices: invoiceDetails,
           ),
         ],
       );
@@ -810,7 +825,15 @@ void main() {
         ),
         setUp: () {
           when(
-                () => (viewByItemRepositoryMock.getViewByItemDetails(
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderHistoryItem.orderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeRootAdminUser.preferredLanguage,
+            ),
+          ).thenAnswer((invocation) async => Right(invoiceDetails));
+
+          when(
+            () => (viewByItemRepositoryMock.getViewByItemDetails(
               soldTo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -820,17 +843,17 @@ void main() {
               ),
             )),
           ).thenAnswer(
-                (invocation) async => Right(orderHistory),
+            (invocation) async => Right(orderHistory),
           );
 
           when(
-                () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
               orderNumbers: orderHistory.orderHistoryItems
                   .map((e) => e.orderNumber)
                   .toList(),
             )),
           ).thenAnswer(
-                (invocation) async => const Left(fakeError),
+            (invocation) async => const Left(fakeError),
           );
         },
         act: (bloc) => bloc.add(
@@ -854,8 +877,17 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
               failureOrSuccessOption: optionOf(Right(orderHistory)),
+              orderHistoryItem: orderHistory.orderHistoryItems.first,
+            ),
+            viewByItemDetailsState.copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              user: fakeRootAdminUser,
+              isInvoiceLoading: true,
+              orderHistory: orderHistory,
+              orderHistoryItem: orderHistory.orderHistoryItems.first,
             ),
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -864,16 +896,7 @@ void main() {
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               orderHistoryItem: orderHistory.orderHistoryItems.first,
-              isLoading: true,
-            ),
-            viewByItemDetailsState.copyWith(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfig: fakeMYSalesOrgConfigs,
-              salesOrganisation: fakeMYSalesOrganisation,
-              user: fakeRootAdminUser,
-              orderHistory: orderHistory,
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
-              failureOrSuccessOption: optionOf(const Left(fakeError)),
+              invoices: invoiceDetails,
             ),
           ];
         },

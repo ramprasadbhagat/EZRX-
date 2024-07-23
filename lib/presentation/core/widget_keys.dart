@@ -1513,6 +1513,9 @@ class WidgetKeys {
       const Key('viewByItemDetailOtherItemExpandSection');
   static const Key viewByItemsOrderDetailOrderOrQueueNumber =
       Key('viewByItemsOrderDetailOrderOrQueueNumber');
+  static const Key orderItemHistoryItemTab = Key('orderItemHistoryItemTab');
+  static const Key orderItemHistoryInvoiceTab =
+      Key('orderItemHistoryInvoiceTab');
   //============================================================
   // View By Orders
   //============================================================

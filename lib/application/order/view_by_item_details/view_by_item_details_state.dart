@@ -12,11 +12,13 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
     required OrderHistory orderHistory,
     required OrderHistoryItem orderHistoryItem,
     required List<OrderStatusTracker> orderHistoryStatuses,
-    required bool isLoading,
+    required bool isStatusLoading,
+    required bool isInvoiceLoading,
     required bool isDetailsLoading,
     required bool isExpanded,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ShipToInfo shipToInfo,
+    required List<InvoiceDetail> invoices,
   }) = _ViewByItemDetailsState;
 
   factory ViewByItemDetailsState.initial() => ViewByItemDetailsState(
@@ -28,10 +30,12 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
         orderHistoryItem: OrderHistoryItem.empty(),
         orderHistoryStatuses: <OrderStatusTracker>[],
         failureOrSuccessOption: none(),
-        isLoading: false,
+        isStatusLoading: false,
+        isInvoiceLoading: false,
         isDetailsLoading: false,
         isExpanded: false,
         shipToInfo: ShipToInfo.empty(),
+        invoices: <InvoiceDetail>[],
       );
 
   List<PoDocuments> get poDocumentsList => isExpanded

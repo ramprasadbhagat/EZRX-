@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
@@ -50,52 +51,37 @@ class ViewByItemDetailsBloc
         ),
       ),
       fetchOrdersInvoiceData: (e) async {
-        final orderNumbers =
-            e.orderHistoryItems.map((e) => e.orderNumber).toList();
-
-        if (orderNumbers.isEmpty) return;
+        if (!e.orderNumber.isValid()) return;
 
         emit(
           state.copyWith(
-            isLoading: true,
+            isInvoiceLoading: true,
             failureOrSuccessOption: none(),
           ),
         );
 
         final failureOrSuccess =
-            await viewByItemRepository.getOrdersInvoiceData(
-          orderNumbers: orderNumbers,
+            await viewByItemRepository.getInvoiceDetailsForOrder(
+          orderNumber: e.orderNumber,
+          customerCodeInfo: state.customerCodeInfo,
+          language: state.user.preferredLanguage,
         );
 
         failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
+                isInvoiceLoading: false,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
-                isLoading: false,
               ),
             );
           },
-          (invoiceDataMap) {
-            final orderHistoryItemsList = List<OrderHistoryItem>.from(
-              state.orderHistory.orderHistoryItems,
-            )
-                .map(
-                  (orderItem) => orderItem.copyWith(
-                    invoiceNumber:
-                        invoiceDataMap[orderItem.hashId]?.invoiceNumber ??
-                            orderItem.invoiceNumber,
-                  ),
-                )
-                .toList();
-
+          (invoiceData) {
             emit(
               state.copyWith(
-                orderHistory: state.orderHistory.copyWith(
-                  orderHistoryItems: orderHistoryItemsList,
-                ),
+                isInvoiceLoading: false,
+                invoices: invoiceData,
                 failureOrSuccessOption: none(),
-                isLoading: false,
               ),
             );
           },
@@ -104,7 +90,7 @@ class ViewByItemDetailsBloc
       fetchZyllemStatus: (e) async {
         emit(
           state.copyWith(
-            isLoading: true,
+            isStatusLoading: true,
           ),
         );
         final failureOrSuccess = await orderStatusTrackerRepository
@@ -114,7 +100,7 @@ class ViewByItemDetailsBloc
           (failure) async => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
-              isLoading: false,
+              isStatusLoading: false,
             ),
           ),
           (orderHistoryStatuses) {
@@ -122,7 +108,7 @@ class ViewByItemDetailsBloc
               state.copyWith(
                 orderHistoryStatuses: orderHistoryStatuses,
                 failureOrSuccessOption: none(),
-                isLoading: false,
+                isStatusLoading: false,
               ),
             );
           },
@@ -131,7 +117,11 @@ class ViewByItemDetailsBloc
       fetchOrderHistoryDetails: (e) async {
         final searchKey = SearchKey.search(e.orderNumber.getOrDefaultValue(''));
         if (searchKey.isInvalidSearchKey) return;
-
+        add(
+          _FetchOrdersInvoiceData(
+            orderNumber: e.orderNumber,
+          ),
+        );
         emit(
           state.copyWith(
             isDetailsLoading: true,
@@ -168,11 +158,6 @@ class ViewByItemDetailsBloc
                 orderHistoryItem: orderHistoryItem,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isDetailsLoading: false,
-              ),
-            );
-            add(
-              _FetchOrdersInvoiceData(
-                orderHistoryItems: orderHistory.orderHistoryItems,
               ),
             );
             if (orderHistoryItem.invoiceNumber.isNotEmpty) {

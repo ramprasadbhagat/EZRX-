@@ -33,8 +33,7 @@ mixin _$ViewByOrderDetailsEvent {
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,8 +52,7 @@ mixin _$ViewByOrderDetailsEvent {
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,8 +71,7 @@ mixin _$ViewByOrderDetailsEvent {
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -308,8 +305,7 @@ class _$InitializedImpl implements _Initialized {
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) {
     return initialized(
         user, configs, customerCodeInfo, salesOrganisation, shipToInfo);
@@ -332,8 +328,7 @@ class _$InitializedImpl implements _Initialized {
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) {
     return initialized?.call(
         user, configs, customerCodeInfo, salesOrganisation, shipToInfo);
@@ -356,8 +351,7 @@ class _$InitializedImpl implements _Initialized {
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -516,8 +510,7 @@ class _$FetchImpl implements _Fetch {
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) {
     return fetch(orderNumber);
   }
@@ -539,8 +532,7 @@ class _$FetchImpl implements _Fetch {
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) {
     return fetch?.call(orderNumber);
   }
@@ -562,8 +554,7 @@ class _$FetchImpl implements _Fetch {
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -724,8 +715,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) {
     return setOrderDetails(orderHistoryDetails);
   }
@@ -747,8 +737,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) {
     return setOrderDetails?.call(orderHistoryDetails);
   }
@@ -770,8 +759,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (setOrderDetails != null) {
@@ -960,8 +948,7 @@ class _$UpdateMaterialTenderContractImpl
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) {
     return updateMaterialTenderContract(selectedTenderContract, queryInfo);
   }
@@ -983,8 +970,7 @@ class _$UpdateMaterialTenderContractImpl
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) {
     return updateMaterialTenderContract?.call(
         selectedTenderContract, queryInfo);
@@ -1007,8 +993,7 @@ class _$UpdateMaterialTenderContractImpl
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (updateMaterialTenderContract != null) {
@@ -1136,8 +1121,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) {
     return expandAttachments();
   }
@@ -1159,8 +1143,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) {
     return expandAttachments?.call();
   }
@@ -1182,8 +1165,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (expandAttachments != null) {
@@ -1300,8 +1282,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) {
     return updateBundle();
   }
@@ -1323,8 +1304,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) {
     return updateBundle?.call();
   }
@@ -1346,8 +1326,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (updateBundle != null) {
@@ -1418,9 +1397,7 @@ abstract class _$$FetchOrdersInvoiceDataImplCopyWith<$Res> {
           $Res Function(_$FetchOrdersInvoiceDataImpl) then) =
       __$$FetchOrdersInvoiceDataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({OrderHistoryDetails orderHistoryDetails});
-
-  $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
+  $Res call({OrderNumber orderNumber});
 }
 
 /// @nodoc
@@ -1436,37 +1413,28 @@ class __$$FetchOrdersInvoiceDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetails = null,
+    Object? orderNumber = null,
   }) {
     return _then(_$FetchOrdersInvoiceDataImpl(
-      orderHistoryDetails: null == orderHistoryDetails
-          ? _value.orderHistoryDetails
-          : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetails,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails {
-    return $OrderHistoryDetailsCopyWith<$Res>(_value.orderHistoryDetails,
-        (value) {
-      return _then(_value.copyWith(orderHistoryDetails: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
-  const _$FetchOrdersInvoiceDataImpl({required this.orderHistoryDetails});
+  const _$FetchOrdersInvoiceDataImpl({required this.orderNumber});
 
   @override
-  final OrderHistoryDetails orderHistoryDetails;
+  final OrderNumber orderNumber;
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsEvent.fetchOrdersInvoiceData(orderHistoryDetails: $orderHistoryDetails)';
+    return 'ViewByOrderDetailsEvent.fetchOrdersInvoiceData(orderNumber: $orderNumber)';
   }
 
   @override
@@ -1474,12 +1442,12 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchOrdersInvoiceDataImpl &&
-            (identical(other.orderHistoryDetails, orderHistoryDetails) ||
-                other.orderHistoryDetails == orderHistoryDetails));
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, orderHistoryDetails);
+  int get hashCode => Object.hash(runtimeType, orderNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -1506,10 +1474,9 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
-    required TResult Function(OrderHistoryDetails orderHistoryDetails)
-        fetchOrdersInvoiceData,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
   }) {
-    return fetchOrdersInvoiceData(orderHistoryDetails);
+    return fetchOrdersInvoiceData(orderNumber);
   }
 
   @override
@@ -1529,10 +1496,9 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
-    TResult? Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
   }) {
-    return fetchOrdersInvoiceData?.call(orderHistoryDetails);
+    return fetchOrdersInvoiceData?.call(orderNumber);
   }
 
   @override
@@ -1552,12 +1518,11 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
-    TResult Function(OrderHistoryDetails orderHistoryDetails)?
-        fetchOrdersInvoiceData,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (fetchOrdersInvoiceData != null) {
-      return fetchOrdersInvoiceData(orderHistoryDetails);
+      return fetchOrdersInvoiceData(orderNumber);
     }
     return orElse();
   }
@@ -1615,10 +1580,9 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
 
 abstract class _FetchOrdersInvoiceData implements ViewByOrderDetailsEvent {
   const factory _FetchOrdersInvoiceData(
-          {required final OrderHistoryDetails orderHistoryDetails}) =
-      _$FetchOrdersInvoiceDataImpl;
+      {required final OrderNumber orderNumber}) = _$FetchOrdersInvoiceDataImpl;
 
-  OrderHistoryDetails get orderHistoryDetails;
+  OrderNumber get orderNumber;
   @JsonKey(ignore: true)
   _$$FetchOrdersInvoiceDataImplCopyWith<_$FetchOrdersInvoiceDataImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1645,6 +1609,7 @@ mixin _$ViewByOrderDetailsState {
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   bool get isLoadingBundleDetail => throw _privateConstructorUsedError;
   bool get isFetchingInvoices => throw _privateConstructorUsedError;
+  List<InvoiceDetail> get invoices => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrderDetailsStateCopyWith<ViewByOrderDetailsState> get copyWith =>
@@ -1671,7 +1636,8 @@ abstract class $ViewByOrderDetailsStateCopyWith<$Res> {
       List<ProductDetailAggregate> productDetailAggregateList,
       ShipToInfo shipToInfo,
       bool isLoadingBundleDetail,
-      bool isFetchingInvoices});
+      bool isFetchingInvoices,
+      List<InvoiceDetail> invoices});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -1709,6 +1675,7 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
     Object? shipToInfo = null,
     Object? isLoadingBundleDetail = null,
     Object? isFetchingInvoices = null,
+    Object? invoices = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -1767,6 +1734,10 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
           ? _value.isFetchingInvoices
           : isFetchingInvoices // ignore: cast_nullable_to_non_nullable
               as bool,
+      invoices: null == invoices
+          ? _value.invoices
+          : invoices // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetail>,
     ) as $Val);
   }
 
@@ -1843,7 +1814,8 @@ abstract class _$$ViewByOrderDetailsStateImplCopyWith<$Res>
       List<ProductDetailAggregate> productDetailAggregateList,
       ShipToInfo shipToInfo,
       bool isLoadingBundleDetail,
-      bool isFetchingInvoices});
+      bool isFetchingInvoices,
+      List<InvoiceDetail> invoices});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -1886,6 +1858,7 @@ class __$$ViewByOrderDetailsStateImplCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? isLoadingBundleDetail = null,
     Object? isFetchingInvoices = null,
+    Object? invoices = null,
   }) {
     return _then(_$ViewByOrderDetailsStateImpl(
       user: null == user
@@ -1944,6 +1917,10 @@ class __$$ViewByOrderDetailsStateImplCopyWithImpl<$Res>
           ? _value.isFetchingInvoices
           : isFetchingInvoices // ignore: cast_nullable_to_non_nullable
               as bool,
+      invoices: null == invoices
+          ? _value._invoices
+          : invoices // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetail>,
     ));
   }
 }
@@ -1965,10 +1942,12 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
       required final List<ProductDetailAggregate> productDetailAggregateList,
       required this.shipToInfo,
       required this.isLoadingBundleDetail,
-      required this.isFetchingInvoices})
+      required this.isFetchingInvoices,
+      required final List<InvoiceDetail> invoices})
       : _isLoadingTenderContract = isLoadingTenderContract,
         _materials = materials,
         _productDetailAggregateList = productDetailAggregateList,
+        _invoices = invoices,
         super._();
 
   @override
@@ -2019,10 +1998,17 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
   final bool isLoadingBundleDetail;
   @override
   final bool isFetchingInvoices;
+  final List<InvoiceDetail> _invoices;
+  @override
+  List<InvoiceDetail> get invoices {
+    if (_invoices is EqualUnmodifiableListView) return _invoices;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invoices);
+  }
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsState(user: $user, configs: $configs, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, shipToInfo: $shipToInfo, isLoadingBundleDetail: $isLoadingBundleDetail, isFetchingInvoices: $isFetchingInvoices)';
+    return 'ViewByOrderDetailsState(user: $user, configs: $configs, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, shipToInfo: $shipToInfo, isLoadingBundleDetail: $isLoadingBundleDetail, isFetchingInvoices: $isFetchingInvoices, invoices: $invoices)';
   }
 
   @override
@@ -2056,7 +2042,8 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
             (identical(other.isLoadingBundleDetail, isLoadingBundleDetail) ||
                 other.isLoadingBundleDetail == isLoadingBundleDetail) &&
             (identical(other.isFetchingInvoices, isFetchingInvoices) ||
-                other.isFetchingInvoices == isFetchingInvoices));
+                other.isFetchingInvoices == isFetchingInvoices) &&
+            const DeepCollectionEquality().equals(other._invoices, _invoices));
   }
 
   @override
@@ -2075,7 +2062,8 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
       const DeepCollectionEquality().hash(_productDetailAggregateList),
       shipToInfo,
       isLoadingBundleDetail,
-      isFetchingInvoices);
+      isFetchingInvoices,
+      const DeepCollectionEquality().hash(_invoices));
 
   @JsonKey(ignore: true)
   @override
@@ -2100,7 +2088,9 @@ abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
       required final List<ProductDetailAggregate> productDetailAggregateList,
       required final ShipToInfo shipToInfo,
       required final bool isLoadingBundleDetail,
-      required final bool isFetchingInvoices}) = _$ViewByOrderDetailsStateImpl;
+      required final bool isFetchingInvoices,
+      required final List<InvoiceDetail>
+          invoices}) = _$ViewByOrderDetailsStateImpl;
   const _ViewByOrderDetailsState._() : super._();
 
   @override
@@ -2131,6 +2121,8 @@ abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
   bool get isLoadingBundleDetail;
   @override
   bool get isFetchingInvoices;
+  @override
+  List<InvoiceDetail> get invoices;
   @override
   @JsonKey(ignore: true)
   _$$ViewByOrderDetailsStateImplCopyWith<_$ViewByOrderDetailsStateImpl>

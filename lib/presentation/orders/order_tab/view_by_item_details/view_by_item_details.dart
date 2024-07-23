@@ -11,8 +11,10 @@ import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
+import 'package:ezrxmobile/presentation/core/tab_view_with_dynamic_height.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/section/order_history_invoice_tab.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_common_tile.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
@@ -71,6 +73,7 @@ part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/sect
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_order_item_tile.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_item_history_item_tab.dart';
 
 @RoutePage()
 class ViewByItemDetailsPage extends StatelessWidget {
@@ -119,7 +122,8 @@ class ViewByItemDetailsPage extends StatelessWidget {
             );
           },
           buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading ||
+              previous.isStatusLoading != current.isStatusLoading ||
+              previous.isInvoiceLoading != current.isInvoiceLoading ||
               previous.isDetailsLoading != current.isDetailsLoading ||
               previous.orderHistoryItem != current.orderHistoryItem ||
               previous.orderHistoryStatuses != current.orderHistoryStatuses,
@@ -132,51 +136,32 @@ class ViewByItemDetailsPage extends StatelessWidget {
                     currentPath: context.router.currentPath,
                     child: ListView(
                       key: WidgetKeys.scrollList,
-                      children: <Widget>[
-                        const LicenseExpiredBanner(),
-                        const EdiUserBanner(),
-                        ViewByItemDetailsHeaderSection(
-                          orderHistoryItem: state.orderHistoryItem,
-                          orderHistoryBasicInfo:
-                              state.orderHistory.orderBasicInformation,
-                        ),
-                        _ViewByItemStatusTracker(
-                          orderHistoryItem: state.orderHistoryItem,
-                          subSteps: state.orderHistoryStatuses,
-                        ),
-                        const Divider(
-                          indent: 0,
-                          height: 32,
-                          endIndent: 0,
-                          color: ZPColors.lightGrey,
+                      children: [
+                        _OrderInformation(
+                          state: state,
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                            vertical: 16.0,
+                          padding: const EdgeInsets.only(top: 32.0),
+                          child: TabViewWithDynamicHeight(
+                            tabs: [
+                              Tab(
+                                key: WidgetKeys.orderItemHistoryItemTab,
+                                text: context.tr('Your item'),
+                              ),
+                              Tab(
+                                key: WidgetKeys.orderItemHistoryInvoiceTab,
+                                text:
+                                    '${context.tr('Invoices')} (${state.invoices.length})',
+                              ),
+                            ],
+                            tabViews: [
+                              const _OrderItemHistoryItemTab(),
+                              OrderHistoryInvoiceTab(
+                                invoices: state.invoices,
+                                isLoading: state.isInvoiceLoading,
+                              ),
+                            ],
                           ),
-                          child: AddressInfoSection.order(),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                          ),
-                          child: PayerInformation(
-                            expanded: false,
-                          ),
-                        ),
-                        const Divider(
-                          indent: 0,
-                          height: 20,
-                          endIndent: 0,
-                          color: ZPColors.lightGrey,
-                        ),
-                        ItemDetailsSection(
-                          orderHistoryItem: state.orderHistoryItem,
-                        ),
-                        OtherItemDetailsSection(
-                          otherItems: state.otherItems,
-                          isMarketPlace: state.orderHistoryItem.isMarketPlace,
                         ),
                       ],
                     ),
@@ -184,6 +169,59 @@ class ViewByItemDetailsPage extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class _OrderInformation extends StatelessWidget {
+  final ViewByItemDetailsState state;
+  const _OrderInformation({
+    required this.state,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const LicenseExpiredBanner(),
+        const EdiUserBanner(),
+        ViewByItemDetailsHeaderSection(
+          orderHistoryItem: state.orderHistoryItem,
+          orderHistoryBasicInfo: state.orderHistory.orderBasicInformation,
+        ),
+        _ViewByItemStatusTracker(
+          orderHistoryItem: state.orderHistoryItem,
+          subSteps: state.orderHistoryStatuses,
+        ),
+        const Divider(
+          indent: 0,
+          height: 32,
+          endIndent: 0,
+          color: ZPColors.lightGrey,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 16.0,
+          ),
+          child: AddressInfoSection.order(),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: PayerInformation(
+            expanded: false,
+          ),
+        ),
+        const Divider(
+          indent: 0,
+          height: 20,
+          endIndent: 0,
+          color: ZPColors.lightGrey,
+        ),
+      ],
     );
   }
 }

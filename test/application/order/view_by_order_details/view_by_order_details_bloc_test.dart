@@ -4,8 +4,7 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
@@ -13,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
@@ -50,20 +50,21 @@ void main() {
   late ViewByItemRepository viewByItemRepositoryMock;
   final viewByOrderDetailsState = ViewByOrderDetailsState.initial();
   const fakeError = ApiFailure.other('fake-error');
-  final fakeStringValue = StringValue('');
-  final fakeInvoiceData = InvoiceData.empty();
   final fakeMaterialInfo = MaterialInfo.empty();
   final fakeMaterialNumber = MaterialNumber('fake-data');
+  late final List<InvoiceDetail> invoiceDetails;
 
   group(
     'ViewByOrderDetailsBloc Test',
     () {
-      setUp(() async {
+      setUpAll(() async {
         viewByOrderDetailsRepositoryMock = ViewByOrderDetailsRepositoryMock();
         productDetailRepositoryMock = ProductDetailsRepositoryMock();
         viewByItemRepositoryMock = ViewByItemRepositoryMock();
         orderHistoryDetailsMock =
             await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
+        invoiceDetails =
+            await ViewByItemLocalDataSource().getInvoiceDetailsForOrder();
         orderHistoryDetailsMock = orderHistoryDetailsMock.copyWith(
           orderHistoryDetailsOrderItem: [
             orderHistoryDetailsMock.orderHistoryDetailsOrderItem.first,
@@ -164,8 +165,10 @@ void main() {
             ),
           ).thenAnswer((invocation) async => Right(orderHistoryDetailsMock));
           when(
-            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
-              orderNumbers: [orderHistoryDetailsMock.orderNumber],
+            () => (viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeClient.preferredLanguage,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -215,7 +218,6 @@ void main() {
             ),
             materials: fakeMaterials,
             isLoadingTenderContract: fakeIsLoadingTenderContract,
-            isFetchingInvoices: false,
           ),
         ],
       );
@@ -245,6 +247,15 @@ void main() {
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
           );
+          when(
+            () => (viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: fakeOrderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeClient.preferredLanguage,
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
         },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetch(
@@ -269,6 +280,22 @@ void main() {
               const Left(
                 ApiFailure.other('Fake-Error'),
               ),
+            ),
+          ),
+          ViewByOrderDetailsState.initial().copyWith(
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
+            isFetchingInvoices: true,
+          ),
+          ViewByOrderDetailsState.initial().copyWith(
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
+            failureOrSuccessOption: optionOf(
+              const Left(fakeError),
             ),
           ),
         ],
@@ -487,7 +514,9 @@ void main() {
         );
       });
 
-      test('test displayBuyAgainButton is false when isCovidOrderTypeForPH is true and isCustomer is false', () {
+      test(
+          'test displayBuyAgainButton is false when isCovidOrderTypeForPH is true and isCustomer is false',
+          () {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
@@ -495,8 +524,10 @@ void main() {
         );
         bloc.emit(
           viewByOrderDetailsState.copyWith(
-            configs: fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
-            orderHistoryDetails: orderHistoryDetailsMock.copyWith(type: DocumentType('zpvf')),
+            configs:
+                fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
+            orderHistoryDetails:
+                orderHistoryDetailsMock.copyWith(type: DocumentType('zpvf')),
             user: fakeZPAdminUser,
           ),
         );
@@ -507,7 +538,9 @@ void main() {
         );
       });
 
-      test('test displayBuyAgainButton is true when isCovidOrderTypeForPH is false and isCustomer is false', () {
+      test(
+          'test displayBuyAgainButton is true when isCovidOrderTypeForPH is false and isCustomer is false',
+          () {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
@@ -515,8 +548,10 @@ void main() {
         );
         bloc.emit(
           viewByOrderDetailsState.copyWith(
-            configs: fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
-            orderHistoryDetails: orderHistoryDetailsMock.copyWith(type: DocumentType('zpor')),
+            configs:
+                fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
+            orderHistoryDetails:
+                orderHistoryDetailsMock.copyWith(type: DocumentType('zpor')),
             user: fakeZPAdminUser,
           ),
         );
@@ -527,8 +562,9 @@ void main() {
         );
       });
 
-
-      test('test displayBuyAgainButton is true when isCovidOrderTypeForPH is true and isCustomer is true', () {
+      test(
+          'test displayBuyAgainButton is true when isCovidOrderTypeForPH is true and isCustomer is true',
+          () {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
@@ -536,8 +572,10 @@ void main() {
         );
         bloc.emit(
           viewByOrderDetailsState.copyWith(
-            configs: fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
-            orderHistoryDetails: orderHistoryDetailsMock.copyWith(type: DocumentType('zpvf')),
+            configs:
+                fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
+            orderHistoryDetails:
+                orderHistoryDetailsMock.copyWith(type: DocumentType('zpvf')),
             user: fakeClientAdmin,
           ),
         );
@@ -548,7 +586,9 @@ void main() {
         );
       });
 
-      test('test displayBuyAgainButton is false when isCovidOrderTypeForSG is true and isCustomer is false', () {
+      test(
+          'test displayBuyAgainButton is false when isCovidOrderTypeForSG is true and isCustomer is false',
+          () {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
@@ -556,8 +596,10 @@ void main() {
         );
         bloc.emit(
           viewByOrderDetailsState.copyWith(
-            configs: fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
-            orderHistoryDetails: orderHistoryDetailsMock.copyWith(type: DocumentType('zpfc')),
+            configs:
+                fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
+            orderHistoryDetails:
+                orderHistoryDetailsMock.copyWith(type: DocumentType('zpfc')),
             user: fakeZPAdminUser,
           ),
         );
@@ -568,7 +610,9 @@ void main() {
         );
       });
 
-      test('test displayBuyAgainButton is true when isCovidOrderTypeForSG is false and isCustomer is false', () {
+      test(
+          'test displayBuyAgainButton is true when isCovidOrderTypeForSG is false and isCustomer is false',
+          () {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
@@ -576,8 +620,10 @@ void main() {
         );
         bloc.emit(
           viewByOrderDetailsState.copyWith(
-            configs: fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
-            orderHistoryDetails: orderHistoryDetailsMock.copyWith(type: DocumentType('zpor')),
+            configs:
+                fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
+            orderHistoryDetails:
+                orderHistoryDetailsMock.copyWith(type: DocumentType('zpor')),
             user: fakeZPAdminUser,
           ),
         );
@@ -588,8 +634,9 @@ void main() {
         );
       });
 
-
-      test('test displayBuyAgainButton is true when isCovidOrderTypeForSG is true and isCustomer is true', () {
+      test(
+          'test displayBuyAgainButton is true when isCovidOrderTypeForSG is true and isCustomer is true',
+          () {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
@@ -597,8 +644,10 @@ void main() {
         );
         bloc.emit(
           viewByOrderDetailsState.copyWith(
-            configs: fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
-            orderHistoryDetails: orderHistoryDetailsMock.copyWith(type: DocumentType('zpfc')),
+            configs:
+                fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
+            orderHistoryDetails:
+                orderHistoryDetailsMock.copyWith(type: DocumentType('zpfc')),
             user: fakeClientAdmin,
           ),
         );
@@ -619,18 +668,16 @@ void main() {
         seed: () => viewByOrderDetailsState,
         setUp: () {
           when(
-            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
-              orderNumbers: [orderHistoryDetailsMock.orderNumber],
-            )),
-          ).thenAnswer(
-            (invocation) async => Right(<StringValue, InvoiceData>{
-              fakeStringValue: fakeInvoiceData,
-            }),
-          );
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: orderHistoryDetailsMock.orderNumber,
+              customerCodeInfo: viewByOrderDetailsState.customerCodeInfo,
+              language: viewByOrderDetailsState.user.preferredLanguage,
+            ),
+          ).thenAnswer((invocation) async => Right(invoiceDetails));
         },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetchOrdersInvoiceData(
-            orderHistoryDetails: orderHistoryDetailsMock,
+            orderNumber: orderHistoryDetailsMock.orderNumber,
           ),
         ),
         expect: () => [
@@ -638,10 +685,7 @@ void main() {
             isFetchingInvoices: true,
           ),
           viewByOrderDetailsState.copyWith(
-            orderHistoryDetails:
-                viewByOrderDetailsState.orderHistoryDetails.copyWith(
-              invoiceNumber: fakeStringValue,
-            ),
+            invoices: invoiceDetails,
           ),
         ],
       );

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -51,6 +52,11 @@ class ViewByOrderDetailsBloc
         ),
       ),
       fetch: (e) async {
+        add(
+          _FetchOrdersInvoiceData(
+            orderNumber: e.orderNumber,
+          ),
+        );
         emit(
           state.copyWith(
             isLoading: true,
@@ -92,11 +98,7 @@ class ViewByOrderDetailsBloc
                 },
               ),
             );
-            add(
-              _FetchOrdersInvoiceData(
-                orderHistoryDetails: orderHistoryDetails,
-              ),
-            );
+
             add(const _UpdateBundle());
           },
         );
@@ -188,7 +190,7 @@ class ViewByOrderDetailsBloc
         );
       },
       fetchOrdersInvoiceData: (_FetchOrdersInvoiceData e) async {
-        if (e.orderHistoryDetails.orderHistoryDetailsOrderItem.isEmpty) return;
+        if (!e.orderNumber.isValid()) return;
 
         emit(
           state.copyWith(
@@ -198,8 +200,10 @@ class ViewByOrderDetailsBloc
         );
 
         final failureOrSuccess =
-            await viewByItemRepository.getOrdersInvoiceData(
-          orderNumbers: [e.orderHistoryDetails.orderNumber],
+            await viewByItemRepository.getInvoiceDetailsForOrder(
+          orderNumber: e.orderNumber,
+          customerCodeInfo: state.customerCodeInfo,
+          language: state.user.preferredLanguage,
         );
 
         failureOrSuccess.fold(
@@ -211,13 +215,10 @@ class ViewByOrderDetailsBloc
               ),
             );
           },
-          (invoiceDataMap) {
+          (invoices) {
             emit(
               state.copyWith(
-                orderHistoryDetails:
-                    state.orderHistoryDetails.copyWithInvoiceNumber(
-                  invoiceDataMap: invoiceDataMap,
-                ),
+                invoices: invoices,
                 failureOrSuccessOption: none(),
                 isFetchingInvoices: false,
               ),

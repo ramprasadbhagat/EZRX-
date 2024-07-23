@@ -476,12 +476,12 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isStatusLoading: true,
         ),
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
+          isStatusLoading: false,
           orderHistoryStatuses: [],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
@@ -511,12 +511,12 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isStatusLoading: true,
         ),
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
+          isStatusLoading: false,
           orderHistoryStatuses: [],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
@@ -543,7 +543,7 @@ void main() {
     testWidgets('When enableSpecialInstructions is false', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isStatusLoading: true,
         ),
       );
       final expectedStates = [
@@ -572,7 +572,7 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isStatusLoading: true,
         ),
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
@@ -594,7 +594,7 @@ void main() {
     testWidgets('When enableReferenceNote is false', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isStatusLoading: true,
         ),
       );
       final expectedStates = [
@@ -623,7 +623,7 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isStatusLoading: true,
         ),
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
@@ -644,7 +644,7 @@ void main() {
     testWidgets('Find Order created Status', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
+          isStatusLoading: false,
           orderHistoryStatuses: [],
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
             status: OrderStepValue('Order created'),
@@ -679,7 +679,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isStatusLoading: true,
         ),
       );
       final expectedStates = [
@@ -937,7 +937,7 @@ void main() {
           (tester) async {
         final expectedState = [
           ViewByItemDetailsState.initial().copyWith(
-            isLoading: true,
+            isStatusLoading: true,
           ),
           ViewByItemDetailsState.initial().copyWith(
             failureOrSuccessOption: optionOf(
@@ -1759,7 +1759,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isDetailsLoading: true,
         ),
       );
       final expectedStates = [
@@ -1810,7 +1810,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isDetailsLoading: true,
         ),
       );
       final expectedStates = [
@@ -1855,7 +1855,7 @@ void main() {
     //   );
     //   when(() => viewByItemDetailsBlocMock.state).thenReturn(
     //     ViewByItemDetailsState.initial().copyWith(
-    //       isLoading: true,
+    //       isStatusLoading: true,
     //     ),
     //   );
     //   final expectedStates = [
@@ -1900,7 +1900,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isDetailsLoading: true,
         ),
       );
       final expectedStates = [
@@ -1938,7 +1938,7 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
+          isStatusLoading: false,
           orderHistoryItem: mockViewByItemsOrderHistory.orderHistoryItems.last,
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
@@ -2184,7 +2184,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
+          isStatusLoading: false,
           orderHistoryItem: pnGMaterial,
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [pnGMaterial],

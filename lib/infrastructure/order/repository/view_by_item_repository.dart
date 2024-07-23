@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_request.dart';
@@ -167,6 +168,37 @@ class ViewByItemRepository implements IViewByItemRepository {
           _getInvoiceMapData(ordersInvoiceData: ordersInvoiceData);
 
       return Right(invoiceDataMap);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<InvoiceDetail>>> getInvoiceDetailsForOrder({
+    required OrderNumber orderNumber,
+    required CustomerCodeInfo customerCodeInfo,
+    required Language language,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final invoiceList =
+            await viewByItemLocalDataSource.getInvoiceDetailsForOrder();
+
+        return Right(invoiceList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      final invoiceList =
+          await viewByItemRemoteDataSource.getInvoiceDetailsForOrder(
+        orderNumber: orderNumber.getOrCrash(),
+        soldToCustomerCode: customerCodeInfo.customerCodeSoldTo,
+        language: language.languageCode,
+      );
+
+      return Right(invoiceList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

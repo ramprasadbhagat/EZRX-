@@ -1,13 +1,18 @@
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/presentation/core/tab_view_with_dynamic_height.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/section/order_history_invoice_tab.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,19 +20,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
 
-part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_bundle_item_details_section.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_status_tracker.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_bundle_item_details_section.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/order_history_item_tab.dart';
 
 @RoutePage()
 class ViewByOrderDetailsPage extends StatelessWidget {
@@ -46,7 +49,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
           appBar: CustomAppBar.commonAppBar(
             title: Text(context.tr('Order Details')),
             customerBlockedOrSuspended:
-                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
+                eligibilityState.customerBlockOrSuspended,
           ),
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,
@@ -57,70 +60,31 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                 : ListView(
                     key: WidgetKeys.scrollList,
                     children: <Widget>[
-                      const LicenseExpiredBanner(),
-                      const EdiUserBanner(),
-                      const OrderHeaderSection(),
-                      if (eligibilityState.salesOrg.isID)
-                        _ViewByOrderStatusTracker(
-                          orderHistoryDetails: state.orderHistoryDetails,
-                        ),
+                      _OrderInformation(state: state),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 16.0,
-                        ),
-                        child: AddressInfoSection.order(),
-                      ),
-                      const Divider(
-                        indent: 0,
-                        height: 20,
-                        endIndent: 0,
-                        thickness: 2.5,
-                        color: ZPColors.lightGray2,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: PayerInformation(
-                          expanded: false,
-                        ),
-                      ),
-                      const OrderSummarySection(),
-                      const Divider(
-                        indent: 0,
-                        height: 20,
-                        endIndent: 0,
-                        thickness: 2.5,
-                        color: ZPColors.lightGray2,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 10,
-                        ),
-                        child: Text(
-                          '${context.tr('Order items')} (${state.orderHistoryDetails.orderHistoryDetailsOrderItem.length})',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.copyWith(color: ZPColors.neutralsBlack),
-                          key: WidgetKeys.viewByOrderOrderItems,
+                        padding: const EdgeInsets.only(top: 32.0),
+                        child: TabViewWithDynamicHeight(
+                          tabs: [
+                            Tab(
+                              key: WidgetKeys.orderItemHistoryItemTab,
+                              text:
+                                  '${context.tr('Your items')} (${state.orderHistoryDetails.orderHistoryDetailsOrderItem.length})',
+                            ),
+                            Tab(
+                              key: WidgetKeys.orderItemHistoryInvoiceTab,
+                              text:
+                                  '${context.tr('Invoices')} (${state.invoices.length})',
+                            ),
+                          ],
+                          tabViews: [
+                            const _OrderHistoryItemTab(),
+                            OrderHistoryInvoiceTab(
+                              invoices: state.invoices,
+                              isLoading: state.isFetchingInvoices,
+                            ),
+                          ],
                         ),
                       ),
-                      if (state.orderHistoryDetails.orderHistoryDetailsOrderItem
-                          .bundleItemDetailsList.isNotEmpty)
-                        _BundleItemDetailsSection(
-                          orderNumber: state.orderHistoryDetails.orderNumber,
-                        ),
-                      if (state.orderHistoryDetails.orderHistoryDetailsOrderItem
-                          .materialItemDetailsList.isNotEmpty)
-                        OrderItemDetailsSection(
-                          viewByOrderHistoryGroupList: state
-                              .orderHistoryDetails
-                              .orderHistoryDetailsOrderItem
-                              .materialItemDetailsList,
-                          isMarketPlace:
-                              state.orderHistoryDetails.isMarketPlace,
-                        ),
                     ],
                   ),
           ),
@@ -148,6 +112,56 @@ class ViewByOrderDetailsPage extends StatelessWidget {
               : null,
         );
       },
+    );
+  }
+}
+
+class _OrderInformation extends StatelessWidget {
+  final ViewByOrderDetailsState state;
+  const _OrderInformation({required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
+    return Column(
+      children: [
+        const LicenseExpiredBanner(),
+        const EdiUserBanner(),
+        const OrderHeaderSection(),
+        if (eligibilityState.salesOrg.isID)
+          _ViewByOrderStatusTracker(
+            orderHistoryDetails: state.orderHistoryDetails,
+          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 16.0,
+          ),
+          child: AddressInfoSection.order(),
+        ),
+        const Divider(
+          indent: 0,
+          height: 20,
+          endIndent: 0,
+          thickness: 2.5,
+          color: ZPColors.lightGray2,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: PayerInformation(
+            expanded: false,
+          ),
+        ),
+        const OrderSummarySection(),
+        const Divider(
+          indent: 0,
+          height: 20,
+          endIndent: 0,
+          thickness: 2.5,
+          color: ZPColors.lightGray2,
+        ),
+      ],
     );
   }
 }
