@@ -8,12 +8,17 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
@@ -33,6 +38,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/mock_other.dart';
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
 void main() {
@@ -269,17 +275,29 @@ void main() {
   group(
     'Product suggestion page navigation to material or bundle details test',
     () {
-      testWidgets('=> Material Navigation', (tester) async {
+      testWidgets('=> Material Navigation with non-empty suggested products', (tester) async {
         final expectedState = <ProductSearchState>[
           ProductSearchState.initial(),
           ProductSearchState.initial().copyWith(
             searchKey: SearchKey.search('test-search'),
             suggestedProductList: <MaterialInfo>[
               MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('fake-material-number'),
+                materialNumber: MaterialNumber('fake-material-number-1'),
                 type: MaterialInfoType('material'),
+                name: 'item-1',
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number-2'),
+                type: MaterialInfoType('material'),
+                name: 'item-2',
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number-3'),
+                type: MaterialInfoType('material'),
+                name: 'item-3',
               ),
             ],
+            salesOrganization: SalesOrganisation.empty().copyWith(salesOrg: fakeIDSalesOrg),
           ),
         ];
         whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
@@ -287,14 +305,40 @@ void main() {
         await tester.pumpAndSettle();
         expect(searchHistoryText, findsNothing);
         expect(productSearchSuggestionSection, findsOneWidget);
+
         final productTile = find.byKey(
           WidgetKeys.searchedProduct(
-            MaterialNumber('fake-material-number').displayMatNo,
+            MaterialNumber('fake-material-number-1').displayMatNo,
           ),
         );
         expect(productTile, findsOneWidget);
+
         await tester.tap(productTile);
         await tester.pumpAndSettle();
+
+        verify(
+              () => trackMixpanelEvent(
+            TrackingEvents.productSearch,
+            props: {
+              TrackingProps.searchKeyword: 'test-search',
+              TrackingProps.searchFrom: ' Page',
+              TrackingProps.searchMethod: 'drop down list',
+            },
+          ),
+        ).called(1);
+
+        verify(
+              () => trackClevertapEvent(
+            TrackingEvents.productSearch,
+            props: {
+              TrackingProps.searchKeyword: 'test-search',
+              TrackingProps.searchFrom: ' Page',
+              TrackingProps.searchMethod: 'drop down list',
+              TrackingProps.searchResults: ['item-1', 'item-2', 'item-3'],
+              TrackingProps.market: 'ID',
+            },
+          ),
+        ).called(1);
 
         expect(autoRouterMock.current.name, ProductDetailsPageRoute.name);
       });

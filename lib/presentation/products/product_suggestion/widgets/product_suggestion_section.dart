@@ -29,6 +29,23 @@ class _ProductSuggestionSection extends StatelessWidget {
                     .toList(),
           },
         );
+
+        trackClevertapEvent(
+          TrackingEvents.productSearch,
+          props: {
+            TrackingProps.searchKeyword: state.searchKey.getOrDefaultValue(''),
+            TrackingProps.searchFrom:
+            RouterUtils.buildRouteTrackingName(parentRoute),
+            TrackingProps.searchMethod: 'user typed',
+            TrackingProps.searchResults: state.suggestedProductList.isEmpty
+                ? ['no result']
+                : state.suggestedProductList
+                    .take(5)
+                    .map((e) => e.name)
+                    .toList(),
+            TrackingProps.market: state.salesOrganization.salesOrg.country,
+          },
+        );
       },
       buildWhen: (previous, current) =>
           previous.suggestedProductList != current.suggestedProductList ||

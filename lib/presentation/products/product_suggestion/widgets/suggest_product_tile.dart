@@ -29,6 +29,23 @@ class _SuggestedProductTile extends StatelessWidget {
               },
             );
 
+            final state = context.read<ProductSearchBloc>().state;
+            trackClevertapEvent(
+              TrackingEvents.productSearch,
+              props: {
+                TrackingProps.searchKeyword: state.searchKey
+                    .getOrDefaultValue(''),
+                TrackingProps.searchFrom:
+                RouterUtils.buildRouteTrackingName(parentRoute),
+                TrackingProps.searchMethod: 'drop down list',
+                TrackingProps.searchResults: state.suggestedProductList
+                    .take(5)
+                    .map((e) => e.name)
+                    .toList(),
+                TrackingProps.market: state.salesOrganization.salesOrg.country,
+              },
+            );
+
             product.type.typeMaterial
                 ? context.router
                     .push(ProductDetailsPageRoute(materialInfo: product))
