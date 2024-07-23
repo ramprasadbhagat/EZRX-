@@ -30,12 +30,25 @@ part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/w
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/widgets/apl_payment_method.dart';
 
 @RoutePage()
-class PaymentMethodTab extends StatelessWidget {
+class PaymentMethodTab extends StatefulWidget {
   const PaymentMethodTab({super.key});
 
   @override
+  State<PaymentMethodTab> createState() => _PaymentMethodTabState();
+}
+
+class _PaymentMethodTabState extends State<PaymentMethodTab> {
+  @override
+  void initState() {
+    context
+        .read<NewPaymentBloc>()
+        .add(const NewPaymentEvent.fetchAvailablePaymentMethods());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final saleOrg = context.read<EligibilityBloc>().state.salesOrg;
+    final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
 
     return RefreshIndicator(
       onRefresh: () async => context
@@ -44,14 +57,14 @@ class PaymentMethodTab extends StatelessWidget {
       child: ListView(
         key: WidgetKeys.scrollList,
         children: [
-          if (!saleOrg.isID) const _NoteAnnouncement(),
+          if (!salesOrg.isID) const _NoteAnnouncement(),
           DetailsInfoSection(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            label: saleOrg.isID ? '' : 'Select payment method',
+            label: salesOrg.isID ? '' : 'Select payment method',
             labelStyle: Theme.of(context).textTheme.labelMedium,
             child: Column(
               children: [
-                if (saleOrg.isPH) const _WarningAnnouncement(),
+                if (salesOrg.isPH) const _WarningAnnouncement(),
                 const _PaymentMethodSelector(),
                 BlocConsumer<NewPaymentBloc, NewPaymentState>(
                   listenWhen: (previous, current) =>
@@ -61,7 +74,7 @@ class PaymentMethodTab extends StatelessWidget {
                   listener: (context, state) {
                     context.read<BankInAccountsBloc>().add(
                           BankInAccountsEvent.bankInFetch(
-                            salesOrg: saleOrg,
+                            salesOrg: salesOrg,
                           ),
                         );
                   },
