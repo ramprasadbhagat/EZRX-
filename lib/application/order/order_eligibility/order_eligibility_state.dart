@@ -51,6 +51,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
       if (cartItems.containInvalidTenderContractMaterial) {
         return 'Tender Contract is no longer available for one or few item(s). Please remove to continue.';
       }
+      if (cartItems.hasMandatoryTenderMaterialButUnavailable) {
+        return 'Product ${cartItems.mandatoryTenderMaterialButUnavailableMaterialName} need to use tender contract.';
+      }
       if (cartItems.isMaxQtyExceedsForAnyTender) {
         return 'One or few item(s) order qty exceed the maximum available tender quantity.';
       }
@@ -233,7 +236,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       isGimmickMaterialNotAllowed ||
       hasInvalidTenderMaterial ||
       isMaxQtyExceedsForAnyTender ||
-      atLeastOneItemInStockRequired;
+      atLeastOneItemInStockRequired ||
+      cartItems.hasMandatoryTenderMaterialButUnavailable;
 
   List<bool> get activeErrorsList => [
         displayMovWarning,
@@ -244,6 +248,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
         hasInvalidTenderMaterial,
         isMaxQtyExceedsForAnyTender,
         atLeastOneItemInStockRequired,
+        cartItems.hasMandatoryTenderMaterialButUnavailable,
       ].where((condition) => condition).toList();
 
   bool get hasMultipleErrors => activeErrorsList.length > 1;

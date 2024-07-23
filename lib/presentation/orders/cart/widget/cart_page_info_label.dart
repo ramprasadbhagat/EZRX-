@@ -63,6 +63,18 @@ class _CartPageInfoLabel extends StatelessWidget {
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),
+                    if (state
+                        .cartItems.hasMandatoryTenderMaterialButUnavailable)
+                      _ErrorText(
+                        text: context.tr(
+                          'Product {productName} need to use tender contract.',
+                          namedArgs: {
+                            'productName': state.cartItems
+                                .mandatoryTenderMaterialButUnavailableMaterialName,
+                          },
+                        ),
+                        showLeadingIcon: state.hasMultipleErrors,
+                      ),
                     if (state.isMaxQtyExceedsForAnyTender)
                       _ErrorText(
                         text: context.tr(

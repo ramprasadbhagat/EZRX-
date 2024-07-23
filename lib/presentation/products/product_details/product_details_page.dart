@@ -571,13 +571,18 @@ class _FooterState extends State<_Footer> {
     final tenderExceedQty = tenderState.isExceedQty &&
         eligibilityState.salesOrgConfigs.enableTenderOrders;
 
+    final isTenderContractMandatoryButUnavailable =
+        materialInfo.hasMandatoryTenderContract &&
+            tenderState.tenderContractList.isEmpty;
+
     return !materialInfo.isSuspended &&
         (materialInfo.isFOCMaterial
             ? (materialWithoutPrice && materialInStock)
             : !(price.finalPrice.isEmpty && !materialWithoutPrice) &&
                 materialInStock) &&
         validQty &&
-        !tenderExceedQty;
+        !tenderExceedQty &&
+        !isTenderContractMandatoryButUnavailable;
   }
 
   @override
@@ -627,7 +632,8 @@ class _FooterState extends State<_Footer> {
             return BlocBuilder<TenderContractDetailBloc,
                 TenderContractDetailState>(
               buildWhen: (previous, current) =>
-                  previous.isExceedQty != current.isExceedQty,
+                  previous.isExceedQty != current.isExceedQty ||
+                  previous.isFetching != current.isFetching,
               builder: (context, tenderState) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
@@ -757,12 +763,14 @@ class _FooterState extends State<_Footer> {
 
                               return LoadingShimmer.withChild(
                                 enabled: stateCart.isUpserting ||
-                                    state.isDetailAndStockFetching,
+                                    state.isDetailAndStockFetching ||
+                                    tenderState.isFetching,
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton(
                                     onPressed: stateCart.isUpserting ||
                                             state.isDetailAndStockFetching ||
+                                            tenderState.isFetching ||
                                             !isEligibleForAddToCart(
                                               context: context,
                                               productDetailState: state,

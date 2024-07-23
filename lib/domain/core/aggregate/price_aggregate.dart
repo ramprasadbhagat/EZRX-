@@ -121,6 +121,11 @@ class PriceAggregate with _$PriceAggregate {
       tenderContract.contractNumber.isContractNumberNotEmpty &&
       tenderContract.isTenderExpired;
 
+  bool get isTenderContractMandatoryButUnavailable =>
+      salesOrgConfig.enableTenderOrders &&
+      materialInfo.hasMandatoryTenderContract &&
+      tenderContract.isEmpty;    
+
   bool get showErrorMessageForID =>
       salesOrgConfig.salesOrg.isID &&
       (_isStockQtyExceedsForId || isMaxQtyExceedsForId);

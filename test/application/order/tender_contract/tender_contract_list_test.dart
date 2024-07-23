@@ -102,12 +102,7 @@ void main() {
           apiFailureOrSuccessOption: optionOf(
             const Left(fakeError),
           ),
-          isFetching: true,
-        ),
-        tenderContractListState.copyWith(
-          apiFailureOrSuccessOption: optionOf(
-            const Left(fakeError),
-          ),
+          isFetching: false,
         ),
       ],
     );

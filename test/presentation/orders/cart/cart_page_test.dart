@@ -4710,6 +4710,55 @@ void main() {
         });
 
         testWidgets(
+            'Show error message Product [material_name] need to use tender contract. when hasMandatoryTenderContract is true and tender data is not available',
+            (tester) async {
+          final mockItem = mockCartItems.first.copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              type: MaterialInfoType('material'),
+              defaultMaterialDescription: 'material_name',
+              materialNumber: MaterialNumber('123456789'),
+              quantity: MaterialQty(170),
+              hasMandatoryTenderContract: true,
+            ),
+            tenderContract: TenderContract.empty(),
+            quantity: 11,
+            stockInfoList: [
+              StockInfo.empty().copyWith(
+                materialNumber: mockCartItems.first.getMaterialNumber,
+                stockQuantity: 10,
+              ),
+            ],
+            salesOrgConfig: fakeVNSalesOrgConfigs,
+          );
+          final orderEligibilityState =
+              OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [
+                mockItem,
+              ],
+            ),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            orderEligibilityState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text(
+              'Product material_name need to use tender contract.',
+            ),
+            findsOneWidget,
+          );
+          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          expect(checkoutButton, findsOneWidget);
+          expect(orderEligibilityState.isCheckoutDisabled, true);
+        });
+
+        testWidgets(
             'Show error message One or few item(s) order qty exceed the maximum available tender quantity.',
             (tester) async {
           final mockItem = mockCartItems.first.copyWith(

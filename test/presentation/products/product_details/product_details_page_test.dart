@@ -360,6 +360,7 @@ void main() {
               materialInfo: materialInfo.copyWith(
                 quantity: MaterialQty(2),
                 isFOCMaterial: true,
+                hasMandatoryTenderContract: false,
               ),
               stockInfo: StockInfo.empty().copyWith(
                 inStock: MaterialInStock('true'),
@@ -418,6 +419,7 @@ void main() {
               materialInfo: materialInfo.copyWith(
                 quantity: MaterialQty(2),
                 isFOCMaterial: true,
+                hasMandatoryTenderContract: false,
               ),
               stockInfo: StockInfo.empty().copyWith(
                 inStock: MaterialInStock('true'),
@@ -503,6 +505,7 @@ void main() {
                 quantity: MaterialQty(2),
                 isFOCMaterial: true,
                 type: MaterialInfoType.material(),
+                hasMandatoryTenderContract: false,
               ),
               stockInfo: StockInfo.empty().copyWith(
                 inStock: MaterialInStock('true'),
@@ -554,6 +557,7 @@ void main() {
                   quantity: MaterialQty(2),
                   isFOCMaterial: true,
                   type: MaterialInfoType.material(),
+                  hasMandatoryTenderContract: false,
                 ),
                 price: materialPrice,
                 quantity: inputQty,
@@ -656,6 +660,7 @@ void main() {
               materialInfo: materialInfo.copyWith(
                 quantity: MaterialQty(2),
                 isFOCMaterial: false,
+                hasMandatoryTenderContract: false,
               ),
               stockInfo: StockInfo.empty().copyWith(
                 inStock: MaterialInStock('true'),
@@ -800,6 +805,7 @@ void main() {
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: materialInfo.copyWith(
                 quantity: MaterialQty(2),
+                hasMandatoryTenderContract: false,
               ),
               stockInfo: StockInfo.empty().copyWith(
                 inStock: MaterialInStock('true'),
@@ -3036,6 +3042,7 @@ void main() {
                 productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                   materialInfo: materialInfo.copyWith(
                     quantity: MaterialQty(2),
+                    hasMandatoryTenderContract: false,
                   ),
                   stockInfo: StockInfo.empty().copyWith(
                     inStock: MaterialInStock('true'),
@@ -3647,6 +3654,7 @@ void main() {
                 materialInfo: materialInfo.copyWith(
                   quantity: MaterialQty(2),
                   isFOCMaterial: true,
+                  hasMandatoryTenderContract: false,
                 ),
                 stockInfo: StockInfo.empty().copyWith(
                   inStock: MaterialInStock('true'),
@@ -3725,6 +3733,7 @@ void main() {
                 materialInfo: materialInfo.copyWith(
                   quantity: MaterialQty(2),
                   isFOCMaterial: true,
+                  hasMandatoryTenderContract: false,
                 ),
                 stockInfo: StockInfo.empty().copyWith(
                   inStock: MaterialInStock('true'),
@@ -3804,6 +3813,7 @@ void main() {
                 materialInfo: materialInfo.copyWith(
                   quantity: MaterialQty(2),
                   isFOCMaterial: true,
+                  hasMandatoryTenderContract: false,
                 ),
                 stockInfo: StockInfo.empty().copyWith(
                   inStock: MaterialInStock('true'),
@@ -3989,6 +3999,121 @@ void main() {
           expect(
             find.textContaining('Material expires soon', findRichText: true),
             findsNothing,
+          );
+        });
+
+        testWidgets(
+            'Add to Cart is disabled when hasMandatoryTenderContract is true and tender data is not available',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  quantity: MaterialQty(2),
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: [],
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final cartButtonFinder =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          final addToCartButton = find.byType(ElevatedButton);
+          expect(cartButtonFinder, findsOneWidget);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(addToCartButton);
+          expect(
+            tester.widget<ElevatedButton>(addToCartButton).enabled,
+            isFalse,
+          );
+        });
+
+        testWidgets(
+            'Add to Cart is enabled when hasMandatoryTenderContract is true and tender data is available',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  quantity: MaterialQty(2),
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final cartButtonFinder =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          final addToCartButton = find.byType(ElevatedButton);
+          expect(cartButtonFinder, findsOneWidget);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(addToCartButton);
+          expect(
+            tester.widget<ElevatedButton>(addToCartButton).enabled,
+            isTrue,
+          );
+        });
+
+        testWidgets(
+            'Add to cart button pressed test when isFetching is true for tender details',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  quantity: MaterialQty(2),
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: [],
+              isFetching: true,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final addToCartButton =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(addToCartButton);
+          verifyNever(
+            () => cartMockBloc.add(
+              CartEvent.upsertCart(
+                priceAggregate: PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('00000111111'),
+                    isFavourite: true,
+                    isSuspended: false,
+                    isFOCMaterial: true,
+                  ),
+                  quantity: 1,
+                ),
+              ),
+            ),
           );
         });
       });

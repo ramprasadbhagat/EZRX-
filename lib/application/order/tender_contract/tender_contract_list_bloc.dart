@@ -67,6 +67,7 @@ class TenderContractListBloc
               emit(
                 state.copyWith(
                   apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                  isFetching: false,
                 ),
               );
             },
@@ -76,15 +77,14 @@ class TenderContractListBloc
                   materialNumber: tenderContractDetail,
                 },
               );
+              emit(
+                state.copyWith(
+                  tenderContracts: Map.from(state.tenderContracts)
+                    ..addAll(tenderContractMap),
+                  isFetching: false,
+                ),
+              );
             },
-          );
-
-          emit(
-            state.copyWith(
-              tenderContracts: Map.from(state.tenderContracts)
-                ..addAll(tenderContractMap),
-              isFetching: false,
-            ),
           );
         }
       },

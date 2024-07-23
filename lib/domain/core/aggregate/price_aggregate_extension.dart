@@ -379,4 +379,11 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
     return materialInfoList;
   }
+
+  bool get hasMandatoryTenderMaterialButUnavailable =>
+      isNotEmpty && any((e) => e.isTenderContractMandatoryButUnavailable);
+
+  String get mandatoryTenderMaterialButUnavailableMaterialName => where(
+        (element) => element.isTenderContractMandatoryButUnavailable,
+      ).map((e) => e.materialInfo.displayDescription).toList().join(',');
 }
