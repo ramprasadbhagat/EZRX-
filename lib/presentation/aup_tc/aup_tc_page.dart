@@ -278,7 +278,7 @@ class AcceptButton extends StatelessWidget {
                 pre.showMarketPlaceTnc != cur.showMarketPlaceTnc &&
                 !cur.showMarketPlaceTnc,
             listener: (context, _) {
-              context.router.maybePop();
+              context.router.popForced();
             },
           ),
       ],

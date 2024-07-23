@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -20,7 +19,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/mock_other.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 import '../../common_mock_data/mock_web_view.dart';
@@ -38,13 +40,12 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    locator.registerSingleton(Config());
-    locator.registerSingleton(AppRouter());
+    locator.registerSingleton<AppRouter>(AutoRouteMock());
     locator.registerSingleton<AupTcBloc>(AupTcBlocMock());
-    locator<Config>().appFlavor = Flavor.mock;
     autoRouterMock = locator<AppRouter>();
     mockAupTcBloc = locator<AupTcBloc>();
     await mockWebViewDependencies.init();
+    when(() => autoRouterMock.currentPath).thenReturn('');
   });
 
   setUp(() {
@@ -410,6 +411,31 @@ void main() {
             ),
           ),
         );
+      });
+
+      testWidgets('Pop when user accept', (tester) async {
+        final initialState = EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          user: fakeClientUser.copyWith(
+            acceptPrivacyPolicy: true,
+            acceptMPTC: MarketPlaceTnCAcceptance.unknown(),
+          ),
+          customerCodeInfo: fakeMarketPlaceCustomerCode,
+        );
+        when(() => autoRouterMock.popForced()).thenAnswer((_) async => true);
+        whenListen(
+          mockEligibilityBloc,
+          Stream.fromIterable([
+            initialState,
+            initialState.copyWith
+                .user(acceptMPTC: MarketPlaceTnCAcceptance.accept()),
+          ]),
+        );
+
+        await tester.pumpWidget(aupTcWidget(fakeClient, true));
+        await tester.pump();
+
+        verify(() => autoRouterMock.popForced()).called(1);
       });
     });
 
