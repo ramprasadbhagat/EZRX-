@@ -47,4 +47,5 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.redirectResetPassword(
     ResetPasswordCred resetPasswordCred,
   ) = _RedirectResetPassword;
+  const factory DeepLinkingState.redirectOrder() = _RedirectOrder;
 }

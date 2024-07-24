@@ -614,6 +614,7 @@ mixin _$DeepLinkingState {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -642,6 +643,7 @@ mixin _$DeepLinkingState {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -670,6 +672,7 @@ mixin _$DeepLinkingState {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -698,6 +701,7 @@ mixin _$DeepLinkingState {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -719,6 +723,7 @@ mixin _$DeepLinkingState {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -740,6 +745,7 @@ mixin _$DeepLinkingState {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -828,6 +834,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return initial();
   }
@@ -859,6 +866,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return initial?.call();
   }
@@ -890,6 +898,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -924,6 +933,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return initial(this);
   }
@@ -948,6 +958,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return initial?.call(this);
   }
@@ -972,6 +983,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1098,6 +1110,7 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return linkPending(link, banner);
   }
@@ -1129,6 +1142,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return linkPending?.call(link, banner);
   }
@@ -1160,6 +1174,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1194,6 +1209,7 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return linkPending(this);
   }
@@ -1218,6 +1234,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return linkPending?.call(this);
   }
@@ -1242,6 +1259,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1378,6 +1396,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectBundleDetail(materialNumber, banner);
   }
@@ -1409,6 +1428,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectBundleDetail?.call(materialNumber, banner);
   }
@@ -1440,6 +1460,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1474,6 +1495,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectBundleDetail(this);
   }
@@ -1498,6 +1520,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectBundleDetail?.call(this);
   }
@@ -1522,6 +1545,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1658,6 +1682,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectProductDetail(materialNumber, banner);
   }
@@ -1689,6 +1714,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectProductDetail?.call(materialNumber, banner);
   }
@@ -1720,6 +1746,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -1754,6 +1781,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectProductDetail(this);
   }
@@ -1778,6 +1806,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectProductDetail?.call(this);
   }
@@ -1802,6 +1831,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -1934,6 +1964,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectProductsTab(searchKey, materialFilter);
   }
@@ -1965,6 +1996,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectProductsTab?.call(searchKey, materialFilter);
   }
@@ -1996,6 +2028,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectProductsTab != null) {
@@ -2030,6 +2063,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectProductsTab(this);
   }
@@ -2054,6 +2088,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectProductsTab?.call(this);
   }
@@ -2078,6 +2113,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectProductsTab != null) {
@@ -2192,6 +2228,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectOrderDetail(orderNumber);
   }
@@ -2223,6 +2260,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectOrderDetail?.call(orderNumber);
   }
@@ -2254,6 +2292,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -2288,6 +2327,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectOrderDetail(this);
   }
@@ -2312,6 +2352,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectOrderDetail?.call(this);
   }
@@ -2336,6 +2377,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -2459,6 +2501,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectReturnDetail(returnId);
   }
@@ -2490,6 +2533,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectReturnDetail?.call(returnId);
   }
@@ -2521,6 +2565,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
@@ -2555,6 +2600,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectReturnDetail(this);
   }
@@ -2579,6 +2625,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectReturnDetail?.call(this);
   }
@@ -2603,6 +2650,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
@@ -2738,6 +2786,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectPaymentDetail(paymentIdentifierInfo, isMarketPlace);
   }
@@ -2769,6 +2818,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectPaymentDetail?.call(paymentIdentifierInfo, isMarketPlace);
   }
@@ -2800,6 +2850,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -2834,6 +2885,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectPaymentDetail(this);
   }
@@ -2858,6 +2910,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectPaymentDetail?.call(this);
   }
@@ -2882,6 +2935,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -2970,6 +3024,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectZPPaymentHome();
   }
@@ -3001,6 +3056,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectZPPaymentHome?.call();
   }
@@ -3032,6 +3088,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectZPPaymentHome != null) {
@@ -3066,6 +3123,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectZPPaymentHome(this);
   }
@@ -3090,6 +3148,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectZPPaymentHome?.call(this);
   }
@@ -3114,6 +3173,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectZPPaymentHome != null) {
@@ -3194,6 +3254,7 @@ class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectMPPaymentHome();
   }
@@ -3225,6 +3286,7 @@ class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectMPPaymentHome?.call();
   }
@@ -3256,6 +3318,7 @@ class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectMPPaymentHome != null) {
@@ -3290,6 +3353,7 @@ class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectMPPaymentHome(this);
   }
@@ -3314,6 +3378,7 @@ class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectMPPaymentHome?.call(this);
   }
@@ -3338,6 +3403,7 @@ class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectMPPaymentHome != null) {
@@ -3455,6 +3521,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectInvoiceDetail(invoiceNumber, isMarketPlace);
   }
@@ -3486,6 +3553,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectInvoiceDetail?.call(invoiceNumber, isMarketPlace);
   }
@@ -3517,6 +3585,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -3551,6 +3620,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectInvoiceDetail(this);
   }
@@ -3575,6 +3645,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectInvoiceDetail?.call(this);
   }
@@ -3599,6 +3670,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -3685,6 +3757,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectFAQ();
   }
@@ -3716,6 +3789,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectFAQ?.call();
   }
@@ -3747,6 +3821,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -3781,6 +3856,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectFAQ(this);
   }
@@ -3805,6 +3881,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectFAQ?.call(this);
   }
@@ -3829,6 +3906,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -3907,6 +3985,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectAboutUs();
   }
@@ -3938,6 +4017,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectAboutUs?.call();
   }
@@ -3969,6 +4049,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -4003,6 +4084,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectAboutUs(this);
   }
@@ -4027,6 +4109,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectAboutUs?.call(this);
   }
@@ -4051,6 +4134,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -4156,6 +4240,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectContactUs(market);
   }
@@ -4187,6 +4272,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectContactUs?.call(market);
   }
@@ -4218,6 +4304,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -4252,6 +4339,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectContactUs(this);
   }
@@ -4276,6 +4364,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectContactUs?.call(this);
   }
@@ -4300,6 +4389,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -4384,6 +4474,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectUserGuide();
   }
@@ -4415,6 +4506,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectUserGuide?.call();
   }
@@ -4446,6 +4538,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectUserGuide != null) {
@@ -4480,6 +4573,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectUserGuide(this);
   }
@@ -4504,6 +4598,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectUserGuide?.call(this);
   }
@@ -4528,6 +4623,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectUserGuide != null) {
@@ -4642,6 +4738,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return error(failure);
   }
@@ -4673,6 +4770,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return error?.call(failure);
   }
@@ -4704,6 +4802,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -4738,6 +4837,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return error(this);
   }
@@ -4762,6 +4862,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return error?.call(this);
   }
@@ -4786,6 +4887,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -4908,6 +5010,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(ApiFailure failure) error,
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
+    required TResult Function() redirectOrder,
   }) {
     return redirectResetPassword(resetPasswordCred);
   }
@@ -4939,6 +5042,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(ApiFailure failure)? error,
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult? Function()? redirectOrder,
   }) {
     return redirectResetPassword?.call(resetPasswordCred);
   }
@@ -4970,6 +5074,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(ApiFailure failure)? error,
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
+    TResult Function()? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectResetPassword != null) {
@@ -5004,6 +5109,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(_Error value) error,
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
   }) {
     return redirectResetPassword(this);
   }
@@ -5028,6 +5134,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
   }) {
     return redirectResetPassword?.call(this);
   }
@@ -5052,6 +5159,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(_RedirectUserGuide value)? redirectUserGuide,
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
     required TResult orElse(),
   }) {
     if (redirectResetPassword != null) {
@@ -5069,4 +5177,232 @@ abstract class _RedirectResetPassword implements DeepLinkingState {
   @JsonKey(ignore: true)
   _$$RedirectResetPasswordImplCopyWith<_$RedirectResetPasswordImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RedirectOrderImplCopyWith<$Res> {
+  factory _$$RedirectOrderImplCopyWith(
+          _$RedirectOrderImpl value, $Res Function(_$RedirectOrderImpl) then) =
+      __$$RedirectOrderImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectOrderImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectOrderImpl>
+    implements _$$RedirectOrderImplCopyWith<$Res> {
+  __$$RedirectOrderImplCopyWithImpl(
+      _$RedirectOrderImpl _value, $Res Function(_$RedirectOrderImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectOrderImpl implements _RedirectOrder {
+  const _$RedirectOrderImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectOrder()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RedirectOrderImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+  }) {
+    return redirectOrder();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+  }) {
+    return redirectOrder?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    required TResult orElse(),
+  }) {
+    if (redirectOrder != null) {
+      return redirectOrder();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+  }) {
+    return redirectOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+  }) {
+    return redirectOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    required TResult orElse(),
+  }) {
+    if (redirectOrder != null) {
+      return redirectOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectOrder implements DeepLinkingState {
+  const factory _RedirectOrder() = _$RedirectOrderImpl;
 }

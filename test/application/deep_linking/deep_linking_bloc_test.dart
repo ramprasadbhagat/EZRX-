@@ -828,6 +828,25 @@ void main() {
     ],
   );
 
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume redirect Order tab success',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(EzrxLink('/my-account/Orders')),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectOrder(),
+    ],
+  );
+
   group('Redirect To Reset Password', () {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume reset password link success',

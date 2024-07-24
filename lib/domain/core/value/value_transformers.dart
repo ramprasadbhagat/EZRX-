@@ -895,6 +895,8 @@ bool isAboutUsLink(String path) => path == '/about-us';
 
 bool isUserGuideLink(String path) => path == '/user-guide';
 
+bool isOrderLink(String path) => path == '/my-account/Orders';
+
 String getViewByItemTitle(int value) {
   switch (value) {
     case 0:
