@@ -85,6 +85,7 @@ class AdditionalDetailsBloc
       initiateFromHistory: (value) {
         emit(
           AdditionalDetailsState.initial().copyWith(
+            config: value.config,
             deliveryInfoData: value.data.copyWith(
               mobileNumber: PhoneNumber(
                 value.data.mobileNumber.validPhoneNumber,

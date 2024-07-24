@@ -2283,6 +2283,7 @@ void main() {
         verify(
           () => additionalDetailsBlocMock.add(
             AdditionalDetailsEvent.initiateFromHistory(
+              config: SalesOrganisationConfigs.empty(),
               data: DeliveryInfoData.empty(),
             ),
           ),

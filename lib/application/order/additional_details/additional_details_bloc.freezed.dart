@@ -28,7 +28,9 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,7 +44,8 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,7 +59,8 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -237,7 +241,9 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
     return initialized(config, customerCodeInfo);
   }
@@ -254,7 +260,8 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
     return initialized?.call(config, customerCodeInfo);
   }
@@ -271,7 +278,8 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -447,7 +455,9 @@ class _$AdditionalDetailsTextOnChangeImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
     return onTextChange(label, newValue);
   }
@@ -464,7 +474,8 @@ class _$AdditionalDetailsTextOnChangeImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
     return onTextChange?.call(label, newValue);
   }
@@ -481,7 +492,8 @@ class _$AdditionalDetailsTextOnChangeImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -622,7 +634,9 @@ class _$AdditionalDetailsValidateFormImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
     return validateForm();
   }
@@ -639,7 +653,8 @@ class _$AdditionalDetailsValidateFormImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
     return validateForm?.call();
   }
@@ -656,7 +671,8 @@ class _$AdditionalDetailsValidateFormImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -825,7 +841,9 @@ class _$AdditionalDetailsAddPoDocumentImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
     return addPoDocument(poDocuments);
   }
@@ -842,7 +860,8 @@ class _$AdditionalDetailsAddPoDocumentImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
     return addPoDocument?.call(poDocuments);
   }
@@ -859,7 +878,8 @@ class _$AdditionalDetailsAddPoDocumentImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -1037,7 +1057,9 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
     return removePoDocument(poDocument);
   }
@@ -1054,7 +1076,8 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
     return removePoDocument?.call(poDocument);
   }
@@ -1071,7 +1094,8 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1211,7 +1235,9 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
     return removeAllPoDocument();
   }
@@ -1228,7 +1254,8 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
     return removeAllPoDocument?.call();
   }
@@ -1245,7 +1272,8 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1378,7 +1406,9 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
     return toggleGreenDelivery();
   }
@@ -1395,7 +1425,8 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
     return toggleGreenDelivery?.call();
   }
@@ -1412,7 +1443,8 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
@@ -1499,8 +1531,9 @@ abstract class _$$AdditionalDetailsInitiateFromHistoryImplCopyWith<$Res> {
           $Res Function(_$AdditionalDetailsInitiateFromHistoryImpl) then) =
       __$$AdditionalDetailsInitiateFromHistoryImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DeliveryInfoData data});
+  $Res call({SalesOrganisationConfigs config, DeliveryInfoData data});
 
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
   $DeliveryInfoDataCopyWith<$Res> get data;
 }
 
@@ -1517,14 +1550,27 @@ class __$$AdditionalDetailsInitiateFromHistoryImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? config = null,
     Object? data = null,
   }) {
     return _then(_$AdditionalDetailsInitiateFromHistoryImpl(
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as DeliveryInfoData,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value));
+    });
   }
 
   @override
@@ -1540,14 +1586,17 @@ class __$$AdditionalDetailsInitiateFromHistoryImplCopyWithImpl<$Res>
 
 class _$AdditionalDetailsInitiateFromHistoryImpl
     implements _AdditionalDetailsInitiateFromHistory {
-  const _$AdditionalDetailsInitiateFromHistoryImpl({required this.data});
+  const _$AdditionalDetailsInitiateFromHistoryImpl(
+      {required this.config, required this.data});
 
+  @override
+  final SalesOrganisationConfigs config;
   @override
   final DeliveryInfoData data;
 
   @override
   String toString() {
-    return 'AdditionalDetailsEvent.initiateFromHistory(data: $data)';
+    return 'AdditionalDetailsEvent.initiateFromHistory(config: $config, data: $data)';
   }
 
   @override
@@ -1555,11 +1604,12 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AdditionalDetailsInitiateFromHistoryImpl &&
+            (identical(other.config, config) || other.config == config) &&
             (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode => Object.hash(runtimeType, config, data);
 
   @JsonKey(ignore: true)
   @override
@@ -1582,9 +1632,11 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function(DeliveryInfoData data) initiateFromHistory,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
   }) {
-    return initiateFromHistory(data);
+    return initiateFromHistory(config, data);
   }
 
   @override
@@ -1599,9 +1651,10 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
   }) {
-    return initiateFromHistory?.call(data);
+    return initiateFromHistory?.call(config, data);
   }
 
   @override
@@ -1616,11 +1669,12 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data)? initiateFromHistory,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
     required TResult orElse(),
   }) {
     if (initiateFromHistory != null) {
-      return initiateFromHistory(data);
+      return initiateFromHistory(config, data);
     }
     return orElse();
   }
@@ -1693,9 +1747,11 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
 abstract class _AdditionalDetailsInitiateFromHistory
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsInitiateFromHistory(
-          {required final DeliveryInfoData data}) =
+          {required final SalesOrganisationConfigs config,
+          required final DeliveryInfoData data}) =
       _$AdditionalDetailsInitiateFromHistoryImpl;
 
+  SalesOrganisationConfigs get config;
   DeliveryInfoData get data;
   @JsonKey(ignore: true)
   _$$AdditionalDetailsInitiateFromHistoryImplCopyWith<

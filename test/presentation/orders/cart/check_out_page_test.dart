@@ -1253,11 +1253,17 @@ void main() {
     );
 
     testWidgets(
-      '=> test PO Reference in place Order when  poNumberRequired is true ',
+      '=> test empty Po Reference in place Order when poNumberRequired is true',
       (tester) async {
         when(() => additionalDetailsBlocMock.state).thenReturn(
           AdditionalDetailsState.initial().copyWith(
             isValidated: true,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              paymentTerm: PaymentTerm(
+                'fake_payment_term - fake_payment_term_description',
+              ),
+              poReference: PoReference(''),
+            ),
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1287,8 +1293,102 @@ void main() {
         expect(
           (tester.widget(customerPOReferenceKey) as TextFormField)
               .validator
-              ?.call('PO field'),
+              ?.call(''),
           'PO reference is a required field.',
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test empty Po Reference with spaces in place Order when poNumberRequired is true',
+          (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+              isValidated: true,
+              deliveryInfoData: DeliveryInfoData.empty().copyWith(
+                paymentTerm: PaymentTerm(
+                  'fake_payment_term - fake_payment_term_description',
+                ),
+                poReference: PoReference('        '),
+              ),
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final customerPOReferenceKey = find.byKey(const Key('pOReferenceKey'));
+        expect(customerPOReferenceKey, findsOneWidget);
+
+        expect(
+          (tester.widget(customerPOReferenceKey) as TextFormField)
+              .validator
+              ?.call(''),
+          'PO reference is a required field.',
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test not empty Po Reference in place Order when poNumberRequired is true',
+          (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+              isValidated: true,
+              deliveryInfoData: DeliveryInfoData.empty().copyWith(
+                paymentTerm: PaymentTerm(
+                  'fake_payment_term - fake_payment_term_description',
+                ),
+                poReference: PoReference('sample po reference'),
+              ),
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        final customerPOReferenceKey = find.byKey(const Key('pOReferenceKey'));
+        expect(customerPOReferenceKey, findsOneWidget);
+
+        expect(
+          (tester.widget(customerPOReferenceKey) as TextFormField)
+              .validator
+              ?.call(''),
+          null,
         );
       },
     );

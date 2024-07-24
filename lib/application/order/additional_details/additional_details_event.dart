@@ -23,6 +23,7 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   const factory AdditionalDetailsEvent.toggleGreenDelivery() =
       _AdditionalDetailsToggleGreenDelivery;
   const factory AdditionalDetailsEvent.initiateFromHistory({
+    required SalesOrganisationConfigs config,
     required DeliveryInfoData data,
   }) = _AdditionalDetailsInitiateFromHistory;
 }

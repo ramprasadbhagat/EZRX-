@@ -524,7 +524,7 @@ class PoReference extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory PoReference(String input) {
-    return PoReference._(validateStringNotEmpty(input));
+    return PoReference._(validateStringNotEmpty(input.trim()));
   }
 
   const PoReference._(this.value);

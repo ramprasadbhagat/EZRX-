@@ -140,6 +140,7 @@ class _CartPageState extends State<CartPage> {
 
       context.read<AdditionalDetailsBloc>().add(
             AdditionalDetailsEvent.initiateFromHistory(
+              config: eligibilityState.salesOrgConfigs,
               data: widget.deliveryInfo ?? DeliveryInfoData.empty(),
             ),
           );

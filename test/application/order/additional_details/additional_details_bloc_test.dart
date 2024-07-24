@@ -80,11 +80,13 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initiateFromHistory(
+            config: fakeIDSalesOrgConfigs,
             data: data,
           ),
         ),
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
+            config: fakeIDSalesOrgConfigs,
             deliveryInfoData: data.copyWith(
               mobileNumber: PhoneNumber(data.mobileNumber.validPhoneNumber),
             ),
