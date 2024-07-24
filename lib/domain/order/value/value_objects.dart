@@ -311,21 +311,6 @@ class SpecialInstructions extends ValueObject<String> {
   const SpecialInstructions._(this.value);
 }
 
-class POReference extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory POReference(String input) {
-    return POReference._(validateStringNotEmpty(input));
-  }
-
-  String get displayPOReference {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  const POReference._(this.value);
-}
-
 class PaymentTermCode extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -525,6 +510,10 @@ class PoReference extends ValueObject<String> {
 
   factory PoReference(String input) {
     return PoReference._(validateStringNotEmpty(input.trim()));
+  }
+
+  String get displayPoReference {
+    return naIfEmpty(value.getOrElse(() => ''));
   }
 
   const PoReference._(this.value);

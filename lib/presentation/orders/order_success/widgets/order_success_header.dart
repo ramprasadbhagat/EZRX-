@@ -68,7 +68,7 @@ class _OrderSuccessHeader extends StatelessWidget {
             valueFlex: valueFlex,
             keyText: 'PO reference'.tr(),
             keyTextStyle: textStyle,
-            valueText: orderHeader.pOReference.displayPOReference,
+            valueText: orderHeader.poReference.displayPoReference,
             valueTextStyle: textStyle,
           ),
           if (eligibilityState.salesOrgConfigs.enableFutureDeliveryDay)

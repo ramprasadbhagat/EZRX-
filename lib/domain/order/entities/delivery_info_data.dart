@@ -26,7 +26,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
   }) {
     return DeliveryInfoData.empty().copyWith(
       poReference: PoReference(
-        orderHistoryDetails.pOReference.displayPOReference,
+        orderHistoryDetails.poReference.displayPoReference,
       ),
       contactPerson: ContactPerson(
         orderHistoryDetails.orderBy.getOrDefaultValue(''),

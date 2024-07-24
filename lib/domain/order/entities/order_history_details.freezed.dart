@@ -38,7 +38,7 @@ mixin _$OrderHistoryDetails {
   String get soldTo => throw _privateConstructorUsedError;
   String get shipTo => throw _privateConstructorUsedError;
   CompanyName get companyName => throw _privateConstructorUsedError;
-  POReference get pOReference => throw _privateConstructorUsedError;
+  PoReference get poReference => throw _privateConstructorUsedError;
   String get shipToAddress => throw _privateConstructorUsedError;
   String get soldToAddress => throw _privateConstructorUsedError;
   StringValue get invoiceNumber => throw _privateConstructorUsedError;
@@ -86,7 +86,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       String soldTo,
       String shipTo,
       CompanyName companyName,
-      POReference pOReference,
+      PoReference poReference,
       String shipToAddress,
       String soldToAddress,
       StringValue invoiceNumber,
@@ -135,7 +135,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
     Object? soldTo = null,
     Object? shipTo = null,
     Object? companyName = null,
-    Object? pOReference = null,
+    Object? poReference = null,
     Object? shipToAddress = null,
     Object? soldToAddress = null,
     Object? invoiceNumber = null,
@@ -225,10 +225,10 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as CompanyName,
-      pOReference: null == pOReference
-          ? _value.pOReference
-          : pOReference // ignore: cast_nullable_to_non_nullable
-              as POReference,
+      poReference: null == poReference
+          ? _value.poReference
+          : poReference // ignore: cast_nullable_to_non_nullable
+              as PoReference,
       shipToAddress: null == shipToAddress
           ? _value.shipToAddress
           : shipToAddress // ignore: cast_nullable_to_non_nullable
@@ -317,7 +317,7 @@ abstract class _$$OrderHistoryDetailsImplCopyWith<$Res>
       String soldTo,
       String shipTo,
       CompanyName companyName,
-      POReference pOReference,
+      PoReference poReference,
       String shipToAddress,
       String soldToAddress,
       StringValue invoiceNumber,
@@ -365,7 +365,7 @@ class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
     Object? soldTo = null,
     Object? shipTo = null,
     Object? companyName = null,
-    Object? pOReference = null,
+    Object? poReference = null,
     Object? shipToAddress = null,
     Object? soldToAddress = null,
     Object? invoiceNumber = null,
@@ -455,10 +455,10 @@ class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as CompanyName,
-      pOReference: null == pOReference
-          ? _value.pOReference
-          : pOReference // ignore: cast_nullable_to_non_nullable
-              as POReference,
+      poReference: null == poReference
+          ? _value.poReference
+          : poReference // ignore: cast_nullable_to_non_nullable
+              as PoReference,
       shipToAddress: null == shipToAddress
           ? _value.shipToAddress
           : shipToAddress // ignore: cast_nullable_to_non_nullable
@@ -531,7 +531,7 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
       required this.soldTo,
       required this.shipTo,
       required this.companyName,
-      required this.pOReference,
+      required this.poReference,
       required this.shipToAddress,
       required this.soldToAddress,
       required this.invoiceNumber,
@@ -588,7 +588,7 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
   @override
   final CompanyName companyName;
   @override
-  final POReference pOReference;
+  final PoReference poReference;
   @override
   final String shipToAddress;
   @override
@@ -628,7 +628,7 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
 
   @override
   String toString() {
-    return 'OrderHistoryDetails(totalTax: $totalTax, orderValue: $orderValue, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, isMarketPlace: $isMarketPlace, taxRate: $taxRate)';
+    return 'OrderHistoryDetails(totalTax: $totalTax, orderValue: $orderValue, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, poReference: $poReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, isMarketPlace: $isMarketPlace, taxRate: $taxRate)';
   }
 
   @override
@@ -670,8 +670,8 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
             (identical(other.companyName, companyName) ||
                 other.companyName == companyName) &&
-            (identical(other.pOReference, pOReference) ||
-                other.pOReference == pOReference) &&
+            (identical(other.poReference, poReference) ||
+                other.poReference == poReference) &&
             (identical(other.shipToAddress, shipToAddress) ||
                 other.shipToAddress == shipToAddress) &&
             (identical(other.soldToAddress, soldToAddress) ||
@@ -723,7 +723,7 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
         soldTo,
         shipTo,
         companyName,
-        pOReference,
+        poReference,
         shipToAddress,
         soldToAddress,
         invoiceNumber,
@@ -766,7 +766,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final String soldTo,
       required final String shipTo,
       required final CompanyName companyName,
-      required final POReference pOReference,
+      required final PoReference poReference,
       required final String shipToAddress,
       required final String soldToAddress,
       required final StringValue invoiceNumber,
@@ -821,7 +821,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   CompanyName get companyName;
   @override
-  POReference get pOReference;
+  PoReference get poReference;
   @override
   String get shipToAddress;
   @override

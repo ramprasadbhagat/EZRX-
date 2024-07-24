@@ -324,7 +324,7 @@ void main() {
             OrderSummaryState.initial().copyWith(
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
-                  pOReference: POReference(''),
+                  poReference: PoReference(''),
                 ),
               ],
             ),

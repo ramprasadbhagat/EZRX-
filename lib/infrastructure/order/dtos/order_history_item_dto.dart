@@ -111,7 +111,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       isBonusMaterial: orderHistoryItem.isBonusMaterial,
       telephoneNumber: orderHistoryItem.telephoneNumber.displayTelephoneNumber,
       invoiceNumber: orderHistoryItem.invoiceNumber.getOrDefaultValue(''),
-      pOReference: orderHistoryItem.pOReference.displayPOReference,
+      pOReference: orderHistoryItem.poReference.displayPoReference,
       expiryDate: orderHistoryItem.expiryDate.dateString,
       requestedDeliveryDate: orderHistoryItem.requestedDeliveryDate.dateString,
       specialInstruction:
@@ -170,7 +170,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       expiryDate: DateTimeStringValue(expiryDate),
       invoiceNumber: StringValue(invoiceNumber),
       isBonusMaterial: isBonusMaterial,
-      pOReference: POReference(pOReference),
+      poReference: PoReference(pOReference),
       telephoneNumber: PhoneNumber(telephoneNumber),
       productImages: ProductImages.empty(),
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),

@@ -284,7 +284,7 @@ class OrderRepository implements IOrderRepository {
         TrackingProps.market: market,
         TrackingProps.collectiveNumber: '',
         TrackingProps.poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        TrackingProps.poReference:orderDetail.pOReference.displayPOReference,
+        TrackingProps.poReference:orderDetail.poReference.displayPoReference,
         TrackingProps.purchaseOrderType: user.role.type.purchaseOrderType,
         TrackingProps.orderType: orderDetail.type.documentTypeCode,
         TrackingProps.specialInstruction: orderDetail.

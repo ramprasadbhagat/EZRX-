@@ -58,7 +58,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
             valueFlex: 1,
             key: WidgetKeys.viewByItemsOrderDetailPoReference,
             keyText: context.tr('PO reference'),
-            valueText: orderHistoryItem.pOReference.displayPOReference,
+            valueText: orderHistoryItem.poReference.displayPoReference,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),
