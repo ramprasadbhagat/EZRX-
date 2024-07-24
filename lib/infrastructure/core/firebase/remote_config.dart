@@ -56,6 +56,9 @@ class RemoteConfigService {
     return PromotionRemoteConfigDto.fromJson(configAsJson).toDomain.blackList;
   }
 
+  bool get passUserId =>
+      _remoteConfig.getBool(RemoteConfigConstants.passUserId);
+
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
   Future<void> _setInAppDefaultValues() async {
@@ -68,6 +71,7 @@ class RemoteConfigService {
           PromotionRemoteConfigDto.fromDomain(PromotionRemoteConfig.empty())
               .toJson(),
         ),
+        RemoteConfigConstants.passUserId: false,
       },
     );
   }

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dar
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
@@ -60,11 +61,16 @@ void main() {
   late UserLocalDataSource localDataSourceMock;
   late FirebaseAnalyticsService firebaseAnalyticsServiceMock;
   late UserRemoteDataSource remoteDataSourceMock;
+  late TokenStorage tokenStorageMock;
   late FirebaseCrashlyticsService firebaseCrashlyticsServiceMock;
   late FirebaseAnalytics firebaseAnalyticsMock;
   late FirebaseAnalyticsObserver firebaseAnalyticsObserverMock;
   late FirebaseCrashlytics firebaseCrashlyticsMock;
   late MixpanelService mixpanelService;
+  const rootAdminToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
+  const refreshToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
   late MockClevertapService mockClevertapService;
   late DatadogService datadogServiceMock;
   late LanguageLocalDataSource languageLocalDataSource;
@@ -88,6 +94,7 @@ void main() {
         observer: firebaseAnalyticsObserverMock,
       );
       firebaseCrashlyticsMock = FirebaseCrashlyticsMock();
+      tokenStorageMock = MockTokenStorage();
       remoteDataSourceMock = UserRemoteDataSourceMock();
 
       firebaseCrashlyticsServiceMock = FirebaseCrashlyticsService(
@@ -105,6 +112,7 @@ void main() {
         remoteDataSource: remoteDataSourceMock,
         config: configMock,
         localDataSource: localDataSourceMock,
+        tokenStorage: tokenStorageMock,
         mixpanelService: mixpanelService,
         datadogService: datadogServiceMock,
         languageLocalDataSource: languageLocalDataSource,
@@ -359,9 +367,13 @@ void main() {
       'get user from remote datasource successfully with uat',
       () async {
         when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+        when(() => tokenStorageMock.get()).thenAnswer(
+          (_) async => JWTDto(access: rootAdminToken, refresh: refreshToken),
+        );
         when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
         when(
           () => remoteDataSourceMock.getUser(
+            userId: '11461',
             market: mockMarket,
           ),
         ).thenAnswer((_) async => User.empty());
@@ -394,10 +406,13 @@ void main() {
     test(
       'get user from remote datasource throws error with uat',
       () async {
+        when(() => tokenStorageMock.get())
+            .thenAnswer((_) async => JWTDto(access: '', refresh: ''));
         when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
         when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
         when(
           () => remoteDataSourceMock.getUser(
+            userId: '',
             market: mockMarket,
           ),
         ).thenThrow(error);

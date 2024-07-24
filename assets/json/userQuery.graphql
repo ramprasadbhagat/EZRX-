@@ -1,6 +1,6 @@
 {
-    "query":" query userQuery(\$ignoreCustomerCode: Boolean) {
-        user(ignoreCustomerCode: \$ignoreCustomerCode) {
+    "query":" query userQuery(\$id: Int!, $ignoreCustomerCode: Boolean) {
+        user(id: \$id, ignoreCustomerCode: \$ignoreCustomerCode) {
             id
             username
             email
@@ -91,5 +91,7 @@
             acceptMPTC
           }
         },
-    "variables": {}
+    "variables":{
+       "id":3860
+    }
  }

@@ -28,6 +28,7 @@ class UserRemoteDataSource {
   });
 
   Future<User> getUser({
+    required String userId,
     required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -37,15 +38,19 @@ class UserRemoteDataSource {
         data: jsonEncode({
           'query': userQueryMutation.getUserQuery(
             remoteConfigService.enableMarketPlaceMarkets.contains(market),
+            remoteConfigService.passUserId,
           ),
-          'variables': {'ignoreCustomerCode': true},
+          'variables': {
+            if (remoteConfigService.passUserId) 'id': userId,
+            'ignoreCustomerCode': true,
+          },
         }),
       );
       dataSourceExceptionHandler.handleExceptionChecker(
         res: res,
         onCustomExceptionHandler: _userExceptionChecker,
       );
-      
+
       return UserDto.fromJson(res.data['data']['user']).toDomain();
     });
   }
@@ -124,9 +129,9 @@ class UserRemoteDataSource {
           ),
         );
         dataSourceExceptionHandler.handleExceptionChecker(
-        res: res,
-        onCustomExceptionHandler: _userExceptionChecker,
-      );
+          res: res,
+          onCustomExceptionHandler: _userExceptionChecker,
+        );
 
         return UserDto.fromJson(res.data['data']['updateUser']['user'])
             .toDomain();

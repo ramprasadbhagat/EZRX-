@@ -61,6 +61,8 @@ void main() {
     test(
       'Get user',
       () async {
+        when(() => remoteConfigService.passUserId).thenReturn(true);
+
         final res = json.decode(
           await rootBundle.loadString('assets/json/userResponse.json'),
         );
@@ -75,11 +77,12 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation
-                .getUserQuery(fakeConfigValue),
+                .getUserQuery(fakeConfigValue, true),
             'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
         final result = await remoteDataSource.getUser(
+          userId: userId,
           market: fakeMarket,
         );
         final resTest = UserDto.fromJson(res['data']['user']).toDomain();
@@ -89,6 +92,8 @@ void main() {
     test(
       'Get user server exception',
       () async {
+        when(() => remoteConfigService.passUserId).thenReturn(false);
+
         dioAdapter.onPost(
           '/api/strapiEngine',
           (server) => server.reply(
@@ -104,12 +109,13 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation
-                .getUserQuery(fakeConfigValue),
-            'variables': {'id': userId, 'ignoreCustomerCode': true},
+                .getUserQuery(fakeConfigValue, false),
+            'variables': {'ignoreCustomerCode': true},
           }),
         );
         await remoteDataSource
             .getUser(
+          userId: userId,
           market: fakeMarket,
         )
             .onError((error, _) async {
@@ -121,6 +127,8 @@ void main() {
     test(
       'Status code != 200',
       () async {
+        when(() => remoteConfigService.passUserId).thenReturn(true);
+
         dioAdapter.onPost(
           '/api/strapiEngine',
           (server) => server.reply(
@@ -134,12 +142,13 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation
-                .getUserQuery(fakeConfigValue),
+                .getUserQuery(fakeConfigValue, true),
             'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
         await remoteDataSource
             .getUser(
+          userId: userId,
           market: fakeMarket,
         )
             .onError((error, _) async {
