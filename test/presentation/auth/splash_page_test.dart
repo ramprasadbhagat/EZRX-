@@ -1695,5 +1695,42 @@ void main() {
       },
       variant: valueVariantForResetPassword,
     );
+
+    testWidgets('When Redirecting About Us Page', (tester) async {
+      final link = Uri.parse(
+        'https://uat-id.ezrx.com/about-us',
+      );
+
+      when(() => autoRouterMock.push(const AboutUsPageRoute())).thenAnswer(
+        (_) => Future.value(),
+      );
+      final expectedDeepLinkStates = [
+        const DeepLinkingState.initial(),
+        DeepLinkingState.linkPending(
+          EzrxLink(link.toString()),
+        ),
+        const DeepLinkingState.redirectAboutUs(),
+      ];
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          shipToInfo: fakeShipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeTWSalesOrganisation,
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('root_admin')),
+          ),
+        ),
+      );
+      whenListen(
+        deepLinkingBlocMock,
+        Stream.fromIterable(expectedDeepLinkStates),
+      );
+      await getWidget(tester);
+      await tester.pump();
+
+      verify(
+        () => autoRouterMock.push(const AboutUsPageRoute()),
+      ).called(1);
+    });
   });
 }

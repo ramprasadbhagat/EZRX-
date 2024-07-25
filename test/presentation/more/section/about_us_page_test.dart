@@ -85,6 +85,12 @@ void main() {
       await tester.pumpWidget(getWidgetToTest());
       await tester.pump();
 
+      verify(
+        () => aboutUsBloc.add(
+          const AboutUsEvent.fetchAboutUsInfo(),
+        ),
+      ).called(1);
+
       expect(find.byKey(WidgetKeys.loaderImage), findsOneWidget);
     });
     testWidgets('Should show the layout when fetching success', (tester) async {

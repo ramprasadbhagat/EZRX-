@@ -35,6 +35,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
   @override
   void initState() {
     super.initState();
+    context.read<AboutUsBloc>().add(const AboutUsEvent.fetchAboutUsInfo());
     _scrollController.addListener(_scrollListener);
   }
 

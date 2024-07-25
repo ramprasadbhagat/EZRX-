@@ -949,7 +949,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 } else {
                   context.router.push(ResetPasswordPageRoute());
                 }
-              }, redirectOrder: () {
+              },
+              redirectOrder: () {
                 context.navigateTo(const OrdersTabRoute());
               },
             );

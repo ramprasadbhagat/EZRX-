@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
@@ -44,12 +43,7 @@ class MoreDetailsTile {
           color: ZPColors.greenIconColor,
         ),
         label: 'About us',
-        onTap: () {
-          context
-              .read<AboutUsBloc>()
-              .add(const AboutUsEvent.fetchAboutUsInfo());
-          context.navigateTo(const AboutUsPageRoute());
-        },
+        onTap: () => context.navigateTo(const AboutUsPageRoute()),
       );
 
   factory MoreDetailsTile.chatSupport(BuildContext context) => MoreDetailsTile(
