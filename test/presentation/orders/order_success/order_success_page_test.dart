@@ -409,7 +409,7 @@ void main() {
       });
 
       testWidgets('Show Contact Detail In Order Detail Header', (tester) async {
-        final fakeContactPerson = ContactPerson('fake-contact-person');
+        final fakeOrderBy = StringValue('fake-contact-person');
         final fakePhoneNumber = PhoneNumber('fake-phone-number');
         when(() => eligibilityBlocMock.state).thenAnswer(
           (invocation) => EligibilityState.initial().copyWith(
@@ -420,16 +420,11 @@ void main() {
           (invocation) => OrderSummaryState.initial().copyWith(
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
+                orderBy: fakeOrderBy,
                 telephoneNumber: fakePhoneNumber,
               ),
             ],
           ),
-        );
-        when(() => additionalDetailsBlocMock.state).thenAnswer(
-          (invocation) =>
-              AdditionalDetailsState.initial().copyWith.deliveryInfoData(
-                    contactPerson: fakeContactPerson,
-                  ),
         );
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -438,7 +433,7 @@ void main() {
           find.byKey(
             WidgetKeys.balanceTextRow(
               'Contact person'.tr(),
-              fakeContactPerson.getOrDefaultValue(''),
+              fakeOrderBy.displayNAIfEmpty,
             ),
           ),
           findsOneWidget,

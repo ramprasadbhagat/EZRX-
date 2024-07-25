@@ -105,12 +105,7 @@ class _OrderSuccessHeader extends StatelessWidget {
               valueFlex: valueFlex,
               keyText: context.tr('Contact person'),
               keyTextStyle: textStyle,
-              valueText: context
-                  .read<AdditionalDetailsBloc>()
-                  .state
-                  .deliveryInfoData
-                  .contactPerson
-                  .getOrDefaultValue(''),
+              valueText: orderHeader.orderBy.displayNAIfEmpty,
               valueTextStyle: textStyle,
             ),
           if (eligibilityState.salesOrgConfigs.enableMobileNumber)
