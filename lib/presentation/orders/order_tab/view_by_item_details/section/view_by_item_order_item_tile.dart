@@ -13,6 +13,11 @@ class ViewByItemOrderItemTile extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
     return OrderItemCommonTile(
+      onTap: () => context.router.push(
+        ProductDetailsPageRoute(
+          materialInfo: orderHistoryItem.reOrderMaterialInfo,
+        ),
+      ),
       batchExpiryDate: OrderHistoryStockInfo.viewByItem(
         eligibilityState: eligibilityState,
         item: orderHistoryItem,

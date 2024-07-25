@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_common_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -2750,6 +2751,42 @@ void main() {
       final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
       expect(tenderTag, findsOneWidget);
     });
+
+    testWidgets(
+      ' -> Can navigate to product detail page when tap on OrderHistoryItem',
+      (WidgetTester tester) async {
+        when(
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(
+              materialInfo: fakeOrderHistoryItem.reOrderMaterialInfo,
+            ),
+          ),
+        ).thenAnswer((_) async => true);
+
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final orderItemCommonTile = find.byType(OrderItemCommonTile).first;
+        await tester.ensureVisible(orderItemCommonTile);
+        await tester.pumpAndSettle();
+
+        await tester.tap(orderItemCommonTile);
+        await tester.pump();
+
+        verify(
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(
+              materialInfo: fakeOrderHistoryItem.reOrderMaterialInfo,
+            ),
+          ),
+        ).called(1);
+      },
+    );
   });
 
   group('Item material - ', () {
