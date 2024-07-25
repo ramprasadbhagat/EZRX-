@@ -11,7 +11,7 @@ class _RequestDateRangePicker extends StatelessWidget {
       children: [
         const _FromRequestDateFilter(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: padding6),
           child: Text(
             '-',
             style: Theme.of(context).textTheme.titleSmall,
@@ -62,13 +62,13 @@ class _FromRequestDateFilter extends StatelessWidget {
                     color: ZPColors.darkGray,
                   ),
               suffixIcon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
+                padding: EdgeInsets.only(right: padding6),
                 child: Icon(
                   Icons.calendar_month,
                   size: 20,
                 ),
               ),
-              suffixIconConstraints: const BoxConstraints(maxWidth: 25),
+              suffixIconConstraints: const BoxConstraints(maxWidth: padding24),
               focusedBorder:
                   Theme.of(context).inputDecorationTheme.disabledBorder,
             ),
@@ -118,13 +118,13 @@ class _ToRequestDateFilter extends StatelessWidget {
                     color: ZPColors.darkGray,
                   ),
               suffixIcon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
+                padding: EdgeInsets.only(right: padding6),
                 child: Icon(
                   Icons.calendar_month,
                   size: 20,
                 ),
               ),
-              suffixIconConstraints: const BoxConstraints(maxWidth: 25),
+              suffixIconConstraints: const BoxConstraints(maxWidth: padding24),
               focusedBorder:
                   Theme.of(context).inputDecorationTheme.disabledBorder,
             ),

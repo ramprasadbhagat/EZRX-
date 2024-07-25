@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/regexes.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ part 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/
 part 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/widgets/return_by_item_filter_type_picker.dart';
 part 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/widgets/return_by_item_filter_amount_range_input.dart';
 
-const _defaultPadding = EdgeInsets.symmetric(horizontal: 15);
+const _defaultPadding = EdgeInsets.symmetric(horizontal: padding12);
 
 class ReturnByItemFilterPage extends StatelessWidget {
   const ReturnByItemFilterPage({
@@ -55,7 +56,7 @@ class ReturnByItemFilterPage extends StatelessWidget {
           ),
           const _ReturnFilter(),
           const Divider(
-            height: 32,
+            height: padding24,
             endIndent: 0,
             indent: 0,
             color: ZPColors.lightGrey,
@@ -65,12 +66,12 @@ class ReturnByItemFilterPage extends StatelessWidget {
             child: Row(
               children: [
                 _ResetButton(),
-                SizedBox(width: 12),
+                SizedBox(width: padding12),
                 _ApplyButton(),
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: padding12),
         ],
       ),
     );
@@ -92,30 +93,34 @@ class _ReturnFilter extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 10),
+            const SizedBox(height: padding12),
             if (context.read<EligibilityBloc>().state.marketPlaceEligible) ...[
               const _FilterSectionLabel('Show returns'),
-              const SizedBox(height: 10),
-              Padding(
-                padding: _defaultPadding
-                    .subtract(const EdgeInsets.symmetric(horizontal: 3)),
-                child: const _ReturnTypePicker(),
+              const Padding(
+                padding: EdgeInsets.all(padding12),
+                child: _ReturnTypePicker(),
               ),
-              const SizedBox(height: 16),
             ],
             _FilterSectionLabel(context.tr('Request date')),
-            const SizedBox(height: 14),
             const Padding(
-              padding: _defaultPadding,
+              padding: EdgeInsets.fromLTRB(
+                padding12,
+                padding12,
+                padding12,
+                padding24,
+              ),
               child: _RequestDateRangePicker(),
             ),
-            const SizedBox(height: 20),
             _FilterSectionLabel(
               '${context.tr('Request amount')} (${salesOrgConfig.currency.code})',
             ),
-            const SizedBox(height: 14),
             const Padding(
-              padding: _defaultPadding,
+              padding: EdgeInsets.fromLTRB(
+                padding12,
+                padding12,
+                padding12,
+                0,
+              ),
               child: _RequestAmountRangeInput(),
             ),
             if (!state.filter.isReturnAmountValueRangeValid)
@@ -126,7 +131,7 @@ class _ReturnFilter extends StatelessWidget {
                   isValid: state.filter.isReturnAmountValueRangeValid,
                 ),
               ),
-            const SizedBox(height: 20),
+            const SizedBox(height: padding24),
             _FilterSectionLabel(context.tr('Status')),
             const Padding(
               padding: _defaultPadding,

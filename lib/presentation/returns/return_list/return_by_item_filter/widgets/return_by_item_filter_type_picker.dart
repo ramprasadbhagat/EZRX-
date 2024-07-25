@@ -12,7 +12,7 @@ class _ReturnTypePicker extends StatelessWidget {
       builder: (context, state) => Column(
         children: MaterialOriginFilter.supportedTypes.map((type) {
           return ListTileTheme(
-            horizontalTitleGap: 2,
+            horizontalTitleGap: padding6,
             child: RadioListTile<MaterialOriginFilter>(
               key: WidgetKeys.filterRadioTile(
                 type.titleViewByItem,
