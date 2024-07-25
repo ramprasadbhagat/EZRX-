@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filte
 import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_request_filter_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:ezrxmobile/presentation/widgets/announcement_bottomsheet.dart';
 import 'package:flutter/material.dart';
@@ -90,11 +91,6 @@ class _ReturnRootState extends State<ReturnRoot> {
           isScrollControlled: true,
           enableDrag: false,
           isDismissible: false,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(16),
-            ),
-          ),
           builder: (_) => AnnouncementBottomSheet(
             maintenanceItem:
                 context.read<AnnouncementBloc>().state.maintenanceItem,
@@ -141,9 +137,9 @@ class _ReturnRootState extends State<ReturnRoot> {
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                      12.0,
-                      12.0,
-                      12.0,
+                      padding12,
+                      padding12,
+                      padding12,
                       0.0,
                     ),
                     child: Row(

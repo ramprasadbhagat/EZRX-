@@ -40,11 +40,6 @@ class _FilterReturnByRequest extends StatelessWidget {
       isScrollControlled: true,
       enableDrag: false,
       isDismissible: false,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
-      ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
         return const ReturnByRequestFilterPage();
