@@ -96,6 +96,7 @@ class ReturnListItemCard extends StatelessWidget {
           totalPrice: detailData.returnValue,
           overrideValue: detailData.priceOverride.doubleValue,
           wareHouseStorageCondition: data.wareHouseStorageCondition,
+          unitPrice: detailData.unitPrice,
         ),
         bottomWidget: bottomWidget,
         showUnitPrice: true,

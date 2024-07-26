@@ -172,7 +172,7 @@ class NewRequestState with _$NewRequestState {
             )
             .toList(),
         TrackingProps.unitPrice:
-            allItemDetails.map((e) => e.unitPrice.apiParameterValue).toList(),
+            allItemDetails.map((e) => e.unitPrice).toList(),
       };
 
   ReturnType getReturnItemReturnType(String uuid) {

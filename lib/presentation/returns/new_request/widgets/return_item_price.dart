@@ -38,7 +38,7 @@ class ReturnItemPrice extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 4.0),
                 child: PriceComponent(
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
-                  price: details.unitPrice.apiParameterValue,
+                  price: details.unitPrice.toString(),
                   type: PriceStyle.counterOfferPrice,
                 ),
               ),
@@ -47,7 +47,7 @@ class ReturnItemPrice extends StatelessWidget {
               price: (details.returnType.isCounterOfferElegible &&
                       details.priceOverride.isValid())
                   ? details.priceOverride.stringValue
-                  : details.unitPrice.apiParameterValue,
+                  : details.unitPrice.toString(),
               type: PriceStyle.summaryPrice,
             ),
           ],

@@ -88,7 +88,7 @@ class ReturnMaterial with _$ReturnMaterial {
         itemNumber: itemNumber,
         assignmentNumber: assignmentNumber,
         batch: batch,
-        unitPrice: unitPrice,
+        unitPrice: unitPrice.doubleValue,
         balanceQty: balanceQuantity,
       );
 

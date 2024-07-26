@@ -227,6 +227,8 @@ class RangeValue extends ValueObject<double> {
 
   int get intValue => value.getOrElse(() => 0).toInt();
 
+  double get doubleValue => value.getOrElse(() => 0);
+
   String get apiParameterValueIfNegative =>
       value.isLeft() ? '' : (-1 * value.getOrElse(() => 0)).toString();
 

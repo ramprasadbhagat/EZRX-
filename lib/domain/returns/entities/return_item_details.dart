@@ -17,7 +17,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
     required String assignmentNumber,
     required String batch,
     required ReturnQuantity returnQuantity,
-    required RangeValue unitPrice,
+    required double unitPrice,
     required Usage usage,
     required List<PoDocuments> uploadedFiles,
     required Remarks remarks,
@@ -34,7 +34,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
         assignmentNumber: '',
         batch: '',
         returnQuantity: ReturnQuantity(''),
-        unitPrice: RangeValue(''),
+        unitPrice: 0,
         usage: Usage.empty(),
         uploadedFiles: <PoDocuments>[],
         remarks: Remarks(''),
@@ -53,5 +53,5 @@ class ReturnItemDetails with _$ReturnItemDetails {
       returnQuantity.getIntValue *
       ((returnType.isCounterOfferElegible && priceOverride.isValid())
           ? priceOverride.doubleValue
-          : unitPrice.getOrDefaultValue(0));
+          : unitPrice);
 }

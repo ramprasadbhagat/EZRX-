@@ -21,7 +21,7 @@ mixin _$ReturnItemDetails {
   String get assignmentNumber => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   ReturnQuantity get returnQuantity => throw _privateConstructorUsedError;
-  RangeValue get unitPrice => throw _privateConstructorUsedError;
+  double get unitPrice => throw _privateConstructorUsedError;
   Usage get usage => throw _privateConstructorUsedError;
   List<PoDocuments> get uploadedFiles => throw _privateConstructorUsedError;
   Remarks get remarks => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $ReturnItemDetailsCopyWith<$Res> {
       String assignmentNumber,
       String batch,
       ReturnQuantity returnQuantity,
-      RangeValue unitPrice,
+      double unitPrice,
       Usage usage,
       List<PoDocuments> uploadedFiles,
       Remarks remarks,
@@ -113,7 +113,7 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as RangeValue,
+              as double,
       usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
@@ -172,7 +172,7 @@ abstract class _$$ReturnItemDetailsImplCopyWith<$Res>
       String assignmentNumber,
       String batch,
       ReturnQuantity returnQuantity,
-      RangeValue unitPrice,
+      double unitPrice,
       Usage usage,
       List<PoDocuments> uploadedFiles,
       Remarks remarks,
@@ -236,7 +236,7 @@ class __$$ReturnItemDetailsImplCopyWithImpl<$Res>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as RangeValue,
+              as double,
       usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
@@ -305,7 +305,7 @@ class _$ReturnItemDetailsImpl extends _ReturnItemDetails {
   @override
   final ReturnQuantity returnQuantity;
   @override
-  final RangeValue unitPrice;
+  final double unitPrice;
   @override
   final Usage usage;
   final List<PoDocuments> _uploadedFiles;
@@ -399,7 +399,7 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
       required final String assignmentNumber,
       required final String batch,
       required final ReturnQuantity returnQuantity,
-      required final RangeValue unitPrice,
+      required final double unitPrice,
       required final Usage usage,
       required final List<PoDocuments> uploadedFiles,
       required final Remarks remarks,
@@ -421,7 +421,7 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   @override
   ReturnQuantity get returnQuantity;
   @override
-  RangeValue get unitPrice;
+  double get unitPrice;
   @override
   Usage get usage;
   @override
