@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -30,10 +31,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required DateTimeStringValue deliveryDate,
     required OrderNumber orderNumber,
     required DateTimeStringValue createdDate,
-    required StringValue batch,
     required StringValue orderBy,
     required DocumentType orderType,
-    required DateTimeStringValue expiryDate,
     required PoReference poReference,
     required StringValue invoiceNumber,
     required bool isBonusMaterial,
@@ -64,6 +63,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required double totalUnitPrice,
     required double totalTax,
     required double taxRate,
+    required List<Batches> batches,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -78,8 +78,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
         deliveryDate: DateTimeStringValue(''),
         orderNumber: OrderNumber(''),
         createdDate: DateTimeStringValue(''),
-        batch: StringValue(''),
-        expiryDate: DateTimeStringValue(''),
         invoiceNumber: StringValue(''),
         isBonusMaterial: false,
         governmentMaterialCode: '',
@@ -112,6 +110,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         taxRate: 0,
         totalTax: 0,
         totalUnitPrice: 0,
+        batches: <Batches>[],
       );
 
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;
@@ -173,8 +172,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
   bool get showMaterialListPrice => !hidePrice && getListPrice > unitPrice;
 
   double get getListPrice => originPrice - tax;
-
-  bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 
   String combinationCode({
     required bool showGMCPart,

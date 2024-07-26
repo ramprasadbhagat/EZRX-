@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/batches_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_tender_contract_details_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -36,8 +37,6 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     required String plannedDeliveryDate,
     @JsonKey(name: 'pickedQuantity', defaultValue: 0)
     required int pickedQuantity,
-    @JsonKey(name: 'batch', defaultValue: '') required String batch,
-    @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
     required String lineReferenceNotes,
     @JsonKey(name: 'lineNumber', defaultValue: '') required String lineNumber,
@@ -87,6 +86,11 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     @JsonKey(name: 'totalTax', defaultValue: 0.0) required double totalTax,
     @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
     required double taxRate,
+    @JsonKey(
+      name: 'batches',
+      defaultValue: <BatchesDto>[],
+    )
+    required List<BatchesDto> batches,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -106,8 +110,6 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       plannedDeliveryDate:
           orderHistoryDetailsOrderItem.plannedDeliveryDate.dateString,
       pickedQuantity: orderHistoryDetailsOrderItem.pickedQuantity,
-      batch: orderHistoryDetailsOrderItem.batch.getValue(),
-      expiryDate: orderHistoryDetailsOrderItem.expiryDate.dateString,
       lineReferenceNotes:
           orderHistoryDetailsOrderItem.lineReferenceNotes.getValue(),
       lineNumber: orderHistoryDetailsOrderItem.lineNumber.getOrDefaultValue(''),
@@ -140,6 +142,9 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       taxRate: orderHistoryDetailsOrderItem.taxRate,
       totalTax: orderHistoryDetailsOrderItem.totalTax,
       totalUnitPrice: orderHistoryDetailsOrderItem.totalUnitPrice,
+      batches: List.from(
+        orderHistoryDetailsOrderItem.batches,
+      ).map((e) => BatchesDto.fromDomain(e)).toList(),
     );
   }
 
@@ -157,8 +162,6 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       sAPStatus: OrderStepValue(sAPStatus),
       plannedDeliveryDate: DateTimeStringValue(plannedDeliveryDate),
       pickedQuantity: pickedQuantity,
-      batch: StringValue(batch),
-      expiryDate: DateTimeStringValue(expiryDate),
       lineReferenceNotes: Remarks(lineReferenceNotes),
       lineNumber: LineNumber(lineNumber),
       isTenderContractMaterial: isTenderContractMaterial,
@@ -201,6 +204,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       taxRate: taxRate,
       totalTax: totalTax,
       totalUnitPrice: totalUnitPrice,
+      batches: batches.map((e) => e.toDomain()).toList(),
     );
   }
 

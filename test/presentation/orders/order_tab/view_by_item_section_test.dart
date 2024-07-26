@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -63,6 +64,12 @@ void main() {
         principalCode: PrincipalCode('00000001231'),
       ),
       createdDate: DateTimeStringValue('2023041107'),
+      batches: [
+        Batches(
+          batchNumber: StringValue('Batch1'),
+          expiryDate: DateTimeStringValue('20240824'),
+        ),
+      ],
     ),
     OrderHistoryItem.empty().copyWith(
       principalData: PrincipalData.empty().copyWith(

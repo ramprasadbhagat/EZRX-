@@ -29,8 +29,6 @@ mixin _$OrderHistoryDetailsOrderItem {
   DateTimeStringValue get plannedDeliveryDate =>
       throw _privateConstructorUsedError;
   int get pickedQuantity => throw _privateConstructorUsedError;
-  StringValue get batch => throw _privateConstructorUsedError;
-  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   Remarks get lineReferenceNotes => throw _privateConstructorUsedError;
   LineNumber get lineNumber => throw _privateConstructorUsedError;
   bool get isTenderContractMaterial => throw _privateConstructorUsedError;
@@ -57,6 +55,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   double get totalUnitPrice => throw _privateConstructorUsedError;
   double get totalTax => throw _privateConstructorUsedError;
   double get taxRate => throw _privateConstructorUsedError;
+  List<Batches> get batches => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderItemCopyWith<OrderHistoryDetailsOrderItem>
@@ -84,8 +83,6 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       OrderStepValue sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
       int pickedQuantity,
-      StringValue batch,
-      DateTimeStringValue expiryDate,
       Remarks lineReferenceNotes,
       LineNumber lineNumber,
       bool isTenderContractMaterial,
@@ -108,7 +105,8 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       ItemRegistrationNumber itemRegistrationNumber,
       double totalUnitPrice,
       double totalTax,
-      double taxRate});
+      double taxRate,
+      List<Batches> batches});
 
   $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -144,8 +142,6 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
-    Object? batch = null,
-    Object? expiryDate = null,
     Object? lineReferenceNotes = null,
     Object? lineNumber = null,
     Object? isTenderContractMaterial = null,
@@ -169,6 +165,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -219,14 +216,6 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as StringValue,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
       lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
@@ -319,6 +308,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value.batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<Batches>,
     ) as $Val);
   }
 
@@ -394,8 +387,6 @@ abstract class _$$OrderHistoryDetailsOrderItemImplCopyWith<$Res>
       OrderStepValue sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
       int pickedQuantity,
-      StringValue batch,
-      DateTimeStringValue expiryDate,
       Remarks lineReferenceNotes,
       LineNumber lineNumber,
       bool isTenderContractMaterial,
@@ -418,7 +409,8 @@ abstract class _$$OrderHistoryDetailsOrderItemImplCopyWith<$Res>
       ItemRegistrationNumber itemRegistrationNumber,
       double totalUnitPrice,
       double totalTax,
-      double taxRate});
+      double taxRate,
+      List<Batches> batches});
 
   @override
   $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
@@ -459,8 +451,6 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
-    Object? batch = null,
-    Object? expiryDate = null,
     Object? lineReferenceNotes = null,
     Object? lineNumber = null,
     Object? isTenderContractMaterial = null,
@@ -484,6 +474,7 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_$OrderHistoryDetailsOrderItemImpl(
       type: null == type
@@ -534,14 +525,6 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as StringValue,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
       lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
@@ -634,6 +617,10 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value._batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<Batches>,
     ));
   }
 }
@@ -654,8 +641,6 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
       required this.sAPStatus,
       required this.plannedDeliveryDate,
       required this.pickedQuantity,
-      required this.batch,
-      required this.expiryDate,
       required this.lineReferenceNotes,
       required this.lineNumber,
       required this.isTenderContractMaterial,
@@ -678,8 +663,10 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
       required this.itemRegistrationNumber,
       required this.totalUnitPrice,
       required this.totalTax,
-      required this.taxRate})
+      required this.taxRate,
+      required final List<Batches> batches})
       : _details = details,
+        _batches = batches,
         super._();
 
   @override
@@ -706,10 +693,6 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
   final DateTimeStringValue plannedDeliveryDate;
   @override
   final int pickedQuantity;
-  @override
-  final StringValue batch;
-  @override
-  final DateTimeStringValue expiryDate;
   @override
   final Remarks lineReferenceNotes;
   @override
@@ -762,10 +745,17 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
   final double totalTax;
   @override
   final double taxRate;
+  final List<Batches> _batches;
+  @override
+  List<Batches> get batches {
+    if (_batches is EqualUnmodifiableListView) return _batches;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_batches);
+  }
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, invoiceNumber: $invoiceNumber, itemRegistrationNumber: $itemRegistrationNumber, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, invoiceNumber: $invoiceNumber, itemRegistrationNumber: $itemRegistrationNumber, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate, batches: $batches)';
   }
 
   @override
@@ -795,9 +785,6 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
                 other.plannedDeliveryDate == plannedDeliveryDate) &&
             (identical(other.pickedQuantity, pickedQuantity) ||
                 other.pickedQuantity == pickedQuantity) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
             (identical(other.lineReferenceNotes, lineReferenceNotes) ||
                 other.lineReferenceNotes == lineReferenceNotes) &&
             (identical(other.lineNumber, lineNumber) ||
@@ -838,8 +825,10 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.totalUnitPrice, totalUnitPrice) ||
                 other.totalUnitPrice == totalUnitPrice) &&
-            (identical(other.totalTax, totalTax) || other.totalTax == totalTax) &&
-            (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
+            (identical(other.taxRate, taxRate) || other.taxRate == taxRate) &&
+            const DeepCollectionEquality().equals(other._batches, _batches));
   }
 
   @override
@@ -857,8 +846,6 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
         sAPStatus,
         plannedDeliveryDate,
         pickedQuantity,
-        batch,
-        expiryDate,
         lineReferenceNotes,
         lineNumber,
         isTenderContractMaterial,
@@ -881,7 +868,8 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
         itemRegistrationNumber,
         totalUnitPrice,
         totalTax,
-        taxRate
+        taxRate,
+        const DeepCollectionEquality().hash(_batches)
       ]);
 
   @JsonKey(ignore: true)
@@ -908,8 +896,6 @@ abstract class _OrderHistoryDetailsOrderItem
       required final OrderStepValue sAPStatus,
       required final DateTimeStringValue plannedDeliveryDate,
       required final int pickedQuantity,
-      required final StringValue batch,
-      required final DateTimeStringValue expiryDate,
       required final Remarks lineReferenceNotes,
       required final LineNumber lineNumber,
       required final bool isTenderContractMaterial,
@@ -932,7 +918,9 @@ abstract class _OrderHistoryDetailsOrderItem
       required final ItemRegistrationNumber itemRegistrationNumber,
       required final double totalUnitPrice,
       required final double totalTax,
-      required final double taxRate}) = _$OrderHistoryDetailsOrderItemImpl;
+      required final double taxRate,
+      required final List<Batches>
+          batches}) = _$OrderHistoryDetailsOrderItemImpl;
   _OrderHistoryDetailsOrderItem._() : super._();
 
   @override
@@ -959,10 +947,6 @@ abstract class _OrderHistoryDetailsOrderItem
   DateTimeStringValue get plannedDeliveryDate;
   @override
   int get pickedQuantity;
-  @override
-  StringValue get batch;
-  @override
-  DateTimeStringValue get expiryDate;
   @override
   Remarks get lineReferenceNotes;
   @override
@@ -1009,6 +993,8 @@ abstract class _OrderHistoryDetailsOrderItem
   double get totalTax;
   @override
   double get taxRate;
+  @override
+  List<Batches> get batches;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryDetailsOrderItemImplCopyWith<

@@ -1,10 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_history_stock_info.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,10 +21,19 @@ class CreditInvoiceDetailItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final salesOrgConfigs =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return CommonTileItem(
-      key: Key(customerDocumentDetail.batchNumber.getOrDefaultValue('')),
-      headerText: _batchExpiryDateText(context),
+      key: Key(
+        customerDocumentDetail.batches.firstOrNull?.batchNumber
+                .getOrDefaultValue('') ??
+            '',
+      ),
+      batchExpiryDate: OrderHistoryStockInfo.creditInvoiceDetail(
+        eligibilityState: eligibilityState,
+        item: customerDocumentDetail,
+        isMarketPlaceAccess: context.isMPPayment,
+      ),
       materialNumber: customerDocumentDetail.materialNumber,
       label: customerDocumentDetail.materialNumber.displayMatNo,
       subtitle: '',
@@ -54,22 +63,5 @@ class CreditInvoiceDetailItemTile extends StatelessWidget {
             )
           : null,
     );
-  }
-
-  String _batchExpiryDateText(BuildContext context) {
-    final salesConfig = context.read<EligibilityBloc>().state.salesOrgConfigs;
-    final displayedBatch = context.isMPPayment
-        ? 'NA'
-        : customerDocumentDetail.batchNumber.displayNAIfEmpty;
-    final displayedExpiryDate = context.isMPPayment
-        ? 'NA'
-        : customerDocumentDetail.expiryDate.dateOrNaString;
-
-    return [
-      if (salesConfig.batchNumDisplay)
-        '${context.tr('Batch')}: $displayedBatch',
-      if (salesConfig.expiryDateDisplay)
-        '${context.tr('Expires')}: $displayedExpiryDate',
-    ].join(' - ');
   }
 }

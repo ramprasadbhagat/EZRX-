@@ -36,10 +36,18 @@
         "netAmount": 0,
         "taxAmount": 0,
         "transactionCurrency": "",
-        "batchNumber": "ZPMYUAT002",
-        "expiryDate": "20250306",
         "principalName": "ORGANON (M) SDN BHD",
-        "principalCode": "0000140087"
+        "principalCode": "0000140087",
+        "batches": [
+          {
+            "batchNumber": "SGUAT0001",
+            "expiryDate": "20241231"
+          },
+          {
+            "batchNumber": "SGUAT0003",
+            "expiryDate": "20241241"
+          }
+        ]
       },
       {
         "billingDocumentItem": "000010",
@@ -56,11 +64,8 @@
         "netAmount": 680330,
         "taxAmount": 34017,
         "transactionCurrency": "",
-        "batchNumber": null,
-        "expiryDate": null,
         "principalName": "Bayer (South East Asia) Pte. Ltd",
-        "principalCode": "0000102670",
-        "__typename": "customerDocumentDetailsResponse"
+        "principalCode": "0000102670"
       }
     ]
   }

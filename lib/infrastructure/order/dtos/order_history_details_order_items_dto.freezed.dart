@@ -45,10 +45,6 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   String get plannedDeliveryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'pickedQuantity', defaultValue: 0)
   int get pickedQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'batch', defaultValue: '')
-  String get batch => throw _privateConstructorUsedError;
-  @JsonKey(name: 'expiryDate', defaultValue: '')
-  String get expiryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
   String get lineReferenceNotes => throw _privateConstructorUsedError;
   @JsonKey(name: 'lineNumber', defaultValue: '')
@@ -96,6 +92,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   double get totalTax => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+  List<BatchesDto> get batches => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -127,8 +125,6 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(name: 'plannedDeliveryDate', defaultValue: '')
       String plannedDeliveryDate,
       @JsonKey(name: 'pickedQuantity', defaultValue: 0) int pickedQuantity,
-      @JsonKey(name: 'batch', defaultValue: '') String batch,
-      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
       String lineReferenceNotes,
       @JsonKey(name: 'lineNumber', defaultValue: '') String lineNumber,
@@ -166,7 +162,9 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
       @JsonKey(name: 'totalTax', defaultValue: 0.0) double totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      double taxRate});
+      double taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      List<BatchesDto> batches});
 
   $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> get tenderContractDetails;
 }
@@ -197,8 +195,6 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
-    Object? batch = null,
-    Object? expiryDate = null,
     Object? lineReferenceNotes = null,
     Object? lineNumber = null,
     Object? isTenderContractMaterial = null,
@@ -218,6 +214,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -268,14 +265,6 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as String,
       lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
@@ -352,6 +341,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value.batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<BatchesDto>,
     ) as $Val);
   }
 
@@ -391,8 +384,6 @@ abstract class _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'plannedDeliveryDate', defaultValue: '')
       String plannedDeliveryDate,
       @JsonKey(name: 'pickedQuantity', defaultValue: 0) int pickedQuantity,
-      @JsonKey(name: 'batch', defaultValue: '') String batch,
-      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
       String lineReferenceNotes,
       @JsonKey(name: 'lineNumber', defaultValue: '') String lineNumber,
@@ -430,7 +421,9 @@ abstract class _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
       @JsonKey(name: 'totalTax', defaultValue: 0.0) double totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      double taxRate});
+      double taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      List<BatchesDto> batches});
 
   @override
   $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> get tenderContractDetails;
@@ -461,8 +454,6 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
-    Object? batch = null,
-    Object? expiryDate = null,
     Object? lineReferenceNotes = null,
     Object? lineNumber = null,
     Object? isTenderContractMaterial = null,
@@ -482,6 +473,7 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_$OrderHistoryDetailsOrderItemDtoImpl(
       type: null == type
@@ -532,14 +524,6 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as String,
       lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
@@ -616,6 +600,10 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value._batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<BatchesDto>,
     ));
   }
 }
@@ -641,8 +629,6 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
       required this.plannedDeliveryDate,
       @JsonKey(name: 'pickedQuantity', defaultValue: 0)
       required this.pickedQuantity,
-      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
-      @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
       required this.lineReferenceNotes,
       @JsonKey(name: 'lineNumber', defaultValue: '') required this.lineNumber,
@@ -686,8 +672,11 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
       required this.totalUnitPrice,
       @JsonKey(name: 'totalTax', defaultValue: 0.0) required this.totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      required this.taxRate})
+      required this.taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      required final List<BatchesDto> batches})
       : _details = details,
+        _batches = batches,
         super._();
 
   factory _$OrderHistoryDetailsOrderItemDtoImpl.fromJson(
@@ -730,12 +719,6 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @override
   @JsonKey(name: 'pickedQuantity', defaultValue: 0)
   final int pickedQuantity;
-  @override
-  @JsonKey(name: 'batch', defaultValue: '')
-  final String batch;
-  @override
-  @JsonKey(name: 'expiryDate', defaultValue: '')
-  final String expiryDate;
   @override
   @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
   final String lineReferenceNotes;
@@ -806,10 +789,18 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @override
   @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   final double taxRate;
+  final List<BatchesDto> _batches;
+  @override
+  @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+  List<BatchesDto> get batches {
+    if (_batches is EqualUnmodifiableListView) return _batches;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_batches);
+  }
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate, batches: $batches)';
   }
 
   @override
@@ -840,9 +831,6 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
                 other.plannedDeliveryDate == plannedDeliveryDate) &&
             (identical(other.pickedQuantity, pickedQuantity) ||
                 other.pickedQuantity == pickedQuantity) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
             (identical(other.lineReferenceNotes, lineReferenceNotes) ||
                 other.lineReferenceNotes == lineReferenceNotes) &&
             (identical(other.lineNumber, lineNumber) ||
@@ -876,8 +864,10 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
             (identical(other.totalUnitPrice, totalUnitPrice) ||
                 other.totalUnitPrice == totalUnitPrice) &&
-            (identical(other.totalTax, totalTax) || other.totalTax == totalTax) &&
-            (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
+            (identical(other.taxRate, taxRate) || other.taxRate == taxRate) &&
+            const DeepCollectionEquality().equals(other._batches, _batches));
   }
 
   @JsonKey(ignore: true)
@@ -896,8 +886,6 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
         sAPStatus,
         plannedDeliveryDate,
         pickedQuantity,
-        batch,
-        expiryDate,
         lineReferenceNotes,
         lineNumber,
         isTenderContractMaterial,
@@ -916,7 +904,8 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
         isCovid,
         totalUnitPrice,
         totalTax,
-        taxRate
+        taxRate,
+        const DeepCollectionEquality().hash(_batches)
       ]);
 
   @JsonKey(ignore: true)
@@ -958,9 +947,6 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final String plannedDeliveryDate,
       @JsonKey(name: 'pickedQuantity', defaultValue: 0)
       required final int pickedQuantity,
-      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-      required final String expiryDate,
       @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
       required final String lineReferenceNotes,
       @JsonKey(name: 'lineNumber', defaultValue: '')
@@ -988,8 +974,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       required final String itemRegistrationNumber,
-      @JsonKey(
-          name: 'productType', readValue: JsonReadValueHelper.readProductType)
+      @JsonKey(name: 'productType', readValue: JsonReadValueHelper.readProductType)
       required final String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
       required final bool promosStatus,
@@ -1008,7 +993,10 @@ abstract class _OrderHistoryDetailsOrderItemDto
       @JsonKey(name: 'totalTax', defaultValue: 0.0)
       required final double totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      required final double taxRate}) = _$OrderHistoryDetailsOrderItemDtoImpl;
+      required final double taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      required final List<BatchesDto>
+          batches}) = _$OrderHistoryDetailsOrderItemDtoImpl;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
@@ -1050,12 +1038,6 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'pickedQuantity', defaultValue: 0)
   int get pickedQuantity;
-  @override
-  @JsonKey(name: 'batch', defaultValue: '')
-  String get batch;
-  @override
-  @JsonKey(name: 'expiryDate', defaultValue: '')
-  String get expiryDate;
   @override
   @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
   String get lineReferenceNotes;
@@ -1120,6 +1102,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate;
+  @override
+  @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+  List<BatchesDto> get batches;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<

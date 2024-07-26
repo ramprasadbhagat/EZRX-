@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/product_images/entities/product_images.da
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/batches_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
@@ -33,7 +34,6 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     required String createdDate,
     @JsonKey(name: 'orderBy', defaultValue: '') required String orderBy,
     @JsonKey(name: 'orderType', defaultValue: '') required String orderType,
-    @JsonKey(name: 'batch', defaultValue: '') required String batch,
     @JsonKey(name: 'isBonusMaterial', defaultValue: false)
     required bool isBonusMaterial,
     @JsonKey(name: 'telephoneNumber', defaultValue: '')
@@ -47,7 +47,6 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     required String governmentMaterialCode,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
     required String itemRegistrationNumber,
-    @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
     required String requestedDeliveryDate,
     @JsonKey(name: 'specialInstructions', defaultValue: '')
@@ -89,6 +88,11 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'totalTax', defaultValue: 0.0) required double totalTax,
     @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
     required double taxRate,
+    @JsonKey(
+      name: 'batches',
+      defaultValue: <BatchesDto>[],
+    )
+    required List<BatchesDto> batches,
   }) = _OrderHistoryItemDto;
 
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
@@ -105,21 +109,19 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       orderNumber: orderHistoryItem.orderNumber.getOrCrash(),
       createdDate: orderHistoryItem.createdDate.dateString,
       tax: orderHistoryItem.tax,
-      batch: orderHistoryItem.batch.getOrCrash(),
       orderBy: orderHistoryItem.orderBy.getOrDefaultValue(''),
       orderType: orderHistoryItem.orderType.getOrCrash(),
       isBonusMaterial: orderHistoryItem.isBonusMaterial,
       telephoneNumber: orderHistoryItem.telephoneNumber.displayTelephoneNumber,
       invoiceNumber: orderHistoryItem.invoiceNumber.getOrDefaultValue(''),
       pOReference: orderHistoryItem.poReference.displayPoReference,
-      expiryDate: orderHistoryItem.expiryDate.dateString,
       requestedDeliveryDate: orderHistoryItem.requestedDeliveryDate.dateString,
       specialInstruction:
           orderHistoryItem.specialInstructions.displaySpecialInstructions,
-      orderHistoryItemPoAttachments:
-          List.from(orderHistoryItem.orderHistoryItemPoAttachments)
-              .map((e) => PoDocumentsDto.fromDomain(e))
-              .toList(),
+      orderHistoryItemPoAttachments: orderHistoryItem
+          .orderHistoryItemPoAttachments
+          .map((e) => PoDocumentsDto.fromDomain(e))
+          .toList(),
       eZRXNumber: orderHistoryItem.ezrxNumber.getOrDefaultValue(''),
       isBundle: orderHistoryItem.isBundle,
       promoStatus: orderHistoryItem.promoStatus,
@@ -148,6 +150,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       taxRate: orderHistoryItem.taxRate,
       totalTax: orderHistoryItem.totalTax,
       totalUnitPrice: orderHistoryItem.totalUnitPrice,
+      batches: orderHistoryItem.batches
+          .map((e) => BatchesDto.fromDomain(e))
+          .toList(),
     );
   }
   OrderHistoryItem toDomain() {
@@ -164,10 +169,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       orderNumber: OrderNumber(orderNumber),
       createdDate: DateTimeStringValue(createdDate),
       tax: tax,
-      batch: StringValue(batch),
       orderBy: StringValue(orderBy),
       orderType: DocumentType(orderType),
-      expiryDate: DateTimeStringValue(expiryDate),
       invoiceNumber: StringValue(invoiceNumber),
       isBonusMaterial: isBonusMaterial,
       poReference: PoReference(pOReference),
@@ -201,6 +204,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       taxRate: taxRate,
       totalTax: totalTax,
       totalUnitPrice: totalUnitPrice,
+      batches: batches.map((e) => e.toDomain()).toList(),
     );
   }
 

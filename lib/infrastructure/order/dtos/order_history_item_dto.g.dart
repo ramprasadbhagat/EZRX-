@@ -25,7 +25,6 @@ _$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
               as String,
       orderBy: json['orderBy'] as String? ?? '',
       orderType: json['orderType'] as String? ?? '',
-      batch: json['batch'] as String? ?? '',
       isBonusMaterial: json['isBonusMaterial'] as bool? ?? false,
       telephoneNumber: json['telephoneNumber'] as String? ?? '',
       invoiceNumber: json['invoiceNumber'] as String? ?? '',
@@ -33,7 +32,6 @@ _$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
       manufactureName: json['manufactureName'] as String? ?? '',
       governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
-      expiryDate: json['expiryDate'] as String? ?? '',
       requestedDeliveryDate: json['requestedDeliveryDate'] as String? ?? '',
       specialInstruction: json['specialInstructions'] as String? ?? '',
       tax: (json['tax'] as num?)?.toDouble() ?? 0.0,
@@ -64,6 +62,10 @@ _$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
       totalTax: (json['totalTax'] as num?)?.toDouble() ?? 0.0,
       taxRate:
           (JsonReadValueHelper.handleTax(json, 'taxRate') as num).toDouble(),
+      batches: (json['batches'] as List<dynamic>?)
+              ?.map((e) => BatchesDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
@@ -82,7 +84,6 @@ Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
       'createdDate': instance.createdDate,
       'orderBy': instance.orderBy,
       'orderType': instance.orderType,
-      'batch': instance.batch,
       'isBonusMaterial': instance.isBonusMaterial,
       'telephoneNumber': instance.telephoneNumber,
       'invoiceNumber': instance.invoiceNumber,
@@ -90,7 +91,6 @@ Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
       'manufactureName': instance.manufactureName,
       'governmentMaterialCode': instance.governmentMaterialCode,
       'itemRegistrationNumber': instance.itemRegistrationNumber,
-      'expiryDate': instance.expiryDate,
       'requestedDeliveryDate': instance.requestedDeliveryDate,
       'specialInstructions': instance.specialInstruction,
       'tax': instance.tax,
@@ -116,4 +116,5 @@ Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
       'totalUnitPrice': instance.totalUnitPrice,
       'totalTax': instance.totalTax,
       'taxRate': instance.taxRate,
+      'batches': instance.batches.map((e) => e.toJson()).toList(),
     };

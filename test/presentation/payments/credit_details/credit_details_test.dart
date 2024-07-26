@@ -6,6 +6,8 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
@@ -110,6 +112,9 @@ void main() {
   }
 
   group('Credit Details Screen Test', () {
+    final fakeBatch1 = StringValue('Batch1');
+    final fakeExpiry1 = DateTimeStringValue('20240824');
+
     testWidgets('=> LoadingImage  Test', (tester) async {
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
@@ -321,7 +326,16 @@ void main() {
       );
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
-          itemsInfo: [fakeDetails.first],
+          itemsInfo: [
+            fakeDetails.first.copyWith(
+              batches: [
+                Batches(
+                  batchNumber: fakeBatch1,
+                  expiryDate: fakeExpiry1,
+                ),
+              ],
+            ),
+          ],
         ),
       );
       await getWidget(tester, isMarketPlace: true);
@@ -361,6 +375,113 @@ void main() {
         ),
         findsOne,
       );
+    });
+
+    testWidgets(
+        ' -> Display Batch and EXP info when salesOrgConfig BatchNumDisplay is true for multiple batch and expiry',
+        (tester) async {
+      final fakeBatch1 = StringValue('Batch1');
+      final fakeBatch2 = StringValue('Batch2');
+      final fakeExpiry1 = DateTimeStringValue('20240824');
+      final fakeExpiry2 = DateTimeStringValue('20250824');
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial()
+            .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+      );
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          itemsInfo: [
+            fakeDetails.first.copyWith(
+              batches: [
+                Batches(
+                  batchNumber: fakeBatch1,
+                  expiryDate: fakeExpiry1,
+                ),
+                Batches(
+                  batchNumber: fakeBatch2,
+                  expiryDate: fakeExpiry2,
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.creditDetailsPageListView);
+      final invoiceTile = find.byKey(WidgetKeys.creditDetailMaterial(0, 0));
+      await tester.dragUntilVisible(
+        invoiceTile,
+        scrollList,
+        const Offset(0, -200),
+      );
+      await tester.pump();
+      final expectedDelivery1 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch1.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry1.dateOrDashString}',
+        findRichText: true,
+      );
+      final expectedDelivery2 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch2.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry2.dateOrDashString}',
+        findRichText: true,
+      );
+      expect(expectedDelivery1, findsOneWidget);
+      expect(expectedDelivery2, findsOneWidget);
+    });
+
+    testWidgets(
+        ' -> Display Batch and EXP info when salesOrgConfig BatchNumDisplay is false for multiple batch and expiry',
+        (tester) async {
+      final fakeBatch1 = StringValue('Batch1');
+      final fakeBatch2 = StringValue('Batch2');
+      final fakeExpiry1 = DateTimeStringValue('20240824');
+      final fakeExpiry2 = DateTimeStringValue('20250824');
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
+            batchNumDisplay: false,
+          ),
+        ),
+      );
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          itemsInfo: [
+            fakeDetails.first.copyWith(
+              batches: [
+                Batches(
+                  batchNumber: fakeBatch1,
+                  expiryDate: fakeExpiry1,
+                ),
+                Batches(
+                  batchNumber: fakeBatch2,
+                  expiryDate: fakeExpiry2,
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.creditDetailsPageListView);
+      final invoiceTile = find.byKey(WidgetKeys.creditDetailMaterial(0, 0));
+      await tester.dragUntilVisible(
+        invoiceTile,
+        scrollList,
+        const Offset(0, -200),
+      );
+      await tester.pump();
+      final expectedDelivery1 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch1.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry1.dateOrDashString}',
+        findRichText: true,
+      );
+      final expectedDelivery2 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch2.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry2.dateOrDashString}',
+        findRichText: true,
+      );
+      expect(expectedDelivery1, findsOneWidget);
+      expect(expectedDelivery2, findsOneWidget);
     });
   });
 }

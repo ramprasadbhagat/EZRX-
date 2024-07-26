@@ -46,8 +46,6 @@ mixin _$OrderHistoryItemDto {
   String get orderBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'orderType', defaultValue: '')
   String get orderType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'batch', defaultValue: '')
-  String get batch => throw _privateConstructorUsedError;
   @JsonKey(name: 'isBonusMaterial', defaultValue: false)
   bool get isBonusMaterial => throw _privateConstructorUsedError;
   @JsonKey(name: 'telephoneNumber', defaultValue: '')
@@ -62,8 +60,6 @@ mixin _$OrderHistoryItemDto {
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'expiryDate', defaultValue: '')
-  String get expiryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'specialInstructions', defaultValue: '')
@@ -112,6 +108,8 @@ mixin _$OrderHistoryItemDto {
   double get totalTax => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+  List<BatchesDto> get batches => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -142,7 +140,6 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       String createdDate,
       @JsonKey(name: 'orderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'orderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       bool isBonusMaterial,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
@@ -155,7 +152,6 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
@@ -189,7 +185,9 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
       @JsonKey(name: 'totalTax', defaultValue: 0.0) double totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      double taxRate});
+      double taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      List<BatchesDto> batches});
 }
 
 /// @nodoc
@@ -218,7 +216,6 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? createdDate = null,
     Object? orderBy = null,
     Object? orderType = null,
-    Object? batch = null,
     Object? isBonusMaterial = null,
     Object? telephoneNumber = null,
     Object? invoiceNumber = null,
@@ -226,7 +223,6 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? manufactureName = null,
     Object? governmentMaterialCode = null,
     Object? itemRegistrationNumber = null,
-    Object? expiryDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
     Object? tax = null,
@@ -250,6 +246,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -304,10 +301,6 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as String,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
       isBonusMaterial: null == isBonusMaterial
           ? _value.isBonusMaterial
           : isBonusMaterial // ignore: cast_nullable_to_non_nullable
@@ -335,10 +328,6 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
@@ -432,6 +421,10 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value.batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<BatchesDto>,
     ) as $Val);
   }
 }
@@ -461,7 +454,6 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       String createdDate,
       @JsonKey(name: 'orderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'orderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       bool isBonusMaterial,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
@@ -474,7 +466,6 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
@@ -508,7 +499,9 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
       @JsonKey(name: 'totalTax', defaultValue: 0.0) double totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      double taxRate});
+      double taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      List<BatchesDto> batches});
 }
 
 /// @nodoc
@@ -535,7 +528,6 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
     Object? createdDate = null,
     Object? orderBy = null,
     Object? orderType = null,
-    Object? batch = null,
     Object? isBonusMaterial = null,
     Object? telephoneNumber = null,
     Object? invoiceNumber = null,
@@ -543,7 +535,6 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
     Object? manufactureName = null,
     Object? governmentMaterialCode = null,
     Object? itemRegistrationNumber = null,
-    Object? expiryDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
     Object? tax = null,
@@ -567,6 +558,7 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_$OrderHistoryItemDtoImpl(
       materialNumber: null == materialNumber
@@ -621,10 +613,6 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as String,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
       isBonusMaterial: null == isBonusMaterial
           ? _value.isBonusMaterial
           : isBonusMaterial // ignore: cast_nullable_to_non_nullable
@@ -652,10 +640,6 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
@@ -749,6 +733,10 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value._batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<BatchesDto>,
     ));
   }
 }
@@ -775,7 +763,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       required this.createdDate,
       @JsonKey(name: 'orderBy', defaultValue: '') required this.orderBy,
       @JsonKey(name: 'orderType', defaultValue: '') required this.orderType,
-      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       required this.isBonusMaterial,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
@@ -789,7 +776,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       required this.governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       required this.itemRegistrationNumber,
-      @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       required this.requestedDeliveryDate,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
@@ -829,8 +815,11 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       required this.totalUnitPrice,
       @JsonKey(name: 'totalTax', defaultValue: 0.0) required this.totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      required this.taxRate})
+      required this.taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      required final List<BatchesDto> batches})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
+        _batches = batches,
         super._();
 
   factory _$OrderHistoryItemDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -876,9 +865,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @JsonKey(name: 'orderType', defaultValue: '')
   final String orderType;
   @override
-  @JsonKey(name: 'batch', defaultValue: '')
-  final String batch;
-  @override
   @JsonKey(name: 'isBonusMaterial', defaultValue: false)
   final bool isBonusMaterial;
   @override
@@ -899,9 +885,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   final String itemRegistrationNumber;
-  @override
-  @JsonKey(name: 'expiryDate', defaultValue: '')
-  final String expiryDate;
   @override
   @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
@@ -979,10 +962,18 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @override
   @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   final double taxRate;
+  final List<BatchesDto> _batches;
+  @override
+  @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+  List<BatchesDto> get batches {
+    if (_batches is EqualUnmodifiableListView) return _batches;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_batches);
+  }
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderOrderReason: $tenderOrderReason, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, isTenderExpired: $isTenderExpired, isCovid: $isCovid, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderOrderReason: $tenderOrderReason, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, isTenderExpired: $isTenderExpired, isCovid: $isCovid, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate, batches: $batches)';
   }
 
   @override
@@ -1014,7 +1005,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
             (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
             (identical(other.orderType, orderType) ||
                 other.orderType == orderType) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.isBonusMaterial, isBonusMaterial) ||
                 other.isBonusMaterial == isBonusMaterial) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
@@ -1029,8 +1019,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
                 other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
             (identical(other.specialInstruction, specialInstruction) ||
@@ -1059,7 +1047,8 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
                 other.isMarketPlace == isMarketPlace) &&
             (identical(other.tenderContractNumber, tenderContractNumber) ||
                 other.tenderContractNumber == tenderContractNumber) &&
-            (identical(other.tenderContractReference, tenderContractReference) || other.tenderContractReference == tenderContractReference) &&
+            (identical(other.tenderContractReference, tenderContractReference) ||
+                other.tenderContractReference == tenderContractReference) &&
             (identical(other.tenderOrderReason, tenderOrderReason) || other.tenderOrderReason == tenderOrderReason) &&
             (identical(other.tenderPriceUnit, tenderPriceUnit) || other.tenderPriceUnit == tenderPriceUnit) &&
             (identical(other.tenderPrice, tenderPrice) || other.tenderPrice == tenderPrice) &&
@@ -1067,7 +1056,8 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
             (identical(other.totalUnitPrice, totalUnitPrice) || other.totalUnitPrice == totalUnitPrice) &&
             (identical(other.totalTax, totalTax) || other.totalTax == totalTax) &&
-            (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
+            (identical(other.taxRate, taxRate) || other.taxRate == taxRate) &&
+            const DeepCollectionEquality().equals(other._batches, _batches));
   }
 
   @JsonKey(ignore: true)
@@ -1087,7 +1077,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
         createdDate,
         orderBy,
         orderType,
-        batch,
         isBonusMaterial,
         telephoneNumber,
         invoiceNumber,
@@ -1095,7 +1084,6 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
         manufactureName,
         governmentMaterialCode,
         itemRegistrationNumber,
-        expiryDate,
         requestedDeliveryDate,
         specialInstruction,
         tax,
@@ -1118,7 +1106,8 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
         isCovid,
         totalUnitPrice,
         totalTax,
-        taxRate
+        taxRate,
+        const DeepCollectionEquality().hash(_batches)
       ]);
 
   @JsonKey(ignore: true)
@@ -1161,7 +1150,6 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'orderBy', defaultValue: '') required final String orderBy,
       @JsonKey(name: 'orderType', defaultValue: '')
       required final String orderType,
-      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       required final bool isBonusMaterial,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
@@ -1176,8 +1164,6 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       required final String itemRegistrationNumber,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-      required final String expiryDate,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       required final String requestedDeliveryDate,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
@@ -1224,7 +1210,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'totalTax', defaultValue: 0.0)
       required final double totalTax,
       @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
-      required final double taxRate}) = _$OrderHistoryItemDtoImpl;
+      required final double taxRate,
+      @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+      required final List<BatchesDto> batches}) = _$OrderHistoryItemDtoImpl;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
@@ -1270,9 +1258,6 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'orderType', defaultValue: '')
   String get orderType;
   @override
-  @JsonKey(name: 'batch', defaultValue: '')
-  String get batch;
-  @override
   @JsonKey(name: 'isBonusMaterial', defaultValue: false)
   bool get isBonusMaterial;
   @override
@@ -1293,9 +1278,6 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber;
-  @override
-  @JsonKey(name: 'expiryDate', defaultValue: '')
-  String get expiryDate;
   @override
   @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
@@ -1366,6 +1348,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate;
+  @override
+  @JsonKey(name: 'batches', defaultValue: <BatchesDto>[])
+  List<BatchesDto> get batches;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryItemDtoImplCopyWith<_$OrderHistoryItemDtoImpl> get copyWith =>

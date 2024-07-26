@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
@@ -32,8 +33,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required OrderStepValue sAPStatus,
     required DateTimeStringValue plannedDeliveryDate,
     required int pickedQuantity,
-    required StringValue batch,
-    required DateTimeStringValue expiryDate,
     required Remarks lineReferenceNotes,
     required LineNumber lineNumber,
     required bool isTenderContractMaterial,
@@ -57,6 +56,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required double totalUnitPrice,
     required double totalTax,
     required double taxRate,
+    required List<Batches> batches,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -72,8 +72,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         sAPStatus: OrderStepValue(''),
         plannedDeliveryDate: DateTimeStringValue(''),
         pickedQuantity: 0,
-        batch: StringValue(''),
-        expiryDate: DateTimeStringValue(''),
         lineReferenceNotes: Remarks(''),
         lineNumber: LineNumber(''),
         isTenderContractMaterial: false,
@@ -97,6 +95,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         taxRate: 0,
         totalTax: 0,
         totalUnitPrice: 0,
+        batches: <Batches>[],
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
@@ -134,8 +133,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   bool get showOfferTag => !isBonus && promoStatus;
 
   bool get isBonus => type.isMaterialTypeBonus && unitPrice == 0;
-
-  bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 
   String itemUnitPrice(
     bool isIDMarket,

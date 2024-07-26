@@ -58,8 +58,6 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         WarehouseStorageCondition
         OrderNumber
         Available
-        Batch
-        ExpiryDate
         IsMarketplace
         Seller
         POReference
@@ -86,6 +84,10 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         promotype
         promoStatus
         isCovid
+        Batches {
+          BatchNumber
+          ExpiryDate
+        }
       }
      
     }

@@ -26,6 +26,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -111,6 +112,9 @@ void main() {
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late List<CustomerLicense> customerLicense;
+  final fakeBatch = StringValue('fake-batch');
+  final fakeExpiryDate = DateTimeStringValue('2023-10-04');
+
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
@@ -127,7 +131,12 @@ void main() {
     fakeOrderHistoryItem = viewByOrder
         .orderHeaders.first.orderHistoryDetailsOrderItem.first
         .copyWith(
-      expiryDate: DateTimeStringValue('2023-10-04'),
+      batches: [
+        Batches(
+          batchNumber: fakeBatch,
+          expiryDate: fakeExpiryDate,
+        ),
+      ],
     );
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
@@ -853,7 +862,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batches.first.batchNumber.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.batches.first.expiryDate.dateOrDashString})',
       );
       expect(expectedDelivery, findsNothing);
     });
@@ -871,7 +880,6 @@ void main() {
           isLoading: true,
         ),
       );
-      final fakeBatch = StringValue('fake-batch');
 
       final expectedStates = [
         ViewByOrderDetailsState.initial().copyWith(
@@ -879,7 +887,6 @@ void main() {
             orderHistoryDetailsOrderItem: [
               fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType.material(),
-                batch: fakeBatch,
               ),
             ],
           ),
@@ -894,10 +901,70 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeBatch.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString}',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batches.first.batchNumber.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.batches.first.expiryDate.dateOrDashString}',
         findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
+    });
+
+    testWidgets(
+        ' => Display Batch and EXP info when salesOrgConfig BatchNumDisplay is true for multiple batch and expiry',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
+      final fakeBatch1 = StringValue('Batch1');
+      final fakeBatch2 = StringValue('Batch2');
+      final fakeExpiry1 = DateTimeStringValue('20240824');
+      final fakeExpiry2 = DateTimeStringValue('20250824');
+
+      final expectedStates = [
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                productType: MaterialInfoType.material(),
+                batches: [
+                  Batches(
+                    batchNumber: fakeBatch1,
+                    expiryDate: fakeExpiry1,
+                  ),
+                  Batches(
+                    batchNumber: fakeBatch2,
+                    expiryDate: fakeExpiry2,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ];
+      whenListen(
+        viewByOrderDetailsBlocMock,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
+      await tester.pumpAndSettle();
+
+      final expectedDelivery1 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch1.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry1.dateOrDashString}',
+        findRichText: true,
+      );
+      final expectedDelivery2 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch2.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry2.dateOrDashString}',
+        findRichText: true,
+      );
+      expect(expectedDelivery1, findsOneWidget);
+      expect(expectedDelivery2, findsOneWidget);
     });
 
     testWidgets(
@@ -2456,9 +2523,6 @@ void main() {
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
               fakeOrderHistoryItem.copyWith(
-                expiryDate: DateTimeStringValue(
-                  DateTime.now().toIso8601String(),
-                ),
                 isMarketPlace: true,
               ),
             ],
@@ -2524,6 +2588,7 @@ void main() {
               materialNumber: MaterialNumber('fake-bundle'),
               productType: MaterialInfoType.bundle(),
               isMarketPlace: true,
+              batches: fakeOrderHistoryItem.batches,
             ),
           ],
         ),

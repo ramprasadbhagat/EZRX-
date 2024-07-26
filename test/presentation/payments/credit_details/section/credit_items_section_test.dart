@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
@@ -89,14 +91,26 @@ void main() {
       () => MixpanelService(config: locator<Config>()),
     );
     autoRouterMock = locator<AppRouter>();
+    final fakeBatch1 = StringValue('Batch1');
+    final fakeExpiry1 = DateTimeStringValue('20240824');
     fakeDetails = (await CreditAndInvoiceDetailsLocalDataSource()
             .getCreditAndInvoiceDetails())
         .take(1)
+        .map(
+          (e) => e.copyWith(
+            batches: [
+              Batches(
+                batchNumber: fakeBatch1,
+                expiryDate: fakeExpiry1,
+              ),
+            ],
+          ),
+        )
         .toList();
     fakeCreditItems = [
       CustomerDocumentDetailGroup.empty().copyWith(
         principalName: PrincipalName('fake-PN'),
-        items: fakeDetails,
+        items: [fakeDetails.first],
       ),
     ];
 
@@ -159,13 +173,11 @@ void main() {
           find.descendant(
             of: find.byType(CommonTileItem),
             matching: find.textContaining(
-              'Batch: ${e.batchNumber.displayNAIfEmpty} - Expires: ${e.expiryDate.dateString}',
+              'Batch: ${e.batches.first.batchNumber.displayNAIfEmpty} - Expires: ${e.batches.first.expiryDate.dateString}',
               findRichText: true,
             ),
           ),
-          currentSalesOrgConfigs.batchNumDisplay
-              ? findsOneWidget
-              : findsNothing,
+          findsOneWidget,
         );
         expect(
           find.text(

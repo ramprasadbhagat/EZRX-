@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
@@ -202,6 +203,9 @@ void main() {
   }
 
   group('Invoice Details Screen Test', () {
+    final fakeBatch1 = StringValue('Batch1');
+    final fakeExpiry1 = DateTimeStringValue('20240824');
+
     group(' => Download e-invoice button test', () {
       testWidgets(' => download e-invoice button visible', (tester) async {
         when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
@@ -733,7 +737,14 @@ void main() {
             eligibilityStateVariant.currentValue ?? EligibilityState.initial();
         final currentSalesOrgConfigs = currentEligibilityState.salesOrgConfigs;
 
-        final invoiceDetail = fakeInvoiceDetail.first;
+        final invoiceDetail = fakeInvoiceDetail.first.copyWith(
+          batches: [
+            Batches(
+              batchNumber: fakeBatch1,
+              expiryDate: fakeExpiry1,
+            ),
+          ],
+        );
         when(() => eligibilityBlocMock.state).thenReturn(
           currentEligibilityState,
         );
@@ -749,7 +760,7 @@ void main() {
 
         await tester.dragUntilVisible(
           find.byKey(
-            Key(invoiceDetail.batchNumber.getOrDefaultValue('')),
+            Key(invoiceDetail.batches.first.batchNumber.getOrDefaultValue('')),
           ),
           find.byKey(
             WidgetKeys.scrollList,
@@ -760,12 +771,10 @@ void main() {
 
         expect(
           find.textContaining(
-            'Batch: ${invoiceDetail.batchNumber.getOrDefaultValue('')} - Expires: ${invoiceDetail.expiryDate.dateString}',
+            'Batch: ${invoiceDetail.batches.first.batchNumber.getOrDefaultValue('')} - Expires: ${invoiceDetail.batches.first.expiryDate.dateString}',
             findRichText: true,
           ),
-          currentSalesOrgConfigs.batchNumDisplay
-              ? findsOneWidget
-              : findsNothing,
+          findsOneWidget,
         );
         expect(
           find.text(
@@ -863,7 +872,14 @@ void main() {
     testWidgets(
       ' => Test tax value for invoice item section for VN market',
       (tester) async {
-        final invoiceDetail = fakeInvoiceDetail[2];
+        final invoiceDetail = fakeInvoiceDetail[2].copyWith(
+          batches: [
+            Batches(
+              batchNumber: fakeBatch1,
+              expiryDate: fakeExpiry1,
+            ),
+          ],
+        );
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -882,7 +898,7 @@ void main() {
 
         await tester.dragUntilVisible(
           find.byKey(
-            Key(invoiceDetail.batchNumber.getOrDefaultValue('')),
+            Key(invoiceDetail.batches.first.batchNumber.getOrDefaultValue('')),
           ),
           find.byKey(
             WidgetKeys.scrollList,
@@ -953,7 +969,16 @@ void main() {
       );
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
-          itemsInfo: [fakeInvoiceDetail.first],
+          itemsInfo: [
+            fakeInvoiceDetail.first.copyWith(
+              batches: [
+                Batches(
+                  batchNumber: fakeBatch1,
+                  expiryDate: fakeExpiry1,
+                ),
+              ],
+            ),
+          ],
         ),
       );
       await getWidget(tester, isMarketPlace: true);
@@ -1091,6 +1116,113 @@ void main() {
         'You do not have access to view this order'.tr(),
       );
       expect(msg, findsOneWidget);
+    });
+
+    testWidgets(
+        ' -> Display Batch and EXP info when salesOrgConfig BatchNumDisplay is true for multiple batch and expiry',
+        (tester) async {
+      final fakeBatch1 = StringValue('Batch1');
+      final fakeBatch2 = StringValue('Batch2');
+      final fakeExpiry1 = DateTimeStringValue('20240824');
+      final fakeExpiry2 = DateTimeStringValue('20250824');
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial()
+            .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+      );
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          itemsInfo: [
+            fakeInvoiceDetail.first.copyWith(
+              batches: [
+                Batches(
+                  batchNumber: fakeBatch1,
+                  expiryDate: fakeExpiry1,
+                ),
+                Batches(
+                  batchNumber: fakeBatch2,
+                  expiryDate: fakeExpiry2,
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.scrollList);
+      final invoiceTile = find.byKey(WidgetKeys.invoiceDetailMaterial(0, 0));
+      await tester.dragUntilVisible(
+        invoiceTile,
+        scrollList,
+        const Offset(0, -200),
+      );
+      await tester.pump();
+      final expectedDelivery1 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch1.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry1.dateOrDashString}',
+        findRichText: true,
+      );
+      final expectedDelivery2 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch2.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry2.dateOrDashString}',
+        findRichText: true,
+      );
+      expect(expectedDelivery1, findsOneWidget);
+      expect(expectedDelivery2, findsOneWidget);
+    });
+
+    testWidgets(
+        ' -> Display Batch and EXP info when salesOrgConfig BatchNumDisplay is false for multiple batch and expiry',
+        (tester) async {
+      final fakeBatch1 = StringValue('Batch1');
+      final fakeBatch2 = StringValue('Batch2');
+      final fakeExpiry1 = DateTimeStringValue('20240824');
+      final fakeExpiry2 = DateTimeStringValue('20250824');
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
+            batchNumDisplay: false,
+          ),
+        ),
+      );
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          itemsInfo: [
+            fakeInvoiceDetail.first.copyWith(
+              batches: [
+                Batches(
+                  batchNumber: fakeBatch1,
+                  expiryDate: fakeExpiry1,
+                ),
+                Batches(
+                  batchNumber: fakeBatch2,
+                  expiryDate: fakeExpiry2,
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.scrollList);
+      final invoiceTile = find.byKey(WidgetKeys.invoiceDetailMaterial(0, 0));
+      await tester.dragUntilVisible(
+        invoiceTile,
+        scrollList,
+        const Offset(0, -200),
+      );
+      await tester.pump();
+      final expectedDelivery1 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch1.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry1.dateOrDashString}',
+        findRichText: true,
+      );
+      final expectedDelivery2 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch2.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry2.dateOrDashString}',
+        findRichText: true,
+      );
+      expect(expectedDelivery1, findsOneWidget);
+      expect(expectedDelivery2, findsOneWidget);
     });
   });
 }

@@ -14,10 +14,12 @@ query customerDocumentDetails($input: customerDocumentDetailsRequest!) {
     netAmount
     taxAmount
     transactionCurrency
-    batchNumber
-    expiryDate
     principalName
     principalCode
+    batches {
+      batchNumber
+      expiryDate
+    }
   }
 }
 

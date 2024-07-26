@@ -22,8 +22,6 @@ _$OrderHistoryDetailsOrderItemDtoImpl
           sAPStatus: json['sAPStatus'] as String? ?? '',
           plannedDeliveryDate: json['plannedDeliveryDate'] as String? ?? '',
           pickedQuantity: (json['pickedQuantity'] as num?)?.toInt() ?? 0,
-          batch: json['batch'] as String? ?? '',
-          expiryDate: json['expiryDate'] as String? ?? '',
           lineReferenceNotes: json['lineReferenceNotes'] as String? ?? '',
           lineNumber: json['lineNumber'] as String? ?? '',
           isTenderContractMaterial: JsonReadValueHelper.readBoolStringFormat(
@@ -58,6 +56,10 @@ _$OrderHistoryDetailsOrderItemDtoImpl
           totalTax: (json['totalTax'] as num?)?.toDouble() ?? 0.0,
           taxRate: (JsonReadValueHelper.handleTax(json, 'taxRate') as num)
               .toDouble(),
+          batches: (json['batches'] as List<dynamic>?)
+                  ?.map((e) => BatchesDto.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              [],
         );
 
 Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
@@ -75,8 +77,6 @@ Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
       'sAPStatus': instance.sAPStatus,
       'plannedDeliveryDate': instance.plannedDeliveryDate,
       'pickedQuantity': instance.pickedQuantity,
-      'batch': instance.batch,
-      'expiryDate': instance.expiryDate,
       'lineReferenceNotes': instance.lineReferenceNotes,
       'lineNumber': instance.lineNumber,
       'isTenderContractMaterial': instance.isTenderContractMaterial,
@@ -96,4 +96,5 @@ Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
       'totalUnitPrice': instance.totalUnitPrice,
       'totalTax': instance.totalTax,
       'taxRate': instance.taxRate,
+      'batches': instance.batches.map((e) => e.toJson()).toList(),
     };

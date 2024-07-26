@@ -29,10 +29,9 @@ mixin _$CustomerDocumentDetail {
   double get grossAmount => throw _privateConstructorUsedError;
   double get netAmount => throw _privateConstructorUsedError;
   double get taxAmount => throw _privateConstructorUsedError;
-  StringValue get batchNumber => throw _privateConstructorUsedError;
-  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   PrincipalData get principalData => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
+  List<Batches> get batches => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerDocumentDetailCopyWith<CustomerDocumentDetail> get copyWith =>
@@ -59,10 +58,9 @@ abstract class $CustomerDocumentDetailCopyWith<$Res> {
       double grossAmount,
       double netAmount,
       double taxAmount,
-      StringValue batchNumber,
-      DateTimeStringValue expiryDate,
       PrincipalData principalData,
-      ProductImages productImages});
+      ProductImages productImages,
+      List<Batches> batches});
 
   $PrincipalDataCopyWith<$Res> get principalData;
   $ProductImagesCopyWith<$Res> get productImages;
@@ -95,10 +93,9 @@ class _$CustomerDocumentDetailCopyWithImpl<$Res,
     Object? grossAmount = null,
     Object? netAmount = null,
     Object? taxAmount = null,
-    Object? batchNumber = null,
-    Object? expiryDate = null,
     Object? principalData = null,
     Object? productImages = null,
+    Object? batches = null,
   }) {
     return _then(_value.copyWith(
       billingDocumentItem: null == billingDocumentItem
@@ -153,14 +150,6 @@ class _$CustomerDocumentDetailCopyWithImpl<$Res,
           ? _value.taxAmount
           : taxAmount // ignore: cast_nullable_to_non_nullable
               as double,
-      batchNumber: null == batchNumber
-          ? _value.batchNumber
-          : batchNumber // ignore: cast_nullable_to_non_nullable
-              as StringValue,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
       principalData: null == principalData
           ? _value.principalData
           : principalData // ignore: cast_nullable_to_non_nullable
@@ -169,6 +158,10 @@ class _$CustomerDocumentDetailCopyWithImpl<$Res,
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      batches: null == batches
+          ? _value.batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<Batches>,
     ) as $Val);
   }
 
@@ -212,10 +205,9 @@ abstract class _$$CustomerDocumentDetailImplCopyWith<$Res>
       double grossAmount,
       double netAmount,
       double taxAmount,
-      StringValue batchNumber,
-      DateTimeStringValue expiryDate,
       PrincipalData principalData,
-      ProductImages productImages});
+      ProductImages productImages,
+      List<Batches> batches});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -249,10 +241,9 @@ class __$$CustomerDocumentDetailImplCopyWithImpl<$Res>
     Object? grossAmount = null,
     Object? netAmount = null,
     Object? taxAmount = null,
-    Object? batchNumber = null,
-    Object? expiryDate = null,
     Object? principalData = null,
     Object? productImages = null,
+    Object? batches = null,
   }) {
     return _then(_$CustomerDocumentDetailImpl(
       billingDocumentItem: null == billingDocumentItem
@@ -307,14 +298,6 @@ class __$$CustomerDocumentDetailImplCopyWithImpl<$Res>
           ? _value.taxAmount
           : taxAmount // ignore: cast_nullable_to_non_nullable
               as double,
-      batchNumber: null == batchNumber
-          ? _value.batchNumber
-          : batchNumber // ignore: cast_nullable_to_non_nullable
-              as StringValue,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
       principalData: null == principalData
           ? _value.principalData
           : principalData // ignore: cast_nullable_to_non_nullable
@@ -323,6 +306,10 @@ class __$$CustomerDocumentDetailImplCopyWithImpl<$Res>
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      batches: null == batches
+          ? _value._batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<Batches>,
     ));
   }
 }
@@ -344,11 +331,11 @@ class _$CustomerDocumentDetailImpl extends _CustomerDocumentDetail {
       required this.grossAmount,
       required this.netAmount,
       required this.taxAmount,
-      required this.batchNumber,
-      required this.expiryDate,
       required this.principalData,
-      required this.productImages})
-      : super._();
+      required this.productImages,
+      required final List<Batches> batches})
+      : _batches = batches,
+        super._();
 
   @override
   final String billingDocumentItem;
@@ -377,17 +364,20 @@ class _$CustomerDocumentDetailImpl extends _CustomerDocumentDetail {
   @override
   final double taxAmount;
   @override
-  final StringValue batchNumber;
-  @override
-  final DateTimeStringValue expiryDate;
-  @override
   final PrincipalData principalData;
   @override
   final ProductImages productImages;
+  final List<Batches> _batches;
+  @override
+  List<Batches> get batches {
+    if (_batches is EqualUnmodifiableListView) return _batches;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_batches);
+  }
 
   @override
   String toString() {
-    return 'CustomerDocumentDetail(billingDocumentItem: $billingDocumentItem, salesDocumentItemType: $salesDocumentItemType, materialNumber: $materialNumber, billingDocumentItemText: $billingDocumentItemText, billingQuantity: $billingQuantity, billingQuantityUnit: $billingQuantityUnit, salesMeasureISOUnit: $salesMeasureISOUnit, referenceSDDocument: $referenceSDDocument, referenceSDDocumentItem: $referenceSDDocumentItem, referenceSDDocumentCategory: $referenceSDDocumentCategory, grossAmount: $grossAmount, netAmount: $netAmount, taxAmount: $taxAmount, batchNumber: $batchNumber, expiryDate: $expiryDate, principalData: $principalData, productImages: $productImages)';
+    return 'CustomerDocumentDetail(billingDocumentItem: $billingDocumentItem, salesDocumentItemType: $salesDocumentItemType, materialNumber: $materialNumber, billingDocumentItemText: $billingDocumentItemText, billingQuantity: $billingQuantity, billingQuantityUnit: $billingQuantityUnit, salesMeasureISOUnit: $salesMeasureISOUnit, referenceSDDocument: $referenceSDDocument, referenceSDDocumentItem: $referenceSDDocumentItem, referenceSDDocumentCategory: $referenceSDDocumentCategory, grossAmount: $grossAmount, netAmount: $netAmount, taxAmount: $taxAmount, principalData: $principalData, productImages: $productImages, batches: $batches)';
   }
 
   @override
@@ -425,14 +415,11 @@ class _$CustomerDocumentDetailImpl extends _CustomerDocumentDetail {
                 other.netAmount == netAmount) &&
             (identical(other.taxAmount, taxAmount) ||
                 other.taxAmount == taxAmount) &&
-            (identical(other.batchNumber, batchNumber) ||
-                other.batchNumber == batchNumber) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
             (identical(other.principalData, principalData) ||
                 other.principalData == principalData) &&
             (identical(other.productImages, productImages) ||
-                other.productImages == productImages));
+                other.productImages == productImages) &&
+            const DeepCollectionEquality().equals(other._batches, _batches));
   }
 
   @override
@@ -451,10 +438,9 @@ class _$CustomerDocumentDetailImpl extends _CustomerDocumentDetail {
       grossAmount,
       netAmount,
       taxAmount,
-      batchNumber,
-      expiryDate,
       principalData,
-      productImages);
+      productImages,
+      const DeepCollectionEquality().hash(_batches));
 
   @JsonKey(ignore: true)
   @override
@@ -466,24 +452,22 @@ class _$CustomerDocumentDetailImpl extends _CustomerDocumentDetail {
 
 abstract class _CustomerDocumentDetail extends CustomerDocumentDetail {
   const factory _CustomerDocumentDetail(
-          {required final String billingDocumentItem,
-          required final StringValue salesDocumentItemType,
-          required final MaterialNumber materialNumber,
-          required final String billingDocumentItemText,
-          required final IntegerValue billingQuantity,
-          required final String billingQuantityUnit,
-          required final String salesMeasureISOUnit,
-          required final String referenceSDDocument,
-          required final String referenceSDDocumentItem,
-          required final String referenceSDDocumentCategory,
-          required final double grossAmount,
-          required final double netAmount,
-          required final double taxAmount,
-          required final StringValue batchNumber,
-          required final DateTimeStringValue expiryDate,
-          required final PrincipalData principalData,
-          required final ProductImages productImages}) =
-      _$CustomerDocumentDetailImpl;
+      {required final String billingDocumentItem,
+      required final StringValue salesDocumentItemType,
+      required final MaterialNumber materialNumber,
+      required final String billingDocumentItemText,
+      required final IntegerValue billingQuantity,
+      required final String billingQuantityUnit,
+      required final String salesMeasureISOUnit,
+      required final String referenceSDDocument,
+      required final String referenceSDDocumentItem,
+      required final String referenceSDDocumentCategory,
+      required final double grossAmount,
+      required final double netAmount,
+      required final double taxAmount,
+      required final PrincipalData principalData,
+      required final ProductImages productImages,
+      required final List<Batches> batches}) = _$CustomerDocumentDetailImpl;
   const _CustomerDocumentDetail._() : super._();
 
   @override
@@ -513,13 +497,11 @@ abstract class _CustomerDocumentDetail extends CustomerDocumentDetail {
   @override
   double get taxAmount;
   @override
-  StringValue get batchNumber;
-  @override
-  DateTimeStringValue get expiryDate;
-  @override
   PrincipalData get principalData;
   @override
   ProductImages get productImages;
+  @override
+  List<Batches> get batches;
   @override
   @JsonKey(ignore: true)
   _$$CustomerDocumentDetailImplCopyWith<_$CustomerDocumentDetailImpl>

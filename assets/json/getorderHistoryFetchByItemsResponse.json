@@ -30,7 +30,9 @@
               "LineNumber": "000020",
               "Tax": 0,
               "TotalTax": 0,
-              "TaxRate":["0"],
+              "TaxRate": [
+                "0"
+              ],
               "DeliveryDate": "20240108",
               "DeliveryTime": "",
               "OrderType": "ZPOR",
@@ -40,8 +42,6 @@
               "PurchaseOrderType": "MRXS",
               "WarehouseStorageCondition": "AC",
               "Available": true,
-              "Batch": "1K24C1",
-              "ExpiryDate": "",
               "isMarketPlace": true,
               "Seller": "",
               "POReference": "",
@@ -66,8 +66,14 @@
               "promotype": "",
               "promoStatus": false,
               "referenceNotes": "Test Delivery Info",
-              "isTenderExpire" : false,
-              "isCovid" : false
+              "isTenderExpire": false,
+              "isCovid": false,
+              "Batches": [
+                {
+                  "BatchNumber": "SGUAT0001",
+                  "ExpiryDate": "20241231"
+                }
+              ]
             },
             {
               "poAttachment": null,
@@ -92,8 +98,6 @@
               "PurchaseOrderType": "MRXS",
               "WarehouseStorageCondition": "AC",
               "Available": true,
-              "Batch": "1K24C1",
-              "ExpiryDate": "",
               "isMarketPlace": false,
               "Seller": "",
               "POReference": "",
@@ -118,8 +122,8 @@
               "promotype": "",
               "promoStatus": false,
               "referenceNotes": "Test Delivery Info",
-              "isTenderExpire" : false,
-              "isCovid" : false
+              "isTenderExpire": false,
+              "isCovid": false
             },
             {
               "poAttachment": null,
@@ -144,8 +148,6 @@
               "PurchaseOrderType": "MRXS",
               "WarehouseStorageCondition": "AC",
               "Available": true,
-              "Batch": "1K24C1",
-              "ExpiryDate": "",
               "isMarketPlace": true,
               "Seller": "",
               "POReference": "",
@@ -170,8 +172,8 @@
               "promotype": "",
               "promoStatus": true,
               "referenceNotes": "",
-              "isTenderExpire" : true,
-              "isCovid" : false
+              "isTenderExpire": true,
+              "isCovid": false
             },
             {
               "poAttachment": null,
@@ -196,8 +198,6 @@
               "PurchaseOrderType": "MRXS",
               "WarehouseStorageCondition": "AC",
               "Available": true,
-              "Batch": "1K24C1",
-              "ExpiryDate": "",
               "isMarketPlace": false,
               "Seller": "",
               "POReference": "",
@@ -222,8 +222,8 @@
               "promotype": "",
               "promoStatus": true,
               "referenceNotes": "",
-              "isTenderExpire" : true,
-              "isCovid" : false
+              "isTenderExpire": true,
+              "isCovid": false
             },
             {
               "poAttachment": null,
@@ -248,8 +248,6 @@
               "PurchaseOrderType": "MRXS",
               "WarehouseStorageCondition": "AC",
               "Available": true,
-              "Batch": "1K24C1",
-              "ExpiryDate": "",
               "isMarketPlace": false,
               "Seller": "",
               "POReference": "",
@@ -274,9 +272,9 @@
               "promotype": "",
               "promoStatus": false,
               "referenceNotes": "Test Delivery Info",
-              "isTenderExpire" : false,
-              "isCovid" : false
-           }
+              "isTenderExpire": false,
+              "isCovid": false
+            }
           ]
         }
       ]

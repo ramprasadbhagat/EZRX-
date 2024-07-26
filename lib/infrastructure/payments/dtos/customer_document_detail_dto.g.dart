@@ -23,10 +23,12 @@ _$CustomerDocumentDetailDtoImpl _$$CustomerDocumentDetailDtoImplFromJson(
       grossAmount: (json['grossAmount'] as num?)?.toDouble() ?? 0.0,
       netAmount: (json['netAmount'] as num?)?.toDouble() ?? 0.0,
       taxAmount: (json['taxAmount'] as num?)?.toDouble() ?? 0.0,
-      batchNumber: json['batchNumber'] as String? ?? '',
-      expiryDate: json['expiryDate'] as String? ?? '',
       principalName: json['principalName'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
+      batches: (json['batches'] as List<dynamic>?)
+              ?.map((e) => BatchesDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$CustomerDocumentDetailDtoImplToJson(
@@ -45,8 +47,7 @@ Map<String, dynamic> _$$CustomerDocumentDetailDtoImplToJson(
       'grossAmount': instance.grossAmount,
       'netAmount': instance.netAmount,
       'taxAmount': instance.taxAmount,
-      'batchNumber': instance.batchNumber,
-      'expiryDate': instance.expiryDate,
       'principalName': instance.principalName,
       'principalCode': instance.principalCode,
+      'batches': instance.batches.map((e) => e.toJson()).toList(),
     };

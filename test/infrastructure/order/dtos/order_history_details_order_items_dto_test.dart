@@ -30,6 +30,12 @@ void main() {
         'TotalUnitPrice': 200.0,
         'TotalTax': 0.0,
         'TaxRate': ['0'],
+        'Batches': [
+          {
+            'BatchNumber': 'fake-batch',
+            'ExpiryDate': '20241231',
+          }
+        ],
       };
     });
 
@@ -40,7 +46,8 @@ void main() {
         ).toDomain(),
       );
 
-      expect(configs.batch, 'fake-batch');
+      expect(configs.batches.first.batchNumber, 'fake-batch');
+      expect(configs.batches.first.expiryDate, '20241231');
       expect(configs.hidePrice, true);
       expect(configs.totalUnitPrice, 200.0);
       expect(configs.totalTax, 0.0);
@@ -54,7 +61,8 @@ void main() {
         ).toDomain(),
       ).toJson();
 
-      expect(configs['batch'], 'fake-batch');
+      expect(configs['batches'][0]['batchNumber'], 'fake-batch');
+      expect(configs['batches'][0]['expiryDate'], '20241231');
       expect(configs['hidePrice'], true);
       expect(configs['totalUnitPrice'], 200.0);
       expect(configs['totalTax'], 0.0);

@@ -3,39 +3,50 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class OrderHistoryStockInfo extends StatelessWidget {
-  final String batchNumber;
-  final String expiryDate;
-  final EligibilityState eligibilityState;
+  final List<String> batchNumber;
+  final List<String> expiryDate;
+  final bool displayBatchAndExpiryDate;
 
   const OrderHistoryStockInfo({
     super.key,
     required this.batchNumber,
     required this.expiryDate,
-    required this.eligibilityState,
+    this.displayBatchAndExpiryDate = false,
   });
 
   factory OrderHistoryStockInfo.viewByOrder({
     required OrderHistoryDetailsOrderItem item,
     required EligibilityState eligibilityState,
   }) {
-    final stockInfo = StockInfo.empty().copyWith(
-      batch: item.batch,
-      expiryDate: item.expiryDate,
+    final stockInfos = item.batches.map(
+      (e) => StockInfo.empty().copyWith(
+        batch: e.batchNumber,
+        expiryDate: e.expiryDate,
+      ),
     );
 
     return OrderHistoryStockInfo(
-      batchNumber:
-          stockInfo.displayBatchNumber(isMarketPlace: item.isMarketPlace),
-      expiryDate: stockInfo.displayExpiryDate(
-        isMarketPlace: item.isMarketPlace,
-        isPhMdi: eligibilityState.salesOrg.isPhMdi,
-        isAbbotPrincipalCode: item.principalData.principalCode.isAbbot,
-      ),
-      eligibilityState: eligibilityState,
+      batchNumber: stockInfos
+          .map(
+            (e) => e.displayBatchNumber(isMarketPlace: item.isMarketPlace),
+          )
+          .toList(),
+      expiryDate: stockInfos
+          .map(
+            (e) => e.displayExpiryDate(
+              isMarketPlace: item.isMarketPlace,
+              isPhMdi: eligibilityState.salesOrg.isPhMdi,
+              isAbbotPrincipalCode: item.principalData.principalCode.isAbbot,
+            ),
+          )
+          .toList(),
+      displayBatchAndExpiryDate:
+          eligibilityState.salesOrgConfigs.batchNumDisplay,
     );
   }
 
@@ -43,38 +54,84 @@ class OrderHistoryStockInfo extends StatelessWidget {
     required OrderHistoryItem item,
     required EligibilityState eligibilityState,
   }) {
-    final stockInfo = StockInfo.empty().copyWith(
-      batch: item.batch,
-      expiryDate: item.expiryDate,
+    final stockInfos = item.batches.map(
+      (e) => StockInfo.empty().copyWith(
+        batch: e.batchNumber,
+        expiryDate: e.expiryDate,
+      ),
     );
 
     return OrderHistoryStockInfo(
-      batchNumber:
-          stockInfo.displayBatchNumber(isMarketPlace: item.isMarketPlace),
-      expiryDate: stockInfo.displayExpiryDate(
-        isMarketPlace: item.isMarketPlace,
-        isPhMdi: eligibilityState.salesOrg.isPhMdi,
-        isAbbotPrincipalCode: item.principalData.principalCode.isAbbot,
+      batchNumber: stockInfos
+          .map(
+            (e) => e.displayBatchNumber(isMarketPlace: item.isMarketPlace),
+          )
+          .toList(),
+      expiryDate: stockInfos
+          .map(
+            (e) => e.displayExpiryDate(
+              isMarketPlace: item.isMarketPlace,
+              isPhMdi: eligibilityState.salesOrg.isPhMdi,
+              isAbbotPrincipalCode: item.principalData.principalCode.isAbbot,
+            ),
+          )
+          .toList(),
+      displayBatchAndExpiryDate:
+          eligibilityState.salesOrgConfigs.batchNumDisplay,
+    );
+  }
+
+  factory OrderHistoryStockInfo.creditInvoiceDetail({
+    required CustomerDocumentDetail item,
+    required bool isMarketPlaceAccess,
+    required EligibilityState eligibilityState,
+  }) {
+    final stockInfos = item.batches.map(
+      (e) => StockInfo.empty().copyWith(
+        batch: e.batchNumber,
+        expiryDate: e.expiryDate,
       ),
-      eligibilityState: eligibilityState,
+    );
+
+    return OrderHistoryStockInfo(
+      batchNumber: stockInfos
+          .map(
+            (e) => e.displayBatchNumber(isMarketPlace: isMarketPlaceAccess),
+          )
+          .toList(),
+      expiryDate: stockInfos
+          .map(
+            (e) => e.displayExpiryDate(
+              isMarketPlace: isMarketPlaceAccess,
+              isPhMdi: eligibilityState.salesOrg.isPhMdi,
+              isAbbotPrincipalCode: item.principalData.principalCode.isAbbot,
+            ),
+          )
+          .toList(),
+      displayBatchAndExpiryDate: true,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!eligibilityState.salesOrgConfigs.batchNumDisplay) {
+    if (!displayBatchAndExpiryDate) {
       return const SizedBox();
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 1),
-      child: Text(
-        '${context.tr('Batch')}: $batchNumber - ${context.tr('Expires')}: $expiryDate',
-        style: Theme.of(context)
-            .textTheme
-            .bodySmall
-            ?.copyWith(color: ZPColors.neutralsGrey1),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: List.generate(batchNumber.length, (index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 1),
+          child: Text(
+            '${context.tr('Batch')}: ${batchNumber[index]} - ${context.tr('Expires')}: ${expiryDate[index]}',
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: ZPColors.neutralsGrey1),
+          ),
+        );
+      }),
     );
   }
 }

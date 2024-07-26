@@ -16,10 +16,12 @@ class CreditAndInvoiceDetailsQueryMutation {
         grossAmount
         netAmount
         taxAmount
-        batchNumber
-        expiryDate
         principalName
         principalCode
+        batches {
+          batchNumber
+          expiryDate
+        }
       }
     }
     ''';

@@ -27,10 +27,8 @@ mixin _$OrderHistoryItem {
   DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   OrderNumber get orderNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
-  StringValue get batch => throw _privateConstructorUsedError;
   StringValue get orderBy => throw _privateConstructorUsedError;
   DocumentType get orderType => throw _privateConstructorUsedError;
-  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   PoReference get poReference => throw _privateConstructorUsedError;
   StringValue get invoiceNumber => throw _privateConstructorUsedError;
   bool get isBonusMaterial => throw _privateConstructorUsedError;
@@ -68,6 +66,7 @@ mixin _$OrderHistoryItem {
   double get totalUnitPrice => throw _privateConstructorUsedError;
   double get totalTax => throw _privateConstructorUsedError;
   double get taxRate => throw _privateConstructorUsedError;
+  List<Batches> get batches => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryItemCopyWith<OrderHistoryItem> get copyWith =>
@@ -92,10 +91,8 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
       DateTimeStringValue createdDate,
-      StringValue batch,
       StringValue orderBy,
       DocumentType orderType,
-      DateTimeStringValue expiryDate,
       PoReference poReference,
       StringValue invoiceNumber,
       bool isBonusMaterial,
@@ -125,7 +122,8 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       ItemRegistrationNumber itemRegistrationNumber,
       double totalUnitPrice,
       double totalTax,
-      double taxRate});
+      double taxRate,
+      List<Batches> batches});
 
   $ProductImagesCopyWith<$Res> get productImages;
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -155,10 +153,8 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? deliveryDate = null,
     Object? orderNumber = null,
     Object? createdDate = null,
-    Object? batch = null,
     Object? orderBy = null,
     Object? orderType = null,
-    Object? expiryDate = null,
     Object? poReference = null,
     Object? invoiceNumber = null,
     Object? isBonusMaterial = null,
@@ -189,6 +185,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -235,10 +232,6 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as StringValue,
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
@@ -247,10 +240,6 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as DocumentType,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
@@ -371,6 +360,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value.batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<Batches>,
     ) as $Val);
   }
 
@@ -411,10 +404,8 @@ abstract class _$$OrderHistoryItemImplCopyWith<$Res>
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
       DateTimeStringValue createdDate,
-      StringValue batch,
       StringValue orderBy,
       DocumentType orderType,
-      DateTimeStringValue expiryDate,
       PoReference poReference,
       StringValue invoiceNumber,
       bool isBonusMaterial,
@@ -444,7 +435,8 @@ abstract class _$$OrderHistoryItemImplCopyWith<$Res>
       ItemRegistrationNumber itemRegistrationNumber,
       double totalUnitPrice,
       double totalTax,
-      double taxRate});
+      double taxRate,
+      List<Batches> batches});
 
   @override
   $ProductImagesCopyWith<$Res> get productImages;
@@ -474,10 +466,8 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
     Object? deliveryDate = null,
     Object? orderNumber = null,
     Object? createdDate = null,
-    Object? batch = null,
     Object? orderBy = null,
     Object? orderType = null,
-    Object? expiryDate = null,
     Object? poReference = null,
     Object? invoiceNumber = null,
     Object? isBonusMaterial = null,
@@ -508,6 +498,7 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
     Object? totalUnitPrice = null,
     Object? totalTax = null,
     Object? taxRate = null,
+    Object? batches = null,
   }) {
     return _then(_$OrderHistoryItemImpl(
       materialNumber: null == materialNumber
@@ -554,10 +545,6 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as StringValue,
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
@@ -566,10 +553,6 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as DocumentType,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
@@ -690,6 +673,10 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
           ? _value.taxRate
           : taxRate // ignore: cast_nullable_to_non_nullable
               as double,
+      batches: null == batches
+          ? _value._batches
+          : batches // ignore: cast_nullable_to_non_nullable
+              as List<Batches>,
     ));
   }
 }
@@ -709,10 +696,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
       required this.deliveryDate,
       required this.orderNumber,
       required this.createdDate,
-      required this.batch,
       required this.orderBy,
       required this.orderType,
-      required this.expiryDate,
       required this.poReference,
       required this.invoiceNumber,
       required this.isBonusMaterial,
@@ -742,8 +727,10 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
       required this.itemRegistrationNumber,
       required this.totalUnitPrice,
       required this.totalTax,
-      required this.taxRate})
+      required this.taxRate,
+      required final List<Batches> batches})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
+        _batches = batches,
         super._();
 
   @override
@@ -769,13 +756,9 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
   @override
   final DateTimeStringValue createdDate;
   @override
-  final StringValue batch;
-  @override
   final StringValue orderBy;
   @override
   final DocumentType orderType;
-  @override
-  final DateTimeStringValue expiryDate;
   @override
   final PoReference poReference;
   @override
@@ -843,10 +826,17 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
   final double totalTax;
   @override
   final double taxRate;
+  final List<Batches> _batches;
+  @override
+  List<Batches> get batches {
+    if (_batches is EqualUnmodifiableListView) return _batches;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_batches);
+  }
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, poReference: $poReference, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, tenderOrderReason: $tenderOrderReason, isCovid: $isCovid, isTenderExpired: $isTenderExpired, itemRegistrationNumber: $itemRegistrationNumber, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, poReference: $poReference, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, tenderOrderReason: $tenderOrderReason, isCovid: $isCovid, isTenderExpired: $isTenderExpired, itemRegistrationNumber: $itemRegistrationNumber, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate, batches: $batches)';
   }
 
   @override
@@ -875,12 +865,9 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
                 other.orderNumber == orderNumber) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
             (identical(other.orderType, orderType) ||
                 other.orderType == orderType) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
             (identical(other.poReference, poReference) ||
                 other.poReference == poReference) &&
             (identical(other.invoiceNumber, invoiceNumber) ||
@@ -923,7 +910,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
                 other.tenderContractNumber == tenderContractNumber) &&
             (identical(other.tenderContractReference, tenderContractReference) ||
                 other.tenderContractReference == tenderContractReference) &&
-            (identical(other.tenderPriceUnit, tenderPriceUnit) || other.tenderPriceUnit == tenderPriceUnit) &&
+            (identical(other.tenderPriceUnit, tenderPriceUnit) ||
+                other.tenderPriceUnit == tenderPriceUnit) &&
             (identical(other.tenderPrice, tenderPrice) || other.tenderPrice == tenderPrice) &&
             (identical(other.tenderOrderReason, tenderOrderReason) || other.tenderOrderReason == tenderOrderReason) &&
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
@@ -931,7 +919,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) || other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.totalUnitPrice, totalUnitPrice) || other.totalUnitPrice == totalUnitPrice) &&
             (identical(other.totalTax, totalTax) || other.totalTax == totalTax) &&
-            (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
+            (identical(other.taxRate, taxRate) || other.taxRate == taxRate) &&
+            const DeepCollectionEquality().equals(other._batches, _batches));
   }
 
   @override
@@ -948,10 +937,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
         deliveryDate,
         orderNumber,
         createdDate,
-        batch,
         orderBy,
         orderType,
-        expiryDate,
         poReference,
         invoiceNumber,
         isBonusMaterial,
@@ -981,7 +968,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
         itemRegistrationNumber,
         totalUnitPrice,
         totalTax,
-        taxRate
+        taxRate,
+        const DeepCollectionEquality().hash(_batches)
       ]);
 
   @JsonKey(ignore: true)
@@ -1005,10 +993,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final DateTimeStringValue deliveryDate,
       required final OrderNumber orderNumber,
       required final DateTimeStringValue createdDate,
-      required final StringValue batch,
       required final StringValue orderBy,
       required final DocumentType orderType,
-      required final DateTimeStringValue expiryDate,
       required final PoReference poReference,
       required final StringValue invoiceNumber,
       required final bool isBonusMaterial,
@@ -1038,7 +1024,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final ItemRegistrationNumber itemRegistrationNumber,
       required final double totalUnitPrice,
       required final double totalTax,
-      required final double taxRate}) = _$OrderHistoryItemImpl;
+      required final double taxRate,
+      required final List<Batches> batches}) = _$OrderHistoryItemImpl;
   _OrderHistoryItem._() : super._();
 
   @override
@@ -1064,13 +1051,9 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   DateTimeStringValue get createdDate;
   @override
-  StringValue get batch;
-  @override
   StringValue get orderBy;
   @override
   DocumentType get orderType;
-  @override
-  DateTimeStringValue get expiryDate;
   @override
   PoReference get poReference;
   @override
@@ -1131,6 +1114,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   double get totalTax;
   @override
   double get taxRate;
+  @override
+  List<Batches> get batches;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryItemImplCopyWith<_$OrderHistoryItemImpl> get copyWith =>

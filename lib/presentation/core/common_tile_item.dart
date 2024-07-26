@@ -36,6 +36,7 @@ class CommonTileItem extends StatelessWidget {
     this.labelTrailing,
     this.labelLeading,
     this.margin,
+    this.batchExpiryDate,
   });
 
   final String label;
@@ -61,6 +62,7 @@ class CommonTileItem extends StatelessWidget {
   final Widget? topHeaderWidget;
   final Widget? labelTrailing;
   final Widget? labelLeading;
+  final Widget? batchExpiryDate;
 
   @override
   Widget build(BuildContext context) {
@@ -137,6 +139,7 @@ class CommonTileItem extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        if (batchExpiryDate != null) batchExpiryDate!,
                         _Subtitle(
                           tileBody3: subtitle,
                           isQuantityBelowImage:

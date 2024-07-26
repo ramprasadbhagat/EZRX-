@@ -78,8 +78,6 @@ class ViewByItemQueryMutation {
         WarehouseStorageCondition
         OrderNumber
         Available
-        Batch
-        ExpiryDate
         ${enableMarketplace ? 'IsMarketplace' : ''}
         Seller
         POReference
@@ -107,6 +105,10 @@ class ViewByItemQueryMutation {
         promoStatus
         referenceNotes
         isCovid
+        Batches {
+          BatchNumber
+          ExpiryDate
+        }
       }
      
     }

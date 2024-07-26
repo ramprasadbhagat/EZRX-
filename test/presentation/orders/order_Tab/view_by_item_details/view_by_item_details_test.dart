@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/batches.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
@@ -154,18 +155,22 @@ void main() {
     fakeOrderHistoryItem = mockViewByItemsOrderHistory.orderHistoryItems
         .firstWhere((e) => e.isTypeMaterial)
         .copyWith(
-          status: OrderStepValue('Picking in progress'),
-          createdDate: DateTimeStringValue(fakeCreatedDate),
-          governmentMaterialCode: 'fakegovernmentMaterialCode',
-          batch: StringValue('fake-batch-number'),
-          expiryDate: DateTimeStringValue('2023-10-04'),
-          invoiceNumber: StringValue('123456'),
-          telephoneNumber: fakePhoneNumber,
-          tenderContractNumber: TenderContractNumber('0040026522'),
-          tenderOrderReason: TenderContractReason('730'),
-          tenderPrice: TenderPrice('11832000'),
-          tenderContractReference: TenderContractNumber('HCM-01234'),
-        );
+      status: OrderStepValue('Picking in progress'),
+      createdDate: DateTimeStringValue(fakeCreatedDate),
+      governmentMaterialCode: 'fakegovernmentMaterialCode',
+      invoiceNumber: StringValue('123456'),
+      telephoneNumber: fakePhoneNumber,
+      tenderContractNumber: TenderContractNumber('0040026522'),
+      tenderOrderReason: TenderContractReason('730'),
+      tenderPrice: TenderPrice('11832000'),
+      tenderContractReference: TenderContractNumber('HCM-01234'),
+      batches: [
+        Batches(
+          batchNumber: StringValue('Batch1'),
+          expiryDate: DateTimeStringValue('20240824'),
+        ),
+      ],
+    );
 
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
@@ -700,7 +705,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString}',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batches.first.batchNumber.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.batches.first.expiryDate.dateOrDashString}',
       );
       expect(expectedDelivery, findsNothing);
     });
@@ -727,10 +732,59 @@ void main() {
         const Offset(0, -300),
       );
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString}',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batches.first.batchNumber.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.batches.first.expiryDate.dateOrDashString}',
         findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
+    });
+
+    testWidgets(
+        ' => Display Batch and EXP info when salesOrgConfig BatchNumDisplay is true for multiple batch and expiry',
+        (tester) async {
+      final fakeBatch1 = StringValue('Batch1');
+      final fakeBatch2 = StringValue('Batch2');
+      final fakeExpiry1 = DateTimeStringValue('20240824');
+      final fakeExpiry2 = DateTimeStringValue('20250824');
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            batches: [
+              Batches(
+                batchNumber: fakeBatch1,
+                expiryDate: fakeExpiry1,
+              ),
+              Batches(
+                batchNumber: fakeBatch2,
+                expiryDate: fakeExpiry2,
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      final expectedDelivery1 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch1.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry1.dateOrDashString}',
+        findRichText: true,
+      );
+      final expectedDelivery2 = find.textContaining(
+        '${'Batch'.tr()}: ${fakeBatch2.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeExpiry2.dateOrDashString}',
+        findRichText: true,
+      );
+      expect(expectedDelivery1, findsOneWidget);
+      expect(expectedDelivery2, findsOneWidget);
     });
 
     testWidgets('on Offer material', (tester) async {
@@ -2274,7 +2328,9 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpWidget(getScopedWidget());
