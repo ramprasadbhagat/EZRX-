@@ -342,7 +342,8 @@ class EligibilityState with _$EligibilityState {
             !isLoadingCustomerCode;
     final isSelectNewShipTo = previous.shipToInfo != shipToInfo && haveShipTo;
     final isSelectNewLanguage =
-        previous.user.preferredLanguage != user.preferredLanguage;
+        previous.user.preferredLanguage != user.preferredLanguage &&
+            user != User.empty();
 
     return isLoadShipToSuccess || isSelectNewShipTo || isSelectNewLanguage;
   }

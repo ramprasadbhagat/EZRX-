@@ -4,7 +4,14 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -22,7 +29,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockAppRouter extends Mock implements AppRouter {}
@@ -193,5 +203,42 @@ void main() {
         expect(errorText, findsOneWidget);
       },
     );
+
+    testWidgets(
+        'Do not call the initialized event when the EligibilityState is the EligibilityState.initial()',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          user: fakeClientUser.copyWith(preferredLanguage: Language('ZH')),
+        ),
+      );
+      final expectedState = [
+        EligibilityState.initial(),
+      ];
+      whenListen(
+        eligibilityBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await getWidget(tester);
+      await tester.pump();
+      verifyNever(
+        () => materialListBlocMock.add(
+          MaterialListEvent.initialized(
+            user: User.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            configs: SalesOrganisationConfigs.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            selectedMaterialFilter: MaterialFilter.empty().copyWith(
+              isProductOffer: true,
+            ),
+          ),
+        ),
+      );
+    });
   });
 }
