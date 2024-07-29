@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -1028,6 +1029,68 @@ void main() {
         expect(itemQuantityInfoIconContentFinder, findsOneWidget);
         expect(itemQuantityInfoIconSubContentFinder, findsOneWidget);
       });
+
+      testWidgets(
+        '=> display WareHouse Storage Condition tag',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                wareHouseStorageCondition: StorageCondition('AC'),
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final wareHouseStorageConditionTag =
+              find.byKey(WidgetKeys.wareHouseStorageConditionTag);
+          expect(wareHouseStorageConditionTag, findsOneWidget);
+          expect(
+            find.text('Air Conditioned'),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> display WareHouse Storage Condition tag for bonus',
+        (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                wareHouseStorageCondition: StorageCondition('AC'),
+                bonusInformation: [
+                  requestInformationMock.copyWith(
+                    wareHouseStorageCondition: StorageCondition('AC'),
+                  ),
+                ],
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final showButtonFinder =
+              find.byKey(WidgetKeys.returnDetailShowDetailButton);
+          await tester.dragUntilVisible(
+            showButtonFinder,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, 1000),
+          );
+          await tester.pumpAndSettle();
+          await tester.tap(showButtonFinder);
+          await tester.pumpAndSettle();
+          final wareHouseStorageConditionTag =
+              find.byKey(WidgetKeys.wareHouseStorageConditionTag);
+          expect(
+            wareHouseStorageConditionTag,
+            findsAtLeast(2),
+          );
+          expect(
+            find.text('Air Conditioned'),
+            findsAtLeast(2),
+          );
+        },
+      );
 
       group('=> Attachment section', () {
         final scrollList = find.byKey(WidgetKeys.scrollList);

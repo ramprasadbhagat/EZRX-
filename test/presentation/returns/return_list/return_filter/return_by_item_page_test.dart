@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -412,6 +413,60 @@ void main() {
           await tester.scrollUntilVisible(
             find.byKey(WidgetKeys.loadMoreLoader),
             200,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> display WareHouse Storage Condition tag',
+        (tester) async {
+          when(() => mockEligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeTHSalesOrgConfigs,
+            ),
+          );
+          when(() => mockReturnListByItemBloc.state).thenReturn(
+            ReturnListByItemState.initial().copyWith(
+              returnItemList: [
+                ReturnItem.empty().copyWith(
+                  wareHouseStorageCondition: StorageCondition('AC'),
+                ),
+                ReturnItem.empty().copyWith(
+                  wareHouseStorageCondition: StorageCondition('FZ'),
+                ),
+                ReturnItem.empty().copyWith(
+                  wareHouseStorageCondition: StorageCondition(''),
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWUT());
+          await tester.pump();
+          final cardFinder = find.byKey(WidgetKeys.returnItemKey);
+          final wareHouseStorageConditionTag =
+              find.byKey(WidgetKeys.wareHouseStorageConditionTag);
+          expect(cardFinder, findsNWidgets(3));
+          expect(wareHouseStorageConditionTag, findsNWidgets(2));
+          expect(
+            find.descendant(
+              of: cardFinder.first,
+              matching: find.text('Air Conditioned'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: cardFinder.at(1),
+              matching: find.text('Freezer'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: cardFinder.last,
+              matching: find.byKey(WidgetKeys.wareHouseStorageConditionTag),
+            ),
+            findsNothing,
           );
         },
       );

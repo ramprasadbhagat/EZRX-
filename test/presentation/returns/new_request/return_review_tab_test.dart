@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/ware_house_storage_condition_tag.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 
 import 'package:flutter/material.dart';
@@ -1254,5 +1255,77 @@ void main() {
     await tester.pumpWidget(getScopedWidget());
     await tester.pumpAndSettle();
     expect(find.byType(MarketPlaceSellerTitle), findsOneWidget);
+  });
+
+  testWidgets('=> varify storage condition for the item ', (tester) async {
+    when(() => newRequestBlocMock.state).thenReturn(
+      NewRequestState.initial().copyWith(
+        selectedItems: [
+          fakeReturnMaterial.copyWith(
+            materialDescription: '',
+            wareHouseStorageCondition: StorageCondition('AC'),
+            bonusItems: [],
+          ),
+        ],
+      ),
+    );
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pumpAndSettle();
+    expect(find.byType(WareHouseStorageConditionTag), findsOneWidget);
+    expect(find.text('Air Conditioned'), findsOneWidget);
+  });
+
+  testWidgets('=> varify storage condition for the bonus item ',
+      (tester) async {
+    when(() => newRequestBlocMock.state).thenReturn(
+      NewRequestState.initial().copyWith(
+        selectedItems: [
+          fakeReturnMaterial.copyWith(
+            materialDescription: '',
+            wareHouseStorageCondition: StorageCondition('AC'),
+            bonusItems: [
+              fakeReturnMaterial.copyWith(
+                materialDescription: '',
+                wareHouseStorageCondition: StorageCondition('AC'),
+              ),
+            ],
+          ),
+        ],
+        invoiceDetails: <InvoiceDetails>[
+          InvoiceDetails.empty().copyWith(
+            returnItemDetailsList: [
+              fakeReturnItemDetails,
+            ],
+          ),
+        ],
+      ),
+    );
+    await tester.pumpWidget(getScopedWidget(useMediaQuery: true));
+    await tester.pumpAndSettle();
+    expect(
+      find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+      findsOneWidget,
+    );
+    await tester.fling(
+      find.byKey(WidgetKeys.scrollList),
+      const Offset(0.0, -2000.0),
+      1000.0,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+        matching: find.text('Bonus details'),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+        matching: find.byType(BonusMaterialReturnInfo),
+      ),
+      findsOneWidget,
+    );
+    expect(find.byType(WareHouseStorageConditionTag), findsAtLeast(2));
+    expect(find.text('Air Conditioned'), findsAtLeast(2));
   });
 }

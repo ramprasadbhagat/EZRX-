@@ -28,6 +28,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_counter_offer.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/ware_house_storage_condition_tag.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -1555,6 +1556,49 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       expect(find.byType(MarketPlaceSellerTitle), findsOneWidget);
+    });
+
+    testWidgets('=> varify storage condition for the item ', (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              materialDescription: '',
+              wareHouseStorageCondition: StorageCondition('AC'),
+              bonusItems: [],
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(find.byType(WareHouseStorageConditionTag), findsOneWidget);
+      expect(find.text('Air Conditioned'), findsOneWidget);
+    });
+
+    testWidgets('=> varify storage condition for the bonus item ',
+        (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              materialDescription: '',
+              wareHouseStorageCondition: StorageCondition('AC'),
+              bonusItems: [
+                fakeReturnMaterial.copyWith(
+                  materialDescription: '',
+                  wareHouseStorageCondition: StorageCondition('AC'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(find.byType(WareHouseStorageConditionTag), findsAtLeast(2));
+      expect(find.text('Air Conditioned'), findsAtLeast(2));
     });
   });
 }
