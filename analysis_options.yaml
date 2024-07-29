@@ -143,6 +143,7 @@ dart_code_metrics:
     - consistent-update-render-object
     - use-setstate-synchronously
     - avoid-functions-in-register-singleton
+    - avoid-cubits
     - prefer-using-list-view:
         exclude:
           - "lib/presentation/home/home_tab.dart" 
