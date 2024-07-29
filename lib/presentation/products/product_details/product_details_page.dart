@@ -121,100 +121,104 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
-    return BlocProvider<ProductDetailBloc>(
-      create: (context) => locator<ProductDetailBloc>()
-        ..add(
-          ProductDetailEvent.fetch(
-            salesOrganisation: eligibilityState.salesOrganisation,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-            shipToInfo: eligibilityState.shipToInfo,
-            user: eligibilityState.user,
-            materialInfo: widget.materialInfo,
-          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductDetailBloc>(
+          create: (context) => locator<ProductDetailBloc>()
+            ..add(
+              ProductDetailEvent.fetch(
+                salesOrganisation: eligibilityState.salesOrganisation,
+                customerCodeInfo: eligibilityState.customerCodeInfo,
+                shipToInfo: eligibilityState.shipToInfo,
+                user: eligibilityState.user,
+                materialInfo: widget.materialInfo,
+              ),
+            ),
         ),
-      child: BlocProvider<TenderContractDetailBloc>(
-        create: (context) => locator<TenderContractDetailBloc>(),
-        child: Scaffold(
-          floatingActionButton: ScrollToTopWidget(
-            scrollController: _scrollController,
-            isVisible: !_isScrollAtInitialPosition,
-          ),
-          body: CustomScrollView(
-            key: WidgetKeys.scrollList,
-            controller: _scrollController,
-            slivers: [
-              BlocBuilder<ProductImageBloc, ProductImageState>(
-                buildWhen: (previous, current) =>
-                    previous.productImageMap != current.productImageMap,
-                builder: (context, productImageState) {
-                  final productImages = productImageState.getMaterialImage(
-                    widget.materialInfo.materialNumber,
-                  );
+        BlocProvider<TenderContractDetailBloc>(
+          create: (context) => locator<TenderContractDetailBloc>(),
+        ),
+      ],
+      child: Scaffold(
+        floatingActionButton: ScrollToTopWidget(
+          scrollController: _scrollController,
+          isVisible: !_isScrollAtInitialPosition,
+        ),
+        body: CustomScrollView(
+          key: WidgetKeys.scrollList,
+          controller: _scrollController,
+          slivers: [
+            BlocBuilder<ProductImageBloc, ProductImageState>(
+              buildWhen: (previous, current) =>
+                  previous.productImageMap != current.productImageMap,
+              builder: (context, productImageState) {
+                final productImages = productImageState.getMaterialImage(
+                  widget.materialInfo.materialNumber,
+                );
 
-                  return CustomAppBar.sliverAppBar(
-                    backGroundColor: _isScrollAtInitialPosition
-                        ? Colors.transparent
-                        : ZPColors.white,
-                    leadingWidget: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: CircleAvatar(
-                        maxRadius: 16,
-                        backgroundColor: _isScrollAtInitialPosition
+                return CustomAppBar.sliverAppBar(
+                  backGroundColor: _isScrollAtInitialPosition
+                      ? Colors.transparent
+                      : ZPColors.white,
+                  leadingWidget: IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: CircleAvatar(
+                      maxRadius: 16,
+                      backgroundColor: _isScrollAtInitialPosition
+                          ? ZPColors.darkGray
+                          : ZPColors.transparent,
+                      child: Icon(
+                        Icons.chevron_left,
+                        color: _isScrollAtInitialPosition
+                            ? ZPColors.white
+                            : ZPColors.black,
+                        key: WidgetKeys.materialDetailsPageBack,
+                      ),
+                    ),
+                  ),
+                  actionWidget: [
+                    Padding(
+                      key: WidgetKeys.materialDetailsPageCartIcon,
+                      padding: const EdgeInsets.all(10),
+                      child: CartButton(
+                        backgroundCartColor: _isScrollAtInitialPosition
                             ? ZPColors.darkGray
                             : ZPColors.transparent,
-                        child: Icon(
-                          Icons.chevron_left,
-                          color: _isScrollAtInitialPosition
-                              ? ZPColors.white
-                              : ZPColors.black,
-                          key: WidgetKeys.materialDetailsPageBack,
-                        ),
+                        cartColor: _isScrollAtInitialPosition
+                            ? ZPColors.white
+                            : ZPColors.black,
+                        iconSize: 20,
+                        positionTop: -8,
+                        isPriceResetApplicable: true,
                       ),
                     ),
-                    actionWidget: [
-                      Padding(
-                        key: WidgetKeys.materialDetailsPageCartIcon,
-                        padding: const EdgeInsets.all(10),
-                        child: CartButton(
-                          backgroundCartColor: _isScrollAtInitialPosition
-                              ? ZPColors.darkGray
-                              : ZPColors.transparent,
-                          cartColor: _isScrollAtInitialPosition
-                              ? ZPColors.white
-                              : ZPColors.black,
-                          iconSize: 20,
-                          positionTop: -8,
-                          isPriceResetApplicable: true,
-                        ),
-                      ),
-                    ],
-                    customerBlockedOrSuspended:
-                        eligibilityState.customerBlockOrSuspended,
-                    flexibleSpaceWidget: _ProductImageSection(
-                      productImage: productImages,
-                    ),
-                    expandedHeight: _getExpandedImageHeight(productImages),
-                  );
-                },
-              ),
-              SliverList.list(
-                children: [
-                  const LicenseExpiredBanner(),
-                  const StockInfoBanner(),
-                  const EdiUserBanner(),
-                  _BodyContent(
-                    isEditTender: widget.isEditTender,
+                  ],
+                  customerBlockedOrSuspended:
+                      eligibilityState.customerBlockOrSuspended,
+                  flexibleSpaceWidget: _ProductImageSection(
+                    productImage: productImages,
                   ),
-                  _SimilarProducts(),
-                ],
-              ),
-            ],
-          ),
-          bottomNavigationBar: _Footer(
-            banner: widget.banner,
-            isEditTender: widget.isEditTender,
-            quantity: widget.materialInfo.quantity.intValue,
-          ),
+                  expandedHeight: _getExpandedImageHeight(productImages),
+                );
+              },
+            ),
+            SliverList.list(
+              children: [
+                const LicenseExpiredBanner(),
+                const StockInfoBanner(),
+                const EdiUserBanner(),
+                _BodyContent(
+                  isEditTender: widget.isEditTender,
+                ),
+                _SimilarProducts(),
+              ],
+            ),
+          ],
+        ),
+        bottomNavigationBar: _Footer(
+          banner: widget.banner,
+          isEditTender: widget.isEditTender,
+          quantity: widget.materialInfo.quantity.intValue,
         ),
       ),
     );
