@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
 class RouterUtils {
-  static const _routePatternMatcher = r'^.*\/([\w-]+)$';
+  static const _routePatternMatcher = r'([\w-]+)$';
 
   static String buildRouteTrackingName(String name) {
     final regex = RegExp(_routePatternMatcher);

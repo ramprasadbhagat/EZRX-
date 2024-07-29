@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -52,6 +53,9 @@ void main() {
   const fakeSearchText = 'fake-search-text';
   late List<MaterialInfo> materialSearchResults;
   late MaterialListBloc materialListBlocMock;
+  late MixpanelService mixpanelService;
+  late ClevertapService clevertapService;
+  late Config configMock;
 
   /////////////////////////key///////////////////////////////////
   final productSearchSuggestionSection =
@@ -61,14 +65,17 @@ void main() {
   //////////////////////////////////////////////////////////////
 
   setUpAll(() async {
+    mixpanelService = MixpanelServiceMock();
+    clevertapService = ClevertapServiceMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
-    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
-    locator.registerLazySingleton(() => AppRouter());
-    autoRouterMock = locator<AppRouter>();
+    locator.registerLazySingleton<MixpanelService>(() => mixpanelService);
+    locator.registerSingleton<ClevertapService>(clevertapService);
+    locator.registerLazySingleton(() => AutoRouteMock());
+    autoRouterMock = AutoRouteMock();
+    configMock = locator<Config>();
     materialSearchResults =
-        (await MaterialListLocalDataSource().getProductList())
-            .products;
+        (await MaterialListLocalDataSource().getProductList()).products;
+    when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
   });
 
   setUp(() async {
@@ -80,7 +87,6 @@ void main() {
     productSearchBlocMock = ProductSearchBlocMock();
     materialFilterBlocMock = MaterialFilterBlocMock();
     materialListBlocMock = MaterialListBlocMock();
-
     when(() => productSearchBlocMock.state).thenReturn(
       ProductSearchState.initial().copyWith(
         productSuggestionHistory: ProductSuggestionHistory.empty()
@@ -105,7 +111,7 @@ void main() {
         .thenReturn(MaterialListState.initial());
   });
 
-  Widget getWidget() {
+  Widget getWidget({String parentRoute = ''}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -132,7 +138,7 @@ void main() {
           create: (context) => materialListBlocMock,
         ),
       ],
-      child: const ProductSuggestionPage(parentRoute: ''),
+      child: ProductSuggestionPage(parentRoute: parentRoute),
     );
   }
 
@@ -159,6 +165,19 @@ void main() {
       final selectedFilter = MaterialFilter.empty().copyWith(
         isCovidSelected: true,
       );
+      const searchKey = 'material';
+      when(
+        () => autoRouterMock.navigateNamed(any()),
+      ).thenAnswer((_) => Future.value());
+
+      when(() => productSearchBlocMock.state).thenReturn(
+        ProductSearchState.initial().copyWith(
+          productSuggestionHistory: ProductSuggestionHistory.empty()
+              .copyWith(searchKeyList: [SearchKey.search('test-search')]),
+          salesOrganization: fakeMYSalesOrganisation,
+          searchKey: SearchKey.search(searchKey),
+        ),
+      );
 
       when(() => materialFilterBlocMock.state).thenReturn(
         MaterialFilterState.initial().copyWith(
@@ -166,38 +185,110 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(getWidget());
+      await tester.pumpWidget(getWidget(parentRoute: 'products'));
       await tester.pump();
       final searchBar = find.byType(CustomSearchBar);
       expect(searchBar, findsOneWidget);
 
       await tester.tap(searchBar);
 
-      await tester.enterText(searchBar, fakeSearchText);
+      await tester.enterText(searchBar, searchKey);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
       verify(
+        () => mixpanelService.trackEvent(
+          eventName: TrackingEvents.productSearch,
+          properties: {
+            TrackingProps.searchKeyword: searchKey,
+            TrackingProps.searchFrom: 'Products Page',
+          },
+        ),
+      ).called(1);
+
+      verify(
+        () => clevertapService.trackEvent(
+          eventName: TrackingEvents.productSearch,
+          properties: {
+            TrackingProps.searchKeyword: searchKey,
+            TrackingProps.searchFrom: 'Products Page',
+            TrackingProps.searchMethod: 'user typed',
+            TrackingProps.market: fakeMYSalesOrganisation.salesOrg.country,
+          },
+        ),
+      ).called(1);
+
+      verify(
         () => productSearchBlocMock.add(
           ProductSearchEvent.saveSearchHistory(
-            searchKey: SearchKey.search(fakeSearchText),
+            searchKey: SearchKey.search(searchKey),
           ),
         ),
       ).called(1);
 
       verify(
-        () => materialListBlocMock
-          ..add(
-            const MaterialListEvent.updateSearchKey(
-              searchKey: fakeSearchText,
-            ),
+        () => materialListBlocMock.add(
+          const MaterialListEvent.updateSearchKey(
+            searchKey: searchKey,
           ),
+        ),
       ).called(1);
 
       verify(
         () => materialListBlocMock.add(
           MaterialListEvent.fetch(
             selectedMaterialFilter: selectedFilter,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        '=> auto search material on suggestion page - verify clever tap event not called',
+        (tester) async {
+      const searchKey = 'material';
+
+      await tester.pumpWidget(getWidget(parentRoute: 'main/products'));
+      await tester.pump();
+      final searchBar = find.byType(CustomSearchBar);
+      expect(searchBar, findsOneWidget);
+
+      await tester.tap(searchBar);
+
+      await tester.enterText(searchBar, searchKey);
+      await tester.pump(
+        Duration(
+          milliseconds: configMock.autoSearchTimeout,
+        ),
+      );
+
+      verify(
+        () => mixpanelService.trackEvent(
+          eventName: TrackingEvents.productSearch,
+          properties: {
+            TrackingProps.searchKeyword: searchKey,
+            TrackingProps.searchFrom: 'Products Page',
+          },
+        ),
+      ).called(1);
+
+      verifyNever(
+        () => clevertapService.trackEvent(
+          eventName: TrackingEvents.productSearch,
+          properties: {
+            TrackingProps.searchKeyword: searchKey,
+            TrackingProps.searchFrom: 'Products Page',
+            TrackingProps.searchMethod: 'user typed',
+            TrackingProps.market: fakeMYSalesOrganisation.salesOrg.country,
+          },
+        ),
+      );
+
+      verify(
+        () => productSearchBlocMock.add(
+          ProductSearchEvent.searchProduct(
+            searchKey: SearchKey.search(searchKey),
+            materialFilter: MaterialFilter.empty(),
           ),
         ),
       ).called(1);
@@ -275,7 +366,68 @@ void main() {
   group(
     'Product suggestion page navigation to material or bundle details test',
     () {
-      testWidgets('=> Material Navigation with non-empty suggested products', (tester) async {
+      final materialDetailRouteData = RouteData(
+        stackKey: const Key(''),
+        type: const RouteType.adaptive(),
+        route: RouteMatch(
+          segments: const ['orders', 'material_details'],
+          config: AutoRoute(
+            page: const PageInfo(ProductDetailsPageRoute.name),
+          ),
+          stringMatch: 'orders/material_details',
+          key: const ValueKey('ProductDetailsPageRoute'),
+        ),
+        router: AutoRouteMock(),
+        pendingChildren: [],
+      );
+      final bundleDetailRouteData = RouteData(
+        stackKey: const Key(''),
+        type: const RouteType.adaptive(),
+        route: RouteMatch(
+          segments: const ['orders', 'bundle_detail'],
+          config: AutoRoute(
+            page: const PageInfo(BundleDetailPageRoute.name),
+          ),
+          stringMatch: '/orders/bundle_detail',
+          key: const ValueKey('BundleDetailPageRoute'),
+        ),
+        router: AutoRouteMock(),
+        pendingChildren: [],
+      );
+      final scanMaterialInfoRouteData = RouteData(
+        stackKey: const Key(''),
+        type: const RouteType.adaptive(),
+        route: RouteMatch(
+          segments: const ['orders', 'scan_material_info'],
+          config: AutoRoute(
+            page: const PageInfo(ScanMaterialInfoRoute.name),
+            path: '/orders/scan_material_info',
+          ),
+          stringMatch: '/orders/scan_material_info',
+          key: const ValueKey('ScanMaterialInfoRoute'),
+        ),
+        router: AutoRouteMock(),
+        pendingChildren: [],
+      );
+
+      setUp(() {
+        when(() => autoRouterMock.pushNamed(any()))
+            .thenAnswer((invocation) async => null);
+      });
+
+      testWidgets('=> Material Navigation with non-empty suggested products',
+          (tester) async {
+        when(() => autoRouterMock.current).thenReturn(materialDetailRouteData);
+        when(
+          () => autoRouterMock.push(
+            ProductDetailsPageRoute(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number'),
+                type: MaterialInfoType('material'),
+              ),
+            ),
+          ),
+        ).thenAnswer((invocation) async => true);
         final expectedState = <ProductSearchState>[
           ProductSearchState.initial(),
           ProductSearchState.initial().copyWith(
@@ -297,7 +449,8 @@ void main() {
                 name: 'item-3',
               ),
             ],
-            salesOrganization: SalesOrganisation.empty().copyWith(salesOrg: fakeIDSalesOrg),
+            salesOrganization:
+                SalesOrganisation.empty().copyWith(salesOrg: fakeIDSalesOrg),
           ),
         ];
         whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
@@ -317,7 +470,7 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(
-              () => trackMixpanelEvent(
+          () => trackMixpanelEvent(
             TrackingEvents.productSearch,
             props: {
               TrackingProps.searchKeyword: 'test-search',
@@ -328,12 +481,12 @@ void main() {
         ).called(1);
 
         verify(
-              () => trackClevertapEvent(
+          () => trackClevertapEvent(
             TrackingEvents.productSearch,
             props: {
               TrackingProps.searchKeyword: 'test-search',
               TrackingProps.searchFrom: ' Page',
-              TrackingProps.searchMethod: 'drop down list',
+              TrackingProps.searchMethod: 'user typed',
               TrackingProps.searchResults: ['item-1', 'item-2', 'item-3'],
               TrackingProps.market: 'ID',
             },
@@ -346,6 +499,17 @@ void main() {
       testWidgets(
         '=> Bundle Navigation',
         (tester) async {
+          when(() => autoRouterMock.current).thenReturn(bundleDetailRouteData);
+          when(
+            () => autoRouterMock.push(
+              BundleDetailPageRoute(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-number'),
+                  type: MaterialInfoType('material'),
+                ),
+              ),
+            ),
+          ).thenAnswer((invocation) async => true);
           await tester
               .pump(VisibilityDetectorController.instance.updateInterval);
           final expectedState = [
@@ -381,6 +545,9 @@ void main() {
       testWidgets(
         'Test Product Search Section',
         (tester) async {
+          when(
+            () => autoRouterMock.navigateNamed(any()),
+          ).thenAnswer((_) => Future.value());
           await tester.pumpWidget(getWidget());
           await tester.pump();
           final searchBarFinder = find.byKey(WidgetKeys.searchBar);
@@ -414,6 +581,12 @@ void main() {
       testWidgets(
         'Test Product Search open scan camera',
         (tester) async {
+          when(() => autoRouterMock.current)
+              .thenReturn(scanMaterialInfoRouteData);
+
+          when(
+            () => autoRouterMock.push(const ScanMaterialInfoRoute()),
+          ).thenAnswer((_) => Future.value());
           await tester.pumpWidget(getWidget());
           await tester.pump();
           final searchBarFinder = find.byKey(WidgetKeys.searchBar);

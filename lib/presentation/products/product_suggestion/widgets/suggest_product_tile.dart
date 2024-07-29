@@ -33,11 +33,11 @@ class _SuggestedProductTile extends StatelessWidget {
             trackClevertapEvent(
               TrackingEvents.productSearch,
               props: {
-                TrackingProps.searchKeyword: state.searchKey
-                    .getOrDefaultValue(''),
+                TrackingProps.searchKeyword:
+                    state.searchKey.getOrDefaultValue(''),
                 TrackingProps.searchFrom:
-                RouterUtils.buildRouteTrackingName(parentRoute),
-                TrackingProps.searchMethod: 'drop down list',
+                    RouterUtils.buildRouteTrackingName(parentRoute),
+                TrackingProps.searchMethod: 'user typed',
                 TrackingProps.searchResults: state.suggestedProductList
                     .take(5)
                     .map((e) => e.name)

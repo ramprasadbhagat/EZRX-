@@ -62,7 +62,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
               initialValue: _searchKey.searchValueOrEmpty,
               enabled: true,
               onSearchChanged: (value) {
-                _trackSearchEvent(value);
+                _trackMixPanelSearchEvent(value);
                 context.read<ProductSearchBloc>().add(
                       ProductSearchEvent.searchProduct(
                         searchKey: SearchKey.search(value),
@@ -74,7 +74,8 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                     );
               },
               onSearchSubmitted: (value) {
-                _trackSearchEvent(value);
+                _trackMixPanelSearchEvent(value);
+                _trackCleverTapSearchEvent(value);
                 context.read<ProductSearchBloc>().add(
                       ProductSearchEvent.saveSearchHistory(
                         searchKey: SearchKey.search(value),
@@ -113,7 +114,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
     );
   }
 
-  void _trackSearchEvent(String keyword) {
+  void _trackMixPanelSearchEvent(String keyword) {
     trackMixpanelEvent(
       TrackingEvents.productSearch,
       props: {
@@ -122,12 +123,22 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
             RouterUtils.buildRouteTrackingName(widget.parentRoute),
       },
     );
+  }
+
+  void _trackCleverTapSearchEvent(String keyword) {
     trackClevertapEvent(
       TrackingEvents.productSearch,
       props: {
         TrackingProps.searchKeyword: keyword,
         TrackingProps.searchFrom:
             RouterUtils.buildRouteTrackingName(widget.parentRoute),
+        TrackingProps.searchMethod: 'user typed',
+        TrackingProps.market: context
+            .read<ProductSearchBloc>()
+            .state
+            .salesOrganization
+            .salesOrg
+            .country,
       },
     );
   }
