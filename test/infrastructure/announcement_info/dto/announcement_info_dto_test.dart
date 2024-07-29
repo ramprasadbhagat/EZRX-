@@ -53,6 +53,38 @@ void main() {
           expect(announcementItem.title, getValue(itemData, 'title'));
         },
       );
+
+      test('Test toJson', () {
+        final announcementArticleInfoMap =
+            AnnouncementArticleInfoDto.fromJson(data['data']['search'])
+                .toJson();
+
+        expect(announcementArticleInfoMap['total'], 37);
+      });
+    },
+  );
+
+  group(
+    'Test Branch And Ic4 Info Dto',
+    () {
+      setUp(
+        () async {
+          data = {
+            'id': 'fake-id',
+            'name': 'fake-name',
+            'displayName': 'fake-display-name',
+          };
+        },
+      );
+      test(
+        '=> data mapping',
+        () {
+          final branchAndIc4Info = BranchAndIc4InfoDto.fromJson(data).toDomain;
+          expect(branchAndIc4Info.id, 'fake-id');
+          expect(branchAndIc4Info.name, 'fake-name');
+          expect(branchAndIc4Info.displayName, 'fake-display-name');
+        },
+      );
     },
   );
 }

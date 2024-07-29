@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -392,6 +393,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:upgrader/upgrader.dart';
 
 GetIt locator = GetIt.instance;
+const httpServiceWithoutInterceptor = 'HttpServiceWithoutInterceptor';
 
 void setupLocator() {
   //============================================================
@@ -515,6 +517,14 @@ void setupLocator() {
         locator<DatadogInterceptor>(),
       ],
     ),
+  );
+
+  locator.registerLazySingleton(
+    () => HttpService(
+      config: locator<Config>(),
+      interceptors: <Interceptor>[],
+    ),
+    instanceName: httpServiceWithoutInterceptor,
   );
 
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
@@ -2549,7 +2559,8 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AnnouncementAttachmentDownloadRemoteDataSource(
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      httpService: locator<HttpService>(),
+      httpService:
+          locator<HttpService>(instanceName: httpServiceWithoutInterceptor),
     ),
   );
   locator.registerLazySingleton(
