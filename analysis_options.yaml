@@ -142,6 +142,7 @@ dart_code_metrics:
     - check-for-equals-in-render-object-setters
     - consistent-update-render-object
     - use-setstate-synchronously
+    - avoid-passing-bloc-to-bloc
     - avoid-functions-in-register-singleton
     - avoid-cubits
     - prefer-using-list-view:
