@@ -502,10 +502,15 @@ void main() {
       await tester.pumpAndSettle();
 
       final statusTrackerSection = find.byType(StatusTrackerSection);
-
       expect(statusTrackerSection, findsOneWidget);
-      await tester.tap(statusTrackerSection);
+
+      final arrowRight = find.byIcon(Icons.arrow_forward_ios);
+      expect(statusTrackerSection, findsOneWidget);
+
+      await tester.ensureVisible(arrowRight);
+      await tester.tap(arrowRight);
       await tester.pump();
+
       final expectedDelivery = find.textContaining('Expected delivery');
       expect(expectedDelivery, findsOneWidget);
     });

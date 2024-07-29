@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,13 +37,13 @@ class RequestItemSection extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(padding12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                bottom: 16,
+                bottom: padding12,
               ),
               child: Text(
                 '${context.tr('Return items')} (${returnDetailsByRequestState.requestInformationHeader.totalItemCount})',
@@ -51,7 +52,7 @@ class RequestItemSection extends StatelessWidget {
             ),
             ...returnDetailsByRequestState.requestInformation.mapIndexed(
               (index, item) => Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.only(bottom: padding12),
                 child: ReturnItemCard(
                   key: WidgetKeys.returnRequestDetailMaterial(index),
                   returnRequestInformation: item,

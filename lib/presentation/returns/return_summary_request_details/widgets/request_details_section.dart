@@ -3,14 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/return_status_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,22 +44,12 @@ class RequestDetailsSection extends StatelessWidget {
               requestInformationHeader.bapiStatus.displayStatusForViewByRequest,
           title: 'Return request status'.tr(),
         ),
-        const Divider(
-          indent: 0,
-          height: 20,
-          endIndent: 0,
-          color: ZPColors.lightGray2,
-        ),
+        const _Divider(),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(padding12),
           child: AddressInfoSection.returnRequest(),
         ),
-        const Divider(
-          indent: 0,
-          height: 20,
-          endIndent: 0,
-          color: ZPColors.lightGray2,
-        ),
+        const _Divider(),
         _InvoiceSummarySection(
           requestInformationHeader: requestInformationHeader,
         ),
@@ -82,7 +73,8 @@ class _ReturnDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       tileColor: ZPColors.primary,
-      minVerticalPadding: 20.0,
+      contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
+      minVerticalPadding: padding24,
       title: BalanceTextRow(
         keyText:
             '${context.tr('Return')} #${requestInformationHeader.requestID}',
@@ -98,7 +90,7 @@ class _ReturnDetailsSection extends StatelessWidget {
         children: [
           if (requestInformationHeader.isMarketPlace)
             Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 13),
+              padding: const EdgeInsets.only(top: padding6, bottom: padding12),
               child: MarketPlaceSellerWithLogo.elevated(
                 requestInformation.firstOrNull?.principalName.name ?? '',
               ),
@@ -154,28 +146,22 @@ class _InvoiceSummarySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      minVerticalPadding: 16,
+      contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
+      minVerticalPadding: padding12,
       title: Text(
         'Return summary'.tr(),
         style: Theme.of(context).textTheme.labelMedium,
       ),
       subtitle: Column(
         children: [
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: padding12),
           _PriceWidget(
             key: WidgetKeys.returnRequestDetailSubTotal,
             title: '${context.tr('Subtotal (excl.tax)')} :',
             price: requestInformationHeader.refundTotal.refundTotal.toString(),
             priceType: PriceStyle.summaryPrice,
           ),
-          const Divider(
-            indent: 0,
-            height: 20,
-            endIndent: 0,
-            color: ZPColors.lightGray2,
-          ),
+          const _Divider(),
           _PriceWidget(
             key: WidgetKeys.returnRequestDetailGrandTotal,
             title:
@@ -231,10 +217,11 @@ class _ROSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return requestInformationHeader.bapiStatus.getIsBapiStatusFailed
         ? Container(
-            margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            padding: const EdgeInsets.all(10),
+            margin:
+                const EdgeInsets.fromLTRB(padding12, 0, padding12, padding12),
+            padding: const EdgeInsets.all(padding12),
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+              borderRadius: BorderRadius.all(Radius.circular(padding6)),
               color: ZPColors.lightRedStatusColor,
             ),
             key: WidgetKeys.returnRequestROCreationFailedMessage,
@@ -277,4 +264,18 @@ void _showDetailsPage({
       );
     },
   );
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Divider(
+      indent: 0,
+      height: padding24,
+      endIndent: 0,
+      color: ZPColors.lightGray2,
+    );
+  }
 }

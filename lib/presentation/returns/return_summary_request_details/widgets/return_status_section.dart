@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class ReturnStatusSection extends StatelessWidget {
@@ -20,7 +21,8 @@ class ReturnStatusSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(16.0, 16.0, 0, 0),
+            contentPadding:
+                const EdgeInsets.fromLTRB(padding12, padding12, 0, 0),
             title: Text(
               title,
               style: Theme.of(context)
@@ -45,7 +47,7 @@ class _CloseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+      padding: const EdgeInsets.all(padding12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(double.maxFinite, 55),
@@ -72,7 +74,7 @@ class _CustomStatusStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: padding12),
       child: Column(
         children: customStep
             .mapIndexed(
@@ -115,16 +117,16 @@ class _CustomStepWithIcon extends StatelessWidget {
         //     ],
         //   ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: padding12),
           child: Column(
             children: [
               Container(
                 color: ZPColors.lightGray,
                 width: index == 0 ? 0 : 1,
-                height: 20,
+                height: padding24,
               ),
               Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(padding6),
                 decoration: BoxDecoration(
                   color: index != 0
                       ? ZPColors.transparent
@@ -145,7 +147,7 @@ class _CustomStepWithIcon extends StatelessWidget {
               Container(
                 color: ZPColors.lightGray,
                 width: index >= (customStep.length - 1) ? 0.0 : 1.0,
-                height: 20,
+                height: padding24,
               ),
             ],
           ),

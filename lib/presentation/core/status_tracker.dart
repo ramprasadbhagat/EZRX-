@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class StatusTrackerSection extends StatelessWidget {
@@ -24,7 +25,7 @@ class StatusTrackerSection extends StatelessWidget {
       children: [
         ListTile(
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
+            horizontal: padding12,
           ),
           title: Text(
             title,
@@ -37,7 +38,7 @@ class StatusTrackerSection extends StatelessWidget {
           onTap: onTap,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16, bottom: 10),
+          padding: const EdgeInsets.all(padding12),
           child: Column(
             children: [
               Row(
@@ -48,7 +49,7 @@ class StatusTrackerSection extends StatelessWidget {
                     color: ZPColors.extraDarkGreen,
                   ),
                   const SizedBox(
-                    width: 5,
+                    width: padding6,
                   ),
                   Text(
                     context.tr(status),
@@ -63,13 +64,13 @@ class StatusTrackerSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 7),
+                    margin: const EdgeInsets.only(left: padding6),
                     color: ZPColors.lightGray,
                     width: 1,
-                    height: 20,
+                    height: padding24,
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: padding12,
                   ),
                   if (createDateTime != null)
                     Text(

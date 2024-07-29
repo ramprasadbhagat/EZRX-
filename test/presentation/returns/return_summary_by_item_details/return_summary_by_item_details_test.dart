@@ -197,7 +197,7 @@ void main() {
       );
 
       testWidgets('=> show `-` when attachment is empty', (tester) async {
-        await tester.binding.setSurfaceSize(const Size(480, 900));
+        await tester.binding.setSurfaceSize(const Size(480, 1000));
         when(() => returnSummaryDetailsBlocMock.state).thenReturn(
           ReturnSummaryDetailsState.initial().copyWith(
             requestInformation: requestInformationMock.copyWith(
@@ -239,7 +239,7 @@ void main() {
         (tester) async {
           final currentStatusVariant =
               statusVariants.currentValue ?? StatusType('');
-          await tester.binding.setSurfaceSize(const Size(480, 900));
+          await tester.binding.setSurfaceSize(const Size(480, 1000));
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
@@ -297,7 +297,7 @@ void main() {
         (tester) async {
           final currentStatusVariant =
               statusVariants.currentValue ?? StatusType('');
-          await tester.binding.setSurfaceSize(const Size(480, 900));
+          await tester.binding.setSurfaceSize(const Size(480, 1000));
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
@@ -355,7 +355,7 @@ void main() {
         (tester) async {
           final currentStatusVariant =
               statusVariants.currentValue ?? StatusType('');
-          await tester.binding.setSurfaceSize(const Size(480, 900));
+          await tester.binding.setSurfaceSize(const Size(480, 1000));
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
@@ -412,7 +412,7 @@ void main() {
         (tester) async {
           final currentStatusVariant =
               statusVariants.currentValue ?? StatusType('');
-          await tester.binding.setSurfaceSize(const Size(480, 900));
+          await tester.binding.setSurfaceSize(const Size(480, 1000));
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
@@ -467,7 +467,7 @@ void main() {
       testWidgets(
         '=> return bonus item test',
         (tester) async {
-          await tester.binding.setSurfaceSize(const Size(480, 900));
+          await tester.binding.setSurfaceSize(const Size(480, 1000));
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
@@ -534,7 +534,7 @@ void main() {
       testWidgets(
         '=> return bonus item test for ID',
         (tester) async {
-          await tester.binding.setSurfaceSize(const Size(480, 900));
+          await tester.binding.setSurfaceSize(const Size(480, 1000));
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeIDSalesOrgConfigs,
@@ -574,7 +574,7 @@ void main() {
       testWidgets(
         '=> return bonus item details test',
         (tester) async {
-          await tester.binding.setSurfaceSize(const Size(480, 900));
+          await tester.binding.setSurfaceSize(const Size(480, 1000));
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
@@ -947,7 +947,7 @@ void main() {
       testWidgets(
           'return summary details item test display return price info icon',
           (tester) async {
-        await tester.binding.setSurfaceSize(const Size(480, 900));
+        await tester.binding.setSurfaceSize(const Size(480, 1000));
 
         when(() => returnSummaryDetailsBlocMock.state).thenReturn(
           ReturnSummaryDetailsState.initial().copyWith(
@@ -989,7 +989,7 @@ void main() {
       testWidgets(
           'return summary details item test display return quantity info icon',
           (tester) async {
-        await tester.binding.setSurfaceSize(const Size(480, 900));
+        await tester.binding.setSurfaceSize(const Size(480, 1000));
         when(() => returnSummaryDetailsBlocMock.state).thenReturn(
           ReturnSummaryDetailsState.initial().copyWith(
             requestInformation: requestInformationMock.copyWith(

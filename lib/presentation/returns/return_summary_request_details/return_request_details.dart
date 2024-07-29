@@ -5,13 +5,14 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/detai
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_item_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 @RoutePage()
 class ReturnRequestDetails extends StatelessWidget {
@@ -67,7 +68,7 @@ class ReturnRequestDetails extends StatelessWidget {
                       ),
                       const Divider(
                         indent: 0,
-                        height: 20,
+                        height: padding24,
                         endIndent: 0,
                         color: ZPColors.lightGray2,
                       ),
