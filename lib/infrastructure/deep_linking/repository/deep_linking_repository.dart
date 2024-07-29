@@ -18,7 +18,6 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
-import 'package:flutter/material.dart';
 
 class DeepLinkingRepository implements IDeepLinkingRepository {
   final Config config;
@@ -190,30 +189,22 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   Either<ApiFailure, ResetPasswordCred> extractResetPasswordCred({
     required Uri link,
   }) {
-    try {
-      final decodedLink = Uri.decodeFull(link.toString());
-      final queryParameters = Uri.splitQueryString(
-        decodedLink.characters
-            .getRange(decodedLink.indexOf('?') + 1)
-            .toString(),
-      );
+    final uri = Uri.tryParse(Uri.decodeFull(link.toString()));
 
-      if (!queryParameters.containsKey('username') ||
-          !queryParameters.containsKey('token')) {
-        return const Left(ApiFailure.passwordResetFail());
-      }
-
-      final setPassword = ResetPasswordCred(
-        username: Username(queryParameters['username'] ?? ''),
-        token: StringValue(queryParameters['token'] ?? ''),
-      );
-
-      return setPassword.isValid
-          ? Right(setPassword)
-          : const Left(ApiFailure.passwordResetFail());
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
+    final queryParameters = uri?.queryParameters ?? {};
+    if (!queryParameters.containsKey('username') ||
+        !queryParameters.containsKey('token')) {
+      return const Left(ApiFailure.passwordResetFail());
     }
+
+    final setPassword = ResetPasswordCred(
+      username: Username(queryParameters['username'] ?? ''),
+      token: StringValue(queryParameters['token'] ?? ''),
+    );
+
+    return setPassword.isValid
+        ? Right(setPassword)
+        : const Left(ApiFailure.passwordResetFail());
   }
 
   @override
