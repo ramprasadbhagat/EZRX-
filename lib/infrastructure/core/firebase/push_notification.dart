@@ -8,7 +8,6 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -25,7 +24,6 @@ class PushNotificationService {
   }) {
     if (!config.bypassNotificationPermission) {
       _initFirebaseMessaging();
-      debugPrint('Push notification initialized!');
     }
   }
 
@@ -141,17 +139,12 @@ class PushNotificationService {
     if (status.isGranted) {
       await _initLocalNotifications();
       await _setupRemoteMessageListener();
-    } else {
-      debugPrint('User declined or has not accepted permission');
     }
 
     // from terminate mode, app launch when click the push notification banner
     await _fcm.getInitialMessage().then((RemoteMessage? message) async {
-      debugPrint(
-        'AppPushs getInitialMessage : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}',
-      );
       if (message == null) return;
-      _redirectTothePage(message);
+      _redirectToThePage(message);
       // return;
     });
   }
@@ -161,9 +154,6 @@ class PushNotificationService {
     // from foreground usually won't have the push notification banner display
     // we need to use the local notification plugin to display
     FirebaseMessaging.onMessage.listen((RemoteMessage? message) async {
-      debugPrint(
-        'AppPushs onMessage : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}',
-      );
       if (message == null) return;
       final cleverTapId = message.data['wzrk_acct_id'] ?? '';
       _callNotificationApi(message);
@@ -181,11 +171,8 @@ class PushNotificationService {
     FirebaseMessaging.onMessageOpenedApp.listen((
       RemoteMessage? message,
     ) async {
-      debugPrint(
-        'AppPushs onMessageOpenedApp : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}',
-      );
       if (message == null) return;
-      _redirectTothePage(message);
+      _redirectToThePage(message);
     });
 
     return null;
@@ -194,10 +181,10 @@ class PushNotificationService {
   Future<dynamic> _onSelectLocalNotification(String? payload) async {
     if (payload == null) return;
     final message = RemoteMessage.fromMap(jsonDecode(payload));
-    _redirectTothePage(message);
+    _redirectToThePage(message);
   }
 
-  void _redirectTothePage(RemoteMessage message) {
+  void _redirectToThePage(RemoteMessage message) {
     if (message.data['action'] == 'redirect') {
       appRouter.pushNamed(message.data['route_name']);
     }
@@ -218,9 +205,6 @@ class PushNotificationService {
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  debugPrint(
-    'AppPushs onBackgroundMessage : ${message.notification?.title} ${message.notification?.body} ${message.data}',
-  );
   await PushNotificationService.showLocalNotification(
     message.notification.hashCode,
     message.notification?.title,

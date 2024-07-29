@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:app_links/app_links.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:flutter/material.dart';
 
 class DeepLinkingService {
   final _appLinks = AppLinks();
@@ -27,7 +26,6 @@ class DeepLinkingService {
 
   void handleDeepLink(Uri? deepLink) {
     if (deepLink != null) {
-      debugPrint('_handleDeepLink | deeplink: $deepLink');
       _deepLinkStreamController.add(EzrxLink(deepLink.toString()));
     }
   }

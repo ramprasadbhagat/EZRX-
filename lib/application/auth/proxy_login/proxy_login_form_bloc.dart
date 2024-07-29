@@ -81,10 +81,4 @@ class ProxyLoginFormBloc
       },
     );
   }
-
-  @override
-  void onChange(Change<ProxyLoginFormState> change) {
-    super.onChange(change);
-    // print(change);
-  }
 }

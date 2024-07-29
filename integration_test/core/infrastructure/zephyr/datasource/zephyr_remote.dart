@@ -43,7 +43,6 @@ class ZephyrRemoteDataSource {
         'Failed update status for test case $testCaseKey ',
         response,
       );
-      print('Update status for test case $testCaseKey is successfully');
     }
   }
 
@@ -65,8 +64,6 @@ class ZephyrRemoteDataSource {
     Response<dynamic> res,
   ) {
     if (!(res.statusCode == 200 || res.statusCode == 201)) {
-      print('Status code: ${res.statusCode}');
-      print('Body: ${res.data}');
       throw Exception(msg);
     }
   }

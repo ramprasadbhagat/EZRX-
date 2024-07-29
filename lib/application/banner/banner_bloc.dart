@@ -54,10 +54,4 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
       },
     );
   }
-
-  @override
-  void onChange(Change<BannerState> change) {
-    super.onChange(change);
-    // print(change);
-  }
 }

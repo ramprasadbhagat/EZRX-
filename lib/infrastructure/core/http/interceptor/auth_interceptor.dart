@@ -13,7 +13,6 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:flutter/foundation.dart';
 
 class AuthInterceptor extends Interceptor {
   final DeviceStorage deviceStorage;
@@ -64,9 +63,7 @@ class AuthInterceptor extends Interceptor {
       options.headers['version'] = await packageInfoService.getVersion();
       options.headers['build'] = await packageInfoService.getBuildNumber();
       options.headers['platform'] = 'app';
-    } on CacheException catch (e) {
-      debugPrint('load token failure: ${e.message}');
-    }
+    } on CacheException catch (_) {}
     options.headers['Content-Type'] = 'application/json; charset=UTF-8';
     options.headers['Accept-Language'] = tr('en');
 
@@ -137,8 +134,6 @@ class AuthInterceptor extends Interceptor {
 
       return newJwt;
     } catch (e) {
-      debugPrint('Refresh token failed : $e');
-
       return null;
     }
   }
