@@ -26,7 +26,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -1774,15 +1774,8 @@ void main() {
         await tester.pump();
         verify(
           () => poAttachmentBloc.add(
-            PoAttachmentEvent.uploadFile(
-              uploadedPODocument: [
-                PoDocuments.empty().copyWith(
-                  name: 'fake_file',
-                  url: 'fake_url',
-                ),
-              ],
+            const PoAttachmentEvent.pickFile(
               uploadOptionType: UploadOptionType.gallery,
-              user: fakeClientUser,
             ),
           ),
         ).called(1);
@@ -1795,15 +1788,8 @@ void main() {
         await tester.pump();
         verify(
           () => poAttachmentBloc.add(
-            PoAttachmentEvent.uploadFile(
-              uploadedPODocument: [
-                PoDocuments.empty().copyWith(
-                  name: 'fake_file',
-                  url: 'fake_url',
-                ),
-              ],
+            const PoAttachmentEvent.pickFile(
               uploadOptionType: UploadOptionType.file,
-              user: fakeClientUser,
             ),
           ),
         ).called(1);
@@ -1816,15 +1802,8 @@ void main() {
         await tester.pump();
         verify(
           () => poAttachmentBloc.add(
-            PoAttachmentEvent.uploadFile(
-              uploadedPODocument: [
-                PoDocuments.empty().copyWith(
-                  name: 'fake_file',
-                  url: 'fake_url',
-                ),
-              ],
+            const PoAttachmentEvent.pickFile(
               uploadOptionType: UploadOptionType.takePhoto,
-              user: fakeClientUser,
             ),
           ),
         ).called(1);

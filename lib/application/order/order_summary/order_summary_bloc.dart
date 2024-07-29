@@ -18,7 +18,7 @@ import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 
 part 'order_summary_event.dart';
 part 'order_summary_state.dart';

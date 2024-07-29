@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
 import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:flutter/services.dart';

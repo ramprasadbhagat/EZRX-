@@ -66,12 +66,15 @@ import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_f
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
+import 'package:ezrxmobile/application/payments/claim_management/claim_management_bloc.dart';
+import 'package:ezrxmobile/application/payments/claim_management/filter/claim_management_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_invoice_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_claim_submission/new_claim_submission_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -325,6 +328,9 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_in
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/bank_instruction_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/claim_management_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/claim_management_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/claim_management_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
@@ -342,6 +348,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progres
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/bank_instruction_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/claim_management_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/e_invoice_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
@@ -2950,6 +2957,51 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<StockInfoLocalDataSource>(),
       remoteDataSource: locator<StockInfoRemoteDataSource>(),
+    ),
+  );
+
+  //============================================================
+  //  Claim Management
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ClaimManagementQueryMutation());
+
+  locator.registerLazySingleton(() => ClaimManagementLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => ClaimManagementRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      claimManagementQueryMutation: locator<ClaimManagementQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ClaimManagementRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ClaimManagementLocalDataSource>(),
+      remoteDataSource: locator<ClaimManagementRemoteDataSource>(),
+      fileSystemHelper: locator<FileSystemHelper>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ClaimManagementBloc(
+      config: locator<Config>(),
+      claimManagementRepository: locator<ClaimManagementRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ClaimManagementFilterBloc(),
+  );
+
+  locator.registerLazySingleton(
+    () => NewClaimSubmissionBloc(
+      config: locator<Config>(),
+      claimManagementRepository: locator<ClaimManagementRepository>(),
     ),
   );
 }

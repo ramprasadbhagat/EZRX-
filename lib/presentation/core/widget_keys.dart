@@ -1738,4 +1738,40 @@ class WidgetKeys {
   static const Key stockInfoBanner = Key('stockInfoBanner');
   static const Key stockInfoBannerTitle = Key('stockInfoBannerTitle');
   static const Key stockInfoBannerContent = Key('stockInfoBannerContent');
+
+  //===========================================================
+  //  Claim Management
+  //============================================================
+  static const Key claimManagementPage = Key('claimManagementPage');
+  static const Key newClaimButton = Key('newClaimButton');
+  static const Key claimItemPrincipal = Key('claimItemPrincipal');
+  static const Key claimItemClaimType = Key('claimItemClaimType');
+  static const Key claimItemId = Key('claimItemId');
+  static const Key claimItemSubmitDate = Key('claimItemSubmitDate');
+  static const Key claimItemAmount = Key('claimItemAmount');
+  static const Key claimManagementItem = Key('claimManagementItem');
+  static const Key claimSubmittedPage = Key('claimSubmittedPage');
+  static const Key newClaimSubmissionPage = Key('newClaimSubmissionPage');
+  static const Key claimManagementFilterBottomsheet =
+      Key('claimManagementFilterBottomsheet');
+  static const Key claimManagementFilterIcon = Key('claimManagementFilterIcon');
+  static Key claimTypeFilter(String name, bool value) =>
+      Key('claimTypeFilter$name$value');
+  static const Key claimSubmittedViewClaimListButton =
+      Key('claimSubmittedViewClaimListButton');
+  static const Key claimSubmittedCreateNewClaimButton =
+      Key('claimSubmittedCreateNewClaimButton');
+  static const Key newClaimPrincipalCodeTextField =
+      Key('newClaimPrincipalCodeTextField');
+  static const Key newClaimPrincipalCodeTextFieldItem =
+      Key('newClaimPrincipalCodeTextFieldItem');
+  static const Key newClaimClaimTypeDropdown = Key('newClaimClaimTypeDropdown');
+  static const Key newClaimClaimAmountTextField =
+      Key('newClaimClaimAmountTextField');
+  static const Key newClaimClaimDetailsTextField =
+      Key('newClaimClaimDetailsTextField');
+  static const Key newClaimDocumentUpload = Key('newClaimDocumentUpload');
+  static const Key uploadDocumentItem = Key('uploadDocumentItem');
+  static const Key uploadDocumentDeleteButton =
+      Key('uploadDocumentDeleteButton');
 }

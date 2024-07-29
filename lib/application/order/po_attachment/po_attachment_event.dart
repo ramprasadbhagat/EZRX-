@@ -9,12 +9,16 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
   const factory PoAttachmentEvent.openFile({
     required PoDocuments files,
   }) = _OpenFile;
-  const factory PoAttachmentEvent.uploadFile({
-    required List<PoDocuments> uploadedPODocument,
+  const factory PoAttachmentEvent.pickFile({
     required UploadOptionType uploadOptionType,
+  }) = _PickFile;
+  const factory PoAttachmentEvent.uploadFile({
     required User user,
   }) = _UpLoadFile;
   const factory PoAttachmentEvent.deleteFile({
     required PoDocuments file,
   }) = _DeleteFile;
+  const factory PoAttachmentEvent.deleteLocalFile({
+    required PlatformFile file,
+  }) = _DeleteLocalFile;
 }

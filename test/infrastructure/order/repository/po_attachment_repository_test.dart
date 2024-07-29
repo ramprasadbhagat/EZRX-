@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -105,6 +105,7 @@ void main() {
       fileSystemHelper: fileSystemHelperMock,
       takePictureService: takePictureServiceMock,
     );
+    when(() => mockConfig.maximumUploadSize).thenReturn(10);
   });
 
   group('PoAttachmentRepository fileDownload test  ', () {

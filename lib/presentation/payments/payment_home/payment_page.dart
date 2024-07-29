@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+import 'package:ezrxmobile/application/payments/claim_management/claim_management_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';

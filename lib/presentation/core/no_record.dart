@@ -165,6 +165,29 @@ class NoRecordFound extends StatelessWidget {
           svgImage: SvgImage.emptyBox,
         );
 
+  factory NoRecordFound.claimManagement(
+    BuildContext context, {
+    required bool hasFilter,
+  }) =>
+      hasFilter
+          ? const NoRecordFound()
+          : NoRecordFound(
+              title: 'No claims to show',
+              subTitleWidget: const SizedBox(),
+              svgImage: SvgImage.emptyBox,
+              actionButton: ElevatedButton(
+                key: WidgetKeys.filterApplyButton,
+                onPressed: () =>
+                    context.router.push(const NewClaimSubmissionPageRoute()),
+                child: Text(
+                  context.tr('Create new claim'),
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                ),
+              ),
+            );
+
   @override
   Widget build(BuildContext context) {
     return Padding(

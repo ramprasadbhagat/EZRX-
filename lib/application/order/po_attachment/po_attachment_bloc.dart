@@ -1,13 +1,15 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:ezrxmobile/application/core/upload_option_type.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 
 part 'po_attachment_event.dart';
 part 'po_attachment_state.dart';
@@ -93,10 +95,9 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           },
         );
       },
-      uploadFile: (_UpLoadFile e) async {
+      pickFile: (_PickFile e) async {
         emit(
           state.copyWith(
-            isFetching: true,
             failureOrSuccessOption: none(),
             fileOperationMode: FileOperationMode.none,
           ),
@@ -109,7 +110,6 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           (failure) async => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-              isFetching: false,
             ),
           ),
           (_) async {
@@ -121,52 +121,54 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
               (failure) async => emit(
                 state.copyWith(
                   failureOrSuccessOption: optionOf(pickFilesFailureOrSuccess),
-                  isFetching: false,
                 ),
               ),
-              (files) async {
-                final newFiles = files
-                    .where(
-                      (platformFile) => !state.fileUrl.any(
-                        (poDocuments) => poDocuments.name == platformFile.name,
-                      ),
-                    )
-                    .toList();
-                if (newFiles.isEmpty) {
+              (files) {
+                if (files.isNotEmpty) {
                   emit(
                     state.copyWith(
-                      isFetching: false,
+                      failureOrSuccessOption:
+                          optionOf(pickFilesFailureOrSuccess),
+                      localFiles: [...state.localFiles, ...files],
                     ),
                   );
-
-                  return;
                 }
-                final uploadFilesFailureOrSuccess =
-                    await poAttachmentRepository.uploadFiles(
-                  files: newFiles,
-                  user: e.user,
-                );
-                uploadFilesFailureOrSuccess.fold(
-                  (l) => emit(
-                    state.copyWith(
-                      failureOrSuccessOption:
-                          optionOf(uploadFilesFailureOrSuccess),
-                      isFetching: false,
-                    ),
-                  ),
-                  (r) => emit(
-                    state.copyWith(
-                      failureOrSuccessOption:
-                          optionOf(uploadFilesFailureOrSuccess),
-                      fileUrl: [...r, ...state.fileUrl],
-                      isFetching: false,
-                      fileOperationMode: FileOperationMode.upload,
-                    ),
-                  ),
-                );
               },
             );
           },
+        );
+      },
+      uploadFile: (_UpLoadFile e) async {
+        if (state.localFiles.isEmpty) return;
+        emit(
+          state.copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            fileOperationMode: FileOperationMode.none,
+          ),
+        );
+        final uploadFilesFailureOrSuccess =
+            await poAttachmentRepository.uploadFiles(
+          files: state.localFiles,
+          user: e.user,
+        );
+        uploadFilesFailureOrSuccess.fold(
+          (l) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(uploadFilesFailureOrSuccess),
+              localFiles: <PlatformFile>[],
+              isFetching: false,
+            ),
+          ),
+          (r) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(uploadFilesFailureOrSuccess),
+              fileUrl: [...r, ...state.fileUrl],
+              localFiles: <PlatformFile>[],
+              isFetching: false,
+              fileOperationMode: FileOperationMode.upload,
+            ),
+          ),
         );
       },
       deleteFile: (_DeleteFile e) async {
@@ -203,6 +205,19 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
               isFetching: false,
               fileOperationMode: FileOperationMode.delete,
             ),
+          ),
+        );
+      },
+      deleteLocalFile: (_DeleteLocalFile e) {
+        final newFileList = List<PlatformFile>.of(state.localFiles)
+          ..removeWhere(
+            (element) => element == e.file,
+          );
+
+        emit(
+          state.copyWith(
+            localFiles: newFileList,
+            fileOperationMode: FileOperationMode.delete,
           ),
         );
       },

@@ -7,7 +7,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
@@ -23,7 +23,6 @@ import 'package:open_file_safe/open_file_safe.dart' as ofs;
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-const int _fileSizeLimitMB = 20;
 const int _maxUpload = 10;
 
 class PoAttachmentRepository implements IpoAttachmentRepository {
@@ -154,12 +153,11 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       }
       final biggerFile = files.where(
         (PlatformFile element) =>
-            element.size > (_fileSizeLimitMB * pow(1024, 2)),
+            element.size > (config.maximumUploadSize * pow(1024, 2)),
       );
       if (biggerFile.isNotEmpty) {
         return const Left(ApiFailure.uploadedFileSizeExceed());
       }
-
       final upLoadedFiles = Future.wait(
         files
             .map(
@@ -237,6 +235,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
     try {
       if (uploadOptionType == UploadOptionType.takePhoto) {
         final result = await takePictureService.takePicture();
+
         final renamedFiles = result.map(
           (imagePath) {
             final image = File(imagePath);

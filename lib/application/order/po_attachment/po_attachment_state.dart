@@ -6,12 +6,14 @@ class PoAttachmentState with _$PoAttachmentState {
   const factory PoAttachmentState({
     required bool isFetching,
     required List<PoDocuments> fileUrl,
+    required List<PlatformFile> localFiles,
     required FileOperationMode fileOperationMode,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _PoAttachmentState;
   factory PoAttachmentState.initial() => const PoAttachmentState(
         isFetching: false,
         fileUrl: <PoDocuments>[],
+        localFiles: <PlatformFile>[],
         fileOperationMode: FileOperationMode.none,
         failureOrSuccessOption: None(),
       );
@@ -37,8 +39,15 @@ class PoAttachmentState with _$PoAttachmentState {
 
   bool get isDownloadOperation =>
       fileOperationMode == FileOperationMode.download;
-      bool get isAttachmentUploaded =>isFetching &&
-                       fileOperationMode == FileOperationMode.upload;
+  bool get isAttachmentUploaded =>
+      isFetching && fileOperationMode == FileOperationMode.upload;
 }
 
 enum FileOperationMode { view, download, upload, none, delete }
+
+extension PoAttachmentListExtension on List<PlatformFile> {
+  bool hasFileExeed(int maximumUploadSize) => any(
+        (PlatformFile element) =>
+            element.size > (maximumUploadSize * pow(1024, 2)),
+      );
+}

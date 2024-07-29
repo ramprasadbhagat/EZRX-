@@ -136,3 +136,70 @@ class TransactionStatus extends ValueObject<String> {
   bool get paymentMarketPlaceFailed =>
       isPaymentMarketPlaceFailedStatusCode(value.getOrElse(() => ''));
 }
+
+class ClaimType extends ValueObject<int> {
+  static final supportClaimTypes = List.generate(
+    9,
+    (index) => ClaimType(index + 1),
+  );
+
+  factory ClaimType(int input) => ClaimType._(Right(input));
+
+  factory ClaimType.empty() => ClaimType(-1);
+
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  const ClaimType._(this.value);
+
+  String get title => getClaimTypeTitle(value.getOrElse(() => -1));
+
+  String get data => getClaimTypeDataSubmit(value.getOrElse(() => -1));
+
+  List<SupportDocumentType> get documentTypes =>
+      checkIsNeedFullDocument(value.getOrElse(() => -1))
+          ? SupportDocumentType.fullDocument
+          : SupportDocumentType.notIncludeCopyDocument;
+
+  bool get isEmpty => this == ClaimType.empty();
+
+  bool get isNotEmpty => this != ClaimType.empty();
+}
+
+class SupportDocumentType extends ValueObject<int> {
+  static final fullDocument = [
+    SupportDocumentType.proofOfBillingSOA(),
+    SupportDocumentType.agreement(),
+    SupportDocumentType.poCopy(),
+    SupportDocumentType.invoiceCopy(),
+    SupportDocumentType.supportingComputation(),
+  ];
+
+  static final notIncludeCopyDocument = [
+    SupportDocumentType.proofOfBillingDMSOAMSF(),
+    SupportDocumentType.agreement(),
+    SupportDocumentType.supportingComputation(),
+  ];
+
+  factory SupportDocumentType(int input) => SupportDocumentType._(Right(input));
+
+  factory SupportDocumentType.proofOfBillingSOA() => SupportDocumentType(0);
+
+  factory SupportDocumentType.proofOfBillingDMSOAMSF() =>
+      SupportDocumentType(1);
+
+  factory SupportDocumentType.agreement() => SupportDocumentType(2);
+
+  factory SupportDocumentType.poCopy() => SupportDocumentType(3);
+
+  factory SupportDocumentType.invoiceCopy() => SupportDocumentType(4);
+
+  factory SupportDocumentType.supportingComputation() => SupportDocumentType(5);
+
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  const SupportDocumentType._(this.value);
+
+  String get title => getSupportDocumentTitle(value.getOrElse(() => -1));
+}

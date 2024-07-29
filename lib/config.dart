@@ -22,6 +22,7 @@ class Config {
   int articlePageSize = 1000;
   int autoSearchTimeout = 1500;
   int maximumCartQuantity = 99999;
+  int maximumUploadSize = 20;
   String customScheme = 'ezrx://';
   bool bypassNotificationPermission = false;
 

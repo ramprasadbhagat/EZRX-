@@ -66,7 +66,19 @@ class _PaymentOptionMenu extends StatelessWidget {
           key: WidgetKeys.claimsMenu,
           icon: 'claims.svg',
           label: 'Claims',
-          onTap: () => {},
+          onTap: () {
+            context.read<ClaimManagementBloc>().add(
+                  ClaimManagementEvent.initialized(
+                    salesOrganisation: eligibilityState.salesOrganisation,
+                    customerCodeInfo: eligibilityState.customerCodeInfo,
+                    user: eligibilityState.user,
+                  ),
+                );
+
+            context.router.push(
+              const ClaimManagementPageRoute(),
+            );
+          },
         ),
     ];
   }

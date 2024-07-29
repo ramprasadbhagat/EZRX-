@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
@@ -323,8 +323,7 @@ void main() {
                 returnItemDetailsList: [
                   fakeReturnItemDetail.copyWith(
                     uploadedFiles: [
-                      PoDocuments.empty()
-                          .copyWith(name: fakeFileName),
+                      PoDocuments.empty().copyWith(name: fakeFileName),
                     ],
                   ),
                 ],
@@ -343,8 +342,7 @@ void main() {
               returnItemDetailsList: [
                 fakeReturnItemDetail.copyWith(
                   uploadedFiles: [
-                    PoDocuments.empty()
-                        .copyWith(name: fakeFileName),
+                    PoDocuments.empty().copyWith(name: fakeFileName),
                   ],
                 ),
               ],

@@ -69,3 +69,131 @@ String getReferenceListString(String referenceId) => referenceId.isNotEmpty
 bool isPaymentMYFailedStatusCode(String code) => code == '0';
 
 bool isPaymentMarketPlaceFailedStatusCode(String code) => code == '1';
+
+String getClaimTypeTitle(int claimType) {
+  var type = '';
+  switch (claimType) {
+    case 1:
+      type = 'Principal Deals';
+      break;
+
+    case 2:
+      type = 'Principal Discounts';
+      break;
+
+    case 3:
+      type = 'Principal Rebate';
+      break;
+
+    case 4:
+      type = 'Listing Fee';
+      break;
+
+    case 5:
+      type = 'Display allowances';
+      break;
+
+    case 6:
+      type = 'Anniversary Support';
+      break;
+
+    case 7:
+      type = 'Opening Support';
+      break;
+
+    case 8:
+      type = 'Administrative Charges';
+      break;
+
+    case 9:
+      type = 'Other Promo Support';
+      break;
+  }
+
+  return 'P$claimType - $type';
+}
+
+String getClaimTypeDataSubmit(int claimType) {
+  var type = '';
+  switch (claimType) {
+    case 1:
+      type = 'Principal Deals';
+      break;
+
+    case 2:
+      type = 'Principal Deductions';
+      break;
+
+    case 3:
+      type = 'Principal Rebate';
+      break;
+
+    case 4:
+      type = 'Listing Fee';
+      break;
+
+    case 5:
+      type = 'Display Allowances';
+      break;
+
+    case 6:
+      type = 'Anniversary Support';
+      break;
+
+    case 7:
+      type = 'Opening Support';
+      break;
+
+    case 8:
+      type = 'Administration Charges';
+      break;
+
+    case 9:
+      type = 'Other Promo Support';
+      break;
+  }
+
+  return 'P$claimType- $type';
+}
+
+bool checkIsNeedFullDocument(int claimType) {
+  switch (claimType) {
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+String getSupportDocumentTitle(int documentType) {
+  var type = '';
+  switch (documentType) {
+    case 0:
+      type = 'Proof of Billing/SOA';
+      break;
+
+    case 1:
+      type = 'Proof of Billing (DM, SOA, MSF)';
+      break;
+
+    case 2:
+      type = 'Agreement/Contract/Trade Letter';
+      break;
+
+    case 3:
+      type = 'PO Copy';
+      break;
+
+    case 4:
+      type = 'Invoice Copy';
+      break;
+
+    case 5:
+      type = 'Supporting Computation';
+      break;
+  }
+
+  return type;
+}

@@ -218,6 +218,18 @@ class AppRouter extends $AppRouter {
           path: '/payments/payment_failed',
           page: PaymentFailedPageRoute.page,
         ),
+        AutoRoute(
+          path: '/payments/claim_management',
+          page: ClaimManagementPageRoute.page,
+        ),
+        AutoRoute(
+          path: '/payments/new_claim_submission',
+          page: NewClaimSubmissionPageRoute.page,
+        ),
+        AutoRoute(
+          path: '/payments/claim_submitted',
+          page: ClaimSubmittedPageRoute.page,
+        ),
         CustomRoute(
           path: '/intro',
           page: IntroPageRoute.page,

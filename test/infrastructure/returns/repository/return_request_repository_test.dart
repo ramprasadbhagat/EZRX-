@@ -133,6 +133,7 @@ void main() {
         poDocumentRemoteDataSource: poDocumentRemoteDataSourceMock,
         poDocumentLocalDataSource: poDocumentLocalDataSourceMock,
       );
+      when(() => configMock.maximumUploadSize).thenReturn(20);
     },
   );
 

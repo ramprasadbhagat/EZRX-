@@ -21,10 +21,10 @@ mixin _$PoAttachmentEvent {
     required TResult Function() initialized,
     required TResult Function(List<PoDocuments> files) downloadFile,
     required TResult Function(PoDocuments files) openFile,
-    required TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)
-        uploadFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,10 +32,10 @@ mixin _$PoAttachmentEvent {
     TResult? Function()? initialized,
     TResult? Function(List<PoDocuments> files)? downloadFile,
     TResult? Function(PoDocuments files)? openFile,
-    TResult? Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,10 +43,10 @@ mixin _$PoAttachmentEvent {
     TResult Function()? initialized,
     TResult Function(List<PoDocuments> files)? downloadFile,
     TResult Function(PoDocuments files)? openFile,
-    TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
     TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,8 +55,10 @@ mixin _$PoAttachmentEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
     required TResult Function(_UpLoadFile value) uploadFile,
     required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,8 +66,10 @@ mixin _$PoAttachmentEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
     TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,8 +77,10 @@ mixin _$PoAttachmentEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
     TResult Function(_UpLoadFile value)? uploadFile,
     TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,10 +145,10 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(List<PoDocuments> files) downloadFile,
     required TResult Function(PoDocuments files) openFile,
-    required TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)
-        uploadFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
   }) {
     return initialized();
   }
@@ -153,10 +159,10 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(List<PoDocuments> files)? downloadFile,
     TResult? Function(PoDocuments files)? openFile,
-    TResult? Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
   }) {
     return initialized?.call();
   }
@@ -167,10 +173,10 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? initialized,
     TResult Function(List<PoDocuments> files)? downloadFile,
     TResult Function(PoDocuments files)? openFile,
-    TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
     TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -185,8 +191,10 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
     required TResult Function(_UpLoadFile value) uploadFile,
     required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
   }) {
     return initialized(this);
   }
@@ -197,8 +205,10 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
     TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
   }) {
     return initialized?.call(this);
   }
@@ -209,8 +219,10 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
     TResult Function(_UpLoadFile value)? uploadFile,
     TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -298,10 +310,10 @@ class _$DownloadFileImpl implements _DownloadFile {
     required TResult Function() initialized,
     required TResult Function(List<PoDocuments> files) downloadFile,
     required TResult Function(PoDocuments files) openFile,
-    required TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)
-        uploadFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
   }) {
     return downloadFile(files);
   }
@@ -312,10 +324,10 @@ class _$DownloadFileImpl implements _DownloadFile {
     TResult? Function()? initialized,
     TResult? Function(List<PoDocuments> files)? downloadFile,
     TResult? Function(PoDocuments files)? openFile,
-    TResult? Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
   }) {
     return downloadFile?.call(files);
   }
@@ -326,10 +338,10 @@ class _$DownloadFileImpl implements _DownloadFile {
     TResult Function()? initialized,
     TResult Function(List<PoDocuments> files)? downloadFile,
     TResult Function(PoDocuments files)? openFile,
-    TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
     TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
@@ -344,8 +356,10 @@ class _$DownloadFileImpl implements _DownloadFile {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
     required TResult Function(_UpLoadFile value) uploadFile,
     required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
   }) {
     return downloadFile(this);
   }
@@ -356,8 +370,10 @@ class _$DownloadFileImpl implements _DownloadFile {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
     TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
   }) {
     return downloadFile?.call(this);
   }
@@ -368,8 +384,10 @@ class _$DownloadFileImpl implements _DownloadFile {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
     TResult Function(_UpLoadFile value)? uploadFile,
     TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
@@ -466,10 +484,10 @@ class _$OpenFileImpl implements _OpenFile {
     required TResult Function() initialized,
     required TResult Function(List<PoDocuments> files) downloadFile,
     required TResult Function(PoDocuments files) openFile,
-    required TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)
-        uploadFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
   }) {
     return openFile(files);
   }
@@ -480,10 +498,10 @@ class _$OpenFileImpl implements _OpenFile {
     TResult? Function()? initialized,
     TResult? Function(List<PoDocuments> files)? downloadFile,
     TResult? Function(PoDocuments files)? openFile,
-    TResult? Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
   }) {
     return openFile?.call(files);
   }
@@ -494,10 +512,10 @@ class _$OpenFileImpl implements _OpenFile {
     TResult Function()? initialized,
     TResult Function(List<PoDocuments> files)? downloadFile,
     TResult Function(PoDocuments files)? openFile,
-    TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
     TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (openFile != null) {
@@ -512,8 +530,10 @@ class _$OpenFileImpl implements _OpenFile {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
     required TResult Function(_UpLoadFile value) uploadFile,
     required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
   }) {
     return openFile(this);
   }
@@ -524,8 +544,10 @@ class _$OpenFileImpl implements _OpenFile {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
     TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
   }) {
     return openFile?.call(this);
   }
@@ -536,8 +558,10 @@ class _$OpenFileImpl implements _OpenFile {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
     TResult Function(_UpLoadFile value)? uploadFile,
     TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (openFile != null) {
@@ -557,15 +581,177 @@ abstract class _OpenFile implements PoAttachmentEvent {
 }
 
 /// @nodoc
+abstract class _$$PickFileImplCopyWith<$Res> {
+  factory _$$PickFileImplCopyWith(
+          _$PickFileImpl value, $Res Function(_$PickFileImpl) then) =
+      __$$PickFileImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UploadOptionType uploadOptionType});
+}
+
+/// @nodoc
+class __$$PickFileImplCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$PickFileImpl>
+    implements _$$PickFileImplCopyWith<$Res> {
+  __$$PickFileImplCopyWithImpl(
+      _$PickFileImpl _value, $Res Function(_$PickFileImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uploadOptionType = null,
+  }) {
+    return _then(_$PickFileImpl(
+      uploadOptionType: null == uploadOptionType
+          ? _value.uploadOptionType
+          : uploadOptionType // ignore: cast_nullable_to_non_nullable
+              as UploadOptionType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PickFileImpl implements _PickFile {
+  const _$PickFileImpl({required this.uploadOptionType});
+
+  @override
+  final UploadOptionType uploadOptionType;
+
+  @override
+  String toString() {
+    return 'PoAttachmentEvent.pickFile(uploadOptionType: $uploadOptionType)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PickFileImpl &&
+            (identical(other.uploadOptionType, uploadOptionType) ||
+                other.uploadOptionType == uploadOptionType));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uploadOptionType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PickFileImplCopyWith<_$PickFileImpl> get copyWith =>
+      __$$PickFileImplCopyWithImpl<_$PickFileImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
+  }) {
+    return pickFile(uploadOptionType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
+  }) {
+    return pickFile?.call(uploadOptionType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
+    required TResult orElse(),
+  }) {
+    if (pickFile != null) {
+      return pickFile(uploadOptionType);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_DownloadFile value) downloadFile,
+    required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
+    required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
+  }) {
+    return pickFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_DownloadFile value)? downloadFile,
+    TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
+    TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
+  }) {
+    return pickFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_DownloadFile value)? downloadFile,
+    TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
+    TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
+    required TResult orElse(),
+  }) {
+    if (pickFile != null) {
+      return pickFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PickFile implements PoAttachmentEvent {
+  const factory _PickFile({required final UploadOptionType uploadOptionType}) =
+      _$PickFileImpl;
+
+  UploadOptionType get uploadOptionType;
+  @JsonKey(ignore: true)
+  _$$PickFileImplCopyWith<_$PickFileImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$UpLoadFileImplCopyWith<$Res> {
   factory _$$UpLoadFileImplCopyWith(
           _$UpLoadFileImpl value, $Res Function(_$UpLoadFileImpl) then) =
       __$$UpLoadFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {List<PoDocuments> uploadedPODocument,
-      UploadOptionType uploadOptionType,
-      User user});
+  $Res call({User user});
 
   $UserCopyWith<$Res> get user;
 }
@@ -581,19 +767,9 @@ class __$$UpLoadFileImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uploadedPODocument = null,
-    Object? uploadOptionType = null,
     Object? user = null,
   }) {
     return _then(_$UpLoadFileImpl(
-      uploadedPODocument: null == uploadedPODocument
-          ? _value._uploadedPODocument
-          : uploadedPODocument // ignore: cast_nullable_to_non_nullable
-              as List<PoDocuments>,
-      uploadOptionType: null == uploadOptionType
-          ? _value.uploadOptionType
-          : uploadOptionType // ignore: cast_nullable_to_non_nullable
-              as UploadOptionType,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -613,29 +789,14 @@ class __$$UpLoadFileImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpLoadFileImpl implements _UpLoadFile {
-  const _$UpLoadFileImpl(
-      {required final List<PoDocuments> uploadedPODocument,
-      required this.uploadOptionType,
-      required this.user})
-      : _uploadedPODocument = uploadedPODocument;
+  const _$UpLoadFileImpl({required this.user});
 
-  final List<PoDocuments> _uploadedPODocument;
-  @override
-  List<PoDocuments> get uploadedPODocument {
-    if (_uploadedPODocument is EqualUnmodifiableListView)
-      return _uploadedPODocument;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_uploadedPODocument);
-  }
-
-  @override
-  final UploadOptionType uploadOptionType;
   @override
   final User user;
 
   @override
   String toString() {
-    return 'PoAttachmentEvent.uploadFile(uploadedPODocument: $uploadedPODocument, uploadOptionType: $uploadOptionType, user: $user)';
+    return 'PoAttachmentEvent.uploadFile(user: $user)';
   }
 
   @override
@@ -643,19 +804,11 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpLoadFileImpl &&
-            const DeepCollectionEquality()
-                .equals(other._uploadedPODocument, _uploadedPODocument) &&
-            (identical(other.uploadOptionType, uploadOptionType) ||
-                other.uploadOptionType == uploadOptionType) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_uploadedPODocument),
-      uploadOptionType,
-      user);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -669,12 +822,12 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     required TResult Function() initialized,
     required TResult Function(List<PoDocuments> files) downloadFile,
     required TResult Function(PoDocuments files) openFile,
-    required TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)
-        uploadFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
   }) {
-    return uploadFile(uploadedPODocument, uploadOptionType, user);
+    return uploadFile(user);
   }
 
   @override
@@ -683,12 +836,12 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     TResult? Function()? initialized,
     TResult? Function(List<PoDocuments> files)? downloadFile,
     TResult? Function(PoDocuments files)? openFile,
-    TResult? Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
   }) {
-    return uploadFile?.call(uploadedPODocument, uploadOptionType, user);
+    return uploadFile?.call(user);
   }
 
   @override
@@ -697,14 +850,14 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     TResult Function()? initialized,
     TResult Function(List<PoDocuments> files)? downloadFile,
     TResult Function(PoDocuments files)? openFile,
-    TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
     TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
-      return uploadFile(uploadedPODocument, uploadOptionType, user);
+      return uploadFile(user);
     }
     return orElse();
   }
@@ -715,8 +868,10 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
     required TResult Function(_UpLoadFile value) uploadFile,
     required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
   }) {
     return uploadFile(this);
   }
@@ -727,8 +882,10 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
     TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
   }) {
     return uploadFile?.call(this);
   }
@@ -739,8 +896,10 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
     TResult Function(_UpLoadFile value)? uploadFile,
     TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
@@ -751,13 +910,8 @@ class _$UpLoadFileImpl implements _UpLoadFile {
 }
 
 abstract class _UpLoadFile implements PoAttachmentEvent {
-  const factory _UpLoadFile(
-      {required final List<PoDocuments> uploadedPODocument,
-      required final UploadOptionType uploadOptionType,
-      required final User user}) = _$UpLoadFileImpl;
+  const factory _UpLoadFile({required final User user}) = _$UpLoadFileImpl;
 
-  List<PoDocuments> get uploadedPODocument;
-  UploadOptionType get uploadOptionType;
   User get user;
   @JsonKey(ignore: true)
   _$$UpLoadFileImplCopyWith<_$UpLoadFileImpl> get copyWith =>
@@ -841,10 +995,10 @@ class _$DeleteFileImpl implements _DeleteFile {
     required TResult Function() initialized,
     required TResult Function(List<PoDocuments> files) downloadFile,
     required TResult Function(PoDocuments files) openFile,
-    required TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)
-        uploadFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
   }) {
     return deleteFile(file);
   }
@@ -855,10 +1009,10 @@ class _$DeleteFileImpl implements _DeleteFile {
     TResult? Function()? initialized,
     TResult? Function(List<PoDocuments> files)? downloadFile,
     TResult? Function(PoDocuments files)? openFile,
-    TResult? Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
   }) {
     return deleteFile?.call(file);
   }
@@ -869,10 +1023,10 @@ class _$DeleteFileImpl implements _DeleteFile {
     TResult Function()? initialized,
     TResult Function(List<PoDocuments> files)? downloadFile,
     TResult Function(PoDocuments files)? openFile,
-    TResult Function(List<PoDocuments> uploadedPODocument,
-            UploadOptionType uploadOptionType, User user)?
-        uploadFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
     TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (deleteFile != null) {
@@ -887,8 +1041,10 @@ class _$DeleteFileImpl implements _DeleteFile {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
     required TResult Function(_UpLoadFile value) uploadFile,
     required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
   }) {
     return deleteFile(this);
   }
@@ -899,8 +1055,10 @@ class _$DeleteFileImpl implements _DeleteFile {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
     TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
   }) {
     return deleteFile?.call(this);
   }
@@ -911,8 +1069,10 @@ class _$DeleteFileImpl implements _DeleteFile {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
     TResult Function(_UpLoadFile value)? uploadFile,
     TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
     required TResult orElse(),
   }) {
     if (deleteFile != null) {
@@ -933,9 +1093,175 @@ abstract class _DeleteFile implements PoAttachmentEvent {
 }
 
 /// @nodoc
+abstract class _$$DeleteLocalFileImplCopyWith<$Res> {
+  factory _$$DeleteLocalFileImplCopyWith(_$DeleteLocalFileImpl value,
+          $Res Function(_$DeleteLocalFileImpl) then) =
+      __$$DeleteLocalFileImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PlatformFile file});
+}
+
+/// @nodoc
+class __$$DeleteLocalFileImplCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$DeleteLocalFileImpl>
+    implements _$$DeleteLocalFileImplCopyWith<$Res> {
+  __$$DeleteLocalFileImplCopyWithImpl(
+      _$DeleteLocalFileImpl _value, $Res Function(_$DeleteLocalFileImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? file = null,
+  }) {
+    return _then(_$DeleteLocalFileImpl(
+      file: null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as PlatformFile,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteLocalFileImpl implements _DeleteLocalFile {
+  const _$DeleteLocalFileImpl({required this.file});
+
+  @override
+  final PlatformFile file;
+
+  @override
+  String toString() {
+    return 'PoAttachmentEvent.deleteLocalFile(file: $file)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteLocalFileImpl &&
+            (identical(other.file, file) || other.file == file));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, file);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteLocalFileImplCopyWith<_$DeleteLocalFileImpl> get copyWith =>
+      __$$DeleteLocalFileImplCopyWithImpl<_$DeleteLocalFileImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
+    required TResult Function(UploadOptionType uploadOptionType) pickFile,
+    required TResult Function(User user) uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PlatformFile file) deleteLocalFile,
+  }) {
+    return deleteLocalFile(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
+    TResult? Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult? Function(User user)? uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PlatformFile file)? deleteLocalFile,
+  }) {
+    return deleteLocalFile?.call(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
+    TResult Function(UploadOptionType uploadOptionType)? pickFile,
+    TResult Function(User user)? uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PlatformFile file)? deleteLocalFile,
+    required TResult orElse(),
+  }) {
+    if (deleteLocalFile != null) {
+      return deleteLocalFile(file);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_DownloadFile value) downloadFile,
+    required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_PickFile value) pickFile,
+    required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
+    required TResult Function(_DeleteLocalFile value) deleteLocalFile,
+  }) {
+    return deleteLocalFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_DownloadFile value)? downloadFile,
+    TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_PickFile value)? pickFile,
+    TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
+    TResult? Function(_DeleteLocalFile value)? deleteLocalFile,
+  }) {
+    return deleteLocalFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_DownloadFile value)? downloadFile,
+    TResult Function(_OpenFile value)? openFile,
+    TResult Function(_PickFile value)? pickFile,
+    TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
+    TResult Function(_DeleteLocalFile value)? deleteLocalFile,
+    required TResult orElse(),
+  }) {
+    if (deleteLocalFile != null) {
+      return deleteLocalFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteLocalFile implements PoAttachmentEvent {
+  const factory _DeleteLocalFile({required final PlatformFile file}) =
+      _$DeleteLocalFileImpl;
+
+  PlatformFile get file;
+  @JsonKey(ignore: true)
+  _$$DeleteLocalFileImplCopyWith<_$DeleteLocalFileImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$PoAttachmentState {
   bool get isFetching => throw _privateConstructorUsedError;
   List<PoDocuments> get fileUrl => throw _privateConstructorUsedError;
+  List<PlatformFile> get localFiles => throw _privateConstructorUsedError;
   FileOperationMode get fileOperationMode => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -954,6 +1280,7 @@ abstract class $PoAttachmentStateCopyWith<$Res> {
   $Res call(
       {bool isFetching,
       List<PoDocuments> fileUrl,
+      List<PlatformFile> localFiles,
       FileOperationMode fileOperationMode,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
@@ -973,6 +1300,7 @@ class _$PoAttachmentStateCopyWithImpl<$Res, $Val extends PoAttachmentState>
   $Res call({
     Object? isFetching = null,
     Object? fileUrl = null,
+    Object? localFiles = null,
     Object? fileOperationMode = null,
     Object? failureOrSuccessOption = null,
   }) {
@@ -985,6 +1313,10 @@ class _$PoAttachmentStateCopyWithImpl<$Res, $Val extends PoAttachmentState>
           ? _value.fileUrl
           : fileUrl // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      localFiles: null == localFiles
+          ? _value.localFiles
+          : localFiles // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
       fileOperationMode: null == fileOperationMode
           ? _value.fileOperationMode
           : fileOperationMode // ignore: cast_nullable_to_non_nullable
@@ -1008,6 +1340,7 @@ abstract class _$$PoAttachmentStateImplCopyWith<$Res>
   $Res call(
       {bool isFetching,
       List<PoDocuments> fileUrl,
+      List<PlatformFile> localFiles,
       FileOperationMode fileOperationMode,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
@@ -1025,6 +1358,7 @@ class __$$PoAttachmentStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isFetching = null,
     Object? fileUrl = null,
+    Object? localFiles = null,
     Object? fileOperationMode = null,
     Object? failureOrSuccessOption = null,
   }) {
@@ -1037,6 +1371,10 @@ class __$$PoAttachmentStateImplCopyWithImpl<$Res>
           ? _value._fileUrl
           : fileUrl // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      localFiles: null == localFiles
+          ? _value._localFiles
+          : localFiles // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
       fileOperationMode: null == fileOperationMode
           ? _value.fileOperationMode
           : fileOperationMode // ignore: cast_nullable_to_non_nullable
@@ -1055,9 +1393,11 @@ class _$PoAttachmentStateImpl extends _PoAttachmentState {
   const _$PoAttachmentStateImpl(
       {required this.isFetching,
       required final List<PoDocuments> fileUrl,
+      required final List<PlatformFile> localFiles,
       required this.fileOperationMode,
       required this.failureOrSuccessOption})
       : _fileUrl = fileUrl,
+        _localFiles = localFiles,
         super._();
 
   @override
@@ -1070,6 +1410,14 @@ class _$PoAttachmentStateImpl extends _PoAttachmentState {
     return EqualUnmodifiableListView(_fileUrl);
   }
 
+  final List<PlatformFile> _localFiles;
+  @override
+  List<PlatformFile> get localFiles {
+    if (_localFiles is EqualUnmodifiableListView) return _localFiles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_localFiles);
+  }
+
   @override
   final FileOperationMode fileOperationMode;
   @override
@@ -1077,7 +1425,7 @@ class _$PoAttachmentStateImpl extends _PoAttachmentState {
 
   @override
   String toString() {
-    return 'PoAttachmentState(isFetching: $isFetching, fileUrl: $fileUrl, fileOperationMode: $fileOperationMode, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'PoAttachmentState(isFetching: $isFetching, fileUrl: $fileUrl, localFiles: $localFiles, fileOperationMode: $fileOperationMode, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1088,6 +1436,8 @@ class _$PoAttachmentStateImpl extends _PoAttachmentState {
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             const DeepCollectionEquality().equals(other._fileUrl, _fileUrl) &&
+            const DeepCollectionEquality()
+                .equals(other._localFiles, _localFiles) &&
             (identical(other.fileOperationMode, fileOperationMode) ||
                 other.fileOperationMode == fileOperationMode) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -1099,6 +1449,7 @@ class _$PoAttachmentStateImpl extends _PoAttachmentState {
       runtimeType,
       isFetching,
       const DeepCollectionEquality().hash(_fileUrl),
+      const DeepCollectionEquality().hash(_localFiles),
       fileOperationMode,
       failureOrSuccessOption);
 
@@ -1114,6 +1465,7 @@ abstract class _PoAttachmentState extends PoAttachmentState {
   const factory _PoAttachmentState(
       {required final bool isFetching,
       required final List<PoDocuments> fileUrl,
+      required final List<PlatformFile> localFiles,
       required final FileOperationMode fileOperationMode,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$PoAttachmentStateImpl;
@@ -1123,6 +1475,8 @@ abstract class _PoAttachmentState extends PoAttachmentState {
   bool get isFetching;
   @override
   List<PoDocuments> get fileUrl;
+  @override
+  List<PlatformFile> get localFiles;
   @override
   FileOperationMode get fileOperationMode;
   @override

@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_attachment_dto.freezed.dart';

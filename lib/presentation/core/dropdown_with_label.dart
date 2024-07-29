@@ -18,7 +18,7 @@ class DropdownWithLabel extends StatelessWidget {
 
   final Key fieldKey;
   final String labelText;
-  final ValueChanged<String?> onChanged;
+  final ValueChanged<String?>? onChanged;
   final bool isEnabled;
   final String hintText;
   final String initialValue;
