@@ -56,7 +56,7 @@ class ReturnItemsTab extends StatelessWidget {
             horizontalTitleGap: 10,
             subtitle: Text(
               context.tr(
-                'Return requests can be created from invoices dated within the last 24 months ONLY.',
+                'Return requests can be created from invoices dated within the last 5 years ONLY.',
               ),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: ZPColors.neutralsDarkBlack,

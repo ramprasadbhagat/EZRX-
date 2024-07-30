@@ -174,7 +174,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final msg = find.text(
-          'Return requests can be created from invoices dated within the last 24 months ONLY.'
+          'Return requests can be created from invoices dated within the last 5 years ONLY.'
               .tr(),
         );
         expect(msg, findsOneWidget);

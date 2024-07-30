@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -23,6 +24,7 @@ void main() {
 
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => Config());
     autoRouterMock = locator<AppRouter>();
     returnItemsBlocMock = ReturnItemsBlocMock();
     returnItemsFilterBlocMock = ReturnItemsFilterBlocMock();

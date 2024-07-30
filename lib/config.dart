@@ -26,6 +26,12 @@ class Config {
   String customScheme = 'ezrx://';
   bool bypassNotificationPermission = false;
 
+  DateTime newReturnRequestFilterStartDate = DateTime(
+    DateTime.now().year - 5,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
+
   String get domain {
     switch (appFlavor) {
       case Flavor.prod:
