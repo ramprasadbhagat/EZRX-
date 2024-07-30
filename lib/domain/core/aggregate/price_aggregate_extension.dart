@@ -98,8 +98,13 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
   ComboDeal get firstComboDeal => isEmpty ? ComboDeal.empty() : first.comboDeal;
 
-  PriceComboDeal get firstPriceComboDeal =>
-      isEmpty ? PriceComboDeal.empty() : first.price.comboDeal;
+  // we need to find the first eligible combo deal in the selected items
+  PriceComboDeal get firstPriceComboDealEligible => isEmpty
+      ? PriceComboDeal.empty()
+      : firstWhere(
+            (priceAggregate) => priceAggregate.price.comboDeal.isEligible,
+            orElse: () => PriceAggregate.empty(),
+          ).price.comboDeal;
 
   List<PriceAggregate> get preOrderItems =>
       expand((e) => [e, ...e.bonusMaterialPriceAggregate])

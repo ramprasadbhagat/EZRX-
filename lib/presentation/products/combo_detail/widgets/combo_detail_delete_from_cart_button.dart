@@ -69,7 +69,7 @@ class _ComboDetailDeleteFromCartButton extends StatelessWidget {
                           .read<ComboDealMaterialDetailBloc>()
                           .state
                           .allSelectedItems
-                          .firstPriceComboDeal
+                          .firstPriceComboDealEligible
                           .id,
                     );
 

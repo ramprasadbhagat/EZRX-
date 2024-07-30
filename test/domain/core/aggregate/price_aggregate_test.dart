@@ -1788,11 +1788,12 @@ void main() {
       );
     });
 
-    test('First PriceComboDeal', () {
+    test('First PriceComboDeal with empty combo deal at second item', () {
       final list = [
         PriceAggregate.empty().copyWith(
           price: Price.empty().copyWith(
             comboDeal: PriceComboDeal.empty().copyWith(
+              isEligible: true,
               category: PriceComboDealCategory(
                 type: ComboDealCategoryType('fake-type'),
                 values: [],
@@ -1800,11 +1801,48 @@ void main() {
             ),
           ),
         ),
-        PriceAggregate.empty(),
+        PriceAggregate.empty().copyWith(
+          price: Price.empty().copyWith(
+            comboDeal: PriceComboDeal.empty(),
+          ),
+        ),
       ];
       expect(
-        list.firstPriceComboDeal,
+        list.firstPriceComboDealEligible,
         PriceComboDeal.empty().copyWith(
+          isEligible: true,
+          category: PriceComboDealCategory(
+            type: ComboDealCategoryType('fake-type'),
+            values: [],
+          ),
+        ),
+      );
+    });
+
+    test('First PriceComboDeal with empty combo deal Product at first item',
+        () {
+      final list = [
+        PriceAggregate.empty().copyWith(
+          price: Price.empty().copyWith(
+            comboDeal: PriceComboDeal.empty(),
+          ),
+        ),
+        PriceAggregate.empty().copyWith(
+          price: Price.empty().copyWith(
+            comboDeal: PriceComboDeal.empty().copyWith(
+              isEligible: true,
+              category: PriceComboDealCategory(
+                type: ComboDealCategoryType('fake-type'),
+                values: [],
+              ),
+            ),
+          ),
+        ),
+      ];
+      expect(
+        list.firstPriceComboDealEligible,
+        PriceComboDeal.empty().copyWith(
+          isEligible: true,
           category: PriceComboDealCategory(
             type: ComboDealCategoryType('fake-type'),
             values: [],

@@ -228,7 +228,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
             final overrideQuantity = state
                 .getCurrentComboItemByComboDealId(
                   comboDealMaterialDetailBloc
-                      .state.allSelectedItems.firstPriceComboDeal.id,
+                      .state.allSelectedItems.firstPriceComboDealEligible.id,
                 )
                 .comboMaterialsCurrentQuantity;
 
