@@ -24,6 +24,8 @@ void main() {
   late Config config;
   const offSet = 0;
 
+  final paymentSummaryState = PaymentSummaryState.initial();
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     paymentSummaryMockRepository = PaymentSummaryRepositoryMock();
@@ -42,7 +44,7 @@ void main() {
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
-      seed: () => PaymentSummaryState.initial().copyWith(
+      seed: () => paymentSummaryState.copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
       ),
@@ -66,12 +68,12 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
         ),
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
@@ -85,7 +87,7 @@ void main() {
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
-      seed: () => PaymentSummaryState.initial().copyWith(
+      seed: () => paymentSummaryState.copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
       ),
@@ -109,12 +111,12 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
         ),
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
@@ -128,7 +130,7 @@ void main() {
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
-      seed: () => PaymentSummaryState.initial().copyWith(
+      seed: () => paymentSummaryState.copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
       ),
@@ -152,12 +154,12 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           isFetching: true,
           failureOrSuccessOption: none(),
           appliedFilter: paymentSummaryFilter,
         ),
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
           isFetching: false,
@@ -171,7 +173,7 @@ void main() {
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
-      seed: () => PaymentSummaryState.initial().copyWith(
+      seed: () => paymentSummaryState.copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
       ),
@@ -193,13 +195,13 @@ void main() {
         const PaymentSummaryEvent.loadMore(),
       ),
       expect: () => [
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           isFetching: true,
           failureOrSuccessOption: none(),
           canLoadMore: true,
           appliedFilter: paymentSummaryFilter,
         ),
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           failureOrSuccessOption: none(),
           isFetching: false,
           canLoadMore: false,
@@ -214,7 +216,7 @@ void main() {
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
-      seed: () => PaymentSummaryState.initial().copyWith(
+      seed: () => paymentSummaryState.copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
       ),
@@ -236,13 +238,13 @@ void main() {
         const PaymentSummaryEvent.loadMore(),
       ),
       expect: () => [
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           isFetching: true,
           failureOrSuccessOption: none(),
           canLoadMore: true,
           appliedFilter: paymentSummaryFilter,
         ),
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
           isFetching: false,
@@ -257,7 +259,7 @@ void main() {
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
-      seed: () => PaymentSummaryState.initial().copyWith(
+      seed: () => paymentSummaryState.copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
       ),
@@ -281,12 +283,12 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
         ),
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
@@ -300,7 +302,7 @@ void main() {
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
-      seed: () => PaymentSummaryState.initial().copyWith(
+      seed: () => paymentSummaryState.copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
       ),
@@ -324,15 +326,35 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
         ),
-        PaymentSummaryState.initial().copyWith(
+        paymentSummaryState.copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
+        ),
+      ],
+    );
+
+    blocTest(
+      'for "initialized" event',
+      build: () => ZPPaymentSummaryBloc(
+        paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
+      ),
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
+        PaymentSummaryEvent.initialized(
+          customerCodeInfo: mockCustomerCodeInfo,
+          salesOrganization: mockSalesOrganisation,
+        ),
+      ),
+      expect: () => [
+        paymentSummaryState.copyWith(
+          customerCodeInfo: mockCustomerCodeInfo,
+          salesOrganization: mockSalesOrganisation,
         ),
       ],
     );

@@ -30,7 +30,7 @@ void main() {
     );
 
     blocTest(
-      'Change Form Date Event',
+      'Change Form Date Event when to date state is empty',
       build: () => SoaFilterBloc(),
       act: (SoaFilterBloc bloc) => bloc.add(
         SoaFilterEvent.changeFormDate(fakeFromDate),
@@ -44,7 +44,26 @@ void main() {
     );
 
     blocTest(
-      'Change To Date Event',
+      'Change Form Date Event when to date state is not empty',
+      build: () => SoaFilterBloc(),
+      seed: () => SoaFilterState.initial().copyWith(filter: fakeSoaFilter),
+      act: (SoaFilterBloc bloc) => bloc.add(
+        SoaFilterEvent.changeFormDate(
+          DateTimeStringValue(''),
+        ),
+      ),
+      expect: () => [
+        SoaFilterState.initial().copyWith(
+          filter: SoaFilter(
+            toDate: fakeToDate,
+            fromDate: DateTimeStringValue(''),
+          ),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Change To Date Event when from date state is empty',
       build: () => SoaFilterBloc(),
       act: (SoaFilterBloc bloc) => bloc.add(
         SoaFilterEvent.changeToDate(fakeToDate),
@@ -53,6 +72,25 @@ void main() {
         SoaFilterState.initial().copyWith(
           filter: SoaFilter.empty()
               .copyWith(toDate: fakeToDate, fromDate: fakeToDate),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Change To Date Event when from date state is not empty',
+      build: () => SoaFilterBloc(),
+      seed: () => SoaFilterState.initial().copyWith(filter: fakeSoaFilter),
+      act: (SoaFilterBloc bloc) => bloc.add(
+        SoaFilterEvent.changeToDate(
+          DateTimeStringValue(''),
+        ),
+      ),
+      expect: () => [
+        SoaFilterState.initial().copyWith(
+          filter: SoaFilter(
+            toDate: DateTimeStringValue(''),
+            fromDate: fakeFromDate,
+          ),
         ),
       ],
     );

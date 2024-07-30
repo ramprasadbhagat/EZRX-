@@ -13,6 +13,8 @@ void main() {
   late DateTime fakeEndDate;
   late StatusType selectedState;
   late DateTimeRange dateTimeRange;
+
+  final outstandingInvoiceFilterState = OutstandingInvoiceFilterState.initial();
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
   });
@@ -63,7 +65,7 @@ void main() {
         );
       },
       expect: () => [
-        OutstandingInvoiceFilterState.initial().copyWith(
+        outstandingInvoiceFilterState.copyWith(
           filter: outstandingInvoiceFilter.copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(dateTimeRange.start),
@@ -85,7 +87,7 @@ void main() {
         );
       },
       expect: () => [
-        OutstandingInvoiceFilterState.initial().copyWith(
+        outstandingInvoiceFilterState.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.dueDate(),
             dueDateFrom: DateTimeStringValue(
@@ -110,7 +112,7 @@ void main() {
         );
       },
       expect: () => [
-        OutstandingInvoiceFilterState.initial().copyWith(
+        outstandingInvoiceFilterState.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
             amountValueTo: outstandingInvoiceFilter.amountValueTo,
@@ -131,7 +133,7 @@ void main() {
         );
       },
       expect: () => [
-        OutstandingInvoiceFilterState.initial().copyWith(
+        outstandingInvoiceFilterState.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
             amountValueFrom: outstandingInvoiceFilter.amountValueFrom,
@@ -154,7 +156,7 @@ void main() {
         );
       },
       expect: () => [
-        OutstandingInvoiceFilterState.initial().copyWith(
+        outstandingInvoiceFilterState.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.status(),
             outstandingInvoiceStatus: selectedState,
@@ -172,7 +174,7 @@ void main() {
         );
       },
       expect: () => [
-        OutstandingInvoiceFilterState.initial()
+        outstandingInvoiceFilterState
             .copyWith(showErrorMessage: false),
       ],
     );
@@ -188,10 +190,21 @@ void main() {
         );
       },
       expect: () => [
-        OutstandingInvoiceFilterState.initial().copyWith(
+        outstandingInvoiceFilterState.copyWith(
           filter: outstandingInvoiceFilter,
           showErrorMessage: false,
         ),
+      ],
+    );
+
+    blocTest(
+      'for "resetFilters" event',
+      build: () => OutstandingInvoiceFilterBloc(),
+      act: (OutstandingInvoiceFilterBloc bloc) {
+        bloc.add(const OutstandingInvoiceFilterEvent.resetFilters());
+      },
+      expect: () => [
+        outstandingInvoiceFilterState,
       ],
     );
   });

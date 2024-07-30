@@ -382,6 +382,7 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_list_reposit
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
+import 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/create_payment_invoice_pdf.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
@@ -1883,6 +1884,9 @@ void setupLocator() {
   //  Payment Item
   //
   //============================================================
+  locator.registerLazySingleton(
+        () => CreatePaymentInvoicePdf(),
+  );
 
   locator.registerLazySingleton(
     () => PaymentSummaryDetailsBloc(
@@ -1890,6 +1894,7 @@ void setupLocator() {
       newPaymentRepository: locator<NewPaymentRepository>(),
       deviceRepository: locator<DeviceRepository>(),
       bankInstructionRepository: locator<BankInstructionRepository>(),
+      createPaymentInvoicePdf: locator<CreatePaymentInvoicePdf>(),
     ),
   );
 

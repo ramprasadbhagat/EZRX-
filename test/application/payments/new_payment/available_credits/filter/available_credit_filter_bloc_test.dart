@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  final availableCreditFilterState = AvailableCreditFilterState.initial();
 
   group(
     'Available_Credit_Filter_Bloc Test => ',
@@ -16,7 +17,7 @@ void main() {
         'For "initialize" Event',
         build: () => AvailableCreditFilterBloc(),
         act: (bloc) => bloc.add(const AvailableCreditFilterEvent.initialize()),
-        expect: () => [AvailableCreditFilterState.initial()],
+        expect: () => [availableCreditFilterState],
       );
 
       blocTest<AvailableCreditFilterBloc, AvailableCreditFilterState>(
@@ -33,21 +34,21 @@ void main() {
           ),
         ),
         expect: () => [
-          AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilterState.initial().filter.copyWith(
-                  documentDateFrom: DateTimeStringValue(
-                    getDateStringByDateTime(
-                      DateTime.now().subtract(
-                        const Duration(days: 7),
-                      ),
-                    ),
-                  ),
-                  documentDateTo: DateTimeStringValue(
-                    getDateStringByDateTime(
-                      DateTime.now(),
-                    ),
+          availableCreditFilterState.copyWith(
+            filter: availableCreditFilterState.filter.copyWith(
+              documentDateFrom: DateTimeStringValue(
+                getDateStringByDateTime(
+                  DateTime.now().subtract(
+                    const Duration(days: 7),
                   ),
                 ),
+              ),
+              documentDateTo: DateTimeStringValue(
+                getDateStringByDateTime(
+                  DateTime.now(),
+                ),
+              ),
+            ),
           ),
         ],
       );
@@ -59,11 +60,10 @@ void main() {
           const AvailableCreditFilterEvent.setAmountFrom(amountFrom: '10'),
         ),
         expect: () => [
-          AvailableCreditFilterState.initial().copyWith(
+          availableCreditFilterState.copyWith(
             filter: AvailableCreditFilter.empty().copyWith(
               amountValueFrom: RangeValue('10'),
-              amountValueTo:
-                  AvailableCreditFilterState.initial().filter.amountValueTo,
+              amountValueTo: availableCreditFilterState.filter.amountValueTo,
               filterOption: FilterOption.amountRange(),
             ),
           ),
@@ -76,11 +76,11 @@ void main() {
         act: (bloc) => bloc
             .add(const AvailableCreditFilterEvent.setAmountTo(amountTo: '100')),
         expect: () => [
-          AvailableCreditFilterState.initial().copyWith(
+          availableCreditFilterState.copyWith(
             filter: AvailableCreditFilter.empty().copyWith(
               amountValueTo: RangeValue('100'),
               amountValueFrom:
-                  AvailableCreditFilterState.initial().filter.amountValueFrom,
+                  availableCreditFilterState.filter.amountValueFrom,
               filterOption: FilterOption.amountRange(),
             ),
           ),
@@ -90,7 +90,7 @@ void main() {
       blocTest<AvailableCreditFilterBloc, AvailableCreditFilterState>(
         'For "setValidationFailure" Event with Failure',
         build: () => AvailableCreditFilterBloc(),
-        seed: () => AvailableCreditFilterState.initial().copyWith(
+        seed: () => availableCreditFilterState.copyWith(
           filter: AvailableCreditFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('100'),
             amountValueTo: RangeValue('10'),
@@ -99,12 +99,43 @@ void main() {
         act: (bloc) =>
             bloc.add(const AvailableCreditFilterEvent.setValidationFailure()),
         expect: () => [
-          AvailableCreditFilterState.initial().copyWith(
+          availableCreditFilterState.copyWith(
             filter: AvailableCreditFilter.defaultFilter().copyWith(
               amountValueFrom: RangeValue('100'),
               amountValueTo: RangeValue('10'),
             ),
             showErrorMessage: true,
+          ),
+        ],
+      );
+
+      blocTest<AvailableCreditFilterBloc, AvailableCreditFilterState>(
+        'For "resetFilters" Event',
+        build: () => AvailableCreditFilterBloc(),
+        act: (bloc) =>
+            bloc.add(const AvailableCreditFilterEvent.resetFilters()),
+        expect: () => [
+          availableCreditFilterState,
+        ],
+      );
+
+      blocTest<AvailableCreditFilterBloc, AvailableCreditFilterState>(
+        'For "updateFilterToLastApplied" Event',
+        build: () => AvailableCreditFilterBloc(),
+        act: (bloc) => bloc.add(
+          AvailableCreditFilterEvent.updateFilterToLastApplied(
+            lastAppliedFilter: AvailableCreditFilter.defaultFilter().copyWith(
+              amountValueFrom: RangeValue('100'),
+              amountValueTo: RangeValue('10'),
+            ),
+          ),
+        ),
+        expect: () => [
+          availableCreditFilterState.copyWith(
+            filter: AvailableCreditFilter.defaultFilter().copyWith(
+              amountValueFrom: RangeValue('100'),
+              amountValueTo: RangeValue('10'),
+            ),
           ),
         ],
       );

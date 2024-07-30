@@ -49,8 +49,10 @@ void main() {
   late List<PaymentItem> paymentList;
   late BankInstruction bankInstruction;
   late PaymentInfo paymentInfo;
-  late CreatePaymentInvoicePdf createPaymentInvoice;
   late Uint8List fakeRawFile;
+  late CreatePaymentInvoicePdf createPaymentInvoicePdf;
+
+  final paymentSummaryDetailsState = PaymentSummaryDetailsState.initial();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +60,7 @@ void main() {
     newPaymentRepository = NewPaymentRepositoryMock();
     deviceRepository = DeviceRepositoryMock();
     bankInstructionRepository = BankInstructionRepositoryMock();
-    createPaymentInvoice = CreatePaymentInvoicePdfMock();
+    createPaymentInvoicePdf = CreatePaymentInvoicePdfMock();
     details = await PaymentItemLocalDataSource().getPaymentSummaryDetails();
     paymentList = await PaymentItemLocalDataSource().getPaymentItems();
     bankInstruction = await BankInstructionLocalDataSource()
@@ -79,6 +81,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.initialized(
@@ -89,7 +92,7 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -105,6 +108,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -137,7 +141,7 @@ void main() {
           (invocation) async => Right(bankInstruction),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeIDSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -149,20 +153,20 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeIDSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details: details,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeIDSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details: details,
           isDetailFetching: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           details: details,
           salesOrganization: fakeIDSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -179,6 +183,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -214,7 +219,7 @@ void main() {
           (invocation) async => Right(paymentList),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -227,7 +232,7 @@ void main() {
       ),
       skip: 4,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           details: details.copyWith(
             paymentItems: paymentList,
           ),
@@ -245,6 +250,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -282,7 +288,7 @@ void main() {
           (invocation) async => Right(paymentList),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -297,7 +303,7 @@ void main() {
       ),
       skip: 5,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           details: details.copyWith(
             paymentItems: paymentList,
           ),
@@ -315,6 +321,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -358,7 +365,7 @@ void main() {
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeMYSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -372,7 +379,7 @@ void main() {
         ),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -380,14 +387,14 @@ void main() {
           details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -395,7 +402,7 @@ void main() {
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
           isListLoading: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -404,7 +411,7 @@ void main() {
             paymentItems: paymentList,
           ),
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -414,7 +421,7 @@ void main() {
           ),
           isFetchingAdvice: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeMYSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -434,6 +441,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -461,7 +469,7 @@ void main() {
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -475,7 +483,7 @@ void main() {
       ),
       skip: 1,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
           salesOrganization: fakeSalesOrganisation,
@@ -492,6 +500,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -517,7 +526,7 @@ void main() {
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -530,7 +539,7 @@ void main() {
       ),
       skip: 3,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -548,6 +557,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -561,7 +571,7 @@ void main() {
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -574,7 +584,7 @@ void main() {
       ),
       skip: 1,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           details: details,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
@@ -592,6 +602,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -602,7 +613,7 @@ void main() {
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -613,7 +624,7 @@ void main() {
       ),
       skip: 1,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           details: details,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
@@ -631,6 +642,7 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
       setUp: () {
         when(
@@ -645,7 +657,7 @@ void main() {
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
       },
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -658,7 +670,7 @@ void main() {
       ),
       skip: 1,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           details: details,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
@@ -676,12 +688,14 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeIDSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
         details: details,
+        shipToInfo: fakeShipToInfo,
       ),
       setUp: () {
         when(
@@ -689,13 +703,14 @@ void main() {
         ).thenAnswer(
           (invocation) async => const Right(PermissionStatus.granted),
         );
+
         when(
-          () => createPaymentInvoice.createInvoicePdf(
-            salesOrganisation: fakeSalesOrganisation,
+          () => createPaymentInvoicePdf.createInvoicePdf(
+            salesOrganisation: fakeIDSalesOrganisation,
             paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
             shipToInfo: fakeShipToInfo,
-            createdDate: DateTimeStringValue(''),
-            adviceExpiry: AdviceExpiryValue(''),
+            createdDate: details.createdDate,
+            adviceExpiry: details.adviceExpiry,
           ),
         ).thenAnswer(
           (_) => Future.value(fakeRawFile),
@@ -715,12 +730,21 @@ void main() {
         const PaymentSummaryDetailsEvent.saveAdvice(),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeIDSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details: details,
           isSavingAdvice: true,
+          shipToInfo: fakeShipToInfo,
+        ),
+        paymentSummaryDetailsState.copyWith(
+          savedAdvice: AttachmentFileBuffer.empty(),
+          salesOrganization: fakeIDSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          details: details,
+          shipToInfo: fakeShipToInfo,
         ),
       ],
     );
@@ -732,8 +756,9 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeIDSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
@@ -745,19 +770,31 @@ void main() {
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
+
+        when(
+          () => createPaymentInvoicePdf.createInvoicePdf(
+            salesOrganisation: fakeSalesOrganisation,
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
+            shipToInfo: fakeShipToInfo,
+            createdDate: DateTimeStringValue(''),
+            adviceExpiry: AdviceExpiryValue(''),
+          ),
+        ).thenAnswer(
+          (_) => Future.value(fakeRawFile),
+        );
       },
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         const PaymentSummaryDetailsEvent.saveAdvice(),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeIDSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details: details,
           isSavingAdvice: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeIDSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
@@ -775,12 +812,14 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeIDSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         user: fakeClientUser,
         details: details,
+        shipToInfo: fakeShipToInfo,
       ),
       setUp: () {
         when(
@@ -788,13 +827,14 @@ void main() {
         ).thenAnswer(
           (invocation) async => const Right(PermissionStatus.granted),
         );
+
         when(
-          () => createPaymentInvoice.createInvoicePdf(
-            salesOrganisation: fakeSalesOrganisation,
+          () => createPaymentInvoicePdf.createInvoicePdf(
+            salesOrganisation: fakeIDSalesOrganisation,
             paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
             shipToInfo: fakeShipToInfo,
-            createdDate: DateTimeStringValue(''),
-            adviceExpiry: AdviceExpiryValue(''),
+            createdDate: details.createdDate,
+            adviceExpiry: details.adviceExpiry,
           ),
         ).thenAnswer(
           (_) => Future.value(fakeRawFile),
@@ -812,12 +852,22 @@ void main() {
         const PaymentSummaryDetailsEvent.saveAdvice(),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeIDSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           user: fakeClientUser,
           details: details,
           isSavingAdvice: true,
+          shipToInfo: fakeShipToInfo,
+        ),
+        paymentSummaryDetailsState.copyWith(
+          salesOrganization: fakeIDSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          details: details,
+          failureOrSuccessOption:
+              const Some(Left(ApiFailure.other('mock-error'))),
+          shipToInfo: fakeShipToInfo,
         ),
       ],
     );
@@ -829,8 +879,9 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
@@ -854,7 +905,7 @@ void main() {
         const PaymentSummaryDetailsEvent.deleteAdvice(isMarketPlace: false),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
@@ -862,7 +913,7 @@ void main() {
           details: details,
           isDeletingPayment: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
           salesOrganization: fakeSalesOrganisation,
@@ -881,8 +932,9 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
@@ -906,7 +958,7 @@ void main() {
         const PaymentSummaryDetailsEvent.deleteAdvice(isMarketPlace: true),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
@@ -914,7 +966,7 @@ void main() {
           details: details,
           isDeletingPayment: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
@@ -931,8 +983,9 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
@@ -954,7 +1007,7 @@ void main() {
         const PaymentSummaryDetailsEvent.cancelAdvice(),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
@@ -962,7 +1015,7 @@ void main() {
           details: details,
           isCancelingAdvice: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
           salesOrganization: fakeSalesOrganisation,
@@ -981,8 +1034,9 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         salesOrganization: fakeSalesOrganisation,
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeShipToInfo,
@@ -1004,7 +1058,7 @@ void main() {
         const PaymentSummaryDetailsEvent.cancelAdvice(),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
@@ -1012,7 +1066,7 @@ void main() {
           details: details,
           isCancelingAdvice: true,
         ),
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           salesOrganization: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
@@ -1028,8 +1082,9 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         deviceRepository: deviceRepository,
         bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
       ),
-      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+      seed: () => paymentSummaryDetailsState.copyWith(
         savedAdvice: AttachmentFileBuffer.empty()
             .copyWith(buffer: fakeRawFile, name: 'fake-name'),
       ),
@@ -1047,8 +1102,89 @@ void main() {
         const PaymentSummaryDetailsEvent.viewSavedAdvice(),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
+        paymentSummaryDetailsState.copyWith(
           failureOrSuccessOption: optionOf(const Right(unit)),
+        ),
+      ],
+    );
+
+    blocTest<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+      '=> fetchPaymentSummaryDetailsInfo event success when payment batch aditional info is invalid and salesOrganization is ID',
+      build: () => PaymentSummaryDetailsBloc(
+        paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
+        createPaymentInvoicePdf: createPaymentInvoicePdf,
+      ),
+      setUp: () {
+        when(
+          () => paymentSummaryDetailsMockRepository
+              .fetchPaymentSummaryDetailsInfo(
+            salesOrganization: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            details: details.copyWith(
+              paymentBatchAdditionalInfo: StringValue(''),
+            ),
+            isMarketPlace: true,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          ),
+        );
+        when(
+          () => bankInstructionRepository.getBankInstruction(
+            bankIdentification: details.bankIdentification,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(bankInstruction),
+        );
+      },
+      seed: () => paymentSummaryDetailsState.copyWith(
+        salesOrganization: fakeIDSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        user: fakeClientUser,
+        details: details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+      ),
+      act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
+        PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+          details:
+              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          isMarketPlace: true,
+        ),
+      ),
+      expect: () => [
+        paymentSummaryDetailsState.copyWith(
+          isDetailFetching: true,
+          user: fakeClientUser,
+          details:
+              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          salesOrganization: fakeIDSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        paymentSummaryDetailsState.copyWith(
+          details:
+              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          user: fakeClientUser,
+          salesOrganization: fakeIDSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        paymentSummaryDetailsState.copyWith(
+          salesOrganization: fakeIDSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          details:
+              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          isDetailFetching: true,
+        ),
+        paymentSummaryDetailsState.copyWith(
+          details:
+              details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          salesOrganization: fakeIDSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          bankInstruction: bankInstruction,
         ),
       ],
     );

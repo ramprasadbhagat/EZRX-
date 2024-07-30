@@ -110,6 +110,7 @@ class _PaymentAdviceButton extends StatelessWidget {
 
 class _DeleteAdviceButton extends StatelessWidget {
   const _DeleteAdviceButton({required this.state});
+
   final PaymentSummaryDetailsState state;
 
   void _showDeleteAdviceBottomSheet(
@@ -166,7 +167,9 @@ class _DeleteAdviceButton extends StatelessWidget {
 
 class _DownloadAdviceButton extends StatelessWidget {
   const _DownloadAdviceButton({required this.state});
+
   final PaymentSummaryDetailsState state;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -207,6 +210,7 @@ class _CancelAdviceButton extends StatelessWidget {
   const _CancelAdviceButton({
     required this.state,
   });
+
   final PaymentSummaryDetailsState state;
 
   void _showCancelAdviceBottomSheet(BuildContext context) {

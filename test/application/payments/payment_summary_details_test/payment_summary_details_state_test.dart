@@ -79,5 +79,28 @@ void main() {
         const TRObject('NA'),
       );
     });
+
+    test('=> adviceExpiryText should return TRObject value with ID market', () {
+      final state = PaymentSummaryDetailsState.initial();
+
+      // Modify the state to have Id market salesOrg
+      final modifiedState = state.copyWith(
+        salesOrganization: fakeIDSalesOrganisation,
+        details: PaymentSummaryDetails.empty().copyWith(
+          createdDate: DateTimeStringValue('2023-09-11'),
+          status: FilterStatus('Failed'),
+        ),
+      );
+
+      expect(
+        modifiedState.adviceExpiryText,
+        TRObject(
+          'Expires in {day} day(s)',
+          arguments: {
+            'day': DateTimeStringValue('2023-09-11').paymentAttentionExpiry.toString(),
+          },
+        ),
+      );
+    });
   });
 }

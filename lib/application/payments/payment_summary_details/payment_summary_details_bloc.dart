@@ -18,11 +18,11 @@ import 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'payment_summary_details_bloc.freezed.dart';
+
 part 'payment_summary_details_event.dart';
 
 part 'payment_summary_details_state.dart';
-
-part 'payment_summary_details_bloc.freezed.dart';
 
 class PaymentSummaryDetailsBloc
     extends Bloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState> {
@@ -30,14 +30,18 @@ class PaymentSummaryDetailsBloc
   final INewPaymentRepository newPaymentRepository;
   final IDeviceRepository deviceRepository;
   final IBankInstructionRepository bankInstructionRepository;
+  final CreatePaymentInvoicePdf createPaymentInvoicePdf;
+
   PaymentSummaryDetailsBloc({
     required this.paymentItemRepository,
     required this.newPaymentRepository,
     required this.deviceRepository,
     required this.bankInstructionRepository,
+    required this.createPaymentInvoicePdf,
   }) : super(PaymentSummaryDetailsState.initial()) {
     on<PaymentSummaryDetailsEvent>(_onEvent);
   }
+
   Future<void> _onEvent(
     PaymentSummaryDetailsEvent event,
     Emitter<PaymentSummaryDetailsState> emit,
@@ -200,7 +204,7 @@ class PaymentSummaryDetailsBloc
           ),
           (success) async {
             final failureOrSuccessSave = await newPaymentRepository.saveFile(
-              pdfData: await CreatePaymentInvoicePdf().createInvoicePdf(
+              pdfData: await createPaymentInvoicePdf.createInvoicePdf(
                 paymentInvoiceInfoPdf: state.paymentInvoiceInfoPdf,
                 shipToInfo: state.shipToInfo,
                 salesOrganisation: state.salesOrganization,
