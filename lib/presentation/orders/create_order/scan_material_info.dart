@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +46,6 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
 
   @override
   Widget build(BuildContext context) {
-    scanMaterialInfoBloc = context.read<ScanMaterialInfoBloc>();
-
     return BlocListener<ScanMaterialInfoBloc, ScanMaterialInfoState>(
       listenWhen: (previous, current) =>
           previous.isScanInProgress != current.isScanInProgress &&
@@ -56,7 +56,7 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
           children: [
             AnnouncementBanner(
               currentPath: context.router.currentPath,
-              child: scanMaterialInfoBloc.dataCaptureView,
+              child: locator<MaterialInfoScanner>().dataCaptureView,
             ),
             const _ScannerTorchButton(),
             const _ScannerBackButton(),

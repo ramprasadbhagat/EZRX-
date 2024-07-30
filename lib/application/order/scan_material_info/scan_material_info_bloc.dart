@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
-import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
 
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
@@ -209,10 +208,6 @@ class ScanMaterialInfoBloc
     final scannedMessage = barcode.data ?? '';
 
     scanResultController.sink.add(scannedMessage);
-  }
-
-  DataCaptureView get dataCaptureView {
-    return scanInfoRepository.dataCaptureView();
   }
 
   @override

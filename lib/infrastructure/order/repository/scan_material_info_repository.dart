@@ -40,11 +40,6 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
   });
 
   @override
-  DataCaptureView dataCaptureView() {
-    return materialInfoScanner.dataCaptureView;
-  }
-
-  @override
   BarcodeCapture fetchBarcodeCapture() {
     return materialInfoScanner.barcodeCapture;
   }
