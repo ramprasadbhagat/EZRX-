@@ -92,10 +92,8 @@ class ViewByItemRemoteDataSource {
     );
   }
 
-  Future<List<InvoiceDetail>> getInvoiceDetailsForOrder({
-    required String orderNumber,
-    required String soldToCustomerCode,
-    required String language,
+  Future<InvoiceDetailResponse> getInvoiceDetailsForOrder({
+    required Map<String, dynamic> invoicesByOrderRequest,
   }) async {
     return await dataSourceExceptionHandler.handle(
       () async {
@@ -106,11 +104,7 @@ class ViewByItemRemoteDataSource {
             {
               'query': viewByItemQueryMutation.getInvoiceDetailsForOrder(),
               'variables': {
-                'invoicesByOrderRequest': {
-                  'orderNumber': orderNumber,
-                  'soldTo': soldToCustomerCode,
-                  'language': language,
-                },
+                'invoicesByOrderRequest': invoicesByOrderRequest,
               },
             },
           ),
@@ -121,9 +115,7 @@ class ViewByItemRemoteDataSource {
           jsonEncode(res.data['data']['GetInvoiceDetailsForOrder'] ?? []),
         );
 
-        return List.from(finalData)
-            .map((e) => InvoiceDetailDto.fromJson(e).toDomain())
-            .toList();
+        return InvoiceDetailResponseDto.fromJson(finalData).toDomain();
       },
     );
   }

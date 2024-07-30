@@ -39,7 +39,7 @@ class ViewByItemLocalDataSource {
         .toList();
   }
 
-  Future<List<InvoiceDetail>> getInvoiceDetailsForOrder() async {
+  Future<InvoiceDetailResponse> getInvoiceDetailsForOrder() async {
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/getInvoiceDetailsForOrder.json',
@@ -47,10 +47,10 @@ class ViewByItemLocalDataSource {
     );
     final finalData = data['data']['GetInvoiceDetailsForOrder'];
 
-    return List.from(
+    return InvoiceDetailResponseDto.fromJson(
       makeResponseCamelCase(
         jsonEncode(finalData),
       ),
-    ).map((e) => InvoiceDetailDto.fromJson(e).toDomain()).toList();
+    ).toDomain();
   }
 }

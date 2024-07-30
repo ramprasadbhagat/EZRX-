@@ -25,4 +25,6 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
     required LineNumber lineNumber,
     required OrderNumber orderNumber,
   }) = _FetchOrderHistoryDetails;
+
+  const factory ViewByItemDetailsEvent.loadMoreInvoices() = _LoadMoreInvoices;
 }

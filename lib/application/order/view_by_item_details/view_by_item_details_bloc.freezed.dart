@@ -30,6 +30,7 @@ mixin _$ViewByItemDetailsEvent {
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
     required TResult Function(LineNumber lineNumber, OrderNumber orderNumber)
         fetchOrderHistoryDetails,
+    required TResult Function() loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,6 +47,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult? Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult? Function()? loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +64,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -74,6 +77,7 @@ mixin _$ViewByItemDetailsEvent {
         fetchOrdersInvoiceData,
     required TResult Function(_FetchOrderHistoryDetails value)
         fetchOrderHistoryDetails,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,6 +88,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult? Function(_FetchOrderHistoryDetails value)?
         fetchOrderHistoryDetails,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -93,6 +98,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult Function(_FetchOrderHistoryDetails value)? fetchOrderHistoryDetails,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -287,6 +293,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
     required TResult Function(LineNumber lineNumber, OrderNumber orderNumber)
         fetchOrderHistoryDetails,
+    required TResult Function() loadMoreInvoices,
   }) {
     return initialized(
         customerCodeInfo, user, salesOrganisation, salesOrgConfig, shipToInfo);
@@ -307,6 +314,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult? Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return initialized?.call(
         customerCodeInfo, user, salesOrganisation, salesOrgConfig, shipToInfo);
@@ -327,6 +335,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -346,6 +355,7 @@ class _$InitializedImpl implements _Initialized {
         fetchOrdersInvoiceData,
     required TResult Function(_FetchOrderHistoryDetails value)
         fetchOrderHistoryDetails,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return initialized(this);
   }
@@ -359,6 +369,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult? Function(_FetchOrderHistoryDetails value)?
         fetchOrderHistoryDetails,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return initialized?.call(this);
   }
@@ -371,6 +382,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult Function(_FetchOrderHistoryDetails value)? fetchOrderHistoryDetails,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -476,6 +488,7 @@ class _$FetchZyllemStatusImpl implements _FetchZyllemStatus {
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
     required TResult Function(LineNumber lineNumber, OrderNumber orderNumber)
         fetchOrderHistoryDetails,
+    required TResult Function() loadMoreInvoices,
   }) {
     return fetchZyllemStatus(invoiceNumber);
   }
@@ -495,6 +508,7 @@ class _$FetchZyllemStatusImpl implements _FetchZyllemStatus {
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult? Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return fetchZyllemStatus?.call(invoiceNumber);
   }
@@ -514,6 +528,7 @@ class _$FetchZyllemStatusImpl implements _FetchZyllemStatus {
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -532,6 +547,7 @@ class _$FetchZyllemStatusImpl implements _FetchZyllemStatus {
         fetchOrdersInvoiceData,
     required TResult Function(_FetchOrderHistoryDetails value)
         fetchOrderHistoryDetails,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return fetchZyllemStatus(this);
   }
@@ -545,6 +561,7 @@ class _$FetchZyllemStatusImpl implements _FetchZyllemStatus {
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult? Function(_FetchOrderHistoryDetails value)?
         fetchOrderHistoryDetails,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return fetchZyllemStatus?.call(this);
   }
@@ -557,6 +574,7 @@ class _$FetchZyllemStatusImpl implements _FetchZyllemStatus {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult Function(_FetchOrderHistoryDetails value)? fetchOrderHistoryDetails,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -654,6 +672,7 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
     required TResult Function(LineNumber lineNumber, OrderNumber orderNumber)
         fetchOrderHistoryDetails,
+    required TResult Function() loadMoreInvoices,
   }) {
     return updateIsExpanded(isExpanded);
   }
@@ -673,6 +692,7 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult? Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return updateIsExpanded?.call(isExpanded);
   }
@@ -692,6 +712,7 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (updateIsExpanded != null) {
@@ -710,6 +731,7 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
         fetchOrdersInvoiceData,
     required TResult Function(_FetchOrderHistoryDetails value)
         fetchOrderHistoryDetails,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return updateIsExpanded(this);
   }
@@ -723,6 +745,7 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult? Function(_FetchOrderHistoryDetails value)?
         fetchOrderHistoryDetails,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return updateIsExpanded?.call(this);
   }
@@ -735,6 +758,7 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult Function(_FetchOrderHistoryDetails value)? fetchOrderHistoryDetails,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (updateIsExpanded != null) {
@@ -835,6 +859,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
     required TResult Function(LineNumber lineNumber, OrderNumber orderNumber)
         fetchOrderHistoryDetails,
+    required TResult Function() loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData(orderNumber);
   }
@@ -854,6 +879,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult? Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData?.call(orderNumber);
   }
@@ -873,6 +899,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchOrdersInvoiceData != null) {
@@ -891,6 +918,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
         fetchOrdersInvoiceData,
     required TResult Function(_FetchOrderHistoryDetails value)
         fetchOrderHistoryDetails,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData(this);
   }
@@ -904,6 +932,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult? Function(_FetchOrderHistoryDetails value)?
         fetchOrderHistoryDetails,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData?.call(this);
   }
@@ -916,6 +945,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult Function(_FetchOrderHistoryDetails value)? fetchOrderHistoryDetails,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchOrdersInvoiceData != null) {
@@ -1026,6 +1056,7 @@ class _$FetchOrderHistoryDetailsImpl implements _FetchOrderHistoryDetails {
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
     required TResult Function(LineNumber lineNumber, OrderNumber orderNumber)
         fetchOrderHistoryDetails,
+    required TResult Function() loadMoreInvoices,
   }) {
     return fetchOrderHistoryDetails(lineNumber, orderNumber);
   }
@@ -1045,6 +1076,7 @@ class _$FetchOrderHistoryDetailsImpl implements _FetchOrderHistoryDetails {
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult? Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return fetchOrderHistoryDetails?.call(lineNumber, orderNumber);
   }
@@ -1064,6 +1096,7 @@ class _$FetchOrderHistoryDetailsImpl implements _FetchOrderHistoryDetails {
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
     TResult Function(LineNumber lineNumber, OrderNumber orderNumber)?
         fetchOrderHistoryDetails,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchOrderHistoryDetails != null) {
@@ -1082,6 +1115,7 @@ class _$FetchOrderHistoryDetailsImpl implements _FetchOrderHistoryDetails {
         fetchOrdersInvoiceData,
     required TResult Function(_FetchOrderHistoryDetails value)
         fetchOrderHistoryDetails,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return fetchOrderHistoryDetails(this);
   }
@@ -1095,6 +1129,7 @@ class _$FetchOrderHistoryDetailsImpl implements _FetchOrderHistoryDetails {
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult? Function(_FetchOrderHistoryDetails value)?
         fetchOrderHistoryDetails,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return fetchOrderHistoryDetails?.call(this);
   }
@@ -1107,6 +1142,7 @@ class _$FetchOrderHistoryDetailsImpl implements _FetchOrderHistoryDetails {
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     TResult Function(_FetchOrderHistoryDetails value)? fetchOrderHistoryDetails,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchOrderHistoryDetails != null) {
@@ -1129,6 +1165,156 @@ abstract class _FetchOrderHistoryDetails implements ViewByItemDetailsEvent {
 }
 
 /// @nodoc
+abstract class _$$LoadMoreInvoicesImplCopyWith<$Res> {
+  factory _$$LoadMoreInvoicesImplCopyWith(_$LoadMoreInvoicesImpl value,
+          $Res Function(_$LoadMoreInvoicesImpl) then) =
+      __$$LoadMoreInvoicesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadMoreInvoicesImplCopyWithImpl<$Res>
+    extends _$ViewByItemDetailsEventCopyWithImpl<$Res, _$LoadMoreInvoicesImpl>
+    implements _$$LoadMoreInvoicesImplCopyWith<$Res> {
+  __$$LoadMoreInvoicesImplCopyWithImpl(_$LoadMoreInvoicesImpl _value,
+      $Res Function(_$LoadMoreInvoicesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadMoreInvoicesImpl implements _LoadMoreInvoices {
+  const _$LoadMoreInvoicesImpl();
+
+  @override
+  String toString() {
+    return 'ViewByItemDetailsEvent.loadMoreInvoices()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadMoreInvoicesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(StringValue invoiceNumber) fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function(LineNumber lineNumber, OrderNumber orderNumber)
+        fetchOrderHistoryDetails,
+    required TResult Function() loadMoreInvoices,
+  }) {
+    return loadMoreInvoices();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(StringValue invoiceNumber)? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function(LineNumber lineNumber, OrderNumber orderNumber)?
+        fetchOrderHistoryDetails,
+    TResult? Function()? loadMoreInvoices,
+  }) {
+    return loadMoreInvoices?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfig,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(StringValue invoiceNumber)? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function(LineNumber lineNumber, OrderNumber orderNumber)?
+        fetchOrderHistoryDetails,
+    TResult Function()? loadMoreInvoices,
+    required TResult orElse(),
+  }) {
+    if (loadMoreInvoices != null) {
+      return loadMoreInvoices();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
+    required TResult Function(_FetchOrderHistoryDetails value)
+        fetchOrderHistoryDetails,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
+  }) {
+    return loadMoreInvoices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_FetchOrderHistoryDetails value)?
+        fetchOrderHistoryDetails,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
+  }) {
+    return loadMoreInvoices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_FetchOrderHistoryDetails value)? fetchOrderHistoryDetails,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
+    required TResult orElse(),
+  }) {
+    if (loadMoreInvoices != null) {
+      return loadMoreInvoices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMoreInvoices implements ViewByItemDetailsEvent {
+  const factory _LoadMoreInvoices() = _$LoadMoreInvoicesImpl;
+}
+
+/// @nodoc
 mixin _$ViewByItemDetailsState {
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
@@ -1146,7 +1332,8 @@ mixin _$ViewByItemDetailsState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
-  List<InvoiceDetail> get invoices => throw _privateConstructorUsedError;
+  InvoiceDetailResponse get invoiceDetail => throw _privateConstructorUsedError;
+  bool get canLoadMoreInvoices => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByItemDetailsStateCopyWith<ViewByItemDetailsState> get copyWith =>
@@ -1173,7 +1360,8 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
       bool isExpanded,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ShipToInfo shipToInfo,
-      List<InvoiceDetail> invoices});
+      InvoiceDetailResponse invoiceDetail,
+      bool canLoadMoreInvoices});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $UserCopyWith<$Res> get user;
@@ -1182,6 +1370,7 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
   $OrderHistoryCopyWith<$Res> get orderHistory;
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $InvoiceDetailResponseCopyWith<$Res> get invoiceDetail;
 }
 
 /// @nodoc
@@ -1211,7 +1400,8 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
     Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
     Object? shipToInfo = null,
-    Object? invoices = null,
+    Object? invoiceDetail = null,
+    Object? canLoadMoreInvoices = null,
   }) {
     return _then(_value.copyWith(
       customerCodeInfo: null == customerCodeInfo
@@ -1266,10 +1456,14 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      invoices: null == invoices
-          ? _value.invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceDetail>,
+      invoiceDetail: null == invoiceDetail
+          ? _value.invoiceDetail
+          : invoiceDetail // ignore: cast_nullable_to_non_nullable
+              as InvoiceDetailResponse,
+      canLoadMoreInvoices: null == canLoadMoreInvoices
+          ? _value.canLoadMoreInvoices
+          : canLoadMoreInvoices // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -1329,6 +1523,14 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(shipToInfo: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InvoiceDetailResponseCopyWith<$Res> get invoiceDetail {
+    return $InvoiceDetailResponseCopyWith<$Res>(_value.invoiceDetail, (value) {
+      return _then(_value.copyWith(invoiceDetail: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1354,7 +1556,8 @@ abstract class _$$ViewByItemDetailsStateImplCopyWith<$Res>
       bool isExpanded,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ShipToInfo shipToInfo,
-      List<InvoiceDetail> invoices});
+      InvoiceDetailResponse invoiceDetail,
+      bool canLoadMoreInvoices});
 
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -1370,6 +1573,8 @@ abstract class _$$ViewByItemDetailsStateImplCopyWith<$Res>
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $InvoiceDetailResponseCopyWith<$Res> get invoiceDetail;
 }
 
 /// @nodoc
@@ -1398,7 +1603,8 @@ class __$$ViewByItemDetailsStateImplCopyWithImpl<$Res>
     Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
     Object? shipToInfo = null,
-    Object? invoices = null,
+    Object? invoiceDetail = null,
+    Object? canLoadMoreInvoices = null,
   }) {
     return _then(_$ViewByItemDetailsStateImpl(
       customerCodeInfo: null == customerCodeInfo
@@ -1453,10 +1659,14 @@ class __$$ViewByItemDetailsStateImplCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      invoices: null == invoices
-          ? _value._invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceDetail>,
+      invoiceDetail: null == invoiceDetail
+          ? _value.invoiceDetail
+          : invoiceDetail // ignore: cast_nullable_to_non_nullable
+              as InvoiceDetailResponse,
+      canLoadMoreInvoices: null == canLoadMoreInvoices
+          ? _value.canLoadMoreInvoices
+          : canLoadMoreInvoices // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1478,9 +1688,9 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
       required this.isExpanded,
       required this.failureOrSuccessOption,
       required this.shipToInfo,
-      required final List<InvoiceDetail> invoices})
+      required this.invoiceDetail,
+      required this.canLoadMoreInvoices})
       : _orderHistoryStatuses = orderHistoryStatuses,
-        _invoices = invoices,
         super._();
 
   @override
@@ -1516,17 +1726,14 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
   final ShipToInfo shipToInfo;
-  final List<InvoiceDetail> _invoices;
   @override
-  List<InvoiceDetail> get invoices {
-    if (_invoices is EqualUnmodifiableListView) return _invoices;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_invoices);
-  }
+  final InvoiceDetailResponse invoiceDetail;
+  @override
+  final bool canLoadMoreInvoices;
 
   @override
   String toString() {
-    return 'ViewByItemDetailsState(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig, orderHistory: $orderHistory, orderHistoryItem: $orderHistoryItem, orderHistoryStatuses: $orderHistoryStatuses, isStatusLoading: $isStatusLoading, isInvoiceLoading: $isInvoiceLoading, isDetailsLoading: $isDetailsLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption, shipToInfo: $shipToInfo, invoices: $invoices)';
+    return 'ViewByItemDetailsState(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig, orderHistory: $orderHistory, orderHistoryItem: $orderHistoryItem, orderHistoryStatuses: $orderHistoryStatuses, isStatusLoading: $isStatusLoading, isInvoiceLoading: $isInvoiceLoading, isDetailsLoading: $isDetailsLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption, shipToInfo: $shipToInfo, invoiceDetail: $invoiceDetail, canLoadMoreInvoices: $canLoadMoreInvoices)';
   }
 
   @override
@@ -1559,7 +1766,10 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            const DeepCollectionEquality().equals(other._invoices, _invoices));
+            (identical(other.invoiceDetail, invoiceDetail) ||
+                other.invoiceDetail == invoiceDetail) &&
+            (identical(other.canLoadMoreInvoices, canLoadMoreInvoices) ||
+                other.canLoadMoreInvoices == canLoadMoreInvoices));
   }
 
   @override
@@ -1578,7 +1788,8 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
       isExpanded,
       failureOrSuccessOption,
       shipToInfo,
-      const DeepCollectionEquality().hash(_invoices));
+      invoiceDetail,
+      canLoadMoreInvoices);
 
   @JsonKey(ignore: true)
   @override
@@ -1603,8 +1814,8 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
       required final bool isExpanded,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final ShipToInfo shipToInfo,
-      required final List<InvoiceDetail>
-          invoices}) = _$ViewByItemDetailsStateImpl;
+      required final InvoiceDetailResponse invoiceDetail,
+      required final bool canLoadMoreInvoices}) = _$ViewByItemDetailsStateImpl;
   const _ViewByItemDetailsState._() : super._();
 
   @override
@@ -1634,7 +1845,9 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
   @override
   ShipToInfo get shipToInfo;
   @override
-  List<InvoiceDetail> get invoices;
+  InvoiceDetailResponse get invoiceDetail;
+  @override
+  bool get canLoadMoreInvoices;
   @override
   @JsonKey(ignore: true)
   _$$ViewByItemDetailsStateImplCopyWith<_$ViewByItemDetailsStateImpl>

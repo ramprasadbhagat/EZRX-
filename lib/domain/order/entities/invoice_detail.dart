@@ -26,3 +26,17 @@ class InvoiceDetail with _$InvoiceDetail {
         invoiceTotalQty: 0,
       );
 }
+
+@freezed
+class InvoiceDetailResponse with _$InvoiceDetailResponse {
+  const InvoiceDetailResponse._();
+  factory InvoiceDetailResponse({
+    required int invoiceCount,
+    required List<InvoiceDetail> invoiceDetails,
+  }) = _InvoiceDetailResponse;
+
+  factory InvoiceDetailResponse.empty() => InvoiceDetailResponse(
+        invoiceCount: 0,
+        invoiceDetails: <InvoiceDetail>[],
+      );
+}

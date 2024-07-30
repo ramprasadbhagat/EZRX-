@@ -37,9 +37,10 @@ abstract class IViewByItemRepository {
     required List<OrderNumber> orderNumbers,
   });
 
-  Future<Either<ApiFailure, List<InvoiceDetail>>> getInvoiceDetailsForOrder({
+  Future<Either<ApiFailure, InvoiceDetailResponse>> getInvoiceDetailsForOrder({
     required OrderNumber orderNumber,
     required CustomerCodeInfo customerCodeInfo,
     required Language language,
+    required int offset,
   });
 }

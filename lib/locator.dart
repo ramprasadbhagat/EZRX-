@@ -1171,6 +1171,7 @@ void setupLocator() {
       viewByOrderDetailsRepository: locator<ViewByOrderDetailsRepository>(),
       productDetailRepository: locator<ProductDetailRepository>(),
       viewByItemRepository: locator<ViewByItemRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -2457,6 +2458,7 @@ void setupLocator() {
     () => ViewByItemDetailsBloc(
       orderStatusTrackerRepository: locator<OrderStatusTrackerRepository>(),
       viewByItemRepository: locator<ViewByItemRepository>(),
+      config: locator<Config>(),
     ),
   );
 

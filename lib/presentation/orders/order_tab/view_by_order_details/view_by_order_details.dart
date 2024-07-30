@@ -7,10 +7,9 @@ import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
-import 'package:ezrxmobile/presentation/core/tab_view_with_dynamic_height.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/section/order_history_invoice_tab.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/view_by_details_page.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -53,43 +51,23 @@ class ViewByOrderDetailsPage extends StatelessWidget {
             customerBlockedOrSuspended:
                 eligibilityState.customerBlockOrSuspended,
           ),
-          body: AnnouncementBanner(
-            currentPath: context.router.currentPath,
-            child: state.isLoading
-                ? LoadingShimmer.logo(
-                    key: WidgetKeys.loaderImage,
-                  )
-                : ListView(
-                    key: WidgetKeys.scrollList,
-                    children: <Widget>[
-                      _OrderInformation(state: state),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 32.0),
-                        child: TabViewWithDynamicHeight(
-                          tabs: [
-                            Tab(
-                              key: WidgetKeys.orderItemHistoryItemTab,
-                              text:
-                                  '${context.tr('Your items')} (${state.orderHistoryDetails.orderHistoryDetailsOrderItem.length})',
-                            ),
-                            Tab(
-                              key: WidgetKeys.orderItemHistoryInvoiceTab,
-                              text:
-                                  '${context.tr('Invoices')} (${state.invoices.length})',
-                            ),
-                          ],
-                          tabViews: [
-                            const _OrderHistoryItemTab(),
-                            OrderHistoryInvoiceTab(
-                              invoices: state.invoices,
-                              isLoading: state.isFetchingInvoices,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+          body: state.isLoading
+              ? LoadingShimmer.logo(
+                  key: WidgetKeys.loaderImage,
+                )
+              : ViewByDetailPage(
+                  header: _OrderInformation(
+                    state: state,
                   ),
-          ),
+                  invoiceDetailResponse: state.invoiceDetail,
+                  isInvoiceLoading: state.isFetchingInvoices,
+                  onLoadMoreInvoices: () => context
+                      .read<ViewByOrderDetailsBloc>()
+                      .add(const ViewByOrderDetailsEvent.loadMoreInvoices()),
+                  orderItemHistoryTab: const _OrderHistoryItemTab(),
+                  totalOrderItemsDisplay: state
+                      .orderHistoryDetails.orderHistoryDetailsOrderItem.length,
+                ),
           bottomNavigationBar: state.displayBuyAgainButton && !state.isLoading
               ? BlocProvider(
                   create: (context) => locator<ReOrderPermissionBloc>()

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/expandable_section.dart';
+import 'package:ezrxmobile/presentation/core/load_more_indicator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -19,16 +20,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OrderHistoryInvoiceTab extends StatelessWidget {
   final List<InvoiceDetail> invoices;
   final bool isLoading;
+  final ScrollController controller;
   const OrderHistoryInvoiceTab({
     super.key,
     required this.invoices,
+    required this.controller,
     this.isLoading = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    if (isLoading) {
+    if (isLoading && invoices.isEmpty) {
       return LoadingShimmer.logo(
         key: WidgetKeys.loaderImage,
       );
@@ -44,115 +47,121 @@ class OrderHistoryInvoiceTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
       child: Column(
-        children: List.generate(
-          invoices.length,
-          (index) {
-            final invoice = invoices[index];
+        children: [
+          ...List.generate(
+            invoices.length,
+            (index) {
+              final invoice = invoices[index];
 
-            return CustomCard(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              '${context.tr('Invoice')} #${invoice.invoiceNumber.displayNAIfEmpty}',
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ),
-                          StatusLabel(
-                            status: StatusType(
-                              invoice.invoiceStatus.getOrDefaultValue(''),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              '${context.tr('Material(s) quantity')}: ${invoice.invoiceTotalQty}',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          Text(
-                            '${context.tr('Created on')} ${invoice.invoiceDate.dateString}',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: PriceComponent(
-                        salesOrgConfig: eligibilityState.salesOrgConfigs,
-                        price: invoice.invoiceTotalPrice.toString(),
-                        type: PriceStyle.comboSubTotalExclTax,
-                      ),
-                    ),
-                    ExpandableSection(
-                      expanded: false,
-                      child: Column(
-                        children: [
-                          if (eligibilityState.user.role.type.isSalesRepRole)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Row(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(right: 8.0),
-                                    child: Icon(
-                                      Icons.error,
-                                      size: 16,
-                                      color: ZPColors.skyBlueColor,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      context.tr(
-                                        'Show only materials are available to your account.',
-                                      ),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: ZPColors.skyBlueColor,
-                                          ),
-                                    ),
-                                  ),
-                                ],
+              return CustomCard(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${context.tr('Invoice')} #${invoice.invoiceNumber.displayNAIfEmpty}',
+                                style: Theme.of(context).textTheme.labelMedium,
                               ),
                             ),
-                          ...List.generate(
-                            invoice.orderItems.length,
-                            (
-                              invoiceIndex,
-                            ) {
-                              final item = invoice.orderItems[invoiceIndex];
-
-                              return _MaterialOfInvoice(
-                                material: item,
-                              );
-                            },
-                          ),
-                        ],
+                            StatusLabel(
+                              status: StatusType(
+                                invoice.invoiceStatus.getOrDefaultValue(''),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${context.tr('Material(s) quantity')}: ${invoice.invoiceTotalQty}',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                            ),
+                            Text(
+                              '${context.tr('Created on')} ${invoice.invoiceDate.dateString}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: PriceComponent(
+                          salesOrgConfig: eligibilityState.salesOrgConfigs,
+                          price: invoice.invoiceTotalPrice.toString(),
+                          type: PriceStyle.comboSubTotalExclTax,
+                        ),
+                      ),
+                      ExpandableSection(
+                        expanded: false,
+                        child: Column(
+                          children: [
+                            if (eligibilityState.user.role.type.isSalesRepRole)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Row(
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 8.0),
+                                      child: Icon(
+                                        Icons.error,
+                                        size: 16,
+                                        color: ZPColors.skyBlueColor,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        context.tr(
+                                          'Show only materials are available to your account.',
+                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color: ZPColors.skyBlueColor,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ...List.generate(
+                              invoice.orderItems.length,
+                              (
+                                invoiceIndex,
+                              ) {
+                                final item = invoice.orderItems[invoiceIndex];
+
+                                return _MaterialOfInvoice(
+                                  material: item,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
+              );
+            },
+          ),
+          if (isLoading)
+            LoadingMoreIndicator(
+              controller: controller,
+            ),
+        ],
       ),
     );
   }

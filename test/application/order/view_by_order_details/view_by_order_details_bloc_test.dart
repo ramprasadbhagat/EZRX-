@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
@@ -48,11 +48,21 @@ void main() {
   late Map<MaterialQueryInfo, bool> fakeIsLoadingTenderContract;
   late MaterialQueryInfo fakeQueryInfo;
   late ViewByItemRepository viewByItemRepositoryMock;
-  final viewByOrderDetailsState = ViewByOrderDetailsState.initial();
+  final viewByOrderDetailsSeedState =
+      ViewByOrderDetailsState.initial().copyWith(
+    user: fakeClient,
+    customerCodeInfo: fakeCustomerCodeInfo,
+    salesOrganisation: fakeMYSalesOrganisation,
+    shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+    configs: fakeMYSalesOrgConfigs,
+  );
   const fakeError = ApiFailure.other('fake-error');
   final fakeMaterialInfo = MaterialInfo.empty();
   final fakeMaterialNumber = MaterialNumber('fake-data');
-  late final List<InvoiceDetail> invoiceDetails;
+  late final InvoiceDetailResponse invoiceDetail;
+
+  const offSet = 0;
+  final config = Config()..appFlavor = Flavor.mock;
 
   group(
     'ViewByOrderDetailsBloc Test',
@@ -63,7 +73,7 @@ void main() {
         viewByItemRepositoryMock = ViewByItemRepositoryMock();
         orderHistoryDetailsMock =
             await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
-        invoiceDetails =
+        invoiceDetail =
             await ViewByItemLocalDataSource().getInvoiceDetailsForOrder();
         orderHistoryDetailsMock = orderHistoryDetailsMock.copyWith(
           orderHistoryDetailsOrderItem: [
@@ -120,6 +130,7 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.initialized(
@@ -131,13 +142,7 @@ void main() {
           ),
         ),
         expect: () => [
-          viewByOrderDetailsState.copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            configs: fakeMYSalesOrgConfigs,
-          ),
+          viewByOrderDetailsSeedState,
         ],
       );
 
@@ -147,13 +152,9 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
-        seed: () => viewByOrderDetailsState.copyWith(
-          user: fakeClient,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeMYSalesOrganisation,
-          shipToInfo: fakeShipToInfo,
-        ),
+        seed: () => viewByOrderDetailsSeedState,
         setUp: () {
           when(
             () => viewByOrderDetailsRepositoryMock.getViewByOrderDetails(
@@ -169,6 +170,7 @@ void main() {
               orderNumber: fakeOrderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeClient.preferredLanguage,
+              offset: offSet,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -180,38 +182,22 @@ void main() {
           ),
         ),
         expect: () => [
-          viewByOrderDetailsState.copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
+          viewByOrderDetailsSeedState.copyWith(
             isLoading: true,
           ),
-          viewByOrderDetailsState.copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: orderHistoryDetailsMock,
             failureOrSuccessOption: optionOf(Right(orderHistoryDetailsMock)),
             materials: fakeMaterials,
             isLoadingTenderContract: fakeIsLoadingTenderContract,
           ),
-          viewByOrderDetailsState.copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: orderHistoryDetailsMock,
             materials: fakeMaterials,
             isLoadingTenderContract: fakeIsLoadingTenderContract,
             isFetchingInvoices: true,
           ),
-          viewByOrderDetailsState.copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: orderHistoryDetailsMock,
             failureOrSuccessOption: optionOf(
               const Left(fakeError),
@@ -228,13 +214,9 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
-        seed: () => viewByOrderDetailsState.copyWith(
-          user: fakeClient,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeMYSalesOrganisation,
-          shipToInfo: fakeShipToInfo,
-        ),
+        seed: () => viewByOrderDetailsSeedState,
         setUp: () {
           when(
             () => viewByOrderDetailsRepositoryMock.getViewByOrderDetails(
@@ -252,6 +234,7 @@ void main() {
               orderNumber: fakeOrderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeClient.preferredLanguage,
+              offset: offSet,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -263,37 +246,21 @@ void main() {
           ),
         ),
         expect: () => [
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isLoading: true,
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
           ),
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isLoading: false,
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('Fake-Error'),
               ),
             ),
           ),
-          ViewByOrderDetailsState.initial().copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
+          viewByOrderDetailsSeedState.copyWith(
             isFetchingInvoices: true,
           ),
-          ViewByOrderDetailsState.initial().copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
+          viewByOrderDetailsSeedState.copyWith(
             failureOrSuccessOption: optionOf(
               const Left(fakeError),
             ),
@@ -307,22 +274,16 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
-        seed: () => viewByOrderDetailsState.copyWith(
-          user: fakeClient,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeMYSalesOrganisation,
-        ),
+        seed: () => viewByOrderDetailsSeedState,
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.setOrderDetails(
             orderHistoryDetails: orderHistoryDetailsMock,
           ),
         ),
         expect: () => [
-          viewByOrderDetailsState.copyWith(
-            user: fakeClient,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeMYSalesOrganisation,
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: orderHistoryDetailsMock,
             materials: fakeMaterials,
             isLoadingTenderContract: fakeIsLoadingTenderContract,
@@ -336,6 +297,7 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.updateMaterialTenderContract(
@@ -343,10 +305,7 @@ void main() {
             selectedTenderContract: fakeTenderContract,
           ),
         ),
-        seed: () => viewByOrderDetailsState.copyWith(
-          user: fakeClient,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeMYSalesOrganisation,
+        seed: () => viewByOrderDetailsSeedState.copyWith(
           orderHistoryDetails: orderHistoryDetailsMock,
           materials: fakeMaterials,
           isLoadingTenderContract: fakeIsLoadingTenderContract,
@@ -376,10 +335,7 @@ void main() {
           );
 
           return [
-            viewByOrderDetailsState.copyWith(
-              user: fakeClient,
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeMYSalesOrganisation,
+            viewByOrderDetailsSeedState.copyWith(
               orderHistoryDetails: orderHistoryDetailsMock,
               materials: materialsWithUpdatedTenderContract,
               isLoadingTenderContract: loadingTenderContractStatus,
@@ -394,12 +350,14 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
+        seed: () => viewByOrderDetailsSeedState,
         act: (bloc) => bloc.add(
           const ViewByOrderDetailsEvent.expandAttachments(),
         ),
         expect: () => [
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isExpanded: true,
           ),
         ],
@@ -410,9 +368,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: orderHistoryDetailsMock,
           ),
         );
@@ -426,9 +385,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isExpanded: true,
             orderHistoryDetails: orderHistoryDetailsMock,
           ),
@@ -438,7 +398,7 @@ void main() {
           bloc.state.poDocumentCount,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isExpanded: false,
           ),
         );
@@ -452,9 +412,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
               orderHistoryDetailsPoDocuments: <PoDocuments>[
                 PoDocuments.empty(),
@@ -468,7 +429,7 @@ void main() {
           1,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
               orderHistoryDetailsPoDocuments: <PoDocuments>[],
             ),
@@ -484,9 +445,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isExpanded: true,
             orderHistoryDetails: orderHistoryDetailsMock,
           ),
@@ -502,9 +464,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: orderHistoryDetailsMock,
           ),
         );
@@ -521,9 +484,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             configs:
                 fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
             orderHistoryDetails:
@@ -545,9 +509,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             configs:
                 fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
             orderHistoryDetails:
@@ -569,9 +534,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             configs:
                 fakeSalesOrganisationConfigs.copyWith(salesOrg: fakePHSalesOrg),
             orderHistoryDetails:
@@ -593,9 +559,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             configs:
                 fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
             orderHistoryDetails:
@@ -617,9 +584,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             configs:
                 fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
             orderHistoryDetails:
@@ -641,9 +609,10 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         );
         bloc.emit(
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             configs:
                 fakeSalesOrganisationConfigs.copyWith(salesOrg: fakeSGSalesOrg),
             orderHistoryDetails:
@@ -664,16 +633,18 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
-        seed: () => viewByOrderDetailsState,
+        seed: () => viewByOrderDetailsSeedState,
         setUp: () {
           when(
             () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
               orderNumber: orderHistoryDetailsMock.orderNumber,
-              customerCodeInfo: viewByOrderDetailsState.customerCodeInfo,
-              language: viewByOrderDetailsState.user.preferredLanguage,
+              customerCodeInfo: viewByOrderDetailsSeedState.customerCodeInfo,
+              language: viewByOrderDetailsSeedState.user.preferredLanguage,
+              offset: offSet,
             ),
-          ).thenAnswer((invocation) async => Right(invoiceDetails));
+          ).thenAnswer((invocation) async => Right(invoiceDetail));
         },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetchOrdersInvoiceData(
@@ -681,11 +652,11 @@ void main() {
           ),
         ),
         expect: () => [
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isFetchingInvoices: true,
           ),
-          viewByOrderDetailsState.copyWith(
-            invoices: invoiceDetails,
+          viewByOrderDetailsSeedState.copyWith(
+            invoiceDetail: invoiceDetail,
           ),
         ],
       );
@@ -696,8 +667,9 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
-        seed: () => viewByOrderDetailsState,
+        seed: () => viewByOrderDetailsSeedState,
         act: (bloc) => bloc.add(const ViewByOrderDetailsEvent.updateBundle()),
         expect: () => [],
       );
@@ -708,21 +680,22 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
-        seed: () => viewByOrderDetailsState.copyWith(
+        seed: () => viewByOrderDetailsSeedState.copyWith(
           orderHistoryDetails: orderHistoryDetailsWithTypeBundleMock,
         ),
         setUp: () {
           when(
             () => (productDetailRepositoryMock.getBundleListDetail(
-              customerCodeInfo: viewByOrderDetailsState.customerCodeInfo,
+              customerCodeInfo: viewByOrderDetailsSeedState.customerCodeInfo,
               bundleCodes: orderHistoryDetailsWithTypeBundleMock
                   .orderHistoryDetailsOrderItem.bundleItemDetailsList
                   .map((e) => e.parentId)
                   .toList(),
-              salesOrganisation: viewByOrderDetailsState.salesOrganisation,
-              shipToInfo: ShipToInfo.empty(),
-              language: viewByOrderDetailsState.user.preferredLanguage,
+              salesOrganisation: viewByOrderDetailsSeedState.salesOrganisation,
+              shipToInfo: viewByOrderDetailsSeedState.shipToInfo,
+              language: viewByOrderDetailsSeedState.user.preferredLanguage,
             )),
           ).thenAnswer(
             (invocation) async => {
@@ -732,11 +705,11 @@ void main() {
         },
         act: (bloc) => bloc.add(const ViewByOrderDetailsEvent.updateBundle()),
         expect: () => [
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             isLoadingBundleDetail: true,
             orderHistoryDetails: orderHistoryDetailsWithTypeBundleMock,
           ),
-          viewByOrderDetailsState.copyWith(
+          viewByOrderDetailsSeedState.copyWith(
             orderHistoryDetails: orderHistoryDetailsWithTypeBundleMock.copyWith(
               orderHistoryDetailsOrderItem:
                   orderHistoryDetailsWithTypeBundleMock

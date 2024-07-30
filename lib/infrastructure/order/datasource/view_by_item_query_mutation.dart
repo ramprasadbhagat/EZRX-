@@ -134,17 +134,24 @@ class ViewByItemQueryMutation {
     return '''
      query GetInvoiceDetailsForOrder(\$invoicesByOrderRequest: invoicesByOrderRequest!) {
       GetInvoiceDetailsForOrder(input: \$invoicesByOrderRequest) {
-          InvoiceNumber
-          InvoiceProcessingStatus
-          InvoiceDate
-          InvoiceTotalQty
-          InvoiceTotalPrice
-          InvoiceItems {
-              MaterialCode
-              MaterialDescription
-              Qty
-              UnitPrice
-          }
+          InvoiceCount
+          InvoiceDetails {
+              InvoiceNumber
+              InvoiceHeaderStatus
+              InvoiceProcessingStatus
+              InvoiceDate
+              InvoiceTime
+              InvoiceTotalQty
+              InvoiceTotalPrice
+              InvoiceItems {
+                  Type
+                  LineNumber
+                  MaterialCode
+                  MaterialDescription
+                  Qty
+                  UnitPrice
+              }
+            }
       }
     }
     ''';

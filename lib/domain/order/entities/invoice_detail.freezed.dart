@@ -257,3 +257,156 @@ abstract class _InvoiceDetail extends InvoiceDetail {
   _$$InvoiceDetailImplCopyWith<_$InvoiceDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$InvoiceDetailResponse {
+  int get invoiceCount => throw _privateConstructorUsedError;
+  List<InvoiceDetail> get invoiceDetails => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $InvoiceDetailResponseCopyWith<InvoiceDetailResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InvoiceDetailResponseCopyWith<$Res> {
+  factory $InvoiceDetailResponseCopyWith(InvoiceDetailResponse value,
+          $Res Function(InvoiceDetailResponse) then) =
+      _$InvoiceDetailResponseCopyWithImpl<$Res, InvoiceDetailResponse>;
+  @useResult
+  $Res call({int invoiceCount, List<InvoiceDetail> invoiceDetails});
+}
+
+/// @nodoc
+class _$InvoiceDetailResponseCopyWithImpl<$Res,
+        $Val extends InvoiceDetailResponse>
+    implements $InvoiceDetailResponseCopyWith<$Res> {
+  _$InvoiceDetailResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? invoiceCount = null,
+    Object? invoiceDetails = null,
+  }) {
+    return _then(_value.copyWith(
+      invoiceCount: null == invoiceCount
+          ? _value.invoiceCount
+          : invoiceCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      invoiceDetails: null == invoiceDetails
+          ? _value.invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetail>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$InvoiceDetailResponseImplCopyWith<$Res>
+    implements $InvoiceDetailResponseCopyWith<$Res> {
+  factory _$$InvoiceDetailResponseImplCopyWith(
+          _$InvoiceDetailResponseImpl value,
+          $Res Function(_$InvoiceDetailResponseImpl) then) =
+      __$$InvoiceDetailResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int invoiceCount, List<InvoiceDetail> invoiceDetails});
+}
+
+/// @nodoc
+class __$$InvoiceDetailResponseImplCopyWithImpl<$Res>
+    extends _$InvoiceDetailResponseCopyWithImpl<$Res,
+        _$InvoiceDetailResponseImpl>
+    implements _$$InvoiceDetailResponseImplCopyWith<$Res> {
+  __$$InvoiceDetailResponseImplCopyWithImpl(_$InvoiceDetailResponseImpl _value,
+      $Res Function(_$InvoiceDetailResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? invoiceCount = null,
+    Object? invoiceDetails = null,
+  }) {
+    return _then(_$InvoiceDetailResponseImpl(
+      invoiceCount: null == invoiceCount
+          ? _value.invoiceCount
+          : invoiceCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      invoiceDetails: null == invoiceDetails
+          ? _value._invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetail>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InvoiceDetailResponseImpl extends _InvoiceDetailResponse {
+  _$InvoiceDetailResponseImpl(
+      {required this.invoiceCount,
+      required final List<InvoiceDetail> invoiceDetails})
+      : _invoiceDetails = invoiceDetails,
+        super._();
+
+  @override
+  final int invoiceCount;
+  final List<InvoiceDetail> _invoiceDetails;
+  @override
+  List<InvoiceDetail> get invoiceDetails {
+    if (_invoiceDetails is EqualUnmodifiableListView) return _invoiceDetails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invoiceDetails);
+  }
+
+  @override
+  String toString() {
+    return 'InvoiceDetailResponse(invoiceCount: $invoiceCount, invoiceDetails: $invoiceDetails)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InvoiceDetailResponseImpl &&
+            (identical(other.invoiceCount, invoiceCount) ||
+                other.invoiceCount == invoiceCount) &&
+            const DeepCollectionEquality()
+                .equals(other._invoiceDetails, _invoiceDetails));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, invoiceCount,
+      const DeepCollectionEquality().hash(_invoiceDetails));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InvoiceDetailResponseImplCopyWith<_$InvoiceDetailResponseImpl>
+      get copyWith => __$$InvoiceDetailResponseImplCopyWithImpl<
+          _$InvoiceDetailResponseImpl>(this, _$identity);
+}
+
+abstract class _InvoiceDetailResponse extends InvoiceDetailResponse {
+  factory _InvoiceDetailResponse(
+          {required final int invoiceCount,
+          required final List<InvoiceDetail> invoiceDetails}) =
+      _$InvoiceDetailResponseImpl;
+  _InvoiceDetailResponse._() : super._();
+
+  @override
+  int get invoiceCount;
+  @override
+  List<InvoiceDetail> get invoiceDetails;
+  @override
+  @JsonKey(ignore: true)
+  _$$InvoiceDetailResponseImplCopyWith<_$InvoiceDetailResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

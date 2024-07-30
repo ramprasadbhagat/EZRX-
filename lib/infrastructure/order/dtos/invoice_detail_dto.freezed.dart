@@ -313,3 +313,191 @@ abstract class _InvoiceDetailDto extends InvoiceDetailDto {
   _$$InvoiceDetailDtoImplCopyWith<_$InvoiceDetailDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+InvoiceDetailResponseDto _$InvoiceDetailResponseDtoFromJson(
+    Map<String, dynamic> json) {
+  return _InvoiceDetailResponseDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$InvoiceDetailResponseDto {
+  @JsonKey(name: 'invoiceCount', defaultValue: 0)
+  int get count => throw _privateConstructorUsedError;
+  @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+  List<InvoiceDetailDto> get invoiceDetails =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InvoiceDetailResponseDtoCopyWith<InvoiceDetailResponseDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InvoiceDetailResponseDtoCopyWith<$Res> {
+  factory $InvoiceDetailResponseDtoCopyWith(InvoiceDetailResponseDto value,
+          $Res Function(InvoiceDetailResponseDto) then) =
+      _$InvoiceDetailResponseDtoCopyWithImpl<$Res, InvoiceDetailResponseDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'invoiceCount', defaultValue: 0) int count,
+      @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+      List<InvoiceDetailDto> invoiceDetails});
+}
+
+/// @nodoc
+class _$InvoiceDetailResponseDtoCopyWithImpl<$Res,
+        $Val extends InvoiceDetailResponseDto>
+    implements $InvoiceDetailResponseDtoCopyWith<$Res> {
+  _$InvoiceDetailResponseDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? invoiceDetails = null,
+  }) {
+    return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      invoiceDetails: null == invoiceDetails
+          ? _value.invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetailDto>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$InvoiceDetailResponseDtoImplCopyWith<$Res>
+    implements $InvoiceDetailResponseDtoCopyWith<$Res> {
+  factory _$$InvoiceDetailResponseDtoImplCopyWith(
+          _$InvoiceDetailResponseDtoImpl value,
+          $Res Function(_$InvoiceDetailResponseDtoImpl) then) =
+      __$$InvoiceDetailResponseDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'invoiceCount', defaultValue: 0) int count,
+      @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+      List<InvoiceDetailDto> invoiceDetails});
+}
+
+/// @nodoc
+class __$$InvoiceDetailResponseDtoImplCopyWithImpl<$Res>
+    extends _$InvoiceDetailResponseDtoCopyWithImpl<$Res,
+        _$InvoiceDetailResponseDtoImpl>
+    implements _$$InvoiceDetailResponseDtoImplCopyWith<$Res> {
+  __$$InvoiceDetailResponseDtoImplCopyWithImpl(
+      _$InvoiceDetailResponseDtoImpl _value,
+      $Res Function(_$InvoiceDetailResponseDtoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? invoiceDetails = null,
+  }) {
+    return _then(_$InvoiceDetailResponseDtoImpl(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      invoiceDetails: null == invoiceDetails
+          ? _value._invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetailDto>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$InvoiceDetailResponseDtoImpl extends _InvoiceDetailResponseDto {
+  _$InvoiceDetailResponseDtoImpl(
+      {@JsonKey(name: 'invoiceCount', defaultValue: 0) required this.count,
+      @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+      required final List<InvoiceDetailDto> invoiceDetails})
+      : _invoiceDetails = invoiceDetails,
+        super._();
+
+  factory _$InvoiceDetailResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InvoiceDetailResponseDtoImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'invoiceCount', defaultValue: 0)
+  final int count;
+  final List<InvoiceDetailDto> _invoiceDetails;
+  @override
+  @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+  List<InvoiceDetailDto> get invoiceDetails {
+    if (_invoiceDetails is EqualUnmodifiableListView) return _invoiceDetails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invoiceDetails);
+  }
+
+  @override
+  String toString() {
+    return 'InvoiceDetailResponseDto(count: $count, invoiceDetails: $invoiceDetails)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InvoiceDetailResponseDtoImpl &&
+            (identical(other.count, count) || other.count == count) &&
+            const DeepCollectionEquality()
+                .equals(other._invoiceDetails, _invoiceDetails));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, count, const DeepCollectionEquality().hash(_invoiceDetails));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InvoiceDetailResponseDtoImplCopyWith<_$InvoiceDetailResponseDtoImpl>
+      get copyWith => __$$InvoiceDetailResponseDtoImplCopyWithImpl<
+          _$InvoiceDetailResponseDtoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InvoiceDetailResponseDtoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _InvoiceDetailResponseDto extends InvoiceDetailResponseDto {
+  factory _InvoiceDetailResponseDto(
+      {@JsonKey(name: 'invoiceCount', defaultValue: 0) required final int count,
+      @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+      required final List<InvoiceDetailDto>
+          invoiceDetails}) = _$InvoiceDetailResponseDtoImpl;
+  _InvoiceDetailResponseDto._() : super._();
+
+  factory _InvoiceDetailResponseDto.fromJson(Map<String, dynamic> json) =
+      _$InvoiceDetailResponseDtoImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'invoiceCount', defaultValue: 0)
+  int get count;
+  @override
+  @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+  List<InvoiceDetailDto> get invoiceDetails;
+  @override
+  @JsonKey(ignore: true)
+  _$$InvoiceDetailResponseDtoImplCopyWith<_$InvoiceDetailResponseDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

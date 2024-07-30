@@ -11,12 +11,11 @@ import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
-import 'package:ezrxmobile/presentation/core/tab_view_with_dynamic_height.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/section/order_history_invoice_tab.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_common_tile.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/view_by_details_page.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_history_stock_info.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
@@ -44,7 +43,6 @@ import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
@@ -132,39 +130,16 @@ class ViewByItemDetailsPage extends StatelessWidget {
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )
-                : AnnouncementBanner(
-                    currentPath: context.router.currentPath,
-                    child: ListView(
-                      key: WidgetKeys.scrollList,
-                      children: [
-                        _OrderInformation(
-                          state: state,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 32.0),
-                          child: TabViewWithDynamicHeight(
-                            tabs: [
-                              Tab(
-                                key: WidgetKeys.orderItemHistoryItemTab,
-                                text: context.tr('Your item'),
-                              ),
-                              Tab(
-                                key: WidgetKeys.orderItemHistoryInvoiceTab,
-                                text:
-                                    '${context.tr('Invoices')} (${state.invoices.length})',
-                              ),
-                            ],
-                            tabViews: [
-                              const _OrderItemHistoryItemTab(),
-                              OrderHistoryInvoiceTab(
-                                invoices: state.invoices,
-                                isLoading: state.isInvoiceLoading,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                : ViewByDetailPage(
+                    header: _OrderInformation(
+                      state: state,
                     ),
+                    invoiceDetailResponse: state.invoiceDetail,
+                    isInvoiceLoading: state.isInvoiceLoading,
+                    onLoadMoreInvoices: () => context
+                        .read<ViewByItemDetailsBloc>()
+                        .add(const ViewByItemDetailsEvent.loadMoreInvoices()),
+                    orderItemHistoryTab: const _OrderItemHistoryItemTab(),
                   );
           },
         ),

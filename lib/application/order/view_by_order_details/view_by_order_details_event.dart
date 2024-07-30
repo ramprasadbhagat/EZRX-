@@ -25,4 +25,6 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
   const factory ViewByOrderDetailsEvent.fetchOrdersInvoiceData({
     required OrderNumber orderNumber,
   }) = _FetchOrdersInvoiceData;
+
+  const factory ViewByOrderDetailsEvent.loadMoreInvoices() = _LoadMoreInvoices;
 }

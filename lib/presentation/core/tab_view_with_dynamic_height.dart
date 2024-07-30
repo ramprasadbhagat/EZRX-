@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class TabViewWithDynamicHeight extends StatefulWidget {
   final List<Widget> tabs;
   final List<Widget> tabViews;
+  final Function(bool isInvoicesTab) onTabChanged;
   const TabViewWithDynamicHeight({
     super.key,
     required this.tabs,
     required this.tabViews,
+    required this.onTabChanged,
   })  : assert(tabs.length > 0),
         assert(tabs.length == tabViews.length);
 
@@ -37,6 +39,7 @@ class _TabViewWithDynamicHeightState extends State<TabViewWithDynamicHeight>
 
   void _handleTabSelection() {
     if (_tabController.indexIsChanging) {
+      widget.onTabChanged(_tabController.index == widget.tabs.length - 1);
       setState(() {});
     }
   }

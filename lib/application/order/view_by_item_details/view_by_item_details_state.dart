@@ -18,7 +18,8 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
     required bool isExpanded,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ShipToInfo shipToInfo,
-    required List<InvoiceDetail> invoices,
+    required InvoiceDetailResponse invoiceDetail,
+    required bool canLoadMoreInvoices,
   }) = _ViewByItemDetailsState;
 
   factory ViewByItemDetailsState.initial() => ViewByItemDetailsState(
@@ -35,7 +36,8 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
         isDetailsLoading: false,
         isExpanded: false,
         shipToInfo: ShipToInfo.empty(),
-        invoices: <InvoiceDetail>[],
+        invoiceDetail: InvoiceDetailResponse.empty(),
+        canLoadMoreInvoices: true,
       );
 
   List<PoDocuments> get poDocumentsList => isExpanded

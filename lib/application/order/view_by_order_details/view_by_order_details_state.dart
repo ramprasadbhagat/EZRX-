@@ -18,7 +18,8 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
     required ShipToInfo shipToInfo,
     required bool isLoadingBundleDetail,
     required bool isFetchingInvoices,
-    required List<InvoiceDetail> invoices,
+    required InvoiceDetailResponse invoiceDetail,
+    required bool canLoadMoreInvoices,
   }) = _ViewByOrderDetailsState;
 
   factory ViewByOrderDetailsState.initial() => ViewByOrderDetailsState(
@@ -36,7 +37,8 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
         shipToInfo: ShipToInfo.empty(),
         isLoadingBundleDetail: false,
         configs: SalesOrganisationConfigs.empty(),
-        invoices: <InvoiceDetail>[],
+        invoiceDetail: InvoiceDetailResponse.empty(),
+        canLoadMoreInvoices: true,
       );
   int get poDocumentCount =>
       orderHistoryDetails.orderHistoryDetailsPoDocuments.length;

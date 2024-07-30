@@ -30,3 +30,20 @@ Map<String, dynamic> _$$InvoiceDetailDtoImplToJson(
       'invoiceTotalQty': instance.invoiceTotalQty,
       'invoiceItems': instance.invoiceItems.map((e) => e.toJson()).toList(),
     };
+
+_$InvoiceDetailResponseDtoImpl _$$InvoiceDetailResponseDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$InvoiceDetailResponseDtoImpl(
+      count: (json['invoiceCount'] as num?)?.toInt() ?? 0,
+      invoiceDetails: (json['invoiceDetails'] as List<dynamic>?)
+              ?.map((e) => InvoiceDetailDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$$InvoiceDetailResponseDtoImplToJson(
+        _$InvoiceDetailResponseDtoImpl instance) =>
+    <String, dynamic>{
+      'invoiceCount': instance.count,
+      'invoiceDetails': instance.invoiceDetails.map((e) => e.toJson()).toList(),
+    };

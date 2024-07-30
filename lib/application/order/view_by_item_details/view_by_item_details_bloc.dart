@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -28,10 +29,12 @@ class ViewByItemDetailsBloc
     extends Bloc<ViewByItemDetailsEvent, ViewByItemDetailsState> {
   final IOrderStatusTrackerRepository orderStatusTrackerRepository;
   final IViewByItemRepository viewByItemRepository;
+  final Config config;
 
   ViewByItemDetailsBloc({
     required this.orderStatusTrackerRepository,
     required this.viewByItemRepository,
+    required this.config,
   }) : super(ViewByItemDetailsState.initial()) {
     on<ViewByItemDetailsEvent>(_onEvent);
   }
@@ -65,6 +68,7 @@ class ViewByItemDetailsBloc
           orderNumber: e.orderNumber,
           customerCodeInfo: state.customerCodeInfo,
           language: state.user.preferredLanguage,
+          offset: 0,
         );
 
         failureOrSuccess.fold(
@@ -76,12 +80,14 @@ class ViewByItemDetailsBloc
               ),
             );
           },
-          (invoiceData) {
+          (invoiceDetail) {
             emit(
               state.copyWith(
                 isInvoiceLoading: false,
-                invoices: invoiceData,
+                invoiceDetail: invoiceDetail,
                 failureOrSuccessOption: none(),
+                canLoadMoreInvoices:
+                    invoiceDetail.invoiceDetails.length >= config.pageSize,
               ),
             );
           },
@@ -172,6 +178,50 @@ class ViewByItemDetailsBloc
       },
       updateIsExpanded: (e) async =>
           emit(state.copyWith(isExpanded: e.isExpanded)),
+      loadMoreInvoices: (e) async {
+        if (state.isInvoiceLoading || !state.canLoadMoreInvoices) return;
+        emit(
+          state.copyWith(
+            isInvoiceLoading: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await viewByItemRepository.getInvoiceDetailsForOrder(
+          orderNumber: state.orderHistoryItem.orderNumber,
+          customerCodeInfo: state.customerCodeInfo,
+          language: state.user.preferredLanguage,
+          offset: state.invoiceDetail.invoiceDetails.length,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isInvoiceLoading: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (moreInvoiceDetail) {
+            final invoiceDetail = state.invoiceDetail.copyWith(
+              invoiceDetails:
+                  List<InvoiceDetail>.from(state.invoiceDetail.invoiceDetails)
+                    ..addAll(moreInvoiceDetail.invoiceDetails),
+            );
+            emit(
+              state.copyWith(
+                isInvoiceLoading: false,
+                invoiceDetail: invoiceDetail,
+                failureOrSuccessOption: none(),
+                canLoadMoreInvoices:
+                    moreInvoiceDetail.invoiceDetails.length >= config.pageSize,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -30,7 +30,7 @@ To know more about Domain Driven Design in flutter please visit:
 
 ### Auto build json_serializable, freezed, auto_route_generator, hive_generator
 
-```fvm flutter pub run build_runner watch --delete-conflicting-outputs```
+```fvm flutter pub run build_runner build --delete-conflicting-outputs```
 
 ### Edit localization lang file csv
 

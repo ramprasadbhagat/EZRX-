@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_by_order_request.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -20,6 +21,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.da
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/invoice_by_order_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_request_dto.dart';
 
 class ViewByItemRepository implements IViewByItemRepository {
@@ -174,10 +176,11 @@ class ViewByItemRepository implements IViewByItemRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<InvoiceDetail>>> getInvoiceDetailsForOrder({
+  Future<Either<ApiFailure, InvoiceDetailResponse>> getInvoiceDetailsForOrder({
     required OrderNumber orderNumber,
     required CustomerCodeInfo customerCodeInfo,
     required Language language,
+    required int offset,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -191,11 +194,19 @@ class ViewByItemRepository implements IViewByItemRepository {
     }
 
     try {
+      final invoiceByOrderRequest = InvoiceByOrderRequest(
+        customerCodeSoldTo: customerCodeInfo.customerCodeSoldTo,
+        language: language.languageCode,
+        orderNumber: orderNumber.getOrDefaultValue(''),
+        pageSize: config.pageSize,
+        offSet: offset,
+      );
+
       final invoiceList =
           await viewByItemRemoteDataSource.getInvoiceDetailsForOrder(
-        orderNumber: orderNumber.getOrCrash(),
-        soldToCustomerCode: customerCodeInfo.customerCodeSoldTo,
-        language: language.languageCode,
+        invoicesByOrderRequest:
+            InvoiceByOrderRequestDto.fromDomain(invoiceByOrderRequest)
+                .toMapJson(),
       );
 
       return Right(invoiceList);

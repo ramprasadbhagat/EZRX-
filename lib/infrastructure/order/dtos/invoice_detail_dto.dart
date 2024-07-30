@@ -51,3 +51,21 @@ class InvoiceDetailDto with _$InvoiceDetailDto {
   factory InvoiceDetailDto.fromJson(Map<String, dynamic> json) =>
       _$InvoiceDetailDtoFromJson(json);
 }
+
+@freezed
+class InvoiceDetailResponseDto with _$InvoiceDetailResponseDto {
+  const InvoiceDetailResponseDto._();
+  factory InvoiceDetailResponseDto({
+    @JsonKey(name: 'invoiceCount', defaultValue: 0) required int count,
+    @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailDto>[])
+    required List<InvoiceDetailDto> invoiceDetails,
+  }) = _InvoiceDetailResponseDto;
+
+  factory InvoiceDetailResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$InvoiceDetailResponseDtoFromJson(json);
+
+  InvoiceDetailResponse toDomain() => InvoiceDetailResponse(
+        invoiceCount: count,
+        invoiceDetails: invoiceDetails.map((e) => e.toDomain()).toList(),
+      );
+}

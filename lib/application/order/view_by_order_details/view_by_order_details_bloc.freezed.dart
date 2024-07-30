@@ -34,6 +34,7 @@ mixin _$ViewByOrderDetailsEvent {
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +54,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +74,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,6 +89,7 @@ mixin _$ViewByOrderDetailsEvent {
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -98,6 +102,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +115,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -306,6 +312,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) {
     return initialized(
         user, configs, customerCodeInfo, salesOrganisation, shipToInfo);
@@ -329,6 +336,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return initialized?.call(
         user, configs, customerCodeInfo, salesOrganisation, shipToInfo);
@@ -352,6 +360,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -373,6 +382,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return initialized(this);
   }
@@ -388,6 +398,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return initialized?.call(this);
   }
@@ -403,6 +414,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -511,6 +523,7 @@ class _$FetchImpl implements _Fetch {
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) {
     return fetch(orderNumber);
   }
@@ -533,6 +546,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return fetch?.call(orderNumber);
   }
@@ -555,6 +569,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -575,6 +590,7 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return fetch(this);
   }
@@ -590,6 +606,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return fetch?.call(this);
   }
@@ -605,6 +622,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -716,6 +734,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) {
     return setOrderDetails(orderHistoryDetails);
   }
@@ -738,6 +757,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return setOrderDetails?.call(orderHistoryDetails);
   }
@@ -760,6 +780,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (setOrderDetails != null) {
@@ -780,6 +801,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return setOrderDetails(this);
   }
@@ -795,6 +817,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return setOrderDetails?.call(this);
   }
@@ -810,6 +833,7 @@ class _$SetOrderDetailsImpl implements _SetOrderDetails {
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (setOrderDetails != null) {
@@ -949,6 +973,7 @@ class _$UpdateMaterialTenderContractImpl
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) {
     return updateMaterialTenderContract(selectedTenderContract, queryInfo);
   }
@@ -971,6 +996,7 @@ class _$UpdateMaterialTenderContractImpl
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return updateMaterialTenderContract?.call(
         selectedTenderContract, queryInfo);
@@ -994,6 +1020,7 @@ class _$UpdateMaterialTenderContractImpl
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (updateMaterialTenderContract != null) {
@@ -1014,6 +1041,7 @@ class _$UpdateMaterialTenderContractImpl
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return updateMaterialTenderContract(this);
   }
@@ -1029,6 +1057,7 @@ class _$UpdateMaterialTenderContractImpl
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return updateMaterialTenderContract?.call(this);
   }
@@ -1044,6 +1073,7 @@ class _$UpdateMaterialTenderContractImpl
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (updateMaterialTenderContract != null) {
@@ -1122,6 +1152,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) {
     return expandAttachments();
   }
@@ -1144,6 +1175,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return expandAttachments?.call();
   }
@@ -1166,6 +1198,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (expandAttachments != null) {
@@ -1186,6 +1219,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return expandAttachments(this);
   }
@@ -1201,6 +1235,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return expandAttachments?.call(this);
   }
@@ -1216,6 +1251,7 @@ class _$ExpandAttachmentsImpl implements _ExpandAttachments {
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (expandAttachments != null) {
@@ -1283,6 +1319,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) {
     return updateBundle();
   }
@@ -1305,6 +1342,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return updateBundle?.call();
   }
@@ -1327,6 +1365,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (updateBundle != null) {
@@ -1347,6 +1386,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return updateBundle(this);
   }
@@ -1362,6 +1402,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return updateBundle?.call(this);
   }
@@ -1377,6 +1418,7 @@ class _$UpdateBundleImpl implements _UpdateBundle {
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (updateBundle != null) {
@@ -1475,6 +1517,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     required TResult Function() expandAttachments,
     required TResult Function() updateBundle,
     required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData(orderNumber);
   }
@@ -1497,6 +1540,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult? Function()? expandAttachments,
     TResult? Function()? updateBundle,
     TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData?.call(orderNumber);
   }
@@ -1519,6 +1563,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult Function()? expandAttachments,
     TResult Function()? updateBundle,
     TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchOrdersInvoiceData != null) {
@@ -1539,6 +1584,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     required TResult Function(_UpdateBundle value) updateBundle,
     required TResult Function(_FetchOrdersInvoiceData value)
         fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData(this);
   }
@@ -1554,6 +1600,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult? Function(_ExpandAttachments value)? expandAttachments,
     TResult? Function(_UpdateBundle value)? updateBundle,
     TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
   }) {
     return fetchOrdersInvoiceData?.call(this);
   }
@@ -1569,6 +1616,7 @@ class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
     TResult Function(_ExpandAttachments value)? expandAttachments,
     TResult Function(_UpdateBundle value)? updateBundle,
     TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
     required TResult orElse(),
   }) {
     if (fetchOrdersInvoiceData != null) {
@@ -1586,6 +1634,173 @@ abstract class _FetchOrdersInvoiceData implements ViewByOrderDetailsEvent {
   @JsonKey(ignore: true)
   _$$FetchOrdersInvoiceDataImplCopyWith<_$FetchOrdersInvoiceDataImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadMoreInvoicesImplCopyWith<$Res> {
+  factory _$$LoadMoreInvoicesImplCopyWith(_$LoadMoreInvoicesImpl value,
+          $Res Function(_$LoadMoreInvoicesImpl) then) =
+      __$$LoadMoreInvoicesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadMoreInvoicesImplCopyWithImpl<$Res>
+    extends _$ViewByOrderDetailsEventCopyWithImpl<$Res, _$LoadMoreInvoicesImpl>
+    implements _$$LoadMoreInvoicesImplCopyWith<$Res> {
+  __$$LoadMoreInvoicesImplCopyWithImpl(_$LoadMoreInvoicesImpl _value,
+      $Res Function(_$LoadMoreInvoicesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadMoreInvoicesImpl implements _LoadMoreInvoices {
+  const _$LoadMoreInvoicesImpl();
+
+  @override
+  String toString() {
+    return 'ViewByOrderDetailsEvent.loadMoreInvoices()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadMoreInvoicesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
+    required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
+    required TResult Function(OrderNumber orderNumber) fetchOrdersInvoiceData,
+    required TResult Function() loadMoreInvoices,
+  }) {
+    return loadMoreInvoices();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
+    TResult? Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult? Function()? loadMoreInvoices,
+  }) {
+    return loadMoreInvoices?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
+    TResult Function(OrderNumber orderNumber)? fetchOrdersInvoiceData,
+    TResult Function()? loadMoreInvoices,
+    required TResult orElse(),
+  }) {
+    if (loadMoreInvoices != null) {
+      return loadMoreInvoices();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
+    required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
+    required TResult Function(_LoadMoreInvoices value) loadMoreInvoices,
+  }) {
+    return loadMoreInvoices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult? Function(_LoadMoreInvoices value)? loadMoreInvoices,
+  }) {
+    return loadMoreInvoices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
+    TResult Function(_LoadMoreInvoices value)? loadMoreInvoices,
+    required TResult orElse(),
+  }) {
+    if (loadMoreInvoices != null) {
+      return loadMoreInvoices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMoreInvoices implements ViewByOrderDetailsEvent {
+  const factory _LoadMoreInvoices() = _$LoadMoreInvoicesImpl;
 }
 
 /// @nodoc
@@ -1609,7 +1824,8 @@ mixin _$ViewByOrderDetailsState {
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   bool get isLoadingBundleDetail => throw _privateConstructorUsedError;
   bool get isFetchingInvoices => throw _privateConstructorUsedError;
-  List<InvoiceDetail> get invoices => throw _privateConstructorUsedError;
+  InvoiceDetailResponse get invoiceDetail => throw _privateConstructorUsedError;
+  bool get canLoadMoreInvoices => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrderDetailsStateCopyWith<ViewByOrderDetailsState> get copyWith =>
@@ -1637,7 +1853,8 @@ abstract class $ViewByOrderDetailsStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       bool isLoadingBundleDetail,
       bool isFetchingInvoices,
-      List<InvoiceDetail> invoices});
+      InvoiceDetailResponse invoiceDetail,
+      bool canLoadMoreInvoices});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -1645,6 +1862,7 @@ abstract class $ViewByOrderDetailsStateCopyWith<$Res> {
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $InvoiceDetailResponseCopyWith<$Res> get invoiceDetail;
 }
 
 /// @nodoc
@@ -1675,7 +1893,8 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
     Object? shipToInfo = null,
     Object? isLoadingBundleDetail = null,
     Object? isFetchingInvoices = null,
-    Object? invoices = null,
+    Object? invoiceDetail = null,
+    Object? canLoadMoreInvoices = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -1734,10 +1953,14 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
           ? _value.isFetchingInvoices
           : isFetchingInvoices // ignore: cast_nullable_to_non_nullable
               as bool,
-      invoices: null == invoices
-          ? _value.invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceDetail>,
+      invoiceDetail: null == invoiceDetail
+          ? _value.invoiceDetail
+          : invoiceDetail // ignore: cast_nullable_to_non_nullable
+              as InvoiceDetailResponse,
+      canLoadMoreInvoices: null == canLoadMoreInvoices
+          ? _value.canLoadMoreInvoices
+          : canLoadMoreInvoices // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -1789,6 +2012,14 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(shipToInfo: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InvoiceDetailResponseCopyWith<$Res> get invoiceDetail {
+    return $InvoiceDetailResponseCopyWith<$Res>(_value.invoiceDetail, (value) {
+      return _then(_value.copyWith(invoiceDetail: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1815,7 +2046,8 @@ abstract class _$$ViewByOrderDetailsStateImplCopyWith<$Res>
       ShipToInfo shipToInfo,
       bool isLoadingBundleDetail,
       bool isFetchingInvoices,
-      List<InvoiceDetail> invoices});
+      InvoiceDetailResponse invoiceDetail,
+      bool canLoadMoreInvoices});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -1829,6 +2061,8 @@ abstract class _$$ViewByOrderDetailsStateImplCopyWith<$Res>
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $InvoiceDetailResponseCopyWith<$Res> get invoiceDetail;
 }
 
 /// @nodoc
@@ -1858,7 +2092,8 @@ class __$$ViewByOrderDetailsStateImplCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? isLoadingBundleDetail = null,
     Object? isFetchingInvoices = null,
-    Object? invoices = null,
+    Object? invoiceDetail = null,
+    Object? canLoadMoreInvoices = null,
   }) {
     return _then(_$ViewByOrderDetailsStateImpl(
       user: null == user
@@ -1917,10 +2152,14 @@ class __$$ViewByOrderDetailsStateImplCopyWithImpl<$Res>
           ? _value.isFetchingInvoices
           : isFetchingInvoices // ignore: cast_nullable_to_non_nullable
               as bool,
-      invoices: null == invoices
-          ? _value._invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceDetail>,
+      invoiceDetail: null == invoiceDetail
+          ? _value.invoiceDetail
+          : invoiceDetail // ignore: cast_nullable_to_non_nullable
+              as InvoiceDetailResponse,
+      canLoadMoreInvoices: null == canLoadMoreInvoices
+          ? _value.canLoadMoreInvoices
+          : canLoadMoreInvoices // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1943,11 +2182,11 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
       required this.shipToInfo,
       required this.isLoadingBundleDetail,
       required this.isFetchingInvoices,
-      required final List<InvoiceDetail> invoices})
+      required this.invoiceDetail,
+      required this.canLoadMoreInvoices})
       : _isLoadingTenderContract = isLoadingTenderContract,
         _materials = materials,
         _productDetailAggregateList = productDetailAggregateList,
-        _invoices = invoices,
         super._();
 
   @override
@@ -1998,17 +2237,14 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
   final bool isLoadingBundleDetail;
   @override
   final bool isFetchingInvoices;
-  final List<InvoiceDetail> _invoices;
   @override
-  List<InvoiceDetail> get invoices {
-    if (_invoices is EqualUnmodifiableListView) return _invoices;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_invoices);
-  }
+  final InvoiceDetailResponse invoiceDetail;
+  @override
+  final bool canLoadMoreInvoices;
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsState(user: $user, configs: $configs, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, shipToInfo: $shipToInfo, isLoadingBundleDetail: $isLoadingBundleDetail, isFetchingInvoices: $isFetchingInvoices, invoices: $invoices)';
+    return 'ViewByOrderDetailsState(user: $user, configs: $configs, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, shipToInfo: $shipToInfo, isLoadingBundleDetail: $isLoadingBundleDetail, isFetchingInvoices: $isFetchingInvoices, invoiceDetail: $invoiceDetail, canLoadMoreInvoices: $canLoadMoreInvoices)';
   }
 
   @override
@@ -2043,7 +2279,10 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
                 other.isLoadingBundleDetail == isLoadingBundleDetail) &&
             (identical(other.isFetchingInvoices, isFetchingInvoices) ||
                 other.isFetchingInvoices == isFetchingInvoices) &&
-            const DeepCollectionEquality().equals(other._invoices, _invoices));
+            (identical(other.invoiceDetail, invoiceDetail) ||
+                other.invoiceDetail == invoiceDetail) &&
+            (identical(other.canLoadMoreInvoices, canLoadMoreInvoices) ||
+                other.canLoadMoreInvoices == canLoadMoreInvoices));
   }
 
   @override
@@ -2063,7 +2302,8 @@ class _$ViewByOrderDetailsStateImpl extends _ViewByOrderDetailsState {
       shipToInfo,
       isLoadingBundleDetail,
       isFetchingInvoices,
-      const DeepCollectionEquality().hash(_invoices));
+      invoiceDetail,
+      canLoadMoreInvoices);
 
   @JsonKey(ignore: true)
   @override
@@ -2089,8 +2329,8 @@ abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
       required final ShipToInfo shipToInfo,
       required final bool isLoadingBundleDetail,
       required final bool isFetchingInvoices,
-      required final List<InvoiceDetail>
-          invoices}) = _$ViewByOrderDetailsStateImpl;
+      required final InvoiceDetailResponse invoiceDetail,
+      required final bool canLoadMoreInvoices}) = _$ViewByOrderDetailsStateImpl;
   const _ViewByOrderDetailsState._() : super._();
 
   @override
@@ -2122,7 +2362,9 @@ abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
   @override
   bool get isFetchingInvoices;
   @override
-  List<InvoiceDetail> get invoices;
+  InvoiceDetailResponse get invoiceDetail;
+  @override
+  bool get canLoadMoreInvoices;
   @override
   @JsonKey(ignore: true)
   _$$ViewByOrderDetailsStateImplCopyWith<_$ViewByOrderDetailsStateImpl>

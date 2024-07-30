@@ -1,16 +1,20 @@
 {
     "query": "query GetInvoiceDetailsForOrder($invoicesByOrderRequest: invoicesByOrderRequest!) {
         GetInvoiceDetailsForOrder(input: $invoicesByOrderRequest) {  
-            InvoiceNumber
-            InvoiceProcessingStatus
-            InvoiceDate
-            InvoiceTotalQty
-            InvoiceTotalPrice
-            InvoiceItems {
-                MaterialCode
-                MaterialDescription
-                Qty
-                UnitPrice
+          InvoiceCount
+          InvoiceDetails {
+              InvoiceNumber
+              InvoiceProcessingStatus
+              InvoiceDate
+              InvoiceTotalQty
+              InvoiceTotalPrice
+              InvoiceItems {
+                  Type
+                  MaterialCode
+                  MaterialDescription
+                  Qty
+                  UnitPrice
+              }
             }
         }
     }",

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
@@ -44,7 +45,9 @@ void main() {
   final fakeInvoiceNumber = StringValue('fake-invoice-number');
 
   final viewByItemDetailsState = ViewByItemDetailsState.initial();
-  late final List<InvoiceDetail> invoiceDetails;
+  late final InvoiceDetailResponse invoiceDetail;
+  const offSet = 0;
+  final config = Config()..appFlavor = Flavor.mock;
 
   group(
     'ViewByItemDetailsBloc Test => ',
@@ -53,7 +56,7 @@ void main() {
         fakeOrderStatusTracker =
             await OrderStatusTrackerLocalDataSource().getOrderStatusTracker();
         orderHistory = await ViewByItemLocalDataSource().getViewByItems();
-        invoiceDetails =
+        invoiceDetail =
             await ViewByItemLocalDataSource().getInvoiceDetailsForOrder();
         orderHistoryForFetchStatus = orderHistory.copyWith(
           orderHistoryItems: orderHistory.orderHistoryItems
@@ -103,6 +106,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.initialized(
@@ -129,6 +133,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -173,6 +178,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -219,6 +225,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -245,6 +252,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -272,6 +280,7 @@ void main() {
               orderNumber: fakeOrderHistoryItem.orderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeRootAdminUser.preferredLanguage,
+              offset: offSet,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -328,6 +337,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -355,6 +365,7 @@ void main() {
               orderNumber: fakeOrderHistoryItem.orderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeRootAdminUser.preferredLanguage,
+              offset: offSet,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -444,6 +455,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => seedState,
         setUp: () {
@@ -465,6 +477,7 @@ void main() {
               orderNumber: fakeOrderHistoryItem.orderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeRootAdminUser.preferredLanguage,
+              offset: offSet,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -498,6 +511,7 @@ void main() {
           final orderHistoryBloc = ViewByItemDetailsBloc(
             orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
             viewByItemRepository: viewByItemRepositoryMock,
+            config: config,
           );
           orderHistoryBloc.emit(
             viewByItemDetailsState.copyWith(
@@ -521,6 +535,7 @@ void main() {
           final orderHistoryBloc = ViewByItemDetailsBloc(
             orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
             viewByItemRepository: viewByItemRepositoryMock,
+            config: config,
           );
           orderHistoryBloc.emit(
             viewByItemDetailsState.copyWith(
@@ -548,6 +563,7 @@ void main() {
           final orderHistoryBloc = ViewByItemDetailsBloc(
             orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
             viewByItemRepository: viewByItemRepositoryMock,
+            config: config,
           );
           orderHistoryBloc.emit(
             viewByItemDetailsState.copyWith(
@@ -578,6 +594,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -605,6 +622,7 @@ void main() {
               orderNumber: fakeOrderHistoryItem.orderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeRootAdminUser.preferredLanguage,
+              offset: offSet,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -696,6 +714,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -725,6 +744,7 @@ void main() {
               orderNumber: fakeOrderHistoryItem.orderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeRootAdminUser.preferredLanguage,
+              offset: offSet,
             )),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -785,6 +805,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => seedState.copyWith(orderHistory: orderHistory),
         setUp: () {
@@ -793,8 +814,9 @@ void main() {
               orderNumber: orderHistory.orderHistoryItems.first.orderNumber,
               customerCodeInfo: seedState.customerCodeInfo,
               language: seedState.user.preferredLanguage,
+              offset: offSet,
             ),
-          ).thenAnswer((invocation) async => Right(invoiceDetails));
+          ).thenAnswer((invocation) async => Right(invoiceDetail));
         },
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.fetchOrdersInvoiceData(
@@ -806,7 +828,7 @@ void main() {
             isInvoiceLoading: true,
           ),
           seedState.copyWith(
-            invoices: invoiceDetails,
+            invoiceDetail: invoiceDetail,
           ),
         ],
       );
@@ -816,6 +838,7 @@ void main() {
         build: () => ViewByItemDetailsBloc(
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
         ),
         seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -829,8 +852,9 @@ void main() {
               orderNumber: fakeOrderHistoryItem.orderNumber,
               customerCodeInfo: fakeCustomerCodeInfo,
               language: fakeRootAdminUser.preferredLanguage,
+              offset: offSet,
             ),
-          ).thenAnswer((invocation) async => Right(invoiceDetails));
+          ).thenAnswer((invocation) async => Right(invoiceDetail));
 
           when(
             () => (viewByItemRepositoryMock.getViewByItemDetails(
@@ -896,7 +920,7 @@ void main() {
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               orderHistoryItem: orderHistory.orderHistoryItems.first,
-              invoices: invoiceDetails,
+              invoiceDetail: invoiceDetail,
             ),
           ];
         },

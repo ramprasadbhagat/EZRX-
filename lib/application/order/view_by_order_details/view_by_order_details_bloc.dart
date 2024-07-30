@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
@@ -29,10 +30,13 @@ class ViewByOrderDetailsBloc
   final IViewByOrderDetailsRepository viewByOrderDetailsRepository;
   final IProductDetailRepository productDetailRepository;
   final IViewByItemRepository viewByItemRepository;
+  final Config config;
+
   ViewByOrderDetailsBloc({
     required this.viewByOrderDetailsRepository,
     required this.productDetailRepository,
     required this.viewByItemRepository,
+    required this.config,
   }) : super(ViewByOrderDetailsState.initial()) {
     on<ViewByOrderDetailsEvent>(_onEvent);
   }
@@ -204,6 +208,7 @@ class ViewByOrderDetailsBloc
           orderNumber: e.orderNumber,
           customerCodeInfo: state.customerCodeInfo,
           language: state.user.preferredLanguage,
+          offset: 0,
         );
 
         failureOrSuccess.fold(
@@ -215,12 +220,56 @@ class ViewByOrderDetailsBloc
               ),
             );
           },
-          (invoices) {
+          (invoiceDetail) {
             emit(
               state.copyWith(
-                invoices: invoices,
+                invoiceDetail: invoiceDetail,
                 failureOrSuccessOption: none(),
                 isFetchingInvoices: false,
+              ),
+            );
+          },
+        );
+      },
+      loadMoreInvoices: (e) async {
+        if (state.isFetchingInvoices || !state.canLoadMoreInvoices) return;
+        emit(
+          state.copyWith(
+            isFetchingInvoices: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await viewByItemRepository.getInvoiceDetailsForOrder(
+          orderNumber: state.orderHistoryDetails.orderNumber,
+          customerCodeInfo: state.customerCodeInfo,
+          language: state.user.preferredLanguage,
+          offset: state.invoiceDetail.invoiceDetails.length,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isFetchingInvoices: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (moreInvoiceDetail) {
+            final invoiceDetail = state.invoiceDetail.copyWith(
+              invoiceDetails:
+                  List<InvoiceDetail>.from(state.invoiceDetail.invoiceDetails)
+                    ..addAll(moreInvoiceDetail.invoiceDetails),
+            );
+            emit(
+              state.copyWith(
+                isFetchingInvoices: false,
+                invoiceDetail: invoiceDetail,
+                failureOrSuccessOption: none(),
+                canLoadMoreInvoices:
+                    moreInvoiceDetail.invoiceDetails.length >= config.pageSize,
               ),
             );
           },
