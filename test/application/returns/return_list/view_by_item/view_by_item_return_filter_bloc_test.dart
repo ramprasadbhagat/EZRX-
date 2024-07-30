@@ -13,7 +13,7 @@ void main() {
   late DateTime fakeToDate;
   late DateTime fakeFromDate;
   late DateTimeRange dateTimeRange;
-  setUpAll(() async {
+  setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
   });
 
@@ -58,6 +58,7 @@ void main() {
       },
       expect: () => [ViewByItemReturnFilterState.initial()],
     );
+
     blocTest(
       ' -> updateFilterToLastApplied',
       build: () => ViewByItemReturnFilterBloc(),
@@ -71,6 +72,21 @@ void main() {
       expect: () => [
         ViewByItemReturnFilterState.initial().copyWith(
           filter: appliedFilter,
+        ),
+      ],
+    );
+
+    blocTest(
+      ' -> resetFilters',
+      build: () => ViewByItemReturnFilterBloc(),
+      act: (ViewByItemReturnFilterBloc bloc) {
+        bloc.add(
+          const ViewByItemReturnFilterEvent.resetFilters(),
+        );
+      },
+      expect: () => [
+        ViewByItemReturnFilterState.initial().copyWith(
+          filter: ReturnFilter.empty(),
         ),
       ],
     );

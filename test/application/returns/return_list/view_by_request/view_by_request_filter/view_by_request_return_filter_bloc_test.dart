@@ -29,7 +29,7 @@ void main() {
   const amountFrom = '100';
   const amountTo = '500';
 
-  setUpAll(() async {
+  setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
     returnFilter = ReturnFilter.empty().copyWith(
       returnDateFrom: DateTimeStringValue(
@@ -118,6 +118,25 @@ void main() {
       );
 
       blocTest(
+        'set return type',
+        build: () => ViewByRequestReturnFilterBloc(),
+        act: (ViewByRequestReturnFilterBloc bloc) {
+          bloc.add(
+            ViewByRequestReturnFilterEvent.setReturnType(
+              type: MaterialOriginFilter.mp(),
+            ),
+          );
+        },
+        expect: () => [
+          ViewByRequestReturnFilterState.initial().copyWith(
+            filter: ReturnFilter.empty().copyWith(
+              materialOriginFilter: MaterialOriginFilter.mp(),
+            ),
+          ),
+        ],
+      );
+
+      blocTest(
         'set Return Status to REVIEWED',
         build: () => ViewByRequestReturnFilterBloc(),
         seed: () => ViewByRequestReturnFilterState.initial()
@@ -185,6 +204,21 @@ void main() {
         expect: () => [
           ViewByRequestReturnFilterState.initial().copyWith(
             showErrorMessage: false,
+          ),
+        ],
+      );
+
+      blocTest(
+        'reset filter',
+        build: () => ViewByRequestReturnFilterBloc(),
+        act: (ViewByRequestReturnFilterBloc bloc) {
+          bloc.add(
+            const ViewByRequestReturnFilterEvent.resetFilters(),
+          );
+        },
+        expect: () => [
+          ViewByRequestReturnFilterState.initial().copyWith(
+            filter: ReturnFilter.empty(),
           ),
         ],
       );

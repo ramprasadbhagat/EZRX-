@@ -19,24 +19,28 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../presentation/orders/core/po_attachment_test.dart';
 
-class MockReturnSummaryDetailsRepository extends Mock
+class _MockReturnSummaryDetailsRepository extends Mock
     implements ReturnSummaryDetailsRepository {}
 
-class MockReturnRequestRepository extends Mock
+class _MockReturnRequestRepository extends Mock
     implements ReturnRequestRepository {}
 
 void main() {
-  late MockReturnSummaryDetailsRepository mockReturnSummaryDetailsRepository;
+  late _MockReturnSummaryDetailsRepository mockReturnSummaryDetailsRepository;
   late ReturnRequestRepository mockReturnRequestRepository;
   late PoAttachmentRepository poAttachmentRepository;
   final file = [File('')];
   final fakeReturnItem =
       ReturnItem.empty().copyWith(invoiceID: 'fake-invoice-id');
+  final fakeReturnRequestInformation =
+      ReturnRequestInformation.empty().copyWith(
+    invoiceNo: 'fake-invoice-no',
+  );
 
-  setUpAll(() async {
+  setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
-    mockReturnSummaryDetailsRepository = MockReturnSummaryDetailsRepository();
-    mockReturnRequestRepository = MockReturnRequestRepository();
+    mockReturnSummaryDetailsRepository = _MockReturnSummaryDetailsRepository();
+    mockReturnRequestRepository = _MockReturnRequestRepository();
     poAttachmentRepository = PoAttachmentRepositoryMock();
   });
 
@@ -79,6 +83,43 @@ void main() {
         ReturnSummaryDetailsState.initial().copyWith(
           isLoading: false,
           requestInformation: ReturnRequestInformation.empty(),
+          requestInformationHeader: ReturnRequestInformationHeader.empty(),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Fetch success with data not empty',
+      build: () => ReturnSummaryDetailsBloc(
+        returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
+        returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
+      ),
+      setUp: () {
+        when(
+          () => mockReturnSummaryDetailsRepository.getReturnInformation(
+            returnItem: fakeReturnItem,
+          ),
+        ).thenAnswer(
+          (_) async => Right(
+            RequestInformation.empty().copyWith(
+              returnRequestInformationList: [fakeReturnRequestInformation],
+            ),
+          ),
+        );
+      },
+      act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
+        ReturnSummaryDetailsEvent.fetch(
+          returnItem: fakeReturnItem,
+        ),
+      ),
+      expect: () => [
+        ReturnSummaryDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+        ReturnSummaryDetailsState.initial().copyWith(
+          isLoading: false,
+          requestInformation: fakeReturnRequestInformation,
           requestInformationHeader: ReturnRequestInformationHeader.empty(),
         ),
       ],

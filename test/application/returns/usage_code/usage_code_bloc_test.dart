@@ -10,17 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockUsageCodeRepository extends Mock implements UsageRepository {}
+class _MockUsageCodeRepository extends Mock implements UsageRepository {}
 
 void main() {
-  late MockUsageCodeRepository mockUsageCodeRepository;
+  late _MockUsageCodeRepository mockUsageCodeRepository;
   final mockSalesOrg = SalesOrg('fake-1234');
   final salesOrg2601 = SalesOrg('2601');
   late final List<Usage> usages;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    mockUsageCodeRepository = MockUsageCodeRepository();
+    mockUsageCodeRepository = _MockUsageCodeRepository();
     usages = await UsageCodeLocalDataSource().getUsages();
   });
 
@@ -76,4 +76,33 @@ void main() {
       );
     },
   );
+
+  group('Usage State Test', () {
+    test('Usage exist', () {
+      final fakeState = UsageCodeState.initial().copyWith(
+        usages: usages,
+      );
+      final usage = fakeState.getUsage('C13');
+      expect(
+        usage,
+        const Usage(
+          usageCode: 'C13',
+          usageDescription: 'Wrong Bill-To',
+        ),
+      );
+    });
+
+    test('Usage does not exist', () {
+      final fakeState = UsageCodeState.initial().copyWith(
+        usages: usages,
+      );
+
+      final usage = fakeState.getUsage('T111');
+
+      expect(
+        usage,
+        Usage.empty(),
+      );
+    });
+  });
 }

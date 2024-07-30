@@ -17,7 +17,7 @@ import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
-class ReturnRequestRepositoryMock extends Mock
+class _ReturnRequestRepositoryMock extends Mock
     implements ReturnRequestRepository {}
 
 void main() {
@@ -27,6 +27,8 @@ void main() {
   late ReturnMaterialList fakeReturnMaterialList;
   late ReturnItemsFilter fakeReturnItemsFilter;
   late ReturnItemsState initState;
+  final fakeSearchKey = SearchKey.search('fake-search-key');
+
   setUpAll(() async {
     initState = ReturnItemsState.initial().copyWith(
       customerCodeInfo: fakeCustomerCodeInfo,
@@ -42,7 +44,7 @@ void main() {
   });
   group('Return Items Bloc Testing=>', () {
     setUp(() {
-      repositoryMock = ReturnRequestRepositoryMock();
+      repositoryMock = _ReturnRequestRepositoryMock();
       config = Config()..appFlavor = Flavor.mock;
     });
 
@@ -93,6 +95,25 @@ void main() {
           items: fakeReturnMaterialList.items,
         ),
       ],
+    );
+
+    blocTest<ReturnItemsBloc, ReturnItemsState>(
+      'For "fetch" Event with same filter and search key',
+      build: () => ReturnItemsBloc(
+        newRequestRepository: repositoryMock,
+        config: config,
+      ),
+      seed: () => initState.copyWith(
+        appliedFilter: fakeReturnItemsFilter,
+        searchKey: fakeSearchKey,
+      ),
+      act: (bloc) => bloc.add(
+        ReturnItemsEvent.fetch(
+          appliedFilter: fakeReturnItemsFilter,
+          searchKey: fakeSearchKey,
+        ),
+      ),
+      expect: () => [],
     );
 
     blocTest<ReturnItemsBloc, ReturnItemsState>(

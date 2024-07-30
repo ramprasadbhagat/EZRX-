@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
@@ -14,8 +16,9 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_list_reposit
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class ReturnListRepositoryMock extends Mock implements ReturnListRepository {}
+class _ReturnListRepositoryMock extends Mock implements ReturnListRepository {}
 
 void main() {
   late ReturnListRepository returnListRepositoryMock;
@@ -37,9 +40,13 @@ void main() {
       requestId: '02',
     ),
   ];
+  const fakeError = ApiFailure.other('fake-error');
+  const fakeUrl = 'fake-url';
+  final fakeFile = File('fake-path');
+  final initState = ReturnListByRequestState.initial();
 
-  setUpAll(() async {
-    returnListRepositoryMock = ReturnListRepositoryMock();
+  setUpAll(() {
+    returnListRepositoryMock = _ReturnListRepositoryMock();
     config = Config()..appFlavor = Flavor.mock;
   });
 
@@ -524,6 +531,178 @@ void main() {
           ),
         ),
         expect: () => [],
+      );
+    });
+
+    group('Download File', () {
+      blocTest(
+        'For download file event fail by permission',
+        build: () => ReturnListByRequestBloc(
+          returnListRepository: returnListRepositoryMock,
+          config: config,
+        ),
+        setUp: () {
+          when(
+            () => returnListRepositoryMock.getDownloadPermission(),
+          ).thenAnswer(
+            (_) async => const Left(fakeError),
+          );
+        },
+        act: (ReturnListByRequestBloc bloc) => bloc.add(
+          const ReturnListByRequestEvent.downloadFile(),
+        ),
+        expect: () => [
+          initState.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+          initState.copyWith(
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+            isDownloadInProgress: false,
+          ),
+        ],
+      );
+
+      blocTest(
+        'For download file event: get url fail',
+        build: () => ReturnListByRequestBloc(
+          returnListRepository: returnListRepositoryMock,
+          config: config,
+        ),
+        setUp: () {
+          when(
+            () => returnListRepositoryMock.getDownloadPermission(),
+          ).thenAnswer(
+            (_) async => const Right(PermissionStatus.granted),
+          );
+
+          when(
+            () => returnListRepositoryMock.getFileUrl(
+              customerCodeInfo: initState.customerCodeInfo,
+              shipToInfo: initState.shipInfo,
+              user: initState.user,
+              salesOrg: initState.salesOrg,
+              isViewByReturn: true,
+              appliedFilter: initState.appliedFilter,
+              searchKey: initState.searchKey,
+            ),
+          ).thenAnswer(
+            (_) async => const Left(fakeError),
+          );
+        },
+        act: (ReturnListByRequestBloc bloc) => bloc.add(
+          const ReturnListByRequestEvent.downloadFile(),
+        ),
+        expect: () => [
+          initState.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+          initState.copyWith(
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+            isDownloadInProgress: false,
+          ),
+        ],
+      );
+
+      blocTest(
+        'For download file event: get url success but download fail',
+        build: () => ReturnListByRequestBloc(
+          returnListRepository: returnListRepositoryMock,
+          config: config,
+        ),
+        setUp: () {
+          when(
+            () => returnListRepositoryMock.getDownloadPermission(),
+          ).thenAnswer(
+            (_) async => const Right(PermissionStatus.granted),
+          );
+
+          when(
+            () => returnListRepositoryMock.getFileUrl(
+              customerCodeInfo: initState.customerCodeInfo,
+              shipToInfo: initState.shipInfo,
+              user: initState.user,
+              salesOrg: initState.salesOrg,
+              isViewByReturn: true,
+              appliedFilter: initState.appliedFilter,
+              searchKey: initState.searchKey,
+            ),
+          ).thenAnswer(
+            (_) async => const Right(fakeUrl),
+          );
+
+          when(
+            () => returnListRepositoryMock.downloadFile(
+              url: fakeUrl,
+            ),
+          ).thenAnswer(
+            (_) async => const Left(fakeError),
+          );
+        },
+        act: (ReturnListByRequestBloc bloc) => bloc.add(
+          const ReturnListByRequestEvent.downloadFile(),
+        ),
+        expect: () => [
+          initState.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+          initState.copyWith(
+            isDownloadInProgress: false,
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+          ),
+        ],
+      );
+
+      blocTest(
+        'For download file event: get url success and download success',
+        build: () => ReturnListByRequestBloc(
+          returnListRepository: returnListRepositoryMock,
+          config: config,
+        ),
+        setUp: () {
+          when(
+            () => returnListRepositoryMock.getDownloadPermission(),
+          ).thenAnswer(
+            (_) async => const Right(PermissionStatus.granted),
+          );
+
+          when(
+            () => returnListRepositoryMock.getFileUrl(
+              customerCodeInfo: initState.customerCodeInfo,
+              shipToInfo: initState.shipInfo,
+              user: initState.user,
+              salesOrg: initState.salesOrg,
+              isViewByReturn: true,
+              appliedFilter: initState.appliedFilter,
+              searchKey: initState.searchKey,
+            ),
+          ).thenAnswer(
+            (_) async => const Right(fakeUrl),
+          );
+
+          when(
+            () => returnListRepositoryMock.downloadFile(
+              url: fakeUrl,
+            ),
+          ).thenAnswer(
+            (_) async => Right(fakeFile),
+          );
+        },
+        act: (ReturnListByRequestBloc bloc) => bloc.add(
+          const ReturnListByRequestEvent.downloadFile(),
+        ),
+        expect: () => [
+          initState.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+          initState.copyWith(
+            isDownloadInProgress: false,
+            failureOrSuccessOption: optionOf(Right(fakeFile)),
+          ),
+        ],
       );
     });
   });
