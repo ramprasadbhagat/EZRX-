@@ -467,9 +467,9 @@ stages:
               targetType: 'inline'
               script: |
                 html=$(tr -d '\n' < ./.azure-pipelines/template.html)
-                curl -X POST -H "Content-Type: application/json" -d "{\"text\":\"$html\"}" $MICROSOFT_TEAMS_BUILD_CHANNEL
+                curl -X POST -H "Content-Type: application/json" -d "{\"text\":\"$html\"}" $MICROSOFT_TEAMS_BUILD_MOBILE_CHANNEL
             env:
-              MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'
+              MICROSOFT_TEAMS_BUILD_MOBILE_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_MOBILE_CHANNEL)'
 
           - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
             displayName: Push Report To Azure DevOps Pipeline
@@ -501,7 +501,7 @@ stages:
                 branch_name="$(Build.SourceBranchName)"
                 TITLE="Integration For ${{ parameters.region }} Triggered By $username on $branch_name Fail"
 
-                curl -X POST '$(MICROSOFT_TEAMS_BUILD_CHANNEL)' \
+                curl -X POST '$(MICROSOFT_TEAMS_BUILD_MOBILE_CHANNEL)' \
                 -H 'Content-Type: text/plain' \
                 -d '{
                   "@type": "MessageCard",
@@ -524,4 +524,4 @@ stages:
                   }]
                 }'
             env:
-              MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'
+              MICROSOFT_TEAMS_BUILD_MOBILE_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_MOBILE_CHANNEL)'
