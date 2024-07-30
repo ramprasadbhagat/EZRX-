@@ -692,5 +692,15 @@ void main() {
       expect(find.text('Privacy policy'), findsOne);
       expect(find.text('Terms of use'), findsOne);
     });
+
+    testWidgets('-> Security tile not visilbe when login on behalf',
+        (tester) async {
+      when(() => userBlocMock.state)
+          .thenReturn(UserState.initial().copyWith(isLoginOnBehalf: true));
+      await getWidget(tester);
+      await tester.pump();
+
+      expect(find.byKey(WidgetKeys.securityTile), findsNothing);
+    });
   });
 }

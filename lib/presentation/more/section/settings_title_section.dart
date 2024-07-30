@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/more/more_details_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -22,36 +23,43 @@ class SettingsTile extends StatelessWidget {
       ),
       subtitle: Padding(
         padding: const EdgeInsets.only(top: padding12),
-        child: Column(
-          children: _moreSettingTiles(context).map((item) {
-            return ListTile(
-              visualDensity: VisualDensity.compact,
-              contentPadding: EdgeInsets.zero,
-              dense: true,
-              key: item.key,
-              onTap: item.onTap,
-              trailing: const Icon(
-                Icons.chevron_right_rounded,
-                color: ZPColors.black,
-                size: padding24,
-              ),
-              title: Text(
-                item.label.tr(),
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+        child: BlocBuilder<UserBloc, UserState>(
+          buildWhen: (previous, current) =>
+              previous.isLoginOnBehalf != current.isLoginOnBehalf,
+          builder: (context, state) {
+            return Column(
+              children: [
+                MoreDetailsTile.profile(context),
+                if (!state.isLoginOnBehalf) MoreDetailsTile.security(context),
+                if (context
+                    .read<EligibilityBloc>()
+                    .state
+                    .isNotificationSettingsEnable)
+                  MoreDetailsTile.notifications(context),
+
+                // MoreDetailsTile.privacy(), //  implement yet
+              ].map((item) {
+                return ListTile(
+                  visualDensity: VisualDensity.compact,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  key: item.key,
+                  onTap: item.onTap,
+                  trailing: const Icon(
+                    Icons.chevron_right_rounded,
+                    color: ZPColors.black,
+                    size: padding24,
+                  ),
+                  title: Text(
+                    item.label.tr(),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                );
+              }).toList(),
             );
-          }).toList(),
+          },
         ),
       ),
     );
   }
-
-  List<MoreDetailsTile> _moreSettingTiles(BuildContext context) => [
-        MoreDetailsTile.profile(context),
-        MoreDetailsTile.security(context),
-        if (context.read<EligibilityBloc>().state.isNotificationSettingsEnable)
-          MoreDetailsTile.notifications(context),
-
-        // MoreDetailsTile.privacy(), //  implement yet
-      ];
 }

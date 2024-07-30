@@ -35,9 +35,7 @@ class LoginOnBehalfSheet extends StatelessWidget {
                 .read<EligibilityBloc>()
                 .add(const EligibilityEvent.initialized());
             context.read<UserBloc>().add(
-                  const UserEvent.fetch(
-                    isLoginOnBehalf: true,
-                  ),
+                  const UserEvent.fetch(),
                 );
             context.router.popForced();
           },

@@ -19,7 +19,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -35,7 +35,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -50,7 +50,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -167,7 +167,7 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -186,7 +186,7 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -204,7 +204,7 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -290,8 +290,6 @@ abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isLoginOnBehalf});
 }
 
 /// @nodoc
@@ -301,58 +299,32 @@ class __$$FetchImplCopyWithImpl<$Res>
   __$$FetchImplCopyWithImpl(
       _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoginOnBehalf = null,
-  }) {
-    return _then(_$FetchImpl(
-      isLoginOnBehalf: null == isLoginOnBehalf
-          ? _value.isLoginOnBehalf
-          : isLoginOnBehalf // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({this.isLoginOnBehalf = false});
-
-  @override
-  @JsonKey()
-  final bool isLoginOnBehalf;
+  const _$FetchImpl();
 
   @override
   String toString() {
-    return 'UserEvent.fetch(isLoginOnBehalf: $isLoginOnBehalf)';
+    return 'UserEvent.fetch()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FetchImpl &&
-            (identical(other.isLoginOnBehalf, isLoginOnBehalf) ||
-                other.isLoginOnBehalf == isLoginOnBehalf));
+        (other.runtimeType == runtimeType && other is _$FetchImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoginOnBehalf);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
-      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -364,14 +336,14 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
   }) {
-    return fetch(isLoginOnBehalf);
+    return fetch();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -382,14 +354,14 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
   }) {
-    return fetch?.call(isLoginOnBehalf);
+    return fetch?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -402,7 +374,7 @@ class _$FetchImpl implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(isLoginOnBehalf);
+      return fetch();
     }
     return orElse();
   }
@@ -467,12 +439,7 @@ class _$FetchImpl implements _Fetch {
 }
 
 abstract class _Fetch implements UserEvent {
-  const factory _Fetch({final bool isLoginOnBehalf}) = _$FetchImpl;
-
-  bool get isLoginOnBehalf;
-  @JsonKey(ignore: true)
-  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Fetch() = _$FetchImpl;
 }
 
 /// @nodoc
@@ -514,7 +481,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -533,7 +500,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -551,7 +518,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -701,7 +668,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -720,7 +687,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -738,7 +705,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -905,7 +872,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -924,7 +891,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -943,7 +910,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -1117,7 +1084,7 @@ class _$UpdatePaymentNotificationSettingsImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -1136,7 +1103,7 @@ class _$UpdatePaymentNotificationSettingsImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -1154,7 +1121,7 @@ class _$UpdatePaymentNotificationSettingsImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -1310,7 +1277,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -1329,7 +1296,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -1347,7 +1314,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -1500,7 +1467,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() fetch,
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
@@ -1519,7 +1486,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
@@ -1537,7 +1504,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? fetch,
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,

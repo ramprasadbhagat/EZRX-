@@ -655,6 +655,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => UserBloc(
       userRepository: locator<UserRepository>(),
+      authRepository: locator<AuthRepository>(),
     ),
   );
 

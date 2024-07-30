@@ -7,9 +7,11 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -18,22 +20,29 @@ import '../../../common_mock_data/user_mock.dart';
 
 class UserRepoMock extends Mock implements UserRepository {}
 
+class AuthRepositoryMock extends Mock implements AuthRepository {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late UserRepository userRepoMock;
+  late AuthRepository authRepositoryMock;
   late UserState userState;
+  const refreshToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     userState = UserState.initial();
     userRepoMock = UserRepoMock();
+    authRepositoryMock = AuthRepositoryMock();
   });
   group('User Bloc Testing', () {
     blocTest<UserBloc, UserState>(
       'Initialized',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       act: (UserBloc bloc) => bloc.add(const UserEvent.initialized()),
       expect: () => [userState],
@@ -43,6 +52,7 @@ void main() {
       'Fetch user failed',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -64,6 +74,7 @@ void main() {
       'Fetch user success',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -71,6 +82,50 @@ void main() {
             fakeClientUser,
           ),
         );
+        when(() => authRepositoryMock.getRefreshToken())
+            .thenAnswer((_) async => Right(JWT(refreshToken)));
+      },
+      act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
+      expect: () => [
+        userState.copyWith(user: fakeClientUser),
+      ],
+    );
+
+    blocTest<UserBloc, UserState>(
+      'Fetch user success when login on behalf',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.getUser()).thenAnswer(
+          (invocation) async => Right(
+            fakeClientUser,
+          ),
+        );
+        when(() => authRepositoryMock.getRefreshToken())
+            .thenAnswer((_) async => Right(JWT('')));
+      },
+      act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
+      expect: () => [
+        userState.copyWith(user: fakeClientUser, isLoginOnBehalf: true),
+      ],
+    );
+
+    blocTest<UserBloc, UserState>(
+      'Fetch user success and get token failure',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.getUser()).thenAnswer(
+          (invocation) async => Right(
+            fakeClientUser,
+          ),
+        );
+        when(() => authRepositoryMock.getRefreshToken())
+            .thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
       },
       act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
       expect: () => [
@@ -109,6 +164,7 @@ void main() {
       'Create bloc and fetch',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -125,6 +181,7 @@ void main() {
       'Create bloc and failure on fetch',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -147,6 +204,7 @@ void main() {
       'on [updateNotificationSettings] emits successful user state',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -194,6 +252,7 @@ void main() {
       'on [updateNotifificationSettings] throws error',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -237,6 +296,7 @@ void main() {
       'on updatePaymentNotificationSettings',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -271,6 +331,7 @@ void main() {
       'update language successful',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -305,6 +366,7 @@ void main() {
       'update language failed',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -335,6 +397,7 @@ void main() {
       'select language',
       build: () => UserBloc(
         userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
       ),
       act: (UserBloc bloc) => bloc.add(
         UserEvent.selectLanguage(Language.vietnamese()),
@@ -350,7 +413,10 @@ void main() {
       const fakeError = ApiFailure.other('fake-error');
       blocTest<UserBloc, UserState>(
         'success',
-        build: () => UserBloc(userRepository: userRepoMock),
+        build: () => UserBloc(
+          userRepository: userRepoMock,
+          authRepository: authRepositoryMock,
+        ),
         setUp: () {
           when(
             () => userRepoMock.updateUserTc(),
@@ -364,7 +430,10 @@ void main() {
       );
       blocTest<UserBloc, UserState>(
         'failure -',
-        build: () => UserBloc(userRepository: userRepoMock),
+        build: () => UserBloc(
+          userRepository: userRepoMock,
+          authRepository: authRepositoryMock,
+        ),
         setUp: () {
           when(() => userRepoMock.updateUserTc()).thenAnswer(
             (_) async => const Left(fakeError),
@@ -387,6 +456,7 @@ void main() {
         'failure',
         build: () => UserBloc(
           userRepository: userRepoMock,
+          authRepository: authRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))
@@ -406,6 +476,7 @@ void main() {
         'success',
         build: () => UserBloc(
           userRepository: userRepoMock,
+          authRepository: authRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))

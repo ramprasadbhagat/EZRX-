@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +18,11 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final IUserRepository userRepository;
+  final IAuthRepository authRepository;
 
   UserBloc({
     required this.userRepository,
+    required this.authRepository,
   }) : super(UserState.initial()) {
     on<UserEvent>(_onEvent);
   }
@@ -29,19 +32,30 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       initialized: (e) async => emit(UserState.initial()),
       fetch: (e) async {
         final failureOrSuccess = await userRepository.getUser();
-        failureOrSuccess.fold(
-          (failure) => emit(
+        await failureOrSuccess.fold(
+          (failure) async => emit(
             state.copyWith(
               userFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (user) => emit(
-            state.copyWith(
-              user: user,
-              isLoginOnBehalf: e.isLoginOnBehalf,
-              userFailureOrSuccessOption: none(),
-            ),
-          ),
+          (user) async {
+            final refreshTokenFailureOrSuccess =
+                await authRepository.getRefreshToken();
+
+            //If login on behalf, the refresh token will always be empty string
+            final isLoginOnBehalf = refreshTokenFailureOrSuccess.fold(
+              (_) => false,
+              (token) => !token.isValid(),
+            );
+
+            emit(
+              state.copyWith(
+                user: user,
+                isLoginOnBehalf: isLoginOnBehalf,
+                userFailureOrSuccessOption: none(),
+              ),
+            );
+          },
         );
       },
       acceptTnc: (e) async {
