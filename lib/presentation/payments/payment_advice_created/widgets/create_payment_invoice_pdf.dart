@@ -439,6 +439,8 @@ class CreatePaymentInvoicePdf {
       );
 
   Future<pw.Widget> _description({required String pleaseNote}) async {
+    if (pleaseNote.isEmpty) return pw.SizedBox.shrink();
+
     final image = await _captureImageDescription(pleaseNote: pleaseNote);
 
     return pw.Container(
@@ -449,25 +451,28 @@ class CreatePaymentInvoicePdf {
     );
   }
 
-  pw.Widget _footerInvoice({required String footer}) => pw.Container(
-        padding:
-            const pw.EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-        decoration: pw.BoxDecoration(
-          borderRadius:
-              const pw.BorderRadius.vertical(bottom: pw.Radius.circular(16.0)),
-          color: PdfColor.fromInt(ZPColors.extraLightGrey4.value),
-        ),
-        child: pw.Center(
-          child: pw.Text(
-            footer,
-            style: pw.TextStyle(
-              fontSize: 10,
-              color: PdfColor.fromInt(ZPColors.primary.value),
-              letterSpacing: 0.25,
+  pw.Widget _footerInvoice({required String footer}) => footer.isNotEmpty
+      ? pw.Container(
+          padding:
+              const pw.EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          decoration: pw.BoxDecoration(
+            borderRadius: const pw.BorderRadius.vertical(
+              bottom: pw.Radius.circular(16.0),
+            ),
+            color: PdfColor.fromInt(ZPColors.extraLightGrey4.value),
+          ),
+          child: pw.Center(
+            child: pw.Text(
+              footer,
+              style: pw.TextStyle(
+                fontSize: 10,
+                color: PdfColor.fromInt(ZPColors.primary.value),
+                letterSpacing: 0.25,
+              ),
             ),
           ),
-        ),
-      );
+        )
+      : pw.SizedBox.shrink();
 
   pw.Widget get _paymentStepsQrCode => pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
