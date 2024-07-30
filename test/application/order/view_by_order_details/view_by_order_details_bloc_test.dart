@@ -62,7 +62,7 @@ void main() {
   late final InvoiceDetailResponse invoiceDetail;
 
   const offSet = 0;
-  final config = Config()..appFlavor = Flavor.mock;
+  final config = Config()..appFlavor = Flavor.uat;
 
   group(
     'ViewByOrderDetailsBloc Test',
@@ -721,6 +721,87 @@ void main() {
                       )
                       .toList(),
             ),
+          ),
+        ],
+      );
+
+      blocTest(
+        'For loadMoreInvoices success',
+        build: () => ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
+        ),
+        seed: () => viewByOrderDetailsSeedState.copyWith(
+          invoiceDetail: invoiceDetail,
+          orderHistoryDetails: orderHistoryDetailsMock,
+        ),
+        setUp: () {
+          when(
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: orderHistoryDetailsMock.orderNumber,
+              customerCodeInfo: viewByOrderDetailsSeedState.customerCodeInfo,
+              language: viewByOrderDetailsSeedState.user.preferredLanguage,
+              offset: invoiceDetail.invoiceDetails.length,
+            ),
+          ).thenAnswer((invocation) async => Right(invoiceDetail));
+        },
+        act: (bloc) => bloc.add(
+          const ViewByOrderDetailsEvent.loadMoreInvoices(),
+        ),
+        expect: () => [
+          viewByOrderDetailsSeedState.copyWith(
+            isFetchingInvoices: true,
+            invoiceDetail: invoiceDetail,
+            orderHistoryDetails: orderHistoryDetailsMock,
+          ),
+          viewByOrderDetailsSeedState.copyWith(
+            orderHistoryDetails: orderHistoryDetailsMock,
+            invoiceDetail: invoiceDetail.copyWith(
+              invoiceDetails:
+                  List<InvoiceDetail>.from(invoiceDetail.invoiceDetails)
+                    ..addAll(invoiceDetail.invoiceDetails),
+            ),
+          ),
+        ],
+      );
+
+      blocTest(
+        'For loadMoreInvoices fail',
+        build: () => ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
+        ),
+        seed: () => viewByOrderDetailsSeedState.copyWith(
+          invoiceDetail: invoiceDetail,
+          orderHistoryDetails: orderHistoryDetailsMock,
+        ),
+        setUp: () {
+          when(
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: orderHistoryDetailsMock.orderNumber,
+              customerCodeInfo: viewByOrderDetailsSeedState.customerCodeInfo,
+              language: viewByOrderDetailsSeedState.user.preferredLanguage,
+              offset: invoiceDetail.invoiceDetails.length,
+            ),
+          ).thenAnswer((invocation) async => const Left(fakeError));
+        },
+        act: (bloc) => bloc.add(
+          const ViewByOrderDetailsEvent.loadMoreInvoices(),
+        ),
+        expect: () => [
+          viewByOrderDetailsSeedState.copyWith(
+            isFetchingInvoices: true,
+            invoiceDetail: invoiceDetail,
+            orderHistoryDetails: orderHistoryDetailsMock,
+          ),
+          viewByOrderDetailsSeedState.copyWith(
+            orderHistoryDetails: orderHistoryDetailsMock,
+            invoiceDetail: invoiceDetail,
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
           ),
         ],
       );

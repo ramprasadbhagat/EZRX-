@@ -925,6 +925,85 @@ void main() {
           ];
         },
       );
+
+      blocTest(
+        'For "loadMoreInvoices" Event success',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
+        ),
+        seed: () => seedState.copyWith(
+          orderHistory: orderHistory,
+          invoiceDetail: invoiceDetail,
+        ),
+        setUp: () {
+          when(
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: orderHistory.orderHistoryItems.first.orderNumber,
+              customerCodeInfo: seedState.customerCodeInfo,
+              language: seedState.user.preferredLanguage,
+              offset: invoiceDetail.invoiceDetails.length,
+            ),
+          ).thenAnswer((invocation) async => Right(invoiceDetail));
+        },
+        act: (bloc) => bloc.add(
+          const ViewByItemDetailsEvent.loadMoreInvoices(),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isInvoiceLoading: true,
+            orderHistory: orderHistory,
+            invoiceDetail: invoiceDetail,
+          ),
+          seedState.copyWith(
+            orderHistory: orderHistory,
+            invoiceDetail: invoiceDetail.copyWith(
+              invoiceDetails:
+                  List<InvoiceDetail>.from(invoiceDetail.invoiceDetails)
+                    ..addAll(invoiceDetail.invoiceDetails),
+            ),
+          ),
+        ],
+      );
+
+      blocTest(
+        'For "loadMoreInvoices" Event fail',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+          config: config,
+        ),
+        seed: () => seedState.copyWith(
+          orderHistory: orderHistory,
+          invoiceDetail: invoiceDetail,
+        ),
+        setUp: () {
+          when(
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: orderHistory.orderHistoryItems.first.orderNumber,
+              customerCodeInfo: seedState.customerCodeInfo,
+              language: seedState.user.preferredLanguage,
+              offset: invoiceDetail.invoiceDetails.length,
+            ),
+          ).thenAnswer((invocation) async => const Left(fakeError));
+        },
+        act: (bloc) => bloc.add(
+          const ViewByItemDetailsEvent.loadMoreInvoices(),
+        ),
+        expect: () => [
+          seedState.copyWith(
+            isInvoiceLoading: true,
+            orderHistory: orderHistory,
+            invoiceDetail: invoiceDetail,
+          ),
+          seedState.copyWith(
+            orderHistory: orderHistory,
+            invoiceDetail: invoiceDetail,
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+          ),
+        ],
+      );
     },
   );
 }
