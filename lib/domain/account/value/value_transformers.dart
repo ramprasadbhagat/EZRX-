@@ -465,7 +465,7 @@ List<StatusType> getOrderHistoryFilterStatusList(bool isID) => <StatusType>[
       StatusType('Out for delivery'),
       StatusType('Delivered'),
       StatusType('Cancelled'),
-      if (!isID) StatusType('Pending'),
+      if (!isID) StatusType('Pending release'),
       if (!isID) StatusType('Order packed and ready for delivery'),
       if (!isID) StatusType('Failed'),
       if (!isID) StatusType('In Queue'),

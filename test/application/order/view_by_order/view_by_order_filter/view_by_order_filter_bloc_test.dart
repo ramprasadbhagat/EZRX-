@@ -155,7 +155,7 @@ void main() {
         StatusType('Out for delivery'),
         StatusType('Delivered'),
         StatusType('Cancelled'),
-        StatusType('Pending'),
+        StatusType('Pending release'),
         StatusType('Order packed and ready for delivery'),
         StatusType('Failed'),
         StatusType('In Queue'),
