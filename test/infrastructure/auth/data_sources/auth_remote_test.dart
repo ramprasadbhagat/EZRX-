@@ -531,6 +531,114 @@ void main() {
           },
         );
       });
+
+      group(
+        'access token',
+        () {
+          test(
+            'getAccessToken success',
+            () async {
+              final res = json.decode(
+                await rootBundle.loadString('assets/json/getAccessToken.json'),
+              );
+
+              final refreshToken =
+                  res['data']['getAccessToken']['eZRxRefreshToken'];
+
+              dioAdapter.onPost(
+                '/api/regenerateToken',
+                (server) => server.reply(
+                  200,
+                  res,
+                ),
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                data: jsonEncode({
+                  'query': remoteDataSource.authQueryMutation.getAccessToken(),
+                  'variables': {
+                    'eZRxRefreshToken': refreshToken,
+                  },
+                }),
+              );
+
+              final result = await remoteDataSource.getAccessToken(
+                refreshToken: refreshToken,
+              );
+
+              expect(
+                result,
+                LoginDto.fromJson(res['data']['getAccessToken']).toDomain(),
+              );
+            },
+          );
+
+          test(
+            'getAccessToken error',
+            () async {
+              dioAdapter.onPost(
+                '/api/regenerateToken',
+                (server) => server.reply(
+                  200,
+                  {
+                    'data': null,
+                    'errors': [
+                      {'message': 'fake-error'},
+                    ],
+                  },
+                ),
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                data: jsonEncode({
+                  'query': remoteDataSource.authQueryMutation.getAccessToken(),
+                }),
+              );
+
+              await remoteDataSource
+                  .getAccessToken(
+                refreshToken: 'refreshToken',
+              )
+                  .onError((error, _) async {
+                expect(error, isA<ServerException>());
+                return Future.value(LoginMock());
+              });
+            },
+          );
+
+          test(
+            'getAccessToken error when the authenticated is coming as false',
+            () async {
+              final res = json.decode(
+                await rootBundle.loadString('assets/json/getAccessToken.json'),
+              );
+
+              final refreshToken =
+                  res['data']['getAccessToken']['eZRxRefreshToken'];
+
+              dioAdapter.onPost(
+                '/api/regenerateToken',
+                (server) => server.reply(
+                  200,
+                  res,
+                ),
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                data: jsonEncode({
+                  'query': remoteDataSource.authQueryMutation.getAccessToken(),
+                  'variables': {
+                    'eZRxRefreshToken': refreshToken,
+                  },
+                }),
+              );
+
+              await remoteDataSource
+                  .getAccessToken(
+                refreshToken: 'refreshToken',
+              )
+                  .onError((error, _) async {
+                expect(error, isA<AuthException>());
+                return Future.value(LoginMock());
+              });
+            },
+          );
+        },
+      );
     },
   );
 }

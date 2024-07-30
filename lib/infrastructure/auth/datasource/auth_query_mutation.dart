@@ -154,15 +154,15 @@ class AuthQueryMutation {
 
   String getAccessToken() {
     return '''
-      query getAccessToken(\$eZRxRefreshToken: String!) {
-        getAccessToken(request: {eZRxRefreshToken: \$eZRxRefreshToken}) {
-          eZRxAccessToken
-          eZRxRefreshToken
-          message
-          __typename
-          }
+        query getAccessToken(\$eZRxRefreshToken: String!) {
+            getAccessToken(request: {eZRxRefreshToken: \$eZRxRefreshToken}) {
+              eZRxAccessToken
+              eZRxRefreshToken
+              message
+              __typename
+            }
         }
-        ''';
+    ''';
   }
 
   String requestResetPassword() {

@@ -26,7 +26,7 @@ class AuthLocalDataSource {
       await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
     );
 
-    return LoginDto.fromJson(data['data']['proxyLoginV4']).toDomain();
+    return LoginDto.fromJson(data['data']['proxyLoginV3']).toDomain();
   }
 
   Future<Login> getAccessToken() async {
