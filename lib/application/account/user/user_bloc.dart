@@ -44,7 +44,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
             //If login on behalf, the refresh token will always be empty string
             final isLoginOnBehalf = refreshTokenFailureOrSuccess.fold(
-              (_) => false,
+              (failure) => failure == const ApiFailure.refreshTokenInvalid(),
               (token) => !token.isValid(),
             );
 

@@ -543,7 +543,7 @@ void main() {
           (_) async => JWTDto(access: '', refresh: ''),
         );
         final result = await repository.getRefreshToken();
-        expect(result.isLeft(), true);
+        expect(result, const Left(ApiFailure.refreshTokenInvalid()));
       });
 
       test('test getRefreshToken failure', () async {

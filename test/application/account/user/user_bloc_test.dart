@@ -113,6 +113,28 @@ void main() {
     );
 
     blocTest<UserBloc, UserState>(
+      'Fetch user success when login on behalf and token is invalid',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.getUser()).thenAnswer(
+          (invocation) async => Right(
+            fakeClientUser,
+          ),
+        );
+        when(() => authRepositoryMock.getRefreshToken()).thenAnswer(
+          (_) async => const Left(ApiFailure.refreshTokenInvalid()),
+        );
+      },
+      act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
+      expect: () => [
+        userState.copyWith(user: fakeClientUser, isLoginOnBehalf: true),
+      ],
+    );
+
+    blocTest<UserBloc, UserState>(
       'Fetch user success and get token failure',
       build: () => UserBloc(
         userRepository: userRepoMock,

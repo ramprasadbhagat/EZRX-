@@ -28,6 +28,7 @@ mixin _$ApiFailure {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -82,6 +83,7 @@ mixin _$ApiFailure {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -136,6 +138,7 @@ mixin _$ApiFailure {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -193,6 +196,7 @@ mixin _$ApiFailure {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -273,6 +277,7 @@ mixin _$ApiFailure {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -339,6 +344,7 @@ mixin _$ApiFailure {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -486,6 +492,7 @@ class _$OtherImpl implements _Other {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -543,6 +550,7 @@ class _$OtherImpl implements _Other {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -600,6 +608,7 @@ class _$OtherImpl implements _Other {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -663,6 +672,7 @@ class _$OtherImpl implements _Other {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -746,6 +756,7 @@ class _$OtherImpl implements _Other {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -815,6 +826,7 @@ class _$OtherImpl implements _Other {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -957,6 +969,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -1014,6 +1027,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -1071,6 +1085,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -1134,6 +1149,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -1217,6 +1233,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -1286,6 +1303,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -1402,6 +1420,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -1459,6 +1478,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -1516,6 +1536,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -1579,6 +1600,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -1662,6 +1684,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -1731,6 +1754,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -1842,6 +1866,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -1899,6 +1924,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -1956,6 +1982,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -2019,6 +2046,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -2102,6 +2130,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -2171,6 +2200,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -2282,6 +2312,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -2339,6 +2370,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -2396,6 +2428,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -2459,6 +2492,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -2542,6 +2576,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -2611,6 +2646,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -2726,6 +2762,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -2783,6 +2820,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -2840,6 +2878,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -2903,6 +2942,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -2986,6 +3026,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -3055,6 +3096,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -3172,6 +3214,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -3229,6 +3272,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -3286,6 +3330,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -3349,6 +3394,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -3432,6 +3478,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -3501,6 +3548,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -3613,6 +3661,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -3670,6 +3719,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -3727,6 +3777,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -3790,6 +3841,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -3873,6 +3925,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -3942,6 +3995,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -4053,6 +4107,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -4110,6 +4165,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -4167,6 +4223,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -4230,6 +4287,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -4313,6 +4371,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -4382,6 +4441,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -4493,6 +4553,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -4550,6 +4611,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -4607,6 +4669,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -4670,6 +4733,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -4753,6 +4817,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -4822,6 +4887,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -4886,6 +4952,453 @@ abstract class _TokenExpired implements ApiFailure {
 }
 
 /// @nodoc
+abstract class _$$RefreshTokenInvalidImplCopyWith<$Res> {
+  factory _$$RefreshTokenInvalidImplCopyWith(_$RefreshTokenInvalidImpl value,
+          $Res Function(_$RefreshTokenInvalidImpl) then) =
+      __$$RefreshTokenInvalidImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RefreshTokenInvalidImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$RefreshTokenInvalidImpl>
+    implements _$$RefreshTokenInvalidImplCopyWith<$Res> {
+  __$$RefreshTokenInvalidImplCopyWithImpl(_$RefreshTokenInvalidImpl _value,
+      $Res Function(_$RefreshTokenInvalidImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RefreshTokenInvalidImpl implements _RefreshTokenInvalid {
+  const _$RefreshTokenInvalidImpl();
+
+  @override
+  String toString() {
+    return 'ApiFailure.refreshTokenInvalid()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RefreshTokenInvalidImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
+    required TResult Function() authenticationFailed,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() invalidDomain,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function() scannedProductNotFound,
+    required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+    required TResult Function() attachmentDownloadError,
+    required TResult Function(String message) openDownloadedFileError,
+    required TResult Function() addAnimalHealthWithNormalProductToCart,
+    required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
+    required TResult Function() accountCreationIncomplete,
+  }) {
+    return refreshTokenInvalid();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? invalidDomain,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function()? scannedProductNotFound,
+    TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+    TResult? Function()? attachmentDownloadError,
+    TResult? Function(String message)? openDownloadedFileError,
+    TResult? Function()? addAnimalHealthWithNormalProductToCart,
+    TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
+    TResult? Function()? accountCreationIncomplete,
+  }) {
+    return refreshTokenInvalid?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
+    TResult Function()? authenticationFailed,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? invalidDomain,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function()? scannedProductNotFound,
+    TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    TResult Function()? attachmentDownloadError,
+    TResult Function(String message)? openDownloadedFileError,
+    TResult Function()? addAnimalHealthWithNormalProductToCart,
+    TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
+    TResult Function()? accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (refreshTokenInvalid != null) {
+      return refreshTokenInvalid();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_InvalidDomain value) invalidDomain,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+    required TResult Function(_AttachmentDownloadError value)
+        attachmentDownloadError,
+    required TResult Function(_OpenDownloadedFileError value)
+        openDownloadedFileError,
+    required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
+        addAnimalHealthWithNormalProductToCart,
+    required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
+    required TResult Function(_AccountCreationIncomplete value)
+        accountCreationIncomplete,
+  }) {
+    return refreshTokenInvalid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_InvalidDomain value)? invalidDomain,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult? Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult? Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+  }) {
+    return refreshTokenInvalid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_InvalidDomain value)? invalidDomain,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (refreshTokenInvalid != null) {
+      return refreshTokenInvalid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshTokenInvalid implements ApiFailure {
+  const factory _RefreshTokenInvalid() = _$RefreshTokenInvalidImpl;
+}
+
+/// @nodoc
 abstract class _$$AuthenticationFailedImplCopyWith<$Res> {
   factory _$$AuthenticationFailedImplCopyWith(_$AuthenticationFailedImpl value,
           $Res Function(_$AuthenticationFailedImpl) then) =
@@ -4934,6 +5447,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -4991,6 +5505,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -5048,6 +5563,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -5111,6 +5627,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -5194,6 +5711,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -5263,6 +5781,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -5379,6 +5898,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -5436,6 +5956,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -5493,6 +6014,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -5556,6 +6078,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -5639,6 +6162,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -5708,6 +6232,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -5823,6 +6348,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -5880,6 +6406,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -5937,6 +6464,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -6000,6 +6528,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -6083,6 +6612,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -6152,6 +6682,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -6268,6 +6799,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -6325,6 +6857,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -6382,6 +6915,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -6445,6 +6979,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -6528,6 +7063,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -6597,6 +7133,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -6714,6 +7251,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -6771,6 +7309,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -6828,6 +7367,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -6891,6 +7431,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -6974,6 +7515,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -7043,6 +7585,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -7155,6 +7698,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -7212,6 +7756,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -7269,6 +7814,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -7332,6 +7878,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -7415,6 +7962,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -7484,6 +8032,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -7598,6 +8147,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -7655,6 +8205,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -7712,6 +8263,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -7775,6 +8327,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -7858,6 +8411,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -7927,6 +8481,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -8040,6 +8595,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -8097,6 +8653,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -8154,6 +8711,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -8217,6 +8775,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -8300,6 +8859,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -8369,6 +8929,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -8482,6 +9043,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -8539,6 +9101,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -8596,6 +9159,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -8659,6 +9223,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -8742,6 +9307,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -8811,6 +9377,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -8922,6 +9489,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -8979,6 +9547,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -9036,6 +9605,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -9099,6 +9669,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -9182,6 +9753,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -9251,6 +9823,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -9364,6 +9937,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -9421,6 +9995,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -9478,6 +10053,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -9541,6 +10117,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -9624,6 +10201,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -9693,6 +10271,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -9804,6 +10383,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -9861,6 +10441,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -9918,6 +10499,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -9981,6 +10563,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -10064,6 +10647,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -10133,6 +10717,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -10246,6 +10831,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -10303,6 +10889,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -10360,6 +10947,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -10423,6 +11011,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -10506,6 +11095,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -10575,6 +11165,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -10689,6 +11280,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -10746,6 +11338,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -10803,6 +11396,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -10866,6 +11460,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -10949,6 +11544,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -11018,6 +11614,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -11129,6 +11726,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -11186,6 +11784,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -11243,6 +11842,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -11306,6 +11906,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -11389,6 +11990,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -11458,6 +12060,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -11572,6 +12175,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -11629,6 +12233,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -11686,6 +12291,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -11749,6 +12355,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -11832,6 +12439,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -11901,6 +12509,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -12012,6 +12621,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -12069,6 +12679,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -12126,6 +12737,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -12189,6 +12801,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -12272,6 +12885,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -12341,6 +12955,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -12452,6 +13067,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -12509,6 +13125,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -12566,6 +13183,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -12629,6 +13247,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -12712,6 +13331,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -12781,6 +13401,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -12892,6 +13513,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -12949,6 +13571,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -13006,6 +13629,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -13069,6 +13693,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -13152,6 +13777,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -13221,6 +13847,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -13332,6 +13959,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -13389,6 +14017,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -13446,6 +14075,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -13509,6 +14139,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -13592,6 +14223,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -13661,6 +14293,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -13772,6 +14405,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -13829,6 +14463,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -13886,6 +14521,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -13949,6 +14585,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -14032,6 +14669,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -14101,6 +14739,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -14212,6 +14851,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -14269,6 +14909,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -14326,6 +14967,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -14389,6 +15031,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -14472,6 +15115,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -14541,6 +15185,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -14652,6 +15297,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -14709,6 +15355,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -14766,6 +15413,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -14829,6 +15477,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -14912,6 +15561,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -14981,6 +15631,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -15095,6 +15746,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -15152,6 +15804,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -15209,6 +15862,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -15272,6 +15926,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -15355,6 +16010,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -15424,6 +16080,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -15565,6 +16222,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -15622,6 +16280,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -15679,6 +16338,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -15742,6 +16402,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -15825,6 +16486,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -15894,6 +16556,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -16011,6 +16674,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -16068,6 +16732,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -16125,6 +16790,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -16188,6 +16854,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -16271,6 +16938,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -16340,6 +17008,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -16451,6 +17120,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -16508,6 +17178,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -16565,6 +17236,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -16628,6 +17300,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -16711,6 +17384,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -16780,6 +17454,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -16894,6 +17569,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -16951,6 +17627,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -17008,6 +17685,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -17071,6 +17749,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -17154,6 +17833,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -17223,6 +17903,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -17364,6 +18045,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -17421,6 +18103,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -17478,6 +18161,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -17541,6 +18225,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -17624,6 +18309,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -17693,6 +18379,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -17812,6 +18499,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -17869,6 +18557,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -17926,6 +18615,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -17989,6 +18679,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -18072,6 +18763,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -18141,6 +18833,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -18280,6 +18973,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -18337,6 +19031,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -18394,6 +19089,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -18457,6 +19153,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -18540,6 +19237,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -18609,6 +19307,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -18756,6 +19455,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -18813,6 +19513,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -18870,6 +19571,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -18933,6 +19635,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -19016,6 +19719,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -19085,6 +19789,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -19205,6 +19910,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -19262,6 +19968,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -19319,6 +20026,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -19382,6 +20090,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -19465,6 +20174,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -19534,6 +20244,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -19650,6 +20361,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -19707,6 +20419,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -19764,6 +20477,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -19827,6 +20541,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -19910,6 +20625,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -19979,6 +20695,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -20094,6 +20811,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -20151,6 +20869,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -20208,6 +20927,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -20271,6 +20991,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -20354,6 +21075,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -20423,6 +21145,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -20563,6 +21286,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -20620,6 +21344,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -20677,6 +21402,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -20740,6 +21466,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -20823,6 +21550,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -20892,6 +21620,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -21014,6 +21743,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -21071,6 +21801,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -21128,6 +21859,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -21191,6 +21923,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -21274,6 +22007,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -21343,6 +22077,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -21455,6 +22190,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -21512,6 +22248,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -21569,6 +22306,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -21632,6 +22370,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -21715,6 +22454,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -21784,6 +22524,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -21897,6 +22638,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -21954,6 +22696,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -22011,6 +22754,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -22074,6 +22818,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -22157,6 +22902,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -22226,6 +22972,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -22340,6 +23087,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
     required TResult Function() authenticationFailed,
     required TResult Function() cannotProxyLoginWithCurrentRole,
     required TResult Function() cannotProxyLoginRootAdmin,
@@ -22397,6 +23145,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
     TResult? Function()? authenticationFailed,
     TResult? Function()? cannotProxyLoginWithCurrentRole,
     TResult? Function()? cannotProxyLoginRootAdmin,
@@ -22454,6 +23203,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
     TResult Function()? authenticationFailed,
     TResult Function()? cannotProxyLoginWithCurrentRole,
     TResult Function()? cannotProxyLoginRootAdmin,
@@ -22517,6 +23267,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_CannotProxyLoginWithCurrentRole value)
         cannotProxyLoginWithCurrentRole,
@@ -22600,6 +23351,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,
@@ -22669,6 +23421,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_CannotProxyLoginWithCurrentRole value)?
         cannotProxyLoginWithCurrentRole,

@@ -232,7 +232,7 @@ class AuthRepository implements IAuthRepository {
 
       return refreshToken.isValid()
           ? Right(refreshToken)
-          : const Left(ApiFailure.other('Invalid Refresh Token'));
+          : const Left(ApiFailure.refreshTokenInvalid());
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

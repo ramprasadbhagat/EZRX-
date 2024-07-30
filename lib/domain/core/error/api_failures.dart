@@ -21,6 +21,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.accountLocked() = _AccountLocked;
   const factory ApiFailure.accountExpired() = _AccountExpired;
   const factory ApiFailure.tokenExpired() = _TokenExpired;
+  const factory ApiFailure.refreshTokenInvalid() = _RefreshTokenInvalid;
   const factory ApiFailure.authenticationFailed() = _AuthenticationFailed;
   const factory ApiFailure.cannotProxyLoginWithCurrentRole() =
       _CannotProxyLoginWithCurrentRole;
@@ -196,6 +197,7 @@ extension ApiFailureExt on ApiFailure {
         accountCreationIncomplete: (_) => const TRObject(
           'Your account creation is incomplete. Please contact the local customer service team for assistance.',
         ),
+        refreshTokenInvalid: (_) => const TRObject('Invalid Refresh Token'),
       );
   String get nonTranslatedFailureMessage {
     var fullMessage = failureMessage.message;
