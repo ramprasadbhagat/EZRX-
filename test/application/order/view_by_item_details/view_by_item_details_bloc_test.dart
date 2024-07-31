@@ -91,7 +91,13 @@ void main() {
           salesOrganisation: fakeMYSalesOrganisation,
           user: fakeRootAdminUser,
           orderHistory: orderHistory,
-          orderHistoryItem: orderHistory.orderHistoryItems.first,
+          orderHistorySelectedItems: orderHistory.orderHistoryItems
+              .where(
+                (item) =>
+                    item.lineNumber.parentIntValue ==
+                    fakeOrderHistoryItem.lineNumber.parentIntValue,
+              )
+              .toList(),
           shipToInfo: fakeShipToInfo,
         );
       });
@@ -293,6 +299,14 @@ void main() {
           ),
         ),
         expect: () {
+          final orderHistorySelectedItems = orderHistory.orderHistoryItems
+              .where(
+                (item) =>
+                    item.lineNumber.parentIntValue ==
+                    fakeOrderHistoryItem.lineNumber.parentIntValue,
+              )
+              .toList();
+
           return [
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -307,7 +321,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption: optionOf(Right(orderHistory)),
             ),
             viewByItemDetailsState.copyWith(
@@ -316,7 +330,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
@@ -325,7 +339,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
           ];
@@ -386,6 +400,15 @@ void main() {
           ),
         ),
         expect: () {
+          final orderHistorySelectedItems =
+              orderHistoryForFetchStatus.orderHistoryItems
+                  .where(
+                    (item) =>
+                        item.lineNumber.parentIntValue ==
+                        fakeOrderHistoryItem.lineNumber.parentIntValue,
+                  )
+                  .toList();
+
           return [
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -400,8 +423,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption:
                   optionOf(Right(orderHistoryForFetchStatus)),
             ),
@@ -411,8 +433,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
@@ -421,8 +442,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
             viewByItemDetailsState.copyWith(
@@ -431,8 +451,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               isStatusLoading: true,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
@@ -442,8 +461,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
           ];
@@ -515,16 +533,20 @@ void main() {
           );
           orderHistoryBloc.emit(
             viewByItemDetailsState.copyWith(
-              orderHistoryItem: OrderHistoryItem.empty().copyWith(
-                orderHistoryItemPoAttachments: <PoDocuments>[],
-              ),
+              orderHistorySelectedItems: [
+                OrderHistoryItem.empty().copyWith(
+                  orderHistoryItemPoAttachments: <PoDocuments>[
+                    PoDocuments.empty(),
+                  ],
+                ),
+              ],
               isExpanded: true,
             ),
           );
           expect(
             orderHistoryBloc.state.poDocumentsList,
             orderHistoryBloc
-                .state.orderHistoryItem.orderHistoryItemPoAttachments,
+                .state.orderHistorySelectedItem.orderHistoryItemPoAttachments,
           );
         },
       );
@@ -539,19 +561,21 @@ void main() {
           );
           orderHistoryBloc.emit(
             viewByItemDetailsState.copyWith(
-              orderHistoryItem: OrderHistoryItem.empty().copyWith(
-                orderHistoryItemPoAttachments: [
-                  PoDocuments.empty(),
-                ],
-              ),
+              orderHistorySelectedItems: [
+                OrderHistoryItem.empty().copyWith(
+                  orderHistoryItemPoAttachments: <PoDocuments>[
+                    PoDocuments.empty(),
+                  ],
+                ),
+              ],
               isExpanded: false,
             ),
           );
           expect(
             orderHistoryBloc.state.poDocumentsList,
             [
-              orderHistoryBloc
-                  .state.orderHistoryItem.orderHistoryItemPoAttachments.first,
+              orderHistoryBloc.state.orderHistorySelectedItem
+                  .orderHistoryItemPoAttachments.first,
             ],
           );
         },
@@ -567,9 +591,11 @@ void main() {
           );
           orderHistoryBloc.emit(
             viewByItemDetailsState.copyWith(
-              orderHistoryItem: OrderHistoryItem.empty().copyWith(
-                orderHistoryItemPoAttachments: <PoDocuments>[],
-              ),
+              orderHistorySelectedItems: [
+                OrderHistoryItem.empty().copyWith(
+                  orderHistoryItemPoAttachments: <PoDocuments>[],
+                ),
+              ],
             ),
           );
           expect(
@@ -644,6 +670,15 @@ void main() {
           ),
         ),
         expect: () {
+          final orderHistorySelectedItems =
+              orderHistoryForFetchStatus.orderHistoryItems
+                  .where(
+                    (item) =>
+                        item.lineNumber.parentIntValue ==
+                        fakeOrderHistoryItem.lineNumber.parentIntValue,
+                  )
+                  .toList();
+
           return [
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -658,8 +693,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption:
                   optionOf(Right(orderHistoryForFetchStatus)),
             ),
@@ -669,8 +703,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
@@ -679,8 +712,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
             viewByItemDetailsState.copyWith(
@@ -689,8 +721,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               isStatusLoading: true,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
@@ -701,8 +732,7 @@ void main() {
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForFetchStatus,
               orderHistoryStatuses: fakeOrderStatusTracker,
-              orderHistoryItem:
-                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption: none(),
             ),
           ];
@@ -757,6 +787,15 @@ void main() {
           ),
         ),
         expect: () {
+          final orderHistorySelectedItems =
+              orderHistoryForEmptyInvoiceNumber.orderHistoryItems
+                  .where(
+                    (item) =>
+                        item.lineNumber.parentIntValue ==
+                        fakeOrderHistoryItem.lineNumber.parentIntValue,
+                  )
+                  .toList();
+
           return [
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -771,8 +810,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForEmptyInvoiceNumber,
-              orderHistoryItem:
-                  orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption:
                   optionOf(Right(orderHistoryForEmptyInvoiceNumber)),
             ),
@@ -782,8 +820,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForEmptyInvoiceNumber,
-              orderHistoryItem:
-                  orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               isInvoiceLoading: true,
             ),
             viewByItemDetailsState.copyWith(
@@ -792,8 +829,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistoryForEmptyInvoiceNumber,
-              orderHistoryItem:
-                  orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
           ];
@@ -883,10 +919,18 @@ void main() {
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.fetchOrderHistoryDetails(
             orderNumber: fakeOrderHistoryItem.orderNumber,
-            lineNumber: LineNumber('fake-data'),
+            lineNumber: LineNumber('000020'),
           ),
         ),
         expect: () {
+          final orderHistorySelectedItems = orderHistory.orderHistoryItems
+              .where(
+                (item) =>
+                    item.lineNumber.parentIntValue ==
+                    fakeOrderHistoryItem.lineNumber.parentIntValue,
+              )
+              .toList();
+
           return [
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -902,7 +946,7 @@ void main() {
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
               failureOrSuccessOption: optionOf(Right(orderHistory)),
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
             ),
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -911,7 +955,7 @@ void main() {
               user: fakeRootAdminUser,
               isInvoiceLoading: true,
               orderHistory: orderHistory,
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
             ),
             viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -919,7 +963,7 @@ void main() {
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               orderHistory: orderHistory,
-              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              orderHistorySelectedItems: orderHistorySelectedItems,
               invoiceDetail: invoiceDetail,
             ),
           ];

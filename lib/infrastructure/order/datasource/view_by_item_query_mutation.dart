@@ -144,6 +144,7 @@ class ViewByItemQueryMutation {
               InvoiceTotalQty
               InvoiceTotalPrice
               InvoiceItems {
+                  LineNumber              
                   Type
                   LineNumber
                   MaterialCode

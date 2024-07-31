@@ -1,11 +1,13 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
 class ItemDetailsSection extends StatelessWidget {
-  final OrderHistoryItem orderHistoryItem;
+  final List<ViewByItemGroup> selectedItems;
+  final bool isMarketPlace;
 
   const ItemDetailsSection({
     super.key,
-    required this.orderHistoryItem,
+    required this.selectedItems,
+    this.isMarketPlace = false,
   });
 
   @override
@@ -18,17 +20,37 @@ class ItemDetailsSection extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (!orderHistoryItem.isMarketPlace) ...[
-            Text(
-              orderHistoryItem.principalData.principalName.name,
-              style: Theme.of(context).textTheme.labelMedium,
-              key: WidgetKeys.manufacturerMaterials,
-            ),
-            const SizedBox(height: 10),
-          ],
-          ViewByItemOrderItemTile(orderHistoryItem: orderHistoryItem),
-        ],
+        children: selectedItems
+            .mapIndexed(
+              (index, e) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // All Marketplace items from the same manufacturer will be in one order
+                  // hence we won't need to display the manufacturer name for each group of items here
+                  if (index == 0 && isMarketPlace) const SizedBox(height: 16),
+                  if (!isMarketPlace) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      e.manufactureName.name,
+                      style: Theme.of(context).textTheme.labelMedium,
+                      key: WidgetKeys.manufacturerMaterials,
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                  Column(
+                    children: e.orderHistoryItem
+                        .mapIndexed(
+                          (index, e) => ViewByItemOrderItemTile(
+                            orderHistoryItem: e,
+                            key: WidgetKeys.genericKey(key: index.toString()),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
+            )
+            .toList(),
       ),
     );
   }

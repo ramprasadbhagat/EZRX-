@@ -10,7 +10,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfig,
     required OrderHistory orderHistory,
-    required OrderHistoryItem orderHistoryItem,
+    required List<OrderHistoryItem> orderHistorySelectedItems,
     required List<OrderStatusTracker> orderHistoryStatuses,
     required bool isStatusLoading,
     required bool isInvoiceLoading,
@@ -28,7 +28,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrganisation: SalesOrganisation.empty(),
         orderHistory: OrderHistory.empty(),
-        orderHistoryItem: OrderHistoryItem.empty(),
+        orderHistorySelectedItems: <OrderHistoryItem>[],
         orderHistoryStatuses: <OrderStatusTracker>[],
         failureOrSuccessOption: none(),
         isStatusLoading: false,
@@ -40,22 +40,35 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
         canLoadMoreInvoices: true,
       );
 
-  List<PoDocuments> get poDocumentsList => isExpanded
-      ? orderHistoryItem.orderHistoryItemPoAttachments
-      : [orderHistoryItem.orderHistoryItemPoAttachments.first];
+  OrderHistoryItem get orderHistorySelectedItem =>
+      orderHistorySelectedItems.isNotEmpty
+          ? orderHistorySelectedItems.first
+          : OrderHistoryItem.empty();
+
+  List<PoDocuments> get poDocumentsList =>
+      orderHistorySelectedItem.orderHistoryItemPoAttachments.isNotEmpty
+          ? isExpanded
+              ? orderHistorySelectedItem.orderHistoryItemPoAttachments
+              : [orderHistorySelectedItem.orderHistoryItemPoAttachments.first]
+          : [];
 
   bool get displayShowMoreOrLess =>
-      orderHistoryItem.orderHistoryItemPoAttachments.length > 1;
+      orderHistorySelectedItem.orderHistoryItemPoAttachments.length > 1;
 
   List<OrderHistoryItem> get otherItems => orderHistory.orderHistoryItems
-      .where((e) => e.lineNumber != orderHistoryItem.lineNumber)
+      .where(
+        (e) => !orderHistorySelectedItems
+            .map((e) => e.lineNumber)
+            .toList()
+            .contains(e.lineNumber),
+      )
       .toList();
 
   bool get isCovidOrderType =>
       (salesOrgConfig.salesOrg.isPH &&
-          orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
+          orderHistorySelectedItem.orderType.isCovidOrderTypeForPH) ||
       (salesOrgConfig.salesOrg.isSg &&
-          orderHistoryItem.orderType.isCovidOrderTypeForSG);
+          orderHistorySelectedItem.orderType.isCovidOrderTypeForSG);
 
   bool get isCovidForNonCustomer =>
       isCovidOrderType && !user.role.type.isCustomer;
@@ -65,7 +78,8 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
       return false;
     }
 
-    if (!salesOrgConfig.enableMarketPlace && orderHistoryItem.isMarketPlace) {
+    if (!salesOrgConfig.enableMarketPlace &&
+        orderHistorySelectedItem.isMarketPlace) {
       return false;
     }
 

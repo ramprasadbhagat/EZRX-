@@ -11,11 +11,13 @@ class _OrderItemHistoryItemTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ItemDetailsSection(
-          orderHistoryItem: state.orderHistoryItem,
+          selectedItems:
+              state.orderHistorySelectedItems.getViewByOrderItemDetailsList,
+          isMarketPlace: state.orderHistorySelectedItem.isMarketPlace,
         ),
         OtherItemDetailsSection(
           otherItems: state.otherItems,
-          isMarketPlace: state.orderHistoryItem.isMarketPlace,
+          isMarketPlace: state.orderHistorySelectedItem.isMarketPlace,
         ),
       ],
     );

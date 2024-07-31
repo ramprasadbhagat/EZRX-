@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -153,23 +152,25 @@ class ViewByItemDetailsBloc
             );
           },
           (orderHistory) {
-            final orderHistoryItem =
-                orderHistory.orderHistoryItems.firstWhereOrNull(
-                      (item) => item.lineNumber == e.lineNumber,
-                    ) ??
-                    orderHistory.orderHistoryItems.first;
+            final orderHistoryItems = orderHistory.orderHistoryItems
+                .where(
+                  (item) =>
+                      item.lineNumber.parentIntValue ==
+                      e.lineNumber.parentIntValue,
+                )
+                .toList();
             emit(
               state.copyWith(
                 orderHistory: orderHistory,
-                orderHistoryItem: orderHistoryItem,
+                orderHistorySelectedItems: orderHistoryItems,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isDetailsLoading: false,
               ),
             );
-            if (orderHistoryItem.invoiceNumber.isNotEmpty) {
+            if (state.orderHistorySelectedItem.invoiceNumber.isNotEmpty) {
               add(
                 _FetchZyllemStatus(
-                  invoiceNumber: orderHistoryItem.invoiceNumber,
+                  invoiceNumber: state.orderHistorySelectedItem.invoiceNumber,
                 ),
               );
             }
@@ -189,7 +190,7 @@ class ViewByItemDetailsBloc
 
         final failureOrSuccess =
             await viewByItemRepository.getInvoiceDetailsForOrder(
-          orderNumber: state.orderHistoryItem.orderNumber,
+          orderNumber: state.orderHistorySelectedItem.orderNumber,
           customerCodeInfo: state.customerCodeInfo,
           language: state.user.preferredLanguage,
           offset: state.invoiceDetail.invoiceDetails.length,

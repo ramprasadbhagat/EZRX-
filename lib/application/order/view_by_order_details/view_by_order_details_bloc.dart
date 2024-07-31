@@ -108,6 +108,11 @@ class ViewByOrderDetailsBloc
         );
       },
       setOrderDetails: (e) {
+        add(
+          _FetchOrdersInvoiceData(
+            orderNumber: e.orderHistoryDetails.orderNumber,
+          ),
+        );
         emit(
           state.copyWith(
             orderHistoryDetails: e.orderHistoryDetails,
@@ -226,6 +231,8 @@ class ViewByOrderDetailsBloc
                 invoiceDetail: invoiceDetail,
                 failureOrSuccessOption: none(),
                 isFetchingInvoices: false,
+                canLoadMoreInvoices:
+                    invoiceDetail.invoiceDetails.length >= config.pageSize,
               ),
             );
           },

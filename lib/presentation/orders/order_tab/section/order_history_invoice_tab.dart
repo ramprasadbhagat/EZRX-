@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/expandable_section.dart';
 import 'package:ezrxmobile/presentation/core/load_more_indicator.dart';
@@ -21,11 +22,13 @@ class OrderHistoryInvoiceTab extends StatelessWidget {
   final List<InvoiceDetail> invoices;
   final bool isLoading;
   final ScrollController controller;
+  final List<LineNumber> lineNumberSelected;
   const OrderHistoryInvoiceTab({
     super.key,
     required this.invoices,
     required this.controller,
     this.isLoading = false,
+    this.lineNumberSelected = const <LineNumber>[],
   });
 
   @override
@@ -52,6 +55,9 @@ class OrderHistoryInvoiceTab extends StatelessWidget {
             invoices.length,
             (index) {
               final invoice = invoices[index];
+              final invoiceMaterials = invoice.getInvoiceOrderItemsDisplay(
+                lineNumbersSelected: lineNumberSelected,
+              );
 
               return CustomCard(
                 child: Padding(
@@ -83,7 +89,9 @@ class OrderHistoryInvoiceTab extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                '${context.tr('Material(s) quantity')}: ${invoice.invoiceTotalQty}',
+                                '${context.tr('Material(s) quantity')}: ${invoice.getInvoiceTotalQtyDisplay(
+                                  lineNumbersSelected: lineNumberSelected,
+                                )}',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ),
@@ -98,7 +106,11 @@ class OrderHistoryInvoiceTab extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: PriceComponent(
                           salesOrgConfig: eligibilityState.salesOrgConfigs,
-                          price: invoice.invoiceTotalPrice.toString(),
+                          price: invoice
+                              .getInvoiceTotalPriceDisplay(
+                                lineNumbersSelected: lineNumberSelected,
+                              )
+                              .toString(),
                           type: PriceStyle.comboSubTotalExclTax,
                         ),
                       ),
@@ -137,11 +149,11 @@ class OrderHistoryInvoiceTab extends StatelessWidget {
                                 ),
                               ),
                             ...List.generate(
-                              invoice.orderItems.length,
+                              invoiceMaterials.length,
                               (
                                 invoiceIndex,
                               ) {
-                                final item = invoice.orderItems[invoiceIndex];
+                                final item = invoiceMaterials[invoiceIndex];
 
                                 return _MaterialOfInvoice(
                                   material: item,

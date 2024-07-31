@@ -22,7 +22,7 @@ class _BuyAgainButton extends StatelessWidget {
                   mobileNumber: context
                       .read<ViewByItemDetailsBloc>()
                       .state
-                      .orderHistoryItem
+                      .orderHistorySelectedItem
                       .telephoneNumber,
                 ),
               ),
@@ -184,7 +184,7 @@ class _BuyAgainButton extends StatelessWidget {
 
   void _buyAgain(BuildContext context) {
     final viewByItemDetailState = context.read<ViewByItemDetailsBloc>().state;
-    final item = viewByItemDetailState.orderHistoryItem;
+    final item = viewByItemDetailState.orderHistorySelectedItem;
 
     trackMixpanelEvent(
       TrackingEvents.buyAgainClicked,

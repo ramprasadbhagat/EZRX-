@@ -439,8 +439,6 @@ class CreatePaymentInvoicePdf {
       );
 
   Future<pw.Widget> _description({required String pleaseNote}) async {
-    if (pleaseNote.isEmpty) return pw.SizedBox.shrink();
-
     final image = await _captureImageDescription(pleaseNote: pleaseNote);
 
     return pw.Container(
@@ -472,7 +470,7 @@ class CreatePaymentInvoicePdf {
             ),
           ),
         )
-      : pw.SizedBox.shrink();
+      : pw.SizedBox();
 
   pw.Widget get _paymentStepsQrCode => pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start,

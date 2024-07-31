@@ -277,6 +277,16 @@ void main() {
           config: config,
         ),
         seed: () => viewByOrderDetailsSeedState,
+        setUp: () {
+          when(
+            () => viewByItemRepositoryMock.getInvoiceDetailsForOrder(
+              orderNumber: orderHistoryDetailsMock.orderNumber,
+              customerCodeInfo: viewByOrderDetailsSeedState.customerCodeInfo,
+              language: viewByOrderDetailsSeedState.user.preferredLanguage,
+              offset: offSet,
+            ),
+          ).thenAnswer((invocation) async => Right(invoiceDetail));
+        },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.setOrderDetails(
             orderHistoryDetails: orderHistoryDetailsMock,
@@ -284,6 +294,18 @@ void main() {
         ),
         expect: () => [
           viewByOrderDetailsSeedState.copyWith(
+            orderHistoryDetails: orderHistoryDetailsMock,
+            materials: fakeMaterials,
+            isLoadingTenderContract: fakeIsLoadingTenderContract,
+          ),
+          viewByOrderDetailsSeedState.copyWith(
+            isFetchingInvoices: true,
+            orderHistoryDetails: orderHistoryDetailsMock,
+            materials: fakeMaterials,
+            isLoadingTenderContract: fakeIsLoadingTenderContract,
+          ),
+          viewByOrderDetailsSeedState.copyWith(
+            invoiceDetail: invoiceDetail,
             orderHistoryDetails: orderHistoryDetailsMock,
             materials: fakeMaterials,
             isLoadingTenderContract: fakeIsLoadingTenderContract,

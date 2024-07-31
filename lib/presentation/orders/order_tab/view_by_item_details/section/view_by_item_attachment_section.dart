@@ -20,7 +20,7 @@ class ViewByItemAttachmentSection extends StatelessWidget {
           child: context
                   .read<ViewByItemDetailsBloc>()
                   .state
-                  .orderHistoryItem
+                  .orderHistorySelectedItem
                   .orderHistoryItemPoAttachments
                   .isNotEmpty
               ? const _AttachmentsWithIcon()
@@ -64,11 +64,9 @@ class _AttachmentsWithIcon extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              ...state.poDocumentsList
-                  .map(
-                    (e) => _AttachmentFile(document: e),
-                  )
-                  ,
+              ...state.poDocumentsList.map(
+                (e) => _AttachmentFile(document: e),
+              ),
               if (state.displayShowMoreOrLess)
                 InkWell(
                   key: WidgetKeys.viewByItemsOrderDetailsShowMoreAttachments,

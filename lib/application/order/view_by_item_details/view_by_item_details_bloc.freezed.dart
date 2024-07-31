@@ -1322,7 +1322,8 @@ mixin _$ViewByItemDetailsState {
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   OrderHistory get orderHistory => throw _privateConstructorUsedError;
-  OrderHistoryItem get orderHistoryItem => throw _privateConstructorUsedError;
+  List<OrderHistoryItem> get orderHistorySelectedItems =>
+      throw _privateConstructorUsedError;
   List<OrderStatusTracker> get orderHistoryStatuses =>
       throw _privateConstructorUsedError;
   bool get isStatusLoading => throw _privateConstructorUsedError;
@@ -1352,7 +1353,7 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrgConfig,
       OrderHistory orderHistory,
-      OrderHistoryItem orderHistoryItem,
+      List<OrderHistoryItem> orderHistorySelectedItems,
       List<OrderStatusTracker> orderHistoryStatuses,
       bool isStatusLoading,
       bool isInvoiceLoading,
@@ -1368,7 +1369,6 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   $OrderHistoryCopyWith<$Res> get orderHistory;
-  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $InvoiceDetailResponseCopyWith<$Res> get invoiceDetail;
 }
@@ -1392,7 +1392,7 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
     Object? salesOrganisation = null,
     Object? salesOrgConfig = null,
     Object? orderHistory = null,
-    Object? orderHistoryItem = null,
+    Object? orderHistorySelectedItems = null,
     Object? orderHistoryStatuses = null,
     Object? isStatusLoading = null,
     Object? isInvoiceLoading = null,
@@ -1424,10 +1424,10 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
           ? _value.orderHistory
           : orderHistory // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
-      orderHistoryItem: null == orderHistoryItem
-          ? _value.orderHistoryItem
-          : orderHistoryItem // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryItem,
+      orderHistorySelectedItems: null == orderHistorySelectedItems
+          ? _value.orderHistorySelectedItems
+          : orderHistorySelectedItems // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryItem>,
       orderHistoryStatuses: null == orderHistoryStatuses
           ? _value.orderHistoryStatuses
           : orderHistoryStatuses // ignore: cast_nullable_to_non_nullable
@@ -1510,14 +1510,6 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem {
-    return $OrderHistoryItemCopyWith<$Res>(_value.orderHistoryItem, (value) {
-      return _then(_value.copyWith(orderHistoryItem: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToInfo {
     return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
       return _then(_value.copyWith(shipToInfo: value) as $Val);
@@ -1548,7 +1540,7 @@ abstract class _$$ViewByItemDetailsStateImplCopyWith<$Res>
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrgConfig,
       OrderHistory orderHistory,
-      OrderHistoryItem orderHistoryItem,
+      List<OrderHistoryItem> orderHistorySelectedItems,
       List<OrderStatusTracker> orderHistoryStatuses,
       bool isStatusLoading,
       bool isInvoiceLoading,
@@ -1569,8 +1561,6 @@ abstract class _$$ViewByItemDetailsStateImplCopyWith<$Res>
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   @override
   $OrderHistoryCopyWith<$Res> get orderHistory;
-  @override
-  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
@@ -1595,7 +1585,7 @@ class __$$ViewByItemDetailsStateImplCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? salesOrgConfig = null,
     Object? orderHistory = null,
-    Object? orderHistoryItem = null,
+    Object? orderHistorySelectedItems = null,
     Object? orderHistoryStatuses = null,
     Object? isStatusLoading = null,
     Object? isInvoiceLoading = null,
@@ -1627,10 +1617,10 @@ class __$$ViewByItemDetailsStateImplCopyWithImpl<$Res>
           ? _value.orderHistory
           : orderHistory // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
-      orderHistoryItem: null == orderHistoryItem
-          ? _value.orderHistoryItem
-          : orderHistoryItem // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryItem,
+      orderHistorySelectedItems: null == orderHistorySelectedItems
+          ? _value._orderHistorySelectedItems
+          : orderHistorySelectedItems // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryItem>,
       orderHistoryStatuses: null == orderHistoryStatuses
           ? _value._orderHistoryStatuses
           : orderHistoryStatuses // ignore: cast_nullable_to_non_nullable
@@ -1680,7 +1670,7 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
       required this.salesOrganisation,
       required this.salesOrgConfig,
       required this.orderHistory,
-      required this.orderHistoryItem,
+      required final List<OrderHistoryItem> orderHistorySelectedItems,
       required final List<OrderStatusTracker> orderHistoryStatuses,
       required this.isStatusLoading,
       required this.isInvoiceLoading,
@@ -1690,7 +1680,8 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
       required this.shipToInfo,
       required this.invoiceDetail,
       required this.canLoadMoreInvoices})
-      : _orderHistoryStatuses = orderHistoryStatuses,
+      : _orderHistorySelectedItems = orderHistorySelectedItems,
+        _orderHistoryStatuses = orderHistoryStatuses,
         super._();
 
   @override
@@ -1703,8 +1694,15 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
   final SalesOrganisationConfigs salesOrgConfig;
   @override
   final OrderHistory orderHistory;
+  final List<OrderHistoryItem> _orderHistorySelectedItems;
   @override
-  final OrderHistoryItem orderHistoryItem;
+  List<OrderHistoryItem> get orderHistorySelectedItems {
+    if (_orderHistorySelectedItems is EqualUnmodifiableListView)
+      return _orderHistorySelectedItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderHistorySelectedItems);
+  }
+
   final List<OrderStatusTracker> _orderHistoryStatuses;
   @override
   List<OrderStatusTracker> get orderHistoryStatuses {
@@ -1733,7 +1731,7 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
 
   @override
   String toString() {
-    return 'ViewByItemDetailsState(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig, orderHistory: $orderHistory, orderHistoryItem: $orderHistoryItem, orderHistoryStatuses: $orderHistoryStatuses, isStatusLoading: $isStatusLoading, isInvoiceLoading: $isInvoiceLoading, isDetailsLoading: $isDetailsLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption, shipToInfo: $shipToInfo, invoiceDetail: $invoiceDetail, canLoadMoreInvoices: $canLoadMoreInvoices)';
+    return 'ViewByItemDetailsState(customerCodeInfo: $customerCodeInfo, user: $user, salesOrganisation: $salesOrganisation, salesOrgConfig: $salesOrgConfig, orderHistory: $orderHistory, orderHistorySelectedItems: $orderHistorySelectedItems, orderHistoryStatuses: $orderHistoryStatuses, isStatusLoading: $isStatusLoading, isInvoiceLoading: $isInvoiceLoading, isDetailsLoading: $isDetailsLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption, shipToInfo: $shipToInfo, invoiceDetail: $invoiceDetail, canLoadMoreInvoices: $canLoadMoreInvoices)';
   }
 
   @override
@@ -1750,8 +1748,8 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.orderHistory, orderHistory) ||
                 other.orderHistory == orderHistory) &&
-            (identical(other.orderHistoryItem, orderHistoryItem) ||
-                other.orderHistoryItem == orderHistoryItem) &&
+            const DeepCollectionEquality().equals(
+                other._orderHistorySelectedItems, _orderHistorySelectedItems) &&
             const DeepCollectionEquality()
                 .equals(other._orderHistoryStatuses, _orderHistoryStatuses) &&
             (identical(other.isStatusLoading, isStatusLoading) ||
@@ -1780,7 +1778,7 @@ class _$ViewByItemDetailsStateImpl extends _ViewByItemDetailsState {
       salesOrganisation,
       salesOrgConfig,
       orderHistory,
-      orderHistoryItem,
+      const DeepCollectionEquality().hash(_orderHistorySelectedItems),
       const DeepCollectionEquality().hash(_orderHistoryStatuses),
       isStatusLoading,
       isInvoiceLoading,
@@ -1806,7 +1804,7 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final OrderHistory orderHistory,
-      required final OrderHistoryItem orderHistoryItem,
+      required final List<OrderHistoryItem> orderHistorySelectedItems,
       required final List<OrderStatusTracker> orderHistoryStatuses,
       required final bool isStatusLoading,
       required final bool isInvoiceLoading,
@@ -1829,7 +1827,7 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
   @override
   OrderHistory get orderHistory;
   @override
-  OrderHistoryItem get orderHistoryItem;
+  List<OrderHistoryItem> get orderHistorySelectedItems;
   @override
   List<OrderStatusTracker> get orderHistoryStatuses;
   @override

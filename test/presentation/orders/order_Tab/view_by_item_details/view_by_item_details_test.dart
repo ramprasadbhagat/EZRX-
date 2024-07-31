@@ -349,7 +349,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -378,7 +378,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -411,7 +411,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -448,7 +448,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -559,7 +559,7 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -586,7 +586,7 @@ void main() {
           isStatusLoading: true,
         ),
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -610,7 +610,7 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -637,7 +637,7 @@ void main() {
           isStatusLoading: true,
         ),
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -657,9 +657,11 @@ void main() {
         ViewByItemDetailsState.initial().copyWith(
           isStatusLoading: false,
           orderHistoryStatuses: [],
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            status: OrderStepValue('Order created'),
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              status: OrderStepValue('Order created'),
+            ),
+          ],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -695,7 +697,7 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               fakeOrderHistoryItem,
@@ -725,7 +727,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
         ),
       );
 
@@ -758,18 +760,20 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            batches: [
-              Batches(
-                batchNumber: fakeBatch1,
-                expiryDate: fakeExpiry1,
-              ),
-              Batches(
-                batchNumber: fakeBatch2,
-                expiryDate: fakeExpiry2,
-              ),
-            ],
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              batches: [
+                Batches(
+                  batchNumber: fakeBatch1,
+                  expiryDate: fakeExpiry1,
+                ),
+                Batches(
+                  batchNumber: fakeBatch2,
+                  expiryDate: fakeExpiry2,
+                ),
+              ],
+            ),
+          ],
         ),
       );
 
@@ -795,9 +799,11 @@ void main() {
     testWidgets('on Offer material', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            promoStatus: true,
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              promoStatus: true,
+            ),
+          ],
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -813,9 +819,11 @@ void main() {
     testWidgets('bundle material', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            isBundle: true,
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              isBundle: true,
+            ),
+          ],
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -842,7 +850,7 @@ void main() {
 
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistorySelectedItems: [fakeOrderHistoryItem],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -855,8 +863,9 @@ void main() {
           (tester) async {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+            ],
             salesOrgConfig: fakeSGSalesOrgConfigs,
           ),
         );
@@ -870,8 +879,9 @@ void main() {
           (tester) async {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+            ],
             salesOrgConfig: fakeMYSalesOrgConfigs,
           ),
         );
@@ -884,7 +894,7 @@ void main() {
       testWidgets('is visible when user role is not sales rep', (tester) async {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistorySelectedItems: [fakeOrderHistoryItem],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -936,7 +946,7 @@ void main() {
       testWidgets('is not visible when user role is sales rep', (tester) async {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistorySelectedItems: [fakeOrderHistoryItem],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -955,8 +965,11 @@ void main() {
           (tester) async {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(orderType: DocumentType('zpvf')),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(
+                orderType: DocumentType('zpvf'),
+              ),
+            ],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -976,8 +989,11 @@ void main() {
           (tester) async {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(
+                orderType: DocumentType('ZPVF'),
+              ),
+            ],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -1007,8 +1023,11 @@ void main() {
                 ),
               ),
             ),
-            orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(
+                orderType: DocumentType('ZPVF'),
+              ),
+            ],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -1095,7 +1114,7 @@ void main() {
         );
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistorySelectedItems: [fakeOrderHistoryItem],
           ),
         );
         whenListen(
@@ -1269,7 +1288,7 @@ void main() {
     testWidgets('Invoice Number section loading test ', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -1290,7 +1309,7 @@ void main() {
     testWidgets('Invoice Number section failure test ', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -1337,7 +1356,7 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -1394,7 +1413,7 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -1518,7 +1537,7 @@ void main() {
       ).thenAnswer((_) => Future.value(true));
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
           ),
@@ -1622,7 +1641,7 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistorySelectedItems: [fakeOrderHistoryItemWithAttachments],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
           ),
@@ -1670,7 +1689,7 @@ void main() {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isExpanded: true,
-          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistorySelectedItems: [fakeOrderHistoryItemWithAttachments],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
           ),
@@ -1717,7 +1736,7 @@ void main() {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isExpanded: true,
-          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistorySelectedItems: [fakeOrderHistoryItemWithAttachments],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
           ),
@@ -1763,7 +1782,7 @@ void main() {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isExpanded: true,
-          orderHistoryItem: fakeOrderHistoryItemWithAttachments,
+          orderHistorySelectedItems: [fakeOrderHistoryItemWithAttachments],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItemWithAttachments],
           ),
@@ -1824,14 +1843,16 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            unitPrice: 60,
-            qty: 30,
-            totalUnitPrice: 1800,
-            taxRate: 20,
-            totalTax: 36,
-            totalPrice: 1836,
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              unitPrice: 60,
+              qty: 30,
+              totalUnitPrice: 1800,
+              taxRate: 20,
+              totalTax: 36,
+              totalPrice: 1836,
+            ),
+          ],
         ),
       ];
       whenListen(
@@ -1875,15 +1896,17 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            unitPrice: 136.5,
-            qty: 5,
-            tax: 68.25,
-            taxRate: 50,
-            totalTax: 341.25,
-            totalUnitPrice: 682.5,
-            totalPrice: 1023.75,
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              unitPrice: 136.5,
+              qty: 5,
+              tax: 68.25,
+              taxRate: 50,
+              totalTax: 341.25,
+              totalUnitPrice: 682.5,
+              totalPrice: 1023.75,
+            ),
+          ],
         ),
       ];
       whenListen(
@@ -1920,7 +1943,7 @@ void main() {
     //   );
     //   final expectedStates = [
     //     ViewByItemDetailsState.initial().copyWith(
-    //       orderHistoryItem: fakeOrderHistoryItem.copyWith(
+    //       orderHistoryItems: [fakeOrderHistoryItem].copyWith(
     //         unitPrice: 116640,
     //         qty: 5,
     //         tax: 12830.4,
@@ -1965,12 +1988,14 @@ void main() {
       );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            unitPrice: 60,
-            qty: 30,
-            tax: 126,
-            totalUnitPrice: 1926.00,
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              unitPrice: 60,
+              qty: 30,
+              tax: 126,
+              totalUnitPrice: 1926.00,
+            ),
+          ],
         ),
       ];
       whenListen(
@@ -1999,7 +2024,9 @@ void main() {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isStatusLoading: false,
-          orderHistoryItem: mockViewByItemsOrderHistory.orderHistoryItems.last,
+          orderHistorySelectedItems: [
+            mockViewByItemsOrderHistory.orderHistoryItems.last,
+          ],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               mockViewByItemsOrderHistory.orderHistoryItems.last,
@@ -2046,7 +2073,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItemWithCounterOffer,
+          orderHistorySelectedItems: [fakeOrderHistoryItemWithCounterOffer],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
           ),
@@ -2092,7 +2119,7 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItemWithCounterOffer,
+          orderHistorySelectedItems: [fakeOrderHistoryItemWithCounterOffer],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
           ),
@@ -2130,10 +2157,12 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItemWithCounterOffer.copyWith(
-            originPrice: originPrice,
-            unitPrice: unitPrice,
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItemWithCounterOffer.copyWith(
+              originPrice: originPrice,
+              unitPrice: unitPrice,
+            ),
+          ],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItemWithCounterOffer],
           ),
@@ -2170,7 +2199,7 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
         ),
       );
 
@@ -2198,7 +2227,7 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
         ),
       );
 
@@ -2223,7 +2252,7 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistorySelectedItems: [fakeOrderHistoryItem],
         ),
       );
 
@@ -2245,7 +2274,7 @@ void main() {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isStatusLoading: false,
-          orderHistoryItem: pnGMaterial,
+          orderHistorySelectedItems: [pnGMaterial],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [pnGMaterial],
           ),
@@ -2333,9 +2362,11 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            isMarketPlace: true,
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              isMarketPlace: true,
+            ),
+          ],
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -2386,8 +2417,11 @@ void main() {
         );
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(
+                orderType: DocumentType('ZPVF'),
+              ),
+            ],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -2423,8 +2457,11 @@ void main() {
         );
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(
+                orderType: DocumentType('ZPVF'),
+              ),
+            ],
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),
@@ -2624,7 +2661,7 @@ void main() {
         ).thenReturn(true);
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistorySelectedItems: [fakeOrderHistoryItem],
           ),
         );
         whenListen(
@@ -2658,7 +2695,7 @@ void main() {
         ).thenReturn(true);
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistorySelectedItems: [fakeOrderHistoryItem],
           ),
         );
         whenListen(
@@ -2701,9 +2738,11 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+            ),
+          ],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               fakeOrderHistoryItem.copyWith(
@@ -2737,9 +2776,11 @@ void main() {
 
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
-          ),
+          orderHistorySelectedItems: [
+            fakeOrderHistoryItem.copyWith(
+              itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+            ),
+          ],
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
               fakeOrderHistoryItem.copyWith(
@@ -2826,7 +2867,7 @@ void main() {
 
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistorySelectedItems: [fakeOrderHistoryItem],
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -2881,13 +2922,15 @@ void main() {
         );
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
-            orderHistoryItem: fakeOrderHistoryItem.copyWith(
-              unitPrice: unitPrice,
-              qty: quantity,
-              totalUnitPrice: totalUnitPrice,
-              totalPrice: totalPrice,
-              taxRate: taxRate,
-            ),
+            orderHistorySelectedItems: [
+              fakeOrderHistoryItem.copyWith(
+                unitPrice: unitPrice,
+                qty: quantity,
+                totalUnitPrice: totalUnitPrice,
+                totalPrice: totalPrice,
+                taxRate: taxRate,
+              ),
+            ],
           ),
         );
 

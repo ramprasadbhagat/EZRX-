@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
@@ -123,7 +124,8 @@ class ViewByItemDetailsPage extends StatelessWidget {
               previous.isStatusLoading != current.isStatusLoading ||
               previous.isInvoiceLoading != current.isInvoiceLoading ||
               previous.isDetailsLoading != current.isDetailsLoading ||
-              previous.orderHistoryItem != current.orderHistoryItem ||
+              previous.orderHistorySelectedItem !=
+                  current.orderHistorySelectedItem ||
               previous.orderHistoryStatuses != current.orderHistoryStatuses,
           builder: (context, state) {
             return state.isDetailsLoading
@@ -140,6 +142,11 @@ class ViewByItemDetailsPage extends StatelessWidget {
                         .read<ViewByItemDetailsBloc>()
                         .add(const ViewByItemDetailsEvent.loadMoreInvoices()),
                     orderItemHistoryTab: const _OrderItemHistoryItemTab(),
+                    lineNumberSelected: state.orderHistorySelectedItems
+                        .map(
+                          (e) => e.lineNumber,
+                        )
+                        .toList(),
                   );
           },
         ),
@@ -162,11 +169,11 @@ class _OrderInformation extends StatelessWidget {
         const LicenseExpiredBanner(),
         const EdiUserBanner(),
         ViewByItemDetailsHeaderSection(
-          orderHistoryItem: state.orderHistoryItem,
+          orderHistoryItem: state.orderHistorySelectedItem,
           orderHistoryBasicInfo: state.orderHistory.orderBasicInformation,
         ),
         _ViewByItemStatusTracker(
-          orderHistoryItem: state.orderHistoryItem,
+          orderHistoryItem: state.orderHistorySelectedItem,
           subSteps: state.orderHistoryStatuses,
         ),
         const Divider(

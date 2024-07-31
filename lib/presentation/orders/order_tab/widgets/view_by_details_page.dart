@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/tab_view_with_dynamic_height.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -14,6 +15,7 @@ class ViewByDetailPage extends StatefulWidget {
   final bool isInvoiceLoading;
   final VoidCallback onLoadMoreInvoices;
   final int totalOrderItemsDisplay;
+  final List<LineNumber> lineNumberSelected;
   const ViewByDetailPage({
     super.key,
     required this.isInvoiceLoading,
@@ -22,6 +24,7 @@ class ViewByDetailPage extends StatefulWidget {
     required this.invoiceDetailResponse,
     required this.onLoadMoreInvoices,
     this.totalOrderItemsDisplay = 0,
+    this.lineNumberSelected = const <LineNumber>[],
   });
 
   @override
@@ -92,6 +95,7 @@ class _ViewByDetailPageState extends State<ViewByDetailPage> {
                   invoices: widget.invoiceDetailResponse.invoiceDetails,
                   isLoading: widget.isInvoiceLoading,
                   controller: _controller,
+                  lineNumberSelected: widget.lineNumberSelected,
                 ),
               ],
             ),
