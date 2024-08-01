@@ -225,26 +225,45 @@ void main() {
         );
         when(() => returnItemsBlocMock.state).thenReturn(
           ReturnItemsState.initial().copyWith(
-            items: [fakeReturnMaterial],
+            items: [
+              fakeReturnMaterial.copyWith(
+                bonusItems: [...fakeReturnMaterialList.items[1].bonusItems],
+              ),
+            ],
           ),
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
         final showBonusDetail = find.text('Show details'.tr());
         expect(showBonusDetail, findsOneWidget);
-        await tester.tap(showBonusDetail);
-        await tester.pumpAndSettle();
-        final hideBonusDetail = find.text('Hide details'.tr());
-        expect(hideBonusDetail, findsOneWidget);
-        final bonusPrice = find.text(
-          'SGD 402.80',
+        final mainItemPrice = find.text(
+          'SGD ${fakeUnitPrice.toString()}',
           findRichText: true,
         );
+        expect(mainItemPrice, findsOneWidget);
+        final mainItemQty = find.text(
+          'Qty: ${fakeReturnMaterial.targetQuantity.getOrDefaultValue(0)}',
+        );
+        final mainItemBalanceQuantity = find.text(
+          'Returnable Qty: ${fakeReturnMaterial.balanceQuantity.getOrDefaultValue(0)}',
+        );
+        expect(mainItemBalanceQuantity, findsOneWidget);
+        expect(mainItemQty, findsOneWidget);
+        final bonusPrice = find.text(
+          'SGD 268.53',
+          findRichText: true,
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('Bonus'), findsOneWidget);
         expect(bonusPrice, findsOneWidget);
         final bonusQty = find.text(
-          'Qty: 50 ',
+          'Qty: 14',
         );
         expect(bonusQty, findsOneWidget);
+        final bonusBalanceQuantity = find.text(
+          'Returnable Qty: 12',
+        );
+        expect(bonusBalanceQuantity, findsOneWidget);
       },
     );
 

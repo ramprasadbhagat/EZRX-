@@ -49,20 +49,21 @@ class _ReturnMaterialInfo extends StatelessWidget {
             ],
           ),
           MaterialQuantityAndPrice(
-            quantity: data.targetQuantity.getOrDefaultValue(0),
+            returnQuantity: data.targetQuantity.getOrDefaultValue(0),
+            balanceQuantity: data.balanceQuantity.getOrDefaultValue(0),
             totalPrice: data.totalPrice.getOrDefaultValue(0),
+            displayReturnableQuantity: true,
           ),
           ExpandableSection(
             expanded: false,
             child: Column(
               children: [
                 MaterialDetailsSection(
-                data: data,
-              ),
+                  data: data,
+                ),
               ],
             ),
           ),
-          
           _BonusItemSection(
             items: data.bonusItemsBelongToZPorMP,
           ),

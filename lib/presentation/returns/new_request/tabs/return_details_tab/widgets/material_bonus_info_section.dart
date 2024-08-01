@@ -28,6 +28,7 @@ class _MaterialBonusInfoSection extends StatelessWidget {
             ),
           BonusMaterialInfo(
             data: bonusItem,
+            displayReturnableQuantity: true,
           ),
         ],
       ),

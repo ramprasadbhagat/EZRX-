@@ -9,30 +9,48 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MaterialQuantityAndPrice extends StatelessWidget {
   const MaterialQuantityAndPrice({
     super.key,
-    required this.quantity,
+    required this.returnQuantity,
+    required this.balanceQuantity,
     required this.totalPrice,
+    this.displayReturnableQuantity = false,
   });
 
-  final int quantity;
+  final int returnQuantity;
+  final int balanceQuantity;
   final double totalPrice;
+  final bool displayReturnableQuantity;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '${context.tr('Qty')}: $quantity',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: ZPColors.black,
-              ),
-          key: WidgetKeys.itemQtyKey,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '${context.tr('Qty')}: $returnQuantity',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: ZPColors.black,
+                  ),
+              key: WidgetKeys.itemQtyKey,
+            ),
+            PriceComponent(
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
+              price: totalPrice.toString(),
+              key: WidgetKeys.itemTotalPriceKey,
+            ),
+          ],
         ),
-        PriceComponent(
-          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
-          price: totalPrice.toString(),
-          key: WidgetKeys.itemTotalPriceKey,
-        ),
+        if (displayReturnableQuantity)
+          Text(
+            '${context.tr('Returnable Qty')}: $balanceQuantity',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            key: WidgetKeys.itemBalanceQtyKey,
+          ),
       ],
     );
   }

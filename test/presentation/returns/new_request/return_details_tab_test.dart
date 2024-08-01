@@ -1217,7 +1217,7 @@ void main() {
       );
       await tester.fling(
         find.byKey(WidgetKeys.scrollList),
-        const Offset(0.0, -1000.0),
+        const Offset(0.0, -1300.0),
         1000.0,
       );
       await tester.pump();
@@ -1311,7 +1311,7 @@ void main() {
       );
       await tester.fling(
         find.byKey(WidgetKeys.scrollList),
-        const Offset(0.0, -1000.0),
+        const Offset(0.0, -1300.0),
         1000.0,
       );
       await tester.pump();

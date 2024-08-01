@@ -393,6 +393,7 @@ class WidgetKeys {
   static const Key itemTitleKey = Key('itemTitleKey');
   static const Key itemMaterialNumberKey = Key('itemMaterialNumberKey');
   static const Key itemQtyKey = Key('itemQtyKey');
+  static const Key itemBalanceQtyKey = Key('itemBalanceQtyKey');
   static const Key itemTotalPriceKey = Key('itemTotalPriceKey');
   static const Key itemBonusTagKey = Key('itemBonusTagKey');
   static const Key cannotMoveToNextStep = Key('cannotMoveToNextStep');

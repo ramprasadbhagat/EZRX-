@@ -67,8 +67,10 @@ class _ReturnMaterialWidget extends StatelessWidget with BottomsheetMixin {
                 ],
               ),
               MaterialQuantityAndPrice(
-                quantity: item.targetQuantity.getOrDefaultValue(0),
+                returnQuantity: item.targetQuantity.getOrDefaultValue(0),
+                balanceQuantity: item.balanceQuantity.getOrDefaultValue(0),
                 totalPrice: item.totalPrice.getOrDefaultValue(0),
+                displayReturnableQuantity: true,
                 key: WidgetKeys.newRequestStep2QuantityAndPrice,
               ),
               MaterialDetailsSection(

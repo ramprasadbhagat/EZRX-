@@ -18,6 +18,7 @@ class _BonusItemSection extends StatelessWidget {
                   .map(
                     (ReturnMaterial returnMaterial) => BonusMaterialInfo(
                       data: returnMaterial,
+                      displayReturnableQuantity: true,
                     ),
                   )
                   .toList(),

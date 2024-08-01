@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -9,23 +10,24 @@ import 'package:ezrxmobile/presentation/returns/widgets/ware_house_storage_condi
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 
 class BonusMaterialInfo extends StatelessWidget {
   const BonusMaterialInfo({
     super.key,
     required this.data,
+    this.displayReturnableQuantity = false,
   });
 
   final ReturnMaterial data;
+  final bool displayReturnableQuantity;
 
   String getQuantity(BuildContext context) {
     final details =
         context.read<NewRequestBloc>().state.getReturnItemDetails(data.uuid);
 
-    return details.returnQuantity.getIntValue > 0
+    return details.returnQuantity.getIntValue > 0 && !displayReturnableQuantity
         ? details.returnQuantity.getIntValue.toString()
-        : data.balanceQuantity.apiParameterValue;
+        : data.targetQuantity.apiParameterValue;
   }
 
   @override
@@ -72,13 +74,21 @@ class BonusMaterialInfo extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
+          ReturnItemPrice(data: data),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ReturnItemPrice(data: data),
               Text(
-                '${context.tr('Qty')}: ${getQuantity(context)} ',
+                '${context.tr('Qty')}: ${getQuantity(context)}',
               ),
+              if (displayReturnableQuantity)
+                Text(
+                  '${context.tr('Returnable Qty')}: ${data.balanceQuantity.getOrDefaultValue(0)}',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.black,
+                      ),
+                  key: WidgetKeys.itemBalanceQtyKey,
+                ),
             ],
           ),
           WareHouseStorageConditionTag(
