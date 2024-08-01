@@ -86,7 +86,7 @@
             "enableComboDeals": true,
             "comboDealsUserRole": 1,
             "enableSmallOrderFee": true,
-            "smallOrderFeeUserRoles": [ 
+            "smallOrderFeeUserRoles": [
                "Client User",
                "Client Admin",
                "External Sales Rep"
@@ -99,7 +99,39 @@
                "Client Admin"
             ],
             "mpSmallOrderFee": 10,
-            "mpMovThreshold": 200
+            "mpMovThreshold": 200,
+            "orderTypes": [
+               {
+                  "categoryId": "zpor",
+                  "orderType": "ZPOR",
+                  "description": "Regular order",
+                  "enabled": true
+               },
+               {
+                  "categoryId": "zpfb",
+                  "orderType": "ZPFB",
+                  "description": "Sample order",
+                  "enabled": true
+               },
+               {
+                  "categoryId": "zpfc",
+                  "orderType": "ZPFC",
+                  "description": "FOC order",
+                  "enabled": true
+               },
+               {
+                  "categoryId": "zpfb_800",
+                  "orderType": "ZPFB 800",
+                  "description": "Sample order 800",
+                  "enabled": false
+               },
+               {
+                  "categoryId": "zpfb_801",
+                  "orderType": "ZPFB 801",
+                  "description": "Sample order 801",
+                  "enabled": false
+               }
+            ]
          }
       ]
    }

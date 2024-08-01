@@ -24,6 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final bool isSliver;
   final Widget? flexibleSpaceWidget;
+  final Widget? bottomWidget;
   const CustomAppBar._({
     super.key,
     required this.automaticallyImplyLeading,
@@ -41,6 +42,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.boxShadowColor,
     this.isSliver = false,
     this.flexibleSpaceWidget,
+    this.bottomWidget,
   });
 
   factory CustomAppBar.homeTabAppBar({
@@ -119,6 +121,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
     required Widget flexibleSpaceWidget,
     required double expandedHeight,
+    Widget? bottomWidget,
   }) =>
       CustomAppBar._(
         title: title,
@@ -136,7 +139,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         isSliver: true,
         flexibleSpaceWidget: flexibleSpaceWidget,
         toolBarHeight:
-            customerBlockedOrSuspended ? kToolbarHeight + 10 : kToolbarHeight,
+            customerBlockedOrSuspended ? kToolbarHeight + 50 : kToolbarHeight,
+        bottomWidget: bottomWidget,
       );
 
   @override
@@ -157,18 +161,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             pinned: true,
             expandedHeight: appBarHeight,
             collapsedHeight: toolBarHeight,
-            bottom: customerBlockedOrSuspended
-                ? PreferredSize(
-                    preferredSize: const Size.fromHeight(kToolbarHeight),
-                    child: Column(
-                      children: [
-                        _CustomerBlockedBanner(
-                          isCustomerBlocked: customerBlockedOrSuspended,
-                        ),
-                      ],
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(kToolbarHeight),
+              child: Column(
+                children: [
+                  if (customerBlockedOrSuspended)
+                    _CustomerBlockedBanner(
+                      isCustomerBlocked: customerBlockedOrSuspended,
                     ),
-                  )
-                : null,
+                  bottomWidget ?? const SizedBox.shrink(),
+                ],
+              ),
+            ),
           )
         : AppBar(
             centerTitle: centreTitle,

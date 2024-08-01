@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_order_type_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_principal_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -151,6 +152,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     required double mpSmallOrderFee,
     @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
     required double mpMovThreshold,
+    @JsonKey(name: 'orderTypes', defaultValue: [])
+    required List<SalesOrganisationConfigsOrderTypeDto> orderTypes,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -232,6 +235,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       mpSmallOrderFee: configs.mpSmallOrderFee,
       mpMovThreshold: configs.mpSAPMinOrderAmount,
       enableTenderOrders: configs.enableTenderOrders,
+      orderTypes: List.from(configs.orderTypes)
+          .map((e) => SalesOrganisationConfigsOrderTypeDto.fromDomain(e))
+          .toList(),
     );
   }
 
@@ -315,6 +321,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       mpSAPMinOrderAmount: mpMovThreshold,
       mpSmallOrderFee: mpSmallOrderFee,
       enableTenderOrders: enableTenderOrders,
+      orderTypes: orderTypes.map((e) => e.toDomain()).toList(),
     );
   }
 

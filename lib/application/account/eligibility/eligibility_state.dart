@@ -352,4 +352,12 @@ class EligibilityState with _$EligibilityState {
           !salesOrgConfigs.statementOfAccountEnabled
       ? 0.45
       : 0.3;
+
+  bool get isShowOrderType =>
+      user.role.type.isSalesRepRole &&
+      !salesOrgConfigs.disableOrderType &&
+      user.enableOrderType &&
+      salesOrgConfigs.orderTypes
+          .where((element) => !element.orderType.isZPOR)
+          .isNotEmpty;
 }

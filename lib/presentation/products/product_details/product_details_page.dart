@@ -36,6 +36,7 @@ import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/widgets/order_type_banner.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
@@ -199,6 +200,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     productImage: productImages,
                   ),
                   expandedHeight: _getExpandedImageHeight(productImages),
+                  bottomWidget: const OrderTypeBanner(),
                 );
               },
             ),

@@ -6,9 +6,9 @@ part of 'sales_organisation_configs_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
+_$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
         Map<String, dynamic> json) =>
-    _$SalesOrganisationConfigsDtoImpl(
+    _$_SalesOrganisationConfigsDto(
       disableProcessingStatus: json['disableProcessingStatus'] as bool,
       currency: json['currency'] as String,
       hideCustomer: json['hideCustomer'] as bool? ?? false,
@@ -109,10 +109,15 @@ _$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
               [],
       mpSmallOrderFee: (json['mpSmallOrderFee'] as num?)?.toDouble() ?? 0.0,
       mpMovThreshold: (json['mpMovThreshold'] as num?)?.toDouble() ?? 0.0,
+      orderTypes: (json['orderTypes'] as List<dynamic>?)
+              ?.map((e) => SalesOrganisationConfigsOrderTypeDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
-Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
-        _$SalesOrganisationConfigsDtoImpl instance) =>
+Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
+        _$_SalesOrganisationConfigsDto instance) =>
     <String, dynamic>{
       'disableProcessingStatus': instance.disableProcessingStatus,
       'currency': instance.currency,
@@ -190,4 +195,5 @@ Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
       'mpSmallOrderFeeUserRoles': instance.mpSmallOrderFeeUserRoles,
       'mpSmallOrderFee': instance.mpSmallOrderFee,
       'mpMovThreshold': instance.mpMovThreshold,
+      'orderTypes': instance.orderTypes.map((e) => e.toJson()).toList(),
     };

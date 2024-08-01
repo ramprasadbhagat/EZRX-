@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_ba
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
 import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
+import 'package:ezrxmobile/presentation/home/widgets/order_type_banner.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
@@ -92,6 +93,7 @@ class HomeTab extends StatelessWidget {
                       const LicenseExpiredBanner(),
                       const EdiUserBanner(),
                       const StockInfoBanner(),
+                      const OrderTypeBanner(),
                       const QuickAccessMenuPanel(),
                       const CarouselBanner(),
                       BlocBuilder<EligibilityBloc, EligibilityState>(

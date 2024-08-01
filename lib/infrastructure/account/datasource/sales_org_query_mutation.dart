@@ -108,6 +108,12 @@ class SalesOrgQueryMutation {
     smallOrderFeeUserRoles 
     smallOrderFee 
     movThreshold
+    orderTypes {
+      categoryId
+      orderType
+      description
+      enabled
+    }
     ${enableMarketPlace ? 'enableMarketPlace \nmpMinOrderAmount \nenableMPSmallOrderFee \nmpSmallOrderFeeUserRoles \nmpSmallOrderFee \nmpMovThreshold' : ''}
    statementOfAccountEnabled
   }
