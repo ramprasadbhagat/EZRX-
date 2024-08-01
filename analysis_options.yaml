@@ -147,6 +147,7 @@ dart_code_metrics:
     - avoid-cubits
     - prefer-multi-bloc-provider
     - avoid-bloc-public-methods
+    - prefer-correct-bloc-provider
     - prefer-using-list-view:
         exclude:
           - "lib/presentation/home/home_tab.dart" 
