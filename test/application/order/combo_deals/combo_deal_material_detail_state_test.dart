@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -118,6 +122,39 @@ void main() {
         items: items,
       );
       expect(state.searchableList, {});
+    });
+
+    test(
+        ' => searchableList when comboDeal is K2.1 with optional Combo Materials',
+        () {
+      final mockComboDeal = ComboDeal.empty().copyWith(
+        materialComboDeals: [
+          ComboDealMaterialSet.empty().copyWith(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                mandatory: false,
+                materialNumber: productList.first.getMaterialNumber,
+              ),
+            ],
+          ),
+        ],
+        groupDeal: ComboDealGroupDeal.empty().copyWith(minTotalQuantity: 1),
+      );
+      productList[0] = productList[0].copyWith(comboDeal: mockComboDeal);
+      items = {
+        for (final item in productList)
+          item.getMaterialNumber: item.copyWith(
+            salesOrgConfig: fakeKHSalesOrgConfigs,
+          ),
+      };
+      final state = ComboDealMaterialDetailState.initial().copyWith(
+        searchKey: SearchKey.search('333'),
+        items: items,
+      );
+      expect(
+        state.searchableList,
+        {},
+      );
     });
     test(' => mandatoryMaterials when comboDeal is K2.1', () {
       final mockComboDeal = ComboDeal.empty().copyWith(
@@ -327,6 +364,61 @@ void main() {
       expect(
         state.displayMinPurchaseQtyMessage,
         true,
+      );
+    });
+
+    test(' => totalQuantityUnit ComboDealScheme.k5', () async {
+      final fakeMaterialNumber = MaterialNumber('fake-number');
+      final data = json.decode(
+        await rootBundle.loadString(
+          'assets/json/${ComboDealScheme.k5.comboDealMockResponsePath}',
+        ),
+      );
+      final finalData = data['data']['comboDealForPrincMatGrp'];
+
+      items = {
+        fakeMaterialNumber: PriceAggregate.empty()
+            .copyWith(comboDeal: ComboDealDto.fromJson(finalData).toDomain),
+      };
+      final selectedItems = {fakeMaterialNumber: true};
+
+      final state = ComboDealMaterialDetailState.initial().copyWith(
+        items: items,
+        selectedItems: selectedItems,
+      );
+
+      expect(
+        state.totalQuantityUnit,
+        1,
+      );
+    });
+
+    test(' => totalQuantityUnit ComboDealScheme.k42', () async {
+      final fakeMaterialNumber = MaterialNumber('fake-number');
+      final data = json.decode(
+        await rootBundle.loadString(
+          'assets/json/${ComboDealScheme.k42.comboDealMockResponsePath}',
+        ),
+      );
+      final comboDeal = List.from(data['data']['comboDealForMaterials'])
+          .map((e) => ComboDealDto.fromJson(e).toDomain)
+          .toList()
+          .first;
+
+      items = {
+        fakeMaterialNumber:
+            PriceAggregate.empty().copyWith(comboDeal: comboDeal),
+      };
+      final selectedItems = {fakeMaterialNumber: true};
+
+      final state = ComboDealMaterialDetailState.initial().copyWith(
+        items: items,
+        selectedItems: selectedItems,
+      );
+
+      expect(
+        state.totalQuantityUnit,
+        1,
       );
     });
   });

@@ -572,7 +572,6 @@ class ComboDetailRobot extends CommonRobot {
       case ComboDealScheme.k1:
       case ComboDealScheme.k21:
       case ComboDealScheme.k22:
-      case ComboDealScheme.kWithSuffix:
         nextDealMessage = '';
         break;
       case ComboDealScheme.k3:
@@ -879,8 +878,6 @@ class ComboDetailRobot extends CommonRobot {
             'amount': unit,
           },
         );
-        break;
-      case ComboDealScheme.kWithSuffix:
         break;
     }
 

@@ -477,6 +477,46 @@ void main() {
           );
         },
       );
+
+      test(
+        'Check DiscountPrice with priceValueForPriceOverride',
+        () {
+          final priceOverrideState = PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(90),
+                isDiscountOverride: true,
+              ),
+            ),
+          );
+          final newDiscountPrice = priceOverrideState.discountedPrice;
+          expect(
+            newDiscountPrice,
+            90,
+          );
+        },
+      );
+
+      test(
+        'Check finalCounterOfferPrice not hide price',
+        () {
+          final priceOverrideState = PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(90),
+                isDiscountOverride: true,
+              ),
+              materialInfo: MaterialInfo.empty().copyWith(hidePrice: false),
+            ),
+          );
+          final finalCounterOfferPrice =
+              priceOverrideState.finalCounterOfferPrice;
+          expect(
+            finalCounterOfferPrice,
+            '90.0',
+          );
+        },
+      );
       blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Price Override Bloc Set Product Counter Offer Details has Value',
         build: () => PriceOverrideBloc(

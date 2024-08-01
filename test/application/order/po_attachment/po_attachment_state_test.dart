@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -71,6 +74,16 @@ void main() {
               fileOperationMode: FileOperationMode.upload,
             )
             .isAttachmentUploaded,
+        true,
+      );
+    });
+
+    test('Check hasFileExeed', () {
+      expect(
+        [
+          PlatformFile(name: 'fake-name', size: 20 * pow(1024, 2).round()),
+          PlatformFile(name: 'fake-name', size: 10 * pow(1024, 2).round()),
+        ].hasFileExeed(15),
         true,
       );
     });

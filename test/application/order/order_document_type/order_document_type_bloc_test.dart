@@ -385,5 +385,25 @@ void main() {
         );
       },
     );
+
+    test('Test uniqueOrderTypeList', () {
+      final orderDocumentType = OrderDocumentType.empty()
+          .copyWith(documentType: DocumentType('fake-document'));
+      final state = OrderDocumentTypeState.initial().copyWith(
+        orderDocumentTypeList: [
+          orderDocumentType,
+        ],
+      );
+      expect(state.uniqueOrderTypeList, [orderDocumentType]);
+    });
+
+    test('Test isSpecialOrderType', () {
+      final state = OrderDocumentTypeState.initial().copyWith(
+        selectedOrderType: OrderDocumentType.empty().copyWith(
+          documentType: DocumentType('zpfb'),
+        ),
+      );
+      expect(state.isSpecialOrderType, true);
+    });
   });
 }

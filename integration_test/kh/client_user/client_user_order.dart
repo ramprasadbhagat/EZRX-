@@ -365,7 +365,6 @@ void main() {
     );
     switch (scheme) {
       case ComboDealScheme.k1:
-      case ComboDealScheme.kWithSuffix:
         break;
       case ComboDealScheme.k21:
         await comboDetailRobot.verifyOnSelectFixedComboMaterial(materialNumber);
@@ -3082,7 +3081,7 @@ void main() {
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapBackButton();
 
-            await productRobot.openSearchProductScreen();
+      await productRobot.openSearchProductScreen();
       await productSuggestionRobot
           .searchWithKeyboardAction(bonusMaterialNumber);
       await productRobot.tapSearchMaterial(bonusMaterialNumber);
@@ -3372,8 +3371,9 @@ void main() {
     });
 
     group('Combo - ', () {
-      testWidgets('EZRX-24189 | Back to product detail page from combo detail page',
-              (tester) async {
+      testWidgets(
+          'EZRX-24189 | Back to product detail page from combo detail page',
+          (tester) async {
         await pumpAppWithHomeScreen(
           tester,
         );
@@ -3381,7 +3381,10 @@ void main() {
         await commonRobot.navigateToScreen(NavigationTab.products);
         await browseProductFromEmptyCart();
 
-        await openAndVerifyComboDetail(tester, materialNumber: comboK21FixedMaterialNumber);
+        await openAndVerifyComboDetail(
+          tester,
+          materialNumber: comboK21FixedMaterialNumber,
+        );
         await homeRobot.tapMiniCartIcon();
         await cartRobot.tapCloseButton();
 

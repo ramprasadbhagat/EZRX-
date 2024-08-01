@@ -41,6 +41,7 @@ void main() {
   const fakeSortByFilterKey = Sort.za;
   const fakeMarketPlaceFilterKey = true;
   const fakeTenderContractFilterKey = true;
+  const fakeComboOfferFilterKey = true;
 
   group('Material Filter Bloc', () {
     setUp(() async {
@@ -495,6 +496,26 @@ void main() {
         MaterialFilterState.initial().copyWith(
           materialFilter: filterState.materialFilter
               .copyWith(isTender: fakeTenderContractFilterKey),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Selected Material Filter Combo Offers',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => filterState,
+      act: (MaterialFilterBloc bloc) => bloc.add(
+        const MaterialFilterEvent.updateSelectedMaterialFilter(
+          MaterialFilterType.comboOffers,
+          fakeComboOfferFilterKey,
+        ),
+      ),
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          materialFilter: filterState.materialFilter
+              .copyWith(comboOffers: fakeComboOfferFilterKey),
         ),
       ],
     );

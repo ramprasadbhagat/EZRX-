@@ -118,7 +118,6 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
       case ComboDealScheme.k21:
       case ComboDealScheme.k3:
       case ComboDealScheme.k5:
-      case ComboDealScheme.kWithSuffix:
         return allSelectedItems.length;
       case ComboDealScheme.k22:
       case ComboDealScheme.k4:

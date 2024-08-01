@@ -32,6 +32,8 @@ void main() {
   );
   final file = [File('')];
   final uploadedFiles = [fakePoDocument];
+  final platformFile = PlatformFile(name: fakePoDocument.name, size: 0);
+  final listFile = [platformFile];
 
   group(
     'PoAttachmentBloc Bloc Download Test',
@@ -388,14 +390,55 @@ void main() {
       );
 
       blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc pick at least one file',
+        setUp: () {
+          when(
+            () => poAttachmentRepository.pickFiles(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(listFile),
+          );
+          when(
+            () => poAttachmentRepository.getPermission(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right(
+              PermissionStatus.granted,
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(
+          const PoAttachmentEvent.pickFile(
+            uploadOptionType: UploadOptionType.file,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.none,
+          ),
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.none,
+            failureOrSuccessOption: optionOf(
+              Right(listFile),
+            ),
+            localFiles: listFile,
+          ),
+        ],
+      );
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Upload file upload fail',
         seed: () => PoAttachmentState.initial().copyWith(
-          localFiles: [PlatformFile(name: fakePoDocument.name, size: 0)],
+          localFiles: [platformFile],
         ),
         setUp: () {
           when(
             () => poAttachmentRepository.uploadFiles(
-              files: [PlatformFile(name: fakePoDocument.name, size: 0)],
+              files: [platformFile],
               user: fakeClientUser,
             ),
           ).thenAnswer(
@@ -414,7 +457,7 @@ void main() {
         expect: () => [
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            localFiles: [PlatformFile(name: fakePoDocument.name, size: 0)],
+            localFiles: [platformFile],
             fileOperationMode: FileOperationMode.none,
           ),
           PoAttachmentState.initial().copyWith(
@@ -431,12 +474,12 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Upload file upload success',
         seed: () => PoAttachmentState.initial().copyWith(
-          localFiles: [PlatformFile(name: fakePoDocument.name, size: 0)],
+          localFiles: [platformFile],
         ),
         setUp: () {
           when(
             () => poAttachmentRepository.uploadFiles(
-              files: [PlatformFile(name: fakePoDocument.name, size: 0)],
+              files: [platformFile],
               user: fakeClientUser,
             ),
           ).thenAnswer(
@@ -455,7 +498,7 @@ void main() {
         expect: () => [
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            localFiles: [PlatformFile(name: fakePoDocument.name, size: 0)],
+            localFiles: [platformFile],
             fileOperationMode: FileOperationMode.none,
           ),
           PoAttachmentState.initial().copyWith(
@@ -471,12 +514,12 @@ void main() {
         seed: () => PoAttachmentState.initial().copyWith(
           fileOperationMode: FileOperationMode.upload,
           fileUrl: [fakePoDocument1],
-          localFiles: [PlatformFile(name: fakePoDocument.name, size: 0)],
+          localFiles: [platformFile],
         ),
         setUp: () {
           when(
             () => poAttachmentRepository.uploadFiles(
-              files: [PlatformFile(name: fakePoDocument.name, size: 0)],
+              files: [platformFile],
               user: fakeClientUser,
             ),
           ).thenAnswer(
@@ -496,7 +539,7 @@ void main() {
           PoAttachmentState.initial().copyWith(
             isFetching: true,
             fileOperationMode: FileOperationMode.none,
-            localFiles: [PlatformFile(name: fakePoDocument.name, size: 0)],
+            localFiles: [platformFile],
             fileUrl: [fakePoDocument1],
           ),
           PoAttachmentState.initial().copyWith(
@@ -657,6 +700,26 @@ void main() {
           PoAttachmentState.initial().copyWith(
             failureOrSuccessOption: none(),
             fileUrl: [fakePoDocument1],
+            fileOperationMode: FileOperationMode.delete,
+          ),
+        ],
+      );
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc delete local file',
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        seed: () => PoAttachmentState.initial().copyWith(
+          localFiles: [platformFile],
+        ),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.deleteLocalFile(
+            file: platformFile,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            localFiles: [],
             fileOperationMode: FileOperationMode.delete,
           ),
         ],

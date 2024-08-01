@@ -48,35 +48,38 @@ class OrderEligibilityState with _$OrderEligibilityState {
       if (!cartItems.containMPMaterial) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount';
       }
-      if (cartItems.containInvalidTenderContractMaterial) {
-        return 'Tender Contract is no longer available for one or few item(s). Please remove to continue.';
-      }
-      if (cartItems.hasMandatoryTenderMaterialButUnavailable) {
-        return 'Product ${cartItems.mandatoryTenderMaterialButUnavailableMaterialName} need to use tender contract.';
-      }
-      if (cartItems.isMaxQtyExceedsForAnyTender) {
-        return 'One or few item(s) order qty exceed the maximum available tender quantity.';
-      }
 
       if (!mpMOVEligible && !zpMOVEligible) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal & $displayMPMinOrderAmount for MP subtotal.';
       } else if (!zpMOVEligible) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal.';
-      } else if (askUserToAddCommercialMaterial) {
-        return 'Your cart must contain other commercial material to proceed checkout';
-      } else if (isGimmickMaterialNotAllowed) {
-        return 'Gimmick material $gimmickMaterialCode is not allowed';
       } else {
         return 'Please ensure that minimum order value is at least $displayMPMinOrderAmount for MP subtotal.';
       }
     }
+    if (cartItems.containInvalidTenderContractMaterial) {
+      return 'Tender Contract is no longer available for one or few item(s). Please remove to continue.';
+    }
+    if (cartItems.hasMandatoryTenderMaterialButUnavailable) {
+      return 'Product ${cartItems.mandatoryTenderMaterialButUnavailableMaterialName} need to use tender contract.';
+    }
+    if (cartItems.isMaxQtyExceedsForAnyTender) {
+      return 'One or few item(s) order qty exceed the maximum available tender quantity.';
+    }
+    if (askUserToAddCommercialMaterial) {
+      return 'Your cart must contain other commercial material to proceed checkout';
+    }
+    if (isGimmickMaterialNotAllowed) {
+      return 'Gimmick material $gimmickMaterialCode is not allowed';
+    }
+
     if (isMWPNotAllowedAndPresentInCart) {
       return '$invalidItemErrorMessage Material without price';
     }
     if (!isOOSAllowedIfPresentInCart) {
       return '$invalidItemErrorMessage Out of stock material';
     }
-    if (cartContainsSuspendedMaterials) {
+    if (cartContainsSuspendedPrincipal) {
       return '$invalidItemErrorMessage Principle suspended material';
     }
     if (cartContainsSuspendedMaterials) {

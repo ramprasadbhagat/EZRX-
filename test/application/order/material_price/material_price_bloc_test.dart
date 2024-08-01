@@ -8,6 +8,8 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
@@ -18,6 +20,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class MaterialPriceRepositoryMock extends Mock
     implements MaterialPriceRepository {}
@@ -704,5 +707,47 @@ void main() {
         ),
       ],
     );
+
+    test('Check display Offer Tag when final price not equal last price', () {
+      final materialNumber = MaterialNumber('fake-number');
+      final materialInfo =
+          MaterialInfo.empty().copyWith(materialNumber: materialNumber);
+      final state = MaterialPriceState.initial().copyWith(
+        materialPrice: {
+          materialNumber: Price.empty().copyWith(
+            finalPrice: MaterialPrice(10),
+            lastPrice: MaterialPrice(9),
+          ),
+        },
+      );
+      expect(
+        state.displayOfferTag(materialInfo, fakeClientUser),
+        true,
+      );
+    });
+
+    test('Check display Offer Tag when has bonuses', () {
+      final materialNumber = MaterialNumber('fake-number');
+      final materialInfo = MaterialInfo.empty().copyWith(
+        materialNumber: materialNumber,
+        principalData: PrincipalData.empty()
+            .copyWith(principalCode: PrincipalCode('105307')),
+        stockInfos: [
+          StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+        ],
+      );
+      final state = MaterialPriceState.initial().copyWith(
+        salesOrganisation: fakeMYSalesOrganisation,
+        materialPrice: {
+          materialNumber: Price.empty().copyWith(
+            bonuses: [PriceBonus.empty()],
+          ),
+        },
+      );
+      expect(
+        state.displayOfferTag(materialInfo, fakeExternalSalesRepUser),
+        true,
+      );
+    });
   });
 }

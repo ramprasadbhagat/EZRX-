@@ -6,7 +6,9 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/license_info.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_information_repository.dart';
@@ -131,57 +133,103 @@ void main() {
       ],
     );
 
-    // blocTest<PaymentCustomerInformationBloc, PaymentCustomerInformationState>(
-    //   'Payment Customer Information Fetch success with license list',
-    //   build: () => PaymentCustomerInformationBloc(
-    //     paymentCustomerInformationRepository:
-    //         paymentCustomerInformationRepositoryMock,
-    //   ),
-    //   setUp: () {
-    //     when(
-    //       () => paymentCustomerInformationRepositoryMock
-    //           .getPaymentCustomerInformation(
-    //         customerCodeInfo: fakeCustomerCodeInfo,
-    //         salesOrganisation: fakeSaleOrganisation,
-    //       ),
-    //     ).thenAnswer(
-    //       (invocation) async => Right(paymentCustomerInformationMockData),
-    //     );
-    //   },
-    //   act: (bloc) => bloc.add(
-    //     PaymentCustomerInformationEvent.fetch(
-    //       customeCodeInfo: fakeCustomerCodeInfo,
-    //       salesOrganisation: fakeSaleOrganisation,
-    //       selectedShipToCode: '0070149863',
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     PaymentCustomerInformationState.initial().copyWith(
-    //       paymentCustomerInformation: paymentCustomerInformationMockData,
-    //       licenses: paymentCustomerInformationMockData.shipToInfoList
-    //           .where((element) => element.shipToCustomerCode == '0070149863')
-    //           .first
-    //           .licenses,
-    //       paymentCustomerInformationFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+    blocTest<PaymentCustomerInformationBloc, PaymentCustomerInformationState>(
+      'Payment Customer Information Fetch success with license list',
+      build: () => PaymentCustomerInformationBloc(
+        paymentCustomerInformationRepository:
+            paymentCustomerInformationRepositoryMock,
+      ),
+      setUp: () {
+        when(
+          () => paymentCustomerInformationRepositoryMock
+              .getPaymentCustomerInformation(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(paymentCustomerInformationMockData),
+        );
+      },
+      act: (bloc) => bloc.add(
+        PaymentCustomerInformationEvent.fetch(
+          customeCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrganisation,
+          selectedShipToCode: '0071205149',
+        ),
+      ),
+      expect: () => [
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation: paymentCustomerInformationMockData,
+          licenses: paymentCustomerInformationMockData.shipToInfoList
+              .where((element) => element.shipToCustomerCode == '0071205149')
+              .first
+              .licenses,
+          paymentCustomerInformationFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
 
-    // test(
-    //   '=> Test getLicensesType getter',
-    //   () {
-    //     final licensesType = PaymentCustomerInformationState.initial()
-    //         .copyWith(
-    //           licenses: paymentCustomerInformationMockData.shipToInfoList
-    //               .where(
-    //                 (element) => element.shipToCustomerCode == '0070149863',
-    //               )
-    //               .first
-    //               .licenses,
-    //         )
-    //         .getLicensesType;
-    //     expect(licensesType, 'R03');
-    //   },
-    // );
+    test('=> Test isPaymentCustomerInformationEmpty getter', () {
+      final state = PaymentCustomerInformationState.initial().copyWith(
+        paymentCustomerInformation: PaymentCustomerInformation.empty(),
+      );
+      expect(state.isPaymentCustomerInformationEmpty, true);
+    });
+
+    test(
+      '=> Test getLicensesType getter',
+      () {
+        final state = PaymentCustomerInformationState.initial().copyWith(
+          licenses: [
+            const LicenseInfo(
+              licenceType: 'R03',
+              licenseNumber: '',
+              licenseDescription: '',
+              validFrom: '',
+              validTo: '',
+            ),
+          ],
+        );
+        expect(state.getLicensesType, 'R03');
+      },
+    );
+
+    test('=> Test billToInfoAvailable getter', () {
+      final state = PaymentCustomerInformationState.initial().copyWith(
+        paymentCustomerInformation: PaymentCustomerInformation.empty()
+            .copyWith(billToInfo: [BillToInfo.empty()]),
+      );
+      expect(state.billToInfoAvailable, true);
+    });
+
+    test('=> Test getBillToInfo getter', () {
+      final fakeBillTo = BillToInfo.empty().copyWith(city1: '');
+
+      expect(
+        PaymentCustomerInformationState.initial()
+            .copyWith(
+              paymentCustomerInformation: PaymentCustomerInformation.empty()
+                  .copyWith(billToInfo: [fakeBillTo]),
+            )
+            .getBillToInfo,
+        fakeBillTo,
+      );
+
+      // Return empty billTo Info Not Available
+      expect(
+        PaymentCustomerInformationState.initial().getBillToInfo,
+        BillToInfo.empty(),
+      );
+    });
+
+    test('=> Test customerEmailAddress getter', () {
+      final fakeBillTo = BillToInfo.empty()
+          .copyWith(emailAddresses: [EmailAddress('email@gmail.com')]);
+      final state = PaymentCustomerInformationState.initial().copyWith(
+        paymentCustomerInformation: PaymentCustomerInformation.empty()
+            .copyWith(billToInfo: [fakeBillTo]),
+      );
+      expect(state.customerEmailAddress, 'email@gmail.com');
+    });
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
@@ -24,6 +27,12 @@ class ScanMaterialInfoRepositoryMock extends Mock
 
 class ProductSearchRepositoryMock extends Mock
     implements ProductSearchRepository {}
+
+class MockBarcodeCaptureSession extends Mock implements BarcodeCaptureSession {}
+
+class MockBarcodeCapture extends Mock implements BarcodeCapture {}
+
+class MockBarcode extends Mock implements Barcode {}
 
 class BarcodeCaptureFake extends Fake implements BarcodeCapture {
   @override
@@ -40,6 +49,7 @@ void main() {
   late MaterialFilter fakeMaterialFilter;
   late MaterialInfo fakeMaterial;
   late ScanMaterialInfoBloc bloc;
+  late StreamController<String> scanResultController;
   final fakeEan = Ean('fake');
   final initialState = ScanMaterialInfoState.initial().copyWith(
     salesOrgConfigs: fakeMYSalesOrgConfigs,
@@ -49,6 +59,10 @@ void main() {
     user: fakeClientUser,
   );
 
+  final session = MockBarcodeCaptureSession();
+  final barcodeCapture = MockBarcodeCapture();
+  final barcodeCode = MockBarcode();
+
   setUpAll(() async {
     fakeMaterialFilter = await MaterialFilterLocalDataSource().getFilters();
     fakeMaterial = await ProductDetailLocalDataSource().getProductDetails();
@@ -56,6 +70,7 @@ void main() {
 
   setUp(() {
     scanRepository = ScanMaterialInfoRepositoryMock();
+    scanResultController = StreamController<String>();
     searchRepository = ProductSearchRepositoryMock();
     bloc = ScanMaterialInfoBloc(
       scanInfoRepository: scanRepository,
@@ -63,6 +78,7 @@ void main() {
     );
     when(() => scanRepository.fetchBarcodeCapture())
         .thenReturn(BarcodeCaptureFake());
+    bloc.scanResultController = scanResultController;
   });
 
   group('Scan material info bloc -', () {
@@ -397,6 +413,31 @@ void main() {
           ),
         ],
       );
+    });
+
+    test(
+        'should add scanned data to scanResultController when didScan is called',
+        () async {
+      final barcodeCode = MockBarcode();
+      final session = MockBarcodeCaptureSession();
+      when(() => scanRepository.disableMaterialScan())
+          .thenAnswer((_) async => const Right(true));
+      when(() => session.newlyRecognizedBarcodes).thenReturn([barcodeCode]);
+      when(() => barcodeCode.data).thenReturn('fake-data');
+      bloc.didScan(MockBarcodeCapture(), session);
+      expect(await scanResultController.stream.first, 'fake-data');
+    });
+
+    test(
+        'should add scanned data to scanResultController when didScan is called',
+        () async {
+      when(() => scanRepository.disableMaterialScan())
+          .thenAnswer((_) async => const Right(true));
+      when(() => session.newlyRecognizedBarcodes).thenReturn([barcodeCode]);
+      when(() => barcodeCode.data).thenReturn('fake-data');
+      bloc.didUpdateSession(barcodeCapture, session);
+      bloc.didScan(barcodeCapture, session);
+      expect(await scanResultController.stream.first, 'fake-data');
     });
   });
 }

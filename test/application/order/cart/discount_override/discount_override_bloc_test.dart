@@ -138,5 +138,13 @@ void main() {
         ),
       ],
     );
+
+    test('isDiscountOverride test', () {
+      final state = DiscountOverrideState.initial().copyWith(
+        materialPrice:
+            Price.empty().copyWith(zdp8Override: Zdp8OverrideValue(10.0)),
+      );
+      expect(state.isDiscountOverride, true);
+    });
   });
 }

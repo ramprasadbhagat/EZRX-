@@ -935,5 +935,11 @@ void main() {
         ),
       ],
     );
+
+    test('check displaySearchResult', () {
+      final state = MaterialListState.initial()
+          .copyWith(searchKey: SearchKey.search('searchText'));
+      expect(state.displaySearchResult, true);
+    });
   });
 }

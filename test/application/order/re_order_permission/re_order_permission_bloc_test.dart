@@ -3,9 +3,12 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_tender_contract.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/re_order_permission.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
@@ -38,14 +41,43 @@ void main() async {
   final fakeOrderHistoryItem = fakeViewByItemDetail.orderHistoryItems.first;
   final fakeOrderHistoryDetailsOrderItems =
       fakeViewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem;
-  late final mockValidOrderHistoryDetailsOrderItems =
+  final fakeOrderHistoryDetailsOrderItemsComm =
       fakeOrderHistoryDetailsOrderItems
-          .where(
-            (orderItem) =>
-                mockReOrderPermission.validMaterials
-                    .map((e) => e.materialNumber)
-                    .contains(orderItem.materialNumber) &&
-                orderItem.type.isMaterialTypeComm,
+          .map((e) => e.copyWith(type: OrderItemType('Comm')))
+          .toList();
+  final fakeReorderItems = fakeOrderHistoryDetailsOrderItemsComm
+      .map(
+        (e) => PriceAggregate.empty().copyWith(
+          materialInfo: e.reOrderMaterialInfo,
+          tenderContract:
+              e.tenderContractDetails.contractNumber.isContractNumberEmpty
+                  ? TenderContract.empty()
+                  : e.orderItemTenderContract,
+        ),
+      )
+      .toList();
+  final fakeOrderHistoryDetailsOrderItemsCommWithTender =
+      fakeOrderHistoryDetailsOrderItems
+          .map(
+            (e) => e.copyWith(
+              type: OrderItemType('Comm'),
+              tenderContractDetails:
+                  OrderHistoryDetailsTenderContract.empty().copyWith(
+                contractNumber: TenderContractNumber('fake-number'),
+              ),
+            ),
+          )
+          .toList();
+  final fakeReorderItemsWithTender =
+      fakeOrderHistoryDetailsOrderItemsCommWithTender
+          .map(
+            (e) => PriceAggregate.empty().copyWith(
+              materialInfo: e.reOrderMaterialInfo,
+              tenderContract:
+                  e.tenderContractDetails.contractNumber.isContractNumberEmpty
+                      ? TenderContract.empty()
+                      : e.orderItemTenderContract,
+            ),
           )
           .toList();
   final fakePrice = Price.empty().copyWith(finalPrice: MaterialPrice(12));
@@ -96,23 +128,20 @@ void main() async {
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesConfigs: fakeMYSalesOrgConfigs,
-            materialNumberList: mockValidOrderHistoryDetailsOrderItems
-                .where((e) => e.productType.typeMaterial)
-                .map((e) => e.materialNumber)
+            materialNumberList: fakeReorderItems
+                .where((e) => e.materialInfo.type.typeMaterial)
+                .map((e) => e.getMaterialNumber)
                 .toList(),
             comboDealEligible: false,
           ),
         ).thenAnswer(
-          (_) async => Right({
-            for (final e in mockValidOrderHistoryDetailsOrderItems)
-              e.materialNumber: fakePrice,
-          }),
+          (_) async => const Left(ApiFailure.other('fake-error')),
         );
 
         when(
           () => repository.getReorderPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
-            materialNumbers: fakeOrderHistoryDetailsOrderItems
+            materialNumbers: fakeOrderHistoryDetailsOrderItemsComm
                 .map((e) => e.materialNumber)
                 .toList(),
             salesOrganisation: fakeMYSalesOrganisation,
@@ -124,7 +153,7 @@ void main() async {
       },
       act: (ReOrderPermissionBloc bloc) => bloc.add(
         ReOrderPermissionEvent.fetchOrder(
-          orderHistoryDetailsOrderItems: fakeOrderHistoryDetailsOrderItems,
+          orderHistoryDetailsOrderItems: fakeOrderHistoryDetailsOrderItemsComm,
           orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
         ),
       ),
@@ -134,19 +163,66 @@ void main() async {
           orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
         ),
         initializedState.copyWith(
+          failureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
           orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
-          validOrderItems: mockValidOrderHistoryDetailsOrderItems
-              .map(
-                (e) => PriceAggregate.empty().copyWith(
-                  materialInfo: e.reOrderMaterialInfo,
-                  price: {
-                        for (final e in mockValidOrderHistoryDetailsOrderItems)
-                          e.materialNumber: fakePrice,
-                      }[e.materialNumber] ??
-                      Price.empty(),
-                ),
-              )
-              .toList(),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Fetch order Reorder Permission success with tender',
+      build: () => ReOrderPermissionBloc(
+        reOrderPermissionRepository: repository,
+        materialPriceRepository: priceRepository,
+      ),
+      seed: () => initializedState,
+      setUp: () {
+        when(
+          () => priceRepository.getMaterialPrice(
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesConfigs: fakeMYSalesOrgConfigs,
+            materialNumberList: fakeReorderItemsWithTender
+                .where((e) => e.materialInfo.type.typeMaterial)
+                .map((e) => e.getMaterialNumber)
+                .toList(),
+            comboDealEligible: false,
+          ),
+        ).thenAnswer(
+          (_) async => const Left(ApiFailure.other('fake-error')),
+        );
+
+        when(
+          () => repository.getReorderPermission(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            materialNumbers: fakeOrderHistoryDetailsOrderItemsCommWithTender
+                .map((e) => e.materialNumber)
+                .toList(),
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeSalesRepUser,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+          ),
+        ).thenAnswer((_) async => Right(mockReOrderPermission.validMaterials));
+      },
+      act: (ReOrderPermissionBloc bloc) => bloc.add(
+        ReOrderPermissionEvent.fetchOrder(
+          orderHistoryDetailsOrderItems:
+              fakeOrderHistoryDetailsOrderItemsCommWithTender,
+          orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
+        ),
+      ),
+      expect: () => [
+        initializedState.copyWith(
+          isFetching: true,
+          orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
+        ),
+        initializedState.copyWith(
+          failureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+          orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
         ),
       ],
     );
@@ -493,5 +569,21 @@ void main() async {
         ),
       ],
     );
+
+    test('availableTenderContract getter', () {
+      final state = ReOrderPermissionState.initial().copyWith(
+        validOrderItems: [
+          PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('fake-number'),
+            ),
+            tenderContract: TenderContract.empty(),
+          ),
+        ],
+      );
+      expect(state.availableTenderContract, {
+        MaterialNumber('fake-number'): TenderContract.empty(),
+      });
+    });
   });
 }

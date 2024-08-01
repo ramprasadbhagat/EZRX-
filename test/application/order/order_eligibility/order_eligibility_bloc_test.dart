@@ -166,6 +166,43 @@ void main() {
         ],
       );
 
+      blocTest(
+        ' => showErrorMessage when state.displayInvalidItemsBanner is true',
+        build: () => OrderEligibilityBloc(),
+        seed: () => changedState.copyWith(
+          configs: fakeKHSalesOrgConfigs.copyWith(
+            addOosMaterials: OosMaterial(true),
+          ),
+          cartItems: [
+            fakeCartItem.copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                isSuspended: true,
+              ),
+            ),
+          ],
+        ),
+        act: (OrderEligibilityBloc bloc) {
+          bloc.add(
+            const OrderEligibilityEvent.validateOrderEligibility(),
+          );
+        },
+        expect: () => [
+          changedState.copyWith(
+            configs: fakeKHSalesOrgConfigs.copyWith(
+              addOosMaterials: OosMaterial(true),
+            ),
+            cartItems: [
+              fakeCartItem.copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isSuspended: true,
+                ),
+              ),
+            ],
+            showErrorMessage: true,
+          ),
+        ],
+      );
+
       blocTest<OrderEligibilityBloc, OrderEligibilityState>(
         '=> Update event test',
         build: () => OrderEligibilityBloc(),
@@ -188,6 +225,22 @@ void main() {
             subTotal: 180.0,
             mpSubtotal: 222.2,
             zpSubtotal: 333.3,
+          ),
+        ],
+      );
+
+      blocTest<OrderEligibilityBloc, OrderEligibilityState>(
+        '=> selectDeliveryOption event test',
+        build: () => OrderEligibilityBloc(),
+        seed: () => initializedState,
+        act: (bloc) => bloc.add(
+          OrderEligibilityEvent.selectDeliveryOption(
+            DeliveryOption.requestDeliveryDate(),
+          ),
+        ),
+        expect: () => [
+          initializedState.copyWith(
+            deliveryOption: DeliveryOption.requestDeliveryDate(),
           ),
         ],
       );

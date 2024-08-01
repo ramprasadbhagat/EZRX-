@@ -134,7 +134,6 @@ class ComboDealMaterialDetailBloc
           case ComboDealScheme.k4:
           case ComboDealScheme.k42:
           case ComboDealScheme.k5:
-          case ComboDealScheme.kWithSuffix:
             emit(
               state.copyWith(
                 selectedItems: selectionStatus,

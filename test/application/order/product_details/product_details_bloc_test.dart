@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:mocktail/mocktail.dart';
@@ -67,8 +69,7 @@ void main() {
     stockInfoRepositoryMock = StockInfoRepositoryMock();
     mockMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     mockStockInfo = (await StockInfoLocalDataSource().getStockInfoList()).first;
-    fakeMaterialInfoList =
-        await MaterialListLocalDataSource().getProductList();
+    fakeMaterialInfoList = await MaterialListLocalDataSource().getProductList();
     fakeMaterialInfo = fakeMaterialInfoList.products
         .where(
           (element) => element.data.isNotEmpty,
@@ -627,6 +628,56 @@ void main() {
       );
 
       blocTest<ProductDetailBloc, ProductDetailState>(
+        'Fetch Stock Info List for bundles but get empty stock',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
+        ),
+        setUp: () {
+          when(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeMYSalesOrganisation,
+              materials:
+                  [mockMaterialInfo].map((e) => e.materialNumber).toList(),
+              shipToInfo: fakeShipToInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
+          );
+        },
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            ProductDetailEvent.fetchStockForBundle(
+              materials: [mockMaterialInfo],
+            ),
+          );
+        },
+        seed: () => mockInitialState.copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: mockMaterialInfo,
+          ),
+        ),
+        expect: () => [
+          mockInitialState.copyWith(
+            isStockFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo.copyWith(
+                bundle: mockMaterialInfo.bundle
+                    .copyWith(materials: [mockMaterialInfo]),
+              ),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
         'Failed to Fetch Meta Data',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
@@ -670,6 +721,55 @@ void main() {
             ),
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
+          ),
+        ],
+      );
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
+        'Fetch empty Meta Data',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
+        ),
+        setUp: () {
+          when(
+            () => productDetailMockRepository.getProductsMetaData(
+              materialNumbers: [mockMaterialInfo.materialNumber],
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeMYSalesOrganisation,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(ProductMetaData.empty()),
+          );
+        },
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            ProductDetailEvent.fetchMetaData(),
+          );
+        },
+        seed: () => mockInitialState.copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: mockMaterialInfo,
+            stockInfo: mockStockInfo,
+          ),
+        ),
+        expect: () => [
+          mockInitialState.copyWith(
+            isMetadataFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+              stockInfo: mockStockInfo,
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              stockInfo: mockStockInfo,
+              materialInfo: mockMaterialInfo.copyWith(
+                productImages: ProductImages.empty(),
+              ),
+              productItem: ProductItem.empty(),
+            ),
           ),
         ],
       );
@@ -1320,6 +1420,99 @@ void main() {
               )
               .displayExpiryDate,
           '31 Jul 2023',
+        );
+      });
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
+        'Update Qty',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
+        ),
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            ProductDetailEvent.updateQty(
+              qty: 10,
+            ),
+          );
+        },
+        seed: () => ProductDetailState.initial(),
+        expect: () => [
+          ProductDetailState.initial().copyWith(
+            inputQty: 10,
+          ),
+        ],
+      );
+
+      test('displayOOSPreorderTag getter', () {
+        final state =
+            ProductDetailState.initial().copyWith(isStockFetching: false);
+        expect(state.displayOOSPreorderTag(false), true);
+      });
+
+      test('showTierPrice getter', () {
+        final state = ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              hidePrice: true,
+            ),
+          ),
+        );
+        expect(state.showTierPrice(isMYExternalSalesRepUser: false), true);
+      });
+
+      test('displayOffers getter', () {
+        final state = ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              hidePrice: true,
+              principalData: PrincipalData.empty()
+                  .copyWith(principalCode: PrincipalCode('105307')),
+            ),
+          ),
+        );
+        expect(
+          state.displayOffers(
+            isMYExternalSalesRepUser: true,
+            bonusMaterialList: [BonusMaterial.empty()],
+          ),
+          true,
+        );
+      });
+
+      test('eligibleForStockError getter', () {
+        final state = ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            stockInfo: StockInfo.empty().copyWith(stockQuantity: 1),
+          ),
+          inputQty: 2,
+        );
+        expect(
+          state.eligibleForStockError,
+          true,
+        );
+      });
+
+      test('showRelatedItemsLoading getter', () {
+        final state = ProductDetailState.initial().copyWith(
+          isRelatedProductsFetching: true,
+        );
+        expect(
+          state.showRelatedItemsLoading,
+          true,
+        );
+      });
+
+      test('showRelatedItemsSection getter', () {
+        final state = ProductDetailState.initial().copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            similarProduct: [MaterialInfo.empty()],
+          ),
+        );
+        expect(
+          state.showRelatedItemsSection,
+          true,
         );
       });
     },

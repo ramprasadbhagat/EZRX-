@@ -215,8 +215,6 @@ class ComboDeal with _$ComboDeal {
                 ?.discountInfo
                 .rateToAbs ??
             0;
-      case ComboDealScheme.kWithSuffix:
-        return groupDeal.discountInfo.rateToAbs;
     }
   }
 
@@ -233,8 +231,7 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k4:
       case ComboDealScheme.k42:
         return descendingSortedQtyTiers.last.minQty;
-      case ComboDealScheme.kWithSuffix:
-        return groupDeal.minTotalQuantity;
+
       default:
         return 0;
     }
@@ -266,7 +263,6 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k1:
       case ComboDealScheme.k21:
       case ComboDealScheme.k22:
-      case ComboDealScheme.kWithSuffix:
         return '';
       case ComboDealScheme.k3:
         return 'Buy {unit} more items to get {discount}% discount';
@@ -287,7 +283,6 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k1:
       case ComboDealScheme.k21:
       case ComboDealScheme.k22:
-      case ComboDealScheme.kWithSuffix:
         return '';
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
@@ -348,8 +343,6 @@ class ComboDeal with _$ComboDeal {
             'percent': firstDiscount?.discountInfo.rateDisplay ?? '',
           },
         );
-      case ComboDealScheme.kWithSuffix:
-        return '';
     }
   }
 
@@ -391,8 +384,6 @@ class ComboDeal with _$ComboDeal {
         return k4MaximumDiscount;
       case ComboDealScheme.k5:
         return k5MaximumDiscountRate;
-      case ComboDealScheme.kWithSuffix:
-        return groupDeal.discountInfo.rateDisplay;
     }
   }
 
@@ -463,8 +454,6 @@ class ComboDeal with _$ComboDeal {
             .discountInfo;
       case ComboDealScheme.k5:
         return nextK5Discount(totalAmount).discountInfo;
-      case ComboDealScheme.kWithSuffix:
-        return groupDeal.discountInfo;
     }
   }
 
@@ -483,7 +472,6 @@ class ComboDeal with _$ComboDeal {
   bool get isNextComboDealVisible {
     switch (scheme) {
       case ComboDealScheme.k21:
-      case ComboDealScheme.kWithSuffix:
         return false;
       case ComboDealScheme.k1:
       case ComboDealScheme.k22:
@@ -507,7 +495,7 @@ class ComboDeal with _$ComboDeal {
   }
 }
 
-enum ComboDealScheme { k1, k21, k22, k3, k4, k42, k5, kWithSuffix }
+enum ComboDealScheme { k1, k21, k22, k3, k4, k42, k5 }
 
 extension ComboDealSchemeExt on ComboDealScheme {
   bool get comboDealCanLoadmore => this == ComboDealScheme.k5;
@@ -529,8 +517,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
       case ComboDealScheme.k4:
       case ComboDealScheme.k42:
         return '${context.tr('Total qty')}: $totalUnit';
-      case ComboDealScheme.kWithSuffix:
-        return '';
     }
   }
 
@@ -547,8 +533,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return context.tr('Total SKUs');
       case ComboDealScheme.k5:
         return context.tr('Total Order Amount');
-      case ComboDealScheme.kWithSuffix:
-        return '';
     }
   }
 
@@ -596,8 +580,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
             'amount': minAmountK5,
           },
         );
-      case ComboDealScheme.kWithSuffix:
-        return '';
     }
   }
 
@@ -625,9 +607,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
       case ComboDealScheme.k5:
         title = 'Combo K5';
         break;
-      case ComboDealScheme.kWithSuffix:
-        title = '';
-        break;
     }
 
     return title;
@@ -649,8 +628,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return 'K4.2';
       case ComboDealScheme.k5:
         return 'K5';
-      case ComboDealScheme.kWithSuffix:
-        return '';
     }
   }
 
@@ -730,7 +707,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
             ComboDealSKUTier.empty();
       case ComboDealScheme.k4:
       case ComboDealScheme.k42:
-      case ComboDealScheme.kWithSuffix:
         return getEligibleComboDealQtyTier(materials) !=
             ComboDealQtyTier.empty();
       case ComboDealScheme.k5:
@@ -795,8 +771,6 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return 'getComboDealForMaterialResponseK4.2.json';
       case ComboDealScheme.k5:
         return 'getComboDealForPrincipleResponseK5.json';
-      case ComboDealScheme.kWithSuffix:
-        return '';
     }
   }
 }

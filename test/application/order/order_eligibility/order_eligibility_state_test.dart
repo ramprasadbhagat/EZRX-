@@ -1,7 +1,9 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/tr_object.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -15,7 +17,10 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -248,6 +253,17 @@ void main() {
           .toList();
       final materials = eligibilityState.invalidMaterialCartItems;
       expect(materials, invalidMaterials);
+
+      expect(
+        OrderEligibilityState.initial().copyWith(
+          cartItems: [
+            fakeCartItem.copyWith(
+              price: Price.empty().copyWith(finalPrice: MaterialPrice(100)),
+            ),
+          ],
+        ).invalidMaterialCartItems,
+        [fakeCartItem.materialInfo.copyWith(quantity: MaterialQty(0))],
+      );
     });
 
     test(' => displayCartPagePriceMessage should return correct value', () {
@@ -412,6 +428,27 @@ void main() {
                 configs: fakeMYSalesOrgConfigs,
                 cartItems: [fakeCartItem],
                 grandTotal: fakeMYSalesOrgConfigs.minOrderAmount - 1,
+              )
+              .zpMOVEligible,
+          false,
+        );
+
+        //return false when zp small order fee enable for client role & user is internal sales rep material & subtotal < mov value
+        expect(
+          OrderEligibilityState.initial()
+              .copyWith(
+                configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+                user: fakeInternalSalesRepUser,
+                cartItems: [
+                  fakeCartItem.copyWith(
+                    stockInfoList: [
+                      StockInfo.empty().copyWith(
+                        inStock: MaterialInStock('Yes'),
+                      ),
+                    ],
+                  ),
+                ],
+                subTotal: fakeMYSalesOrgConfigs.minOrderAmount - 1,
               )
               .zpMOVEligible,
           false,
@@ -905,6 +942,41 @@ void main() {
           ).zpSmallOrderFeeApplied,
           true,
         );
+
+        expect(
+          zpSmallOrderFeeEnableState.copyWith(
+            cartItems: [
+              fakeCartItem.copyWith(
+                stockInfoList: inStock,
+                quantity: 0,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  principalData: PrincipalData.empty()
+                      .copyWith(principalCode: PrincipalCode('100777')),
+                ),
+              ),
+            ],
+            configs: fakeSGSalesOrgConfigs.copyWith(
+              enableSmallOrderFee: true,
+              smallOrderFeeUserRoles: ['Client User'],
+            ),
+          ).zpSmallOrderFeeApplied,
+          false,
+        );
+      });
+
+      test('smallOrderFeeApplied getter', () {
+        final state = OrderEligibilityState.initial()
+            .copyWith(salesOrg: fakeIDSalesOrganisation);
+        expect(state.smallOrderFeeApplied, true);
+      });
+
+      test('smallOrderFee getter', () {
+        final state = zpSmallOrderFeeEnableState.copyWith(
+          cartItems: [
+            fakeCartItem.copyWith(stockInfoList: inStock, quantity: 0),
+          ],
+        );
+        expect(state.smallOrderFee, 23.0);
       });
 
       test('mpSmallOrderFeeApplied getter', () {
@@ -937,6 +1009,556 @@ void main() {
           true,
         );
       });
+    });
+
+    group('orderEligibleTrackingErrorMessage test', () {
+      test(
+        ' => Check orderEligibleTrackingErrorMessage for zp only',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [PriceAggregate.empty()],
+            configs: fakeTHSalesOrgConfigs,
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Please ensure that minimum order value is at least THB 100.00',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage with market has ZP and MP and has both ZP and MP small order fee',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isMarketPlace: true,
+                ),
+              ),
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty(),
+              ),
+            ],
+            configs: fakeMYSalesOrgConfigsWithSmallOrderFee.copyWith(
+              mpMinOrderAmount: 200.0,
+            ),
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Please ensure that minimum order value is at least MYR 300.00 for ZP subtotal & MYR 200.00 for MP subtotal.',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage with market has ZP and MP and has ZP small order fee',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isMarketPlace: true,
+                ),
+              ),
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty(),
+              ),
+            ],
+            configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Please ensure that minimum order value is at least MYR 300.00 for ZP subtotal.',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage with market has ZP and MP and has MP small order fee',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isMarketPlace: true,
+                ),
+              ),
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty(),
+              ),
+            ],
+            configs: fakeMYSalesOrgConfigsWithSmallOrderFee.copyWith(
+              mpMinOrderAmount: 200.0,
+            ),
+            zpSubtotal: 400.0,
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Please ensure that minimum order value is at least MYR 200.00 for MP subtotal.',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage for invalid contract',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isMarketPlace: true,
+                ),
+                tenderContract: TenderContract.empty().copyWith(
+                  contractNumber: TenderContractNumber('fake-number'),
+                  isTenderExpired: true,
+                ),
+                salesOrgConfig: fakeVNSalesOrgConfigs,
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Tender Contract is no longer available for one or few item(s). Please remove to continue.',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when is Max Qty Exceeds For Any Tender',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isMarketPlace: true,
+                ),
+                tenderContract: TenderContract.empty().copyWith(
+                  contractNumber: TenderContractNumber('fake-number'),
+                  remainingTenderQuantity: 9,
+                ),
+                quantity: 10,
+                salesOrgConfig: fakeVNSalesOrgConfigs,
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'One or few item(s) order qty exceed the maximum available tender quantity.',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when ask User To Add Commercial Material',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                is26SeriesMaterial: true,
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Your cart must contain other commercial material to proceed checkout',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when Gimmick Material Not Allowed',
+        () {
+          final materialNumber = MaterialNumber('fake-number');
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                isGimmickMaterial: true,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                materialInfo: MaterialInfo.empty()
+                    .copyWith(materialNumber: materialNumber),
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Gimmick material ${materialNumber.displayMatNo} is not allowed',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when MWP Not Allowed And Present In Cart',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                salesOrgConfig: fakePHSalesOrgConfigs,
+                materialInfo: MaterialInfo.empty()
+                    .copyWith(type: MaterialInfoType.material()),
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'The following items have been identified in your cart: Material without price',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when OOS not Allowed If Present In Cart',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty(),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'The following items have been identified in your cart: Out of stock material',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when cart Contains Suspended Principal',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isPrincipalSuspended: true,
+                ),
+                stockInfoList: [
+                  StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+                ],
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'The following items have been identified in your cart: Principle suspended material',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when cart Contains Suspended Materials',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isSuspended: true,
+                ),
+                stockInfoList: [
+                  StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+                ],
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'The following items have been identified in your cart: Suspended material',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when Bundle Quantity not Satisfies',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType.bundle(),
+                ),
+                bundle: Bundle.empty().copyWith(
+                  materials: [
+                    MaterialInfo.empty().copyWith(
+                      stockInfos: [
+                        StockInfo.empty()
+                            .copyWith(inStock: MaterialInStock('Yes')),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'The following items have been identified in your cart: Unsatisfied qty bundle',
+          );
+        },
+      );
+
+      test(
+        ' => Check orderEligibleTrackingErrorMessage when has Mandatory Tender Material But Unavailable',
+        () {
+          final state = OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                salesOrgConfig: fakeVNSalesOrgConfigs,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  hasMandatoryTenderContract: true,
+                  defaultMaterialDescription: 'fake-name',
+                ),
+              ),
+            ],
+          );
+
+          expect(
+            state.orderEligibleTrackingErrorMessage,
+            'Product fake-name need to use tender contract.',
+          );
+        },
+      );
+    });
+
+    group('displayInvalidItemsWarning test', () {
+      test('Check displayInvalidItemsWarning', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          cartItems: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                isSuspended: true,
+              ),
+            ),
+          ],
+          showErrorMessage: true,
+        );
+        expect(
+          state.displayInvalidItemsWarning,
+          true,
+        );
+      });
+
+      test('Check displayInvalidItemsWarning', () {
+        final state = OrderEligibilityState.initial();
+        expect(
+          state.hasMultipleErrors,
+          false,
+        );
+      });
+    });
+
+    group('comboDealEligible Test', () {
+      test('Check comboDealEligible with salesDeals Empty', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          configs: fakeKHSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        );
+        expect(
+          state.comboDealEligible,
+          false,
+        );
+      });
+
+      test('Check comboDealEligible with comboDealsUserRole all user ', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          configs: fakeKHSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo
+              .copyWith(salesDeals: [SalesDealNumber('fake-number')]),
+        );
+        expect(
+          state.comboDealEligible,
+          true,
+        );
+      });
+
+      test('Check comboDealEligible with comboDealsUserRole customer only ',
+          () {
+        final state = OrderEligibilityState.initial().copyWith(
+          configs: fakeKHSalesOrgConfigs.copyWith(
+            comboDealsUserRole: ComboDealUserRole(2),
+          ),
+          customerCodeInfo: fakeCustomerCodeInfo
+              .copyWith(salesDeals: [SalesDealNumber('fake-number')]),
+          user: fakeClientUser,
+        );
+        expect(
+          state.comboDealEligible,
+          true,
+        );
+      });
+
+      test('Check comboDealEligible with comboDealsUserRole salesrep only ',
+          () {
+        final state = OrderEligibilityState.initial().copyWith(
+          configs: fakeKHSalesOrgConfigs.copyWith(
+            comboDealsUserRole: ComboDealUserRole(3),
+          ),
+          customerCodeInfo: fakeCustomerCodeInfo
+              .copyWith(salesDeals: [SalesDealNumber('fake-number')]),
+          user: fakeSalesRepUser,
+        );
+        expect(
+          state.comboDealEligible,
+          true,
+        );
+      });
+
+      test('Check comboDealEligible with comboDealsUserRole not eligible ', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          configs: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo
+              .copyWith(salesDeals: [SalesDealNumber('fake-number')]),
+          user: fakeSalesRepUser,
+        );
+        expect(
+          state.comboDealEligible,
+          false,
+        );
+      });
+    });
+
+    group('smallOrderFeeAppliedMessage Test', () {
+      test('Check showSmallOrderFeeForID', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          salesOrg: fakeIDSalesOrganisation,
+          configs: fakeIDSalesOrgConfigs,
+        );
+        expect(
+          state.smallOrderFeeAppliedMessage,
+          TRObject(
+            'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.',
+            arguments: {
+              'smallOrderFee': StringUtils.priceComponentDisplayPrice(
+                fakeIDSalesOrgConfigs,
+                fakeIDSalesOrganisation.salesOrg.smallOrderThreshold,
+                false,
+              ),
+            },
+          ),
+        );
+      });
+
+      test('Check has both zp and mp small order fee', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          cartItems: [
+            PriceAggregate.empty().copyWith(
+              stockInfoList: [
+                StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+              ],
+            ),
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                isMarketPlace: true,
+              ),
+              stockInfoList: [
+                StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+              ],
+            ),
+          ],
+          configs: fakeMYSalesOrgConfigsWithSmallOrderFee.copyWith(
+            mpMinOrderAmount: 200.0,
+          ),
+          user: fakeClientUser,
+        );
+        expect(
+          state.smallOrderFeeAppliedMessage,
+          const TRObject(
+            'A small order fee applies to orders with ZP and MP in-stock items separately that are under the minimum order value of {zpSmallOrderFee} ZP subtotal & {mpSmallOrderFee} for MP subtotal.',
+            arguments: {
+              'zpSmallOrderFee': 'MYR 300.00',
+              'mpSmallOrderFee': 'MYR 300.00',
+            },
+          ),
+        );
+      });
+
+      test('Check has zp small order fee', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          cartItems: [
+            PriceAggregate.empty().copyWith(
+              stockInfoList: [
+                StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+              ],
+            ),
+          ],
+          configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+          user: fakeClientUser,
+        );
+        expect(
+          state.smallOrderFeeAppliedMessage,
+          const TRObject(
+            'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.',
+            arguments: {'smallOrderFee': 'MYR 300.00'},
+          ),
+        );
+      });
+
+      test('Check has mp small order fee', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          cartItems: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                isMarketPlace: true,
+              ),
+            ),
+          ],
+          configs: fakeMYSalesOrgConfigsWithSmallOrderFee.copyWith(
+            mpMinOrderAmount: 200.0,
+          ),
+        );
+        expect(
+          state.smallOrderFeeAppliedMessage,
+          const TRObject(
+            'A small order fee applies to orders with MP in-stock items that are under the minimum order value of {smallOrderFee} for MP subtotal.',
+            arguments: {'smallOrderFee': 'MYR 300.00'},
+          ),
+        );
+      });
+    });
+
+    test('displayInvalidOOSOnCartItem Test', () {
+      final state = OrderEligibilityState.initial().copyWith(
+        configs:
+            fakeTWSalesOrgConfigs.copyWith(addOosMaterials: OosMaterial(false)),
+      );
+      expect(state.displayInvalidOOSOnCartItem, true);
+    });
+
+    test('invalidCartItems test', () {
+      final state = OrderEligibilityState.initial();
+      expect(state.invalidCartItems, <MaterialInfo>[]);
+    });
+
+    test('invalidComboItems test', () {
+      final state = OrderEligibilityState.initial().copyWith(
+        cartItems: [
+          PriceAggregate.empty().copyWith(
+            materialInfo:
+                MaterialInfo.empty().copyWith(type: MaterialInfoType('combo')),
+            comboMaterials: [ComboMaterialItem.empty()],
+          ),
+        ],
+      );
+      expect(state.invalidComboItems, [
+        PriceAggregate.empty().copyWith(
+          price: Price.empty().copyWith(
+            isValid: false,
+          ),
+          quantity: 0,
+          materialInfo:
+              MaterialInfo.empty().copyWith(type: MaterialInfoType('combo')),
+        ),
+      ]);
     });
   });
 }
