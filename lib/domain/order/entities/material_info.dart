@@ -207,6 +207,17 @@ class MaterialInfo with _$MaterialInfo {
       data.isNotEmpty && data.first.itemRegistrationNumber.isNotEmpty
           ? data.first.itemRegistrationNumber
           : itemRegistrationNumber;
+
+  String get tag {
+    if (!inStock && stockInfos.isNotEmpty) {
+      return 'Preorder';
+    }
+    if (type.typeDealBonus) {
+      return 'Offer';
+    }
+
+    return '';
+  }
 }
 
 @freezed

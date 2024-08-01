@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -12,6 +13,8 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/bonus_sample_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_tender_contract_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
@@ -135,6 +138,7 @@ void main() {
     mixpanelService = MixpanelServiceMock();
     locator.registerLazySingleton<MixpanelService>(() => mixpanelService);
     clevertapService = ClevertapServiceMock();
+    locator.registerLazySingleton<ClevertapService>(() => clevertapService);
     encryption = EncryptionMock();
     orderEncryptionMock = OrderEncryption(
       data: 'fake-data',
@@ -1494,19 +1498,6 @@ void main() {
       ).thenAnswer(
         (invocation) async => orderHistoryDetailsMock,
       );
-      for (final item in orderHistoryDetailsMock.orderHistoryDetailsOrderItem) {
-        when(
-          () => materialBannerStorageMock.get(
-            materialNumber: item.productType.typeBundle
-                ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
-                : item.materialNumber.displayMatNo,
-          ),
-        ).thenAnswer(
-          (invocation) async => EZReachBannerDto.fromDomain(
-            EZReachBanner.empty(),
-          ),
-        );
-      }
 
       when(
         () => materialBannerStorageMock.clear(),
@@ -1524,6 +1515,235 @@ void main() {
         shipToInfo: fakeShipToInfo,
         configs: fakeSalesOrganisationConfigs,
       );
+
+      for (final item in cartMaterials
+          .where((e) => !e.materialInfo.isMarketPlace)
+          .toList()) {
+        if (item.materialInfo.type.typeCombo) {
+          // case 1: item is combo
+          for (final comboItem in item.comboMaterials) {
+            when(
+              () => materialBannerStorageMock.get(
+                materialNumber: comboItem.productId.displayMatNo,
+              ),
+            ).thenAnswer(
+              (invocation) async => EZReachBannerDto.fromDomain(
+                EZReachBanner.empty(),
+              ),
+            );
+
+            verify(
+              () => trackMixpanelEvent(
+                TrackingEvents.successfulOrderItem,
+                props: {
+                  TrackingProps.orderNumber: comboItem.productId.displayMatNo,
+                  TrackingProps.productName: comboItem.materialDescription,
+                  TrackingProps.productNumber: comboItem.productId.displayMatNo,
+                  TrackingProps.productQty: comboItem.quantity,
+                  TrackingProps.unitPrice: comboItem.finalIndividualPrice,
+                  TrackingProps.grandTotal: comboItem.discountedSubTotalWithTax,
+                  TrackingProps.productManufacturer:
+                      comboItem.principalData.principalName.name,
+                  TrackingProps.fromBanner: false,
+                  TrackingProps.bannerId: '',
+                  TrackingProps.bannerTitle: '',
+                  TrackingProps.tag: comboItem.materialInfo.tag,
+                },
+              ),
+            ).called(1);
+
+            verify(
+              () => trackClevertapEvent(
+                TrackingEvents.successfulOrderItem,
+                props: {
+                  TrackingProps.orderNumber: comboItem.productId.displayMatNo,
+                  TrackingProps.productName: comboItem.materialDescription,
+                  TrackingProps.productNumber: comboItem.productId.displayMatNo,
+                  TrackingProps.productQty: comboItem.quantity,
+                  TrackingProps.unitPrice: comboItem.finalIndividualPrice,
+                  TrackingProps.grandTotal: comboItem.discountedSubTotalWithTax,
+                  TrackingProps.productManufacturer:
+                      comboItem.principalData.principalName.name,
+                  TrackingProps.fromBanner: false,
+                  TrackingProps.bannerId: '',
+                  TrackingProps.bannerTitle: '',
+                  TrackingProps.tag: comboItem.materialInfo.tag,
+                  TrackingProps.isOffer:
+                      comboItem.materialInfo.type.typeDealBonus,
+                  TrackingProps.comment: comboItem.materialInfo.remarks,
+                  TrackingProps.parentId: comboItem.materialInfo.parentID,
+                  TrackingProps.type: comboItem.materialInfo.type.getValue(),
+                  TrackingProps.promoStatus: false,
+                  TrackingProps.promoType: comboItem.materialInfo.promoType,
+                  TrackingProps.contract: {},
+                  TrackingProps.override: false,
+                  TrackingProps.principalCode: comboItem
+                      .principalData.principalCode
+                      .getOrDefaultValue(''),
+                  TrackingProps.unitOfMeasurement:
+                      item.salesOrgConfig.currency.code,
+                  TrackingProps.bonuses: [],
+                  TrackingProps.market: fakeMarketPlaceMarket,
+                },
+              ),
+            ).called(1);
+          }
+        } else if (item.materialInfo.type.typeBundle) {
+          // case 2: item is combo
+          for (final bundleItem in item.bundle.materials) {
+            final currentBundle = item.bundle;
+            final materialNumber =
+                '${currentBundle.bundleCode}_${bundleItem.materialNumber.displayMatNo}';
+            when(
+              () => materialBannerStorageMock.get(
+                materialNumber: materialNumber,
+              ),
+            ).thenAnswer(
+              (invocation) async => EZReachBannerDto.fromDomain(
+                EZReachBanner.empty(),
+              ),
+            );
+
+            verify(
+              () => trackMixpanelEvent(
+                TrackingEvents.successfulOrderItem,
+                props: {
+                  TrackingProps.orderNumber:
+                      orderHistoryDetailsMock.orderNumber.getOrDefaultValue(''),
+                  TrackingProps.productName: bundleItem.displayDescription,
+                  TrackingProps.productNumber:
+                      bundleItem.materialNumber.displayMatNo,
+                  TrackingProps.productQty: bundleItem.quantity.intValue,
+                  TrackingProps.unitPrice: currentBundle.currentBundleInfo.rate,
+                  TrackingProps.grandTotal:
+                      currentBundle.currentBundleInfo.rate *
+                          bundleItem.quantity.intValue,
+                  TrackingProps.productManufacturer: bundleItem.getManufactured,
+                  TrackingProps.fromBanner: false,
+                  TrackingProps.bannerId: '',
+                  TrackingProps.bannerTitle: '',
+                  TrackingProps.tag: bundleItem.tag,
+                },
+              ),
+            ).called(1);
+
+            verify(
+              () => trackClevertapEvent(
+                TrackingEvents.successfulOrderItem,
+                props: {
+                  TrackingProps.orderNumber:
+                      orderHistoryDetailsMock.orderNumber.getOrDefaultValue(''),
+                  TrackingProps.productName: bundleItem.displayDescription,
+                  TrackingProps.productNumber:
+                      bundleItem.materialNumber.displayMatNo,
+                  TrackingProps.productQty: bundleItem.quantity.intValue,
+                  TrackingProps.unitPrice: currentBundle.currentBundleInfo.rate,
+                  TrackingProps.grandTotal:
+                      currentBundle.currentBundleInfo.rate *
+                          bundleItem.quantity.intValue,
+                  TrackingProps.productManufacturer: bundleItem.getManufactured,
+                  TrackingProps.fromBanner: false,
+                  TrackingProps.bannerId: '',
+                  TrackingProps.bannerTitle: '',
+                  TrackingProps.tag: bundleItem.tag,
+                  TrackingProps.isOffer: bundleItem.type.typeDealBonus,
+                  TrackingProps.comment: bundleItem.remarks,
+                  TrackingProps.parentId: currentBundle.bundleCode,
+                  TrackingProps.type: bundleItem.type.getValue(),
+                  TrackingProps.promoStatus: false,
+                  TrackingProps.promoType: bundleItem.promoType,
+                  TrackingProps.contract: {},
+                  TrackingProps.override: true,
+                  TrackingProps.principalCode: bundleItem
+                      .principalData.principalCode
+                      .getOrDefaultValue(''),
+                  TrackingProps.unitOfMeasurement:
+                      item.salesOrgConfig.currency.code,
+                  TrackingProps.bonuses: [],
+                  TrackingProps.market: fakeMarketPlaceMarket,
+                },
+              ),
+            ).called(1);
+          }
+        } else {
+          // case 3: normal order item
+          when(
+            () => materialBannerStorageMock.get(
+              materialNumber: item.getMaterialNumber.displayMatNo,
+            ),
+          ).thenAnswer(
+            (invocation) async => EZReachBannerDto.fromDomain(
+              EZReachBanner.empty(),
+            ),
+          );
+
+          verify(
+            () => trackMixpanelEvent(
+              TrackingEvents.successfulOrderItem,
+              props: {
+                TrackingProps.orderNumber:
+                    orderHistoryDetailsMock.orderNumber.getOrDefaultValue(''),
+                TrackingProps.productName: item.materialInfo.displayDescription,
+                TrackingProps.productNumber:
+                    item.getMaterialNumber.displayMatNo,
+                TrackingProps.productQty: item.quantity,
+                TrackingProps.unitPrice: item.unitPrice,
+                TrackingProps.grandTotal: item.finalPriceTotalWithTax,
+                TrackingProps.productManufacturer:
+                    item.materialInfo.principalData.principalName.name,
+                TrackingProps.fromBanner: false,
+                TrackingProps.bannerId: '',
+                TrackingProps.bannerTitle: '',
+                TrackingProps.tag: item.materialInfo.tag,
+              },
+            ),
+          ).called(1);
+
+          verify(
+            () => trackClevertapEvent(
+              TrackingEvents.successfulOrderItem,
+              props: {
+                TrackingProps.orderNumber:
+                    orderHistoryDetailsMock.orderNumber.getOrDefaultValue(''),
+                TrackingProps.productName: item.materialInfo.displayDescription,
+                TrackingProps.productNumber:
+                    item.getMaterialNumber.displayMatNo,
+                TrackingProps.productQty: item.quantity,
+                TrackingProps.unitPrice: item.unitPrice,
+                TrackingProps.grandTotal: item.finalPriceTotalWithTax,
+                TrackingProps.productManufacturer:
+                    item.materialInfo.principalData.principalName.name,
+                TrackingProps.fromBanner: false,
+                TrackingProps.bannerId: '',
+                TrackingProps.bannerTitle: '',
+                TrackingProps.tag: item.materialInfo.tag,
+                TrackingProps.isOffer: item.materialInfo.type.typeDealBonus,
+                TrackingProps.comment: item.materialInfo.remarks,
+                TrackingProps.parentId: item.materialInfo.parentID,
+                TrackingProps.type: item.materialInfo.type.getValue(),
+                TrackingProps.promoStatus: item.promoStatus,
+                TrackingProps.promoType: item.materialInfo.promoType,
+                TrackingProps.contract: SubmitTenderContractDto.fromDomain(
+                  item.toSubmitMaterialInfo().contract,
+                ).toJson(),
+                TrackingProps.override: item.isMaterialItemOverride,
+                TrackingProps.principalCode: item
+                    .materialInfo.principalData.principalCode
+                    .getOrDefaultValue(''),
+                TrackingProps.unitOfMeasurement:
+                    item.salesOrgConfig.currency.code,
+                TrackingProps.bonuses: item.bonusSampleItems
+                    .map(
+                      (e) => BonusSampleItemDto.fromDomain(e).toJson(),
+                )
+                    .toList(),
+                TrackingProps.market: fakeNormalMarket,
+              },
+            ),
+          ).called(1);
+        }
+      }
+
       expect(
         result.getOrElse(() => <OrderHistoryDetails>[]),
         equals([orderHistoryDetailsMock]),
@@ -1567,21 +1787,6 @@ void main() {
       when(() => deviceStorage.currentMarket())
           .thenReturn(fakeMarketPlaceMarket);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      for (final orderHistoryDetail in orderHistoryList) {
-        for (final item in orderHistoryDetail.orderHistoryDetailsOrderItem) {
-          when(
-            () => materialBannerStorageMock.get(
-              materialNumber: item.productType.typeBundle
-                  ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
-                  : item.materialNumber.displayMatNo,
-            ),
-          ).thenAnswer(
-            (invocation) async => EZReachBannerDto.fromDomain(
-              EZReachBanner.empty(),
-            ),
-          );
-        }
-      }
 
       when(
         () => materialBannerStorageMock.clear(),
@@ -1609,6 +1814,7 @@ void main() {
         shipToInfo: fakeShipToInfo,
         configs: fakeSalesOrganisationConfigs,
       );
+
       for (final item in orderHistoryList) {
         verify(
           () => trackMixpanelEvent(
@@ -1616,14 +1822,14 @@ void main() {
             props: {
               if (item.processingStatus.isInQueue)
                 TrackingProps.queueNumber:
-                    item.orderNumber.getOrDefaultValue(''),
+                item.orderNumber.getOrDefaultValue(''),
               TrackingProps.orderNumber: item.orderNumber.getOrDefaultValue(''),
               TrackingProps.grandTotal: item.totalValue,
               TrackingProps.totalQty: item.orderItemsCount,
               TrackingProps.requestDeliveryDate:
-                  item.requestedDeliveryDate.dateOrNaString,
+              item.requestedDeliveryDate.dateOrNaString,
               TrackingProps.lineNumber:
-                  item.orderHistoryDetailsOrderItem.length,
+              item.orderHistoryDetailsOrderItem.length,
               TrackingProps.forceUpgradeVersionInfo:
                   upgrader.state.versionInfo.toString(),
               TrackingProps.forceUpgradeAlertTooSoon: upgrader.isTooSoon(),

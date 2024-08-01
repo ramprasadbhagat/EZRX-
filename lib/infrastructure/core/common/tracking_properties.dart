@@ -44,6 +44,17 @@ class TrackingProps {
   static String orderType = 'order_type';
   static String orderReason = 'order_reason';
   static String collectiveNumber = 'collective_number';
+  static String isCounterOffer = 'is_counter_offer';
+  static String parentId = 'parent_id';
+  static String type = 'type';
+  static String promoStatus = 'promo_status';
+  static String promoType = 'promo_type';
+  static String principalCode = 'principal_code';
+  static String comment = 'comment';
+  static String contract = 'contract';
+  static String unitOfMeasurement = 'unit_of_measurement';
+  static String bonuses = 'bonuses';
+  static String override = 'override';
   //===========================================================
   //  Only Mixpanel track properties
   //===========================================================

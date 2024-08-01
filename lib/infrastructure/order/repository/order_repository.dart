@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -34,7 +35,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/bonus_sample_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_tender_contract_dto.dart';
 import 'package:upgrader/upgrader.dart';
 
 class OrderRepository implements IOrderRepository {
@@ -193,6 +196,7 @@ class OrderRepository implements IOrderRepository {
             salesOrganisation,
             configs,
             customerCodeInfo,
+            cartProducts,
             user,
             deviceStorage.currentMarket(),
           );
@@ -220,6 +224,7 @@ class OrderRepository implements IOrderRepository {
         salesOrganisation,
         configs,
         customerCodeInfo,
+        cartProducts,
         user,
         deviceStorage.currentMarket(),
       );
@@ -244,6 +249,7 @@ class OrderRepository implements IOrderRepository {
     SalesOrganisation salesOrganisation,
     SalesOrganisationConfigs configs,
     CustomerCodeInfo customerCodeInfo,
+    List<PriceAggregate> cartProducts,
     User user,
     String market,
   ) async {
@@ -310,58 +316,181 @@ class OrderRepository implements IOrderRepository {
       },
     );
 
-    for (final item in orderDetail.orderHistoryDetailsOrderItem) {
-      final isOffer = item.showOfferTag;
-      final productTag = item.productTag;
-
-      final tags = <String>[];
-      if (isOffer) tags.add('On Offer');
-      if (productTag.getOrDefaultValue('').isNotEmpty) {
-        tags.add(productTag.displayStatusText);
+    for (final item in cartProducts) {
+      if (item.materialInfo.type.typeCombo) {
+        // case 1: item is combo
+        for (final comboItem in item.comboMaterials) {
+          await _trackingOrderItem(
+            orderNumber: orderQueueNumber,
+            materialNumber: comboItem.productId.displayMatNo,
+            productName: comboItem.materialDescription,
+            productNumber: comboItem.productId.displayMatNo,
+            productQty: comboItem.quantity,
+            unitPrice: comboItem.finalIndividualPrice,
+            grandTotal: comboItem.discountedSubTotalWithTax,
+            productManufacturer: comboItem.principalData.principalName.name,
+            tag: comboItem.materialInfo.tag,
+            isOffer: comboItem.materialInfo.type.typeDealBonus,
+            comment: comboItem.materialInfo.remarks,
+            parentId: comboItem.materialInfo.parentID,
+            type: comboItem.materialInfo.type.getValue(),
+            promoStatus: false,
+            promoType: comboItem.materialInfo.promoType,
+            contract: {},
+            override: false,
+            principalCode:
+                comboItem.principalData.principalCode.getOrDefaultValue(''),
+            unitOfMeasurement: item.salesOrgConfig.currency.code,
+            bonuses: [],
+            market: market,
+          );
+        }
+      } else if (item.materialInfo.type.typeBundle) {
+        // case 2: item is bundle
+        for (final bundleItem in item.bundle.materials) {
+          final currentBundle = item.bundle;
+          await _trackingOrderItem(
+            orderNumber: orderQueueNumber,
+            materialNumber:
+                '${currentBundle.bundleCode}_${bundleItem.materialNumber.displayMatNo}',
+            productName: bundleItem.displayDescription,
+            productNumber: bundleItem.materialNumber.displayMatNo,
+            productQty: bundleItem.quantity.intValue,
+            unitPrice: currentBundle.currentBundleInfo.rate,
+            grandTotal: currentBundle.currentBundleInfo.rate *
+                bundleItem.quantity.intValue,
+            productManufacturer: bundleItem.getManufactured,
+            tag: bundleItem.tag,
+            isOffer: bundleItem.type.typeDealBonus,
+            comment: bundleItem.remarks,
+            parentId: currentBundle.bundleCode,
+            type: bundleItem.type.getValue(),
+            promoStatus: false,
+            promoType: bundleItem.promoType,
+            contract: {},
+            override: true,
+            principalCode:
+                bundleItem.principalData.principalCode.getOrDefaultValue(''),
+            unitOfMeasurement: item.salesOrgConfig.currency.code,
+            bonuses: [],
+            market: market,
+          );
+        }
+      } else {
+        // case 3: normal order item
+        await _trackingOrderItem(
+          orderNumber: orderQueueNumber,
+          materialNumber: item.getMaterialNumber.displayMatNo,
+          productName: item.materialInfo.displayDescription,
+          productNumber: item.getMaterialNumber.displayMatNo,
+          productQty: item.quantity,
+          unitPrice: item.unitPrice,
+          grandTotal: item.finalPriceTotalWithTax,
+          productManufacturer:
+              item.materialInfo.principalData.principalName.name,
+          tag: item.materialInfo.tag,
+          isOffer: item.materialInfo.type.typeDealBonus,
+          comment: item.materialInfo.remarks,
+          parentId: item.materialInfo.parentID,
+          type: item.materialInfo.type.getValue(),
+          promoStatus: item.promoStatus,
+          promoType: item.materialInfo.promoType,
+          contract: SubmitTenderContractDto.fromDomain(
+            item.toSubmitMaterialInfo().contract,
+          ).toJson(),
+          override: item.isMaterialItemOverride,
+          principalCode: item.materialInfo.principalData.principalCode
+              .getOrDefaultValue(''),
+          unitOfMeasurement: item.salesOrgConfig.currency.code,
+          bonuses: item.bonusSampleItems
+              .map(
+                (e) => BonusSampleItemDto.fromDomain(e).toJson(),
+              )
+              .toList(),
+          market: market,
+        );
       }
-      final bannerData = (await materialBannerStorage.get(
-        materialNumber: item.productType.typeBundle
-            ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
-            : item.materialNumber.displayMatNo,
+    }
+  }
+
+  Future<void> _trackingOrderItem({
+    required String orderNumber,
+    required String materialNumber,
+    required String productName,
+    required String productNumber,
+    required int productQty,
+    required double unitPrice,
+    required double grandTotal,
+    required String productManufacturer,
+    required String tag,
+    required bool isOffer,
+    required String comment,
+    required String parentId,
+    required String type,
+    required bool promoStatus,
+    required String promoType,
+    required Map contract,
+    required bool override,
+    required String principalCode,
+    required String unitOfMeasurement,
+    required List bonuses,
+    required String market,
+  }) async {
+    late EZReachBanner bannerData;
+    try {
+      bannerData = (await materialBannerStorage.get(
+        materialNumber: materialNumber,
       ))
           .toDomain();
-
-      mixpanelService.trackEvent(
-        eventName: TrackingEvents.successfulOrderItem,
-        properties: {
-          TrackingProps.orderNumber: orderQueueNumber,
-          TrackingProps.productName: item.materialDescription,
-          TrackingProps.productNumber: item.materialNumber.displayMatNo,
-          TrackingProps.productQty: item.qty,
-          TrackingProps.grandTotal: item.totalPrice,
-          TrackingProps.unitPrice: item.unitPrice,
-          TrackingProps.productManufacturer:
-              item.principalData.principalName.name,
-          TrackingProps.fromBanner: bannerData.isNotEmpty,
-          TrackingProps.bannerId: bannerData.id,
-          TrackingProps.bannerTitle: bannerData.title,
-          TrackingProps.tag: tags.join(', '),
-        },
-      );
-
-      clevertapService.trackEvent(
-        eventName: TrackingEvents.successfulOrderItem,
-        properties: {
-          TrackingProps.orderNumber: orderQueueNumber,
-          TrackingProps.productName: item.materialDescription,
-          TrackingProps.productNumber: item.materialNumber.displayMatNo,
-          TrackingProps.productQty: item.qty,
-          TrackingProps.grandTotal: item.totalPrice,
-          TrackingProps.unitPrice: item.unitPrice,
-          TrackingProps.productManufacturer:
-              item.principalData.principalName.name,
-          TrackingProps.fromBanner: bannerData.isNotEmpty,
-          TrackingProps.bannerId: bannerData.id,
-          TrackingProps.bannerTitle: bannerData.title,
-          TrackingProps.tag: tags.join(', '),
-        },
-      );
+    } catch (_) {
+      bannerData = EZReachBanner.empty();
     }
+
+    mixpanelService.trackEvent(
+      eventName: TrackingEvents.successfulOrderItem,
+      properties: {
+        TrackingProps.orderNumber: orderNumber,
+        TrackingProps.productName: productName,
+        TrackingProps.productNumber: productNumber,
+        TrackingProps.productQty: productQty,
+        TrackingProps.grandTotal: grandTotal,
+        TrackingProps.unitPrice: unitPrice,
+        TrackingProps.productManufacturer: productManufacturer,
+        TrackingProps.fromBanner: bannerData.isNotEmpty,
+        TrackingProps.bannerId: bannerData.id,
+        TrackingProps.bannerTitle: bannerData.title,
+        TrackingProps.tag: tag,
+      },
+    );
+
+    clevertapService.trackEvent(
+      eventName: TrackingEvents.successfulOrderItem,
+      properties: {
+        TrackingProps.orderNumber: orderNumber,
+        TrackingProps.productName: productName,
+        TrackingProps.productNumber: productNumber,
+        TrackingProps.productQty: productQty,
+        TrackingProps.grandTotal: grandTotal,
+        TrackingProps.unitPrice: unitPrice,
+        TrackingProps.productManufacturer: productManufacturer,
+        TrackingProps.fromBanner: bannerData.isNotEmpty,
+        TrackingProps.bannerId: bannerData.id,
+        TrackingProps.bannerTitle: bannerData.title,
+        TrackingProps.tag: tag,
+        TrackingProps.isOffer: isOffer,
+        TrackingProps.comment: comment,
+        TrackingProps.parentId: parentId,
+        TrackingProps.type: type,
+        TrackingProps.promoStatus: promoStatus,
+        TrackingProps.promoType: promoType,
+        TrackingProps.contract: contract,
+        TrackingProps.override: override,
+        TrackingProps.principalCode: principalCode,
+        TrackingProps.unitOfMeasurement: unitOfMeasurement,
+        TrackingProps.bonuses: bonuses,
+        TrackingProps.market: market,
+      },
+    );
   }
 
   SubmitOrder _getSubmitOrderRequest({
