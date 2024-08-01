@@ -26,7 +26,7 @@ class ClevertapService {
   Future<void> createNotificationChannel() async {
     await CleverTapPlugin.createNotificationChannel(
       config.packageName,
-      'eZRx notification',
+      config.channelName,
       config.appName,
       3,
       true,

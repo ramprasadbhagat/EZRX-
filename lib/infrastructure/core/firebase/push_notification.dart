@@ -66,9 +66,9 @@ class PushNotificationService {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(
-          const AndroidNotificationChannel(
-            'com.zuelligpharma.ezrxplus',
-            'eZRx notification',
+          AndroidNotificationChannel(
+            config.packageName,
+            config.channelName,
             importance: Importance.max,
           ),
         );
@@ -86,10 +86,13 @@ class PushNotificationService {
     String? notificationContent,
     String payload,
   ) async {
-    const channelId = 'com.zuelligpharma.ezrxplus';
-    const channelTitle = 'eZRx notification';
     const notificationPriority = Priority.high;
     const notificationImportance = Importance.max;
+
+    // TODO(anyone): get from Config by Flavor later
+    // due to dnstance members can't be accessed from a static method.
+    const channelId = 'com.zuelligpharma.ezrxmobile';
+    const channelTitle = 'eZRx notification';
 
     const androidPlatformChannelSpecifics = AndroidNotificationDetails(
       channelId,
@@ -204,6 +207,8 @@ class PushNotificationService {
   }
 }
 
+// TODO(anyone): should add @pragma('vm:entry-point') annotation & and call Firebase.initializeApp();
+// See more: https://firebase.google.com/docs/cloud-messaging/flutter/receive#background_messages
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await PushNotificationService.showLocalNotification(
     message.notification.hashCode,

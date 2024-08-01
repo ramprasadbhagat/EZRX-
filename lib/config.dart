@@ -25,6 +25,7 @@ class Config {
   int maximumUploadSize = 20;
   String customScheme = 'ezrx://';
   bool bypassNotificationPermission = false;
+  String channelName = 'eZRx notification';
 
   DateTime newReturnRequestFilterStartDate = DateTime(
     DateTime.now().year - 5,
