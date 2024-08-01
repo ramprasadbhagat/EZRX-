@@ -4558,6 +4558,131 @@ void main() {
           ),
         ],
       );
+
+      blocTest<CartBloc, CartState>(
+        'Cart removeInvalidProducts with combo material',
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
+        seed: () => CartState.initial().copyWith(
+          cartProducts: [
+            comboUpdateCartProductList.first.copyWith(
+              comboMaterials: [
+                comboUpdateCartProductList.first.comboMaterials.first.copyWith(
+                  materialInfo: comboUpdateCartProductList
+                      .first.comboMaterials.first.materialInfo
+                      .copyWith(
+                    stockInfos: [
+                      StockInfo.empty().copyWith(
+                        materialNumber: comboUpdateCartProductList.first
+                            .comboMaterials.first.materialInfo.materialNumber,
+                        inStock: MaterialInStock('No'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            priceAggregates.first,
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.removeSelectedProducts(
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              products: [priceAggregates.first.materialInfo],
+              language: fakeClientUser.preferredLanguage,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              [
+                comboUpdateCartProductList.first.copyWith(
+                  comboMaterials: [
+                    comboUpdateCartProductList.first.comboMaterials.first
+                        .copyWith(
+                      materialInfo: comboUpdateCartProductList
+                          .first.comboMaterials.first.materialInfo
+                          .copyWith(stockInfos: <StockInfo>[]),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.removeInvalidProducts(
+            invalidCartItems: [priceAggregates.first.materialInfo],
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isClearing: true,
+            cartProducts: [
+              comboUpdateCartProductList.first.copyWith(
+                comboMaterials: [
+                  comboUpdateCartProductList.first.comboMaterials.first
+                      .copyWith(
+                    materialInfo: comboUpdateCartProductList
+                        .first.comboMaterials.first.materialInfo
+                        .copyWith(
+                      stockInfos: [
+                        StockInfo.empty().copyWith(
+                          materialNumber: comboUpdateCartProductList.first
+                              .comboMaterials.first.materialInfo.materialNumber,
+                          inStock: MaterialInStock('No'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              priceAggregates.first,
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              comboUpdateCartProductList.first.copyWith(
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                comboMaterials: [
+                  comboUpdateCartProductList.first.comboMaterials.first
+                      .copyWith(
+                    salesOrgConfig: fakeMYSalesOrgConfigs,
+                    materialInfo: comboUpdateCartProductList
+                        .first.comboMaterials.first.materialInfo
+                        .copyWith(
+                      stockInfos: [
+                        StockInfo.empty().copyWith(
+                          materialNumber: comboUpdateCartProductList.first
+                              .comboMaterials.first.materialInfo.materialNumber,
+                          inStock: MaterialInStock('No'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ],
+      );
     },
   );
 

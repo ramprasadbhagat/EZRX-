@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -103,9 +104,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (cartItemList) {
             final newCartProductList = _mappingPreviousInfo(
-              previousCartProducts: state.cartProducts,
               currentCartProducts: cartItemList,
-              salesOrganisationConfigs: state.config,
             );
 
             emit(
@@ -237,9 +236,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (products) {
             final newCartProductList = _mappingPreviousInfo(
-              previousCartProducts: state.cartProducts,
               currentCartProducts: products,
-              salesOrganisationConfigs: state.config,
             );
             emit(
               state.copyWith(
@@ -441,9 +438,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (cartProductList) {
             final newCartProductList = _mappingPreviousInfo(
-              previousCartProducts: state.cartProducts,
               currentCartProducts: cartProductList,
-              salesOrganisationConfigs: state.config,
               isUpserting: true,
             );
 
@@ -902,9 +897,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (products) {
             final newCartProductList = _mappingPreviousInfo(
-              previousCartProducts: state.cartProducts,
               currentCartProducts: products,
-              salesOrganisationConfigs: state.config,
             );
             emit(
               state.copyWith(
@@ -944,9 +937,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (cartProductList) {
             final newCartProductList = _mappingPreviousInfo(
-              previousCartProducts: state.cartProducts,
               currentCartProducts: cartProductList,
-              salesOrganisationConfigs: state.config,
             );
             emit(
               state.copyWith(
@@ -1159,11 +1150,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   List<PriceAggregate> _mappingPreviousInfo({
-    required List<PriceAggregate> previousCartProducts,
     required List<PriceAggregate> currentCartProducts,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
     bool isUpserting = false,
   }) {
+    final previousCartProducts = state.cartProducts;
+
     return currentCartProducts.map((cartProduct) {
       final priceAggregate = previousCartProducts.firstWhere(
         (element) =>
@@ -1184,7 +1175,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       return cartProduct.copyWith(
         price: priceAggregate.price,
         bundle: cartProduct.bundle.copyWith(materials: bundleMaterial),
-        salesOrgConfig: salesOrganisationConfigs,
+        salesOrgConfig: state.config,
         stockInfoList: priceAggregate.stockInfoList,
         tenderContract: tenderContract,
         exceedQuantity: priceAggregate.exceedQuantity
@@ -1193,12 +1184,40 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 priceAggregate.price.zdp5RemainingQuota.intValue,
               )
             : false,
-        comboMaterials: cartProduct.comboMaterials
-            .map(
-              (item) => item.copyWith(salesOrgConfig: salesOrganisationConfigs),
-            )
-            .toList(),
+        comboMaterials: _updatingComboMaterial(
+          currentComboItem: cartProduct.comboMaterials,
+          previousComboItem: priceAggregate.comboMaterials,
+        ),
       );
     }).toList();
   }
+
+  List<ComboMaterialItem> _updatingComboMaterial({
+    required List<ComboMaterialItem> previousComboItem,
+    required List<ComboMaterialItem> currentComboItem,
+  }) =>
+      currentComboItem.map((item) {
+        //updated sales org config on material level of combos
+        final updatedMaterial = item.copyWith(salesOrgConfig: state.config);
+
+        if (updatedMaterial.materialInfo.productStockInfo.isEmpty) {
+          //updated the stock information
+          final matchingPreviousMaterial = previousComboItem.firstWhere(
+            (previousMaterial) =>
+                previousMaterial.materialInfo.materialNumber ==
+                updatedMaterial.materialInfo.materialNumber,
+            orElse: () => ComboMaterialItem.empty(),
+          );
+
+          if (matchingPreviousMaterial != ComboMaterialItem.empty()) {
+            return updatedMaterial.copyWith(
+              materialInfo: updatedMaterial.materialInfo.copyWith(
+                stockInfos: matchingPreviousMaterial.materialInfo.stockInfos,
+              ),
+            );
+          }
+        }
+
+        return updatedMaterial;
+      }).toList();
 }

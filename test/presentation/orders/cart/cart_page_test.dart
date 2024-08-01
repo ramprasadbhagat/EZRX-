@@ -3590,8 +3590,7 @@ void main() {
         expect(checkoutButton, findsOneWidget);
         await tester.tap(checkoutButton);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.push(const CheckoutPageRoute()))
-            .called(1);
+        verify(() => autoRouterMock.push(const CheckoutPageRoute())).called(1);
       });
 
       testWidgets(
@@ -5170,6 +5169,105 @@ void main() {
               findsOne,
             );
           }
+        });
+
+        testWidgets(
+            'Test invalid banner when cart consist suspended material with combo material',
+            (tester) async {
+          final suspendedMaterialItem = mockCartItems.firstWhere(
+            (e) =>
+                e.materialInfo.type.typeMaterial && e.materialInfo.isSuspended,
+          );
+          final fakeMaterialInfo =
+              fakeComboMaterialItems.first.materialInfo.copyWith(
+            stockInfos: [
+              StockInfo.empty().copyWith(
+                inStock: MaterialInStock('No'),
+                materialNumber:
+                    fakeComboMaterialItems.first.materialInfo.materialNumber,
+              ),
+            ],
+          );
+          final comboItem = mockCartItems.last.copyWith(
+            materialInfo: mockCartItems.last.materialInfo.copyWith(
+              type: MaterialInfoType('combo'),
+            ),
+            comboMaterials: [
+              fakeComboMaterialItems.first
+                  .copyWith(materialInfo: fakeMaterialInfo),
+            ],
+          );
+
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial()
+                .copyWith(salesOrgConfigs: fakeIDSalesOrgConfigs),
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                suspendedMaterialItem,
+                comboItem,
+              ],
+            ),
+          );
+
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: <PriceAggregate>[
+                suspendedMaterialItem,
+                comboItem,
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final invalidItemBannerFinder =
+              find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
+          final invalidMessageFinder = find.text('Suspended material');
+          final invalidItemBannerButtonFinder =
+              find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
+
+          expect(invalidItemBannerFinder, findsOneWidget);
+          expect(invalidMessageFinder, findsOneWidget);
+          expect(invalidItemBannerButtonFinder, findsOneWidget);
+
+          final comboMaterialFinder = find.byKey(
+            WidgetKeys.cartItemProductTile(
+              comboItem.comboMaterials.first.materialInfo.materialNumber
+                  .displayMatNo,
+            ),
+          );
+
+          expect(
+            find.descendant(
+              of: comboMaterialFinder,
+              matching: find.text('OOS-Preorder'),
+            ),
+            findsOne,
+          );
+          final suspendedMaterialFinder = find.byKey(
+            WidgetKeys.cartItemProductTile(
+              suspendedMaterialItem.materialInfo.materialNumber.displayMatNo,
+            ),
+          );
+
+          await tester.tap(invalidItemBannerButtonFinder);
+          verify(
+            () => cartBloc.add(
+              CartEvent.removeInvalidProducts(
+                invalidCartItems: <MaterialInfo>[
+                  suspendedMaterialItem.materialInfo
+                      .copyWith(quantity: MaterialQty(0)),
+                ],
+              ),
+            ),
+          ).called(1);
+          await tester.pumpAndSettle();
+          expect(comboMaterialFinder, findsOneWidget);
+          expect(suspendedMaterialFinder, findsNothing);
         });
       });
     },

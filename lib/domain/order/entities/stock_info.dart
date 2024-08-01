@@ -63,8 +63,9 @@ class StockInfo with _$StockInfo {
         .dateOrNaString;
   }
 
-  bool get displayPreOrderLabel =>
-      this != StockInfo.empty() && !inStock.isMaterialInStock;
+  bool get isEmpty => this == StockInfo.empty();
+
+  bool get displayPreOrderLabel => !isEmpty && !inStock.isMaterialInStock;
 
   bool get isExpireSoon => expiryDate.withinAYearFromNow;
 }
