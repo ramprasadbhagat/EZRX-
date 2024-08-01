@@ -28,7 +28,9 @@ class MaterialFilterBloc
     Emitter<MaterialFilterState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(MaterialFilterState.initial()),
+      initialized: (_) {
+        emit(MaterialFilterState.initial());
+      },
       fetch: (e) async {
         emit(
           state.copyWith(
@@ -180,11 +182,13 @@ class MaterialFilterBloc
             break;
         }
       },
-      updateSearchKey: (e) async => emit(
-        state.copyWith(
-          searchKey: SearchKey.search(e.searchKey),
-        ),
-      ),
+      updateSearchKey: (e) {
+        emit(
+          state.copyWith(
+            searchKey: SearchKey.search(e.searchKey),
+          ),
+        );
+      },
       initSelectedMaterialFilter: (e) {
         final manufactureMap = Map<String, bool>.from(
           state.materialFilter.manufactureMapOptions,

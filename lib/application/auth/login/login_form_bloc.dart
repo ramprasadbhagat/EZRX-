@@ -32,7 +32,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         emit(state.copyWith(isSubmitting: true));
         final failureOrSuccess = await authRepository.loadCredential();
         final currentMarket = await deviceRepository.getCurrentMarket();
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (_) => emit(state.copyWith(isSubmitting: false)),
           (cred) {
@@ -124,7 +124,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               } else {
                 await authRepository.deleteCredential();
               }
-
+              if (isClosed) return;
               emit(
                 state.copyWith(
                   isSubmitting: false,
@@ -137,6 +137,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             },
           );
         } else {
+          if (isClosed) return;
           emit(state.copyWith(showErrorMessages: true));
         }
       },
@@ -148,7 +149,8 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           ),
         );
         final oktaLoginResult = await authRepository.loginWithOkta();
-        await oktaLoginResult.fold(
+        if (isClosed) return;
+        oktaLoginResult.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -158,12 +160,13 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               ),
             );
           },
-          (success) async => add(const LoginFormEvent.refreshOktaToken()),
+          (success) => add(const LoginFormEvent.refreshOktaToken()),
         );
       },
       refreshOktaToken: (e) async {
         final oktaAccessResult = await authRepository.getOktaAccessToken();
-        await oktaAccessResult.fold(
+        if (isClosed) return;
+        oktaAccessResult.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -173,7 +176,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               ),
             );
           },
-          (oktaAccessToken) async => add(
+          (oktaAccessToken) => add(
             LoginFormEvent.exchanhgeEZRXToken(oktaAccessToken),
           ),
         );
@@ -181,19 +184,22 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
       exchanhgeEZRXToken: (e) async {
         final ezrxResult = await authRepository.getEZRXJWT(e.oktaAccessToken);
         await ezrxResult.fold(
-          (failure) async => emit(
-            state.copyWith(
-              isSubmitting: false,
-              showErrorMessages: true,
-              authFailureOrSuccessOption: optionOf(ezrxResult),
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                authFailureOrSuccessOption: optionOf(ezrxResult),
+              ),
+            );
+          },
           (login) async {
             await authRepository.storeJWT(
               access: login.access,
               refresh: login.refresh,
             );
-
+            if (isClosed) return;
             emit(
               state.copyWith(
                 isSubmitting: false,
@@ -206,8 +212,9 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
       },
       fetchCurrentMarket: (e) async {
         final currentMarket = await deviceRepository.getCurrentMarket();
-        await currentMarket.fold(
-          (failure) async => emit(
+        if (isClosed) return;
+        currentMarket.fold(
+          (failure) => emit(
             state.copyWith(
               authFailureOrSuccessOption: optionOf(currentMarket),
             ),
@@ -226,8 +233,9 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         final currentMarket = await deviceRepository.setCurrentMarket(
           currentMarket: e.currentMarket,
         );
-        await currentMarket.fold(
-          (failure) async => emit(
+        if (isClosed) return;
+        currentMarket.fold(
+          (failure) => emit(
             state.copyWith(
               authFailureOrSuccessOption: optionOf(currentMarket),
             ),

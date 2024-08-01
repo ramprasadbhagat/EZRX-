@@ -42,7 +42,9 @@ abstract class PaymentInProgressBloc
     Emitter<PaymentInProgressState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(PaymentInProgressState.initial()),
+      initialized: (_) {
+        emit(PaymentInProgressState.initial());
+      },
       fetch: (_Fetch e) async {
         emit(
           state.copyWith(
@@ -55,6 +57,7 @@ abstract class PaymentInProgressBloc
           salesOrganization: e.salesOrganization,
           isMarketPlace: isMarketplace,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

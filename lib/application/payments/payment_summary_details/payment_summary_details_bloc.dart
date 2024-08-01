@@ -47,14 +47,16 @@ class PaymentSummaryDetailsBloc
     Emitter<PaymentSummaryDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (event) async => emit(
-        PaymentSummaryDetailsState.initial().copyWith(
-          customerCodeInfo: event.customerCodeInfo,
-          salesOrganization: event.salesOrganization,
-          user: event.user,
-          shipToInfo: event.shipToInfo,
-        ),
-      ),
+      initialized: (event) {
+        emit(
+          PaymentSummaryDetailsState.initial().copyWith(
+            customerCodeInfo: event.customerCodeInfo,
+            salesOrganization: event.salesOrganization,
+            user: event.user,
+            shipToInfo: event.shipToInfo,
+          ),
+        );
+      },
       fetchPaymentSummaryDetailsInfo: (event) async {
         if (!event.details.allIdentifierInfoValid) {
           emit(
@@ -71,6 +73,7 @@ class PaymentSummaryDetailsBloc
             details: event.details,
             isMarketPlace: event.isMarketPlace,
           );
+          if (isClosed) return;
           failureOrSuccess.fold(
             (failure) {
               emit(
@@ -102,6 +105,7 @@ class PaymentSummaryDetailsBloc
             },
           );
         } else {
+          if (isClosed) return;
           emit(
             state.copyWith(
               details: event.details,
@@ -196,12 +200,15 @@ class PaymentSummaryDetailsBloc
         final failureOrSuccessPermission =
             await deviceRepository.getSavePermission();
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-              isSavingAdvice: false,
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+                isSavingAdvice: false,
+              ),
+            );
+          },
           (success) async {
             final failureOrSuccessSave = await newPaymentRepository.saveFile(
               pdfData: await createPaymentInvoicePdf.createInvoicePdf(
@@ -212,7 +219,7 @@ class PaymentSummaryDetailsBloc
                 adviceExpiry: state.details.adviceExpiry,
               ),
             );
-
+            if (isClosed) return;
             failureOrSuccessSave.fold(
               (failure) {
                 emit(
@@ -253,6 +260,7 @@ class PaymentSummaryDetailsBloc
           paymentInfo: paymentInfo,
           isMarketPlace: event.isMarketPlace,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -283,7 +291,7 @@ class PaymentSummaryDetailsBloc
           paymentSummaryDetails: state.details,
           isMarketPlace: e.isMarketPlace,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -312,7 +320,7 @@ class PaymentSummaryDetailsBloc
           customerCodeInfo: state.customerCodeInfo,
           referenceId: state.details.paymentID.getValue(),
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -331,7 +339,7 @@ class PaymentSummaryDetailsBloc
       viewSavedAdvice: (e) async {
         final failureOrSuccessOption = await newPaymentRepository
             .viewSavedAdvice(savedAdvice: state.savedAdvice);
-
+        if (isClosed) return;
         emit(
           state.copyWith(
             failureOrSuccessOption: optionOf(failureOrSuccessOption),

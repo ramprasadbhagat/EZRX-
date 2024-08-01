@@ -25,12 +25,12 @@ class OrderEligibilityBloc
     on<OrderEligibilityEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     OrderEligibilityEvent event,
     Emitter<OrderEligibilityState> emit,
-  ) async {
-    await event.map(
-      initialized: (e) async => emit(
+  ) {
+    event.map(
+      initialized: (e) => emit(
         OrderEligibilityState.initial().copyWith(
           configs: e.configs,
           customerCodeInfo: e.customerCodeInfo,
@@ -40,7 +40,7 @@ class OrderEligibilityBloc
           user: e.user,
         ),
       ),
-      update: (e) async => emit(
+      update: (e) => emit(
         state.copyWith(
           mpSubtotal: e.mpSubtotal,
           zpSubtotal: e.zpSubtotal,
@@ -50,7 +50,7 @@ class OrderEligibilityBloc
           orderType: e.orderType,
         ),
       ),
-      validateOrderEligibility: (e) async => emit(
+      validateOrderEligibility: (e) => emit(
         state.copyWith(
           showErrorMessage: !state.isMinOrderValuePassed ||
               state.isMWPNotAllowedAndPresentInCart ||
@@ -58,7 +58,7 @@ class OrderEligibilityBloc
               state.displayInvalidItemsBanner,
         ),
       ),
-      selectDeliveryOption: (e) async =>
+      selectDeliveryOption: (e) =>
           emit(state.copyWith(deliveryOption: e.value)),
     );
   }

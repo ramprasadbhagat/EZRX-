@@ -38,7 +38,9 @@ abstract class SoaBloc extends Bloc<SoaEvent, SoaState> {
 
   Future<void> _onEvent(SoaEvent event, Emitter<SoaState> emit) async {
     await event.map(
-      initialized: (_) async => emit(SoaState.initial()),
+      initialized: (_) {
+        emit(SoaState.initial());
+      },
       fetch: (_Fetch e) async {
         emit(
           state.copyWith(
@@ -53,6 +55,7 @@ abstract class SoaBloc extends Bloc<SoaEvent, SoaState> {
           salesOrg: e.salesOrg,
           isMarketPlace: isMarketplace,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -69,11 +72,13 @@ abstract class SoaBloc extends Bloc<SoaEvent, SoaState> {
           ),
         );
       },
-      updateFilter: (_UpdateFilter e) async => emit(
-        state.copyWith(
-          appliedFilter: e.soaFilter,
-        ),
-      ),
+      updateFilter: (_UpdateFilter e) {
+        emit(
+          state.copyWith(
+            appliedFilter: e.soaFilter,
+          ),
+        );
+      },
     );
   }
 }

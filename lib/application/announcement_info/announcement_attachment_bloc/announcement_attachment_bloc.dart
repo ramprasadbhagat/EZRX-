@@ -25,7 +25,9 @@ class AnnouncementAttachmentBloc
     Emitter<AnnouncementAttachmentState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(AnnouncementAttachmentState.initial()),
+      initialized: (e) {
+        emit(AnnouncementAttachmentState.initial());
+      },
       downloadFile: (_DownloadFile e) async {
         emit(
           state.copyWith(
@@ -36,16 +38,20 @@ class AnnouncementAttachmentBloc
         final failureOrSuccessPermission =
             await announcementAttachmentRepository.downloadPermission();
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (_) async {
             final failureOrSuccess =
                 await announcementAttachmentRepository.downloadFiles(
               url: e.url,
             );
+            if (isClosed) return;
             emit(
               state.copyWith(
                 isDownloading: false,

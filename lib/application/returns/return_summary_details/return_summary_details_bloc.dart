@@ -35,7 +35,9 @@ class ReturnSummaryDetailsBloc
     Emitter<ReturnSummaryDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(ReturnSummaryDetailsState.initial()),
+      initialized: (e) {
+        emit(ReturnSummaryDetailsState.initial());
+      },
       fetch: (e) async {
         emit(
           state.copyWith(
@@ -49,8 +51,9 @@ class ReturnSummaryDetailsBloc
             await returnSummaryDetailsRepository.getReturnInformation(
           returnItem: e.returnItem,
         );
-        await returnInformationFailureOrSuccess.fold(
-          (failure) async => emit(
+        if (isClosed) return;
+        returnInformationFailureOrSuccess.fold(
+          (failure) => emit(
             state.copyWith(
               isLoading: false,
               failureOrSuccessOption:
@@ -86,20 +89,23 @@ class ReturnSummaryDetailsBloc
             await poAttachmentRepository.downloadPermission();
 
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              downloadedAttachment: e.file,
-              downloadingAttachments: [...state.downloadingAttachments]
-                ..remove(e.file),
-              downloadFailureOrSuccessOption:
-                  optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                downloadedAttachment: e.file,
+                downloadingAttachments: [...state.downloadingAttachments]
+                  ..remove(e.file),
+                downloadFailureOrSuccessOption:
+                    optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (success) async {
             final failureOrSuccess = await poAttachmentRepository.downloadFiles(
               files: [e.file],
             );
-
+            if (isClosed) return;
             emit(
               state.copyWith(
                 downloadedAttachment: e.file,

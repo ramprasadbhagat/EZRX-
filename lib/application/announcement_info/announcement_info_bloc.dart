@@ -100,6 +100,8 @@ class AnnouncementInfoBloc
           after: state.announcementInfo.endCursor,
         );
 
+        if (isClosed) return;
+
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

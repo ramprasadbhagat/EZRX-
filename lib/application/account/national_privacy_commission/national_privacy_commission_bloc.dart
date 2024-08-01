@@ -21,14 +21,16 @@ class NationalPrivacyCommissionBloc extends Bloc<NationalPrivacyCommissionEvent,
     Emitter<NationalPrivacyCommissionState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(NationalPrivacyCommissionState.initial()),
+      initialized: (e) {
+        emit(NationalPrivacyCommissionState.initial());
+      },
       saveImages: (e) async {
         emit(state.copyWith(isSaving: true));
         final saveImagesFailureOrSuccess =
             await poAttachmentRepository.saveAssetImagesToGallery(
           fileList: e.images,
         );
-
+        if (isClosed) return;
         saveImagesFailureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

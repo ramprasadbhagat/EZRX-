@@ -33,12 +33,14 @@ class CreditAndInvoiceDetailsBloc
     Emitter<CreditAndInvoiceDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (event) async => emit(
-        CreditAndInvoiceDetailsState.initial().copyWith(
-          salesOrganisation: event.salesOrganisation,
-          customerCodeInfo: event.customerCodeInfo,
-        ),
-      ),
+      initialized: (event) {
+        emit(
+          CreditAndInvoiceDetailsState.initial().copyWith(
+            salesOrganisation: event.salesOrganisation,
+            customerCodeInfo: event.customerCodeInfo,
+          ),
+        );
+      },
       fetch: (event) async {
         emit(
           state.copyWith(

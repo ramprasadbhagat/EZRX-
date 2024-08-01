@@ -21,12 +21,12 @@ class PaymentSummaryFilterBloc
     on<PaymentSummaryFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     PaymentSummaryFilterEvent event,
     Emitter<PaymentSummaryFilterState> emit,
-  ) async {
-    await event.map(
-      initialized: (_Initialized e) async => emit(
+  ) {
+    event.map(
+      initialized: (_Initialized e) => emit(
         PaymentSummaryFilterState.initial().copyWith(
           salesOrg: e.salesOrg,
         ),
@@ -60,7 +60,7 @@ class PaymentSummaryFilterBloc
           ),
         );
       },
-      setCreatedDate: (_SetCreatedDate e) async => emit(
+      setCreatedDate: (_SetCreatedDate e) => emit(
         state.copyWith(
           filter: PaymentSummaryFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),
@@ -74,7 +74,7 @@ class PaymentSummaryFilterBloc
           showErrorMessages: false,
         ),
       ),
-      amountValueFromChanged: (_AmountValueFromChanged e) async => emit(
+      amountValueFromChanged: (_AmountValueFromChanged e) => emit(
         state.copyWith(
           filter: PaymentSummaryFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
@@ -84,7 +84,7 @@ class PaymentSummaryFilterBloc
           showErrorMessages: false,
         ),
       ),
-      amountValueToChanged: (_AmountValueToChanged e) async => emit(
+      amountValueToChanged: (_AmountValueToChanged e) => emit(
         state.copyWith(
           filter: PaymentSummaryFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),

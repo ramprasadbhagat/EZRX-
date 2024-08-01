@@ -16,15 +16,15 @@ class OutstandingInvoiceFilterBloc
     on<OutstandingInvoiceFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     OutstandingInvoiceFilterEvent event,
     Emitter<OutstandingInvoiceFilterState> emit,
-  ) async {
-    await event.map(
-      initialize: (e) async => emit(
+  ) {
+    event.map(
+      initialize: (e) => emit(
         OutstandingInvoiceFilterState.initial(),
       ),
-      setDocumentDate: (e) async => emit(
+      setDocumentDate: (e) => emit(
         state.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),
@@ -37,7 +37,7 @@ class OutstandingInvoiceFilterBloc
           ),
         ),
       ),
-      setDueDate: (e) async => emit(
+      setDueDate: (e) => emit(
         state.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.dueDate(),
@@ -50,7 +50,7 @@ class OutstandingInvoiceFilterBloc
           ),
         ),
       ),
-      setAmountFrom: (e) async => emit(
+      setAmountFrom: (e) => emit(
         state.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
@@ -60,7 +60,7 @@ class OutstandingInvoiceFilterBloc
           showErrorMessage: false,
         ),
       ),
-      setAmountTo: (e) async => emit(
+      setAmountTo: (e) => emit(
         state.copyWith(
           filter: OutstandingInvoiceFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
@@ -81,19 +81,19 @@ class OutstandingInvoiceFilterBloc
           ),
         );
       },
-      setValidationFailure: (_) async => emit(
+      setValidationFailure: (_) => emit(
         state.copyWith(
           showErrorMessage:
               !state.filter.isOutstandingInvoiceAmountValueRangeValid,
         ),
       ),
-      updateFilterToLastApplied: (e) async => emit(
+      updateFilterToLastApplied: (e) => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
           showErrorMessage: false,
         ),
       ),
-      resetFilters: (e) async => emit(
+      resetFilters: (e) => emit(
         OutstandingInvoiceFilterState.initial().copyWith(
           filter: OutstandingInvoiceFilter.defaultFilter(),
         ),

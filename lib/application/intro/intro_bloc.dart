@@ -29,6 +29,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
         emit(state.copyWith(isLoading: true));
 
         final failureOrSuccess = await deviceRepository.getDeviceData();
+        if (isClosed) return;
         final checkAppIsLaunched = failureOrSuccess.fold(
           (_) => true,
           (isAppFirstLaunch) => isAppFirstLaunch,
@@ -45,6 +46,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
         await deviceRepository.setDeviceData(
           isAppFirstLaunch: isAppFirstLaunch,
         );
+        if (isClosed) return;
         emit(
           state.copyWith(
             isAppFirstLaunch: isAppFirstLaunch,

@@ -58,7 +58,7 @@ class AnnouncementFilterBloc
           salesOrg: e.salesOrg,
           variablePath: e.salesOrg.announcementTagVariablePath,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(

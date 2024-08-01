@@ -115,7 +115,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           oldPassword: state.oldPassword,
           user: state.user,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -128,11 +128,13 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           (success) => add(const _Clear()),
         );
       },
-      clear: (e) async => emit(
-        ResetPasswordState.initial().copyWith(
-          user: state.user,
-        ),
-      ),
+      clear: (e) {
+        emit(
+          ResetPasswordState.initial().copyWith(
+            user: state.user,
+          ),
+        );
+      },
       resetPassword: (e) async {
         final isFormValidated =
             state.newPassword.isValid() && state.confirmPassword.isValid();
@@ -157,6 +159,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           token: state.resetPasswordCred.token,
           username: state.resetPasswordCred.username,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -192,6 +195,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             await changePasswordRepository.changePasswordForFirstTime(
           newPassword: state.newPassword,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -204,9 +208,14 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           (resetPassword) => add(const _Clear()),
         );
       },
-      initialize: (_Initialize e) async => emit(
-        state.copyWith(resetPasswordCred: e.resetPasswordCred, user: e.user),
-      ),
+      initialize: (_Initialize e) {
+        emit(
+          state.copyWith(
+            resetPasswordCred: e.resetPasswordCred,
+            user: e.user,
+          ),
+        );
+      },
     );
   }
 }

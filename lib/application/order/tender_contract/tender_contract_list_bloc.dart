@@ -27,9 +27,11 @@ class TenderContractListBloc
     Emitter<TenderContractListState> emit,
   ) async {
     await event.map(
-      initialize: (e) async => emit(
-        TenderContractListState.initial(),
-      ),
+      initialize: (e) {
+        emit(
+          TenderContractListState.initial(),
+        );
+      },
       fetch: (e) async {
         emit(
           state.copyWith(
@@ -62,6 +64,7 @@ class TenderContractListBloc
             salesOrganisation: e.salesOrganisation,
             shipToInfo: e.shipToInfo,
           );
+          if (isClosed) return;
           failureOrSuccess.fold(
             (failure) {
               emit(

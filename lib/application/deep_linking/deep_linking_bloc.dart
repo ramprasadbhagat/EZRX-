@@ -43,12 +43,15 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
         await _deepLinkStreamSubscription?.cancel();
 
         _deepLinkStreamSubscription = repository.watchDeepLinkValue().listen(
-              (event) => add(
-                DeepLinkingEvent.addPendingLink(event),
-              ),
+          (event) {
+            if (isClosed) return;
+            add(
+              DeepLinkingEvent.addPendingLink(event),
             );
+          },
+        );
         final failureOrSuccess = await repository.initializeDeepLink();
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             DeepLinkingState.error(failure),

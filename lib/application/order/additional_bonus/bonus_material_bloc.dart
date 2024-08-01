@@ -121,6 +121,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           enableGimmickMaterial: e.isGimmickMaterialEnabled,
           searchKey: state.searchKey,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -201,13 +202,15 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           ),
         );
 
-        final failureOrSuccess = await stockInfoRepository.getMappedStockInfoList(
+        final failureOrSuccess =
+            await stockInfoRepository.getMappedStockInfoList(
           items: e.items,
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisationConfigs: e.configs,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
         );
+        if (isClosed) return;
 
         failureOrSuccess.fold(
           (failure) {

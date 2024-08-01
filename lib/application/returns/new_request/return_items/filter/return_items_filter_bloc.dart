@@ -15,12 +15,12 @@ class ReturnItemsFilterBloc
     on<ReturnItemsFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     ReturnItemsFilterEvent event,
     Emitter<ReturnItemsFilterState> emit,
-  ) async {
-    await event.map(
-      initialized: (_Initialized e) async => emit(
+  ) {
+    event.map(
+      initialized: (_Initialized e) => emit(
         ReturnItemsFilterState.initial(),
       ),
       openFilterBottomSheet: (_OpenFilterBottomSheet value) {
@@ -32,7 +32,7 @@ class ReturnItemsFilterBloc
           );
         }
       },
-      setInvoiceDate: (_SetInvoiceDate e) async => emit(
+      setInvoiceDate: (_SetInvoiceDate e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             invoiceDateFrom: DateTimeStringValue(

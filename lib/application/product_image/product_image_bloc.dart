@@ -24,12 +24,14 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
     Emitter<ProductImageState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        ProductImageState.initial().copyWith(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
-        ),
-      ),
+      initialized: (e) {
+        emit(
+          ProductImageState.initial().copyWith(
+            salesOrganisation: e.salesOrganisation,
+            customerCodeInfo: e.customerCodeInfo,
+          ),
+        );
+      },
       set: (e) {
         final updatedMap = {...state.productImageMap};
         for (final entry in e.productImageMap.entries) {

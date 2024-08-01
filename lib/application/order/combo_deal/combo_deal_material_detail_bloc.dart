@@ -45,13 +45,15 @@ class ComboDealMaterialDetailBloc
     Emitter<ComboDealMaterialDetailState> emit,
   ) async {
     await event.map(
-      initialize: (e) async => emit(
-        ComboDealMaterialDetailState.initial().copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
-        ),
-      ),
+      initialize: (e) {
+        emit(
+          ComboDealMaterialDetailState.initial().copyWith(
+            customerCodeInfo: e.customerCodeInfo,
+            salesOrganisation: e.salesOrganisation,
+            shipToInfo: e.shipToInfo,
+          ),
+        );
+      },
       setPriceInfo: (e) {
         final itemsWithPriceInfo =
             Map<MaterialNumber, PriceAggregate>.from(state.items);
@@ -187,6 +189,7 @@ class ComboDealMaterialDetailBloc
         }
 
         final stockInfoList = await _getStockInfoList(materialsInfo);
+        if (isClosed) return;
         if (stockInfoList.isNotEmpty) {
           for (final materialStockInfo in stockInfoList) {
             final material = items[materialStockInfo.materialNumber];
@@ -344,6 +347,7 @@ class ComboDealMaterialDetailBloc
 
             final stockInfoList =
                 await _getStockInfoList(state.allMaterialsInfo);
+            if (isClosed) return;
             if (stockInfoList.isNotEmpty) {
               for (final materialStockInfo in stockInfoList) {
                 final material = items[materialStockInfo.materialNumber];
@@ -453,6 +457,7 @@ class ComboDealMaterialDetailBloc
             final stockInfoList = await _getStockInfoList(
               newItems.entries.map((e) => e.value.materialInfo).toList(),
             );
+            if (isClosed) return;
             if (stockInfoList.isNotEmpty) {
               for (final materialStockInfo in stockInfoList) {
                 final material = items[materialStockInfo.materialNumber];

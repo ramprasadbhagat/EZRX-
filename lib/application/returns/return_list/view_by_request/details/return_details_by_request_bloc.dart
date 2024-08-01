@@ -32,8 +32,9 @@ class ReturnDetailsByRequestBloc
     Emitter<ReturnDetailsByRequestState> emit,
   ) async {
     await event.map(
-      initialized: (_Initialized e) async =>
-          emit(ReturnDetailsByRequestState.initial()),
+      initialized: (_Initialized e) {
+        emit(ReturnDetailsByRequestState.initial());
+      },
       fetch: (_Fetch e) async {
         emit(
           state.copyWith(
@@ -46,8 +47,9 @@ class ReturnDetailsByRequestBloc
             await returnRequestInformationRepository.getReturnRequestById(
           returnRequestId: ReturnRequestsId(requestId: e.returnId),
         );
-        await returnInformationFailureOrSuccess.fold(
-          (failure) async => emit(
+        if (isClosed) return;
+        returnInformationFailureOrSuccess.fold(
+          (failure) => emit(
             state.copyWith(
               isLoading: false,
               failureOrSuccessOption:
@@ -79,20 +81,23 @@ class ReturnDetailsByRequestBloc
         final failureOrSuccessPermission =
             await poAttachmentRepository.downloadPermission();
         await failureOrSuccessPermission.fold(
-          (_) async => emit(
-            state.copyWith(
-              downloadedAttachment: e.file,
-              downloadingAttachments: [...state.downloadingAttachments]
-                ..remove(e.file),
-              downloadFailureOrSuccessOption:
-                  optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (_) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                downloadedAttachment: e.file,
+                downloadingAttachments: [...state.downloadingAttachments]
+                  ..remove(e.file),
+                downloadFailureOrSuccessOption:
+                    optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (success) async {
             final failureOrSuccess = await poAttachmentRepository.downloadFiles(
               files: [e.file],
             );
-
+            if (isClosed) return;
             emit(
               state.copyWith(
                 downloadedAttachment: e.file,

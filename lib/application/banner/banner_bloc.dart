@@ -20,7 +20,9 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
 
   Future<void> _onEvent(BannerEvent event, Emitter<BannerState> emit) async {
     await event.map(
-      initialized: (e) async => emit(BannerState.initial()),
+      initialized: (e) {
+        emit(BannerState.initial());
+      },
       fetch: (e) async {
         emit(state.copyWith(isLoading: true));
         //Fetch eZReach Banner
@@ -32,7 +34,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
           branchCode: e.branchCode,
           targetCustomerType: e.targetCustomerType,
         );
-
+        if (isClosed) return;
         eZReachFailureOrSuccess.fold(
           //eZReach Banner failed
           (failure) => emit(

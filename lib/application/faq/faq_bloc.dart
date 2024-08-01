@@ -42,7 +42,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
           pageSize: config.pageSize,
           after: state.faqInfo.endCursor,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(
@@ -76,7 +76,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
           pageSize: config.pageSize,
           after: state.faqInfo.endCursor,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(

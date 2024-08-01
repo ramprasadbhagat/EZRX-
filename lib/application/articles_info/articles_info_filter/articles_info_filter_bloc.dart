@@ -58,7 +58,7 @@ class ArticlesInfoFilterBloc
           salesOrg: e.salesOrg,
           variablePath: e.salesOrg.articleTagVariablePath,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(

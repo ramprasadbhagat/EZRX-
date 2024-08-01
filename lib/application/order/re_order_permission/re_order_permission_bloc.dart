@@ -40,15 +40,17 @@ class ReOrderPermissionBloc
     Emitter<ReOrderPermissionState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        ReOrderPermissionState.initial().copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          shipToInfo: e.shipToInfo,
-          user: e.user,
-        ),
-      ),
+      initialized: (e) {
+        emit(
+          ReOrderPermissionState.initial().copyWith(
+            customerCodeInfo: e.customerCodeInfo,
+            salesOrganisation: e.salesOrganisation,
+            salesOrganisationConfigs: e.salesOrganisationConfigs,
+            shipToInfo: e.shipToInfo,
+            user: e.user,
+          ),
+        );
+      },
       fetchOrder: (e) async {
         emit(
           state.copyWith(
@@ -69,7 +71,7 @@ class ReOrderPermissionBloc
           salesOrganisationConfigs: state.salesOrganisationConfigs,
           user: state.user,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -131,7 +133,7 @@ class ReOrderPermissionBloc
           salesOrganisationConfigs: state.salesOrganisationConfigs,
           user: state.user,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -166,7 +168,7 @@ class ReOrderPermissionBloc
               .toList(),
           comboDealEligible: false,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (_) => emit(
             state.copyWith(
@@ -189,11 +191,13 @@ class ReOrderPermissionBloc
           ),
         );
       },
-      resetOrderNumberWillUpsert: (e) async => emit(
-        state.copyWith(
-          orderNumberWillUpsert: e.orderNumberWillUpsert,
-        ),
-      ),
+      resetOrderNumberWillUpsert: (e) {
+        emit(
+          state.copyWith(
+            orderNumberWillUpsert: e.orderNumberWillUpsert,
+          ),
+        );
+      },
     );
   }
 }

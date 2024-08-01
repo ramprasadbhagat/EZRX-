@@ -43,15 +43,17 @@ class ViewByItemDetailsBloc
     Emitter<ViewByItemDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        ViewByItemDetailsState.initial().copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrgConfig: e.salesOrgConfig,
-          salesOrganisation: e.salesOrganisation,
-          user: e.user,
-          shipToInfo: e.shipToInfo,
-        ),
-      ),
+      initialized: (e) {
+        emit(
+          ViewByItemDetailsState.initial().copyWith(
+            customerCodeInfo: e.customerCodeInfo,
+            salesOrgConfig: e.salesOrgConfig,
+            salesOrganisation: e.salesOrganisation,
+            user: e.user,
+            shipToInfo: e.shipToInfo,
+          ),
+        );
+      },
       fetchOrdersInvoiceData: (e) async {
         if (!e.orderNumber.isValid()) return;
 
@@ -100,9 +102,9 @@ class ViewByItemDetailsBloc
         );
         final failureOrSuccess = await orderStatusTrackerRepository
             .getOrderStatusTracker(invoiceNumber: e.invoiceNumber);
-
-        await failureOrSuccess.fold(
-          (failure) async => emit(
+        if (isClosed) return;
+        failureOrSuccess.fold(
+          (failure) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isStatusLoading: false,
@@ -177,8 +179,9 @@ class ViewByItemDetailsBloc
           },
         );
       },
-      updateIsExpanded: (e) async =>
-          emit(state.copyWith(isExpanded: e.isExpanded)),
+      updateIsExpanded: (e) {
+        emit(state.copyWith(isExpanded: e.isExpanded));
+      },
       loadMoreInvoices: (e) async {
         if (state.isInvoiceLoading || !state.canLoadMoreInvoices) return;
         emit(

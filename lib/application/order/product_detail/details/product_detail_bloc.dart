@@ -52,8 +52,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           shipToInfo: state.shipToInfo,
           type: e.materialInfo.type,
         );
-        await failureOrSuccess.fold(
-          (failure) async => emit(
+        if (isClosed) return;
+        failureOrSuccess.fold(
+          (failure) => emit(
             state.copyWith(
               isDetailFetching: false,
               failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -162,7 +163,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -198,6 +199,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
         );
+        if (isClosed) return;
         metaDataFailureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -247,13 +249,17 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           principalCode: state
               .productDetailAggregate.materialInfo.principalData.principalCode,
         );
+
         await failureOrSuccess.fold(
-          (failure) async => emit(
-            state.copyWith(
-              isRelatedProductsFetching: false,
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                isRelatedProductsFetching: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
           (products) async {
             final stockInfoData = await stockInfoRepository.getStockInfoList(
               customerCodeInfo: state.customerCodeInfo,
@@ -261,13 +267,15 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               salesOrganisation: state.salesOrganisation,
               shipToInfo: state.shipToInfo,
             );
+            if (isClosed) return;
             final stockInfoList = stockInfoData.getOrElse(() => []);
 
             final similarProduct = products.map(
               (materialInfo) {
                 final materialStockInfo = stockInfoList.firstWhere(
                   (MaterialStockInfo materialStockInfo) =>
-                      materialStockInfo.materialNumber == materialInfo.materialNumber,
+                      materialStockInfo.materialNumber ==
+                      materialInfo.materialNumber,
                   orElse: () => MaterialStockInfo.empty(),
                 );
 
@@ -328,6 +336,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               ? state.productDetailAggregate.similarProduct
               : [state.productDetailAggregate.materialInfo],
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -366,6 +375,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               ? state.productDetailAggregate.similarProduct
               : [state.productDetailAggregate.materialInfo],
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

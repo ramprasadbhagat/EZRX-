@@ -260,6 +260,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final failureOrSuccess = await repository.clearCart();
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -417,6 +418,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (failure) async {
             if (failure == const ApiFailure.cartHasDifferentAddress()) {
               final failureOrSuccess = await repository.clearCart();
+              if (isClosed) return;
               failureOrSuccess.fold(
                 (failure) => emit(
                   state.copyWith(
@@ -575,6 +577,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (failure) async {
             if (failure == const ApiFailure.cartHasDifferentAddress()) {
               final failureOrSuccess = await repository.clearCart();
+              if (isClosed) return;
               failureOrSuccess.fold(
                 (failure) => emit(
                   state.copyWith(
@@ -713,6 +716,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ...state.productsWithCounterOfferDiscount,
             ],
           );
+          if (isClosed) return;
           failureOrSuccess.fold(
             (failure) => emit(
               state.copyWith(
@@ -973,7 +977,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           materialNumbers: state.cartProducts.materialNumbers,
           totalPrice: state.totalMaterialsPrice,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -1004,7 +1008,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisation: state.salesOrganisation,
           product: state.cartProducts.materialInfos,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

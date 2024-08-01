@@ -26,14 +26,16 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
     Emitter<MaterialPriceState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        MaterialPriceState.initial().copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          salesConfigs: e.salesConfigs,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
-        ),
-      ),
+      initialized: (e) {
+        emit(
+          MaterialPriceState.initial().copyWith(
+            customerCodeInfo: e.customerCodeInfo,
+            salesConfigs: e.salesConfigs,
+            salesOrganisation: e.salesOrganisation,
+            shipToInfo: e.shipToInfo,
+          ),
+        );
+      },
       fetch: (e) async {
         emit(
           state.copyWith(

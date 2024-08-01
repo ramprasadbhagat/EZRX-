@@ -59,7 +59,7 @@ class CustomerLicenseBloc
           pageSize: config.pageSize,
           user: state.user,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(
@@ -93,7 +93,7 @@ class CustomerLicenseBloc
           pageSize: config.pageSize,
           user: state.user,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(

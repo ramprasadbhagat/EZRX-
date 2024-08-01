@@ -47,6 +47,7 @@ class OrderDocumentTypeBloc
             await orderDocumentTypeRepository.getOrderDocumentTypList(
           salesOrganisation: e.salesOrganisation,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

@@ -62,7 +62,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
           pageSize: config.articlePageSize,
           after: state.articleInfo.endCursor,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(
@@ -104,7 +104,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
           pageSize: config.articlePageSize,
           after: state.articleInfo.endCursor,
         );
-
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(

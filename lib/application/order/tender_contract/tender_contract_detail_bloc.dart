@@ -25,7 +25,9 @@ class TenderContractDetailBloc
 
   Future<void> _onEvent(TenderContractDetailEvent event, Emitter emit) async {
     await event.map(
-      initialized: (_) async => emit(TenderContractDetailState.initial()),
+      initialized: (_) {
+        emit(TenderContractDetailState.initial());
+      },
       fetch: (_Fetch e) async {
         emit(
           state.copyWith(
@@ -40,7 +42,7 @@ class TenderContractDetailBloc
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

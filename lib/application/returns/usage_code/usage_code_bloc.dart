@@ -24,12 +24,14 @@ class UsageCodeBloc extends Bloc<UsageCodeEvent, UsageCodeState> {
     Emitter<UsageCodeState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(UsageCodeState.initial()),
+      initialized: (e) {
+        emit(UsageCodeState.initial());
+      },
       fetch: (e) async {
         final failureOrSuccess = await usageRepository.getUsages(
           salesOrg: e.salesOrg,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(

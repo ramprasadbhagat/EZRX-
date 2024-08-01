@@ -46,15 +46,17 @@ class ViewByOrderDetailsBloc
     Emitter<ViewByOrderDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        ViewByOrderDetailsState.initial().copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          user: e.user,
-          shipToInfo: e.shipToInfo,
-          configs: e.configs,
-        ),
-      ),
+      initialized: (e) {
+        emit(
+          ViewByOrderDetailsState.initial().copyWith(
+            customerCodeInfo: e.customerCodeInfo,
+            salesOrganisation: e.salesOrganisation,
+            user: e.user,
+            shipToInfo: e.shipToInfo,
+            configs: e.configs,
+          ),
+        );
+      },
       fetch: (e) async {
         add(
           _FetchOrdersInvoiceData(
@@ -181,6 +183,7 @@ class ViewByOrderDetailsBloc
           shipToInfo: state.shipToInfo,
           language: state.user.preferredLanguage,
         );
+        if (isClosed) return;
         emit(
           state.copyWith(
             isLoadingBundleDetail: false,

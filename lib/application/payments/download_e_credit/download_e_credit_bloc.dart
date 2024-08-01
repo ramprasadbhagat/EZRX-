@@ -31,18 +31,21 @@ class DownloadECreditBloc
             await repository.downloadPermission();
 
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              isDownloading: false,
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (failure) {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                isDownloading: false,
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (_) async {
             final downloadFailureOrSuccess =
                 await repository.eCreditInvoiceDownload(
               eCreditInvoiceUrl: state.fileUrl,
             );
-
+            if (isClosed) return;
             downloadFailureOrSuccess.fold(
               (failure) => emit(
                 state.copyWith(
@@ -68,9 +71,9 @@ class DownloadECreditBloc
         final failureOrSuccess = await repository.getECreditDownloadUrl(
           eCreditNumber: e.eCredit,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
-          (failure) async => emit(
+          (failure) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),

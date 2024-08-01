@@ -51,12 +51,14 @@ abstract class PaymentSummaryBloc
     Emitter<PaymentSummaryState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        PaymentSummaryState.initial().copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganization: e.salesOrganization,
-        ),
-      ),
+      initialized: (e) {
+        emit(
+          PaymentSummaryState.initial().copyWith(
+            customerCodeInfo: e.customerCodeInfo,
+            salesOrganization: e.salesOrganization,
+          ),
+        );
+      },
       fetch: (e) async {
         if (!e.appliedFilter.searchKey.isValid()) return;
 
@@ -84,7 +86,7 @@ abstract class PaymentSummaryBloc
           filter: e.appliedFilter,
           isMarketPlace: isMarketplace,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -123,7 +125,7 @@ abstract class PaymentSummaryBloc
           pageSize: config.pageSize,
           isMarketPlace: isMarketplace,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(

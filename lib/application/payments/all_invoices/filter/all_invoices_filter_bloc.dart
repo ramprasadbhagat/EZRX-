@@ -15,12 +15,12 @@ class AllInvoicesFilterBloc
     on<AllInvoicesFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     AllInvoicesFilterEvent event,
     Emitter<AllInvoicesFilterState> emit,
-  ) async {
-    await event.map(
-      initialized: (_Initialized e) async => emit(
+  ) {
+    event.map(
+      initialized: (_Initialized e) => emit(
         AllInvoicesFilterState.initial(),
       ),
       openFilterBottomSheet: (_OpenFilterBottomSheet value) {
@@ -50,7 +50,7 @@ class AllInvoicesFilterBloc
           ),
         );
       },
-      setDueDate: (_SetDueDate e) async => emit(
+      setDueDate: (_SetDueDate e) => emit(
         state.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             filterOption: FilterOption.dueDate(),
@@ -64,7 +64,7 @@ class AllInvoicesFilterBloc
           showErrorMessages: false,
         ),
       ),
-      setDocumentDate: (_SetDocumentDate e) async => emit(
+      setDocumentDate: (_SetDocumentDate e) => emit(
         state.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),
@@ -78,7 +78,7 @@ class AllInvoicesFilterBloc
           showErrorMessages: false,
         ),
       ),
-      amountValueFromChanged: (_AmountValueFromChanged e) async => emit(
+      amountValueFromChanged: (_AmountValueFromChanged e) => emit(
         state.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
@@ -88,7 +88,7 @@ class AllInvoicesFilterBloc
           showErrorMessages: false,
         ),
       ),
-      amountValueToChanged: (_AmountValueToChanged e) async => emit(
+      amountValueToChanged: (_AmountValueToChanged e) => emit(
         state.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),

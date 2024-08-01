@@ -28,9 +28,12 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
     Emitter<SalesOrgState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(SalesOrgState.initial()),
+      initialized: (e) {
+        emit(SalesOrgState.initial());
+      },
       loadSavedOrganisation: (e) async {
         final failureOrSuccess = await salesOrgRepository.getSalesOrg();
+        if (isClosed) return;
         final salesOrganisations = e.salesOrganisations;
 
         // found last selected from local storage => apply
@@ -63,6 +66,7 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
 
         final failureOrSuccess = await salesOrgRepository
             .getSalesOrganisationConfigs(e.salesOrganisation);
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(

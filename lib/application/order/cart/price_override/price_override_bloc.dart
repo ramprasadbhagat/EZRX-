@@ -27,9 +27,11 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
     Emitter<PriceOverrideState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        PriceOverrideState.initial(),
-      ),
+      initialized: (e) {
+        emit(
+          PriceOverrideState.initial(),
+        );
+      },
       setProduct: (e) {
         emit(
           state.copyWith(
@@ -37,50 +39,58 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
           ),
         );
       },
-      onPriceValueChange: (e) async => emit(
-        state.copyWith(
-          showErrorMessages: false,
-          item: state.item.copyWith(
-            materialInfo: state.item.materialInfo.copyWith(
-              counterOfferDetails:
-                  state.item.materialInfo.counterOfferDetails.copyWith(
-                counterOfferPrice: CounterOfferValue(e.newPrice),
+      onPriceValueChange: (e) {
+        emit(
+          state.copyWith(
+            showErrorMessages: false,
+            item: state.item.copyWith(
+              materialInfo: state.item.materialInfo.copyWith(
+                counterOfferDetails:
+                    state.item.materialInfo.counterOfferDetails.copyWith(
+                  counterOfferPrice: CounterOfferValue(e.newPrice),
+                ),
               ),
             ),
           ),
-        ),
-      ),
-      onDiscountValueChanged: (e) async => emit(
-        state.copyWith(
-          showErrorMessages: false,
-          item: state.item.copyWith(
-            materialInfo: state.item.materialInfo.copyWith(
-              counterOfferDetails:
-                  state.item.materialInfo.counterOfferDetails.copyWith(
-                discountOverridePercentage:
-                    CounterOfferDiscountValue(e.newValue),
+        );
+      },
+      onDiscountValueChanged: (e) {
+        emit(
+          state.copyWith(
+            showErrorMessages: false,
+            item: state.item.copyWith(
+              materialInfo: state.item.materialInfo.copyWith(
+                counterOfferDetails:
+                    state.item.materialInfo.counterOfferDetails.copyWith(
+                  discountOverridePercentage:
+                      CounterOfferDiscountValue(e.newValue),
+                ),
               ),
             ),
           ),
-        ),
-      ),
-      onRemarksValueChange: (e) async => emit(
-        state.copyWith(
-          item: state.item.copyWith(
-            materialInfo: state.item.materialInfo.copyWith(
-              counterOfferDetails:
-                  state.item.materialInfo.counterOfferDetails.copyWith(
-                comment: StringValue(e.newRemarks),
+        );
+      },
+      onRemarksValueChange: (e) {
+        emit(
+          state.copyWith(
+            item: state.item.copyWith(
+              materialInfo: state.item.materialInfo.copyWith(
+                counterOfferDetails:
+                    state.item.materialInfo.counterOfferDetails.copyWith(
+                  comment: StringValue(e.newRemarks),
+                ),
               ),
             ),
           ),
-        ),
-      ),
-      validateInputFields: (e) async => emit(
-        state.copyWith(
-          showErrorMessages: !state.isInputFieldValid,
-        ),
-      ),
+        );
+      },
+      validateInputFields: (e) {
+        emit(
+          state.copyWith(
+            showErrorMessages: !state.isInputFieldValid,
+          ),
+        );
+      },
       fetch: (_Fetch value) async {
         emit(
           state.copyWith(
@@ -94,6 +104,7 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
           item: state.item,
           salesOrganisation: value.salesOrganisation,
         );
+        if (isClosed) return;
 
         failureOrSuccess.fold(
           (failure) {

@@ -144,7 +144,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           materialFilter: state.materialFilter,
           user: state.user,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -187,7 +187,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
       (e, emit) async {
         final failureOrSuccess =
             await productSearchRepository.clearSearchHistory();
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -206,6 +206,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     on<_SaveSearchHistory>((event, emit) async {
       final failureOrSuccess =
           await productSearchRepository.saveSearchHistory(event.searchKey);
+      if (isClosed) return;
       failureOrSuccess.fold(
         (failure) => emit(
           state.copyWith(

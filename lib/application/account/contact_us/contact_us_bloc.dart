@@ -26,39 +26,49 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
     Emitter<ContactUsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(
-        ContactUsState.initial().copyWith(
-          appMarket: e.market,
-        ),
-      ),
-      onUsernameChange: (e) async => emit(
-        state.copyWith(
-          contactUs: state.contactUs.copyWith(
-            username: Username(e.newValue),
+      initialized: (e) {
+        emit(
+          ContactUsState.initial().copyWith(
+            appMarket: e.market,
           ),
-        ),
-      ),
-      onEmailChange: (e) async => emit(
-        state.copyWith(
-          contactUs: state.contactUs.copyWith(
-            email: EmailAddress(e.newValue),
+        );
+      },
+      onUsernameChange: (e) {
+        emit(
+          state.copyWith(
+            contactUs: state.contactUs.copyWith(
+              username: Username(e.newValue),
+            ),
           ),
-        ),
-      ),
-      onContactNumberChange: (e) async => emit(
-        state.copyWith(
-          contactUs: state.contactUs.copyWith(
-            contactNumber: PhoneNumber(e.newValue),
+        );
+      },
+      onEmailChange: (e) {
+        emit(
+          state.copyWith(
+            contactUs: state.contactUs.copyWith(
+              email: EmailAddress(e.newValue),
+            ),
           ),
-        ),
-      ),
-      onMessageChange: (e) async => emit(
-        state.copyWith(
-          contactUs: state.contactUs.copyWith(
-            message: StringValue(e.newValue),
+        );
+      },
+      onContactNumberChange: (e) {
+        emit(
+          state.copyWith(
+            contactUs: state.contactUs.copyWith(
+              contactNumber: PhoneNumber(e.newValue),
+            ),
           ),
-        ),
-      ),
+        );
+      },
+      onMessageChange: (e) {
+        emit(
+          state.copyWith(
+            contactUs: state.contactUs.copyWith(
+              message: StringValue(e.newValue),
+            ),
+          ),
+        );
+      },
       submit: (e) async {
         final isUserNameValid = state.contactUs.username.isValid();
         final isEmailValid = state.contactUs.email.isValid();
@@ -81,7 +91,7 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
             contactUs: state.contactUs,
             appMarket: state.appMarket,
           );
-
+          if (isClosed) return;
           failureOrSuccess.fold(
             (failure) {
               emit(
@@ -110,6 +120,7 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
             },
           );
         } else {
+          if (isClosed) return;
           emit(
             state.copyWith(
               showErrorMessage: true,

@@ -30,7 +30,9 @@ class DownloadEInvoiceBloc
     Emitter<DownloadEInvoiceState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(DownloadEInvoiceState.initial()),
+      initialized: (_) {
+        emit(DownloadEInvoiceState.initial());
+      },
       fetchUrl: (e) async {
         emit(
           state.copyWith(
@@ -42,6 +44,7 @@ class DownloadEInvoiceBloc
           salesOrg: e.salesOrg,
           invoiceNumber: e.invoiceNumber,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (_) => emit(
             state.copyWith(
@@ -62,17 +65,21 @@ class DownloadEInvoiceBloc
             await downloadPaymentAttachmentRepository.downloadPermission();
 
         await failureOrSuccessPermission.fold(
-          (_) async => emit(
-            state.copyWith(
-              isDownloading: false,
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (_) {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                isDownloading: false,
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (_) async {
             final failureOrSuccess = await downloadPaymentAttachmentRepository
                 .eCreditInvoiceDownload(
               eCreditInvoiceUrl: state.eInvoiceUrl,
             );
+            if (isClosed) return;
             failureOrSuccess.fold(
               (_) => emit(
                 state.copyWith(
@@ -100,7 +107,7 @@ class DownloadEInvoiceBloc
 
         final failureOrSuccess = await downloadPaymentAttachmentRepository
             .viewSavedFile(savedFile: state.eInvoice);
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (_) => emit(
             state.copyWith(

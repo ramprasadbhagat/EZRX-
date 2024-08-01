@@ -25,7 +25,9 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
     Emitter<ComboDealListState> emit,
   ) async {
     await event.map(
-      initialize: (e) async => emit(ComboDealListState.initial()),
+      initialize: (e) {
+        emit(ComboDealListState.initial());
+      },
       fetchMaterialDeal: (e) async {
         emit(
           state.copyWith(

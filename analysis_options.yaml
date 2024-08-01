@@ -148,6 +148,7 @@ dart_code_metrics:
     - prefer-multi-bloc-provider
     - avoid-bloc-public-methods
     - prefer-correct-bloc-provider
+    - check-is-not-closed-after-async-gap
     - prefer-using-list-view:
         exclude:
           - "lib/presentation/home/home_tab.dart" 

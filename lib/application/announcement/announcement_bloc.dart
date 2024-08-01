@@ -147,7 +147,7 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
                 ),
               ),
         ]);
-
+        if (isClosed) return;
         emit(newState);
       },
       closedBannerId: (e) {

@@ -67,6 +67,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
 
         final failureOrSuccess =
             await notificationRepository.deleteAllNotificationList();
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(

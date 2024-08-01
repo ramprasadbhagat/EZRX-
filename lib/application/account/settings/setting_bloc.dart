@@ -66,8 +66,10 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
                 await authRepository.putBiometricEnabledState(
                   isBiometricEnable: e.isBiometricEnabled,
                 );
+                if (isClosed) return;
                 add(const SettingEvent.fetchBiometricFlag());
               } else {
+                if (isClosed) return;
                 emit(
                   state.copyWith(
                     failureOrSuccessOption: none(),
@@ -80,6 +82,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
           await authRepository.putBiometricEnabledState(
             isBiometricEnable: e.isBiometricEnabled,
           );
+          if (isClosed) return;
           add(const SettingEvent.fetchBiometricFlag());
         }
       },

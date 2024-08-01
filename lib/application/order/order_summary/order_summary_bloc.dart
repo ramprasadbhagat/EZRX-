@@ -149,6 +149,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -177,8 +178,9 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           },
         );
       },
-      updateIsExpanded: (e) async =>
-          emit(state.copyWith(isExpanded: e.isExpanded)),
+      updateIsExpanded: (e) {
+        emit(state.copyWith(isExpanded: e.isExpanded));
+      },
     );
   }
 }

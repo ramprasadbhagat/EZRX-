@@ -29,7 +29,9 @@ class ReturnRequestAttachmentBloc
     Emitter<ReturnRequestAttachmentState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(ReturnRequestAttachmentState.initial()),
+      initialized: (e) {
+        emit(ReturnRequestAttachmentState.initial());
+      },
       uploadFile: (_UpLoadFile e) async {
         emit(
           state.copyWith(
@@ -45,25 +47,32 @@ class ReturnRequestAttachmentBloc
           uploadOptionType: e.uploadOptionType,
         );
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-              isFetching: false,
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+                isFetching: false,
+              ),
+            );
+          },
           (success) async {
             final pickFilesFailureOrSuccess =
                 await returnRequestRepository.pickFiles(
               uploadOptionType: e.uploadOptionType,
             );
             await pickFilesFailureOrSuccess.fold(
-              (failure) async => emit(
-                state.copyWith(
-                  failureOrSuccessOption: optionOf(pickFilesFailureOrSuccess),
-                  isFetching: false,
-                ),
-              ),
+              (failure) async {
+                if (isClosed) return;
+                emit(
+                  state.copyWith(
+                    failureOrSuccessOption: optionOf(pickFilesFailureOrSuccess),
+                    isFetching: false,
+                  ),
+                );
+              },
               (files) async {
+                if (isClosed) return;
                 if (files.isEmpty) {
                   emit(
                     state.copyWith(
@@ -78,6 +87,7 @@ class ReturnRequestAttachmentBloc
                   files: files,
                   user: e.user,
                 );
+                if (isClosed) return;
                 uploadFilesFailureOrSuccess.fold(
                   (failure) => emit(
                     state.copyWith(
@@ -115,6 +125,7 @@ class ReturnRequestAttachmentBloc
             await poAttachmentRepository.deleteFile(
           filePath: e.file.name,
         );
+        if (isClosed) return;
         emit(
           state.copyWith(
             failureOrSuccessOption: optionOf(deleteFilesFailureOrSuccess),
@@ -134,16 +145,20 @@ class ReturnRequestAttachmentBloc
         final failureOrSuccessPermission =
             await poAttachmentRepository.downloadPermission();
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-              isFetching: false,
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+                isFetching: false,
+              ),
+            );
+          },
           (success) async {
             await poAttachmentRepository.downloadFiles(
               files: [e.file],
             );
+            if (isClosed) return;
             emit(
               state.copyWith(
                 failureOrSuccessOption: none(),

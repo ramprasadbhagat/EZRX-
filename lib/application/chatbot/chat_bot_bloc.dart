@@ -39,6 +39,7 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
           ),
         );
         final failureOrSuccess = await chatBotRepository.startChatbot();
+        if (isClosed) return;
         failureOrSuccess.fold(
           (error) => emit(
             state.copyWith(
@@ -63,6 +64,7 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
           ),
         );
         final failureOrSuccess = await chatBotRepository.resetChatbot();
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

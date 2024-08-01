@@ -94,7 +94,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           user: state.user,
           searchKey: state.searchKey,
         );
-        if (emit.isDone) return;
+        if (emit.isDone || isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -145,6 +145,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         user: state.user,
         searchKey: state.searchKey,
       );
+
+      if (isClosed) return;
       failureOrSuccess.fold(
         (failure) => emit(
           state.copyWith(
@@ -185,7 +187,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         salesOrganisation: state.salesOrganisation,
         shipToInfo: state.shipToInfo,
       );
-
+      if (isClosed) return;
       failureOrSuccess.fold(
         (failure) => emit(
           state.copyWith(
@@ -217,8 +219,12 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
       await _favoriteStatusStreamSubscription?.cancel();
       _favoriteStatusStreamSubscription =
           favouriteRepository.watchFavoriteStatus().listen(
-                (event) => add(_UpdateFavoriteStatus(updatedMaterial: event)),
-              );
+        (event) {
+          if (!isClosed) {
+            add(_UpdateFavoriteStatus(updatedMaterial: event));
+          }
+        },
+      );
     });
     on<_UpdateFavoriteStatus>((e, emit) {
       emit(
@@ -240,6 +246,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           materialNumber: e.item.materialNumber,
           list: state.materialList,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

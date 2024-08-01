@@ -28,7 +28,9 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
     Emitter<PoAttachmentState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(PoAttachmentState.initial()),
+      initialized: (e) {
+        emit(PoAttachmentState.initial());
+      },
       downloadFile: (_DownloadFile e) async {
         emit(
           state.copyWith(
@@ -39,15 +41,19 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
         final failureOrSuccessPermission =
             await poAttachmentRepository.downloadPermission();
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (_) async {
             final failureOrSuccess = await poAttachmentRepository.downloadFiles(
               files: e.files,
             );
+            if (isClosed) return;
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -68,16 +74,20 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
         final failureOrSuccessPermission =
             await poAttachmentRepository.downloadPermission();
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-              isFetching: false,
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+                isFetching: false,
+              ),
+            );
+          },
           (_) async {
             final failureOrSuccess = await poAttachmentRepository.openFile(
               files: e.files,
             );
+            if (isClosed) return;
             failureOrSuccess.fold(
               (failure) => emit(
                 state.copyWith(
@@ -107,22 +117,28 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           uploadOptionType: e.uploadOptionType,
         );
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (_) async {
             final pickFilesFailureOrSuccess =
                 await poAttachmentRepository.pickFiles(
               uploadOptionType: e.uploadOptionType,
             );
             await pickFilesFailureOrSuccess.fold(
-              (failure) async => emit(
-                state.copyWith(
-                  failureOrSuccessOption: optionOf(pickFilesFailureOrSuccess),
-                ),
-              ),
+              (failure) async {
+                if (isClosed) return;
+                emit(
+                  state.copyWith(
+                    failureOrSuccessOption: optionOf(pickFilesFailureOrSuccess),
+                  ),
+                );
+              },
               (files) {
                 if (files.isNotEmpty) {
                   emit(
@@ -152,6 +168,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           files: state.localFiles,
           user: e.user,
         );
+        if (isClosed) return;
         uploadFilesFailureOrSuccess.fold(
           (l) => emit(
             state.copyWith(
@@ -183,6 +200,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             await poAttachmentRepository.deleteFile(
           filePath: e.file.url,
         );
+        if (isClosed) return;
 
         final newFileList = List<PoDocuments>.of(state.fileUrl);
 

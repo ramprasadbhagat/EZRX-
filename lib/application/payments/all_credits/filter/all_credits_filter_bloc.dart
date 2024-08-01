@@ -15,12 +15,12 @@ class AllCreditsFilterBloc
     on<AllCreditsFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     AllCreditsFilterEvent event,
     Emitter<AllCreditsFilterState> emit,
-  ) async {
-    await event.map(
-      initialized: (_Initialized e) async => emit(
+  ) {
+    event.map(
+      initialized: (_Initialized e) => emit(
         AllCreditsFilterState.initial(),
       ),
       openFilterBottomSheet: (_OpenFilterBottomSheet value) {
@@ -50,7 +50,7 @@ class AllCreditsFilterBloc
           ),
         );
       },
-      setDocumentDate: (_SetDocumentDate e) async => emit(
+      setDocumentDate: (_SetDocumentDate e) => emit(
         state.copyWith(
           filter: AllCreditsFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),
@@ -64,7 +64,7 @@ class AllCreditsFilterBloc
           showErrorMessages: false,
         ),
       ),
-      amountValueFromChanged: (_AmountValueFromChanged e) async => emit(
+      amountValueFromChanged: (_AmountValueFromChanged e) => emit(
         state.copyWith(
           filter: AllCreditsFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
@@ -74,7 +74,7 @@ class AllCreditsFilterBloc
           showErrorMessages: false,
         ),
       ),
-      amountValueToChanged: (_AmountValueToChanged e) async => emit(
+      amountValueToChanged: (_AmountValueToChanged e) => emit(
         state.copyWith(
           filter: AllCreditsFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),

@@ -194,6 +194,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             paymentStatus: e.paymentStatus,
           );
 
+          if (isClosed) return;
           emit(state.copyWith(isUpdatePaymentGateway: false));
         }
       },
@@ -242,12 +243,15 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         final failureOrSuccessPermission =
             await deviceRepository.getSavePermission();
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-              isSavingInvoicePdf: false,
-            ),
-          ),
+          (failure) {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+                isSavingInvoicePdf: false,
+              ),
+            );
+          },
           (success) async {
             final failureOrSuccessSave = await newPaymentRepository.saveFile(
               pdfData: e.dataInvoicePdf,
@@ -345,7 +349,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
               await newPaymentRepository.getPrincipalCutoffs(
             shipToInfo: state.shipToInfo,
           );
-
+          if (isClosed) return;
           failureOrSuccess.fold(
             (failure) {
               emit(
@@ -366,6 +370,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             },
           );
         } else {
+          if (isClosed) return;
           emit(
             state.copyWith(
               failureOrSuccessOption: none(),

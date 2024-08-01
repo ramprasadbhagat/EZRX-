@@ -117,7 +117,7 @@ class ReturnListByRequestBloc
           appliedFilter: state.appliedFilter,
           searchKey: state.searchKey,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -152,12 +152,15 @@ class ReturnListByRequestBloc
       final failureOrSuccessPermission =
           await returnListRepository.getDownloadPermission();
       await failureOrSuccessPermission.fold(
-        (failure) async => emit(
-          state.copyWith(
-            failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            isDownloadInProgress: false,
-          ),
-        ),
+        (failure) async {
+          if (isClosed) return;
+          emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              isDownloadInProgress: false,
+            ),
+          );
+        },
         (_) async {
           //fetch File Url
           final fileUrlFailureOrSuccess = await returnListRepository.getFileUrl(
@@ -170,18 +173,22 @@ class ReturnListByRequestBloc
             searchKey: state.searchKey,
           );
           await fileUrlFailureOrSuccess.fold(
-            (failure) async => emit(
-              state.copyWith(
-                isDownloadInProgress: false,
-                failureOrSuccessOption: optionOf(fileUrlFailureOrSuccess),
-              ),
-            ),
+            (failure) async {
+              if (isClosed) return;
+              emit(
+                state.copyWith(
+                  isDownloadInProgress: false,
+                  failureOrSuccessOption: optionOf(fileUrlFailureOrSuccess),
+                ),
+              );
+            },
             (url) async {
               //download File
               final downloadFileFailureOrSuccess =
                   await returnListRepository.downloadFile(
                 url: url,
               );
+              if (isClosed) return;
               emit(
                 state.copyWith(
                   isDownloadInProgress: false,

@@ -17,12 +17,12 @@ class AdditionalDetailsBloc
     on<AdditionalDetailsEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     AdditionalDetailsEvent event,
     Emitter<AdditionalDetailsState> emit,
-  ) async {
-    await event.map(
-      initialized: (value) async => emit(
+  ) {
+    event.map(
+      initialized: (value) => emit(
         AdditionalDetailsState.initial().copyWith(
           config: value.config,
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
@@ -32,12 +32,12 @@ class AdditionalDetailsBloc
           ),
         ),
       ),
-      onTextChange: (value) async => _onTextChange(
+      onTextChange: (value) => _onTextChange(
         label: value.label,
         newValue: value.newValue,
         emit: emit,
       ),
-      validateForm: (value) async => _validateAdditionalDetails(
+      validateForm: (value) => _validateAdditionalDetails(
         emit: emit,
       ),
       addPoDocument: (value) {
@@ -65,7 +65,7 @@ class AdditionalDetailsBloc
           ),
         );
       },
-      removeAllPoDocument: (value) async => emit(
+      removeAllPoDocument: (value) => emit(
         state.copyWith(
           deliveryInfoData:
               state.deliveryInfoData.copyWith(poDocuments: <PoDocuments>[]),

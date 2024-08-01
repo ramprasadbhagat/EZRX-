@@ -55,7 +55,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           queryObject: event.queryObject,
           isMarketPlace: event.isMarketPlace,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -88,7 +88,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           salesOrganization: state.salesOrganization,
           isMarketPlace: event.isMarketPlace,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -121,7 +121,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           salesOrganization: state.salesOrganization,
           isMarketPlace: event.isMarketPlace,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -154,7 +154,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           paymentSummaryFilter: event.paymentSummaryFilter,
           isMarketPlace: event.isMarketPlace,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -178,17 +178,21 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
             await paymentAttachmentRepository.downloadPermission();
 
         await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              isDownloadInProgress: false,
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            ),
-          ),
+          (failure) {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                isDownloadInProgress: false,
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              ),
+            );
+          },
           (_) async {
             final failureOrSuccess =
                 await paymentAttachmentRepository.downloadFiles(
               files: event.files,
             );
+            if (isClosed) return;
             failureOrSuccess.fold(
               (failure) => emit(
                 state.copyWith(
@@ -221,17 +225,21 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           await paymentAttachmentRepository.downloadPermission();
 
       await failureOrSuccessPermission.fold(
-        (failure) async => emit(
-          state.copyWith(
-            isDownloadInProgress: false,
-            failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-          ),
-        ),
+        (failure) {
+          if (isClosed) return;
+          emit(
+            state.copyWith(
+              isDownloadInProgress: false,
+              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+            ),
+          );
+        },
         (_) async {
           final failureOrSuccess =
               await paymentAttachmentRepository.soaDownload(
             soaData: event.soaData,
           );
+          if (isClosed) return;
           failureOrSuccess.fold(
             (failure) => emit(
               state.copyWith(

@@ -29,19 +29,25 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> _onEvent(UserEvent event, Emitter<UserState> emit) async {
     await event.map(
-      initialized: (e) async => emit(UserState.initial()),
+      initialized: (e) {
+        emit(UserState.initial());
+      },
       fetch: (e) async {
         final failureOrSuccess = await userRepository.getUser();
+
         await failureOrSuccess.fold(
-          (failure) async => emit(
-            state.copyWith(
-              userFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
+          (failure) async {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
           (user) async {
             final refreshTokenFailureOrSuccess =
                 await authRepository.getRefreshToken();
-
+            if (isClosed) return;
             //If login on behalf, the refresh token will always be empty string
             final isLoginOnBehalf = refreshTokenFailureOrSuccess.fold(
               (failure) => failure == const ApiFailure.refreshTokenInvalid(),
@@ -62,7 +68,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(state.copyWith(isLoading: true));
 
         final failureOrSuccess = await userRepository.updateUserTc();
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -86,7 +92,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         final failureOrSuccess =
             await userRepository.updateUserMarketPlaceTc(e.value);
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -113,6 +119,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         final failureOrSuccess =
             await userRepository.updateNotificationSettings(user);
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -151,6 +158,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         );
         final failureOrSuccessOption =
             await userRepository.updateLanguage(language: e.language);
+        if (isClosed) return;
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(
@@ -169,11 +177,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           },
         );
       },
-      selectLanguage: (_SelectLanguage e) async => emit(
-        state.copyWith(
-          activeLanguage: e.language,
-        ),
-      ),
+      selectLanguage: (_SelectLanguage e) {
+        emit(
+          state.copyWith(
+            activeLanguage: e.language,
+          ),
+        );
+      },
     );
   }
 

@@ -25,7 +25,9 @@ class ProxyLoginFormBloc
     Emitter<ProxyLoginFormState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(ProxyLoginFormState.initial()),
+      initialized: (e) {
+        emit(ProxyLoginFormState.initial());
+      },
       usernameChanged: (e) {
         emit(
           state.copyWith(
@@ -48,6 +50,7 @@ class ProxyLoginFormBloc
           );
           await proxyLoginFailureOrSuccess.fold(
             (_) {
+              if (isClosed) return;
               emit(
                 state.copyWith(
                   isSubmitting: false,
@@ -64,6 +67,7 @@ class ProxyLoginFormBloc
                 access: login.access,
                 refresh: login.refresh,
               );
+              if (isClosed) return;
               emit(
                 state.copyWith(
                   isSubmitting: false,
@@ -76,6 +80,7 @@ class ProxyLoginFormBloc
             },
           );
         } else {
+          if (isClosed) return;
           emit(state.copyWith(showErrorMessages: true));
         }
       },

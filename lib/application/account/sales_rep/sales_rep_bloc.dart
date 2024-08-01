@@ -25,11 +25,14 @@ class SalesRepBloc extends Bloc<SalesRepEvent, SalesRepState> {
     Emitter<SalesRepState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(SalesRepState.initial()),
+      initialized: (e) {
+        emit(SalesRepState.initial());
+      },
       fetch: (e) async {
         final failureOrSuccess = await salesRepRepository.getSalesRepInfo(
           user: e.user,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(

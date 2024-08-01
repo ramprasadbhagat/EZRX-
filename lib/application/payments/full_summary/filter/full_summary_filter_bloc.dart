@@ -15,12 +15,12 @@ class FullSummaryFilterBloc
     on<FullSummaryFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     FullSummaryFilterEvent event,
     Emitter<FullSummaryFilterState> emit,
-  ) async {
-    await event.map(
-      initialized: (_Initialized e) async => emit(
+  ) {
+    event.map(
+      initialized: (_Initialized e) => emit(
         FullSummaryFilterState.initial(),
       ),
       openFilterBottomSheet: (_OpenFilterBottomSheet value) {
@@ -48,7 +48,7 @@ class FullSummaryFilterBloc
           ),
         );
       },
-      setDueDate: (_SetDueDate e) async => emit(
+      setDueDate: (_SetDueDate e) => emit(
         state.copyWith(
           filter: FullSummaryFilter.empty().copyWith(
             filterOption: FilterOption.dueDate(),
@@ -62,7 +62,7 @@ class FullSummaryFilterBloc
           showErrorMessages: false,
         ),
       ),
-      setDocumentDate: (_SetDocumentDate e) async => emit(
+      setDocumentDate: (_SetDocumentDate e) => emit(
         state.copyWith(
           filter: FullSummaryFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),

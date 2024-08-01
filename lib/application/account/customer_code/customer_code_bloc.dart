@@ -135,6 +135,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
             await customerCodeRepository.getCustomerCodeConfig(
           customerCodeInfo: event.customerCodeInfo,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

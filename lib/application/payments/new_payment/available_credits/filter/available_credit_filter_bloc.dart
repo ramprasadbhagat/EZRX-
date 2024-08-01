@@ -15,15 +15,15 @@ class AvailableCreditFilterBloc
     on<AvailableCreditFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     AvailableCreditFilterEvent event,
     Emitter<AvailableCreditFilterState> emit,
-  ) async {
-    await event.map(
-      initialize: (e) async => emit(
+  ) {
+    event.map(
+      initialize: (e) => emit(
         AvailableCreditFilterState.initial(),
       ),
-      setDocumentDate: (e) async => emit(
+      setDocumentDate: (e) => emit(
         state.copyWith(
           filter: AvailableCreditFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),
@@ -36,7 +36,7 @@ class AvailableCreditFilterBloc
           ),
         ),
       ),
-      setAmountFrom: (e) async => emit(
+      setAmountFrom: (e) => emit(
         state.copyWith(
           filter: AvailableCreditFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
@@ -46,7 +46,7 @@ class AvailableCreditFilterBloc
           showErrorMessage: false,
         ),
       ),
-      setAmountTo: (e) async => emit(
+      setAmountTo: (e) => emit(
         state.copyWith(
           filter: AvailableCreditFilter.empty().copyWith(
             filterOption: FilterOption.amountRange(),
@@ -56,18 +56,18 @@ class AvailableCreditFilterBloc
           showErrorMessage: false,
         ),
       ),
-      setValidationFailure: (_) async => emit(
+      setValidationFailure: (_) => emit(
         state.copyWith(
           showErrorMessage:
               !state.filter.isAvailableCreditAmountValueRangeValid,
         ),
       ),
-      resetFilters: (e) async => emit(
+      resetFilters: (e) => emit(
         AvailableCreditFilterState.initial().copyWith(
           filter: AvailableCreditFilter.defaultFilter(),
         ),
       ),
-      updateFilterToLastApplied: (e) async => emit(
+      updateFilterToLastApplied: (e) => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
           showErrorMessage: false,

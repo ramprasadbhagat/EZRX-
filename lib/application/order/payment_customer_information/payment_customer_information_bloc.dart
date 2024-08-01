@@ -29,14 +29,16 @@ class PaymentCustomerInformationBloc extends Bloc<
     Emitter<PaymentCustomerInformationState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(PaymentCustomerInformationState.initial()),
+      initialized: (e) {
+        emit(PaymentCustomerInformationState.initial());
+      },
       fetch: (e) async {
         final failureOrSuccess = await paymentCustomerInformationRepository
             .getPaymentCustomerInformation(
           salesOrganisation: e.salesOrganisation,
           customerCodeInfo: e.customeCodeInfo,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) {
             emit(

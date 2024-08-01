@@ -21,11 +21,13 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
     Emitter<AboutUsState> emit,
   ) async {
     await event.map(
-      initialize: (e) async => emit(
-        AboutUsState.initial().copyWith(
-          salesOrg: e.salesOrg,
-        ),
-      ),
+      initialize: (e) {
+        emit(
+          AboutUsState.initial().copyWith(
+            salesOrg: e.salesOrg,
+          ),
+        );
+      },
       fetchAboutUsInfo: (e) async {
         emit(
           state.copyWith(

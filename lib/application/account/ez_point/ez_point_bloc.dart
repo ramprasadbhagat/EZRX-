@@ -19,14 +19,16 @@ class EZPointBloc extends Bloc<EZPointEvent, EZPointState> {
 
   Future<void> _onEvent(EZPointEvent event, Emitter<EZPointState> emit) async {
     await event.map(
-      initialized: (e) async => emit(EZPointState.initial()),
+      initialized: (e) {
+        emit(EZPointState.initial());
+      },
       fetch: (e) async {
         emit(state.copyWith(isFetching: true));
         final eZPointTokenFailureOrSuccess =
             await eZPointRepository.getEZPointToken(
           customerCodeInfo: e.customerCodeInfo,
         );
-
+        if (isClosed) return;
         eZPointTokenFailureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

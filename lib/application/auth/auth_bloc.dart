@@ -18,31 +18,39 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onEvent(AuthEvent event, Emitter<AuthState> emit) async {
     await event.map(
-      init: (e) async => add(const AuthEvent.authCheck()),
+      init: (e) {
+        add(const AuthEvent.authCheck());
+      },
       bioCheck: (e) async {
         final isBiometricPossibleResult =
             await authRepository.canBeAuthenticatedAndBioAvailable();
         await isBiometricPossibleResult.fold(
-          (error) async => emit(const AuthState.authenticated()),
+          (error) async {
+            if (isClosed) return;
+            emit(const AuthState.authenticated());
+          },
           (response) async {
             final authResultEither =
                 await authRepository.doBiometricAuthentication();
-            await authResultEither.fold(
-              (error) async => add(const AuthEvent.logout()),
-              (response) async => emit(const AuthState.authenticated()),
+            if (isClosed) return;
+            authResultEither.fold(
+              (error) => add(const AuthEvent.logout()),
+              (response) => emit(const AuthState.authenticated()),
             );
           },
         );
       },
       authCheck: (e) async {
         final result = await authRepository.tokenValid();
-        await result.fold(
-          (invalid) async => add(const AuthEvent.refreshEZRXToken()),
-          (valid) async {
+        if (isClosed) return;
+        result.fold(
+          (invalid) => add(const AuthEvent.refreshEZRXToken()),
+          (valid) {
             final isBiometricEnabledResult =
                 authRepository.isBiometricEnabled();
-            await isBiometricEnabledResult.fold(
-              (error) async => emit(const AuthState.authenticated()),
+
+            isBiometricEnabledResult.fold(
+              (error) => emit(const AuthState.authenticated()),
               (isEnable) {
                 isEnable
                     ? add(const AuthEvent.checkIfBiometricDenied())
@@ -55,12 +63,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       refreshEZRXToken: (e) async {
         final refreshResult = await authRepository.getRefreshToken();
         await refreshResult.fold(
-          (failure) async => emit(const AuthState.unauthenticated()),
+          (failure) async {
+            if (isClosed) return;
+            emit(const AuthState.unauthenticated());
+          },
           (refreshToken) async {
             final ezrxResult =
                 await authRepository.getAccessToken(refreshToken);
             await ezrxResult.fold(
-              (failure) async => emit(const AuthState.unauthenticated()),
+              (failure) async {
+                if (isClosed) return;
+                emit(const AuthState.unauthenticated());
+              },
               (login) async {
                 await authRepository.storeJWT(
                   access: login.access,
@@ -68,8 +82,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 );
                 final isBiometricEnabledResult =
                     authRepository.isBiometricEnabled();
-                await isBiometricEnabledResult.fold(
-                  (error) async => emit(const AuthState.authenticated()),
+                if (isClosed) return;
+                isBiometricEnabledResult.fold(
+                  (error) => emit(const AuthState.authenticated()),
                   (isEnable) {
                     isEnable
                         ? add(const AuthEvent.bioCheck())
@@ -83,6 +98,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
       logout: (e) async {
         await authRepository.logout();
+        if (isClosed) return;
         emit(const AuthState.unauthenticated());
       },
       checkIfBiometricDenied: (e) async {

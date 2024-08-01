@@ -70,11 +70,14 @@ class ScanMaterialInfoBloc
           type: PermissionType.camera,
         );
         await permissionsResult.fold(
-          (failure) async => emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(permissionsResult),
-            ),
-          ),
+          (failure) {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(permissionsResult),
+              ),
+            );
+          },
           (permissionStatus) async {
             final failureOrSuccess =
                 await scanInfoRepository.scanMaterialNumberFromDeviceCamera();
@@ -103,12 +106,16 @@ class ScanMaterialInfoBloc
         final permissionsResult = await scanInfoRepository.getPermission(
           type: PermissionType.files,
         );
+
         await permissionsResult.fold(
-          (failure) async => emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(permissionsResult),
-            ),
-          ),
+          (failure) {
+            if (isClosed) return;
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(permissionsResult),
+              ),
+            );
+          },
           (permissionResult) async {
             emit(
               state.copyWith(isScanInProgress: false),
@@ -161,6 +168,7 @@ class ScanMaterialInfoBloc
           salesOrgConfig: state.salesOrgConfigs,
           materialFilter: state.materialFilter,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -181,6 +189,7 @@ class ScanMaterialInfoBloc
       updateTorchState: (e) async {
         final failureOrSuccess =
             await scanInfoRepository.updateTorchState(torchState: e.torchState);
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

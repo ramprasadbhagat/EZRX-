@@ -30,7 +30,9 @@ class PaymentTermBloc extends Bloc<PaymentTermEvent, PaymentTermState> {
     Emitter<PaymentTermState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(PaymentTermState.initial()),
+      initialized: (e) {
+        emit(PaymentTermState.initial());
+      },
       fetch: (e) async {
         final failureOrSuccess = await paymentTermRepository.getPaymentTerms(
           salesOrganisation: e.salesOrganisation,
@@ -40,6 +42,7 @@ class PaymentTermBloc extends Bloc<PaymentTermEvent, PaymentTermState> {
           salesRepInfo: e.salesRepresentativeInfo,
           preferredLanguage: e.user.preferredLanguage,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (faliure) => emit(
             state.copyWith(

@@ -24,7 +24,9 @@ class NotificationSettingsBloc
     Emitter<NotificationSettingsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(NotificationSettingsState.initial()),
+      initialized: (e) {
+        emit(NotificationSettingsState.initial());
+      },
       fetch: (e) async {
         emit(
           state.copyWith(
@@ -36,7 +38,7 @@ class NotificationSettingsBloc
         );
         final failureOrSuccess =
             await notificationSettingsRepository.getNotificationSettings();
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -102,7 +104,7 @@ class NotificationSettingsBloc
             await notificationSettingsRepository.setNotificationSettings(
           notificationSettings: state.currentNotificationSettings,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

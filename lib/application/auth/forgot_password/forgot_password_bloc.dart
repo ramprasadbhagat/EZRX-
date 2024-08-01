@@ -27,16 +27,20 @@ class ForgotPasswordBloc
     Emitter<ForgotPasswordState> emit,
   ) async {
     await event.map(
-      initialized: (_Initialized value) async => emit(
-        ForgotPasswordState.initial(),
-      ),
-      usernameChanged: (_ForgotPasswordEvent e) async => emit(
-        state.copyWith(
-          username: Username(e.usernameStr),
-          resetPasswordFailureOrSuccessOption: none(),
-          showErrorMessages: false,
-        ),
-      ),
+      initialized: (_Initialized value) {
+        emit(
+          ForgotPasswordState.initial(),
+        );
+      },
+      usernameChanged: (_ForgotPasswordEvent e) {
+        emit(
+          state.copyWith(
+            username: Username(e.usernameStr),
+            resetPasswordFailureOrSuccessOption: none(),
+            showErrorMessages: false,
+          ),
+        );
+      },
       requestPasswordReset: (_RequestPasswordReset e) async {
         if (!state.username.isValid()) {
           emit(
@@ -56,6 +60,7 @@ class ForgotPasswordBloc
           username: state.username,
           language: e.language,
         );
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

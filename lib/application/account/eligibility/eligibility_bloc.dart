@@ -57,7 +57,9 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
     Emitter<EligibilityState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(EligibilityState.initial()),
+      initialized: (_) {
+        emit(EligibilityState.initial());
+      },
       update: (e) {
         emit(
           state.copyWith(
@@ -73,7 +75,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           customerCode: e.customerCodeInfo.customerCodeSoldTo,
           shippingAddress: e.shipToInfo.shipToCustomerCode,
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -99,7 +101,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
 
         final customerStorageSuccessOrFailure =
             await customerCodeRepository.getCustomerCodeStorage();
-
+        if (isClosed) return;
         final lastSavedCustomerInfo = customerStorageSuccessOrFailure.fold(
           (_) => AccountSelector.empty(),
           (accountSelector) => accountSelector,
@@ -127,7 +129,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           pageSize: config.pageSize,
           offset: 0,
         );
-
+        if (isClosed) return;
         final customerCodeInfoList =
             failureOrSuccess.fold<List<CustomerCodeInfo>>(
           (_) => <CustomerCodeInfo>[],
@@ -176,7 +178,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           pageSize: config.pageSize,
           offset: 0,
         );
-
+        if (isClosed) return;
         final customerCodeInfoList =
             failureOrSuccess.fold<List<CustomerCodeInfo>>(
           (_) => <CustomerCodeInfo>[],
@@ -226,17 +228,20 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           },
         );
       },
-      updatedCustomerCodeConfig: (_UpdatedCustomerCodeConfig e) async => emit(
-        state.copyWith(
-          customerCodeConfig: e.customerCodeConfig,
-        ),
-      ),
-      updateStockInfoAvailability: (_UpdateStockInfoAvailability e) async =>
-          emit(
-        state.copyWith(
-          isStockInfoNotAvailable: e.isStockInfoNotAvailable,
-        ),
-      ),
+      updatedCustomerCodeConfig: (_UpdatedCustomerCodeConfig e) {
+        emit(
+          state.copyWith(
+            customerCodeConfig: e.customerCodeConfig,
+          ),
+        );
+      },
+      updateStockInfoAvailability: (_UpdateStockInfoAvailability e) {
+        emit(
+          state.copyWith(
+            isStockInfoNotAvailable: e.isStockInfoNotAvailable,
+          ),
+        );
+      },
       watchStockApiStatus: (_WatchStockApiStatus e) {
         _stockApiStatusStreamSubscription?.cancel();
         _stockApiStatusStreamSubscription =
@@ -253,15 +258,18 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
 
         _connectivityStreamSubscription =
             connectivityRepository.watchNetworkAvailability().listen(
-                  (isNetworkAvailable) => add(
-                    EligibilityEvent.updateNetworkAvailability(
-                      isNetworkAvailable: isNetworkAvailable,
-                    ),
-                  ),
-                );
+          (isNetworkAvailable) {
+            if (isClosed) return;
+            add(
+              EligibilityEvent.updateNetworkAvailability(
+                isNetworkAvailable: isNetworkAvailable,
+              ),
+            );
+          },
+        );
         final failureOrSuccess =
             await connectivityRepository.initializeConnectivity();
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
@@ -271,12 +279,13 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           (_) {},
         );
       },
-      updateNetworkAvailability: (_UpdateNetworkAvailability value) async =>
-          emit(
-        state.copyWith(
-          isNetworkAvailable: value.isNetworkAvailable,
-        ),
-      ),
+      updateNetworkAvailability: (_UpdateNetworkAvailability value) {
+        emit(
+          state.copyWith(
+            isNetworkAvailable: value.isNetworkAvailable,
+          ),
+        );
+      },
     );
   }
 

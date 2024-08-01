@@ -40,7 +40,9 @@ abstract class AccountSummaryBloc
     Emitter<AccountSummaryState> emit,
   ) async {
     await event.map(
-      initialize: (e) async => emit(AccountSummaryState.initial()),
+      initialize: (e) {
+        emit(AccountSummaryState.initial());
+      },
       fetchInvoiceSummary: (e) async {
         emit(
           state.copyWith(

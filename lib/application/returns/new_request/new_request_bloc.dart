@@ -34,11 +34,13 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
     Emitter<NewRequestState> emit,
   ) async {
     await event.map(
-      initialized: (_Initialized e) async => emit(
-        NewRequestState.initial().copyWith(
-          salesOrg: e.salesOrg,
-        ),
-      ),
+      initialized: (_Initialized e) {
+        emit(
+          NewRequestState.initial().copyWith(
+            salesOrg: e.salesOrg,
+          ),
+        );
+      },
       toggleReturnItem: (_ToggleReturnItem e) {
         final invoiceDetails = [...state.invoiceDetails];
         if (e.selected) {
@@ -240,16 +242,20 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
           default:
         }
       },
-      returnReferenceChanged: (_ReturnReferenceChanged e) async => emit(
-        state.copyWith(
-          returnReference: e.returnReference,
-        ),
-      ),
-      specialInstructionsChanged: (_SpecialInstructionsChanged e) async => emit(
-        state.copyWith(
-          specialInstructions: e.specialInstructions,
-        ),
-      ),
+      returnReferenceChanged: (_ReturnReferenceChanged e) {
+        emit(
+          state.copyWith(
+            returnReference: e.returnReference,
+          ),
+        );
+      },
+      specialInstructionsChanged: (_SpecialInstructionsChanged e) {
+        emit(
+          state.copyWith(
+            specialInstructions: e.specialInstructions,
+          ),
+        );
+      },
       submit: (_Submit e) async {
         emit(
           state.copyWith(
@@ -267,7 +273,7 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
             user: e.user,
           ),
         );
-
+        if (isClosed) return;
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
