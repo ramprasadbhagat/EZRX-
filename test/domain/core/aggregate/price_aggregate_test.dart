@@ -1515,6 +1515,40 @@ void main() {
           false,
         );
       });
+
+      test('OOS Items that contain combo', () {
+        final comboMaterialsWithAllOOO = combo.comboMaterials
+            .mapIndexed(
+              (index, e) => e.copyWith.materialInfo(
+                stockInfos: stock(e.materialInfo.materialNumber, false),
+              ),
+            )
+            .toList();
+
+        final list = [
+          PriceAggregate.empty(),
+          material.copyWith(
+            bonusSampleItems: [],
+            salesOrgConfig: fakeMYSalesOrgConfigs,
+            stockInfoList: stock(material.getMaterialNumber, false),
+          ),
+          PriceAggregate.empty(),
+          combo.copyWith(
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              comboMaterials: comboMaterialsWithAllOOO,),
+        ];
+
+        expect(list.preOrderItems, [
+          material.copyWith(
+            bonusSampleItems: [],
+            salesOrgConfig: fakeMYSalesOrgConfigs,
+            stockInfoList: stock(material.getMaterialNumber, false),
+          ),
+          combo.copyWith(
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              comboMaterials: comboMaterialsWithAllOOO,),
+        ]);
+      });
     });
 
     group('totalPriceWithInStockOnly getter -', () {

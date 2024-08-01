@@ -97,6 +97,8 @@ void main() {
   late List<PriceAggregate> mockCartItemBundles;
   late List<PriceAggregate> mockCartItemBundles2;
   late List<PriceAggregate> mockCartItemBundlesWithValidStock;
+  late List<PriceAggregate> mockCartItemComboWithOOS;
+  late List<PriceAggregate> mockCartItemComboWithValidStock;
   late List<PriceAggregate> mockCartItemDiscountBundles;
   late MaterialListBloc materialListBlocMock;
   late TenderContractBloc tenderContractBlocMock;
@@ -280,6 +282,58 @@ void main() {
           materialInfo: MaterialInfo.empty().copyWith(
             materialNumber: MaterialNumber('fake-bundle'),
             type: MaterialInfoType('bundle'),
+          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+        ),
+      ];
+
+      mockCartItemComboWithOOS = [
+        PriceAggregate.empty().copyWith(
+          comboMaterials: [
+            fakeComboMaterialItems.first.copyWith(
+              comboDeals: PriceComboDeal.empty().copyWith(
+                flexibleGroup: FlexibleGroup('fake-combo'),
+                salesDeal: SalesDealNumber('code'),
+              ),
+              materialInfo: MaterialInfo.empty().copyWithStock(
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-1'),
+                    inStock: MaterialInStock('No'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-combo'),
+            type: MaterialInfoType('combo'),
+          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+        ),
+      ];
+
+      mockCartItemComboWithValidStock = [
+        PriceAggregate.empty().copyWith(
+          comboMaterials: [
+            fakeComboMaterialItems.first.copyWith(
+              comboDeals: PriceComboDeal.empty().copyWith(
+                flexibleGroup: FlexibleGroup('fake-combo'),
+                salesDeal: SalesDealNumber('code'),
+              ),
+              materialInfo: MaterialInfo.empty().copyWithStock(
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-1'),
+                    inStock: MaterialInStock('Yes'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-combo'),
+            type: MaterialInfoType('combo'),
           ),
           salesOrgConfig: fakeMYSalesOrgConfigs,
         ),
@@ -902,6 +956,62 @@ void main() {
         expect(find.byKey(WidgetKeys.preOrderModel), findsNothing);
         expect(
           find.byKey(WidgetKeys.preOrderBundle('fake-bundle-code')),
+          findsNothing,
+        );
+      });
+
+      testWidgets('Combo item with OOS need to show preorder modal',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemComboWithOOS,
+            config: fakeMYSalesOrgConfigs,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+
+        await tester.pump();
+        expect(find.byType(StatusLabel), findsOneWidget);
+        expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
+        await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.preOrderModel), findsOneWidget);
+        expect(
+          find.byKey(WidgetKeys.preOrderCombo('fake-combo-code')),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Combo item with valid item does not display preorder modal',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemComboWithValidStock,
+            config: fakeMYSalesOrgConfigs,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        when(() => autoRouterMock.push(const CheckoutPageRoute()))
+            .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
+        await tester.pumpWidget(getWidget());
+
+        await tester.pump();
+        expect(find.byType(StatusLabel), findsNothing);
+        expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
+        await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.preOrderModel), findsNothing);
+        expect(
+          find.byKey(WidgetKeys.preOrderCombo('fake-combo-code')),
           findsNothing,
         );
       });
