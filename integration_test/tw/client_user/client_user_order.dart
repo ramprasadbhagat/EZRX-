@@ -108,6 +108,8 @@ void main() {
   const shipToAddress = '台灣明尼蘇達礦業製造（股）公';
   const otherCustomerCode = '0030038504';
   const otherShipToCode = '0070100010';
+  const shipToCodeWithZmgDiscount = '0071077998';
+  // const customerCodeWithZmgDiscount = '0030183551'; It is there for the future use if we need the customer code to select the correct ship to
   const otherShipToAddress = '長庚紀念醫院林口分院';
   const currency = 'TWD';
   const invalidLengthSearchKey = '1';
@@ -136,7 +138,24 @@ void main() {
   const bonusMaterialNumberTierQty = 10;
   const bonusMaterialName = '０．３ｃｃ塑膠胰島素空針３１號針頭　　';
   const bonusMaterialEnglishName = '0.3cc 31G Syr. 10Bag  8mm 100/Bx';
+  const materialWithZmgGroupDiscount1 = '21084847';
+  const materialWithZmgGroupDiscount2 = '21084848';
+  const materialWithZmgIndividualDiscount =
+      '23154900'; //This material has no available offer section I will request the BE to add the data
   const bonusMaterialNumberUnitPrice = 700;
+// We will remove all the hardcoded price in a other PR as the logic is done in another PR
+  const firstMaterialUnitPriceBeforeZmgGroupDiscount = 564.98;
+  const secondMaterialUnitPriceBeforeZmgGroupDiscount = 587.94;
+
+  const firstMaterialUnitPriceAfterZmgGroupDiscount = 533.98;
+  const secondMaterialUnitPriceAfterZmgGroupDiscount = 555.67;
+
+  const firstMaterialListPriceWithZmgGroupDiscount = 689.00;
+  const secondMaterialListPriceWithZmgGroupDiscount = 717.00;
+
+  const materialUnitPriceForZmgIndividualDiscount = 5300.00;
+  const adjustedUnitPriceAfterQtyIncreaseForZmgIndividual = 4800.00;
+  const materialListPriceWithZmgIndividualDiscount = 6500.00;
   const contactPerson = 'contact-person';
   const contactNumber = '1234567890';
 
@@ -1228,6 +1247,27 @@ void main() {
       await productRobot.filterFavoritesInProductsScreen();
       productRobot.verifyProductFilter(materialName, matched: false);
     });
+
+    testWidgets(
+        'EZRX-T1532| Verify available offers for zmg material in the material detail',
+        (tester) async {
+      await pumpAppWithHomeScreen(
+        tester,
+        shipToCode: shipToCodeWithZmgDiscount,
+      );
+
+      await commonRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openSearchProductScreen();
+      await productRobot
+          .searchWithKeyboardAction(materialWithZmgGroupDiscount1);
+      await productRobot.tapSearchMaterial(materialWithZmgGroupDiscount1);
+      final productName =
+          productDetailRobot.getMaterialDetailsMaterialDescription();
+      productDetailRobot.verifyOnOfferLabel();
+      await productDetailRobot.openAvailableOffers();
+      productDetailRobot.verifyNameProductOffer(productName);
+      productDetailRobot.verifyCodeProductOffer(materialWithZmgGroupDiscount1);
+    });
   });
 
   group('Cart -', () {
@@ -1555,6 +1595,282 @@ void main() {
           .verifyGrandTotalLabel(materialUnitPrice.priceDisplay(currency));
       await orderPriceSummaryRobot.tapCloseButton();
       orderPriceSummaryRobot.verifySheet(isVisible: false);
+    });
+
+    testWidgets('EZRX-T1575 | Verify zmg individual discount in cart page',
+        (tester) async {
+      void testCartMaterialPrice({
+        required double firstMaterialPrice,
+        required double secondMaterialPrice,
+        double firstMaterialListPrice =
+            firstMaterialListPriceWithZmgGroupDiscount,
+        double secondMaterialListPrice =
+            materialListPriceWithZmgIndividualDiscount,
+        required double firstMaterialQty,
+        required double secondMaterialQty,
+      }) {
+        cartRobot.verifyMaterialUnitPrice(
+          materialWithZmgGroupDiscount1,
+          firstMaterialPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialUnitPrice(
+          materialWithZmgIndividualDiscount,
+          secondMaterialPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyGovtMaterialListPrice(
+          materialWithZmgGroupDiscount1,
+          firstMaterialListPriceWithZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyGovtMaterialListPrice(
+          materialWithZmgIndividualDiscount,
+          secondMaterialListPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          materialWithZmgGroupDiscount1,
+          (firstMaterialPrice * firstMaterialQty).priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          materialWithZmgIndividualDiscount,
+          (secondMaterialPrice * secondMaterialQty).priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          ((firstMaterialPrice * firstMaterialQty) +
+                  (secondMaterialPrice * secondMaterialQty))
+              .priceDisplay(currency),
+        );
+      }
+
+      await pumpAppWithHomeScreen(
+        tester,
+        shipToCode: shipToCodeWithZmgDiscount,
+      );
+
+      //ADD materials with zmg discount and different group to cart
+      await browseProductFromEmptyCart();
+      await productRobot
+          .searchWithKeyboardAction(materialWithZmgGroupDiscount1);
+      await productRobot.tapSearchMaterial(materialWithZmgGroupDiscount1);
+      await productDetailRobot.tapAddToCart();
+
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapBackButton();
+      await productRobot.openSearchProductScreen();
+      await productRobot
+          .searchWithKeyboardAction(materialWithZmgIndividualDiscount);
+      await productRobot.tapSearchMaterial(materialWithZmgIndividualDiscount);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+
+      await cartRobot.verifyMaterial(materialWithZmgGroupDiscount1);
+      await cartRobot.verifyMaterial(materialWithZmgIndividualDiscount);
+      await cartRobot.changeMaterialQty(materialWithZmgIndividualDiscount, 2);
+      cartRobot.verifyMaterialQty(materialWithZmgIndividualDiscount, 2);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 1);
+      testCartMaterialPrice(
+        firstMaterialPrice: firstMaterialUnitPriceBeforeZmgGroupDiscount,
+        secondMaterialPrice: materialUnitPriceForZmgIndividualDiscount,
+        firstMaterialQty: 1,
+        secondMaterialQty: 2,
+      );
+      await cartRobot.changeMaterialQty(materialWithZmgIndividualDiscount, 3);
+      //Verify material details in cart
+      cartRobot.verifyMaterialQty(materialWithZmgIndividualDiscount, 3);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 1);
+      testCartMaterialPrice(
+        firstMaterialPrice: firstMaterialUnitPriceBeforeZmgGroupDiscount,
+        secondMaterialPrice: adjustedUnitPriceAfterQtyIncreaseForZmgIndividual,
+        firstMaterialQty: 1,
+        secondMaterialQty: 3,
+      );
+      await cartRobot.changeMaterialQty(materialWithZmgGroupDiscount1, 3);
+      await cartRobot.changeMaterialQty(materialWithZmgIndividualDiscount, 1);
+      cartRobot.verifyMaterialQty(materialWithZmgIndividualDiscount, 1);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 3);
+      testCartMaterialPrice(
+        firstMaterialPrice: firstMaterialUnitPriceBeforeZmgGroupDiscount,
+        secondMaterialPrice: materialUnitPriceForZmgIndividualDiscount,
+        firstMaterialQty: 3,
+        secondMaterialQty: 1,
+      );
+    });
+
+    testWidgets('EZRX-T1574 | Verify zmg group discount in cart page',
+        (tester) async {
+      void verifyCartDetailsWhenZmgGroupDiscountNotValidWithSecondMaterial() {
+        cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount2, 48);
+        cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 1);
+
+        cartRobot.verifyMaterialUnitPrice(
+          materialWithZmgGroupDiscount1,
+          firstMaterialUnitPriceBeforeZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialUnitPrice(
+          materialWithZmgGroupDiscount2,
+          secondMaterialUnitPriceBeforeZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyGovtMaterialListPrice(
+          materialWithZmgGroupDiscount1,
+          firstMaterialListPriceWithZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyGovtMaterialListPrice(
+          materialWithZmgGroupDiscount2,
+          secondMaterialListPriceWithZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          materialWithZmgGroupDiscount1,
+          (firstMaterialUnitPriceBeforeZmgGroupDiscount * 1)
+              .priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          materialWithZmgGroupDiscount2,
+          (secondMaterialUnitPriceBeforeZmgGroupDiscount * 48)
+              .priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          ((firstMaterialUnitPriceBeforeZmgGroupDiscount * 1) +
+                  (secondMaterialUnitPriceBeforeZmgGroupDiscount * 48))
+              .priceDisplay(currency),
+        );
+      }
+
+      void verifyCartDetailsWhenZmgGroupDiscountNotValidWithFirstMaterial() {
+        cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 48);
+        cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount2, 1);
+
+        cartRobot.verifyMaterialUnitPrice(
+          materialWithZmgGroupDiscount1,
+          firstMaterialUnitPriceBeforeZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialUnitPrice(
+          materialWithZmgGroupDiscount2,
+          secondMaterialUnitPriceBeforeZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyGovtMaterialListPrice(
+          materialWithZmgGroupDiscount1,
+          firstMaterialListPriceWithZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyGovtMaterialListPrice(
+          materialWithZmgGroupDiscount2,
+          secondMaterialListPriceWithZmgGroupDiscount.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          materialWithZmgGroupDiscount1,
+          (firstMaterialUnitPriceBeforeZmgGroupDiscount * 48)
+              .priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          materialWithZmgGroupDiscount2,
+          (secondMaterialUnitPriceBeforeZmgGroupDiscount * 1)
+              .priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          ((firstMaterialUnitPriceBeforeZmgGroupDiscount * 48) +
+                  (secondMaterialUnitPriceBeforeZmgGroupDiscount * 1))
+              .priceDisplay(currency),
+        );
+      }
+
+      await pumpAppWithHomeScreen(
+        tester,
+        shipToCode: shipToCodeWithZmgDiscount,
+      );
+
+      //ADD materials with zmg discount and same group to cart
+      await browseProductFromEmptyCart();
+      await productRobot
+          .searchWithKeyboardAction(materialWithZmgGroupDiscount1);
+      await productRobot.tapSearchMaterial(materialWithZmgGroupDiscount1);
+      await productDetailRobot.tapAddToCart();
+
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapBackButton();
+      await productRobot.openSearchProductScreen();
+      await productRobot
+          .searchWithKeyboardAction(materialWithZmgGroupDiscount2);
+      await productRobot.tapSearchMaterial(materialWithZmgGroupDiscount2);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+
+      await cartRobot.verifyMaterial(materialWithZmgGroupDiscount1);
+      await cartRobot.verifyMaterial(materialWithZmgGroupDiscount2);
+      await cartRobot.changeMaterialQty(materialWithZmgGroupDiscount2, 48);
+      verifyCartDetailsWhenZmgGroupDiscountNotValidWithSecondMaterial();
+
+      //Increase quantity of one of the material with same group to apply zmg group discount
+      await cartRobot.increaseMaterialQty(materialWithZmgGroupDiscount2);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount2, 49);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 1);
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithZmgGroupDiscount1,
+        firstMaterialUnitPriceAfterZmgGroupDiscount.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithZmgGroupDiscount2,
+        secondMaterialUnitPriceAfterZmgGroupDiscount.priceDisplay(currency),
+      );
+
+      cartRobot.verifyMaterialTotalPrice(
+        materialWithZmgGroupDiscount2,
+        (secondMaterialUnitPriceAfterZmgGroupDiscount * 49)
+            .priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialTotalPrice(
+        materialWithZmgGroupDiscount1,
+        firstMaterialUnitPriceAfterZmgGroupDiscount.priceDisplay(currency),
+      );
+
+      cartRobot.verifyCartTotalPrice(
+        (firstMaterialUnitPriceAfterZmgGroupDiscount +
+                (secondMaterialUnitPriceAfterZmgGroupDiscount * 49))
+            .priceDisplay(currency),
+      );
+
+      //Decrease quantity by 1 to reset the price to original as total quantity does not satisfy zmg discount criteria
+      await cartRobot.decreaseMaterialQty(materialWithZmgGroupDiscount2);
+      verifyCartDetailsWhenZmgGroupDiscountNotValidWithSecondMaterial();
+
+      //Increase quantity for the first material with same group to apply zmg group discount
+      await cartRobot.changeMaterialQty(materialWithZmgGroupDiscount1, 48);
+      await cartRobot.changeMaterialQty(materialWithZmgGroupDiscount2, 1);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount2, 1);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 48);
+      verifyCartDetailsWhenZmgGroupDiscountNotValidWithFirstMaterial();
+
+      //Increase quantity for the first material with same group to apply zmg group discount
+      await cartRobot.increaseMaterialQty(materialWithZmgGroupDiscount1);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount2, 1);
+      cartRobot.verifyMaterialQty(materialWithZmgGroupDiscount1, 49);
+
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithZmgGroupDiscount1,
+        firstMaterialUnitPriceAfterZmgGroupDiscount.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithZmgGroupDiscount2,
+        secondMaterialUnitPriceAfterZmgGroupDiscount.priceDisplay(currency),
+      );
+
+      cartRobot.verifyMaterialTotalPrice(
+        materialWithZmgGroupDiscount2,
+        secondMaterialUnitPriceAfterZmgGroupDiscount.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialTotalPrice(
+        materialWithZmgGroupDiscount1,
+        (firstMaterialUnitPriceAfterZmgGroupDiscount * 49)
+            .priceDisplay(currency),
+      );
+
+      cartRobot.verifyCartTotalPrice(
+        ((firstMaterialUnitPriceAfterZmgGroupDiscount * 49) +
+                secondMaterialUnitPriceAfterZmgGroupDiscount)
+            .priceDisplay(currency),
+      );
+
+      //Decrease quantity by 1 to reset the price to original as total quantity does not satisfy zmg discount criteria
+      await cartRobot.decreaseMaterialQty(materialWithZmgGroupDiscount1);
+      verifyCartDetailsWhenZmgGroupDiscountNotValidWithFirstMaterial();
     });
   });
 
