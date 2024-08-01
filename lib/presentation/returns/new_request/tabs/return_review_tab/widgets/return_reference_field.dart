@@ -22,7 +22,7 @@ class _ReturnReferenceField extends StatelessWidget {
             FilteringTextInputFormatter.deny(ZPRegexes.hyperlinkRegExp),
           ],
           isEnabled: true,
-          maxLength: 128,
+          maxLength: 35,
         );
       },
     );

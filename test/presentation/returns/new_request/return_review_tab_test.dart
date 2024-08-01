@@ -782,7 +782,7 @@ void main() {
         expect(returnReferenceField, findsOneWidget);
         await tester.enterText(returnReferenceField, 'a' * 200);
         await tester.pump();
-        expect(find.text('a' * 128), findsOneWidget);
+        expect(find.text('a' * 35), findsOneWidget);
       });
 
       testWidgets('check Return reference link', (WidgetTester tester) async {
