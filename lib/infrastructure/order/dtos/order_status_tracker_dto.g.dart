@@ -6,20 +6,20 @@ part of 'order_status_tracker_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OrderStatusTrackerDtoImpl _$$OrderStatusTrackerDtoImplFromJson(
+_$_OrderStatusTrackerDto _$$_OrderStatusTrackerDtoFromJson(
         Map<String, dynamic> json) =>
-    _$OrderStatusTrackerDtoImpl(
+    _$_OrderStatusTrackerDto(
       action: json['Actiom'] as String? ?? '',
       stepName: json['StepName'] as String? ?? '',
-      stepStage: json['StepStape'] as String,
+      stepStage: json['StepStape'] as String? ?? '',
       state: json['State'] as String? ?? '',
       status: json['Status'] as String? ?? '',
       updateTimeStamp: json['UpdateTimeStamp'] as String? ?? '',
       preformedAt: json['PreformedAt'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$OrderStatusTrackerDtoImplToJson(
-        _$OrderStatusTrackerDtoImpl instance) =>
+Map<String, dynamic> _$$_OrderStatusTrackerDtoToJson(
+        _$_OrderStatusTrackerDto instance) =>
     <String, dynamic>{
       'Actiom': instance.action,
       'StepName': instance.stepName,

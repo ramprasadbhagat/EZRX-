@@ -13,11 +13,11 @@ class OrderStatusTrackerDto with _$OrderStatusTrackerDto {
   const factory OrderStatusTrackerDto({
     @JsonKey(name: 'Actiom', defaultValue: '') required String action,
     @JsonKey(name: 'StepName', defaultValue: '') required String stepName,
-    @JsonKey(name: 'StepStape') required String stepStage,
+    @JsonKey(name: 'StepStape', defaultValue: '') required String stepStage,
     @JsonKey(name: 'State', defaultValue: '') required String state,
     @JsonKey(name: 'Status', defaultValue: '') required String status,
     @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
-        required String updateTimeStamp,
+    required String updateTimeStamp,
     @JsonKey(name: 'PreformedAt', defaultValue: '') required String preformedAt,
   }) = _OrderStatusTrackerDto;
 
