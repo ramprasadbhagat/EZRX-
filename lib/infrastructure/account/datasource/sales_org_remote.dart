@@ -31,6 +31,7 @@ class SalesOrgRemoteDataSource {
         data: jsonEncode({
           'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(
             remoteConfigService.enableMarketPlaceMarkets.contains(market),
+            remoteConfigService.enableOrderType,
           ),
           'variables': {
             'request': {

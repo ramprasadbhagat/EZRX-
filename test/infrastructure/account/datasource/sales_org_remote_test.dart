@@ -35,7 +35,7 @@ void main() {
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeEnablePromotionBlacklist = ['ID'];
-
+  const fakeEnableOrderType = true;
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   setUpAll(
@@ -45,6 +45,8 @@ void main() {
           .thenReturn(fakeEnableMarketPlaceMarkets);
       when(() => remoteConfigService.enablePromotionBlacklist)
           .thenReturn(fakeEnablePromotionBlacklist);
+      when(() => remoteConfigService.enableOrderType)
+          .thenReturn(fakeEnableOrderType);
       remoteDataSource = SalesOrgRemoteDataSource(
         httpService: service,
         salesOrgQueryMutation: SalesOrgQueryMutation(),
@@ -76,6 +78,7 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
+              fakeEnableOrderType,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -112,6 +115,7 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
+              fakeEnableOrderType,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -148,6 +152,7 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
+              fakeEnableOrderType,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -180,6 +185,7 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
+              fakeEnableOrderType,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -217,6 +223,7 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
+              fakeEnableOrderType,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -254,6 +261,7 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
+              fakeEnableOrderType,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},

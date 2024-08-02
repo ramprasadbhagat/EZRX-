@@ -6,6 +6,7 @@ class SalesOrgQueryMutation {
   // For fetching Sales Organiazation Configs by salesOrg ID
   String getSalesOrgConfigsQuery(
     bool enableMarketPlace,
+    bool enableOrderType,
   ) {
     return '''
       query salesOrgConfigs(\$request: SalesOrgConfigRequest) {
@@ -108,12 +109,14 @@ class SalesOrgQueryMutation {
     smallOrderFeeUserRoles 
     smallOrderFee 
     movThreshold
-    orderTypes {
-      categoryId
-      orderType
-      description
-      enabled
-    }
+    ${enableOrderType ? '''
+      orderTypes {
+        categoryId
+        orderType
+        description
+        enabled
+      }
+    ''' : ''}
     ${enableMarketPlace ? 'enableMarketPlace \nmpMinOrderAmount \nenableMPSmallOrderFee \nmpSmallOrderFeeUserRoles \nmpSmallOrderFee \nmpMovThreshold' : ''}
    statementOfAccountEnabled
   }
