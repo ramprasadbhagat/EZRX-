@@ -189,6 +189,7 @@ void main() {
   const bonusMaterialName = 'ALLERGYL SP 60ML FL  60ML';
 
   const oosPreOrderMaterialNumber = '21223395';
+  const oosPreOrderComboNumber = '23340069';
   final oosPreOrderMaterialStockInfo = StockInfo.empty();
 
   //K1
@@ -3369,6 +3370,40 @@ void main() {
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });
+
+    testWidgets('EZRX-T2747 | Verify OOS preorder popup when order OOS combo item',
+            (tester) async {
+          await pumpAppWithHomeScreen(
+            tester,
+            shipToCode: '0071262808',
+          );
+
+          await commonRobot.navigateToScreen(NavigationTab.products);
+          await browseProductFromEmptyCart();
+
+          await openAndVerifyComboDetail(
+            tester,
+            materialNumber: oosPreOrderComboNumber,
+          );
+
+          await comboDetailRobot
+              .verifyOnSelectOptionalComboMaterial(oosPreOrderComboNumber);
+          await comboDetailRobot.changeMaterialQuantity(
+            materialNumber: oosPreOrderComboNumber,
+            quantity: 50,
+          );
+
+          await comboDetailRobot.tapToAddToCartButton();
+          await pressCloseButtonToolbar(tester);
+          await comboDetailRobot.tapBackButton();
+
+          await homeRobot.tapMiniCartIcon();
+          await tester.pumpUntilVisible(find.byType(CartProductCombo));
+          await cartRobot.tapCheckoutButton();
+          oosPreOrderRobot.verifySheet(isVisible: true);
+          oosPreOrderRobot.verifyCancelButton();
+          oosPreOrderRobot.verifyContinueButton();
+        });
 
     group('Combo - ', () {
       testWidgets(

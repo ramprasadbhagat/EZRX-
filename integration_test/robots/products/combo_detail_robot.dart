@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -820,7 +821,26 @@ class ComboDetailRobot extends CommonRobot {
 
     expect(comboMaterial, findsOneWidget);
 
-    await tester.tap(comboMaterial);
+    // Get the bottom-left corner of the widget.
+    final bottomLeft = tester.getBottomLeft(comboMaterial);
+
+    // Calculate the position 10 pixels above the bottom-left corner.
+    // we will need to tap on this position to avoid click on the quantity input
+    final tapPosition = bottomLeft - const Offset(0, 10);
+
+    await tester.tapAt(tapPosition);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapBackButton() async {
+    await tester.tap(find.byKey(WidgetKeys.backButton));
+    await tester.pumpAndSettle();
+    final confirmBottomSheet = find.byType(ConfirmBottomSheet);
+    final confirmButton =
+    find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
+    expect(confirmBottomSheet, findsOneWidget);
+    expect(confirmButton, findsOneWidget);
+    await tester.tap(confirmButton);
     await tester.pumpAndSettle();
   }
 
