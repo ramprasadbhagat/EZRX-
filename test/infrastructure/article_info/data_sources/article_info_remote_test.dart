@@ -187,4 +187,152 @@ void main() {
       });
     });
   });
+
+  group('Article Info ID Market remote data source test', () {
+    final variables = {
+      'template': config.articleTemplate,
+      'path': config.announcementApiUrlPath,
+      'pageSize': config.pageSize,
+      'lang': fakeUser.preferredLanguage.locale.languageCode,
+      'after': '',
+    };
+    test('Get Article Info ', () async {
+      final infoRes = json.decode(
+        await rootBundle.loadString('assets/json/getArticleInfoResponse.json'),
+      );
+
+      dioAdapter.onPost(
+        '/api/announcement',
+            (server) => server.reply(
+          200,
+          infoRes,
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {
+          'Content-Type': 'application/json charset=utf-8',
+        },
+        data: jsonEncode({
+          'query': remoteDataSource.queryMutation.getArticleInfoQueryIdMarket(),
+          'variables': variables,
+        }),
+      );
+
+      final result = await remoteDataSource.getArticleInfoIdMarket(
+        announcementUrlPath: config.announcementApiUrlPath,
+        variablePath: salesOrg.articleVariablePath,
+        template1: config.idMarketArticleTemplate1,
+        template2: config.idMarketArticleTemplate2,
+        pageSize: config.pageSize,
+        after: '',
+        lang: fakeUser.preferredLanguage.locale.languageCode,
+      );
+
+      expect(
+        result,
+        AnnouncementArticleInfoDto.fromJson(infoRes['data']['search']).toDomain,
+      );
+    });
+    test('statuscode not equal to 200', () async {
+      dioAdapter.onPost(
+        '/api/announcement',
+            (server) => server.reply(
+          205,
+          {'data': []},
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        data: jsonEncode({
+          'query': remoteDataSource.queryMutation.getArticleInfoQueryIdMarket(),
+          'variables': variables,
+        }),
+      );
+
+      await remoteDataSource
+          .getArticleInfoIdMarket(
+        announcementUrlPath: config.announcementApiUrlPath,
+        variablePath: salesOrg.articleVariablePath,
+        template1: config.idMarketArticleTemplate1,
+        template2: config.idMarketArticleTemplate2,
+        pageSize: config.pageSize,
+        after: '',
+        lang: fakeUser.preferredLanguage.locale.languageCode,
+      )
+          .onError((error, _) async {
+        expect(error, isA<ServerException>());
+        return Future.value(AnnouncementArticleInfoMock());
+      });
+    });
+
+    test('response with error', () async {
+      dioAdapter.onPost(
+        '/api/announcement',
+            (server) => server.reply(
+          200,
+          {
+            'data': null,
+            'errors': [
+              {'message': 'fake-error'},
+            ],
+          },
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {
+          'Content-Type': 'application/json charset=utf-8',
+        },
+        data: jsonEncode({
+          'query': remoteDataSource.queryMutation.getArticleInfoQueryIdMarket(),
+          'variables': variables,
+        }),
+      );
+
+      await remoteDataSource
+          .getArticleInfoIdMarket(
+        announcementUrlPath: config.announcementApiUrlPath,
+        variablePath: salesOrg.articleVariablePath,
+        template1: config.idMarketArticleTemplate1,
+        template2: config.idMarketArticleTemplate2,
+        pageSize: config.pageSize,
+        after: '',
+        lang: fakeUser.preferredLanguage.locale.languageCode,
+      )
+          .onError((error, _) async {
+        expect(error, isA<ServerException>());
+        return Future.value(AnnouncementArticleInfoMock());
+      });
+    });
+    test('response with others error', () async {
+      dioAdapter.onPost(
+        '/api/announcement',
+            (other) => other.reply(
+          200,
+          {
+            'data': {'search': null},
+          },
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {
+          'Content-Type': 'application/json charset=utf-8',
+        },
+        data: jsonEncode({
+          'query': remoteDataSource.queryMutation.getArticleInfoQueryIdMarket(),
+          'variables': variables,
+        }),
+      );
+
+      await remoteDataSource
+          .getArticleInfoIdMarket(
+        announcementUrlPath: config.announcementApiUrlPath,
+        variablePath: salesOrg.articleVariablePath,
+        template1: config.idMarketArticleTemplate1,
+        template2: config.idMarketArticleTemplate2,
+        pageSize: config.pageSize,
+        after: '',
+        lang: fakeUser.preferredLanguage.locale.languageCode,
+      )
+          .onError((error, _) async {
+        expect(error, isA<OtherException>());
+        return Future.value(AnnouncementArticleInfoMock());
+      });
+    });
+  });
 }
