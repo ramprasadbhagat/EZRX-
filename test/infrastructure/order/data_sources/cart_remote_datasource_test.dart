@@ -6,12 +6,16 @@ import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -441,148 +445,537 @@ void main() async {
     },
   );
 
-//Todo will revisit and fix the testcase
-  // group(
-  //   'Cart Remote data source upsertCartListJson',
-  //   () {
-  //     late Map<String, dynamic> upsertCartListJson;
+  group(
+    'Cart Remote data source upsertCart',
+    () {
+      late Map<String, dynamic> upsertCartListJson;
 
-  //     setUpAll(() async {
-  //       upsertCartListJson = json.decode(
-  //         await rootBundle.loadString('assets/json/upsertQueryResponse.json'),
-  //       );
-  //     });
+      setUpAll(() async {
+        upsertCartListJson = json.decode(
+          await rootBundle.loadString('assets/json/upsertQueryResponse.json'),
+        );
+      });
 
-  // final fakeQueryVariables = {
-  //   'itemInput': {
-  //     'ProductID': '',
-  //     'Quantity': 1,
-  //     'ItemSource': 'EZRX',
-  //     'CustomerCode': '',
-  //     'ShipToID': '',
-  //     'SalesOrg': '',
-  //     'ParentID': '',
-  //     'Language': '',
-  //   },
-  // };
+      final fakeQueryVariables = {
+        'itemInput': {
+          'ProductID': '',
+          'Quantity': 1,
+          'ItemSource': 'EZRX',
+          'CustomerCode': '',
+          'ShipToID': '',
+          'SalesOrg': '',
+          'ParentID': '',
+          'Language': '',
+        },
+      };
 
-  // test(
-  //   'Cart Remote data source Success',
-  //   () async {
-  //     final finalData =
-  //         upsertCartListJson['data']['upsertCart']['EzRxItems'];
+      final fakeQueryBundleVariables = {
+        'Type': 'bundle',
+        'ProductID': '',
+        'Quantity': 1,
+        'ItemSource': 'EZRX',
+        'CustomerCode': '',
+        'ShipToID': '',
+        'SalesOrg': '',
+        'ParentID': '',
+        'Language': '',
+      };
 
-  //     dioAdapter.onPost(
-  //       '/api/cart',
-  //       (server) => server.reply(
-  //         200,
-  //         upsertCartListJson,
-  //         delay: const Duration(seconds: 1),
-  //       ),
-  //       headers: {'Content-Type': 'application/json; charset=utf-8'},
-  //       data: jsonEncode({
-  //         'query': remoteDataSource.cartQueryMutation.upsertCart(),
-  //         'variables': fakeQueryVariables
-  //       }),
-  //     );
+      test(
+        'Cart Remote data source Success with enable marketplace',
+        () async {
+          final finalData =
+              upsertCartListJson['data']['upsertCart']['EzRxItems'];
 
-  //     final result = await remoteDataSource.upsertCart(
-  //       requestParams: {
-  //         'ProductID': '',
-  //         'Quantity': 1,
-  //         'ItemSource': 'EZRX',
-  //         'CustomerCode': '',
-  //         'ShipToID': '',
-  //         'SalesOrg': '',
-  //         'ParentID': '',
-  //         'Language': '',
-  //       },
-  //     );
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              upsertCartListJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'variables': fakeQueryVariables,
+            }),
+          );
 
-  //     expect(
-  //       result,
-  //       List.from(makeResponseCamelCase(jsonEncode(finalData)))
-  //           .map((e) => CartProductDto.fromJson(e).toDomain)
-  //           .toList(),
-  //     );
-  //   },
-  // );
+          final result = await remoteDataSource.upsertCart(
+            market: fakeMarket,
+            requestParams: fakeQueryVariables,
+          );
 
-  // test(
-  //   'Cart Remote data source success fail status 200 and error in response',
-  //   () async {
-  //     dioAdapter.onPost(
-  //       '/api/cart',
-  //       (server) => server.reply(
-  //         200,
-  //         upsertCartListJson
-  //           ..putIfAbsent(
-  //             'errors',
-  //             () => [
-  //               {'message': 'fake-error'}
-  //             ],
-  //           ),
-  //         delay: const Duration(seconds: 1),
-  //       ),
-  //       headers: {'Content-Type': 'application/json; charset=utf-8'},
-  //       data: jsonEncode({
-  //         'query': remoteDataSource.cartQueryMutation.upsertCart(),
-  //         'variables': fakeQueryVariables
-  //       }),
-  //     );
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
+                .map((e) => CartProductDto.fromJson(e).toDomain)
+                .toList(),
+          );
+        },
+      );
 
-  //     await remoteDataSource.upsertCart(
-  //       requestParams: {
-  //         'ProductID': '',
-  //         'Quantity': 1,
-  //         'ItemSource': 'EZRX',
-  //         'CustomerCode': '',
-  //         'ShipToID': '',
-  //         'SalesOrg': '',
-  //         'ParentID': '',
-  //         'Language': '',
-  //       },
-  //     ).onError((error, _) {
-  //       expect(error, isA<ServerException>());
-  //       return Future.value(<PriceAggregate>[]);
-  //     });
-  //   },
-  // );
+      test(
+        'Cart Remote data source Success with disable marketplace',
+        () async {
+          final finalData =
+              upsertCartListJson['data']['upsertCart']['EzRxItems'];
 
-  // test(
-  //   'Cart Remote data source fail with status 204',
-  //   () async {
-  //     dioAdapter.onPost(
-  //       '/api/cart',
-  //       (server) => server.reply(
-  //         204,
-  //         upsertCartListJson,
-  //         delay: const Duration(seconds: 1),
-  //       ),
-  //       headers: {'Content-Type': 'application/json; charset=utf-8'},
-  //       data: jsonEncode({
-  //         'query': remoteDataSource.cartQueryMutation.upsertCart(),
-  //         'variables': fakeQueryVariables
-  //       }),
-  //     );
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              upsertCartListJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCart(false),
+              'variables': fakeQueryVariables,
+            }),
+          );
 
-  //     await remoteDataSource.upsertCart(
-  //       requestParams: {
-  //         'ProductID': '',
-  //         'Quantity': 1,
-  //         'ItemSource': 'EZRX',
-  //         'CustomerCode': '',
-  //         'ShipToID': '',
-  //         'SalesOrg': '',
-  //         'ParentID': '',
-  //         'Language': '',
-  //       },
-  //     ).onError((error, _) {
-  //       expect(error, isA<ServerException>());
-  //       return Future.value(<PriceAggregate>[]);
-  //     });
-  //   },
-  // );
-  //},
-  //);
+          final result = await remoteDataSource.upsertCart(
+            market: 'example disable marketplace market',
+            requestParams: fakeQueryVariables,
+          );
+
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
+                .map((e) => CartProductDto.fromJson(e).toDomain)
+                .toList(),
+          );
+        },
+      );
+
+      test(
+        'Cart Remote data source Success with bundle type',
+        () async {
+          upsertCartListJson = json.decode(
+            await rootBundle.loadString(
+                'assets/json/upsertCartItemsWithBundleOffersResponse.json',),
+          );
+
+          final finalData =
+              upsertCartListJson['data']['upsertCartItems']['EzRxItems'];
+
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              upsertCartListJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCartItems(true),
+              'variables': {
+                'itemInput': fakeQueryBundleVariables,
+              },
+            }),
+          );
+
+          final result = await remoteDataSource.upsertCart(
+            market: fakeMarket,
+            requestParams: fakeQueryBundleVariables,
+          );
+
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
+                .map((e) => CartProductDto.fromJson(e).toDomain)
+                .toList(),
+          );
+        },
+      );
+
+      test(
+        'Cart Remote data source Success with null EZRX Items',
+        () async {
+          upsertCartListJson = json.decode(
+            await rootBundle
+                .loadString('assets/json/upsertNullItemsQueryResponse.json'),
+          );
+          final finalData = [];
+
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              upsertCartListJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          final result = await remoteDataSource.upsertCart(
+            market: fakeMarket,
+            requestParams: fakeQueryVariables,
+          );
+
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
+                .map((e) => CartProductDto.fromJson(e).toDomain)
+                .toList(),
+          );
+        },
+      );
+
+      test(
+        'Cart Remote data source success fail status 200 and error in response',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              upsertCartListJson
+                ..putIfAbsent(
+                  'errors',
+                  () => [
+                    {'message': 'fake-error'},
+                  ],
+                ),
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          await remoteDataSource
+              .upsertCart(
+            market: fakeMarket,
+            requestParams: fakeQueryVariables,
+          )
+              .onError((error, _) {
+            expect(error, isA<ServerException>());
+            return Future.value(<PriceAggregate>[]);
+          });
+        },
+      );
+
+      test(
+        'Cart Remote data source fail with status 204',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              204,
+              upsertCartListJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          await remoteDataSource
+              .upsertCart(
+            market: fakeMarket,
+            requestParams: fakeQueryVariables,
+          )
+              .onError((error, _) {
+            expect(error, isA<ServerException>());
+            return Future.value(<PriceAggregate>[]);
+          });
+        },
+      );
+    },
+  );
+
+  group(
+    'Cart remote data source deleteCard',
+    () {
+      test(
+        'Cart Remote data source Success',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              {},
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.deleteCartMutation(),
+            }),
+          );
+          await expectLater(remoteDataSource.deleteCart(), completes);
+        },
+      );
+      test(
+        'Cart Remote data source failed',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              500,
+              {},
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.deleteCartMutation(),
+            }),
+          );
+          await expectLater(remoteDataSource.deleteCart(), throwsException);
+        },
+      );
+    },
+  );
+
+  group(
+    'Cart Remote data source simulateOrder',
+    () {
+      late Map<String, dynamic> simulateOrderJson;
+
+      setUpAll(() async {
+        simulateOrderJson = json.decode(
+          await rootBundle
+              .loadString('assets/json/aplSimulateOrderResponse.json'),
+        );
+      });
+
+      final fakeQueryVariables = {
+        'input': {
+          'customer': 'customerCode',
+          'materials': [
+            {'key': 'value'},
+          ],
+          'salesOrg': 'salesOrgCode',
+        },
+      };
+
+      test(
+        'Cart Remote data source Success',
+        () async {
+          final finalData = simulateOrderJson['data']['aplSimulateOrder'];
+
+          dioAdapter.onPost(
+            '/api/order',
+            (server) => server.reply(
+              200,
+              simulateOrderJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query':
+                  remoteDataSource.cartQueryMutation.aplSimulateOrderQuery(),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          final result = await remoteDataSource.aplSimulateOrder(
+            salesOrgCode: 'salesOrgCode',
+            customerCode: 'customerCode',
+            materialQuantityPairList: [
+              {'key': 'value'},
+            ],
+          );
+
+          expect(
+            result,
+            AplSimulatorOrderDto.fromJson(finalData).toDomain,
+          );
+        },
+      );
+
+      test(
+        'Cart Remote data source success fail status 200 and error in response',
+        () async {
+          dioAdapter.onPost(
+            '/api/order',
+            (server) => server.reply(
+              200,
+              simulateOrderJson
+                ..putIfAbsent(
+                  'errors',
+                  () => [
+                    {'message': 'fake-error'},
+                  ],
+                ),
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query':
+                  remoteDataSource.cartQueryMutation.aplSimulateOrderQuery(),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          await remoteDataSource.aplSimulateOrder(
+            salesOrgCode: 'salesOrgCode',
+            customerCode: 'customerCode',
+            materialQuantityPairList: [
+              {'key': 'value'},
+            ],
+          ).onError((error, _) {
+            expect(error, isA<ServerException>());
+            return Future.value(AplSimulatorOrder.empty());
+          });
+        },
+      );
+
+      test(
+        'Cart Remote data source fail with status 204',
+        () async {
+          dioAdapter.onPost(
+            '/api/order',
+            (server) => server.reply(
+              204,
+              simulateOrderJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query':
+                  remoteDataSource.cartQueryMutation.aplSimulateOrderQuery(),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          await remoteDataSource.aplSimulateOrder(
+            salesOrgCode: 'salesOrgCode',
+            customerCode: 'customerCode',
+            materialQuantityPairList: [
+              {'key': 'value'},
+            ],
+          ).onError((error, _) {
+            expect(error, isA<ServerException>());
+            return Future.value(AplSimulatorOrder.empty());
+          });
+        },
+      );
+    },
+  );
+
+  group(
+    'Cart Remote data source totalPrice',
+    () {
+      late Map<String, dynamic> totalPriceJson;
+
+      setUpAll(() async {
+        totalPriceJson = json.decode(
+          await rootBundle
+              .loadString('assets/json/aplGetTotalPriceResponse.json'),
+        );
+      });
+
+      final fakeQueryVariables = {
+        'AplGetTotalPrice': {
+          'Customer': 'customerCode',
+          'Amount': 1,
+          'MaterialNumber': ['item_1', 'item_2'],
+          'SalesOrg': 'salesOrgCode',
+        },
+      };
+
+      test(
+        'Cart Remote data source Success',
+        () async {
+          final finalData = totalPriceJson['data']['AplGetTotalPrice'];
+
+          dioAdapter.onPost(
+            '/api/price',
+            (server) => server.reply(
+              200,
+              totalPriceJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.aplGetTotalPrice(),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          final result = await remoteDataSource.aplGetTotalPrice(
+            totalPrice: 1,
+            salesOrgCode: 'salesOrgCode',
+            customerCode: 'customerCode',
+            materialNumbers: ['item_1', 'item_2'],
+          );
+
+          expect(result, AplGetTotalPriceDto.fromJson(finalData).toDomain);
+        },
+      );
+
+      test(
+        'Cart Remote data source success fail status 200 and error in response',
+        () async {
+          dioAdapter.onPost(
+            '/api/price',
+            (server) => server.reply(
+              200,
+              totalPriceJson
+                ..putIfAbsent(
+                  'errors',
+                  () => [
+                    {'message': 'fake-error'},
+                  ],
+                ),
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.aplGetTotalPrice(),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          await remoteDataSource.aplGetTotalPrice(
+            totalPrice: 1,
+            salesOrgCode: 'salesOrgCode',
+            customerCode: 'customerCode',
+            materialNumbers: ['item_1', 'item_2'],
+          ).onError((error, _) {
+            expect(error, isA<ServerException>());
+            return Future.value(AplGetTotalPrice.empty());
+          });
+        },
+      );
+
+      test(
+        'Cart Remote data source fail with status 204',
+        () async {
+          dioAdapter.onPost(
+            '/api/price',
+            (server) => server.reply(
+              204,
+              totalPriceJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.aplGetTotalPrice(),
+              'variables': fakeQueryVariables,
+            }),
+          );
+
+          await remoteDataSource.aplGetTotalPrice(
+            totalPrice: 1,
+            salesOrgCode: 'salesOrgCode',
+            customerCode: 'customerCode',
+            materialNumbers: ['item_1', 'item_2'],
+          ).onError((error, _) {
+            expect(error, isA<ServerException>());
+            return Future.value(AplGetTotalPrice.empty());
+          });
+        },
+      );
+    },
+  );
 }

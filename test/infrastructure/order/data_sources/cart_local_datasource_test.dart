@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
@@ -76,7 +77,27 @@ void main() async {
       );
 
       test(
-        'Cart local data source aplOrderSimulator',
+        'Cart local data source upsertCartReOrder',
+            () async {
+          final data = json.decode(
+            await rootBundle.loadString(
+              'assets/json/upsertCartItemsWithReorderMaterialsResponse.json',
+            ),
+          );
+          final finalData = data['data']['upsertCartItems']['EzRxItems'];
+          final result = await localDataSource.upsertCart(type: UpsertCartLocalType.upsertCartItemsReorder);
+
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
+                .map((e) => CartProductDto.fromJson(e).toDomain)
+                .toList(),
+          );
+        },
+      );
+
+      test(
+        'Cart local data source aplSimulateOrder',
         () async {
           final data = json.decode(
             await rootBundle.loadString(
@@ -84,14 +105,31 @@ void main() async {
             ),
           );
           final aplSimulatorOrder = data['data']['aplSimulateOrder'];
-          final result = AplSimulatorOrderDto.fromJson(aplSimulatorOrder).toDomain;
-          
+          final result = await localDataSource.aplSimulateOrder();
 
           expect(
             result,
             AplSimulatorOrderDto.fromJson(
               makeResponseCamelCase(jsonEncode(aplSimulatorOrder)),
             ).toDomain,
+          );
+        },
+      );
+
+      test(
+        'Cart local data source aplGetTotalPrice',
+        () async {
+          final data = json.decode(
+            await rootBundle.loadString(
+              'assets/json/aplGetTotalPriceResponse.json',
+            ),
+          );
+          final aplGetTotalPrice = data['data']['AplGetTotalPrice'];
+          final result = await localDataSource.aplGetTotalPrice();
+
+          expect(
+            result,
+            AplGetTotalPriceDto.fromJson(aplGetTotalPrice).toDomain,
           );
         },
       );
