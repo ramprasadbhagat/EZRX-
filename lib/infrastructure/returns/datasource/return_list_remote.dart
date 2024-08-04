@@ -123,15 +123,15 @@ class ReturnListRemoteDataSource {
     );
   }
 
-  Future<AttachmentFileBuffer> downloadFile({required String url}) async {
+  Future<AttachmentFileBuffer> downloadFile({
+    required String url,
+  }) async {
     return await dataSourceExceptionHandler.handle(
       () async {
-        final fileResponse = await Dio().get(
-          url,
-          options: Options(
-            responseType: ResponseType.bytes,
-            followRedirects: false,
-          ),
+        final fileResponse = await httpService.request(
+          method: 'GET',
+          url: url,
+          responseType: ResponseType.bytes,
         );
 
         return AttachmentFileBuffer(

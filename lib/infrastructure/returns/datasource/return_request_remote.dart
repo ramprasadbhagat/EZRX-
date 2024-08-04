@@ -9,10 +9,10 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_quer
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_material_list_dto.dart';
 
 class ReturnRequestRemoteDataSource {
-  HttpService httpService;
-  ReturnRequestQuery query;
-  DataSourceExceptionHandler dataSourceExceptionHandler;
-  Config config;
+  final HttpService httpService;
+  final ReturnRequestQuery query;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+  final Config config;
   final RemoteConfigService remoteConfigService;
 
   ReturnRequestRemoteDataSource({
@@ -49,7 +49,7 @@ class ReturnRequestRemoteDataSource {
         res: res,
         property: 'searchReturnMaterialsV2',
       );
-      
+
       return ReturnMaterialListDto.fromJson(
         res.data['data']['searchReturnMaterialsV2'],
       ).toDomain();
@@ -112,7 +112,7 @@ class ReturnRequestRemoteDataSource {
         res: res,
         property: 'addRequestV2',
       );
-      
+
       return res.data['data']['addRequestV2']['requestID'] is String
           ? res.data['data']['addRequestV2']['requestID']
           : '';

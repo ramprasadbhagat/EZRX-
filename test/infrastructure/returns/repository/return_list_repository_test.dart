@@ -102,7 +102,7 @@ void main() {
     inputParams = returnListRequestDto
         .toJson()
         .excludeEmptyString(returnListRequestDto.filterQuery.toJson());
-        
+
     final returnExcelRequestDto =
         ReturnExcelListRequestDto.fromDomain(returnExcelListRequest);
     returnExcelRequestParams = returnExcelRequestDto
