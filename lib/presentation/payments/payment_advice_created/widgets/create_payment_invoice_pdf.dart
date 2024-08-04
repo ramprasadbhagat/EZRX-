@@ -47,6 +47,7 @@ class CreatePaymentInvoicePdf {
           style: {
             '*': Style(
               fontSize: FontSize(10),
+              color: ZPColors.neutralsGrey1,
             ),
           },
         ),
