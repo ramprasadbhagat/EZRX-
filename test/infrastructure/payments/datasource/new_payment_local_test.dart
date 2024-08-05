@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/payments/dtos/create_virtual_account_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/principal_cutoffs_dto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 
@@ -149,6 +154,41 @@ void main() {
           );
         },
       );
+
+      test('create Virtual Account ', () async {
+        final data = json.decode(
+          await rootBundle.loadString(
+            'assets/json/createVirtualAccountResponse.json',
+          ),
+        )['data']['createVirtualAccount'];
+
+        final expectResult = CreateVirtualAccountDto.fromJson(data).toDomain();
+
+        final result = await localDataSource.createVirtualAccount();
+
+        expect(
+          result,
+          expectResult,
+        );
+      });
+
+      test('get principal cutoffs', () async {
+        final data = json.decode(
+          await rootBundle.loadString(
+            'assets/json/getPrincipalCutoffsResponse.json',
+          ),
+        )['data']['getPrincipalCutoffs'];
+
+        final expectResult = PrincipalCutoffsDto.fromJson(data).toDomain();
+
+        final result = await localDataSource.getPrincipalCutoffs();
+
+        expect(
+          result,
+          expectResult,
+        );
+      });
+
     },
   );
 }

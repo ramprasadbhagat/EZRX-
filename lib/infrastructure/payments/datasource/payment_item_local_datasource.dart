@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_detail_dto.dart';
 import 'package:flutter/services.dart';
+import 'package:collection/collection.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_item_dto.dart';
 
@@ -22,7 +23,7 @@ class PaymentItemLocalDataSource {
       ),
     );
 
-    return List.from(data['paymentItems'])
+    return List.from(data['data']['paymentItems'])
         .map((e) => PaymentItemDto.fromJson(e).toDomain())
         .toList();
   }
@@ -50,10 +51,13 @@ class PaymentItemLocalDataSource {
   ) async {
     final data = await _getPaymentSummaryDetailsJson;
 
-    final payment = data.firstWhere(
+    final payment = (data as List).firstWhereOrNull(
       (element) => element['paymentID'] == paymentId,
-      orElse: () => PaymentSummaryDetails.empty(),
     );
+
+    if (payment == null) {
+      return PaymentSummaryDetails.empty();
+    }
 
     return PaymentSummaryDetailsDto.fromJson(
       payment,

@@ -1,14 +1,4 @@
 class AllCreditsAndInvoicesQueryMutation {
-  String getAvailableStatusesQuery() {
-    return '''
-    query availableStatuses(\$request: availableStatusesRequest!) {
-      availableStatuses(request: \$request) {
-        statuses
-      }
-    }
-    ''';
-  }
-
   String getDocumentHeaderListQuery() {
     return '''
     query customerDocumentHeaderV2(\$input: customerDocumentHeaderRequest!) {

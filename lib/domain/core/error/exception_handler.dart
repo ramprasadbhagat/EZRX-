@@ -46,7 +46,7 @@ class DataSourceExceptionHandler {
     if (onCustomExceptionHandler != null) {
       onCustomExceptionHandler(res);
     }
-     if (_isServerResponseError(
+    if (_isServerResponseError(
       res: res,
       additionalCondition: additionalCondition,
     )) {

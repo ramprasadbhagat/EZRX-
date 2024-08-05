@@ -21,7 +21,6 @@ class PaymentSummaryLocalDataSource {
   }
 
   Future<List<PaymentSummaryDetails>> getTransactions() async {
-    await Future.delayed(const Duration(seconds: 2));
     final data = json.decode(
       await rootBundle.loadString('assets/json/listTransactionsResponse.json'),
     );

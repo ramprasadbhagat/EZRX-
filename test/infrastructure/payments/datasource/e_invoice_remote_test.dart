@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/e_invoice_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/e_credit_invoice_dto.dart';
@@ -14,21 +15,21 @@ import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 
-class HttpServiceMock extends Mock implements HttpService {}
+class _HttpServiceMock extends Mock implements HttpService {}
 
-class ConfigMock extends Mock implements Config {}
+class _ConfigMock extends Mock implements Config {}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late EInvoiceRemoteDataSource remoteDataSource;
   late HttpService service;
-  late ConfigMock configMock;
+  late _ConfigMock configMock;
   const fakeInvoiceNumber = 'fake-invoice-number';
   const fakeBaseUrl = 'fake-url/';
 
   setUp(() {
-    service = HttpServiceMock();
-    configMock = ConfigMock();
+    service = _HttpServiceMock();
+    configMock = _ConfigMock();
     remoteDataSource = EInvoiceRemoteDataSource(
       httpService: service,
       config: configMock,
@@ -137,6 +138,43 @@ void main() {
       expect(
         result,
         ECreditInvoiceDto.fromJson(res['data'][0]).toDomain(),
+      );
+    });
+
+    test('Should return download payment attachment empty if response empty', () async {
+      final res = json.decode(
+        await rootBundle.loadString('assets/json/emptyResponse.json'),
+      );
+
+      when(
+            () => service.request(
+          method: 'POST',
+          url: '${fakeBaseUrl}payment/listInvoice',
+          data: jsonEncode({
+            'invoice_number': fakeInvoiceNumber,
+            'sales_org': fakePHSalesOrg.getOrCrash(),
+            'sold_to': fakeCustomerCodeInfo.customerCodeSoldTo,
+            'document_type': 'ZPF2',
+          }),
+        ),
+      ).thenAnswer(
+            (_) async => Response(
+          requestOptions: RequestOptions(),
+          data: res,
+          statusCode: 200,
+        ),
+      );
+
+      final result = await remoteDataSource.getEInvoice(
+        country: fakePHSalesOrg.country,
+        invoiceNumber: fakeInvoiceNumber,
+        salesOrg: fakePHSalesOrg.getOrCrash(),
+        soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+      );
+
+      expect(
+        result,
+        DownloadPaymentAttachment.empty(),
       );
     });
   });

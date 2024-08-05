@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
@@ -11,20 +12,24 @@ import 'package:ezrxmobile/domain/payments/error/payment_exception.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/create_virtual_account_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/principal_cutoffs_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
-class PaymentInfoMock extends Mock implements PaymentInfo {}
+class _PaymentInfoMock extends Mock implements PaymentInfo {}
 
-class PaymentInvoiceInfoPdfMock extends Mock implements PaymentInvoiceInfoPdf {}
+class _PaymentInvoiceInfoPdfMock extends Mock
+    implements PaymentInvoiceInfoPdf {}
 
-class NewPaymentMethodMock extends Mock implements NewPaymentMethod {}
+class _NewPaymentMethodMock extends Mock implements NewPaymentMethod {}
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +51,12 @@ void main() async {
   const fakeSalesOrg = 'fake-salesOrg';
   const fakeShipToCode = 'fake-shipToCode';
   const fakeBaseUrl = 'fake-baseurl';
+  const fakeProvider = 'fake-provider';
+  const fakeBankId = 'fake-bank-id';
+  const fakeInvoiceId = 'fake-invoice-id';
+  const fakeBranchId = 'fake-branch-id';
+  const fakeOffset = 10;
+  const fakePageSize = 100;
 
   setUpAll(
     () {
@@ -198,7 +209,8 @@ void main() async {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value(PaymentInfoMock());
+
+          return Future.value(_PaymentInfoMock());
         });
       });
 
@@ -246,7 +258,8 @@ void main() async {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value(PaymentInfoMock());
+
+          return Future.value(_PaymentInfoMock());
         });
       });
 
@@ -294,7 +307,8 @@ void main() async {
         )
             .onError((error, _) async {
           expect(error, isA<PaymentException>());
-          return Future.value(PaymentInfoMock());
+
+          return Future.value(_PaymentInfoMock());
         });
       });
     },
@@ -355,59 +369,65 @@ void main() async {
         );
       });
 
-      test('paymentInvoicePdf should include isMarketPlace when value is true',
-          () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/paymentInvoiceInfoPdfResponse.json'),
-        );
+      test(
+        'paymentInvoicePdf should include isMarketPlace when value is true',
+        () async {
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/paymentInvoiceInfoPdfResponse.json'),
+          );
 
-        final data = jsonEncode({
-          'query': newPaymentRemoteDataSource.newPaymentQuery
-              .getPaymentInvoiceInfoPdf(),
-          'variables': {
-            'request': {
-              'accountingDocExternalReference':
-                  'fake-accountingDocExternalReference',
-              'customerCode': 'fake-customerCode',
-              'customerName': 'fake-customerName',
-              'payer': 'fake-customerCode',
-              'paymentBatchAdditionalInfo': 'fake-paymentBatchAdditionalInfo',
-              'paymentId': 'fake-paymentId',
-              'salesOrg': 'fake-salesOrg',
-              'isMarketPlace': true,
+          final data = jsonEncode(
+            {
+              'query': newPaymentRemoteDataSource.newPaymentQuery
+                  .getPaymentInvoiceInfoPdf(),
+              'variables': {
+                'request': {
+                  'accountingDocExternalReference':
+                      'fake-accountingDocExternalReference',
+                  'customerCode': 'fake-customerCode',
+                  'customerName': 'fake-customerName',
+                  'payer': 'fake-customerCode',
+                  'paymentBatchAdditionalInfo':
+                      'fake-paymentBatchAdditionalInfo',
+                  'paymentId': 'fake-paymentId',
+                  'salesOrg': 'fake-salesOrg',
+                  'isMarketPlace': true,
+                },
+              },
             },
-          },
-        });
+          );
 
-        dioAdapter.onPost(
-          '/api/ezpay',
-          (server) => server.reply(
-            200,
-            res,
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: data,
-        );
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(
+              200,
+              res,
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: data,
+          );
 
-        final result =
-            await newPaymentRemoteDataSource.getPaymentInvoiceInfoPdf(
-          accountingDocExternalReference: 'fake-accountingDocExternalReference',
-          customerCode: 'fake-customerCode',
-          customerName: 'fake-customerName',
-          paymentBatchAdditionalInfo: 'fake-paymentBatchAdditionalInfo',
-          paymentId: 'fake-paymentId',
-          salesOrg: 'fake-salesOrg',
-          zzAdviceNumber: 'fake-adviceNumber',
-          isMarketPlace: true,
-        );
+          final result =
+              await newPaymentRemoteDataSource.getPaymentInvoiceInfoPdf(
+            accountingDocExternalReference:
+                'fake-accountingDocExternalReference',
+            customerCode: 'fake-customerCode',
+            customerName: 'fake-customerName',
+            paymentBatchAdditionalInfo: 'fake-paymentBatchAdditionalInfo',
+            paymentId: 'fake-paymentId',
+            salesOrg: 'fake-salesOrg',
+            zzAdviceNumber: 'fake-adviceNumber',
+            isMarketPlace: true,
+          );
 
-        expect(
-          result,
-          PaymentInvoiceInfoPdfDto.fromJson(res['data']['paymentInvoicePdf'])
-              .toDomain(),
-        );
-      });
+          expect(
+            result,
+            PaymentInvoiceInfoPdfDto.fromJson(res['data']['paymentInvoicePdf'])
+                .toDomain(),
+          );
+        },
+      );
 
       test('paymentInvoicePdf with statuscode not equal to 200', () async {
         final data = jsonEncode({
@@ -450,7 +470,8 @@ void main() async {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value(PaymentInvoiceInfoPdfMock());
+
+          return Future.value(_PaymentInvoiceInfoPdfMock());
         });
       });
 
@@ -500,7 +521,8 @@ void main() async {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value(PaymentInvoiceInfoPdfMock());
+
+          return Future.value(_PaymentInvoiceInfoPdfMock());
         });
       });
     },
@@ -587,47 +609,50 @@ void main() async {
       });
 
       test(
-          'should contain isMarketPlace and customer code in payload when isMarketPlace is true',
-          () async {
-        final data = jsonEncode({
-          'query': newPaymentRemoteDataSource.newPaymentQuery
-              .updatePaymentGatewayQuery(),
-          'variables': {
-            'input': {
-              'paymentID': 'fake-paymentID',
-              'txnStatus': 'fake-txnStatus',
-              'transactionRef': 'fake-transactionRef',
-              'salesOrg': 'fake-salesOrg',
-              'customerCode': 'fake-customer-code',
-              'isMarketPlace': true,
+        'should contain isMarketPlace and customer code in payload when isMarketPlace is true',
+        () async {
+          final data = jsonEncode(
+            {
+              'query': newPaymentRemoteDataSource.newPaymentQuery
+                  .updatePaymentGatewayQuery(),
+              'variables': {
+                'input': {
+                  'paymentID': 'fake-paymentID',
+                  'txnStatus': 'fake-txnStatus',
+                  'transactionRef': 'fake-transactionRef',
+                  'salesOrg': 'fake-salesOrg',
+                  'customerCode': 'fake-customer-code',
+                  'isMarketPlace': true,
+                },
+              },
             },
-          },
-        });
+          );
 
-        dioAdapter.onPost(
-          '/api/ezpay',
-          (server) => server.reply(
-            200,
-            updatePaymentGatewayResponse,
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: data,
-        );
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(
+              200,
+              updatePaymentGatewayResponse,
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: data,
+          );
 
-        final result = await newPaymentRemoteDataSource.updatePaymentGateway(
-          paymentID: 'fake-paymentID',
-          txnStatus: 'fake-txnStatus',
-          transactionRef: 'fake-transactionRef',
-          salesOrg: 'fake-salesOrg',
-          customerCode: 'fake-customer-code',
-          isMarketPlace: true,
-        );
+          final result = await newPaymentRemoteDataSource.updatePaymentGateway(
+            paymentID: 'fake-paymentID',
+            txnStatus: 'fake-txnStatus',
+            transactionRef: 'fake-transactionRef',
+            salesOrg: 'fake-salesOrg',
+            customerCode: 'fake-customer-code',
+            isMarketPlace: true,
+          );
 
-        expect(
-          () => result,
-          isA<void>(),
-        );
-      });
+          expect(
+            () => result,
+            isA<void>(),
+          );
+        },
+      );
     },
   );
 
@@ -674,47 +699,49 @@ void main() async {
         );
       });
 
-      test('fetchPaymentMethod should contain isMarketPlace when value is true',
-          () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/paymentMethodsResponse.json'),
-        );
+      test(
+        'fetchPaymentMethod should contain isMarketPlace when value is true',
+        () async {
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/paymentMethodsResponse.json'),
+          );
 
-        final data = jsonEncode({
-          'query': newPaymentRemoteDataSource.newPaymentQuery
-              .fetchPaymentMethodQuery(),
-          'variables': {
-            'request': {
-              'salesOrg': 'fake-salesOrg',
-              'isMarketPlace': true,
+          final data = jsonEncode({
+            'query': newPaymentRemoteDataSource.newPaymentQuery
+                .fetchPaymentMethodQuery(),
+            'variables': {
+              'request': {
+                'salesOrg': 'fake-salesOrg',
+                'isMarketPlace': true,
+              },
             },
-          },
-        });
+          });
 
-        dioAdapter.onPost(
-          '/api/ezpay',
-          (server) => server.reply(
-            200,
-            res,
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: data,
-        );
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(
+              200,
+              res,
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: data,
+          );
 
-        final result = await newPaymentRemoteDataSource.fetchPaymentMethods(
-          salesOrg: 'fake-salesOrg',
-          isMarketPlace: true,
-        );
+          final result = await newPaymentRemoteDataSource.fetchPaymentMethods(
+            salesOrg: 'fake-salesOrg',
+            isMarketPlace: true,
+          );
 
-        expect(
-          result.length,
-          List.from(res['data']['availablePaymentMethods'])
-              .map((e) => PaymentMethodDto.fromJson(e).toDomain())
-              .toList()
-              .length,
-        );
-      });
+          expect(
+            result.length,
+            List.from(res['data']['availablePaymentMethods'])
+                .map((e) => PaymentMethodDto.fromJson(e).toDomain())
+                .toList()
+                .length,
+          );
+        },
+      );
 
       test('fetchPaymentMethod with statuscode not equal to 200', () async {
         final data = jsonEncode({
@@ -744,7 +771,8 @@ void main() async {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value([NewPaymentMethodMock()]);
+
+          return Future.value([_NewPaymentMethodMock()]);
         });
       });
 
@@ -781,9 +809,193 @@ void main() async {
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value([NewPaymentMethodMock()]);
+
+          return Future.value([_NewPaymentMethodMock()]);
         });
       });
     },
   );
+
+  test('get Outstanding Invoices', () async {
+    final res = json.decode(
+      await rootBundle.loadString('assets/json/customerOpenItemsResponse.json'),
+    );
+
+    final data = jsonEncode({
+      'query': newPaymentRemoteDataSource.newPaymentQuery
+          .getCustomerOpenItemsQuery(),
+      'variables': {
+        'request': {
+          'customerCode': fakeCustomerCode,
+          'salesOrg': fakeSalesOrg,
+          'debitCreditType': 'debit',
+          'first': fakePageSize,
+          'after': fakeOffset,
+          'orderBy': {
+            'order': 'desc',
+            'field': 'netDueDate',
+          },
+          'isMarketPlace': false,
+        },
+      },
+    });
+
+    dioAdapter.onPost(
+      '/api/ezpay',
+      (server) => server.reply(200, res),
+      data: data,
+    );
+
+    final result = await newPaymentRemoteDataSource.getOutstandingInvoices(
+      customerCode: fakeCustomerCode,
+      salesOrg: fakeSalesOrg,
+      offset: fakeOffset,
+      pageSize: fakePageSize,
+      isMarketPlace: false,
+      filterList: [{}],
+    );
+
+    final expectedResult = <CustomerOpenItem>[];
+    for (final item in res['data']['customerOpenItems']
+        ['customerOpenItemsResponse']) {
+      expectedResult.add(CustomerOpenItemDto.fromJson(item).toDomain());
+    }
+
+    expect(
+      result,
+      expectedResult,
+    );
+  });
+
+  test('get available credit notes', () async {
+    final res = json.decode(
+      await rootBundle.loadString('assets/json/customerOpenItemsResponse.json'),
+    );
+
+    final data = jsonEncode({
+      'query': newPaymentRemoteDataSource.newPaymentQuery
+          .getCustomerOpenItemsQuery(),
+      'variables': {
+        'request': {
+          'customerCode': fakeCustomerCode,
+          'salesOrg': fakeSalesOrg,
+          'debitCreditType': 'credit',
+          'first': fakePageSize,
+          'after': fakeOffset,
+          'orderBy': {
+            'order': 'desc',
+            'field': 'postingKeyName',
+          },
+          'isMarketPlace': true,
+        },
+      },
+    });
+
+    dioAdapter.onPost(
+      '/api/ezpay',
+      (server) => server.reply(200, res),
+      data: data,
+    );
+
+    final result = await newPaymentRemoteDataSource.getAvailableCreditNotes(
+      customerCode: fakeCustomerCode,
+      salesOrg: fakeSalesOrg,
+      offset: fakeOffset,
+      pageSize: fakePageSize,
+      isMarketPlace: true,
+      filterList: [{}],
+    );
+
+    final expectedResult = <CustomerOpenItem>[];
+    for (final item in res['data']['customerOpenItems']
+        ['customerOpenItemsResponse']) {
+      expectedResult.add(CustomerOpenItemDto.fromJson(item).toDomain());
+    }
+
+    expect(
+      result,
+      expectedResult,
+    );
+  });
+
+  test('create virtual account', () async {
+    final res = json.decode(
+      await rootBundle
+          .loadString('assets/json/createVirtualAccountResponse.json'),
+    );
+
+    final data = jsonEncode({
+      'query': newPaymentRemoteDataSource.newPaymentQuery
+          .createVirtualAccountQuery(),
+      'variables': {
+        'input': {
+          'customer': fakeCustomerCode,
+          'salesOrg': fakeSalesOrg,
+          'provider': fakeProvider,
+          'bankID': fakeBankId,
+          'invoices': [fakeInvoiceId],
+        },
+      },
+    });
+
+    dioAdapter.onPost(
+      '/api/ezpay',
+      (server) => server.reply(200, res),
+      data: data,
+    );
+
+    final result = await newPaymentRemoteDataSource.createVirtualAccount(
+      customerCode: fakeCustomerCode,
+      salesOrg: fakeSalesOrg,
+      invoices: [fakeInvoiceId],
+      bankID: fakeBankId,
+      provider: fakeProvider,
+    );
+
+    final expectedResult = CreateVirtualAccountDto.fromJson(
+      res['data']['createVirtualAccount'],
+    ).toDomain();
+
+    expect(
+      result,
+      expectedResult,
+    );
+  });
+
+  test('get principal cutoffs', () async {
+    final res = json.decode(
+      await rootBundle
+          .loadString('assets/json/getPrincipalCutoffsResponse.json'),
+    );
+
+    final data = jsonEncode({
+      'query': newPaymentRemoteDataSource.newPaymentQuery.getPrincipalCutOffs(),
+      'variables': {
+        'request': {
+          'branch': [fakeBranchId],
+          'configurationName': 'Payment',
+          'status': ['Active'],
+        },
+      },
+    });
+
+    dioAdapter.onPost(
+      '/api/license',
+      (server) => server.reply(200, res),
+      data: data,
+    );
+
+    final result = await newPaymentRemoteDataSource.getPrincipalCutoffs(
+      branches: [fakeBranchId],
+    );
+
+    final expectedResult = PrincipalCutoffsDto.fromJson(
+      res['data']['getPrincipalCutoffs'],
+    ).toDomain();
+
+    expect(
+      result,
+      expectedResult,
+    );
+  });
 }

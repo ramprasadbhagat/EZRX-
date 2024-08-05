@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_remote.dart';
@@ -107,6 +110,42 @@ void main() {
 
           expect(result, expectResult);
         });
+
+        test(
+          'should return OutstandingBalance.empty() when data response is empty',
+          () async {
+            final res = json.decode(
+              await rootBundle.loadString(
+                'assets/json/getOutstandingBalanceEmptyResponse.json',
+              ),
+            );
+
+            final data = jsonEncode({
+              'query': remoteDataSource.query.getOutstandingBalanceQuery(),
+              'variables': {
+                'input': {
+                  'customerCode': 'mock_customer_code',
+                  'salesOrg': 'mock_salesOrg',
+                  'isMarketPlace': true,
+                },
+              },
+            });
+
+            dioAdapter.onPost(
+              '/api/ezpay',
+              (server) => server.reply(200, res),
+              data: data,
+            );
+
+            final result = await remoteDataSource.fetchInvoiceSummary(
+              customerCode: 'mock_customer_code',
+              salesOrg: 'mock_salesOrg',
+              isMarketPlace: true,
+            );
+
+            expect(result, OutstandingBalance.empty());
+          },
+        );
       });
 
       group('Fetch credit limit -', () {
@@ -179,6 +218,76 @@ void main() {
           ).toDomain;
 
           expect(result, expectResult);
+        });
+
+        test(
+          'should return CreditLimit.empty() when data response is empty',
+          () async {
+            final res = json.decode(
+              await rootBundle
+                  .loadString('assets/json/getCreditLimitEmptyResponse.json'),
+            );
+
+            final data = jsonEncode({
+              'query': remoteDataSource.query.getCreditLimitQuery(),
+              'variables': {
+                'input': {
+                  'customerCode': 'mock_customer_code',
+                  'salesOrg': 'mock_salesOrg',
+                  'isMarketPlace': true,
+                },
+              },
+            });
+
+            dioAdapter.onPost(
+              '/api/ezpay',
+              (server) => server.reply(200, res),
+              data: data,
+            );
+
+            final result = await remoteDataSource.fetchCreditLimit(
+              customerCode: 'mock_customer_code',
+              salesOrg: 'mock_salesOrg',
+              isMarketPlace: true,
+            );
+
+            expect(result, CreditLimit.empty());
+          },
+        );
+
+        test('should return error when data response is invalid', () async {
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/getCreditLimitErrorResponse.json'),
+          );
+
+          final data = jsonEncode({
+            'query': remoteDataSource.query.getCreditLimitQuery(),
+            'variables': {
+              'input': {
+                'customerCode': 'mock_customer_code',
+                'salesOrg': 'mock_salesOrg',
+                'isMarketPlace': true,
+              },
+            },
+          });
+
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(200, res),
+            data: data,
+          );
+
+          expect(
+            () async {
+              await remoteDataSource.fetchCreditLimit(
+                customerCode: 'mock_customer_code',
+                salesOrg: 'mock_salesOrg',
+                isMarketPlace: true,
+              );
+            },
+            throwsA(isA<ServerException>()),
+          );
         });
       });
     },

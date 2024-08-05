@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_query.dart';
@@ -145,14 +144,10 @@ class PaymentItemRemoteDataSource {
     );
     final data = res.data['data']['deleteCustomerPayment'];
 
-    if (data != null) {
-      final statusMessage = data['statusMessage'];
+    if (data == null) return false;
 
-      return statusMessage ==
-          'Customer Payment Advice has been Deleted Successfully';
-    }
-
-    throw ServerException(message: data['statusMessage']);
+    return data['statusMessage'] ==
+        'Customer Payment Advice has been Deleted Successfully';
   }
 
   Future<PaymentSummaryDetails> getTransaction({

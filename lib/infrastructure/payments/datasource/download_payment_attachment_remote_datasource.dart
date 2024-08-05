@@ -143,7 +143,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}/payment/downloadSoa',
+        url: '${config.urlConstants}payment/downloadSoa',
         data: {'url': fileUrl},
         responseType: ResponseType.bytes,
       );
@@ -165,7 +165,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}/payment/downloadEcn',
+        url: '${config.urlConstants}payment/downloadEcn',
         data: {'url': fileUrl},
         responseType: ResponseType.bytes,
       );
