@@ -19,6 +19,7 @@ const _fakeUserName = 'fake-user';
 const _fakeId = 'fake-id';
 const _fakeRoleDesc = 'fake-role-desc';
 const _fakeRoleId = 'fake-role-id';
+const _fakeEmail = 'email@gmail.com';
 
 final fakeRootAdminUser = User.empty().copyWith(
   username: Username(_fakeUserName),
@@ -34,6 +35,7 @@ final fakeClientUser = User.empty().copyWith(
   preferredLanguage: Language.english(),
   username: Username(_fakeUserName),
   id: _fakeId,
+  email: EmailAddress(_fakeEmail),
   role: Role.empty().copyWith(
     description: _fakeRoleDesc,
     id: _fakeRoleId,

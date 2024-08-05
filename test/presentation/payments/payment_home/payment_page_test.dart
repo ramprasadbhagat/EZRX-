@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/claim_management/claim_management_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
@@ -77,6 +78,7 @@ void main() {
   late AvailableCreditFilterBloc availableCreditFilterBloc;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
+  late ClaimManagementBloc claimManagementBloc;
   late SoaFilterBloc soaFilterBlocMock;
   const fakeError = ApiFailure.other('fake-error');
   late List<Soa> soaList;
@@ -145,6 +147,7 @@ void main() {
     reset(autoRouterMock);
     soaBloc = ZPSoaBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
+    claimManagementBloc = ClaimManagementBlocMock();
     authBlocMock = AuthBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
@@ -193,6 +196,9 @@ void main() {
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
+    when(() => claimManagementBloc.state)
+        .thenReturn(ClaimManagementState.initial());
+
     when(() => autoRouterMock.currentPath).thenReturn(PaymentPageRoute.name);
     when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
     when(() => autoRouterMock.maybePop())
@@ -307,6 +313,9 @@ void main() {
         ),
         BlocProvider<PaymentSummaryDetailsBloc>(
           create: (context) => paymentSummaryDetailsBlocMock,
+        ),
+        BlocProvider<ClaimManagementBloc>(
+          create: (context) => claimManagementBloc,
         ),
       ],
       child: PaymentPage(isMarketPlace: isMarketPlace),
@@ -830,8 +839,15 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakePHSalesOrganisation,
           salesOrgConfigs: fakePHSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
         ),
       );
+      when(() => autoRouterMock.push(const ClaimManagementPageRoute()))
+          .thenAnswer(
+        (_) => Future.value(),
+      );
+
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(paymentHome, findsOneWidget);
@@ -841,6 +857,20 @@ void main() {
       expect(paymentSummaryMenu, findsOneWidget);
       expect(statementOfAccountsMenu, findsOneWidget);
       expect(claimsMenu, findsOneWidget);
+      await tester.tap(claimsMenu);
+      verify(
+        () => claimManagementBloc.add(
+          ClaimManagementEvent.initialized(
+            salesOrganisation: fakePHSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => autoRouterMock.push(const ClaimManagementPageRoute()),
+      ).called(1);
     });
 
     testWidgets('Check payment option in marketplace payment', (tester) async {
