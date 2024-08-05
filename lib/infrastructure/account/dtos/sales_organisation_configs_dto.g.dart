@@ -6,9 +6,9 @@ part of 'sales_organisation_configs_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
+_$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_SalesOrganisationConfigsDto(
+    _$SalesOrganisationConfigsDtoImpl(
       disableProcessingStatus: json['disableProcessingStatus'] as bool,
       currency: json['currency'] as String,
       hideCustomer: json['hideCustomer'] as bool? ?? false,
@@ -114,10 +114,15 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
                   e as Map<String, dynamic>))
               .toList() ??
           [],
+      authorizedExtSalesRep: (json['authorizedExtSalesRep'] as List<dynamic>?)
+              ?.map((e) => ExternalSalesRepresentativeInfoDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
-Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
-        _$_SalesOrganisationConfigsDto instance) =>
+Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
+        _$SalesOrganisationConfigsDtoImpl instance) =>
     <String, dynamic>{
       'disableProcessingStatus': instance.disableProcessingStatus,
       'currency': instance.currency,
@@ -196,4 +201,6 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'mpSmallOrderFee': instance.mpSmallOrderFee,
       'mpMovThreshold': instance.mpMovThreshold,
       'orderTypes': instance.orderTypes.map((e) => e.toJson()).toList(),
+      'authorizedExtSalesRep':
+          instance.authorizedExtSalesRep.map((e) => e.toJson()).toList(),
     };

@@ -12,7 +12,7 @@ part of 'sales_organisation_configs_order_type_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SalesOrganisationConfigsOrderTypeDto
     _$SalesOrganisationConfigsOrderTypeDtoFromJson(Map<String, dynamic> json) {
@@ -93,12 +93,12 @@ class _$SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SalesOrganisationConfigsOrderTypeDtoCopyWith<$Res>
+abstract class _$$SalesOrganisationConfigsOrderTypeDtoImplCopyWith<$Res>
     implements $SalesOrganisationConfigsOrderTypeDtoCopyWith<$Res> {
-  factory _$$_SalesOrganisationConfigsOrderTypeDtoCopyWith(
-          _$_SalesOrganisationConfigsOrderTypeDto value,
-          $Res Function(_$_SalesOrganisationConfigsOrderTypeDto) then) =
-      __$$_SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res>;
+  factory _$$SalesOrganisationConfigsOrderTypeDtoImplCopyWith(
+          _$SalesOrganisationConfigsOrderTypeDtoImpl value,
+          $Res Function(_$SalesOrganisationConfigsOrderTypeDtoImpl) then) =
+      __$$SalesOrganisationConfigsOrderTypeDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -109,13 +109,13 @@ abstract class _$$_SalesOrganisationConfigsOrderTypeDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res>
+class __$$SalesOrganisationConfigsOrderTypeDtoImplCopyWithImpl<$Res>
     extends _$SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res,
-        _$_SalesOrganisationConfigsOrderTypeDto>
-    implements _$$_SalesOrganisationConfigsOrderTypeDtoCopyWith<$Res> {
-  __$$_SalesOrganisationConfigsOrderTypeDtoCopyWithImpl(
-      _$_SalesOrganisationConfigsOrderTypeDto _value,
-      $Res Function(_$_SalesOrganisationConfigsOrderTypeDto) _then)
+        _$SalesOrganisationConfigsOrderTypeDtoImpl>
+    implements _$$SalesOrganisationConfigsOrderTypeDtoImplCopyWith<$Res> {
+  __$$SalesOrganisationConfigsOrderTypeDtoImplCopyWithImpl(
+      _$SalesOrganisationConfigsOrderTypeDtoImpl _value,
+      $Res Function(_$SalesOrganisationConfigsOrderTypeDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -126,7 +126,7 @@ class __$$_SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res>
     Object? description = null,
     Object? enabled = null,
   }) {
-    return _then(_$_SalesOrganisationConfigsOrderTypeDto(
+    return _then(_$SalesOrganisationConfigsOrderTypeDtoImpl(
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -149,18 +149,18 @@ class __$$_SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SalesOrganisationConfigsOrderTypeDto
+class _$SalesOrganisationConfigsOrderTypeDtoImpl
     extends _SalesOrganisationConfigsOrderTypeDto {
-  const _$_SalesOrganisationConfigsOrderTypeDto(
+  const _$SalesOrganisationConfigsOrderTypeDtoImpl(
       {@JsonKey(name: 'categoryId', defaultValue: '') required this.categoryId,
       @JsonKey(name: 'orderType', defaultValue: '') required this.orderType,
       @JsonKey(name: 'description', defaultValue: '') required this.description,
       @JsonKey(name: 'enabled', defaultValue: false) required this.enabled})
       : super._();
 
-  factory _$_SalesOrganisationConfigsOrderTypeDto.fromJson(
+  factory _$SalesOrganisationConfigsOrderTypeDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_SalesOrganisationConfigsOrderTypeDtoFromJson(json);
+      _$$SalesOrganisationConfigsOrderTypeDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'categoryId', defaultValue: '')
@@ -181,10 +181,10 @@ class _$_SalesOrganisationConfigsOrderTypeDto
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrganisationConfigsOrderTypeDto &&
+            other is _$SalesOrganisationConfigsOrderTypeDtoImpl &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
             (identical(other.orderType, orderType) ||
@@ -202,14 +202,14 @@ class _$_SalesOrganisationConfigsOrderTypeDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrganisationConfigsOrderTypeDtoCopyWith<
-          _$_SalesOrganisationConfigsOrderTypeDto>
-      get copyWith => __$$_SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<
-          _$_SalesOrganisationConfigsOrderTypeDto>(this, _$identity);
+  _$$SalesOrganisationConfigsOrderTypeDtoImplCopyWith<
+          _$SalesOrganisationConfigsOrderTypeDtoImpl>
+      get copyWith => __$$SalesOrganisationConfigsOrderTypeDtoImplCopyWithImpl<
+          _$SalesOrganisationConfigsOrderTypeDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesOrganisationConfigsOrderTypeDtoToJson(
+    return _$$SalesOrganisationConfigsOrderTypeDtoImplToJson(
       this,
     );
   }
@@ -218,19 +218,20 @@ class _$_SalesOrganisationConfigsOrderTypeDto
 abstract class _SalesOrganisationConfigsOrderTypeDto
     extends SalesOrganisationConfigsOrderTypeDto {
   const factory _SalesOrganisationConfigsOrderTypeDto(
-      {@JsonKey(name: 'categoryId', defaultValue: '')
-      required final String categoryId,
-      @JsonKey(name: 'orderType', defaultValue: '')
-      required final String orderType,
-      @JsonKey(name: 'description', defaultValue: '')
-      required final String description,
-      @JsonKey(name: 'enabled', defaultValue: false)
-      required final bool enabled}) = _$_SalesOrganisationConfigsOrderTypeDto;
+          {@JsonKey(name: 'categoryId', defaultValue: '')
+          required final String categoryId,
+          @JsonKey(name: 'orderType', defaultValue: '')
+          required final String orderType,
+          @JsonKey(name: 'description', defaultValue: '')
+          required final String description,
+          @JsonKey(name: 'enabled', defaultValue: false)
+          required final bool enabled}) =
+      _$SalesOrganisationConfigsOrderTypeDtoImpl;
   const _SalesOrganisationConfigsOrderTypeDto._() : super._();
 
   factory _SalesOrganisationConfigsOrderTypeDto.fromJson(
           Map<String, dynamic> json) =
-      _$_SalesOrganisationConfigsOrderTypeDto.fromJson;
+      _$SalesOrganisationConfigsOrderTypeDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'categoryId', defaultValue: '')
@@ -246,7 +247,7 @@ abstract class _SalesOrganisationConfigsOrderTypeDto
   bool get enabled;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrganisationConfigsOrderTypeDtoCopyWith<
-          _$_SalesOrganisationConfigsOrderTypeDto>
+  _$$SalesOrganisationConfigsOrderTypeDtoImplCopyWith<
+          _$SalesOrganisationConfigsOrderTypeDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

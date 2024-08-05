@@ -93,7 +93,9 @@ class PriceSummaryTile extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            PriceSummarySection(cartState: cartState),
+            PriceSummarySection(
+              cartState: cartState,
+            ),
             const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,

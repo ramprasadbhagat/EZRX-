@@ -383,7 +383,14 @@ class OrderEligibilityState with _$OrderEligibilityState {
   // If small order fee is enabled, will validate MOV using value from SAP instead of from SalesConfig
   bool get zpMOVEligible {
     if (cartItems.zpMaterialOnly.isEmpty) return true;
-    if (zpSmallOrderFeeEnable) return true;
+
+    if (zpSmallOrderFeeEnable) {
+      if (user.role.type.isExternalSalesRep) {
+        return _extSalesRepMOVEligible;
+      }
+
+      return true;
+    }
 
     if (atLeastOneZPItemInStockRequired) {
       return true;
@@ -474,8 +481,14 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get zpSmallOrderFeeApplied {
     if (!zpSmallOrderFeeEnable) return false;
+
     if (atLeastOneZPItemInStockRequired) return false;
+
     if (cartItems.zpMaterialOnly.isMOVExclusion) return false;
+
+    if (user.role.type.isExternalSalesRep) {
+      return false;
+    }
 
     if (cartItems.zpMaterialOnly.containCovidMaterial) return false;
 
@@ -522,4 +535,39 @@ class OrderEligibilityState with _$OrderEligibilityState {
         RoleType.clientUser().smallOrderFeeRole,
         RoleType.clientAdmin().smallOrderFeeRole,
       ].any((role) => configs.smallOrderFeeUserRoles.contains(role));
+
+  bool get _isAuthorizedExternalSalesRep =>
+      configs.authorizedExtSalesRep.any((e) => e.userId.toString() == user.id);
+
+  bool get smallOrderFeeForExtSalesRep =>
+      user.role.type.isExternalSalesRep &&
+      zpSmallOrderFeeEnable &&
+      !zpSubtotalInStockGreaterThanSAPMOV &&
+      !cartItems.zpMaterialOnly.isMOVExclusion;
+
+  bool get agreeSmallOrderFeeForExtSalesRep =>
+      smallOrderFeeForExtSalesRep && _isAuthorizedExternalSalesRep;
+
+  bool get _extSalesRepMOVEligible =>
+      cartItems.zpMaterialOnly.isMOVExclusion ||
+      _isAuthorizedExternalSalesRep ||
+      zpSubtotalInStockGreaterThanSAPMOV;
+
+  SalesRepAuthorizedDetails get getSalesRepAuthorizedDetails {
+    if (!smallOrderFeeForExtSalesRep || zpSubtotalInStockGreaterThanSAPMOV) {
+      return SalesRepAuthorizedDetails.empty();
+    }
+
+    if (cartItems.isMOVExclusion) {
+      return SalesRepAuthorizedDetails.isMOVExclusion();
+    }
+
+    return _isAuthorizedExternalSalesRep
+        ? SalesRepAuthorizedDetails.authorizedExtSalesRep(
+            user.username.getValue(),
+          )
+        : SalesRepAuthorizedDetails.empty(
+            sendPayload: user.isPPATriggerMaintained,
+          );
+  }
 }

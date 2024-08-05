@@ -67,3 +67,14 @@ final fakeSGSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   comboDealsUserRole: ComboDealUserRole(0),
   statementOfAccountEnabled: true,
 );
+
+final fakeSGSalesOrgConfigsWithSmallOrderFee = fakeSGSalesOrgConfigs.copyWith(
+  sapMinOrderAmount: 300,
+  enableSmallOrderFee: true,
+  smallOrderFeeUserRoles: ['External Sales Rep'],
+  smallOrderFee: 23,
+  mpSAPMinOrderAmount: 300,
+  enableMPSmallOrderFee: true,
+  mpSmallOrderFeeUserRoles: ['Client User'],
+  mpSmallOrderFee: 23,
+);

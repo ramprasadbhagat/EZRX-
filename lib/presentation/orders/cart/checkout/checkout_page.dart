@@ -169,7 +169,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: const EdgeInsets.all(20),
-                        child: PriceSummarySection(cartState: cartState),
+                        child: PriceSummarySection(
+                          cartState: cartState,
+                        ),
                       ),
                     ),
                     const SliverToBoxAdapter(child: SizedBox(height: 8.0)),

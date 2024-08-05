@@ -22,34 +22,35 @@ class SmallOrderFee extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final messageObject =
-        context.read<OrderEligibilityBloc>().state.smallOrderFeeAppliedMessage;
+    final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
+    final messageObject = orderEligibilityState.smallOrderFeeAppliedMessage;
 
     return Column(
       key: WidgetKeys.smallOrderFeeSection,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 8.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '${context.tr('Small order fee')}:',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-            ),
-            PriceDisplayWidget(
-              priceComponent: PriceComponent(
-                key: WidgetKeys.smallOrderFeePrice,
-                salesOrgConfig: eligibilityState.salesOrgConfigs,
-                price: value.toString(),
-                type: PriceStyle.summaryPrice,
+        if (!orderEligibilityState.smallOrderFeeForExtSalesRep)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '${context.tr('Small order fee')}:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
               ),
-            ),
-          ],
-        ),
-        if (showMessage && value > 0)
+              PriceDisplayWidget(
+                priceComponent: PriceComponent(
+                  key: WidgetKeys.smallOrderFeePrice,
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
+                  price: value.toString(),
+                  type: PriceStyle.summaryPrice,
+                ),
+              ),
+            ],
+          ),
+        if (showMessage || orderEligibilityState.smallOrderFeeForExtSalesRep)
           InfoLabel(
             textValue: context.tr(
               messageObject.message,

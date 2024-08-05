@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -246,7 +247,8 @@ void main() {
         () => orderEligibilityBlocMock.state,
       ).thenReturn(OrderEligibilityState.initial());
       when(() => autoRouterMock.current).thenReturn(checkoutPageRouteRouteData);
-      when(() => autoRouterMock.maybePop()).thenAnswer((invocation) async => true);
+      when(() => autoRouterMock.maybePop())
+          .thenAnswer((invocation) async => true);
       when(() => autoRouterMock.pushNamed(any()))
           .thenAnswer((invocation) async => null);
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
@@ -393,6 +395,7 @@ void main() {
               zpSmallOrderFee: 0,
               data: DeliveryInfoData.empty()
                   .copyWith(contactPerson: ContactPerson('fakeInput')),
+              salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
             ),
           ),
         ).called(1);
@@ -1301,16 +1304,16 @@ void main() {
 
     testWidgets(
       '=> test empty Po Reference with spaces in place Order when poNumberRequired is true',
-          (tester) async {
+      (tester) async {
         when(() => additionalDetailsBlocMock.state).thenReturn(
           AdditionalDetailsState.initial().copyWith(
-              isValidated: true,
-              deliveryInfoData: DeliveryInfoData.empty().copyWith(
-                paymentTerm: PaymentTerm(
-                  'fake_payment_term - fake_payment_term_description',
-                ),
-                poReference: PoReference('        '),
+            isValidated: true,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              paymentTerm: PaymentTerm(
+                'fake_payment_term - fake_payment_term_description',
               ),
+              poReference: PoReference('        '),
+            ),
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1348,16 +1351,16 @@ void main() {
 
     testWidgets(
       '=> test not empty Po Reference in place Order when poNumberRequired is true',
-          (tester) async {
+      (tester) async {
         when(() => additionalDetailsBlocMock.state).thenReturn(
           AdditionalDetailsState.initial().copyWith(
-              isValidated: true,
-              deliveryInfoData: DeliveryInfoData.empty().copyWith(
-                paymentTerm: PaymentTerm(
-                  'fake_payment_term - fake_payment_term_description',
-                ),
-                poReference: PoReference('sample po reference'),
+            isValidated: true,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              paymentTerm: PaymentTerm(
+                'fake_payment_term - fake_payment_term_description',
               ),
+              poReference: PoReference('sample po reference'),
+            ),
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -2712,7 +2715,7 @@ void main() {
         final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
           salesOrg: currentSalesOrgConfigVariant.salesOrg,
         );
-
+        final aplOrder = aplSimulatorOrder.copyWith(smallOrderFee: 10);
         final cartProducts = [
           mockCartItems.first.copyWith(
             salesOrgConfig: currentSalesOrgConfigVariant,
@@ -2732,7 +2735,7 @@ void main() {
             config: currentSalesOrgConfigVariant,
             salesOrganisation: currentSalesOrganisation,
             cartProducts: cartProducts,
-            aplSimulatorOrder: aplSimulatorOrder,
+            aplSimulatorOrder: aplOrder,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
@@ -2765,7 +2768,7 @@ void main() {
             StringUtils.priceComponentDisplayPrice(
               currentSalesOrgConfigVariant,
               currentSalesOrgConfigVariant.salesOrg.isID
-                  ? aplSimulatorOrder.totalPriceWithoutTax
+                  ? aplOrder.totalPriceWithoutTax
                   : currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
                       ? mockCartItems.first.finalPrice
                       : mockCartItems.first.finalPriceTotalWithTax,
@@ -2793,12 +2796,13 @@ void main() {
               ? findsOneWidget
               : findsNothing,
         );
+
         final checkoutSummarySmallOrderFeePriceFinder = find.descendant(
           of: find.byKey(WidgetKeys.smallOrderFeeSection),
           matching: find.text(
             StringUtils.priceComponentDisplayPrice(
               currentSalesOrgConfigVariant,
-              aplSimulatorOrder.smallOrderFee,
+              aplOrder.smallOrderFee,
               false,
             ),
             findRichText: true,
@@ -2826,7 +2830,7 @@ void main() {
           matching: find.text(
             StringUtils.priceComponentDisplayPrice(
               currentSalesOrgConfigVariant,
-              aplSimulatorOrder.totalDiscountValue,
+              aplOrder.totalDiscountValue,
               false,
             ),
             findRichText: true,

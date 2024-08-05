@@ -97,6 +97,10 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     enableMarketPlace
     mpMinOrderAmount
     statementOfAccountEnabled
+    authorizedExtSalesRep {
+      userId
+      userName
+      }
     }
 }
 

@@ -12,7 +12,7 @@ part of 'order_type.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderType {
@@ -78,10 +78,11 @@ class _$OrderTypeCopyWithImpl<$Res, $Val extends OrderType>
 }
 
 /// @nodoc
-abstract class _$$_OrderTypeCopyWith<$Res> implements $OrderTypeCopyWith<$Res> {
-  factory _$$_OrderTypeCopyWith(
-          _$_OrderType value, $Res Function(_$_OrderType) then) =
-      __$$_OrderTypeCopyWithImpl<$Res>;
+abstract class _$$OrderTypeImplCopyWith<$Res>
+    implements $OrderTypeCopyWith<$Res> {
+  factory _$$OrderTypeImplCopyWith(
+          _$OrderTypeImpl value, $Res Function(_$OrderTypeImpl) then) =
+      __$$OrderTypeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,11 +93,11 @@ abstract class _$$_OrderTypeCopyWith<$Res> implements $OrderTypeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OrderTypeCopyWithImpl<$Res>
-    extends _$OrderTypeCopyWithImpl<$Res, _$_OrderType>
-    implements _$$_OrderTypeCopyWith<$Res> {
-  __$$_OrderTypeCopyWithImpl(
-      _$_OrderType _value, $Res Function(_$_OrderType) _then)
+class __$$OrderTypeImplCopyWithImpl<$Res>
+    extends _$OrderTypeCopyWithImpl<$Res, _$OrderTypeImpl>
+    implements _$$OrderTypeImplCopyWith<$Res> {
+  __$$OrderTypeImplCopyWithImpl(
+      _$OrderTypeImpl _value, $Res Function(_$OrderTypeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +108,7 @@ class __$$_OrderTypeCopyWithImpl<$Res>
     Object? description = null,
     Object? enabled = null,
   }) {
-    return _then(_$_OrderType(
+    return _then(_$OrderTypeImpl(
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -130,8 +131,8 @@ class __$$_OrderTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderType extends _OrderType {
-  const _$_OrderType(
+class _$OrderTypeImpl extends _OrderType {
+  const _$OrderTypeImpl(
       {required this.categoryId,
       required this.orderType,
       required this.description,
@@ -153,10 +154,10 @@ class _$_OrderType extends _OrderType {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderType &&
+            other is _$OrderTypeImpl &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
             (identical(other.orderType, orderType) ||
@@ -173,8 +174,8 @@ class _$_OrderType extends _OrderType {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderTypeCopyWith<_$_OrderType> get copyWith =>
-      __$$_OrderTypeCopyWithImpl<_$_OrderType>(this, _$identity);
+  _$$OrderTypeImplCopyWith<_$OrderTypeImpl> get copyWith =>
+      __$$OrderTypeImplCopyWithImpl<_$OrderTypeImpl>(this, _$identity);
 }
 
 abstract class _OrderType extends OrderType {
@@ -182,7 +183,7 @@ abstract class _OrderType extends OrderType {
       {required final String categoryId,
       required final DocumentType orderType,
       required final StringValue description,
-      required final bool enabled}) = _$_OrderType;
+      required final bool enabled}) = _$OrderTypeImpl;
   const _OrderType._() : super._();
 
   @override
@@ -195,6 +196,6 @@ abstract class _OrderType extends OrderType {
   bool get enabled;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderTypeCopyWith<_$_OrderType> get copyWith =>
+  _$$OrderTypeImplCopyWith<_$OrderTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

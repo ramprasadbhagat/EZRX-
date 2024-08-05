@@ -94,7 +94,8 @@
             "automatedPersonalisation": true,
             "directMarketing": true
          },
-         "acceptMPTC": 0
+         "acceptMPTC": 0,
+         "isPPATriggerMaintained": false
       }
    }
 }

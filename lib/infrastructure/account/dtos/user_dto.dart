@@ -92,6 +92,8 @@ class UserDto with _$UserDto {
     required bool isFirstLogin,
     @JsonKey(name: 'isResetUserPassword', defaultValue: false)
     required bool isResetUserPassword,
+    @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+    required bool isPPATriggerMaintained,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -129,6 +131,7 @@ class UserDto with _$UserDto {
       acceptMPTC: user.acceptMPTC.getOrDefaultValue(''),
       isFirstLogin: user.isFirstLogin,
       isResetUserPassword: user.isResetUserPassword,
+      isPPATriggerMaintained: user.isPPATriggerMaintained,
     );
   }
   static const emptyUserDto = UserDto(
@@ -158,6 +161,7 @@ class UserDto with _$UserDto {
     acceptMPTC: '',
     isFirstLogin: false,
     isResetUserPassword: false,
+    isPPATriggerMaintained: false,
   );
 
   User toDomain() {
@@ -201,6 +205,7 @@ class UserDto with _$UserDto {
       acceptMPTC: MarketPlaceTnCAcceptance(acceptMPTC),
       isFirstLogin: isFirstLogin,
       isResetUserPassword: isResetUserPassword,
+      isPPATriggerMaintained: isPPATriggerMaintained,
     );
   }
 

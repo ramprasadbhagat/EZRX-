@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -321,6 +322,7 @@ void main() {
       aplSmallOrderFee: 12500.0,
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
     );
     expect(
       result,
@@ -416,6 +418,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -476,6 +479,7 @@ void main() {
       aplSmallOrderFee: 12500.0,
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
     );
     expect(
       result,
@@ -506,6 +510,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -547,6 +552,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -586,6 +592,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -630,6 +637,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -688,6 +696,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -750,6 +759,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -808,6 +818,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -885,6 +896,7 @@ void main() {
           aplSmallOrderFee: 12500.0,
           mpSmallOrderFee: 0,
           zpSmallOrderFee: 0,
+          salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
         );
         expect(
           result,
@@ -928,6 +940,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -1048,6 +1061,7 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -1104,6 +1118,7 @@ void main() {
           aplSmallOrderFee: 12500.0,
           mpSmallOrderFee: 0,
           zpSmallOrderFee: 0,
+          salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
         );
 
         expect(result, Right(submitOrderResponseMock));
@@ -1202,6 +1217,7 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -1281,6 +1297,7 @@ void main() {
         aplSmallOrderFee: 12500.0,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
       expect(
         result,
@@ -1335,6 +1352,7 @@ void main() {
       aplSmallOrderFee: 12500.0,
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
     );
 
     expect(result, Right(submitOrderResponseMock));
@@ -1382,6 +1400,7 @@ void main() {
       aplSmallOrderFee: 12500.0,
       mpSmallOrderFee: 200,
       zpSmallOrderFee: 100,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
     );
 
     expect(result, Right(submitOrderResponseMock));
@@ -1434,6 +1453,7 @@ void main() {
       aplSmallOrderFee: 12500.0,
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
     );
 
     expect(result, Right(submitOrderResponseMock));

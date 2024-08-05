@@ -12,7 +12,7 @@ part of 'sales_organisation_configs.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesOrganisationConfigs {
@@ -95,6 +95,8 @@ mixin _$SalesOrganisationConfigs {
   double get mpSmallOrderFee => throw _privateConstructorUsedError;
   double get mpSAPMinOrderAmount => throw _privateConstructorUsedError;
   List<OrderType> get orderTypes => throw _privateConstructorUsedError;
+  List<ExternalSalesRepresentativeInfo> get authorizedExtSalesRep =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -182,7 +184,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       List<String> mpSmallOrderFeeUserRoles,
       double mpSmallOrderFee,
       double mpSAPMinOrderAmount,
-      List<OrderType> orderTypes});
+      List<OrderType> orderTypes,
+      List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep});
 }
 
 /// @nodoc
@@ -274,6 +277,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? mpSmallOrderFee = null,
     Object? mpSAPMinOrderAmount = null,
     Object? orderTypes = null,
+    Object? authorizedExtSalesRep = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -576,17 +580,21 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.orderTypes
           : orderTypes // ignore: cast_nullable_to_non_nullable
               as List<OrderType>,
+      authorizedExtSalesRep: null == authorizedExtSalesRep
+          ? _value.authorizedExtSalesRep
+          : authorizedExtSalesRep // ignore: cast_nullable_to_non_nullable
+              as List<ExternalSalesRepresentativeInfo>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
+abstract class _$$SalesOrganisationConfigsImplCopyWith<$Res>
     implements $SalesOrganisationConfigsCopyWith<$Res> {
-  factory _$$_SalesOrganisationConfigsCopyWith(
-          _$_SalesOrganisationConfigs value,
-          $Res Function(_$_SalesOrganisationConfigs) then) =
-      __$$_SalesOrganisationConfigsCopyWithImpl<$Res>;
+  factory _$$SalesOrganisationConfigsImplCopyWith(
+          _$SalesOrganisationConfigsImpl value,
+          $Res Function(_$SalesOrganisationConfigsImpl) then) =
+      __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -664,16 +672,18 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       List<String> mpSmallOrderFeeUserRoles,
       double mpSmallOrderFee,
       double mpSAPMinOrderAmount,
-      List<OrderType> orderTypes});
+      List<OrderType> orderTypes,
+      List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep});
 }
 
 /// @nodoc
-class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
+class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
     extends _$SalesOrganisationConfigsCopyWithImpl<$Res,
-        _$_SalesOrganisationConfigs>
-    implements _$$_SalesOrganisationConfigsCopyWith<$Res> {
-  __$$_SalesOrganisationConfigsCopyWithImpl(_$_SalesOrganisationConfigs _value,
-      $Res Function(_$_SalesOrganisationConfigs) _then)
+        _$SalesOrganisationConfigsImpl>
+    implements _$$SalesOrganisationConfigsImplCopyWith<$Res> {
+  __$$SalesOrganisationConfigsImplCopyWithImpl(
+      _$SalesOrganisationConfigsImpl _value,
+      $Res Function(_$SalesOrganisationConfigsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -754,8 +764,9 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? mpSmallOrderFee = null,
     Object? mpSAPMinOrderAmount = null,
     Object? orderTypes = null,
+    Object? authorizedExtSalesRep = null,
   }) {
-    return _then(_$_SalesOrganisationConfigs(
+    return _then(_$SalesOrganisationConfigsImpl(
       enableIRN: null == enableIRN
           ? _value.enableIRN
           : enableIRN // ignore: cast_nullable_to_non_nullable
@@ -1056,14 +1067,18 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value._orderTypes
           : orderTypes // ignore: cast_nullable_to_non_nullable
               as List<OrderType>,
+      authorizedExtSalesRep: null == authorizedExtSalesRep
+          ? _value._authorizedExtSalesRep
+          : authorizedExtSalesRep // ignore: cast_nullable_to_non_nullable
+              as List<ExternalSalesRepresentativeInfo>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
-  const _$_SalesOrganisationConfigs(
+class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
+  const _$SalesOrganisationConfigsImpl(
       {required this.enableIRN,
       required this.enableDefaultMD,
       required this.disableProcessingStatus,
@@ -1138,11 +1153,14 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required final List<String> mpSmallOrderFeeUserRoles,
       required this.mpSmallOrderFee,
       required this.mpSAPMinOrderAmount,
-      required final List<OrderType> orderTypes})
+      required final List<OrderType> orderTypes,
+      required final List<ExternalSalesRepresentativeInfo>
+          authorizedExtSalesRep})
       : _principalList = principalList,
         _smallOrderFeeUserRoles = smallOrderFeeUserRoles,
         _mpSmallOrderFeeUserRoles = mpSmallOrderFeeUserRoles,
         _orderTypes = orderTypes,
+        _authorizedExtSalesRep = authorizedExtSalesRep,
         super._();
 
   @override
@@ -1321,16 +1339,25 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
     return EqualUnmodifiableListView(_orderTypes);
   }
 
+  final List<ExternalSalesRepresentativeInfo> _authorizedExtSalesRep;
   @override
-  String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount, orderTypes: $orderTypes)';
+  List<ExternalSalesRepresentativeInfo> get authorizedExtSalesRep {
+    if (_authorizedExtSalesRep is EqualUnmodifiableListView)
+      return _authorizedExtSalesRep;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_authorizedExtSalesRep);
   }
 
   @override
-  bool operator ==(dynamic other) {
+  String toString() {
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep)';
+  }
+
+  @override
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrganisationConfigs &&
+            other is _$SalesOrganisationConfigsImpl &&
             (identical(other.enableIRN, enableIRN) ||
                 other.enableIRN == enableIRN) &&
             (identical(other.enableDefaultMD, enableDefaultMD) ||
@@ -1433,7 +1460,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             const DeepCollectionEquality().equals(other._mpSmallOrderFeeUserRoles, _mpSmallOrderFeeUserRoles) &&
             (identical(other.mpSmallOrderFee, mpSmallOrderFee) || other.mpSmallOrderFee == mpSmallOrderFee) &&
             (identical(other.mpSAPMinOrderAmount, mpSAPMinOrderAmount) || other.mpSAPMinOrderAmount == mpSAPMinOrderAmount) &&
-            const DeepCollectionEquality().equals(other._orderTypes, _orderTypes));
+            const DeepCollectionEquality().equals(other._orderTypes, _orderTypes) &&
+            const DeepCollectionEquality().equals(other._authorizedExtSalesRep, _authorizedExtSalesRep));
   }
 
   @override
@@ -1513,15 +1541,16 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         const DeepCollectionEquality().hash(_mpSmallOrderFeeUserRoles),
         mpSmallOrderFee,
         mpSAPMinOrderAmount,
-        const DeepCollectionEquality().hash(_orderTypes)
+        const DeepCollectionEquality().hash(_orderTypes),
+        const DeepCollectionEquality().hash(_authorizedExtSalesRep)
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
-      get copyWith => __$$_SalesOrganisationConfigsCopyWithImpl<
-          _$_SalesOrganisationConfigs>(this, _$identity);
+  _$$SalesOrganisationConfigsImplCopyWith<_$SalesOrganisationConfigsImpl>
+      get copyWith => __$$SalesOrganisationConfigsImplCopyWithImpl<
+          _$SalesOrganisationConfigsImpl>(this, _$identity);
 }
 
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
@@ -1600,7 +1629,9 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final List<String> mpSmallOrderFeeUserRoles,
       required final double mpSmallOrderFee,
       required final double mpSAPMinOrderAmount,
-      required final List<OrderType> orderTypes}) = _$_SalesOrganisationConfigs;
+      required final List<OrderType> orderTypes,
+      required final List<ExternalSalesRepresentativeInfo>
+          authorizedExtSalesRep}) = _$SalesOrganisationConfigsImpl;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -1754,7 +1785,9 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   List<OrderType> get orderTypes;
   @override
+  List<ExternalSalesRepresentativeInfo> get authorizedExtSalesRep;
+  @override
   @JsonKey(ignore: true)
-  _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
+  _$$SalesOrganisationConfigsImplCopyWith<_$SalesOrganisationConfigsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

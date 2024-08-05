@@ -40,6 +40,7 @@ mixin _$User {
   MarketPlaceTnCAcceptance get acceptMPTC => throw _privateConstructorUsedError;
   bool get isFirstLogin => throw _privateConstructorUsedError;
   bool get isResetUserPassword => throw _privateConstructorUsedError;
+  bool get isPPATriggerMaintained => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -73,7 +74,8 @@ abstract class $UserCopyWith<$Res> {
       PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC,
       bool isFirstLogin,
-      bool isResetUserPassword});
+      bool isResetUserPassword,
+      bool isPPATriggerMaintained});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
@@ -117,6 +119,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
+    Object? isPPATriggerMaintained = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -211,6 +214,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPPATriggerMaintained: null == isPPATriggerMaintained
+          ? _value.isPPATriggerMaintained
+          : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -277,7 +284,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC,
       bool isFirstLogin,
-      bool isResetUserPassword});
+      bool isResetUserPassword,
+      bool isPPATriggerMaintained});
 
   @override
   $FullNameCopyWith<$Res> get fullName;
@@ -322,6 +330,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
+    Object? isPPATriggerMaintained = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -416,6 +425,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPPATriggerMaintained: null == isPPATriggerMaintained
+          ? _value.isPPATriggerMaintained
+          : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -446,7 +459,8 @@ class _$UserImpl extends _User {
       required this.mobileNumber,
       required this.acceptMPTC,
       required this.isFirstLogin,
-      required this.isResetUserPassword})
+      required this.isResetUserPassword,
+      required this.isPPATriggerMaintained})
       : _userSalesOrganisations = userSalesOrganisations,
         _salesOrganisations = salesOrganisations,
         _supportedLanguages = supportedLanguages,
@@ -519,10 +533,12 @@ class _$UserImpl extends _User {
   final bool isFirstLogin;
   @override
   final bool isResetUserPassword;
+  @override
+  final bool isPPATriggerMaintained;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained)';
   }
 
   @override
@@ -572,7 +588,9 @@ class _$UserImpl extends _User {
             (identical(other.isFirstLogin, isFirstLogin) ||
                 other.isFirstLogin == isFirstLogin) &&
             (identical(other.isResetUserPassword, isResetUserPassword) ||
-                other.isResetUserPassword == isResetUserPassword));
+                other.isResetUserPassword == isResetUserPassword) &&
+            (identical(other.isPPATriggerMaintained, isPPATriggerMaintained) ||
+                other.isPPATriggerMaintained == isPPATriggerMaintained));
   }
 
   @override
@@ -600,7 +618,8 @@ class _$UserImpl extends _User {
         mobileNumber,
         acceptMPTC,
         isFirstLogin,
-        isResetUserPassword
+        isResetUserPassword,
+        isPPATriggerMaintained
       ]);
 
   @JsonKey(ignore: true)
@@ -634,7 +653,8 @@ abstract class _User extends User {
       required final PhoneNumber mobileNumber,
       required final MarketPlaceTnCAcceptance acceptMPTC,
       required final bool isFirstLogin,
-      required final bool isResetUserPassword}) = _$UserImpl;
+      required final bool isResetUserPassword,
+      required final bool isPPATriggerMaintained}) = _$UserImpl;
   const _User._() : super._();
 
   @override
@@ -683,6 +703,8 @@ abstract class _User extends User {
   bool get isFirstLogin;
   @override
   bool get isResetUserPassword;
+  @override
+  bool get isPPATriggerMaintained;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

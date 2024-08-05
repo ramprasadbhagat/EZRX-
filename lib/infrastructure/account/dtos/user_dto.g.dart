@@ -62,6 +62,7 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
               as String,
       isFirstLogin: json['isFirstLogin'] as bool? ?? false,
       isResetUserPassword: json['isResetUserPassword'] as bool? ?? false,
+      isPPATriggerMaintained: json['isPPATriggerMaintained'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
@@ -96,4 +97,5 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
       'acceptMPTC': instance.acceptMPTC,
       'isFirstLogin': instance.isFirstLogin,
       'isResetUserPassword': instance.isResetUserPassword,
+      'isPPATriggerMaintained': instance.isPPATriggerMaintained,
     };

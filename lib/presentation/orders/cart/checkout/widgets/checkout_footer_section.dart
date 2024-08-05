@@ -72,6 +72,8 @@ class _CheckoutFooterSection extends StatelessWidget {
                               .read<AdditionalDetailsBloc>()
                               .state
                               .deliveryInfoData,
+                          salesRepAuthorizedDetails: orderEligibilityState
+                              .getSalesRepAuthorizedDetails,
                         ),
                       );
                 } else {

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
@@ -33,6 +34,7 @@ class SubmitOrder with _$SubmitOrder {
     required String purchaseOrderType,
     required String orderReason,
     required SmallOrderFeeDetail smallOrderFeeDetail,
+    required SalesRepAuthorizedDetails salesRepAuthorizedDetails,
   }) = _SubmitOrderCustomer;
 
   factory SubmitOrder.empty() => SubmitOrder(
@@ -58,6 +60,7 @@ class SubmitOrder with _$SubmitOrder {
         purchaseOrderType: '',
         orderReason: '',
         smallOrderFeeDetail: SmallOrderFeeDetail.empty(),
+        salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
       );
 }
 

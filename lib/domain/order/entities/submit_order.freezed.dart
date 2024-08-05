@@ -39,6 +39,8 @@ mixin _$SubmitOrder {
   String get orderReason => throw _privateConstructorUsedError;
   SmallOrderFeeDetail get smallOrderFeeDetail =>
       throw _privateConstructorUsedError;
+  SalesRepAuthorizedDetails get salesRepAuthorizedDetails =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitOrderCopyWith<SubmitOrder> get copyWith =>
@@ -73,10 +75,12 @@ abstract class $SubmitOrderCopyWith<$Res> {
       String paymentMethod,
       String purchaseOrderType,
       String orderReason,
-      SmallOrderFeeDetail smallOrderFeeDetail});
+      SmallOrderFeeDetail smallOrderFeeDetail,
+      SalesRepAuthorizedDetails salesRepAuthorizedDetails});
 
   $SubmitOrderCustomerCopyWith<$Res> get customer;
   $SmallOrderFeeDetailCopyWith<$Res> get smallOrderFeeDetail;
+  $SalesRepAuthorizedDetailsCopyWith<$Res> get salesRepAuthorizedDetails;
 }
 
 /// @nodoc
@@ -114,6 +118,7 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     Object? purchaseOrderType = null,
     Object? orderReason = null,
     Object? smallOrderFeeDetail = null,
+    Object? salesRepAuthorizedDetails = null,
   }) {
     return _then(_value.copyWith(
       userName: null == userName
@@ -204,6 +209,10 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.smallOrderFeeDetail
           : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
               as SmallOrderFeeDetail,
+      salesRepAuthorizedDetails: null == salesRepAuthorizedDetails
+          ? _value.salesRepAuthorizedDetails
+          : salesRepAuthorizedDetails // ignore: cast_nullable_to_non_nullable
+              as SalesRepAuthorizedDetails,
     ) as $Val);
   }
 
@@ -221,6 +230,15 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     return $SmallOrderFeeDetailCopyWith<$Res>(_value.smallOrderFeeDetail,
         (value) {
       return _then(_value.copyWith(smallOrderFeeDetail: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesRepAuthorizedDetailsCopyWith<$Res> get salesRepAuthorizedDetails {
+    return $SalesRepAuthorizedDetailsCopyWith<$Res>(
+        _value.salesRepAuthorizedDetails, (value) {
+      return _then(_value.copyWith(salesRepAuthorizedDetails: value) as $Val);
     });
   }
 }
@@ -255,12 +273,15 @@ abstract class _$$SubmitOrderCustomerImplCopyWith<$Res>
       String paymentMethod,
       String purchaseOrderType,
       String orderReason,
-      SmallOrderFeeDetail smallOrderFeeDetail});
+      SmallOrderFeeDetail smallOrderFeeDetail,
+      SalesRepAuthorizedDetails salesRepAuthorizedDetails});
 
   @override
   $SubmitOrderCustomerCopyWith<$Res> get customer;
   @override
   $SmallOrderFeeDetailCopyWith<$Res> get smallOrderFeeDetail;
+  @override
+  $SalesRepAuthorizedDetailsCopyWith<$Res> get salesRepAuthorizedDetails;
 }
 
 /// @nodoc
@@ -296,6 +317,7 @@ class __$$SubmitOrderCustomerImplCopyWithImpl<$Res>
     Object? purchaseOrderType = null,
     Object? orderReason = null,
     Object? smallOrderFeeDetail = null,
+    Object? salesRepAuthorizedDetails = null,
   }) {
     return _then(_$SubmitOrderCustomerImpl(
       userName: null == userName
@@ -386,6 +408,10 @@ class __$$SubmitOrderCustomerImplCopyWithImpl<$Res>
           ? _value.smallOrderFeeDetail
           : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
               as SmallOrderFeeDetail,
+      salesRepAuthorizedDetails: null == salesRepAuthorizedDetails
+          ? _value.salesRepAuthorizedDetails
+          : salesRepAuthorizedDetails // ignore: cast_nullable_to_non_nullable
+              as SalesRepAuthorizedDetails,
     ));
   }
 }
@@ -415,7 +441,8 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
       required this.paymentMethod,
       required this.purchaseOrderType,
       required this.orderReason,
-      required this.smallOrderFeeDetail})
+      required this.smallOrderFeeDetail,
+      required this.salesRepAuthorizedDetails})
       : _products = products,
         _poDocuments = poDocuments,
         super._();
@@ -476,10 +503,12 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
   final String orderReason;
   @override
   final SmallOrderFeeDetail smallOrderFeeDetail;
+  @override
+  final SalesRepAuthorizedDetails salesRepAuthorizedDetails;
 
   @override
   String toString() {
-    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, orderType: $orderType, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, orderReason: $orderReason, smallOrderFeeDetail: $smallOrderFeeDetail)';
+    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, orderType: $orderType, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, orderReason: $orderReason, smallOrderFeeDetail: $smallOrderFeeDetail, salesRepAuthorizedDetails: $salesRepAuthorizedDetails)';
   }
 
   @override
@@ -528,7 +557,10 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
             (identical(other.orderReason, orderReason) ||
                 other.orderReason == orderReason) &&
             (identical(other.smallOrderFeeDetail, smallOrderFeeDetail) ||
-                other.smallOrderFeeDetail == smallOrderFeeDetail));
+                other.smallOrderFeeDetail == smallOrderFeeDetail) &&
+            (identical(other.salesRepAuthorizedDetails,
+                    salesRepAuthorizedDetails) ||
+                other.salesRepAuthorizedDetails == salesRepAuthorizedDetails));
   }
 
   @override
@@ -555,7 +587,8 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
         paymentMethod,
         purchaseOrderType,
         orderReason,
-        smallOrderFeeDetail
+        smallOrderFeeDetail,
+        salesRepAuthorizedDetails
       ]);
 
   @JsonKey(ignore: true)
@@ -589,7 +622,8 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
           required final String paymentMethod,
           required final String purchaseOrderType,
           required final String orderReason,
-          required final SmallOrderFeeDetail smallOrderFeeDetail}) =
+          required final SmallOrderFeeDetail smallOrderFeeDetail,
+          required final SalesRepAuthorizedDetails salesRepAuthorizedDetails}) =
       _$SubmitOrderCustomerImpl;
   const _SubmitOrderCustomer._() : super._();
 
@@ -637,6 +671,8 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   String get orderReason;
   @override
   SmallOrderFeeDetail get smallOrderFeeDetail;
+  @override
+  SalesRepAuthorizedDetails get salesRepAuthorizedDetails;
   @override
   @JsonKey(ignore: true)
   _$$SubmitOrderCustomerImplCopyWith<_$SubmitOrderCustomerImpl> get copyWith =>

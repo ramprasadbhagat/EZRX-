@@ -90,7 +90,7 @@ void main() {
   });
 
   RouteData fakeRouteData(String name) => RouteData(
-    stackKey: const Key(''),
+        stackKey: const Key(''),
         type: const RouteType.adaptive(),
         route: RouteMatch(
           segments: const [],

@@ -118,7 +118,11 @@ class SalesOrgQueryMutation {
       }
     ''' : ''}
     ${enableMarketPlace ? 'enableMarketPlace \nmpMinOrderAmount \nenableMPSmallOrderFee \nmpSmallOrderFeeUserRoles \nmpSmallOrderFee \nmpMovThreshold' : ''}
-   statementOfAccountEnabled
+    statementOfAccountEnabled
+    authorizedExtSalesRep {
+      userId
+      userName
+    }
   }
 }
 

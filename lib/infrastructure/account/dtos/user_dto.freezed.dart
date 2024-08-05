@@ -89,6 +89,8 @@ mixin _$UserDto {
   bool get isFirstLogin => throw _privateConstructorUsedError;
   @JsonKey(name: 'isResetUserPassword', defaultValue: false)
   bool get isResetUserPassword => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+  bool get isPPATriggerMaintained => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -155,7 +157,9 @@ abstract class $UserDtoCopyWith<$Res> {
       String acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
-      bool isResetUserPassword});
+      bool isResetUserPassword,
+      @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+      bool isPPATriggerMaintained});
 
   $RoleDtoCopyWith<$Res> get role;
   $AccessRightDtoCopyWith<$Res> get accessRight;
@@ -202,6 +206,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
+    Object? isPPATriggerMaintained = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -316,6 +321,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPPATriggerMaintained: null == isPPATriggerMaintained
+          ? _value.isPPATriggerMaintained
+          : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -398,7 +407,9 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       String acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
-      bool isResetUserPassword});
+      bool isResetUserPassword,
+      @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+      bool isPPATriggerMaintained});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -445,6 +456,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
+    Object? isPPATriggerMaintained = null,
   }) {
     return _then(_$UserDtoImpl(
       id: null == id
@@ -559,6 +571,10 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPPATriggerMaintained: null == isPPATriggerMaintained
+          ? _value.isPPATriggerMaintained
+          : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -628,7 +644,9 @@ class _$UserDtoImpl extends _UserDto {
       @JsonKey(name: 'isFirstLogin', defaultValue: false)
       required this.isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
-      required this.isResetUserPassword})
+      required this.isResetUserPassword,
+      @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+      required this.isPPATriggerMaintained})
       : _userSalesOrganisations = userSalesOrganisations,
         _salesOrganisations = salesOrganisations,
         _paymentNotification = paymentNotification,
@@ -761,10 +779,13 @@ class _$UserDtoImpl extends _UserDto {
   @override
   @JsonKey(name: 'isResetUserPassword', defaultValue: false)
   final bool isResetUserPassword;
+  @override
+  @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+  final bool isPPATriggerMaintained;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained)';
   }
 
   @override
@@ -826,7 +847,9 @@ class _$UserDtoImpl extends _UserDto {
             (identical(other.isFirstLogin, isFirstLogin) ||
                 other.isFirstLogin == isFirstLogin) &&
             (identical(other.isResetUserPassword, isResetUserPassword) ||
-                other.isResetUserPassword == isResetUserPassword));
+                other.isResetUserPassword == isResetUserPassword) &&
+            (identical(other.isPPATriggerMaintained, isPPATriggerMaintained) ||
+                other.isPPATriggerMaintained == isPPATriggerMaintained));
   }
 
   @JsonKey(ignore: true)
@@ -860,7 +883,8 @@ class _$UserDtoImpl extends _UserDto {
         mobileNumber,
         acceptMPTC,
         isFirstLogin,
-        isResetUserPassword
+        isResetUserPassword,
+        isPPATriggerMaintained
       ]);
 
   @JsonKey(ignore: true)
@@ -942,7 +966,9 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'isFirstLogin', defaultValue: false)
       required final bool isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
-      required final bool isResetUserPassword}) = _$UserDtoImpl;
+      required final bool isResetUserPassword,
+      @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+      required final bool isPPATriggerMaintained}) = _$UserDtoImpl;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
@@ -1042,6 +1068,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'isResetUserPassword', defaultValue: false)
   bool get isResetUserPassword;
+  @override
+  @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
+  bool get isPPATriggerMaintained;
   @override
   @JsonKey(ignore: true)
   _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith =>

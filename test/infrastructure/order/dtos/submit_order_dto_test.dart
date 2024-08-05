@@ -16,6 +16,7 @@ void main() {
         'PurchaseOrderType': fakePurchaseOrderType,
         'customer': <String, dynamic>{},
         'orderReason': fakeOrderReason,
+        'salesRepAuthorizedDetails': <String, dynamic>{},
       };
     });
     test('Test toDomain', () {

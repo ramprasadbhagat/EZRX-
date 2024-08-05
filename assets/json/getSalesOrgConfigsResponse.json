@@ -131,7 +131,21 @@
                   "description": "Sample order 801",
                   "enabled": false
                }
-            ]
+            ],
+            "authorizedExtSalesRep": [
+               {
+                  "userId": 513,
+                  "userName": "sgfre_m.tan"
+               },
+               {
+                  "userId": 1277,
+                  "userName": "sgfre_lina.l"
+               },
+               {
+                  "userId": 3368,
+                  "userName": "testextsalesrep"
+               }
+            ]            
          }
       ]
    }

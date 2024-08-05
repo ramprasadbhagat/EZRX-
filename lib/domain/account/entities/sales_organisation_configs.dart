@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/order_type.dart';
+import 'package:ezrxmobile/domain/account/entities/external_sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -88,6 +89,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required double mpSmallOrderFee,
     required double mpSAPMinOrderAmount,
     required List<OrderType> orderTypes,
+    required List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep,
   }) = _SalesOrganisationConfigs;
 
   //ignore:long-method
@@ -167,6 +169,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         mpSAPMinOrderAmount: 0.0,
         enableTenderOrders: false,
         orderTypes: <OrderType>[],
+        authorizedExtSalesRep: <ExternalSalesRepresentativeInfo>[],
       );
 
   bool get shouldDisplayVATInPercentage =>

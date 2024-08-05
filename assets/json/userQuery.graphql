@@ -89,6 +89,7 @@
              directMarketing
             }
             acceptMPTC
+            isPPATriggerMaintained
           }
         },
     "variables":{

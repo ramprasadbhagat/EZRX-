@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -71,6 +72,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       smallOrderFeeDetail:
           smallOrderFeeDetail?.toDomain ?? SmallOrderFeeDetail.empty(),
       orderReason: orderReason,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
     );
   }
 

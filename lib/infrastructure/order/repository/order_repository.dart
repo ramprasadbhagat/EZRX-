@@ -4,6 +4,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -36,6 +37,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bonus_sample_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/sales_rep_authorized_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_tender_contract_dto.dart';
 import 'package:upgrader/upgrader.dart';
@@ -89,6 +91,7 @@ class OrderRepository implements IOrderRepository {
     required DeliveryInfoData data,
     required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs configs,
+    required SalesRepAuthorizedDetails salesRepAuthorizedDetails,
   }) async {
     final submitOrder = _getSubmitOrderRequest(
       shipToInfo: shipToInfo,
@@ -102,6 +105,7 @@ class OrderRepository implements IOrderRepository {
       customerCodeInfo: customerCodeInfo,
       salesOrganisation: salesOrganisation,
       configs: configs,
+      salesRepAuthorizedDetails: salesRepAuthorizedDetails,
     );
 
     if (config.appFlavor == Flavor.mock) {
@@ -132,7 +136,16 @@ class OrderRepository implements IOrderRepository {
       if (submitOrder.orderType.isNotEmpty) {
         submitOrderData.addAll({'orderType': submitOrder.orderType});
       }
-
+      if (submitOrder.salesRepAuthorizedDetails.sendPayload) {
+        submitOrderData.addAll(
+          {
+            'salesRepAuthorizedDetails':
+                SalesRepAuthorizedDetailsDto.fromDomain(
+              submitOrder.salesRepAuthorizedDetails,
+            ).toJson(),
+          },
+        );
+      }
       final encryptedData = encryption.encryptionData(
         data: submitOrderData,
         secretKey: config.orderEncryptionSecret,
@@ -284,30 +297,30 @@ class OrderRepository implements IOrderRepository {
         TrackingProps.grandTotal: orderDetail.totalValue,
         TrackingProps.totalQty: orderDetail.orderItemsCount,
         TrackingProps.requestDeliveryDate:
-        orderDetail.requestedDeliveryDate.dateOrNaString,
+            orderDetail.requestedDeliveryDate.dateOrNaString,
         TrackingProps.lineNumber:
             orderDetail.orderHistoryDetailsOrderItem.length,
         TrackingProps.market: market,
         TrackingProps.collectiveNumber: '',
         TrackingProps.poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        TrackingProps.poReference:orderDetail.poReference.displayPoReference,
+        TrackingProps.poReference: orderDetail.poReference.displayPoReference,
         TrackingProps.purchaseOrderType: user.role.type.purchaseOrderType,
         TrackingProps.orderType: orderDetail.type.documentTypeCode,
-        TrackingProps.specialInstruction: orderDetail.
-        orderHistoryDetailsSpecialInstructions.displaySpecialInstructions,
+        TrackingProps.specialInstruction: orderDetail
+            .orderHistoryDetailsSpecialInstructions.displaySpecialInstructions,
         TrackingProps.telephone: orderDetail.telephoneNumber.validPhoneNumber,
         TrackingProps.blockOrder: configs.enablePrincipalList,
         TrackingProps.companyName: orderDetail.companyName.name,
         TrackingProps.customerNumber: orderDetail.soldTo,
         TrackingProps.customerNumberShipTo: orderDetail.shipTo,
-        TrackingProps.salesOrg: salesOrganisation.salesOrg
-            .getOrDefaultValue(''),
+        TrackingProps.salesOrg:
+            salesOrganisation.salesOrg.getOrDefaultValue(''),
         TrackingProps.division: customerCodeInfo.division,
         TrackingProps.deliveryFee: orderDetail.deliveryFee,
         TrackingProps.language: user.settings.languagePreference.languageCode,
         TrackingProps.paymentMethod: 'Bank Transfer',
-        TrackingProps.paymentTerm: orderDetail.orderHistoryDetailsPaymentTerm.
-        paymentTermCode.displayPaymentTermCode,
+        TrackingProps.paymentTerm: orderDetail.orderHistoryDetailsPaymentTerm
+            .paymentTermCode.displayPaymentTermCode,
         TrackingProps.poDocuments: orderDetail.poDocumentsName,
         TrackingProps.referenceNote: orderDetail.referenceNotes,
         TrackingProps.totalTax: orderDetail.totalTax,
@@ -505,6 +518,7 @@ class OrderRepository implements IOrderRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
+    required SalesRepAuthorizedDetails salesRepAuthorizedDetails,
   }) {
     return SubmitOrder(
       userName: data.contactPerson.getValue().isNotEmpty
@@ -551,6 +565,7 @@ class OrderRepository implements IOrderRepository {
         cartItems: cartProducts,
         customerCodeInfo: customerCodeInfo,
       ),
+      salesRepAuthorizedDetails: salesRepAuthorizedDetails,
     );
   }
 }

@@ -601,6 +601,23 @@ void main() {
         });
 
         test(
+            'when contains ZP material only and ZP MoV is not eligible for SG External Sales Rep',
+            () {
+          final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem],
+            configs: fakeSGSalesOrgConfigsWithSmallOrderFee,
+          );
+
+          expect(
+            stateWithMPMaterial.movNotEligibleMessage,
+            const TRObject(
+              'Please ensure that minimum order value is at least {mov}',
+              arguments: {'mov': 'SGD 300.00'},
+            ),
+          );
+        });
+
+        test(
             'when contains both ZP and MP materials and both ZP MoV and MP MoV are not eligible',
             () {
           final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(

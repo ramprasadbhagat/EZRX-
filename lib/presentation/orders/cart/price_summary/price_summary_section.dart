@@ -105,7 +105,8 @@ class PriceSummarySection extends StatelessWidget {
         ),
         if (salesOrgConfig.displaySubtotalTaxBreakdown)
           _TaxWidget(cartState: cartState),
-        if (orderEligibilityState.smallOrderFeeApplied)
+        if (orderEligibilityState.smallOrderFeeApplied ||
+            orderEligibilityState.smallOrderFeeForExtSalesRep)
           SmallOrderFee(
             value: orderEligibilityState.showSmallOrderFeeForID
                 ? cartState.aplSmallOrderFees(

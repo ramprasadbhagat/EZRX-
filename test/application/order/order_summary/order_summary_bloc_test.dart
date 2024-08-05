@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -106,6 +107,7 @@ void main() {
             aplSmallOrderFee: 12500.0,
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
+            salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
           ),
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
@@ -129,6 +131,7 @@ void main() {
             aplSmallOrderFee: 12500.0,
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
+            salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
           ),
         );
       },
@@ -166,6 +169,7 @@ void main() {
             aplSmallOrderFee: 12500.0,
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
+            salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),
@@ -191,6 +195,7 @@ void main() {
             aplSmallOrderFee: 12500.0,
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
+            salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
           ),
         );
       },
@@ -251,6 +256,7 @@ void main() {
             aplSmallOrderFee: 12500.0,
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
+            salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
           ),
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
@@ -297,6 +303,7 @@ void main() {
             aplSmallOrderFee: 12500.0,
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
+            salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
           ),
         );
       },

@@ -40,6 +40,7 @@ class User with _$User {
     required MarketPlaceTnCAcceptance acceptMPTC,
     required bool isFirstLogin,
     required bool isResetUserPassword,
+    required bool isPPATriggerMaintained,
   }) = _User;
 
   factory User.empty() => User(
@@ -71,6 +72,7 @@ class User with _$User {
         acceptMPTC: MarketPlaceTnCAcceptance(''),
         isFirstLogin: false,
         isResetUserPassword: false,
+        isPPATriggerMaintained: false,
       );
 
   bool get eligibleForResetPassword =>

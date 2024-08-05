@@ -167,6 +167,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
     if (!orderEligibilityState.isCheckoutDisabled) {
       FocusScope.of(context).requestFocus(FocusNode());
       if (cartState.showSmallOrderFeeBottomSheet ||
+          orderEligibilityState.agreeSmallOrderFeeForExtSalesRep ||
           orderEligibilityState.smallOrderFee > 0) {
         final agreeToSmallOrderFee =
             await _showAgreeToSmallOrderFeeModal(context: context);
