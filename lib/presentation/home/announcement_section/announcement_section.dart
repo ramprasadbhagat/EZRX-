@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -41,8 +43,21 @@ class AnnouncementSection extends StatelessWidget {
                     context.router.push(const AnnouncementsPageRoute()),
               ),
             ),
-            ...state.announcementInfo.homePageAnnouncementList
-                .map((e) => AnnouncementItem(item: e)),
+            ...state.announcementInfo.homePageAnnouncementList.map(
+              (e) => GestureDetector(
+                onTap: () {
+                  context.read<AnnouncementInfoDetailsBloc>().add(
+                        AnnouncementInfoDetailsEvent.fetch(
+                          itemId: e.id,
+                          salesOrg:
+                              context.read<EligibilityBloc>().state.salesOrg,
+                        ),
+                      );
+                  context.router.push(const AnnouncementInfoDetailsPageRoute());
+                },
+                child: AnnouncementItem(item: e),
+              ),
+            ),
           ],
         );
       },
