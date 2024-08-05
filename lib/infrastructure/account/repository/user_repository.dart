@@ -143,7 +143,6 @@ class UserRepository implements IUserRepository {
         languagePreference:
             userDetails.settings.languagePreference.languageCode,
         emailNotification: userDetails.settings.emailNotifications,
-        userId: userDetails.id,
       );
 
       return Right(user);

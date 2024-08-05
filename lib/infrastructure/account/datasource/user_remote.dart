@@ -104,13 +104,11 @@ class UserRemoteDataSource {
   Future<User> updateUserNotificationAndLanguagePreference({
     required String languagePreference,
     required bool emailNotification,
-    required String userId,
   }) async {
     return await dataSourceExceptionHandler.handle(
       () async {
         final data = {
           'input': {
-            'where': {'id': int.parse(userId)},
             'data': {
               'emailNotifications': emailNotification,
               'languagePreference': languagePreference,

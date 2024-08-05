@@ -270,7 +270,6 @@ void main() {
             await remoteDataSource.updateUserNotificationAndLanguagePreference(
           languagePreference: '',
           emailNotification: false,
-          userId: '2601',
         );
 
         final resTest =

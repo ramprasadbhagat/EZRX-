@@ -166,7 +166,6 @@ void main() {
               remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
             languagePreference: 'EN',
             emailNotification: false,
-            userId: '',
           ),
         ).thenAnswer((_) async => User.empty());
 
@@ -186,7 +185,6 @@ void main() {
               remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
             languagePreference: 'EN',
             emailNotification: false,
-            userId: '',
           ),
         ).thenThrow(error);
 
