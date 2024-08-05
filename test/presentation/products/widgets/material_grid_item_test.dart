@@ -113,122 +113,113 @@ void main() {
     testWidgets(
       '=> Test display',
       (tester) async {
-        await tester.runAsync(() async {
-          await tester.pumpWidget(getScopedWidget());
-          await tester.pump();
-          expect(find.byType(ProductImage), findsOneWidget);
-          expect(find.byType(OfferLabel), findsOneWidget);
-          expect(find.byType(StockLabel), findsOneWidget);
-          expect(find.byType(CovidLabel), findsOneWidget);
-          expect(find.byType(FavouriteIcon), findsOneWidget);
-          expect(
-            find.text(zpMaterialInfoMock.materialNumber.displayMatNo),
-            findsOneWidget,
-          );
-          expect(
-            find.text(zpMaterialInfoMock.displayDescription),
-            findsOneWidget,
-          );
-          expect(find.text(zpMaterialInfoMock.getManufactured), findsOneWidget);
-          expect(find.byType(ProductPriceLabel), findsOneWidget);
-        });
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(find.byType(ProductImage), findsOneWidget);
+        expect(find.byType(OfferLabel), findsOneWidget);
+        expect(find.byType(StockLabel), findsOneWidget);
+        expect(find.byType(CovidLabel), findsOneWidget);
+        expect(find.byType(FavouriteIcon), findsOneWidget);
+        expect(
+          find.text(zpMaterialInfoMock.materialNumber.displayMatNo),
+          findsOneWidget,
+        );
+        expect(
+          find.text(zpMaterialInfoMock.displayDescription),
+          findsOneWidget,
+        );
+        expect(find.text(zpMaterialInfoMock.getManufactured), findsOneWidget);
+        expect(find.byType(ProductPriceLabel), findsOneWidget);
       },
     );
 
     testWidgets(
-      'List price strike through price visible, if final price is less than list price && enableListPrice = true',
-      (tester) async {
-        await tester.runAsync(() async {
-          final finalPrice = MaterialPrice(80);
-          final listPrice = MaterialPrice(100);
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeVNSalesOrgConfigs,
+        'List price strike through price visible, if final price is less than list price && enableListPrice = true',
+        (tester) async {
+      final finalPrice = MaterialPrice(80);
+      final listPrice = MaterialPrice(100);
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            zpMaterialInfoMock.materialNumber: Price.empty().copyWith(
+              lastPrice: listPrice,
+              finalPrice: finalPrice,
+              materialNumber: zpMaterialInfoMock.materialNumber,
             ),
-          );
-          when(() => materialPriceBlocMock.state).thenReturn(
-            MaterialPriceState.initial().copyWith(
-              materialPrice: {
-                zpMaterialInfoMock.materialNumber: Price.empty().copyWith(
-                  lastPrice: listPrice,
-                  finalPrice: finalPrice,
-                  materialNumber: zpMaterialInfoMock.materialNumber,
-                ),
-              },
-            ),
-          );
-          await tester.pumpWidget(getScopedWidget());
-          await tester.pump();
-          final listPriceStrikeThroughComponent =
-              find.byType(ListPriceStrikeThroughComponent);
-          final listPriceFinder = find.byWidgetPredicate(
-            (widget) =>
-                widget is RichText &&
-                widget.key == WidgetKeys.priceComponent &&
-                widget.text
-                    .toPlainText()
-                    .contains(listPrice.getOrCrash().toString()),
-          );
-          expect(
-            find.descendant(
-              of: listPriceStrikeThroughComponent,
-              matching: listPriceFinder,
-            ),
-            findsOneWidget,
-          );
-        });
-      },
-    );
+          },
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final listPriceStrikeThroughComponent =
+          find.byType(ListPriceStrikeThroughComponent);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: listPriceStrikeThroughComponent,
+          matching: listPriceFinder,
+        ),
+        findsOneWidget,
+      );
+    });
 
     testWidgets(
-      'List price strike through price not visible, if final price is less than list price && enableListPrice = false',
-      (tester) async {
-        await tester.runAsync(() async {
-          final finalPrice = MaterialPrice(80);
-          final listPrice = MaterialPrice(100);
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeMYSalesOrgConfigs,
+        'List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+        (tester) async {
+      final finalPrice = MaterialPrice(80);
+      final listPrice = MaterialPrice(100);
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            zpMaterialInfoMock.materialNumber: Price.empty().copyWith(
+              lastPrice: listPrice,
+              finalPrice: finalPrice,
+              materialNumber: zpMaterialInfoMock.materialNumber,
             ),
-          );
-          when(() => materialPriceBlocMock.state).thenReturn(
-            MaterialPriceState.initial().copyWith(
-              materialPrice: {
-                zpMaterialInfoMock.materialNumber: Price.empty().copyWith(
-                  lastPrice: listPrice,
-                  finalPrice: finalPrice,
-                  materialNumber: zpMaterialInfoMock.materialNumber,
-                ),
-              },
-            ),
-          );
-          await tester.pumpWidget(getScopedWidget());
-          await tester.pump();
-          final listPriceStrikeThroughComponent =
-              find.byType(ListPriceStrikeThroughComponent);
-          final listPriceFinder = find.byWidgetPredicate(
-            (widget) =>
-                widget is RichText &&
-                widget.key == WidgetKeys.priceComponent &&
-                widget.text
-                    .toPlainText()
-                    .contains(listPrice.getOrCrash().toString()),
-          );
-          expect(
-            find.descendant(
-              of: listPriceStrikeThroughComponent,
-              matching: listPriceFinder,
-            ),
-            findsNothing,
-          );
-        });
-      },
-    );
+          },
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final listPriceStrikeThroughComponent =
+          find.byType(ListPriceStrikeThroughComponent);
+      final listPriceFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is RichText &&
+            widget.key == WidgetKeys.priceComponent &&
+            widget.text
+                .toPlainText()
+                .contains(listPrice.getOrCrash().toString()),
+      );
+      expect(
+        find.descendant(
+          of: listPriceStrikeThroughComponent,
+          matching: listPriceFinder,
+        ),
+        findsNothing,
+      );
+    });
 
     testWidgets(
       'List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
       (tester) async {
-        await tester.runAsync(() async {
           final finalPrice = MaterialPrice(200);
           final listPrice = MaterialPrice(100);
           when(() => eligibilityBlocMock.state).thenReturn(
@@ -267,8 +258,6 @@ void main() {
             findsNothing,
           );
         });
-      },
-    );
 
     testWidgets(
       'Show tender tender tag',

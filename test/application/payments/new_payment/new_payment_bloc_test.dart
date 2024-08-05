@@ -10,10 +10,13 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
+import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
@@ -38,6 +41,9 @@ void main() {
   late List<CustomerOpenItem> fakeCustomerOpenItemSelected;
   late List<CustomerOpenItem> fakeCreditSelected;
   late List<NewPaymentMethod> fakePaymentMethodValues;
+  late PaymentMethodOption fakePaymentMethodOption;
+  final newPaymentState = NewPaymentState.initial();
+  final fakeCreateVirtualAccount = CreateVirtualAccount.empty();
   final fakePaymentStatus = PaymentStatus(
     paymentId: 'fake-id',
     transactionReference: 'fake-ref',
@@ -96,6 +102,9 @@ void main() {
         options: [],
       ),
     ];
+
+    fakePaymentMethodOption = PaymentMethodOption.empty()
+        .copyWith(displayName: StringValue('fake-data'));
   });
 
   group(
@@ -117,7 +126,7 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(isMarketPlace: true),
+          newPaymentState.copyWith(isMarketPlace: true),
         ],
       );
 
@@ -127,7 +136,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(isMarketPlace: true),
+        seed: () => newPaymentState.copyWith(isMarketPlace: true),
         setUp: () {
           when(
             () => newPaymentRepository.fetchPaymentMethods(
@@ -140,11 +149,11 @@ void main() {
           const NewPaymentEvent.fetchAvailablePaymentMethods(),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isFetchingPaymentMethod: true,
             isMarketPlace: true,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isFetchingPaymentMethod: false,
             paymentMethods: [NewPaymentMethod.empty()],
             selectedPaymentMethod: NewPaymentMethod.empty(),
@@ -171,10 +180,10 @@ void main() {
           const NewPaymentEvent.fetchAvailablePaymentMethods(),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isFetchingPaymentMethod: true,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isFetchingPaymentMethod: false,
             failureOrSuccessOption: optionOf(
               const Left(ApiFailure.other('fake-error')),
@@ -199,7 +208,7 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             selectedInvoices: [CustomerOpenItem.empty()],
           ),
         ],
@@ -211,7 +220,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           selectedInvoices: [CustomerOpenItem.empty()],
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
@@ -220,7 +229,7 @@ void main() {
             selected: false,
           ),
         ),
-        expect: () => [NewPaymentState.initial()],
+        expect: () => [newPaymentState],
       );
 
       blocTest(
@@ -236,7 +245,7 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             selectedInvoices: [CustomerOpenItem.empty()],
           ),
         ],
@@ -261,7 +270,7 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             selectedCredits: [CustomerOpenItem.empty()],
           ),
         ],
@@ -273,7 +282,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           selectedCredits: [CustomerOpenItem.empty()],
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
@@ -282,7 +291,7 @@ void main() {
             selected: false,
           ),
         ),
-        expect: () => [NewPaymentState.initial()],
+        expect: () => [newPaymentState],
       );
 
       blocTest(
@@ -291,7 +300,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           selectedInvoices: [
             customerOpenItem,
           ],
@@ -303,7 +312,7 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             selectedInvoices: [
               customerOpenItem,
             ],
@@ -331,7 +340,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
@@ -356,13 +365,13 @@ void main() {
         },
         act: (NewPaymentBloc bloc) => bloc.add(const NewPaymentEvent.pay()),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isLoading: true,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedPaymentMethod: fakePaymentMethodValues.first,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),
@@ -381,7 +390,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
@@ -407,14 +416,14 @@ void main() {
         },
         act: (NewPaymentBloc bloc) => bloc.add(const NewPaymentEvent.pay()),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isLoading: true,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedPaymentMethod: fakePaymentMethodValues.first,
             isMarketPlace: true,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             paymentInfo: fakePaymentInfo,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
@@ -430,7 +439,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           selectedInvoices: fakeCustomerOpenItemSelected,
           selectedCredits: fakeCreditSelected,
@@ -459,14 +468,14 @@ void main() {
         },
         act: (NewPaymentBloc bloc) => bloc.add(const NewPaymentEvent.pay()),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isLoading: true,
             selectedInvoices: fakeCustomerOpenItemSelected,
             selectedCredits: fakeCreditSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedPaymentMethod: fakePaymentMethodValues.first,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             paymentInfo: fakePaymentInfo,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
@@ -501,7 +510,7 @@ void main() {
             ),
           );
         },
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
@@ -533,7 +542,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
@@ -578,7 +587,7 @@ void main() {
             ),
           );
         },
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
@@ -609,7 +618,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
@@ -645,7 +654,7 @@ void main() {
             paymentStatus: fakePaymentStatus,
           ),
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           salesOrganisation: fakeSGSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
@@ -672,7 +681,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           paymentInfo: fakePaymentInfo,
           isMarketPlace: true,
@@ -695,11 +704,11 @@ void main() {
         act: (NewPaymentBloc bloc) =>
             bloc.add(const NewPaymentEvent.fetchInvoiceInfoPdf()),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isFetchingInvoiceInfoPdf: true,
             isMarketPlace: true,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),
@@ -716,7 +725,7 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        seed: () => NewPaymentState.initial().copyWith(
+        seed: () => newPaymentState.copyWith(
           isLoading: false,
           paymentInfo: fakePaymentInfo,
         ),
@@ -738,10 +747,10 @@ void main() {
         act: (NewPaymentBloc bloc) =>
             bloc.add(const NewPaymentEvent.fetchInvoiceInfoPdf()),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isFetchingInvoiceInfoPdf: true,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
           ),
         ],
@@ -773,10 +782,10 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isSavingInvoicePdf: true,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),
@@ -816,10 +825,10 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isSavingInvoicePdf: true,
           ),
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),
@@ -859,10 +868,10 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             isSavingInvoicePdf: true,
           ),
-          NewPaymentState.initial(),
+          newPaymentState,
         ],
       );
     },
@@ -883,8 +892,196 @@ void main() {
           ),
         ),
         expect: () => [
-          NewPaymentState.initial().copyWith(
+          newPaymentState.copyWith(
             selectedPaymentMethod: fakePaymentMethodValues.last,
+          ),
+        ],
+      );
+    },
+  );
+
+  group(
+    'Update Payment Method Option Selected',
+    () {
+      blocTest(
+        'Update Payment Method Option Selected',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => newPaymentState,
+        act: (NewPaymentBloc bloc) => bloc.add(
+          NewPaymentEvent.updatePaymentMethodOptionSelected(
+            paymentMethodOptionSelected: fakePaymentMethodOption,
+          ),
+        ),
+        expect: () => [
+          newPaymentState.copyWith(
+            selectedPaymentMethod: newPaymentState.selectedPaymentMethod
+                .copyWith(options: [fakePaymentMethodOption]),
+          ),
+        ],
+      );
+    },
+  );
+
+  group(
+    'Create Virtual Account',
+    () {
+      blocTest(
+        'Create Virtual Account success',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => newPaymentState,
+        act: (NewPaymentBloc bloc) => bloc.add(
+          const NewPaymentEvent.createVirtualAccount(),
+        ),
+        setUp: () {
+          when(
+            () => newPaymentRepository.createVirtualAccount(
+              salesOrganisation: newPaymentState.salesOrganisation,
+              customerCodeInfo: newPaymentState.customerCodeInfo,
+              invoices: newPaymentState.selectedInvoices,
+              paymentMethodOption:
+                  newPaymentState.selectedPaymentMethod.firstSelectedOption,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(fakeCreateVirtualAccount),
+          );
+        },
+        expect: () => [
+          newPaymentState.copyWith(isCreatingVirtualAccount: true),
+          newPaymentState.copyWith(
+            createVirtualAccount: fakeCreateVirtualAccount,
+          ),
+        ],
+      );
+
+      blocTest(
+        'Create Virtual Account failure',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => newPaymentState,
+        act: (NewPaymentBloc bloc) => bloc.add(
+          const NewPaymentEvent.createVirtualAccount(),
+        ),
+        setUp: () {
+          when(
+            () => newPaymentRepository.createVirtualAccount(
+              salesOrganisation: newPaymentState.salesOrganisation,
+              customerCodeInfo: newPaymentState.customerCodeInfo,
+              invoices: newPaymentState.selectedInvoices,
+              paymentMethodOption:
+                  newPaymentState.selectedPaymentMethod.firstSelectedOption,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')),
+          );
+        },
+        expect: () => [
+          newPaymentState.copyWith(isCreatingVirtualAccount: true),
+          newPaymentState.copyWith(
+            createVirtualAccountFailed: true,
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error'))),
+          ),
+        ],
+      );
+    },
+  );
+
+  group(
+    'description',
+    () {
+      blocTest(
+        'getPrincipalCutoffs if is not ID',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => newPaymentState,
+        act: (NewPaymentBloc bloc) => bloc.add(
+          const NewPaymentEvent.getPrincipalCutoffs(),
+        ),
+        expect: () => [
+          newPaymentState.copyWith(isFetchingPrincipalCutoffs: true),
+          newPaymentState,
+        ],
+      );
+
+      blocTest(
+        'getPrincipalCutoffs failure if is ID',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => newPaymentState.copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+        ),
+        act: (NewPaymentBloc bloc) => bloc.add(
+          const NewPaymentEvent.getPrincipalCutoffs(),
+        ),
+        setUp: () {
+          when(
+            () => newPaymentRepository.getPrincipalCutoffs(
+              shipToInfo: fakeShipToInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')),
+          );
+        },
+        expect: () => [
+          newPaymentState.copyWith(
+            isFetchingPrincipalCutoffs: true,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+          newPaymentState.copyWith(
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error'))),
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        ],
+      );
+
+      blocTest(
+        'getPrincipalCutoffs success if is ID',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => newPaymentState.copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+        ),
+        act: (NewPaymentBloc bloc) => bloc.add(
+          const NewPaymentEvent.getPrincipalCutoffs(),
+        ),
+        setUp: () {
+          when(
+                () => newPaymentRepository.getPrincipalCutoffs(
+              shipToInfo: fakeShipToInfo,
+            ),
+          ).thenAnswer(
+                (invocation) async => Right(PrincipalCutoffs.empty()),
+          );
+        },
+        expect: () => [
+          newPaymentState.copyWith(
+            isFetchingPrincipalCutoffs: true,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+          newPaymentState.copyWith(
+            principalCutoffs: PrincipalCutoffs.empty(),
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeIDSalesOrganisation,
           ),
         ],
       );
