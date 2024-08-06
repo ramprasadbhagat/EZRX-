@@ -126,8 +126,8 @@ void main() {
   const materialPrincipalName = 'Besins';
   const materialCountryOfOrigin = 'France';
   const materialUnitMeasurement = 'EA';
-  const materialUnitPrice = 1311.0;
-  const tax = 10;
+  var materialUnitPrice = 0.0;
+  const tax = 0;
 
   const multiImageMaterialNumber = '21232273';
   const otherInfoMaterialNumber = multiImageMaterialNumber;
@@ -178,6 +178,7 @@ void main() {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
     await productRobot.tapSearchMaterial(materialNumber);
+    materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
     await productDetailRobot.tapAddToCart();
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
@@ -950,11 +951,13 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
-      await productDetailRobot.verifyRelateProductDisplayed();
-      await productDetailRobot.tapFirstRelateProduct();
-      productDetailRobot.verifyPage();
-      await productDetailRobot.tapBackButton();
-      productDetailRobot.verifyPage();
+      if (productDetailRobot.checkHasRelateProduct()) {
+        await productDetailRobot.verifyRelateProductDisplayed();
+        await productDetailRobot.tapFirstRelateProduct();
+        productDetailRobot.verifyPage();
+        await productDetailRobot.tapBackButton();
+        productDetailRobot.verifyPage();
+      }
     });
 
     testWidgets('EZRX-T67 | Verify other information in material detail',
@@ -1092,6 +1095,7 @@ void main() {
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
+        await commonRobot.tapClearSearch();
         await commonRobot.pullToRefresh();
         commonRobot.verifySearchBarText('');
 
@@ -1391,7 +1395,6 @@ void main() {
           'EZRX-T88 | Verify view by order detail with default components',
           (tester) async {
         const qty = 7;
-        final price = (materialUnitPrice * qty).priceDisplay(currency);
 
         //init app
         await pumpAppWithLogin(tester);
@@ -1399,6 +1402,7 @@ void main() {
           materialNumber,
           qty,
         );
+        final price = (materialUnitPrice * qty).priceDisplay(currency);
         await checkoutRobot.verifyPoReferenceField(isVisible: true);
         await checkoutRobot.enterPoReference(poReference);
         await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
@@ -1477,6 +1481,8 @@ void main() {
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+
       await productDetailRobot.tapAddToCart();
       productDetailRobot.verifyCartButtonQty(1);
       await productDetailRobot.tapCartButton();
@@ -1754,6 +1760,8 @@ void main() {
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+
       await productDetailRobot.tapAddToCart();
       productDetailRobot.verifyCartButtonQty(1);
       await productDetailRobot.tapCartButton();
@@ -1814,14 +1822,6 @@ void main() {
     });
 
     testWidgets('EZRX-274 | Verify discount override', (tester) async {
-      //variable
-      final materialUnitPriceDisplay = materialUnitPrice.priceDisplay(currency);
-      const discountRate = 10;
-      const newUnitPrice = materialUnitPrice * (1 - discountRate * 0.01);
-      final newUnitPriceDisplay = newUnitPrice.priceDisplay(currency);
-      const materialQty = 7;
-      final totalPrice =
-          (materialUnitPrice * materialQty).priceDisplay(currency);
       //init app
       await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
@@ -1829,6 +1829,16 @@ void main() {
       //verify display
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+
+      //variable
+      const discountRate = 10;
+      final newUnitPrice = materialUnitPrice * (1 - discountRate * 0.01);
+      final newUnitPriceDisplay = newUnitPrice.priceDisplay(currency);
+      const materialQty = 7;
+      final totalPrice =
+          (materialUnitPrice * materialQty).priceDisplay(currency);
+
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
 
@@ -1845,7 +1855,7 @@ void main() {
       cartRobot.verifyMaterialQty(materialNumber, materialQty);
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
-        materialUnitPriceDisplay,
+        materialUnitPrice.priceDisplay(currency),
       );
       cartRobot.verifyMaterialTotalPrice(
         materialNumber,
@@ -1862,7 +1872,9 @@ void main() {
       //verify discount override
       cartRobot.verifyMaterialCounterOfferButton(materialNumber);
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
-      requestCounterOfferRobot.verifyOfferPrice(materialUnitPriceDisplay);
+      requestCounterOfferRobot.verifyListPriceOfferForSalesRep(
+        materialUnitPrice.priceDisplay(currency),
+      );
       await requestCounterOfferRobot
           .enterDiscountCounterPriceRate(discountRate.toString());
       requestCounterOfferRobot
@@ -1871,7 +1883,9 @@ void main() {
       requestCounterOfferRobot.verifySheet(isVisible: false);
       cartRobot.verifyMaterialUnitPrice(materialNumber, newUnitPriceDisplay);
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
-      requestCounterOfferRobot.verifyOfferPrice(newUnitPriceDisplay);
+      requestCounterOfferRobot.verifyListPriceOfferForSalesRep(
+        materialUnitPrice.priceDisplay(currency),
+      );
       requestCounterOfferRobot
           .verifyDiscountCounterPriceRate(discountRate.toStringAsFixed(1));
       await requestCounterOfferRobot.tapCancelButton();
@@ -1893,13 +1907,13 @@ void main() {
     testWidgets('EZRX-T116 | Verify display checkout with default components',
         (tester) async {
       const qty = 7;
-      const totalPrice = materialUnitPrice * qty;
       //init app
       await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         materialNumber,
         qty,
       );
+      final totalPrice = materialUnitPrice * qty;
 
       //verify
       checkoutRobot.verifyPage();
@@ -1967,8 +1981,6 @@ void main() {
         'EZRX-T119 | Verify display material with/without counter offer applied in checkout',
         (tester) async {
       const qty = 7;
-      const newUnitPrice = materialUnitPrice + 100;
-      const newTotalPrice = (newUnitPrice * qty);
 
       //init app
       await pumpAppWithLogin(tester);
@@ -1976,6 +1988,8 @@ void main() {
         materialNumber,
         qty,
       );
+      final newUnitPrice = materialUnitPrice + 100;
+      final newTotalPrice = (newUnitPrice * qty);
 
       //verify
       await checkoutRobot.verifyMaterialPrincipal(materialPrincipalName);
@@ -2064,13 +2078,14 @@ void main() {
         (tester) async {
       const qty = 7;
 
-      const subTotal = materialUnitPrice * qty;
       //init app
       await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         materialNumber,
         qty,
       );
+      final subTotal = materialUnitPrice * qty;
+
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 

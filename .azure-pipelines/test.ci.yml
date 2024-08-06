@@ -7,7 +7,7 @@ parameters:
   - name: region
     type: string
     displayName: Region (Select Region You Want To Test)
-    default:
+    default: my
     values:
       - my
       - id
@@ -264,10 +264,18 @@ stages:
                   script: |
                     test_file=${{ testFile.Key }}
                     region=${{ parameters.region }}
-                    testSuite=("integration_test/$region/$test_file.dart" "${region^^}")
+                    
+                    # Set geolocation for mm, lambda does not support mm
+                    if [ "$region" == "mm" ]; then
+                      geoLocation="MY"
+                    else
+                      geoLocation="$region"
+                    fi
+
+                    testSuite=("integration_test/$region/$test_file.dart" "${geoLocation^^}")
 
                     echo "Testcase:" "${testSuite[0]}"
-                    echo "GeoLocation:" "$region"
+                    echo "GeoLocation:" "$geoLocation"
                     echo "Using device:" "${{ parameters.device_name }}"
 
                     echo -e "\n"
@@ -279,7 +287,7 @@ stages:
                     echo "test_suite_url : " $(test_suite_url)
 
                     echo -e "\n"
-                    echo "Staring the Test execution on Lambdatest :"
+                    echo "Starting the Test execution on Lambdatest :"
 
                     val=$(curl --location -X POST 'https://mobile-api.lambdatest.com/framework/v1/flutter/build' \
                     -H 'Content-Type: application/json' \
@@ -330,11 +338,11 @@ stages:
                     echo -e "\n"
                     echo "The total time taken for the test execution in seconds is :" $duration                     
 
-                    file_without_intergration=$(echo ${test_file} | cut -d '/' -f 2-)
+                    file_without_integration=$(echo ${test_file} | cut -d '/' -f 2-)
 
                     echo "##vso[task.setvariable variable=buildDetails]$buildDetails"
                     echo "##vso[task.setvariable variable=result_build_id]$result_build_id" 
-                    echo "##vso[task.setvariable variable=file_without_intergration]$file_without_intergration"
+                    echo "##vso[task.setvariable variable=file_without_integration]$file_without_integration"
 
                 displayName: Upload App and Test to Lambdatest and wait for result
                 env:
@@ -349,7 +357,7 @@ stages:
                   inlineScript: |
                     buildDetails=$(buildDetails)
                     result_build_id=$(result_build_id)
-                    test_file=$(file_without_intergration)
+                    test_file=$(file_without_integration)
                     echo $test_file
                     total_cases=$(curl --location -u $LAMBDATEST_CREDENTIALS -X GET "https://mobile-api.lambdatest.com/mobile-automation/api/v1/framework/builds/${result_build_id}/report/?encoder=true" | sed -n '/tests="/s/.*tests="\([0-9]*\)".*/\1/p')
                     echo "Total Cases: $total_cases"
@@ -361,7 +369,7 @@ stages:
                     if [ -n "$total_cases" ] && [ -n "$failures_cases" ]; then
                       if [ "$total_cases" -eq "0" ]; then 
                         avg=0
-                        echo "set avg: $avg cause Devision Error"
+                        echo "set avg: $avg cause Division Error"
                         sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
                         sed -i "s|${test_file}_link|$buildDetails|g" .azure-pipelines/template.html 
                       else
@@ -388,7 +396,6 @@ stages:
                   targetType: 'inline'
                   script: |
                     w3m -dump .azure-pipelines/template.html
-
   # daily cron fail easily , comment out for now
   # - stage:
   #   displayName: Run Unit Test

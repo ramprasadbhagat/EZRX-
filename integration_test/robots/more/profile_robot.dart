@@ -44,7 +44,7 @@ class ProfileRobot {
       (tester.widget(find.byKey(WidgetKeys.profilePageLanguageDropdownLabel))
               as Text)
           .data,
-      'Language'.tr(),
+      '${'Language'.tr()}:',
     );
   }
 

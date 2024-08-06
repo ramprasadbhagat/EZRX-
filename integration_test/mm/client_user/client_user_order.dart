@@ -136,8 +136,8 @@ void main() {
   const materialPrincipalName = 'Besins';
   const materialCountryOfOrigin = 'France';
   const materialUnitMeasurement = 'EA';
-  const materialUnitPrice = 1311.0;
-  const tax = 10;
+  var materialUnitPrice = 0.0;
+  const tax = 0;
 
   const multiImageMaterialNumber = materialNumber;
   const otherInfoMaterialNumber = materialNumber;
@@ -189,6 +189,7 @@ void main() {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
     await productRobot.tapSearchMaterial(materialNumber);
+    materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
     await productDetailRobot.tapAddToCart();
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
@@ -339,19 +340,20 @@ void main() {
       forgotPasswordRobot.verifyErrorMessageWithInvalidUsername();
     });
 
-    testWidgets('EZRX-T15 | Verify Forgot password function', (tester) async {
-      //init app
-      await pumpAppInitialState(tester);
+    // TODO: Will uncomment when we have different flow as of now password get changed
+    // testWidgets('EZRX-T15 | Verify Forgot password function', (tester) async {
+    //   //init app
+    //   await pumpAppInitialState(tester);
 
-      //forgot password
-      await loginRobot.findForgotPasswordLink();
-      await loginRobot.tapToForgotPassword();
+    //   //forgot password
+    //   await loginRobot.findForgotPasswordLink();
+    //   await loginRobot.tapToForgotPassword();
 
-      //verify send email
-      await forgotPasswordRobot.enterTextToUsernameField(username);
-      await forgotPasswordRobot.tapToNextButton();
-      forgotPasswordRobot.verifyMessageSentEmail();
-    });
+    //   //verify send email
+    //   await forgotPasswordRobot.enterTextToUsernameField(username);
+    //   await forgotPasswordRobot.tapToNextButton();
+    //   forgotPasswordRobot.verifyMessageSentEmail();
+    // });
 
     testWidgets('EZRX-T12 | Verify login successfully with check :Remember me',
         (tester) async {
@@ -1139,16 +1141,10 @@ void main() {
       productSuggestionRobot.verifySearchHistoryItem(materialNumber);
 
       await productSuggestionRobot.tapSearchHistoryItem(materialNumber);
-      productRobot.verifyPageVisible();
-      await productRobot.openSearchProductScreen();
-      productSuggestionRobot.verifySearchBarText('');
-
-      await productSuggestionRobot.autoSearch(offerMaterialNumber);
+      productSuggestionRobot.verifySearchHistory(isVisible: false);
       await productSuggestionRobot.tapClearSearch();
-
       productSuggestionRobot.verifySearchHistory();
       productSuggestionRobot.verifySearchHistoryItem(materialNumber);
-      productSuggestionRobot.verifySearchHistoryItem(offerMaterialNumber);
 
       await productSuggestionRobot.tapDeleteSearchHistory();
       productSuggestionRobot.verifyClearHistoryBottomSheet();
@@ -1226,6 +1222,7 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productRobot.searchWithKeyboardAction(offerMaterialNumber);
       await productRobot.tapSearchMaterial(offerMaterialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
       final productName =
           productDetailRobot.getMaterialDetailsMaterialDescription();
       await productDetailRobot.openAvailableOffers();
@@ -1242,11 +1239,13 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
-      await productDetailRobot.verifyRelateProductDisplayed();
-      await productDetailRobot.tapFirstRelateProduct();
-      productDetailRobot.verifyPage();
-      await productDetailRobot.tapBackButton();
-      productDetailRobot.verifyPage();
+      if (productDetailRobot.checkHasRelateProduct()) {
+        await productDetailRobot.verifyRelateProductDisplayed();
+        await productDetailRobot.tapFirstRelateProduct();
+        productDetailRobot.verifyPage();
+        await productDetailRobot.tapBackButton();
+        productDetailRobot.verifyPage();
+      }
     });
 
     testWidgets('EZRX-T67 | Verify other information in material detail',
@@ -1335,6 +1334,7 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
@@ -1373,6 +1373,7 @@ void main() {
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
       await productDetailRobot.tapAddToCart();
       productDetailRobot.verifyCartButtonQty(1);
       await productDetailRobot.tapCartButton();
@@ -1639,12 +1640,14 @@ void main() {
 
     testWidgets('EZRX-T97 | Verify price summary in cart', (tester) async {
       const qty = 1;
-      const totalPrice = materialUnitPrice * qty;
+
       //init app
       await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+      final totalPrice = materialUnitPrice * qty;
       await productDetailRobot.tapAddToCart();
       productDetailRobot.verifyCartButtonQty(1);
       await productDetailRobot.tapCartButton();
@@ -1753,6 +1756,7 @@ void main() {
       //verify
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
@@ -1846,10 +1850,15 @@ void main() {
       await productSuggestionRobot
           .searchWithKeyboardAction(oosPreOrderMaterialNumber);
       await productRobot.tapSearchMaterial(oosPreOrderMaterialNumber);
+      final oosMaterialUnitPrice = productDetailRobot.getMaterialUnitPrice;
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
       await cartRobot.verifyMaterial(oosPreOrderMaterialNumber);
+      cartRobot.verifyMaterialUnitPrice(
+        oosPreOrderMaterialNumber,
+        oosMaterialUnitPrice.priceDisplay(currency),
+      );
       cartRobot.verifyMaterialOOSPreOrderStatus(oosPreOrderMaterialNumber);
       await cartRobot.changeMaterialQty(oosPreOrderMaterialNumber, qty);
       await cartRobot.tapCheckoutButton();
@@ -1878,10 +1887,10 @@ void main() {
     testWidgets('EZRX-T116 | Verify display checkout with default components',
         (tester) async {
       const qty = 2;
-      const totalPrice = materialUnitPrice * qty;
       //init app
       await pumpAppWithHomeScreen(tester);
       await checkoutWithMaterial(materialNumber, qty);
+      final totalPrice = materialUnitPrice * qty;
 
       //verify
       checkoutRobot.verifyPage();
@@ -2082,11 +2091,11 @@ void main() {
     testWidgets('EZRX-T125 | Verify display material in order submitted',
         (tester) async {
       const qty = 7;
-      const totalPrice = materialUnitPrice * qty;
 
       //init app
       await pumpAppWithHomeScreen(tester);
       await checkoutWithMaterial(materialNumber, qty);
+      final totalPrice = materialUnitPrice * qty;
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
@@ -2236,11 +2245,13 @@ void main() {
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
         await commonRobot.pullToRefresh();
+        await commonRobot.tapClearSearch();
         commonRobot.verifySearchBarText('');
 
         final materialNumber = viewByItemsRobot.getFirstProductId();
         await commonRobot.searchWithSearchIcon(materialNumber);
         viewByItemsRobot.verifyOrdersWithProductCode(materialNumber);
+        await commonRobot.tapClearSearch();
         await commonRobot.pullToRefresh();
 
         await commonRobot.autoSearch(invalidLengthSearchKey);

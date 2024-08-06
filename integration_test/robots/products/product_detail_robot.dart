@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
@@ -44,6 +45,25 @@ class ProductDetailRobot extends CommonRobot {
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
+  }
+
+  double _extractDouble(String input) {
+    if (input == 'Price Not Available'.tr()) return 0.0;
+
+    final cleanedInput = input.replaceAll(',', '');
+    final regex = RegExp(r'(\d+(\.\d+)?)');
+    final match = regex.firstMatch(cleanedInput);
+
+    return match != null ? double.parse(match.group(0)!) : 0.0;
+  }
+
+  double get getMaterialUnitPrice {
+    final priceWidgetFinder = find.descendant(
+      of: body,
+      matching: find.byKey(WidgetKeys.currentPrice),
+    );
+    final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
+    return _extractDouble(priceString);
   }
 
   String getMaterialDetailsMaterialDescription() {

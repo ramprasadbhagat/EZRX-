@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -144,8 +145,7 @@ class CartRobot extends CommonRobot {
   }) {
     expect(
       find.text(
-        'Please ensure that minimum order value is at least {mov}'
-            .tr(
+        'Please ensure that minimum order value is at least {mov}'.tr(
           namedArgs: {
             'mov': minimumOrderAmount,
           },
@@ -393,7 +393,17 @@ class CartRobot extends CommonRobot {
   }
 
   Future<void> swipeMaterialToDelete(String materialNumber) async {
-    await tester.fling(_materialItem(materialNumber), defaultSwipeOffset, 100);
+    const dragOffset = Offset(-100, 0); // Move left by 100 pixels
+    final startingPoint = tester
+        .getTopRight(
+          find.descendant(
+            of: _materialItem(materialNumber),
+            matching: find.byType(CustomSlidable),
+          ),
+        )
+        .translate(-100, 20);
+
+    await tester.flingFrom(startingPoint, dragOffset, 100);
     await tester.pumpAndSettle();
     await tester.tap(
       find.descendant(

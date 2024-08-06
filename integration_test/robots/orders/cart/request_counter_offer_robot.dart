@@ -60,6 +60,16 @@ class RequestCounterOfferRobot {
     );
   }
 
+  void verifyListPriceOfferForSalesRep(String price) {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.counterOfferListPriceWithoutStrikeWidget),
+        matching: find.textContaining(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyPriceTextField() {
     expect(priceTextField, findsOneWidget);
   }
