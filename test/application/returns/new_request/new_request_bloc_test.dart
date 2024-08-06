@@ -13,8 +13,10 @@ import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -586,6 +588,49 @@ void main() {
           ),
         ],
       );
+
+      blocTest(
+        ' => test event toggleBonusItem',
+        build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
+        seed: () => NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              invoiceNumber: fakeReturnMaterial.assignmentNumber,
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                fakeReturnItemDetail,
+              ],
+            ),
+          ],
+        ),
+        act: (NewRequestBloc bloc) => [
+          bloc.add(
+            NewRequestEvent.toggleBonusItem(
+              item: fakeReturnMaterial,
+              included: true,
+            ),
+          ),
+        ],
+        expect: () => [
+          NewRequestState.initial().copyWith(
+            selectedItems: [fakeReturnMaterial],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                invoiceNumber: fakeReturnMaterial.assignmentNumber,
+                salesOrg: fakeSalesOrg,
+                returnItemDetailsList: [
+                  fakeReturnItemDetail,
+                  fakeReturnMaterial.validatedItemDetails.copyWith(
+                    returnType: fakeReturnItemDetail.returnType,
+                    priceOverride: fakeReturnItemDetail.priceOverride,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
     },
   );
 
@@ -640,6 +685,185 @@ void main() {
           'Please ensure that the items selected for return are from the same Principal.',
         );
       });
+    });
+  });
+
+  group('Test updateRequestCounterOffer & updateSelectedReturnType event', () {
+    blocTest(
+      ' => test updateRequestCounterOffer event when isChangeMaterialCounterOffer is true then false',
+      build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
+      seed: () => NewRequestState.initial().copyWith(
+        invoiceDetails: [
+          InvoiceDetails.empty().copyWith(
+            returnItemDetailsList: [
+              fakeReturnItemDetail,
+            ],
+          ),
+        ],
+      ),
+      act: (NewRequestBloc bloc) => bloc
+        ..add(
+          NewRequestEvent.updateRequestCounterOffer(
+            uuid:
+                '${fakeReturnMaterial.assignmentNumber}${fakeReturnMaterial.itemNumber}',
+            isChangeMaterialCounterOffer: true,
+            counterOfferValue: CounterOfferValue('6'),
+          ),
+        )
+        ..add(
+          NewRequestEvent.updateRequestCounterOffer(
+            uuid:
+                '${fakeReturnMaterial.assignmentNumber}${fakeReturnMaterial.itemNumber}',
+            isChangeMaterialCounterOffer: false,
+            counterOfferValue: CounterOfferValue('9'),
+          ),
+        ),
+      expect: () => [
+        NewRequestState.initial().copyWith(
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetail.copyWith(
+                  priceOverride: CounterOfferValue('6'),
+                ),
+              ],
+            ),
+          ],
+        ),
+        NewRequestState.initial().copyWith(
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetail.copyWith(
+                  priceOverride: CounterOfferValue('9'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+
+    blocTest(
+      ' => test event updateSelectedReturnType',
+      build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
+      seed: () => NewRequestState.initial().copyWith(
+        invoiceDetails: [
+          InvoiceDetails.empty().copyWith(
+            returnItemDetailsList: [
+              fakeReturnItemDetail,
+            ],
+          ),
+        ],
+      ),
+      act: (NewRequestBloc bloc) => bloc.add(
+        NewRequestEvent.updateSelectedReturnType(
+          returnType: ReturnType('fake-type'),
+          assignmentNumber: fakeReturnMaterial.assignmentNumber,
+        ),
+      ),
+      expect: () => [
+        NewRequestState.initial().copyWith(
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetail.copyWith(
+                  returnType: ReturnType('fake-type'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  });
+
+  group('Unit test for newRequestState', () {
+    test('Test get validInvoiceDetails', () {
+      expect(
+        NewRequestState.initial()
+            .copyWith(
+              invoiceDetails: [
+                InvoiceDetails.empty().copyWith(
+                  returnItemDetailsList: [
+                    fakeReturnItemDetail.copyWith(
+                      balanceQty: IntegerValue('0'),
+                    ),
+                    fakeReturnItemDetail.copyWith(
+                      balanceQty: IntegerValue('1'),
+                    ),
+                  ],
+                ),
+              ],
+            )
+            .validInvoiceDetails
+            .first
+            .returnItemDetailsList,
+        [
+          fakeReturnItemDetail.copyWith(balanceQty: IntegerValue('1')),
+        ],
+      );
+    });
+
+    test('Test mixpanelTrackingInfo', () {
+      expect(
+          NewRequestState.initial().copyWith(
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                returnItemDetailsList: [
+                  fakeReturnItemDetail.copyWith(
+                    returnQuantity: ReturnQuantity('1'),
+                  ),
+                  fakeReturnItemDetail.copyWith(
+                    returnQuantity: ReturnQuantity('1'),
+                  ),
+                ],
+              ),
+            ],
+          ).mixpanelTrackingInfo(
+            reasonList: [
+              Usage(
+                usageCode: fakeReturnItemDetail.returnReason,
+                usageDescription: 'fake-description',
+              ),
+            ],
+          ),
+          {
+            TrackingProps.returnId: '',
+            TrackingProps.totalQty: 2,
+            TrackingProps.totalPrice: 20.0,
+            TrackingProps.isSingle: true,
+            TrackingProps.isBonusIncluded: false,
+            TrackingProps.returnReason: [
+              'fake-description',
+              'fake-description',
+            ],
+            TrackingProps.productName: ['', ''],
+            TrackingProps.productManufacturer: ['NA', 'NA'],
+            TrackingProps.unitPrice: [0.0, 0.0],
+          });
+    });
+
+    test('Test mixpanelTrackingInfo', () {
+      expect(
+        NewRequestState.initial().copyWith(
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetail.copyWith(returnReason: 'fake-reason'),
+              ],
+            ),
+          ],
+        ).mixpanelTrackingInfo(
+          reasonList: [
+            const Usage(
+              usageCode: 'fake-code',
+              usageDescription: 'fake-description',
+            ),
+          ],
+        ),
+        containsPair(TrackingProps.returnReason, ['fake-reason']),
+      );
     });
   });
 }
