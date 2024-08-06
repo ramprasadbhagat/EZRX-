@@ -68,23 +68,13 @@ class _NotificationList extends StatelessWidget {
           ),
         ],
       ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            notificationData.createdAt.differenceTime,
-            key: WidgetKeys.notificationItemDifferenceTime,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(color: ZPColors.darkGray),
-          ),
-          const SizedBox(width: padding6),
-          const Icon(
-            Icons.delete_outline_rounded,
-            color: ZPColors.darkGray,
-          ),
-        ],
+      trailing: Text(
+        notificationData.createdAt.differenceTime,
+        key: WidgetKeys.notificationItemDifferenceTime,
+        style: Theme.of(context)
+            .textTheme
+            .bodySmall!
+            .copyWith(color: ZPColors.darkGray),
       ),
     );
   }
