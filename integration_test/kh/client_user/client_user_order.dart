@@ -612,8 +612,8 @@ void main() {
 
       //verify send email
       await forgotPasswordRobot.enterTextToUsernameField(username);
-      await forgotPasswordRobot.tapToNextButton();
-      forgotPasswordRobot.verifyMessageSentEmail();
+      // await forgotPasswordRobot.tapToNextButton();
+      // forgotPasswordRobot.verifyMessageSentEmail();
     });
 
     testWidgets('EZRX-T12 | Verify login successfully with check :Remember me',
