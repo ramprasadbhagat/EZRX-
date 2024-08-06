@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
@@ -15,7 +16,10 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
+import 'package:ezrxmobile/domain/notification/value/value_object.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -55,9 +59,10 @@ void main() {
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlockMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
+  late DeepLinkingBloc deepLinkingBlocMock;
 
   setUpAll(() async {
-    locator.registerLazySingleton(() => AppRouter());
+    setupLocator();
     notifications = await NotificationLocalDataSource().getNotificationList();
     customerInformationMock =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
@@ -75,6 +80,8 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
       viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
+      deepLinkingBlocMock = DeepLinkingBlocMock();
+
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => eligibilityBlocMock.state)
@@ -92,6 +99,8 @@ void main() {
           .thenReturn(ViewByOrderDetailsState.initial());
       when(() => returnDetailsByRequestBlocMock.state)
           .thenReturn(ReturnDetailsByRequestState.initial());
+      when(() => deepLinkingBlocMock.state)
+          .thenReturn(const DeepLinkingState.initial());
     });
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -122,6 +131,9 @@ void main() {
           ),
           BlocProvider<ViewByOrderDetailsBloc>(
             create: (context) => viewByOrderDetailsBlocMock,
+          ),
+          BlocProvider<DeepLinkingBloc>(
+            create: (context) => deepLinkingBlocMock,
           ),
         ],
         child: const Material(child: NotificationTab()),
@@ -718,5 +730,81 @@ void main() {
         expect(msg, findsOneWidget);
       },
     );
+
+    testWidgets('Test _AnnouncementList widget with internal link',
+        (tester) async {
+      final notification = notifications.notificationData.first.copyWith(
+        type: NotificationType('AnnouncementBanner'),
+        hyperLink: EZReachBannerLink('https://example.ezrxplus.com'),
+      );
+
+      when(() => notificationBlocMock.state).thenReturn(
+        NotificationState.initial().copyWith(
+          notificationList: notifications.copyWith(
+            notificationData: [notification],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final listTile = find.byType(ListTile);
+      expect(listTile, findsOneWidget);
+
+      // test event tap to ListTile with internal link
+      expect(notification.hyperLink.isInternalLink, true);
+      await tester.tap(listTile);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => deepLinkingBlocMock.add(
+          DeepLinkingEvent.addPendingLink(
+            EzrxLink(notification.hyperLink.getValue()),
+          ),
+        ),
+      ).called(1);
+
+      // other widgets test
+      final differTimeText = find.text(notification.createdAt.differenceTime);
+      expect(differTimeText, findsOneWidget);
+
+      final icons = find.byIcon(notification.title.iconData);
+      expect(icons, findsOneWidget);
+
+      expect(
+        find.byKey(WidgetKeys.notificationItemDescription),
+        findsOneWidget,
+      );
+      final findTextDateTime =
+          find.text(notification.createdAt.notificationDateTime);
+      expect(findTextDateTime, findsOneWidget);
+    });
+
+    testWidgets('Test _AnnouncementList tap with external link',
+        (tester) async {
+      final notification = notifications.notificationData.first.copyWith(
+        type: NotificationType('AnnouncementBanner'),
+        hyperLink: EZReachBannerLink('https://vnexpress.net/'),
+      );
+
+      // test event tap to ListTile with external link
+      when(() => notificationBlocMock.state).thenReturn(
+        NotificationState.initial().copyWith(
+          notificationList: notifications.copyWith(
+            notificationData: [notification],
+          ),
+        ),
+      );
+      expect(notification.hyperLink.isExternalLink, true);
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final listTile = find.byType(ListTile);
+      expect(listTile, findsOneWidget);
+
+      await tester.tap(listTile);
+      await tester.pumpAndSettle();
+      expect(autoRouterMock.current.name, WebViewPageRoute.name);
+    });
   });
 }
