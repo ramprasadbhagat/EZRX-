@@ -25,6 +25,8 @@ mixin _$SalesOrganisationConfigsOrderTypeDto {
   String get categoryId => throw _privateConstructorUsedError;
   @JsonKey(name: 'orderType', defaultValue: '')
   String get orderType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'orderReason', defaultValue: 0)
+  int get orderReason => throw _privateConstructorUsedError;
   @JsonKey(name: 'description', defaultValue: '')
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'enabled', defaultValue: false)
@@ -48,6 +50,7 @@ abstract class $SalesOrganisationConfigsOrderTypeDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'categoryId', defaultValue: '') String categoryId,
       @JsonKey(name: 'orderType', defaultValue: '') String orderType,
+      @JsonKey(name: 'orderReason', defaultValue: 0) int orderReason,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'enabled', defaultValue: false) bool enabled});
 }
@@ -68,6 +71,7 @@ class _$SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res,
   $Res call({
     Object? categoryId = null,
     Object? orderType = null,
+    Object? orderReason = null,
     Object? description = null,
     Object? enabled = null,
   }) {
@@ -80,6 +84,10 @@ class _$SalesOrganisationConfigsOrderTypeDtoCopyWithImpl<$Res,
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -104,6 +112,7 @@ abstract class _$$SalesOrganisationConfigsOrderTypeDtoImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'categoryId', defaultValue: '') String categoryId,
       @JsonKey(name: 'orderType', defaultValue: '') String orderType,
+      @JsonKey(name: 'orderReason', defaultValue: 0) int orderReason,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'enabled', defaultValue: false) bool enabled});
 }
@@ -123,6 +132,7 @@ class __$$SalesOrganisationConfigsOrderTypeDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? categoryId = null,
     Object? orderType = null,
+    Object? orderReason = null,
     Object? description = null,
     Object? enabled = null,
   }) {
@@ -135,6 +145,10 @@ class __$$SalesOrganisationConfigsOrderTypeDtoImplCopyWithImpl<$Res>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -154,6 +168,7 @@ class _$SalesOrganisationConfigsOrderTypeDtoImpl
   const _$SalesOrganisationConfigsOrderTypeDtoImpl(
       {@JsonKey(name: 'categoryId', defaultValue: '') required this.categoryId,
       @JsonKey(name: 'orderType', defaultValue: '') required this.orderType,
+      @JsonKey(name: 'orderReason', defaultValue: 0) required this.orderReason,
       @JsonKey(name: 'description', defaultValue: '') required this.description,
       @JsonKey(name: 'enabled', defaultValue: false) required this.enabled})
       : super._();
@@ -169,6 +184,9 @@ class _$SalesOrganisationConfigsOrderTypeDtoImpl
   @JsonKey(name: 'orderType', defaultValue: '')
   final String orderType;
   @override
+  @JsonKey(name: 'orderReason', defaultValue: 0)
+  final int orderReason;
+  @override
   @JsonKey(name: 'description', defaultValue: '')
   final String description;
   @override
@@ -177,7 +195,7 @@ class _$SalesOrganisationConfigsOrderTypeDtoImpl
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsOrderTypeDto(categoryId: $categoryId, orderType: $orderType, description: $description, enabled: $enabled)';
+    return 'SalesOrganisationConfigsOrderTypeDto(categoryId: $categoryId, orderType: $orderType, orderReason: $orderReason, description: $description, enabled: $enabled)';
   }
 
   @override
@@ -189,6 +207,8 @@ class _$SalesOrganisationConfigsOrderTypeDtoImpl
                 other.categoryId == categoryId) &&
             (identical(other.orderType, orderType) ||
                 other.orderType == orderType) &&
+            (identical(other.orderReason, orderReason) ||
+                other.orderReason == orderReason) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.enabled, enabled) || other.enabled == enabled));
@@ -196,8 +216,8 @@ class _$SalesOrganisationConfigsOrderTypeDtoImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, categoryId, orderType, description, enabled);
+  int get hashCode => Object.hash(
+      runtimeType, categoryId, orderType, orderReason, description, enabled);
 
   @JsonKey(ignore: true)
   @override
@@ -222,6 +242,8 @@ abstract class _SalesOrganisationConfigsOrderTypeDto
           required final String categoryId,
           @JsonKey(name: 'orderType', defaultValue: '')
           required final String orderType,
+          @JsonKey(name: 'orderReason', defaultValue: 0)
+          required final int orderReason,
           @JsonKey(name: 'description', defaultValue: '')
           required final String description,
           @JsonKey(name: 'enabled', defaultValue: false)
@@ -239,6 +261,9 @@ abstract class _SalesOrganisationConfigsOrderTypeDto
   @override
   @JsonKey(name: 'orderType', defaultValue: '')
   String get orderType;
+  @override
+  @JsonKey(name: 'orderReason', defaultValue: 0)
+  int get orderReason;
   @override
   @JsonKey(name: 'description', defaultValue: '')
   String get description;

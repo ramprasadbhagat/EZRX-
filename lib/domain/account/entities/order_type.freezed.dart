@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderType {
   String get categoryId => throw _privateConstructorUsedError;
   DocumentType get orderType => throw _privateConstructorUsedError;
+  int get orderReason => throw _privateConstructorUsedError;
   StringValue get description => throw _privateConstructorUsedError;
   bool get enabled => throw _privateConstructorUsedError;
 
@@ -34,6 +35,7 @@ abstract class $OrderTypeCopyWith<$Res> {
   $Res call(
       {String categoryId,
       DocumentType orderType,
+      int orderReason,
       StringValue description,
       bool enabled});
 }
@@ -53,6 +55,7 @@ class _$OrderTypeCopyWithImpl<$Res, $Val extends OrderType>
   $Res call({
     Object? categoryId = null,
     Object? orderType = null,
+    Object? orderReason = null,
     Object? description = null,
     Object? enabled = null,
   }) {
@@ -65,6 +68,10 @@ class _$OrderTypeCopyWithImpl<$Res, $Val extends OrderType>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as DocumentType,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -88,6 +95,7 @@ abstract class _$$OrderTypeImplCopyWith<$Res>
   $Res call(
       {String categoryId,
       DocumentType orderType,
+      int orderReason,
       StringValue description,
       bool enabled});
 }
@@ -105,6 +113,7 @@ class __$$OrderTypeImplCopyWithImpl<$Res>
   $Res call({
     Object? categoryId = null,
     Object? orderType = null,
+    Object? orderReason = null,
     Object? description = null,
     Object? enabled = null,
   }) {
@@ -117,6 +126,10 @@ class __$$OrderTypeImplCopyWithImpl<$Res>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as DocumentType,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -135,6 +148,7 @@ class _$OrderTypeImpl extends _OrderType {
   const _$OrderTypeImpl(
       {required this.categoryId,
       required this.orderType,
+      required this.orderReason,
       required this.description,
       required this.enabled})
       : super._();
@@ -144,13 +158,15 @@ class _$OrderTypeImpl extends _OrderType {
   @override
   final DocumentType orderType;
   @override
+  final int orderReason;
+  @override
   final StringValue description;
   @override
   final bool enabled;
 
   @override
   String toString() {
-    return 'OrderType(categoryId: $categoryId, orderType: $orderType, description: $description, enabled: $enabled)';
+    return 'OrderType(categoryId: $categoryId, orderType: $orderType, orderReason: $orderReason, description: $description, enabled: $enabled)';
   }
 
   @override
@@ -162,14 +178,16 @@ class _$OrderTypeImpl extends _OrderType {
                 other.categoryId == categoryId) &&
             (identical(other.orderType, orderType) ||
                 other.orderType == orderType) &&
+            (identical(other.orderReason, orderReason) ||
+                other.orderReason == orderReason) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.enabled, enabled) || other.enabled == enabled));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, categoryId, orderType, description, enabled);
+  int get hashCode => Object.hash(
+      runtimeType, categoryId, orderType, orderReason, description, enabled);
 
   @JsonKey(ignore: true)
   @override
@@ -182,6 +200,7 @@ abstract class _OrderType extends OrderType {
   const factory _OrderType(
       {required final String categoryId,
       required final DocumentType orderType,
+      required final int orderReason,
       required final StringValue description,
       required final bool enabled}) = _$OrderTypeImpl;
   const _OrderType._() : super._();
@@ -190,6 +209,8 @@ abstract class _OrderType extends OrderType {
   String get categoryId;
   @override
   DocumentType get orderType;
+  @override
+  int get orderReason;
   @override
   StringValue get description;
   @override

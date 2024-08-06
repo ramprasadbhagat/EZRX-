@@ -11,6 +11,7 @@ class OrderType with _$OrderType {
   const factory OrderType({
     required String categoryId,
     required DocumentType orderType,
+    required int orderReason,
     required StringValue description,
     required bool enabled,
   }) = _OrderType;
@@ -19,6 +20,7 @@ class OrderType with _$OrderType {
         categoryId: '',
         orderType: DocumentType(''),
         description: StringValue(''),
+        orderReason: 0,
         enabled: false,
       );
 }

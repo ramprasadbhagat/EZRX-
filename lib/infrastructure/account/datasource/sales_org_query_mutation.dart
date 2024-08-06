@@ -113,6 +113,7 @@ class SalesOrgQueryMutation {
       orderTypes {
         categoryId
         orderType
+        orderReason
         description
         enabled
       }

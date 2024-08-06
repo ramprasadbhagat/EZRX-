@@ -12,6 +12,7 @@ _$SalesOrganisationConfigsOrderTypeDtoImpl
         _$SalesOrganisationConfigsOrderTypeDtoImpl(
           categoryId: json['categoryId'] as String? ?? '',
           orderType: json['orderType'] as String? ?? '',
+          orderReason: (json['orderReason'] as num?)?.toInt() ?? 0,
           description: json['description'] as String? ?? '',
           enabled: json['enabled'] as bool? ?? false,
         );
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$SalesOrganisationConfigsOrderTypeDtoImplToJson(
     <String, dynamic>{
       'categoryId': instance.categoryId,
       'orderType': instance.orderType,
+      'orderReason': instance.orderReason,
       'description': instance.description,
       'enabled': instance.enabled,
     };

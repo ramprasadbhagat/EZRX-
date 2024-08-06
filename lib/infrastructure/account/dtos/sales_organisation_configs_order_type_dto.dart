@@ -14,6 +14,7 @@ class SalesOrganisationConfigsOrderTypeDto
   const factory SalesOrganisationConfigsOrderTypeDto({
     @JsonKey(name: 'categoryId', defaultValue: '') required String categoryId,
     @JsonKey(name: 'orderType', defaultValue: '') required String orderType,
+    @JsonKey(name: 'orderReason', defaultValue: 0) required int orderReason,
     @JsonKey(name: 'description', defaultValue: '') required String description,
     @JsonKey(name: 'enabled', defaultValue: false) required bool enabled,
   }) = _SalesOrganisationConfigsOrderTypeDto;
@@ -23,6 +24,7 @@ class SalesOrganisationConfigsOrderTypeDto
     return SalesOrganisationConfigsOrderTypeDto(
       categoryId: orderType.categoryId,
       orderType: orderType.orderType.getValue(),
+      orderReason: orderType.orderReason,
       description: orderType.description.getValue(),
       enabled: orderType.enabled,
     );
@@ -32,6 +34,7 @@ class SalesOrganisationConfigsOrderTypeDto
     return OrderType(
       categoryId: categoryId,
       orderType: DocumentType(orderType),
+      orderReason: orderReason,
       description: StringValue(description),
       enabled: enabled,
     );
