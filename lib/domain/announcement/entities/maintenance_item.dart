@@ -73,10 +73,8 @@ class MaintenanceItem with _$MaintenanceItem {
         .toList();
   }
 
-  List<NotificationData> get listNotificationData => banners
-      .where((element) => element.loginType.isLogged)
-      .map((e) => e.toNotificationData)
-      .toList();
+  List<NotificationData> get listNotificationData =>
+      banners.map((e) => e.toNotificationData).toList();
 }
 
 @freezed
