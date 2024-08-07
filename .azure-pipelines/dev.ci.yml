@@ -148,6 +148,7 @@ stages:
 
   - stage: UnitTest
     displayName: Unit Test Coverage
+    dependsOn: []
     jobs:
       - job: TestApplication
         displayName: Test application
