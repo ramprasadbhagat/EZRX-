@@ -445,7 +445,7 @@ class CreatePaymentInvoicePdf {
     return pw.Container(
       width: double.infinity,
       color: PdfColor.fromInt(ZPColors.extraLightGrey2.value),
-      padding: const pw.EdgeInsets.symmetric(vertical: 5.0),
+      padding: const pw.EdgeInsets.symmetric(vertical: 5.0).copyWith(right: 20),
       child: pw.Image(image),
     );
   }
