@@ -62,4 +62,5 @@ class TrackingEvents {
   static String generatePaymentAdviceFailed = 'Generate Payment Advice Failed';
   static String payNowClicked = 'Pay Now Clicked';
   static String forceUpgradeCheck = 'Force Upgrade Check';
+  static String requestCounterOffer = 'Request Counter Offer';
 }

@@ -725,6 +725,7 @@ void setupLocator() {
       remoteDataSource: locator<PriceOverrideRemoteDataSource>(),
       config: locator<Config>(),
       localDataSource: locator<PriceOverrideLocalDataSource>(),
+      mixpanelService: locator<MixpanelService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -1882,7 +1883,7 @@ void setupLocator() {
   //
   //============================================================
   locator.registerLazySingleton(
-        () => CreatePaymentInvoicePdf(),
+    () => CreatePaymentInvoicePdf(),
   );
 
   locator.registerLazySingleton(

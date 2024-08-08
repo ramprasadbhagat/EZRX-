@@ -112,4 +112,6 @@ class TrackingProps {
   static String forceUpgradeBlocked = 'force_upgrade_blocked';
   static String forceUpgradeAlertTooSoon = 'force_upgrade_alert_too_soon';
   static String forceUpgradeIgnoredAlert = 'force_upgrade_ignored_alert';
+  static String counterOfferPrice = 'counter_offer_price';
+  static String counterOfferRemarks = 'counter_offer_remarks';
 }
