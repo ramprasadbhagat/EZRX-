@@ -37,6 +37,7 @@ class ProductDetailRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = productDetailQuery.getMaterialDetails(
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
+        remoteConfigService.enableProductTypeFilter,
       );
 
       final variables = {

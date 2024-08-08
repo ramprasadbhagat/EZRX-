@@ -24,7 +24,10 @@
             "promoType": "",
             "isMarketPlace": true,
             "hasMandatoryTenderContract": true,
-            "hasValidTenderContract": true
+            "hasValidTenderContract": true,
+            "isSampleMaterial": false,
+            "isGimmick": true,
+            "isPoison": true
         }
     }
 }

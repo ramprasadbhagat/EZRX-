@@ -35,6 +35,9 @@ query materialDetails(
     promoType
     hasMandatoryTenderContract
     hasValidTenderContract
+    isPoison
+    isGimmick
+    isSampleMaterial
   }
 }
 

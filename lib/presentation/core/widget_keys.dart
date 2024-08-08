@@ -70,6 +70,9 @@ class WidgetKeys {
   static const Key billToCustomerCode = Key('billToCustomerCode');
   static const Key billToAddress = Key('billToAddress');
   static const Key tenderTag = Key('tenderTag');
+  static const Key gimmickTag = Key('gimmickTag');
+  static const Key sampleTag = Key('sampleTag');
+  static const Key poisonTag = Key('poisonTag');
   static const Key orderItemPriceStrikeThrough =
       Key('orderItemPriceStrikeThrough');
   static const Key dontAllowAlertDialog = Key('dontAllowAlertDialog');

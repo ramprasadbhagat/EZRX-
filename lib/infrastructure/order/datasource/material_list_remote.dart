@@ -52,6 +52,7 @@ class MaterialListRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery(
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
+        remoteConfigService.enableProductTypeFilter,
       );
 
       final variables = {
@@ -125,6 +126,7 @@ class MaterialListRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery(
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
+        remoteConfigService.enableProductTypeFilter,
       );
 
       final variables = {
@@ -213,6 +215,7 @@ class MaterialListRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery(
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
+        remoteConfigService.enableProductTypeFilter,
       );
 
       final variables = {

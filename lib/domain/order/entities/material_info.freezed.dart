@@ -54,6 +54,7 @@ mixin _$MaterialInfo {
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
   bool get isSampleMaterial => throw _privateConstructorUsedError;
+  bool get isPoison => throw _privateConstructorUsedError;
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
@@ -111,6 +112,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       bool isSampleMaterial,
+      bool isPoison,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
       double tax,
@@ -175,6 +177,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
     Object? isSampleMaterial = null,
+    Object? isPoison = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
     Object? tax = null,
@@ -325,6 +328,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasValidTenderContract: null == hasValidTenderContract
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
@@ -446,6 +453,7 @@ abstract class _$$MaterialInfoImplCopyWith<$Res>
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       bool isSampleMaterial,
+      bool isPoison,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
       double tax,
@@ -513,6 +521,7 @@ class __$$MaterialInfoImplCopyWithImpl<$Res>
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
     Object? isSampleMaterial = null,
+    Object? isPoison = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
     Object? tax = null,
@@ -663,6 +672,10 @@ class __$$MaterialInfoImplCopyWithImpl<$Res>
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasValidTenderContract: null == hasValidTenderContract
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
@@ -738,6 +751,7 @@ class _$MaterialInfoImpl extends _MaterialInfo {
       required this.materialGroup2,
       required this.materialGroup4,
       required this.isSampleMaterial,
+      required this.isPoison,
       required this.hasValidTenderContract,
       required this.hasMandatoryTenderContract,
       required this.tax,
@@ -835,6 +849,8 @@ class _$MaterialInfoImpl extends _MaterialInfo {
   @override
   final bool isSampleMaterial;
   @override
+  final bool isPoison;
+  @override
   final bool hasValidTenderContract;
   @override
   final bool hasMandatoryTenderContract;
@@ -859,7 +875,7 @@ class _$MaterialInfoImpl extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, isMarketPlace: $isMarketPlace, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, tax: $tax, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails, sampleBonusItemId: $sampleBonusItemId)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, isMarketPlace: $isMarketPlace, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, isPoison: $isPoison, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, tax: $tax, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails, sampleBonusItemId: $sampleBonusItemId)';
   }
 
   @override
@@ -933,6 +949,8 @@ class _$MaterialInfoImpl extends _MaterialInfo {
                 other.materialGroup4 == materialGroup4) &&
             (identical(other.isSampleMaterial, isSampleMaterial) ||
                 other.isSampleMaterial == isSampleMaterial) &&
+            (identical(other.isPoison, isPoison) ||
+                other.isPoison == isPoison) &&
             (identical(other.hasValidTenderContract, hasValidTenderContract) ||
                 other.hasValidTenderContract == hasValidTenderContract) &&
             (identical(other.hasMandatoryTenderContract, hasMandatoryTenderContract) ||
@@ -945,8 +963,7 @@ class _$MaterialInfoImpl extends _MaterialInfo {
             (identical(other.ean, ean) || other.ean == ean) &&
             (identical(other.counterOfferDetails, counterOfferDetails) ||
                 other.counterOfferDetails == counterOfferDetails) &&
-            (identical(other.sampleBonusItemId, sampleBonusItemId) ||
-                other.sampleBonusItemId == sampleBonusItemId));
+            (identical(other.sampleBonusItemId, sampleBonusItemId) || other.sampleBonusItemId == sampleBonusItemId));
   }
 
   @override
@@ -987,6 +1004,7 @@ class _$MaterialInfoImpl extends _MaterialInfo {
         materialGroup2,
         materialGroup4,
         isSampleMaterial,
+        isPoison,
         hasValidTenderContract,
         hasMandatoryTenderContract,
         tax,
@@ -1041,6 +1059,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
       required final bool isSampleMaterial,
+      required final bool isPoison,
       required final bool hasValidTenderContract,
       required final bool hasMandatoryTenderContract,
       required final double tax,
@@ -1121,6 +1140,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   MaterialGroup get materialGroup4;
   @override
   bool get isSampleMaterial;
+  @override
+  bool get isPoison;
   @override
   bool get hasValidTenderContract;
   @override

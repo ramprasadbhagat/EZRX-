@@ -130,6 +130,8 @@ abstract class ZPColors {
   static const Color brickRedColor = Color.fromRGBO(112, 29, 57, 1);
   static const Color shadersGrey = Color.fromRGBO(85, 85, 85, 1);
   static const Color bannerBackground = Color.fromRGBO(229, 235, 236, 1);
+  static const Color poisonMaterialText = Color.fromRGBO(169, 47, 47, 1);
+  static const Color poisonMaterialBg = Color.fromRGBO(250, 235, 240, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

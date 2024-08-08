@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -25,28 +24,15 @@ import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 void main() {
   late ProductImageBlocMock productImageBlocMock;
@@ -68,7 +54,6 @@ void main() {
   group('Test "Material Grid Item"', () {
     setUp(() async {
       TestWidgetsFlutterBinding.ensureInitialized();
-      locator = GetIt.instance;
       productImageBlocMock = ProductImageBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
@@ -378,6 +363,57 @@ void main() {
 
         expect(manufacturerText.startsWith('Sold by: '), false);
       });
+    });
+
+    testWidgets('Show gimmick tag when is gimmick material', (tester) async {
+      await tester.pumpWidget(
+        getScopedWidget(
+          materialInfo:
+              listMaterialInfo.firstWhere((element) => element.isGimmick),
+        ),
+      );
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.gimmickTag),
+          matching: find.text('Gimmick'),
+        ),
+        findsOne,
+      );
+    });
+
+    testWidgets('Show sample tag when is sample material', (tester) async {
+      await tester.pumpWidget(
+        getScopedWidget(
+          materialInfo: listMaterialInfo
+              .firstWhere((element) => element.isSampleMaterial),
+        ),
+      );
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.sampleTag),
+          matching: find.text('Sample'),
+        ),
+        findsOne,
+      );
+    });
+
+    testWidgets('Show poison tag when is poison material', (tester) async {
+      await tester.pumpWidget(
+        getScopedWidget(
+          materialInfo:
+              listMaterialInfo.firstWhere((element) => element.isPoison),
+        ),
+      );
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.poisonTag),
+          matching: find.text('Poison'),
+        ),
+        findsOne,
+      );
     });
   });
 }

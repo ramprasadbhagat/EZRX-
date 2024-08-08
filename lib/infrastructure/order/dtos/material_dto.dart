@@ -96,6 +96,7 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'dataTotalHidden', defaultValue: 0)
     required int dataTotalHidden,
     @JsonKey(name: 'isGimmick', defaultValue: false) required bool isGimmick,
+    @JsonKey(name: 'isPoison', defaultValue: false) required bool isPoison,
     @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
     required List<MaterialDataDto> data,
     @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -108,53 +109,6 @@ class MaterialDto with _$MaterialDto {
     )
     required bool isMarketPlace,
   }) = _MaterialDto;
-
-  factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
-    return MaterialDto(
-      quantity: materialInfo.quantity.intValue,
-      defaultMaterialDescription: materialInfo.defaultMaterialDescription,
-      materialNumber: materialInfo.materialNumber.getOrDefaultValue(''),
-      materialDescription: materialInfo.materialDescription,
-      governmentMaterialCode:
-          materialInfo.governmentMaterialCode.getOrDefaultValue(''),
-      therapeuticClass: materialInfo.therapeuticClass,
-      itemBrand: materialInfo.itemBrand,
-      principalName:
-          materialInfo.principalData.principalName.getOrDefaultValue(''),
-      principalCode:
-          materialInfo.principalData.principalCode.getOrDefaultValue(''),
-      taxClassification: materialInfo.taxClassification.getOrDefaultValue(''),
-      itemRegistrationNumber:
-          materialInfo.itemRegistrationNumber.getOrDefaultValue(''),
-      unitOfMeasurement: materialInfo.unitOfMeasurement.getOrDefaultValue(''),
-      materialGroup2: materialInfo.materialGroup2.getOrDefaultValue(''),
-      materialGroup4: materialInfo.materialGroup4.getOrDefaultValue(''),
-      isSampleMaterial: materialInfo.isSampleMaterial,
-      hidePrice: materialInfo.hidePrice,
-      hasValidTenderContract: materialInfo.hasValidTenderContract,
-      hasMandatoryTenderContract: materialInfo.hasMandatoryTenderContract,
-      taxes: materialInfo.tax,
-      bundles:
-          materialInfo.bundles.map((e) => BundleDto.fromDomain(e)).toList(),
-      isFOCMaterial: materialInfo.isFOCMaterial,
-      remarks: materialInfo.remarks,
-      genericMaterialName: materialInfo.genericMaterialName,
-      ean: materialInfo.ean,
-      code: '',
-      data:
-          materialInfo.data.map((e) => MaterialDataDto.fromDomain(e)).toList(),
-      dataTotalCount: 0,
-      dataTotalHidden: 0,
-      isFavourite: false,
-      isGimmick: false,
-      manufactured: '',
-      name: '',
-      type: '',
-      bundle: BundleDto.fromDomain(materialInfo.bundle),
-      isSuspended: materialInfo.isSuspended,
-      isMarketPlace: materialInfo.isMarketPlace,
-    );
-  }
 
   MaterialInfo toDomain() {
     return MaterialInfo(
@@ -172,7 +126,7 @@ class MaterialDto with _$MaterialDto {
       unitOfMeasurement: StringValue(unitOfMeasurement),
       materialGroup2: MaterialGroup(materialGroup2),
       materialGroup4: MaterialGroup(materialGroup4),
-      isSampleMaterial: isSampleMaterial,
+
       hidePrice: hidePrice,
       hasValidTenderContract: hasValidTenderContract,
       hasMandatoryTenderContract: hasMandatoryTenderContract,
@@ -193,6 +147,8 @@ class MaterialDto with _$MaterialDto {
       dataTotalHidden: DataTotalHidden(dataTotalHidden),
       isFavourite: isFavourite,
       isGimmick: isGimmick,
+      isSampleMaterial: isSampleMaterial,
+      isPoison: isPoison,
       manufactured: manufactured,
       name: name,
       type: MaterialInfoType(type),

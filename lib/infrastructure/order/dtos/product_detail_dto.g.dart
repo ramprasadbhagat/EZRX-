@@ -37,6 +37,9 @@ _$ProductDetailDtoImpl _$$ProductDetailDtoImplFromJson(
       hasMandatoryTenderContract:
           json['hasMandatoryTenderContract'] as bool? ?? false,
       hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
+      isGimmick: json['isGimmick'] as bool? ?? false,
+      isSampleMaterial: json['isSampleMaterial'] as bool? ?? false,
+      isPoison: json['isPoison'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$ProductDetailDtoImplToJson(
@@ -65,4 +68,7 @@ Map<String, dynamic> _$$ProductDetailDtoImplToJson(
       'isMarketPlace': instance.isMarketPlace,
       'hasMandatoryTenderContract': instance.hasMandatoryTenderContract,
       'hasValidTenderContract': instance.hasValidTenderContract,
+      'isGimmick': instance.isGimmick,
+      'isSampleMaterial': instance.isSampleMaterial,
+      'isPoison': instance.isPoison,
     };

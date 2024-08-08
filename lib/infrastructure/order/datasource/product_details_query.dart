@@ -1,5 +1,8 @@
 class ProductDetailQuery {
-  String getMaterialDetails(bool enableMarketplace) {
+  String getMaterialDetails(
+    bool enableMarketplace,
+    bool enableProductTypeFilter,
+  ) {
     return '''
      query materialDetails(
         \$materialNumber: String!,
@@ -38,6 +41,12 @@ class ProductDetailQuery {
         suspensionStatus
         hasMandatoryTenderContract
         hasValidTenderContract
+        ${enableProductTypeFilter ? '''
+          isPoison
+          isGimmick
+          isSampleMaterial
+        ''' : ''}
+
       }
     }
      ''';

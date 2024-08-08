@@ -67,6 +67,12 @@ mixin _$ProductDetailDto {
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isGimmick', defaultValue: false)
+  bool get isGimmick => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+  bool get isSampleMaterial => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  bool get isPoison => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -115,7 +121,11 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       bool hasMandatoryTenderContract,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      bool hasValidTenderContract});
+      bool hasValidTenderContract,
+      @JsonKey(name: 'isGimmick', defaultValue: false) bool isGimmick,
+      @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+      bool isSampleMaterial,
+      @JsonKey(name: 'isPoison', defaultValue: false) bool isPoison});
 }
 
 /// @nodoc
@@ -154,6 +164,9 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
     Object? isMarketPlace = null,
     Object? hasMandatoryTenderContract = null,
     Object? hasValidTenderContract = null,
+    Object? isGimmick = null,
+    Object? isSampleMaterial = null,
+    Object? isPoison = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -248,6 +261,18 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSampleMaterial: null == isSampleMaterial
+          ? _value.isSampleMaterial
+          : isSampleMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -295,7 +320,11 @@ abstract class _$$ProductDetailDtoImplCopyWith<$Res>
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       bool hasMandatoryTenderContract,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      bool hasValidTenderContract});
+      bool hasValidTenderContract,
+      @JsonKey(name: 'isGimmick', defaultValue: false) bool isGimmick,
+      @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+      bool isSampleMaterial,
+      @JsonKey(name: 'isPoison', defaultValue: false) bool isPoison});
 }
 
 /// @nodoc
@@ -332,6 +361,9 @@ class __$$ProductDetailDtoImplCopyWithImpl<$Res>
     Object? isMarketPlace = null,
     Object? hasMandatoryTenderContract = null,
     Object? hasValidTenderContract = null,
+    Object? isGimmick = null,
+    Object? isSampleMaterial = null,
+    Object? isPoison = null,
   }) {
     return _then(_$ProductDetailDtoImpl(
       materialNumber: null == materialNumber
@@ -426,6 +458,18 @@ class __$$ProductDetailDtoImplCopyWithImpl<$Res>
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSampleMaterial: null == isSampleMaterial
+          ? _value.isSampleMaterial
+          : isSampleMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -476,7 +520,11 @@ class _$ProductDetailDtoImpl extends _ProductDetailDto {
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       required this.hasMandatoryTenderContract,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      required this.hasValidTenderContract})
+      required this.hasValidTenderContract,
+      @JsonKey(name: 'isGimmick', defaultValue: false) required this.isGimmick,
+      @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+      required this.isSampleMaterial,
+      @JsonKey(name: 'isPoison', defaultValue: false) required this.isPoison})
       : super._();
 
   factory _$ProductDetailDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -552,10 +600,19 @@ class _$ProductDetailDtoImpl extends _ProductDetailDto {
   @override
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
   final bool hasValidTenderContract;
+  @override
+  @JsonKey(name: 'isGimmick', defaultValue: false)
+  final bool isGimmick;
+  @override
+  @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+  final bool isSampleMaterial;
+  @override
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  final bool isPoison;
 
   @override
   String toString() {
-    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus, isSuspended: $isSuspended, isMarketPlace: $isMarketPlace, hasMandatoryTenderContract: $hasMandatoryTenderContract, hasValidTenderContract: $hasValidTenderContract)';
+    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus, isSuspended: $isSuspended, isMarketPlace: $isMarketPlace, hasMandatoryTenderContract: $hasMandatoryTenderContract, hasValidTenderContract: $hasValidTenderContract, isGimmick: $isGimmick, isSampleMaterial: $isSampleMaterial, isPoison: $isPoison)';
   }
 
   @override
@@ -611,7 +668,13 @@ class _$ProductDetailDtoImpl extends _ProductDetailDto {
                 other.hasMandatoryTenderContract ==
                     hasMandatoryTenderContract) &&
             (identical(other.hasValidTenderContract, hasValidTenderContract) ||
-                other.hasValidTenderContract == hasValidTenderContract));
+                other.hasValidTenderContract == hasValidTenderContract) &&
+            (identical(other.isGimmick, isGimmick) ||
+                other.isGimmick == isGimmick) &&
+            (identical(other.isSampleMaterial, isSampleMaterial) ||
+                other.isSampleMaterial == isSampleMaterial) &&
+            (identical(other.isPoison, isPoison) ||
+                other.isPoison == isPoison));
   }
 
   @JsonKey(ignore: true)
@@ -640,7 +703,10 @@ class _$ProductDetailDtoImpl extends _ProductDetailDto {
         isSuspended,
         isMarketPlace,
         hasMandatoryTenderContract,
-        hasValidTenderContract
+        hasValidTenderContract,
+        isGimmick,
+        isSampleMaterial,
+        isPoison
       ]);
 
   @JsonKey(ignore: true)
@@ -706,7 +772,13 @@ abstract class _ProductDetailDto extends ProductDetailDto {
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       required final bool hasMandatoryTenderContract,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      required final bool hasValidTenderContract}) = _$ProductDetailDtoImpl;
+      required final bool hasValidTenderContract,
+      @JsonKey(name: 'isGimmick', defaultValue: false)
+      required final bool isGimmick,
+      @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+      required final bool isSampleMaterial,
+      @JsonKey(name: 'isPoison', defaultValue: false)
+      required final bool isPoison}) = _$ProductDetailDtoImpl;
   _ProductDetailDto._() : super._();
 
   factory _ProductDetailDto.fromJson(Map<String, dynamic> json) =
@@ -782,6 +854,15 @@ abstract class _ProductDetailDto extends ProductDetailDto {
   @override
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
   bool get hasValidTenderContract;
+  @override
+  @JsonKey(name: 'isGimmick', defaultValue: false)
+  bool get isGimmick;
+  @override
+  @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+  bool get isSampleMaterial;
+  @override
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  bool get isPoison;
   @override
   @JsonKey(ignore: true)
   _$$ProductDetailDtoImplCopyWith<_$ProductDetailDtoImpl> get copyWith =>

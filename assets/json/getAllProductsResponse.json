@@ -30,7 +30,7 @@
                     "IsGimmick": false,
                     "hasValidTenderContract": true,
                     "hasMandatoryTenderContract": false,
-                    "isMarketPlace":true
+                    "isMarketPlace": true
                 },
                 {
                     "Code": "0047278981",
@@ -123,9 +123,11 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
-                    "hasValidTenderContract": true,
+                    "hasValidTenderContract": false,
                     "hasMandatoryTenderContract": false,
-                    "IsGimmick": false
+                    "IsGimmick": true,
+                    "isSampleMaterial": false,
+                    "isPoison": false
                 },
                 {
                     "Code": "000000000023344237",
@@ -151,9 +153,11 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
-                    "hasValidTenderContract": true,
+                    "hasValidTenderContract": false,
                     "hasMandatoryTenderContract": false,
-                    "IsGimmick": false
+                    "IsGimmick": false,
+                    "isSampleMaterial": true,
+                    "isPoison": false
                 },
                 {
                     "Code": "000000000023270265",
@@ -179,9 +183,11 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
-                    "hasValidTenderContract": true,
+                    "hasValidTenderContract": false,
                     "hasMandatoryTenderContract": false,
-                    "IsGimmick": false
+                    "IsGimmick": false,
+                    "isSampleMaterial": false,
+                    "isPoison": true
                 },
                 {
                     "Code": "000000000023344243",
@@ -207,9 +213,11 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
-                    "hasValidTenderContract": true,
+                    "hasValidTenderContract": false,
                     "hasMandatoryTenderContract": false,
-                    "IsGimmick": false
+                    "IsGimmick": false,
+                    "isSampleMaterial": true,
+                    "isPoison": true
                 },
                 {
                     "Code": "000000000023344235",
@@ -522,7 +530,7 @@
                     "DataTotalCount": 6,
                     "DataTotalHidden": 3,
                     "IsGimmick": null,
-                    "isMarketPlace":true
+                    "isMarketPlace": true
                 }
             ]
         }

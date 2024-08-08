@@ -47,6 +47,7 @@ _$MaterialDtoImpl _$$MaterialDtoImplFromJson(Map<String, dynamic> json) =>
       dataTotalCount: (json['dataTotalCount'] as num?)?.toInt() ?? 0,
       dataTotalHidden: (json['dataTotalHidden'] as num?)?.toInt() ?? 0,
       isGimmick: json['isGimmick'] as bool? ?? false,
+      isPoison: json['isPoison'] as bool? ?? false,
       data: (json['data'] as List<dynamic>?)
               ?.map((e) => MaterialDataDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -96,6 +97,7 @@ Map<String, dynamic> _$$MaterialDtoImplToJson(_$MaterialDtoImpl instance) =>
       'dataTotalCount': instance.dataTotalCount,
       'dataTotalHidden': instance.dataTotalHidden,
       'isGimmick': instance.isGimmick,
+      'isPoison': instance.isPoison,
       'data': instance.data.map((e) => e.toJson()).toList(),
       'bundles': instance.bundles.map((e) => e.toJson()).toList(),
       'suspensionStatus': instance.isSuspended,

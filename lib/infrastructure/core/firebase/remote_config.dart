@@ -62,6 +62,9 @@ class RemoteConfigService {
   bool get enableOrderType =>
       _remoteConfig.getBool(RemoteConfigConstants.enableOrderTypeConfig);
 
+  bool get enableProductTypeFilter =>
+      _remoteConfig.getBool(RemoteConfigConstants.enableProductTypesFilter);
+
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
   Future<void> _setInAppDefaultValues() async {
@@ -75,6 +78,7 @@ class RemoteConfigService {
               .toJson(),
         ),
         RemoteConfigConstants.passUserId: false,
+        RemoteConfigConstants.enableProductTypesFilter: false,
       },
     );
   }

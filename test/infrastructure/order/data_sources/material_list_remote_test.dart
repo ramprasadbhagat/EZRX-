@@ -25,6 +25,7 @@ void main() {
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
+  const fakeEnableProductTypeFilter = true;
   const pageSize = 24;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
@@ -41,6 +42,8 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       when(() => remoteConfigService.enableMarketPlaceMarkets)
           .thenReturn(fakeEnableMarketPlaceMarkets);
+      when(() => remoteConfigService.enableProductTypeFilter)
+          .thenReturn(fakeEnableProductTypeFilter);
       remoteDataSource = MaterialListRemoteDataSource(
         httpService: service,
         config: Config(),
@@ -82,8 +85,8 @@ void main() {
       ),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
-        'query':
-            remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue),
+        'query': remoteDataSource.materialListQuery
+            .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
         'variables': variables,
       }),
     );
@@ -151,8 +154,8 @@ void main() {
       ),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
-        'query':
-            remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue),
+        'query': remoteDataSource.materialListQuery
+            .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
         'variables': variables,
       }),
     );
@@ -265,7 +268,7 @@ void main() {
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
           'query': remoteDataSource.materialListQuery
-              .getProductQuery(fakeConfigValue),
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
@@ -320,7 +323,7 @@ void main() {
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
           'query': remoteDataSource.materialListQuery
-              .getProductQuery(fakeConfigValue),
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );

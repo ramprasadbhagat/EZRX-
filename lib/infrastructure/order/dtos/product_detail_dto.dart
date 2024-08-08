@@ -61,6 +61,10 @@ class ProductDetailDto with _$ProductDetailDto {
     required bool hasMandatoryTenderContract,
     @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
     required bool hasValidTenderContract,
+    @JsonKey(name: 'isGimmick', defaultValue: false) required bool isGimmick,
+    @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+    required bool isSampleMaterial,
+    @JsonKey(name: 'isPoison', defaultValue: false) required bool isPoison,
   }) = _ProductDetailDto;
 
   MaterialInfo toDomain() => MaterialInfo(
@@ -86,7 +90,9 @@ class ProductDetailDto with _$ProductDetailDto {
         ean: '',
         materialGroup2: MaterialGroup(''),
         materialGroup4: MaterialGroup(''),
-        isSampleMaterial: false,
+        isSampleMaterial: isSampleMaterial,
+        isGimmick: isGimmick,
+        isPoison: isPoison,
         hasValidTenderContract: hasValidTenderContract,
         hasMandatoryTenderContract: hasMandatoryTenderContract,
         taxClassification: MaterialTaxClassification(''),
@@ -97,7 +103,6 @@ class ProductDetailDto with _$ProductDetailDto {
         data: <MaterialData>[],
         dataTotalCount: 0,
         dataTotalHidden: DataTotalHidden(0),
-        isGimmick: false,
         manufactured: '',
         name: '',
         type: MaterialInfoType(''),

@@ -53,6 +53,7 @@ class MaterialInfo with _$MaterialInfo {
     required MaterialGroup materialGroup2,
     required MaterialGroup materialGroup4,
     required bool isSampleMaterial,
+    required bool isPoison,
     required bool hasValidTenderContract,
     required bool hasMandatoryTenderContract,
     required double tax,
@@ -110,6 +111,7 @@ class MaterialInfo with _$MaterialInfo {
         isSuspended: false,
         isPrincipalSuspended: false,
         isMarketPlace: false,
+        isPoison: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

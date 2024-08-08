@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/combo_offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
@@ -78,7 +79,14 @@ class MaterialGridItem extends StatelessWidget {
                           alignment: Alignment.bottomLeft,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              if (materialInfo.isPoison)
+                                ProductTag.poison(isRounded: false),
+                              if (materialInfo.isSampleMaterial)
+                                ProductTag.sample(isRounded: false),
+                              if (materialInfo.isGimmick)
+                                ProductTag.gimmickTag(isRounded: false),
                               CovidLabel(
                                 materialInfo: materialInfo,
                               ),

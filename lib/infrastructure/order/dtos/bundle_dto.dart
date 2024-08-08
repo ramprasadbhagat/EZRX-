@@ -38,20 +38,6 @@ class BundleDto with _$BundleDto {
     );
   }
 
-  factory BundleDto.fromDomain(Bundle bundle) {
-    return BundleDto(
-      materials:
-          bundle.materials.map((e) => MaterialDto.fromDomain(e)).toList(),
-      bundleName: bundle.bundleName.getOrDefaultValue(''),
-      bundleCode: bundle.bundleCode,
-      bundleInformation: bundle.bundleInformation
-          .map((e) => BundleInfoDto.fromDomain(e))
-          .toList(),
-      conditions: bundle.conditions,
-      bonusEligible: bundle.bonusEligible,
-    );
-  }
-
   factory BundleDto.fromJson(Map<String, dynamic> json) =>
       _$BundleDtoFromJson(json);
 }

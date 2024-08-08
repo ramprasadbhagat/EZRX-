@@ -93,6 +93,8 @@ mixin _$MaterialDto {
   int get dataTotalHidden => throw _privateConstructorUsedError;
   @JsonKey(name: 'isGimmick', defaultValue: false)
   bool get isGimmick => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  bool get isPoison => throw _privateConstructorUsedError;
   @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
   List<MaterialDataDto> get data => throw _privateConstructorUsedError;
   @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -167,6 +169,7 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'dataTotalCount', defaultValue: 0) int dataTotalCount,
       @JsonKey(name: 'dataTotalHidden', defaultValue: 0) int dataTotalHidden,
       @JsonKey(name: 'isGimmick', defaultValue: false) bool isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false) bool isPoison,
       @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
       List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -225,6 +228,7 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
     Object? dataTotalCount = null,
     Object? dataTotalHidden = null,
     Object? isGimmick = null,
+    Object? isPoison = null,
     Object? data = null,
     Object? bundles = null,
     Object? isSuspended = null,
@@ -359,6 +363,10 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
           ? _value.isGimmick
           : isGimmick // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -447,6 +455,7 @@ abstract class _$$MaterialDtoImplCopyWith<$Res>
       @JsonKey(name: 'dataTotalCount', defaultValue: 0) int dataTotalCount,
       @JsonKey(name: 'dataTotalHidden', defaultValue: 0) int dataTotalHidden,
       @JsonKey(name: 'isGimmick', defaultValue: false) bool isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false) bool isPoison,
       @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
       List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -504,6 +513,7 @@ class __$$MaterialDtoImplCopyWithImpl<$Res>
     Object? dataTotalCount = null,
     Object? dataTotalHidden = null,
     Object? isGimmick = null,
+    Object? isPoison = null,
     Object? data = null,
     Object? bundles = null,
     Object? isSuspended = null,
@@ -638,6 +648,10 @@ class __$$MaterialDtoImplCopyWithImpl<$Res>
           ? _value.isGimmick
           : isGimmick // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -723,6 +737,7 @@ class _$MaterialDtoImpl extends _MaterialDto {
       @JsonKey(name: 'dataTotalHidden', defaultValue: 0)
       required this.dataTotalHidden,
       @JsonKey(name: 'isGimmick', defaultValue: false) required this.isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false) required this.isPoison,
       @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
       required final List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -845,6 +860,9 @@ class _$MaterialDtoImpl extends _MaterialDto {
   @override
   @JsonKey(name: 'isGimmick', defaultValue: false)
   final bool isGimmick;
+  @override
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  final bool isPoison;
   final List<MaterialDataDto> _data;
   @override
   @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
@@ -873,7 +891,7 @@ class _$MaterialDtoImpl extends _MaterialDto {
 
   @override
   String toString() {
-    return 'MaterialDto(governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean, bundle: $bundle, code: $code, name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, data: $data, bundles: $bundles, isSuspended: $isSuspended, isMarketPlace: $isMarketPlace)';
+    return 'MaterialDto(governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean, bundle: $bundle, code: $code, name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, isPoison: $isPoison, data: $data, bundles: $bundles, isSuspended: $isSuspended, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -942,6 +960,8 @@ class _$MaterialDtoImpl extends _MaterialDto {
                 other.dataTotalHidden == dataTotalHidden) &&
             (identical(other.isGimmick, isGimmick) ||
                 other.isGimmick == isGimmick) &&
+            (identical(other.isPoison, isPoison) ||
+                other.isPoison == isPoison) &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             (identical(other.isSuspended, isSuspended) ||
@@ -986,6 +1006,7 @@ class _$MaterialDtoImpl extends _MaterialDto {
         dataTotalCount,
         dataTotalHidden,
         isGimmick,
+        isPoison,
         const DeepCollectionEquality().hash(_data),
         const DeepCollectionEquality().hash(_bundles),
         isSuspended,
@@ -1073,6 +1094,8 @@ abstract class _MaterialDto extends MaterialDto {
       required final int dataTotalHidden,
       @JsonKey(name: 'isGimmick', defaultValue: false)
       required final bool isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false)
+      required final bool isPoison,
       @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
       required final List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -1191,6 +1214,9 @@ abstract class _MaterialDto extends MaterialDto {
   @override
   @JsonKey(name: 'isGimmick', defaultValue: false)
   bool get isGimmick;
+  @override
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  bool get isPoison;
   @override
   @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
   List<MaterialDataDto> get data;

@@ -37,6 +37,8 @@ query ($request: GetAllProductsRequest!) {
       DataTotalHidden
       HidePrice
       IsGimmick
+      IsPoison
+      isSampleMaterial
       hasValidTenderContract
       hasMandatoryTenderContract
     }

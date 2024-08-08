@@ -1,5 +1,8 @@
 class ProductsQuery {
-  String getProductQuery(bool enableMarketplace) {
+  String getProductQuery(
+    bool enableMarketplace,
+    bool enableProductTypeFilter,
+  ) {
     return '''
       query (\$request: GetAllProductsRequest!) {
         GetAllProducts(request: \$request) {
@@ -44,6 +47,10 @@ class ProductsQuery {
             DataTotalHidden
             HidePrice
             IsGimmick
+            ${enableProductTypeFilter ? '''
+              IsPoison
+              isSampleMaterial
+            ''' : ''}
             hasValidTenderContract
             hasMandatoryTenderContract
           }

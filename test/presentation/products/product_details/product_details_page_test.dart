@@ -4142,6 +4142,71 @@ void main() {
           );
         });
       });
+
+      group('Product tag -', () {
+        testWidgets('Should show gimmick tag when is gimmick material',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial()
+                .copyWith
+                .productDetailAggregate
+                .materialInfo(isGimmick: true),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.gimmickTag),
+              matching: find.text('Gimmick'),
+            ),
+            findsOne,
+          );
+        });
+
+        testWidgets('Should show sample tag when is sample material',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial()
+                .copyWith
+                .productDetailAggregate
+                .materialInfo(isSampleMaterial: true),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.sampleTag),
+              matching: find.text('Sample'),
+            ),
+            findsOne,
+          );
+        });
+
+        testWidgets('Should show poison tag when is poison material',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial()
+                .copyWith
+                .productDetailAggregate
+                .materialInfo(isPoison: true),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.poisonTag),
+              matching: find.text('Poison'),
+            ),
+            findsOne,
+          );
+        });
+      });
     },
   );
 }

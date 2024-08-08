@@ -102,74 +102,7 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'isTenderExpired', defaultValue: false)
     required bool isTenderExpired,
   }) = _CartProductDto;
-  factory CartProductDto.fromDomain(
-    PriceAggregate cartItemDetails,
-  ) {
-    return CartProductDto(
-      genericMaterialName: cartItemDetails.materialInfo.genericMaterialName,
-      itemRegistrationNumber: cartItemDetails.materialInfo.getIRN.getValue(),
-      materialDescription: cartItemDetails.materialInfo.materialDescription,
-      materialNumber: cartItemDetails.materialInfo.materialNumber.getOrCrash(),
-      parentID: cartItemDetails.materialInfo.parentID,
-      productID: cartItemDetails.materialInfo.materialNumber.getOrCrash(),
-      quantity: cartItemDetails.materialInfo.quantity.intValue,
-      taxClassification:
-          cartItemDetails.materialInfo.taxClassification.getOrDefaultValue(''),
-      isFOCMaterial: cartItemDetails.materialInfo.isFOCMaterial,
-      tax: cartItemDetails.materialInfo.tax,
-      therapeuticClass: cartItemDetails.materialInfo.therapeuticClass,
-      type: cartItemDetails.materialInfo.type.getOrCrash(),
-      principalName: cartItemDetails.materialInfo.principalData.principalName
-          .getOrDefaultValue(''),
-      principalCode:
-          cartItemDetails.materialInfo.principalData.principalCode.getOrCrash(),
-      remarks: cartItemDetails.materialInfo.remarks,
-      counterOfferCurrency: cartItemDetails
-          .materialInfo.counterOfferDetails.counterOfferCurrency
-          .getOrDefaultValue(''),
-      counterOfferPrice: cartItemDetails
-          .materialInfo.counterOfferDetails.counterOfferPrice.doubleValue,
-      counterOfferDiscount: cartItemDetails.materialInfo.counterOfferDetails
-          .discountOverridePercentage.doubleValue,
-      bundleDetails: BundleDetailsDto.fromDomain(
-        BundleDetails(
-          bundleCode: cartItemDetails.bundle.bundleCode,
-          bundleName: cartItemDetails.bundle.bundleName.getValue(),
-          bundleInformation: cartItemDetails.bundle.bundleInformation,
-        ),
-      ),
-      bundleMaterials: (cartItemDetails.bundle.materials)
-          .map((e) => MaterialDto.fromDomain(e))
-          .toList(),
-      bonusMaterials: cartItemDetails.bonusSampleItems
-          .map((e) => BonusSampleItemDto.fromDomain(e))
-          .toList(),
-      hidePrice: cartItemDetails.materialInfo.hidePrice,
-      isSuspended: cartItemDetails.materialInfo.isSuspended,
-      isPrincipalSuspended: cartItemDetails.materialInfo.isPrincipalSuspended,
-      comboMaterials: [],
-      comboDeal: PriceComboDealDto.empty,
-      maximumQty: cartItemDetails.maximumQty,
-      governmentMaterialCode: cartItemDetails.materialInfo.getGMC.getValue(),
-      isMarketPlace: cartItemDetails.materialInfo.isMarketPlace,
-      defaultMaterialDescription:
-          cartItemDetails.materialInfo.defaultMaterialDescription,
-      materialGroup2: cartItemDetails.materialInfo.materialGroup2.getOrCrash(),
-      materialGroup4: cartItemDetails.materialInfo.materialGroup4.getOrCrash(),
-      is26SeriesMaterial: cartItemDetails.is26SeriesMaterial,
-      isGimmick: cartItemDetails.isGimmickMaterial,
-      hasMandatoryTenderContract:
-          cartItemDetails.materialInfo.hasMandatoryTenderContract,
-      hasValidTenderContract:
-          cartItemDetails.materialInfo.hasValidTenderContract,
-      tenderContractNumber:
-          cartItemDetails.tenderContract.contractNumber.getOrCrash(),
-      tenderOrderReason:
-          cartItemDetails.tenderContract.tenderOrderReason.getOrCrash(),
-      isTenderExpired: cartItemDetails.tenderContract.isTenderExpired,
-      isCovid: cartItemDetails.isCovid,
-    );
-  }
+
   MaterialInfo get toMaterialInfo {
     return MaterialInfo.empty().copyWith(
       genericMaterialName: genericMaterialName,

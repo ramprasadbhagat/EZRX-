@@ -49,4 +49,10 @@ abstract class SvgImage {
       '${_basePath}request_date_delivery_icon.svg';
   static const String deviceThermostatIcon =
       '${_basePath}device_thermostat.svg';
+  static const String gimmickMaterialIcon =
+      '${_basePath}gimmick_material_icon.svg';
+  static const String sampleMaterialIcon =
+      '${_basePath}sample_material_icon.svg';
+  static const String poisonMaterialIcon =
+      '${_basePath}poison_material_icon.svg';
 }

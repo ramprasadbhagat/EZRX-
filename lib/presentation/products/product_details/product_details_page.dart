@@ -32,6 +32,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -343,6 +344,9 @@ class _BodyContent extends StatelessWidget {
                                 .productTag(validateOutOfStockValue),
                           ),
                         ),
+                      if (materialInfo.isPoison) ProductTag.poison(),
+                      if (materialInfo.isSampleMaterial) ProductTag.sample(),
+                      if (materialInfo.isGimmick) ProductTag.gimmickTag(),
                     ],
                   ),
                   const SizedBox(height: 8),

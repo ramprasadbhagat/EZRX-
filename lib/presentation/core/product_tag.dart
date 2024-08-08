@@ -17,19 +17,24 @@ class ProductTag extends StatelessWidget {
   final EdgeInsets? padding;
   final BorderRadiusGeometry? borderRadius;
   final IconData iconData;
+  final double? iconSize;
+  final double iconSpacing;
+
   const ProductTag._({
     super.key,
     required this.labelTag,
+    required this.backgroundColor,
+    required this.textColor,
     this.hasIcon = false,
     this.assetIconSvg = '',
     this.iconData = Icons.local_offer_outlined,
+    this.iconSpacing = 0,
     this.labelStyle,
-    required this.backgroundColor,
-    required this.textColor,
     this.iconColor,
     this.margin,
     this.padding,
     this.borderRadius,
+    this.iconSize,
   });
 
   factory ProductTag.bundleOffer({TextStyle? labelStyle}) => ProductTag._(
@@ -114,6 +119,59 @@ class ProductTag extends StatelessWidget {
           topRight: Radius.circular(8.0),
         ),
       );
+  factory ProductTag.gimmickTag({bool isRounded = true}) =>
+      ProductTag._iconWithLabel(
+        key: WidgetKeys.gimmickTag,
+        label: 'Gimmick',
+        icon: SvgImage.gimmickMaterialIcon,
+        bgColor: ZPColors.paleBlueGray,
+        textColor: ZPColors.darkTeal,
+        isRounded: isRounded,
+      );
+  factory ProductTag.sample({bool isRounded = true}) =>
+      ProductTag._iconWithLabel(
+        key: WidgetKeys.sampleTag,
+        label: 'Sample',
+        icon: SvgImage.sampleMaterialIcon,
+        bgColor: ZPColors.paleBlueGray,
+        textColor: ZPColors.darkTeal,
+        isRounded: isRounded,
+      );
+  factory ProductTag.poison({bool isRounded = true}) =>
+      ProductTag._iconWithLabel(
+        key: WidgetKeys.poisonTag,
+        label: 'Poison',
+        icon: SvgImage.poisonMaterialIcon,
+        bgColor: ZPColors.poisonMaterialBg,
+        textColor: ZPColors.poisonMaterialText,
+        isRounded: isRounded,
+      );
+
+  factory ProductTag._iconWithLabel({
+    required Key key,
+    required String label,
+    required String icon,
+    required Color textColor,
+    required Color bgColor,
+    bool isRounded = false,
+  }) =>
+      ProductTag._(
+        key: key,
+        labelTag: label,
+        assetIconSvg: icon,
+        hasIcon: true,
+        iconSize: 14,
+        iconSpacing: 4,
+        backgroundColor: bgColor,
+        textColor: textColor,
+        margin: isRounded ? const EdgeInsets.only(left: 8) : null,
+        padding: isRounded
+            ? const EdgeInsets.symmetric(horizontal: 8, vertical: 3.5)
+            : const EdgeInsets.fromLTRB(16, 4, 8, 4),
+        borderRadius: isRounded
+            ? BorderRadius.circular(24)
+            : const BorderRadius.only(topRight: Radius.circular(8.0)),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -135,15 +193,18 @@ class ProductTag extends StatelessWidget {
         children: [
           if (hasIcon)
             assetIconSvg.isNotEmpty
-                ? SvgPicture.asset(
-                    assetIconSvg,
-                    height: 18,
-                    fit: BoxFit.fill,
-                    color: iconColor,
+                ? Padding(
+                    padding: EdgeInsets.only(right: iconSpacing),
+                    child: SvgPicture.asset(
+                      assetIconSvg,
+                      height: iconSize ?? 18,
+                      fit: BoxFit.fill,
+                      color: iconColor,
+                    ),
                   )
                 : Icon(
                     iconData,
-                    size: 20,
+                    size: iconSize ?? 20,
                     color: ZPColors.white,
                   ),
           if (labelTag.isNotEmpty)
