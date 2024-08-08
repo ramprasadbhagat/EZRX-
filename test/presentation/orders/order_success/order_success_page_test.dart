@@ -43,6 +43,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.da
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
@@ -1257,6 +1258,48 @@ void main() {
           ),
         );
       });
+
+      testWidgets(
+        ' -> Can navigate to product detail page when tap on OrderHistoryDetailsOrderItem',
+        (WidgetTester tester) async {
+          when(
+            () => autoRouterMock.push(
+              ProductDetailsPageRoute(
+                materialInfo: fakeMaterialItem.priceAggregate.materialInfo,
+              ),
+            ),
+          ).thenAnswer((_) async => true);
+
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem,
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final orderItemCommonTile = find.byType(CommonTileItem).first;
+          await tester.ensureVisible(orderItemCommonTile);
+          await tester.pumpAndSettle();
+
+          await tester.tap(orderItemCommonTile);
+          await tester.pump();
+
+          verify(
+            () => autoRouterMock.push(
+              ProductDetailsPageRoute(
+                materialInfo: fakeMaterialItem.priceAggregate.materialInfo,
+              ),
+            ),
+          ).called(1);
+        },
+      );
 
       testWidgets('Show section when have data', (tester) async {
         await tester.pumpWidget(getWidget());

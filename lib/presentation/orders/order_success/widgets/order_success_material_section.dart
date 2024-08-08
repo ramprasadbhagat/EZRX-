@@ -76,6 +76,11 @@ class _MaterialItem extends StatelessWidget {
         );
 
     return CommonTileItem(
+      onTap: () => context.router.push(
+        ProductDetailsPageRoute(
+          materialInfo: orderItem.priceAggregate.materialInfo,
+        ),
+      ),
       margin: const EdgeInsets.symmetric(vertical: _verticalPadding),
       materialNumber: orderItem.materialNumber,
       label: orderItem.combinationCode(
