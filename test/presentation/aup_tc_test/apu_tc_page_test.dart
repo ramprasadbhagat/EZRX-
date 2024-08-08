@@ -139,7 +139,7 @@ void main() {
         expect(
           find.descendant(
             of: acceptButton,
-            matching: find.text('Accept and continue'.tr()),
+            matching: find.text('Accept'.tr()),
           ),
           findsOneWidget,
         );
@@ -242,10 +242,6 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.descendant(of: tncContent, matching: webView),
-          findsOneWidget,
-        );
-        expect(
           find.descendant(of: privacyContent, matching: webView),
           findsOneWidget,
         );
@@ -253,7 +249,7 @@ void main() {
           find.descendant(
             of: privacyCheckBox,
             matching: find.text(
-              'I have read and hereby consent to my personal data being processed in accordance with the Regional Privacy Policy.'
+              'I acknowledge and agree that the Regional Privacy Policy and Acceptable Use Policy for eZRx+ likewise applies to my usage of Marketplace. I consent to my personal data being processed by Marketplace in accordance with the Regional Privacy Policy.'
                   .tr(),
             ),
           ),
@@ -263,7 +259,7 @@ void main() {
           find.descendant(
             of: tncCheckBox,
             matching: find.text(
-              'I have read and hereby agree to the Terms of Use and Acceptable Use Policy.'
+              'I have read and hereby agree to the additional terms (shared above) that apply to my use of Marketplace.'
                   .tr(),
             ),
           ),
@@ -272,7 +268,7 @@ void main() {
         expect(
           find.descendant(
             of: acceptButton,
-            matching: find.text('Accept and continue'.tr()),
+            matching: find.text('Accept'.tr()),
           ),
           findsOneWidget,
         );

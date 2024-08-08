@@ -113,11 +113,12 @@ class AupTCPage extends StatelessWidget {
                             ),
                       ),
                       const SizedBox(height: 16),
-                      _ConsentBox(
-                        key: WidgetKeys.tncContentBox,
-                        user: state.user,
-                        url: state.user.tncFile,
-                      ),
+                      if (!isMarketPlace)
+                        _ConsentBox(
+                          key: WidgetKeys.tncContentBox,
+                          user: state.user,
+                          url: state.user.tncFile,
+                        ),
                       const SizedBox(height: 16),
                       _ConsentBox(
                         key: WidgetKeys.privacyContentBox,
@@ -127,9 +128,9 @@ class AupTCPage extends StatelessWidget {
                             : state.user.privacyPolicyFile,
                       ),
                       const SizedBox(height: 16),
-                      const _TermsOfUseConsentCheckBox(),
-                      const SizedBox(height: 5),
-                      const _PrivacyPolicyConsentCheckBox(),
+                      _TermsOfUseConsentCheckBox(isMarketPlace),
+                      const SizedBox(height: 8),
+                      _PrivacyPolicyConsentCheckBox(isMarketPlace),
                     ],
                   ),
                 ),
@@ -144,7 +145,9 @@ class AupTCPage extends StatelessWidget {
 }
 
 class _TermsOfUseConsentCheckBox extends StatelessWidget {
-  const _TermsOfUseConsentCheckBox();
+  const _TermsOfUseConsentCheckBox(this.isMarketPlace);
+
+  final bool isMarketPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -152,27 +155,36 @@ class _TermsOfUseConsentCheckBox extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.tncConsent != current.tncConsent,
       builder: (context, state) {
-        return CheckboxListTile(
-          key: WidgetKeys.tncCheckBox,
-          contentPadding: const EdgeInsets.all(0),
-          value: state.tncConsent,
-          title: Text(
-            context.tr(
-              'I have read and hereby agree to the Terms of Use and Acceptable Use Policy.',
-            ),
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ZPColors.darkerGrey,
-                ),
+        return ListTileTheme(
+          data: const ListTileThemeData(
+            titleAlignment: ListTileTitleAlignment.top,
+            contentPadding: EdgeInsets.zero,
+            minVerticalPadding: 0,
           ),
-          onChanged: (value) {
-            context.read<AupTcBloc>().add(
-                  AupTcEvent.termsOfUseConsent(
-                    newValue: value!,
+          child: CheckboxListTile(
+            key: WidgetKeys.tncCheckBox,
+            contentPadding: const EdgeInsets.all(0),
+            value: state.tncConsent,
+            title: Text(
+              context.tr(
+                isMarketPlace
+                    ? 'I have read and hereby agree to the additional terms (shared above) that apply to my use of Marketplace.'
+                    : 'I have read and hereby agree to the Terms of Use and Acceptable Use Policy.',
+              ),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ZPColors.darkerGrey,
                   ),
-                );
-          },
-          visualDensity: VisualDensity.compact,
-          controlAffinity: ListTileControlAffinity.leading,
+            ),
+            onChanged: (value) {
+              context.read<AupTcBloc>().add(
+                    AupTcEvent.termsOfUseConsent(
+                      newValue: value!,
+                    ),
+                  );
+            },
+            visualDensity: VisualDensity.compact,
+            controlAffinity: ListTileControlAffinity.leading,
+          ),
         );
       },
     );
@@ -180,7 +192,9 @@ class _TermsOfUseConsentCheckBox extends StatelessWidget {
 }
 
 class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
-  const _PrivacyPolicyConsentCheckBox();
+  const _PrivacyPolicyConsentCheckBox(this.isMarketPlace);
+
+  final bool isMarketPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -188,27 +202,36 @@ class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.privacyConsent != current.privacyConsent,
       builder: (context, state) {
-        return CheckboxListTile(
-          key: WidgetKeys.privacyCheckBox,
-          contentPadding: const EdgeInsets.all(0),
-          value: state.privacyConsent,
-          title: Text(
-            context.tr(
-              'I have read and hereby consent to my personal data being processed in accordance with the Regional Privacy Policy.',
-            ),
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ZPColors.darkerGrey,
-                ),
+        return ListTileTheme(
+          data: const ListTileThemeData(
+            titleAlignment: ListTileTitleAlignment.top,
+            contentPadding: EdgeInsets.zero,
+            minVerticalPadding: 0,
           ),
-          onChanged: (value) {
-            context.read<AupTcBloc>().add(
-                  AupTcEvent.privacyPolicyConsent(
-                    newValue: value!,
+          child: CheckboxListTile(
+            key: WidgetKeys.privacyCheckBox,
+            contentPadding: const EdgeInsets.all(0),
+            value: state.privacyConsent,
+            title: Text(
+              context.tr(
+                isMarketPlace
+                    ? 'I acknowledge and agree that the Regional Privacy Policy and Acceptable Use Policy for eZRx+ likewise applies to my usage of Marketplace. I consent to my personal data being processed by Marketplace in accordance with the Regional Privacy Policy.'
+                    : 'I have read and hereby consent to my personal data being processed in accordance with the Regional Privacy Policy.',
+              ),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ZPColors.darkerGrey,
                   ),
-                );
-          },
-          visualDensity: VisualDensity.compact,
-          controlAffinity: ListTileControlAffinity.leading,
+            ),
+            onChanged: (value) {
+              context.read<AupTcBloc>().add(
+                    AupTcEvent.privacyPolicyConsent(
+                      newValue: value!,
+                    ),
+                  );
+            },
+            visualDensity: VisualDensity.compact,
+            controlAffinity: ListTileControlAffinity.leading,
+          ),
         );
       },
     );
@@ -221,6 +244,7 @@ class _ConsentBox extends StatelessWidget {
     required this.url,
     required this.user,
   });
+
   final String url;
   final User user;
 
@@ -344,7 +368,7 @@ class AcceptButton extends StatelessWidget {
                         child: LoadingShimmer.withChild(
                           enabled: userState.isLoading,
                           child: Text(
-                            context.tr('Accept and continue'),
+                            context.tr('Accept'),
                           ),
                         ),
                       ),
