@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_common_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -424,6 +425,16 @@ void main() {
 
       expect(customerBlockedBanner, findsOneWidget);
       final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+      // verify the text color is not the ZP primary color
+      final textFinder = find.text('Buy again');
+      // Find the RichText widget that is created internally by the Text widget
+      final richTextFinder =
+          find.descendant(of: textFinder, matching: find.byType(RichText));
+      // Access the RichText widget and its text property
+      final richTextWidget = tester.widget(richTextFinder) as RichText;
+      final textSpan = richTextWidget.text as TextSpan;
+      expect(textSpan.style?.color, isNot(equals(ZPColors.primary)));
+      // tap the button to verify the action never happened
       await tester.tap(button);
       verifyNever(
         () => reOrderPermissionBlocMock.add(

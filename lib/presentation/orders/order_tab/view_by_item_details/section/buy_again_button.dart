@@ -73,8 +73,6 @@ class _BuyAgainButton extends StatelessWidget {
                 key: WidgetKeys.viewByItemDetailBuyAgainButton,
                 style: OutlinedButton.styleFrom(
                   maximumSize: const Size(double.maxFinite, 45),
-                  backgroundColor: Colors.white,
-                  side: const BorderSide(color: ZPColors.primary),
                 ),
                 onPressed: reOrderState.isFetching ||
                         isCustomerBlockedOrSuspended ||
@@ -85,9 +83,6 @@ class _BuyAgainButton extends StatelessWidget {
                   enabled: reOrderState.isFetching || stateCart.isBuyAgain,
                   child: Text(
                     context.tr('Buy again'),
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: ZPColors.primary,
-                        ),
                   ),
                 ),
               ),
