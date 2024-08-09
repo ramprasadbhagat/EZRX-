@@ -95,7 +95,8 @@
             "directMarketing": true
          },
          "acceptMPTC": 0,
-         "isPPATriggerMaintained": false
+         "isPPATriggerMaintained": false,
+         "selectedOrderType": "zpor"
       }
    }
 }

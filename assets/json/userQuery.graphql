@@ -90,6 +90,7 @@
             }
             acceptMPTC
             isPPATriggerMaintained
+            selectedOrderType
           }
         },
     "variables":{

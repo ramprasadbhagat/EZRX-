@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
@@ -206,6 +207,27 @@ class UserRepository implements IUserRepository {
       }
 
       return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, DocumentType>> updateSelectedOrderType(
+    DocumentType value,
+  ) async {
+    try {
+      if (config.appFlavor == Flavor.mock) {
+        final result = await localDataSource.updateSelectedOrderType();
+
+        return Right(result);
+      }
+
+      final result = await remoteDataSource.updateSelectedOrderType(
+        value: value.getOrDefaultValue(''),
+      );
+
+      return Right(result);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

@@ -63,6 +63,7 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
       isFirstLogin: json['isFirstLogin'] as bool? ?? false,
       isResetUserPassword: json['isResetUserPassword'] as bool? ?? false,
       isPPATriggerMaintained: json['isPPATriggerMaintained'] as bool? ?? false,
+      selectedOrderType: json['selectedOrderType'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
@@ -98,4 +99,5 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
       'isFirstLogin': instance.isFirstLogin,
       'isResetUserPassword': instance.isResetUserPassword,
       'isPPATriggerMaintained': instance.isPPATriggerMaintained,
+      'selectedOrderType': instance.selectedOrderType,
     };

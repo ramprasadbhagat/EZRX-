@@ -80,6 +80,7 @@ abstract class ZPColors {
   static const Color blueBGColor = Color.fromRGBO(106, 141, 241, 1);
   static const Color transparent = Color.fromRGBO(255, 255, 255, 0);
   static const Color warning = Color.fromRGBO(254, 198, 0, 1);
+  static const Color warningBg = Color.fromRGBO(255, 249, 230, 1);
   static const Color lightYellowColor = Color.fromRGBO(255, 237, 176, 1);
   static const Color blueTagColor = Color.fromRGBO(246, 249, 253, 1);
   static const Color lightRedStatusColor = Color.fromRGBO(255, 211, 211, 1);

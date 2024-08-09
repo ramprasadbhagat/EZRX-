@@ -94,6 +94,8 @@ class UserDto with _$UserDto {
     required bool isResetUserPassword,
     @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
     required bool isPPATriggerMaintained,
+    @JsonKey(name: 'selectedOrderType', defaultValue: '')
+    required String selectedOrderType,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -113,6 +115,7 @@ class UserDto with _$UserDto {
       mobileNotifications: user.settings.mobileNotifications,
       languagePreference: user.settings.languagePreference.languageCode,
       enableOrderType: user.enableOrderType,
+      selectedOrderType: user.selectedOrderType.getOrDefaultValue(''),
       acceptPrivacyPolicy: user.acceptPrivacyPolicy,
       hasBonusOverride: user.hasBonusOverride,
       disableCreateOrder: user.disableCreateOrder,
@@ -162,6 +165,7 @@ class UserDto with _$UserDto {
     isFirstLogin: false,
     isResetUserPassword: false,
     isPPATriggerMaintained: false,
+    selectedOrderType: '',
   );
 
   User toDomain() {
@@ -194,6 +198,7 @@ class UserDto with _$UserDto {
       ),
       acceptPrivacyPolicy: acceptPrivacyPolicy,
       enableOrderType: enableOrderType,
+      selectedOrderType: DocumentType(selectedOrderType),
       hasBonusOverride: hasBonusOverride,
       disableCreateOrder: disableCreateOrder,
       disablePaymentAccess: disablePaymentAccess,

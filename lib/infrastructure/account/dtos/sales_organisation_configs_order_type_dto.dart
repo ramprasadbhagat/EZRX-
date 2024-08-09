@@ -22,7 +22,7 @@ class SalesOrganisationConfigsOrderTypeDto
     OrderType orderType,
   ) {
     return SalesOrganisationConfigsOrderTypeDto(
-      categoryId: orderType.categoryId,
+      categoryId: orderType.categoryId.getValue(),
       orderType: orderType.orderType.getValue(),
       orderReason: orderType.orderReason,
       description: orderType.description.getValue(),
@@ -32,8 +32,8 @@ class SalesOrganisationConfigsOrderTypeDto
 
   OrderType toDomain() {
     return OrderType(
-      categoryId: categoryId,
-      orderType: DocumentType(orderType),
+      categoryId: DocumentType(categoryId),
+      orderType: StringValue(orderType),
       orderReason: orderReason,
       description: StringValue(description),
       enabled: enabled,

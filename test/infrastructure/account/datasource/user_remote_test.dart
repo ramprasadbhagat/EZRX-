@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
@@ -364,6 +365,83 @@ void main() {
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(SettingTc.empty());
+        });
+      },
+    );
+  });
+
+  group('Upadte user selected order type -', () {
+    test(
+      'success',
+      () async {
+        final response = json.decode(
+          await rootBundle
+              .loadString('assets/json/updateSelectedOrderTypeResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(200, response),
+          data: jsonEncode({
+            'query':
+                remoteDataSource.userQueryMutation.updateSelectedOrderType(),
+            'variables': {'orderType': 'zpor'},
+          }),
+        );
+        final result =
+            await remoteDataSource.updateSelectedOrderType(value: 'zpor');
+        final resTest =
+            DocumentType(response['data']['updateSelectedOrderType'] as String);
+        expect(result, resTest);
+      },
+    );
+
+    test(
+      'server exception',
+      () async {
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(
+            200,
+            {
+              'data': null,
+              'errors': [
+                {'message': 'fake-error'},
+              ],
+            },
+          ),
+          data: jsonEncode({
+            'query':
+                remoteDataSource.userQueryMutation.updateSelectedOrderType(),
+            'variables': {'orderType': 'zpor'},
+          }),
+        );
+        await remoteDataSource
+            .updateSelectedOrderType(value: 'zpor')
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(DocumentType(''));
+        });
+      },
+    );
+
+    test(
+      'Status code != 200',
+      () async {
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(201, {'data': null}),
+          data: jsonEncode({
+            'query':
+                remoteDataSource.userQueryMutation.updateSelectedOrderType(),
+            'variables': {'orderType': 'zpor'},
+          }),
+        );
+        await remoteDataSource
+            .updateSelectedOrderType(value: 'zpor')
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(DocumentType(''));
         });
       },
     );

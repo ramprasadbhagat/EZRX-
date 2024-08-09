@@ -184,6 +184,9 @@ class WidgetKeys {
       Key('bundleMaterialCount$title');
   static const Key availableOfferList = Key('availableOfferList');
   static const Key exploreMarketPlaceButton = Key('exploreMarketPlaceButton');
+  static Key orderTypeTile(String id) => Key('orderTypeTile$id');
+  static const Key cartNotEmptyMessageWhenSelectOrderType =
+      Key('cartNotEmptyWhenSelectOrderTypeMessage');
   //============================================================
   //  MORE TAB BAR
   //============================================================

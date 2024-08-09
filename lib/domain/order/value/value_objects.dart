@@ -669,6 +669,8 @@ class DocumentType extends ValueObject<String> {
   factory DocumentType(String input) =>
       DocumentType._(validateStringNotEmpty(input));
 
+  factory DocumentType.zpor() => DocumentType('zpor');
+
   String get documentTypeCode {
     if (isZPFB) return 'ZPFB';
     if (isZPFC) return 'ZPFC';

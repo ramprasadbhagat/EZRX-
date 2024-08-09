@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
@@ -513,6 +514,52 @@ void main() {
             user: fakeClientUser.copyWith(
               acceptMPTC: fakeAcceptanceStatus,
             ),
+          ),
+        ],
+      );
+    });
+
+    group('Set selected order type -', () {
+      final fakeOrderType = DocumentType('fake');
+      blocTest<UserBloc, UserState>(
+        'failure',
+        build: () => UserBloc(
+          userRepository: userRepoMock,
+          authRepository: authRepositoryMock,
+        ),
+        setUp: () {
+          when(() => userRepoMock.updateSelectedOrderType(fakeOrderType))
+              .thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
+        },
+        act: (UserBloc bloc) =>
+            bloc.add(UserEvent.selectOrderType(orderType: fakeOrderType)),
+        expect: () => [
+          userState.copyWith(isSelectingOrderType: true),
+          userState.copyWith(
+            userFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.poorConnection())),
+          ),
+        ],
+      );
+
+      blocTest<UserBloc, UserState>(
+        'success',
+        build: () => UserBloc(
+          userRepository: userRepoMock,
+          authRepository: authRepositoryMock,
+        ),
+        setUp: () {
+          when(() => userRepoMock.updateSelectedOrderType(fakeOrderType))
+              .thenAnswer((_) async => Right(fakeOrderType));
+        },
+        act: (UserBloc bloc) =>
+            bloc.add(UserEvent.selectOrderType(orderType: fakeOrderType)),
+        seed: () => userState.copyWith(user: fakeClientUser),
+        expect: () => [
+          userState.copyWith(user: fakeClientUser, isSelectingOrderType: true),
+          userState.copyWith(
+            user: fakeClientUser.copyWith(selectedOrderType: fakeOrderType),
+            userFailureOrSuccessOption: optionOf(Right(fakeOrderType)),
           ),
         ],
       );

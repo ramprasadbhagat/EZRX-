@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
@@ -553,6 +554,69 @@ void main() {
             result,
             const Left(ApiFailure.marketplaceTnCAcceptanceError()),
           );
+        },
+      );
+    });
+
+    group('update user selected order type -', () {
+      final fakeOrderType = DocumentType('fake');
+      test(
+        'from local datasource successfully',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+          when(() => localDataSourceMock.updateSelectedOrderType())
+              .thenAnswer((_) async => fakeOrderType);
+
+          final result =
+              await repository.updateSelectedOrderType(fakeOrderType);
+          expect(result, Right(fakeOrderType));
+        },
+      );
+
+      test(
+        'from local datasource throws error',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+          when(() => localDataSourceMock.updateSelectedOrderType())
+              .thenThrow(mockException);
+
+          final result =
+              await repository.updateSelectedOrderType(fakeOrderType);
+          expect(result, Left(ApiFailure.other(mockException.message)));
+        },
+      );
+
+      test(
+        'from remote datasource successfully',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => remoteDataSourceMock.updateSelectedOrderType(
+              value: fakeOrderType.getOrCrash(),
+            ),
+          ).thenAnswer((_) async => fakeOrderType);
+
+          final result =
+              await repository.updateSelectedOrderType(fakeOrderType);
+          expect(result, Right(fakeOrderType));
+        },
+      );
+
+      test(
+        'from remote datasource throws error',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => remoteDataSourceMock.updateSelectedOrderType(
+              value: fakeOrderType.getOrCrash(),
+            ),
+          ).thenThrow(mockException);
+
+          final result =
+              await repository.updateSelectedOrderType(fakeOrderType);
+          expect(result, Left(ApiFailure.other(mockException.message)));
         },
       );
     });

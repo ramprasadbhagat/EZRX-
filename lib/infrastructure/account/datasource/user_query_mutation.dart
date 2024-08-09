@@ -103,6 +103,7 @@ class UserQueryMutation {
             }
             ${enableMarketPlace ? 'acceptMPTC' : ''}
             isPPATriggerMaintained
+            selectedOrderType
           }
         }
     ''';
@@ -165,4 +166,10 @@ class UserQueryMutation {
     }
     ''';
   }
+
+  String updateSelectedOrderType() => '''
+    mutation updateSelectedOrderType(\$orderType: String!) {
+      updateSelectedOrderType(orderType: \$orderType)
+    }
+  ''';
 }

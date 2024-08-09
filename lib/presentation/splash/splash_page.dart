@@ -219,7 +219,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           },
         ),
         BlocListener<UserBloc, UserState>(
-          listenWhen: (previous, current) => previous.user != current.user,
+          //Avoid refetching the whole API after selecting new order type
+          listenWhen: (previous, current) =>
+              previous.user.copyWith(selectedOrderType: DocumentType('')) !=
+              current.user.copyWith(selectedOrderType: DocumentType('')),
           listener: (context, state) {
             _initializeSalesOrg(state);
             if (state.isSalesRep) {
@@ -236,6 +239,28 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             context.read<IntroBloc>().add(
                   const IntroEvent.checkAppFirstLaunch(),
                 );
+          },
+        ),
+        BlocListener<UserBloc, UserState>(
+          // This buildWhen is for re-fetching API after user select new order type
+          // previous.isNotEmpty check is to avoid triggering after login. We already got selectedOrderType in EligibilityBloc from EligibilityEvent.update event
+          // previous.isLoginOnBehalf == current.isLoginOnBehalf check is to avoid triggering because the UserState is reset after login on behalf
+          listenWhen: (previous, current) =>
+              previous.user.selectedOrderType !=
+                  current.user.selectedOrderType &&
+              previous.isNotEmpty &&
+              previous.isLoginOnBehalf == current.isLoginOnBehalf,
+          listener: (context, state) {
+            final eligibilityBloc = context.read<EligibilityBloc>();
+            eligibilityBloc.add(
+              EligibilityEvent.update(
+                user: state.user,
+                salesOrganisation: eligibilityBloc.state.salesOrganisation,
+                salesOrgConfigs: eligibilityBloc.state.salesOrgConfigs,
+                selectedOrderType: eligibilityBloc.state.selectedOrderType,
+              ),
+            );
+            //Re-fetch product list here
           },
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
@@ -516,6 +541,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               _initializeHomeTabDependencies(context, state);
               _initializeProduct();
               _initializeCart(state);
+              if (state.isInvalidSelectedOrderType) {
+                context.read<CartBloc>().add(const CartEvent.clearCart());
+                context.read<UserBloc>().add(
+                      UserEvent.selectOrderType(orderType: DocumentType.zpor()),
+                    );
+              }
 
               context.read<EligibilityBloc>().add(
                     const EligibilityEvent.registerChatBot(),

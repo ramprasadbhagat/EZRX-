@@ -79,6 +79,7 @@ class RemoteConfigService {
         ),
         RemoteConfigConstants.passUserId: false,
         RemoteConfigConstants.enableProductTypesFilter: false,
+        RemoteConfigConstants.enableOrderTypeConfig: false,
       },
     );
   }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_tc_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -40,5 +41,15 @@ class UserLocalDataSource {
     );
 
     return UserDto.fromJson(data['data']['updateUser']['user']).toDomain();
+  }
+
+  Future<DocumentType> updateSelectedOrderType() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/updateSelectedOrderTypeResponse.json',
+      ),
+    );
+
+    return DocumentType(data['data']['updateSelectedOrderType'] as String);
   }
 }

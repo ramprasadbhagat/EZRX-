@@ -17,4 +17,7 @@ class UserEvent with _$UserEvent {
   }) = _UpdatePaymentNotificationSettings;
   const factory UserEvent.updateLanguage(Language language) = _UpdateLanguage;
   const factory UserEvent.selectLanguage(Language language) = _SelectLanguage;
+  const factory UserEvent.selectOrderType({
+    required DocumentType orderType,
+  }) = _SelectOrderType;
 }

@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderType {
-  String get categoryId => throw _privateConstructorUsedError;
-  DocumentType get orderType => throw _privateConstructorUsedError;
+  DocumentType get categoryId => throw _privateConstructorUsedError;
+  StringValue get orderType => throw _privateConstructorUsedError;
   int get orderReason => throw _privateConstructorUsedError;
   StringValue get description => throw _privateConstructorUsedError;
   bool get enabled => throw _privateConstructorUsedError;
@@ -33,8 +33,8 @@ abstract class $OrderTypeCopyWith<$Res> {
       _$OrderTypeCopyWithImpl<$Res, OrderType>;
   @useResult
   $Res call(
-      {String categoryId,
-      DocumentType orderType,
+      {DocumentType categoryId,
+      StringValue orderType,
       int orderReason,
       StringValue description,
       bool enabled});
@@ -63,11 +63,11 @@ class _$OrderTypeCopyWithImpl<$Res, $Val extends OrderType>
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DocumentType,
       orderType: null == orderType
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
-              as DocumentType,
+              as StringValue,
       orderReason: null == orderReason
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
@@ -93,8 +93,8 @@ abstract class _$$OrderTypeImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String categoryId,
-      DocumentType orderType,
+      {DocumentType categoryId,
+      StringValue orderType,
       int orderReason,
       StringValue description,
       bool enabled});
@@ -121,11 +121,11 @@ class __$$OrderTypeImplCopyWithImpl<$Res>
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DocumentType,
       orderType: null == orderType
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
-              as DocumentType,
+              as StringValue,
       orderReason: null == orderReason
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
@@ -154,9 +154,9 @@ class _$OrderTypeImpl extends _OrderType {
       : super._();
 
   @override
-  final String categoryId;
+  final DocumentType categoryId;
   @override
-  final DocumentType orderType;
+  final StringValue orderType;
   @override
   final int orderReason;
   @override
@@ -198,17 +198,17 @@ class _$OrderTypeImpl extends _OrderType {
 
 abstract class _OrderType extends OrderType {
   const factory _OrderType(
-      {required final String categoryId,
-      required final DocumentType orderType,
+      {required final DocumentType categoryId,
+      required final StringValue orderType,
       required final int orderReason,
       required final StringValue description,
       required final bool enabled}) = _$OrderTypeImpl;
   const _OrderType._() : super._();
 
   @override
-  String get categoryId;
+  DocumentType get categoryId;
   @override
-  DocumentType get orderType;
+  StringValue get orderType;
   @override
   int get orderReason;
   @override

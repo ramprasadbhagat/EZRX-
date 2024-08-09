@@ -29,6 +29,7 @@ mixin _$User {
   Settings get settings => throw _privateConstructorUsedError;
   bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
   bool get enableOrderType => throw _privateConstructorUsedError;
+  DocumentType get selectedOrderType => throw _privateConstructorUsedError;
   bool get hasBonusOverride => throw _privateConstructorUsedError;
   bool get disableCreateOrder => throw _privateConstructorUsedError;
   bool get disableReturns => throw _privateConstructorUsedError;
@@ -64,6 +65,7 @@ abstract class $UserCopyWith<$Res> {
       Settings settings,
       bool acceptPrivacyPolicy,
       bool enableOrderType,
+      DocumentType selectedOrderType,
       bool hasBonusOverride,
       bool disableCreateOrder,
       bool disableReturns,
@@ -108,6 +110,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? settings = null,
     Object? acceptPrivacyPolicy = null,
     Object? enableOrderType = null,
+    Object? selectedOrderType = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
@@ -170,6 +173,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedOrderType: null == selectedOrderType
+          ? _value.selectedOrderType
+          : selectedOrderType // ignore: cast_nullable_to_non_nullable
+              as DocumentType,
       hasBonusOverride: null == hasBonusOverride
           ? _value.hasBonusOverride
           : hasBonusOverride // ignore: cast_nullable_to_non_nullable
@@ -274,6 +281,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       Settings settings,
       bool acceptPrivacyPolicy,
       bool enableOrderType,
+      DocumentType selectedOrderType,
       bool hasBonusOverride,
       bool disableCreateOrder,
       bool disableReturns,
@@ -319,6 +327,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? settings = null,
     Object? acceptPrivacyPolicy = null,
     Object? enableOrderType = null,
+    Object? selectedOrderType = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
@@ -381,6 +390,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedOrderType: null == selectedOrderType
+          ? _value.selectedOrderType
+          : selectedOrderType // ignore: cast_nullable_to_non_nullable
+              as DocumentType,
       hasBonusOverride: null == hasBonusOverride
           ? _value.hasBonusOverride
           : hasBonusOverride // ignore: cast_nullable_to_non_nullable
@@ -449,6 +462,7 @@ class _$UserImpl extends _User {
       required this.settings,
       required this.acceptPrivacyPolicy,
       required this.enableOrderType,
+      required this.selectedOrderType,
       required this.hasBonusOverride,
       required this.disableCreateOrder,
       required this.disableReturns,
@@ -505,6 +519,8 @@ class _$UserImpl extends _User {
   @override
   final bool enableOrderType;
   @override
+  final DocumentType selectedOrderType;
+  @override
   final bool hasBonusOverride;
   @override
   final bool disableCreateOrder;
@@ -538,7 +554,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, selectedOrderType: $selectedOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained)';
   }
 
   @override
@@ -567,6 +583,8 @@ class _$UserImpl extends _User {
                 other.acceptPrivacyPolicy == acceptPrivacyPolicy) &&
             (identical(other.enableOrderType, enableOrderType) ||
                 other.enableOrderType == enableOrderType) &&
+            (identical(other.selectedOrderType, selectedOrderType) ||
+                other.selectedOrderType == selectedOrderType) &&
             (identical(other.hasBonusOverride, hasBonusOverride) ||
                 other.hasBonusOverride == hasBonusOverride) &&
             (identical(other.disableCreateOrder, disableCreateOrder) ||
@@ -608,6 +626,7 @@ class _$UserImpl extends _User {
         settings,
         acceptPrivacyPolicy,
         enableOrderType,
+        selectedOrderType,
         hasBonusOverride,
         disableCreateOrder,
         disableReturns,
@@ -643,6 +662,7 @@ abstract class _User extends User {
       required final Settings settings,
       required final bool acceptPrivacyPolicy,
       required final bool enableOrderType,
+      required final DocumentType selectedOrderType,
       required final bool hasBonusOverride,
       required final bool disableCreateOrder,
       required final bool disableReturns,
@@ -681,6 +701,8 @@ abstract class _User extends User {
   bool get acceptPrivacyPolicy;
   @override
   bool get enableOrderType;
+  @override
+  DocumentType get selectedOrderType;
   @override
   bool get hasBonusOverride;
   @override

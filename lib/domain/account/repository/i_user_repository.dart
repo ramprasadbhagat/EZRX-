@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class IUserRepository {
   Future<Either<ApiFailure, User>> getUser();
@@ -16,4 +17,7 @@ abstract class IUserRepository {
   Future<Either<ApiFailure, UpdateLanguageResponse>> updateLanguage({
     required Language language,
   });
+  Future<Either<ApiFailure, DocumentType>> updateSelectedOrderType(
+    DocumentType value,
+  );
 }

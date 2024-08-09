@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -181,6 +182,35 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(
           state.copyWith(
             activeLanguage: e.language,
+          ),
+        );
+      },
+      selectOrderType: (e) async {
+        emit(
+          state.copyWith(
+            isSelectingOrderType: true,
+            userFailureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await userRepository.updateSelectedOrderType(e.orderType);
+
+        if (isClosed) return;
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isSelectingOrderType: false,
+            ),
+          ),
+          (newOrderType) => emit(
+            state.copyWith(
+              user: state.user.copyWith(selectedOrderType: newOrderType),
+              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isSelectingOrderType: false,
+            ),
           ),
         );
       },

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/error/user_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_tc_dto.dart';
@@ -135,5 +136,26 @@ class UserRemoteDataSource {
             .toDomain();
       },
     );
+  }
+
+  Future<DocumentType> updateSelectedOrderType({required String value}) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': userQueryMutation.updateSelectedOrderType(),
+          'variables': {'orderType': value},
+        }),
+      );
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _userExceptionChecker,
+      );
+
+      return DocumentType(
+        (res.data['data']['updateSelectedOrderType'] as String?) ?? '',
+      );
+    });
   }
 }

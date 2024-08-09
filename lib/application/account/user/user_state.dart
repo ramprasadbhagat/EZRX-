@@ -10,6 +10,7 @@ class UserState with _$UserState {
     required Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
     required Language activeLanguage,
     required bool isLoading,
+    required bool isSelectingOrderType,
   }) = _UserState;
 
   factory UserState.initial() => UserState(
@@ -18,6 +19,7 @@ class UserState with _$UserState {
         userFailureOrSuccessOption: none(),
         activeLanguage: Language.english(),
         isLoading: false,
+        isSelectingOrderType: false,
       );
 
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;

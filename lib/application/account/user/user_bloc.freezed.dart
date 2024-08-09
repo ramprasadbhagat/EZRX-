@@ -30,6 +30,7 @@ mixin _$UserEvent {
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,6 +46,7 @@ mixin _$UserEvent {
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +62,7 @@ mixin _$UserEvent {
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +79,7 @@ mixin _$UserEvent {
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,6 +95,7 @@ mixin _$UserEvent {
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,6 +111,7 @@ mixin _$UserEvent {
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -178,6 +184,7 @@ class _$InitializedImpl implements _Initialized {
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return initialized();
   }
@@ -196,6 +203,7 @@ class _$InitializedImpl implements _Initialized {
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return initialized?.call();
   }
@@ -214,6 +222,7 @@ class _$InitializedImpl implements _Initialized {
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -236,6 +245,7 @@ class _$InitializedImpl implements _Initialized {
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return initialized(this);
   }
@@ -254,6 +264,7 @@ class _$InitializedImpl implements _Initialized {
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return initialized?.call(this);
   }
@@ -272,6 +283,7 @@ class _$InitializedImpl implements _Initialized {
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -335,6 +347,7 @@ class _$FetchImpl implements _Fetch {
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return fetch();
   }
@@ -353,6 +366,7 @@ class _$FetchImpl implements _Fetch {
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return fetch?.call();
   }
@@ -371,6 +385,7 @@ class _$FetchImpl implements _Fetch {
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -393,6 +408,7 @@ class _$FetchImpl implements _Fetch {
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return fetch(this);
   }
@@ -411,6 +427,7 @@ class _$FetchImpl implements _Fetch {
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return fetch?.call(this);
   }
@@ -429,6 +446,7 @@ class _$FetchImpl implements _Fetch {
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -492,6 +510,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return acceptTnc();
   }
@@ -510,6 +529,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return acceptTnc?.call();
   }
@@ -528,6 +548,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (acceptTnc != null) {
@@ -550,6 +571,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return acceptTnc(this);
   }
@@ -568,6 +590,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return acceptTnc?.call(this);
   }
@@ -586,6 +609,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (acceptTnc != null) {
@@ -679,6 +703,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return setMarketPlaceTncAcceptance(value);
   }
@@ -697,6 +722,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return setMarketPlaceTncAcceptance?.call(value);
   }
@@ -715,6 +741,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (setMarketPlaceTncAcceptance != null) {
@@ -737,6 +764,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return setMarketPlaceTncAcceptance(this);
   }
@@ -755,6 +783,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return setMarketPlaceTncAcceptance?.call(this);
   }
@@ -773,6 +802,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (setMarketPlaceTncAcceptance != null) {
@@ -883,6 +913,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return updateNotificationSettings(languagePreference, emailNotifications);
   }
@@ -901,6 +932,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return updateNotificationSettings?.call(
         languagePreference, emailNotifications);
@@ -920,6 +952,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (updateNotificationSettings != null) {
@@ -942,6 +975,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return updateNotificationSettings(this);
   }
@@ -960,6 +994,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return updateNotificationSettings?.call(this);
   }
@@ -978,6 +1013,7 @@ class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (updateNotificationSettings != null) {
@@ -1095,6 +1131,7 @@ class _$UpdatePaymentNotificationSettingsImpl
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return updatePaymentNotificationSettings(paymentNotification);
   }
@@ -1113,6 +1150,7 @@ class _$UpdatePaymentNotificationSettingsImpl
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return updatePaymentNotificationSettings?.call(paymentNotification);
   }
@@ -1131,6 +1169,7 @@ class _$UpdatePaymentNotificationSettingsImpl
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (updatePaymentNotificationSettings != null) {
@@ -1153,6 +1192,7 @@ class _$UpdatePaymentNotificationSettingsImpl
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return updatePaymentNotificationSettings(this);
   }
@@ -1171,6 +1211,7 @@ class _$UpdatePaymentNotificationSettingsImpl
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return updatePaymentNotificationSettings?.call(this);
   }
@@ -1189,6 +1230,7 @@ class _$UpdatePaymentNotificationSettingsImpl
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (updatePaymentNotificationSettings != null) {
@@ -1288,6 +1330,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return updateLanguage(language);
   }
@@ -1306,6 +1349,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return updateLanguage?.call(language);
   }
@@ -1324,6 +1368,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (updateLanguage != null) {
@@ -1346,6 +1391,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return updateLanguage(this);
   }
@@ -1364,6 +1410,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return updateLanguage?.call(this);
   }
@@ -1382,6 +1429,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (updateLanguage != null) {
@@ -1478,6 +1526,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
         updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
   }) {
     return selectLanguage(language);
   }
@@ -1496,6 +1545,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
         updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
   }) {
     return selectLanguage?.call(language);
   }
@@ -1514,6 +1564,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
         updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
     required TResult orElse(),
   }) {
     if (selectLanguage != null) {
@@ -1536,6 +1587,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
         updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
   }) {
     return selectLanguage(this);
   }
@@ -1554,6 +1606,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
         updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
   }) {
     return selectLanguage?.call(this);
   }
@@ -1572,6 +1625,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
         updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
     required TResult orElse(),
   }) {
     if (selectLanguage != null) {
@@ -1591,6 +1645,203 @@ abstract class _SelectLanguage implements UserEvent {
 }
 
 /// @nodoc
+abstract class _$$SelectOrderTypeImplCopyWith<$Res> {
+  factory _$$SelectOrderTypeImplCopyWith(_$SelectOrderTypeImpl value,
+          $Res Function(_$SelectOrderTypeImpl) then) =
+      __$$SelectOrderTypeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DocumentType orderType});
+}
+
+/// @nodoc
+class __$$SelectOrderTypeImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$SelectOrderTypeImpl>
+    implements _$$SelectOrderTypeImplCopyWith<$Res> {
+  __$$SelectOrderTypeImplCopyWithImpl(
+      _$SelectOrderTypeImpl _value, $Res Function(_$SelectOrderTypeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderType = null,
+  }) {
+    return _then(_$SelectOrderTypeImpl(
+      orderType: null == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as DocumentType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SelectOrderTypeImpl implements _SelectOrderType {
+  const _$SelectOrderTypeImpl({required this.orderType});
+
+  @override
+  final DocumentType orderType;
+
+  @override
+  String toString() {
+    return 'UserEvent.selectOrderType(orderType: $orderType)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SelectOrderTypeImpl &&
+            (identical(other.orderType, orderType) ||
+                other.orderType == orderType));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, orderType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SelectOrderTypeImplCopyWith<_$SelectOrderTypeImpl> get copyWith =>
+      __$$SelectOrderTypeImplCopyWithImpl<_$SelectOrderTypeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
+    required TResult Function(
+            Language languagePreference, bool emailNotifications)
+        updateNotificationSettings,
+    required TResult Function(PaymentNotification paymentNotification)
+        updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
+    required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
+  }) {
+    return selectOrderType(orderType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult? Function(Language languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+    TResult? Function(PaymentNotification paymentNotification)?
+        updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
+    TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
+  }) {
+    return selectOrderType?.call(orderType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult Function(Language languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+    TResult Function(PaymentNotification paymentNotification)?
+        updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
+    TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
+    required TResult orElse(),
+  }) {
+    if (selectOrderType != null) {
+      return selectOrderType(orderType);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
+    required TResult Function(_UpdatePaymentNotificationSettings value)
+        updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
+    required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
+  }) {
+    return selectOrderType(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult? Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+    TResult? Function(_UpdatePaymentNotificationSettings value)?
+        updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
+    TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
+  }) {
+    return selectOrderType?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+    TResult Function(_UpdatePaymentNotificationSettings value)?
+        updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
+    TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
+    required TResult orElse(),
+  }) {
+    if (selectOrderType != null) {
+      return selectOrderType(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SelectOrderType implements UserEvent {
+  const factory _SelectOrderType({required final DocumentType orderType}) =
+      _$SelectOrderTypeImpl;
+
+  DocumentType get orderType;
+  @JsonKey(ignore: true)
+  _$$SelectOrderTypeImplCopyWith<_$SelectOrderTypeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserState {
   User get user => throw _privateConstructorUsedError;
   bool get isLoginOnBehalf => throw _privateConstructorUsedError;
@@ -1598,6 +1849,7 @@ mixin _$UserState {
       throw _privateConstructorUsedError;
   Language get activeLanguage => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isSelectingOrderType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserStateCopyWith<UserState> get copyWith =>
@@ -1614,7 +1866,8 @@ abstract class $UserStateCopyWith<$Res> {
       bool isLoginOnBehalf,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
       Language activeLanguage,
-      bool isLoading});
+      bool isLoading,
+      bool isSelectingOrderType});
 
   $UserCopyWith<$Res> get user;
 }
@@ -1637,6 +1890,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
     Object? userFailureOrSuccessOption = null,
     Object? activeLanguage = null,
     Object? isLoading = null,
+    Object? isSelectingOrderType = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -1658,6 +1912,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSelectingOrderType: null == isSelectingOrderType
+          ? _value.isSelectingOrderType
+          : isSelectingOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -1684,7 +1942,8 @@ abstract class _$$UserStateImplCopyWith<$Res>
       bool isLoginOnBehalf,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
       Language activeLanguage,
-      bool isLoading});
+      bool isLoading,
+      bool isSelectingOrderType});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -1706,6 +1965,7 @@ class __$$UserStateImplCopyWithImpl<$Res>
     Object? userFailureOrSuccessOption = null,
     Object? activeLanguage = null,
     Object? isLoading = null,
+    Object? isSelectingOrderType = null,
   }) {
     return _then(_$UserStateImpl(
       user: null == user
@@ -1728,6 +1988,10 @@ class __$$UserStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSelectingOrderType: null == isSelectingOrderType
+          ? _value.isSelectingOrderType
+          : isSelectingOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1740,7 +2004,8 @@ class _$UserStateImpl extends _UserState {
       required this.isLoginOnBehalf,
       required this.userFailureOrSuccessOption,
       required this.activeLanguage,
-      required this.isLoading})
+      required this.isLoading,
+      required this.isSelectingOrderType})
       : super._();
 
   @override
@@ -1753,10 +2018,12 @@ class _$UserStateImpl extends _UserState {
   final Language activeLanguage;
   @override
   final bool isLoading;
+  @override
+  final bool isSelectingOrderType;
 
   @override
   String toString() {
-    return 'UserState(user: $user, isLoginOnBehalf: $isLoginOnBehalf, userFailureOrSuccessOption: $userFailureOrSuccessOption, activeLanguage: $activeLanguage, isLoading: $isLoading)';
+    return 'UserState(user: $user, isLoginOnBehalf: $isLoginOnBehalf, userFailureOrSuccessOption: $userFailureOrSuccessOption, activeLanguage: $activeLanguage, isLoading: $isLoading, isSelectingOrderType: $isSelectingOrderType)';
   }
 
   @override
@@ -1774,12 +2041,20 @@ class _$UserStateImpl extends _UserState {
             (identical(other.activeLanguage, activeLanguage) ||
                 other.activeLanguage == activeLanguage) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.isSelectingOrderType, isSelectingOrderType) ||
+                other.isSelectingOrderType == isSelectingOrderType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, isLoginOnBehalf,
-      userFailureOrSuccessOption, activeLanguage, isLoading);
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      isLoginOnBehalf,
+      userFailureOrSuccessOption,
+      activeLanguage,
+      isLoading,
+      isSelectingOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -1795,7 +2070,8 @@ abstract class _UserState extends UserState {
       required final Option<Either<ApiFailure, dynamic>>
           userFailureOrSuccessOption,
       required final Language activeLanguage,
-      required final bool isLoading}) = _$UserStateImpl;
+      required final bool isLoading,
+      required final bool isSelectingOrderType}) = _$UserStateImpl;
   const _UserState._() : super._();
 
   @override
@@ -1808,6 +2084,8 @@ abstract class _UserState extends UserState {
   Language get activeLanguage;
   @override
   bool get isLoading;
+  @override
+  bool get isSelectingOrderType;
   @override
   @JsonKey(ignore: true)
   _$$UserStateImplCopyWith<_$UserStateImpl> get copyWith =>

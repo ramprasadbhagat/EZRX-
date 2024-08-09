@@ -353,11 +353,30 @@ class EligibilityState with _$EligibilityState {
       ? 0.45
       : 0.3;
 
+  //============================================================
+  // Order type
+  //
+  //============================================================
+
+  bool get isInvalidSelectedOrderType =>
+      !salesOrgConfigs.orderTypes
+          .any((e) => e.categoryId == user.selectedOrderType && e.enabled) &&
+      isShowOrderType;
+
+  OrderType get selectedOrderTypeInfo => salesOrgConfigs.orderTypes.firstWhere(
+        (e) => e.categoryId == user.selectedOrderType,
+        orElse: () =>
+            OrderType.empty().copyWith(categoryId: user.selectedOrderType),
+      );
+
   bool get isShowOrderType =>
       user.role.type.isSalesRepRole &&
       !salesOrgConfigs.disableOrderType &&
       user.enableOrderType &&
       salesOrgConfigs.orderTypes
-          .where((element) => !element.orderType.isZPOR)
+          .where((element) => !element.categoryId.isZPOR)
           .isNotEmpty;
+
+  //============================================================
+  //============================================================
 }
