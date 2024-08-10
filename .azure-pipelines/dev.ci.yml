@@ -332,13 +332,6 @@ stages:
             parameters:
               testPath: 'test/presentation/more'
 
-      - job: TestPresentationOrderHistory
-        displayName: Test presentation -> order-history
-        steps:
-          - template: templates/unit_test_coverage_steps_template.yml
-            parameters:
-              testPath: 'test/presentation/order_history'
-
       - job: TestPresentationOrders
         displayName: Test presentation -> orders
         steps:

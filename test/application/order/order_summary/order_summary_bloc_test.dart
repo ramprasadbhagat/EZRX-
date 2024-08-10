@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -51,7 +50,6 @@ void main() {
     shipToInfo: fakeShipToInfo,
     salesOrgConfig: fakePHSalesOrgConfigs,
     salesOrganisation: fakePHSalesOrganisation,
-    orderDocumentType: OrderDocumentType.empty(),
   );
   final stockInfoList = <MaterialStockInfo>[MaterialStockInfo.empty()];
 
@@ -77,7 +75,6 @@ void main() {
             customerCodeInfo: seedState.customerCodeInfo,
             salesOrgConfig: seedState.salesOrgConfig,
             salesOrganisation: seedState.salesOrganisation,
-            orderDocumentType: seedState.orderDocumentType,
           ),
         );
       },
@@ -94,7 +91,6 @@ void main() {
             customerCodeInfo: seedState.customerCodeInfo,
             salesOrganisation: fakePHSalesOrganisation,
             data: DeliveryInfoData.empty(),
-            orderDocumentType: seedState.orderDocumentType,
             configs: seedState.salesOrgConfig,
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
@@ -162,7 +158,6 @@ void main() {
             customerCodeInfo: seedState.customerCodeInfo,
             salesOrganisation: seedState.salesOrganisation,
             data: DeliveryInfoData.empty(),
-            orderDocumentType: seedState.orderDocumentType,
             configs: seedState.salesOrgConfig,
             orderValue: 100.0,
             totalTax: 100,
@@ -220,7 +215,6 @@ void main() {
             customerCodeInfo: seedState.customerCodeInfo,
             salesOrganisation: seedState.salesOrganisation,
             data: DeliveryInfoData.empty(),
-            orderDocumentType: seedState.orderDocumentType,
             configs: seedState.salesOrgConfig,
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(

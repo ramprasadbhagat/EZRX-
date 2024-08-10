@@ -21,7 +21,6 @@ import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 
 part 'eligibility_event.dart';
 
@@ -67,7 +66,6 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             user: e.user,
             salesOrganisation: e.salesOrganisation,
             salesOrgConfigs: e.salesOrgConfigs,
-            selectedOrderType: e.selectedOrderType,
           ),
         );
       },

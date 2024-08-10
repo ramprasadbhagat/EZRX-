@@ -107,27 +107,6 @@ class CartState with _$CartState {
       )
       .fold(0, (sum, e) => sum + e.quantity);
 
-  String dialogContent(OrderDocumentType selected) =>
-      selected.documentType.isSpecialOrderType
-          ? selected.documentType.isZPFB && containNonSampleMaterial
-              ? 'non-sample'
-              : selected.documentType.isZPFC && containNonFocMaterialOT
-                  ? 'non-FOC'
-                  : ''
-          : containNonRegularMaterial
-              ? 'FOC and/or sample'
-              : '';
-
-  bool showDialog(OrderDocumentType orderType) {
-    return orderType.documentType.isZPFB
-        ? containNonSampleMaterial
-        : orderType.documentType.isZPFC
-            ? containNonFocMaterialOT
-            : orderType.documentType.isZPOR
-                ? containNonRegularMaterial
-                : false;
-  }
-
   int getQuantityOfProduct({required MaterialNumber productNumber}) {
     return cartProducts
             .where(

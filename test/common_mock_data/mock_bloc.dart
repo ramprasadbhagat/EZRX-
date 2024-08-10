@@ -29,7 +29,6 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dar
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
@@ -254,10 +253,6 @@ class PoAttachmentBlocMock
 class ReOrderPermissionBlocMock
     extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
     implements ReOrderPermissionBloc {}
-
-class OrderDocumentTypeBlocMock
-    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
-    implements OrderDocumentTypeBloc {}
 
 class ScanMaterialInfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>

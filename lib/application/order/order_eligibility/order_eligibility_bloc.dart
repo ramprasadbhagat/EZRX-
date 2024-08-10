@@ -14,8 +14,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-
 part 'order_eligibility_event.dart';
 part 'order_eligibility_state.dart';
 part 'order_eligibility_bloc.freezed.dart';
@@ -35,7 +33,6 @@ class OrderEligibilityBloc
         OrderEligibilityState.initial().copyWith(
           configs: e.configs,
           customerCodeInfo: e.customerCodeInfo,
-          orderType: e.orderType,
           salesOrg: e.salesOrg,
           shipInfo: e.shipInfo,
           user: e.user,
@@ -48,7 +45,6 @@ class OrderEligibilityBloc
           subTotal: e.subTotal,
           grandTotal: e.grandTotal,
           cartItems: e.cartItems,
-          orderType: e.orderType,
         ),
       ),
       validateOrderEligibility: (e) => emit(

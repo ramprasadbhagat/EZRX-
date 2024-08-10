@@ -23,16 +23,10 @@ mixin _$OrderEligibilityEvent {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)
+            ShipToInfo shipInfo)
         initialized,
-    required TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)
+    required TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
@@ -45,16 +39,10 @@ mixin _$OrderEligibilityEvent {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult? Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult? Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
@@ -67,16 +55,10 @@ mixin _$OrderEligibilityEvent {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
@@ -142,8 +124,7 @@ abstract class _$$InitializedImplCopyWith<$Res> {
       SalesOrganisation salesOrg,
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipInfo,
-      String orderType});
+      ShipToInfo shipInfo});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrg;
@@ -168,7 +149,6 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? configs = null,
     Object? customerCodeInfo = null,
     Object? shipInfo = null,
-    Object? orderType = null,
   }) {
     return _then(_$InitializedImpl(
       user: null == user
@@ -191,10 +171,6 @@ class __$$InitializedImplCopyWithImpl<$Res>
           ? _value.shipInfo
           : shipInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 
@@ -247,8 +223,7 @@ class _$InitializedImpl implements _Initialized {
       required this.salesOrg,
       required this.configs,
       required this.customerCodeInfo,
-      required this.shipInfo,
-      required this.orderType});
+      required this.shipInfo});
 
   @override
   final User user;
@@ -260,12 +235,10 @@ class _$InitializedImpl implements _Initialized {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipInfo;
-  @override
-  final String orderType;
 
   @override
   String toString() {
-    return 'OrderEligibilityEvent.initialized(user: $user, salesOrg: $salesOrg, configs: $configs, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType)';
+    return 'OrderEligibilityEvent.initialized(user: $user, salesOrg: $salesOrg, configs: $configs, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo)';
   }
 
   @override
@@ -280,14 +253,12 @@ class _$InitializedImpl implements _Initialized {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipInfo, shipInfo) ||
-                other.shipInfo == shipInfo) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType));
+                other.shipInfo == shipInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, salesOrg, configs,
-      customerCodeInfo, shipInfo, orderType);
+  int get hashCode => Object.hash(
+      runtimeType, user, salesOrg, configs, customerCodeInfo, shipInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -303,22 +274,15 @@ class _$InitializedImpl implements _Initialized {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)
+            ShipToInfo shipInfo)
         initialized,
-    required TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)
+    required TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
   }) {
-    return initialized(
-        user, salesOrg, configs, customerCodeInfo, shipInfo, orderType);
+    return initialized(user, salesOrg, configs, customerCodeInfo, shipInfo);
   }
 
   @override
@@ -329,22 +293,16 @@ class _$InitializedImpl implements _Initialized {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult? Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult? Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
   }) {
     return initialized?.call(
-        user, salesOrg, configs, customerCodeInfo, shipInfo, orderType);
+        user, salesOrg, configs, customerCodeInfo, shipInfo);
   }
 
   @override
@@ -355,24 +313,17 @@ class _$InitializedImpl implements _Initialized {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(
-          user, salesOrg, configs, customerCodeInfo, shipInfo, orderType);
+      return initialized(user, salesOrg, configs, customerCodeInfo, shipInfo);
     }
     return orElse();
   }
@@ -423,15 +374,13 @@ abstract class _Initialized implements OrderEligibilityEvent {
       required final SalesOrganisation salesOrg,
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipInfo,
-      required final String orderType}) = _$InitializedImpl;
+      required final ShipToInfo shipInfo}) = _$InitializedImpl;
 
   User get user;
   SalesOrganisation get salesOrg;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipInfo;
-  String get orderType;
   @JsonKey(ignore: true)
   _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -445,7 +394,6 @@ abstract class _$$UpdateImplCopyWith<$Res> {
   @useResult
   $Res call(
       {List<PriceAggregate> cartItems,
-      String orderType,
       double grandTotal,
       double zpSubtotal,
       double mpSubtotal,
@@ -464,7 +412,6 @@ class __$$UpdateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cartItems = null,
-    Object? orderType = null,
     Object? grandTotal = null,
     Object? zpSubtotal = null,
     Object? mpSubtotal = null,
@@ -475,10 +422,6 @@ class __$$UpdateImplCopyWithImpl<$Res>
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
       grandTotal: null == grandTotal
           ? _value.grandTotal
           : grandTotal // ignore: cast_nullable_to_non_nullable
@@ -504,7 +447,6 @@ class __$$UpdateImplCopyWithImpl<$Res>
 class _$UpdateImpl implements _Update {
   const _$UpdateImpl(
       {required final List<PriceAggregate> cartItems,
-      required this.orderType,
       required this.grandTotal,
       required this.zpSubtotal,
       required this.mpSubtotal,
@@ -520,8 +462,6 @@ class _$UpdateImpl implements _Update {
   }
 
   @override
-  final String orderType;
-  @override
   final double grandTotal;
   @override
   final double zpSubtotal;
@@ -532,7 +472,7 @@ class _$UpdateImpl implements _Update {
 
   @override
   String toString() {
-    return 'OrderEligibilityEvent.update(cartItems: $cartItems, orderType: $orderType, grandTotal: $grandTotal, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal)';
+    return 'OrderEligibilityEvent.update(cartItems: $cartItems, grandTotal: $grandTotal, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal)';
   }
 
   @override
@@ -542,8 +482,6 @@ class _$UpdateImpl implements _Update {
             other is _$UpdateImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartItems, _cartItems) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
             (identical(other.grandTotal, grandTotal) ||
                 other.grandTotal == grandTotal) &&
             (identical(other.zpSubtotal, zpSubtotal) ||
@@ -558,7 +496,6 @@ class _$UpdateImpl implements _Update {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_cartItems),
-      orderType,
       grandTotal,
       zpSubtotal,
       mpSubtotal,
@@ -578,22 +515,15 @@ class _$UpdateImpl implements _Update {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)
+            ShipToInfo shipInfo)
         initialized,
-    required TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)
+    required TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
   }) {
-    return update(
-        cartItems, orderType, grandTotal, zpSubtotal, mpSubtotal, subTotal);
+    return update(cartItems, grandTotal, zpSubtotal, mpSubtotal, subTotal);
   }
 
   @override
@@ -604,22 +534,16 @@ class _$UpdateImpl implements _Update {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult? Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult? Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
   }) {
     return update?.call(
-        cartItems, orderType, grandTotal, zpSubtotal, mpSubtotal, subTotal);
+        cartItems, grandTotal, zpSubtotal, mpSubtotal, subTotal);
   }
 
   @override
@@ -630,24 +554,17 @@ class _$UpdateImpl implements _Update {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
     if (update != null) {
-      return update(
-          cartItems, orderType, grandTotal, zpSubtotal, mpSubtotal, subTotal);
+      return update(cartItems, grandTotal, zpSubtotal, mpSubtotal, subTotal);
     }
     return orElse();
   }
@@ -695,14 +612,12 @@ class _$UpdateImpl implements _Update {
 abstract class _Update implements OrderEligibilityEvent {
   const factory _Update(
       {required final List<PriceAggregate> cartItems,
-      required final String orderType,
       required final double grandTotal,
       required final double zpSubtotal,
       required final double mpSubtotal,
       required final double subTotal}) = _$UpdateImpl;
 
   List<PriceAggregate> get cartItems;
-  String get orderType;
   double get grandTotal;
   double get zpSubtotal;
   double get mpSubtotal;
@@ -784,16 +699,10 @@ class _$SelectDeliveryOptionImpl implements _SelectDeliveryOption {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)
+            ShipToInfo shipInfo)
         initialized,
-    required TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)
+    required TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
@@ -809,16 +718,10 @@ class _$SelectDeliveryOptionImpl implements _SelectDeliveryOption {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult? Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult? Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
@@ -834,16 +737,10 @@ class _$SelectDeliveryOptionImpl implements _SelectDeliveryOption {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
@@ -952,16 +849,10 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)
+            ShipToInfo shipInfo)
         initialized,
-    required TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)
+    required TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
@@ -977,16 +868,10 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult? Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult? Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
@@ -1002,16 +887,10 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo,
-            String orderType)?
+            ShipToInfo shipInfo)?
         initialized,
-    TResult Function(
-            List<PriceAggregate> cartItems,
-            String orderType,
-            double grandTotal,
-            double zpSubtotal,
-            double mpSubtotal,
-            double subTotal)?
+    TResult Function(List<PriceAggregate> cartItems, double grandTotal,
+            double zpSubtotal, double mpSubtotal, double subTotal)?
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
@@ -1076,7 +955,6 @@ mixin _$OrderEligibilityState {
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipInfo => throw _privateConstructorUsedError;
   DeliveryOption get deliveryOption => throw _privateConstructorUsedError;
-  String get orderType => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   double get zpSubtotal => throw _privateConstructorUsedError;
   double get mpSubtotal => throw _privateConstructorUsedError;
@@ -1102,7 +980,6 @@ abstract class $OrderEligibilityStateCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipInfo,
       DeliveryOption deliveryOption,
-      String orderType,
       User user,
       double zpSubtotal,
       double mpSubtotal,
@@ -1137,7 +1014,6 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
     Object? customerCodeInfo = null,
     Object? shipInfo = null,
     Object? deliveryOption = null,
-    Object? orderType = null,
     Object? user = null,
     Object? zpSubtotal = null,
     Object? mpSubtotal = null,
@@ -1173,10 +1049,6 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
           ? _value.deliveryOption
           : deliveryOption // ignore: cast_nullable_to_non_nullable
               as DeliveryOption,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1258,7 +1130,6 @@ abstract class _$$OrderEligibilityStateImplCopyWith<$Res>
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipInfo,
       DeliveryOption deliveryOption,
-      String orderType,
       User user,
       double zpSubtotal,
       double mpSubtotal,
@@ -1296,7 +1167,6 @@ class __$$OrderEligibilityStateImplCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipInfo = null,
     Object? deliveryOption = null,
-    Object? orderType = null,
     Object? user = null,
     Object? zpSubtotal = null,
     Object? mpSubtotal = null,
@@ -1332,10 +1202,6 @@ class __$$OrderEligibilityStateImplCopyWithImpl<$Res>
           ? _value.deliveryOption
           : deliveryOption // ignore: cast_nullable_to_non_nullable
               as DeliveryOption,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1371,7 +1237,6 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
       required this.customerCodeInfo,
       required this.shipInfo,
       required this.deliveryOption,
-      required this.orderType,
       required this.user,
       required this.zpSubtotal,
       required this.mpSubtotal,
@@ -1401,8 +1266,6 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
   @override
   final DeliveryOption deliveryOption;
   @override
-  final String orderType;
-  @override
   final User user;
   @override
   final double zpSubtotal;
@@ -1415,7 +1278,7 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
 
   @override
   String toString() {
-    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, deliveryOption: $deliveryOption, orderType: $orderType, user: $user, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal, showErrorMessage: $showErrorMessage)';
+    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, deliveryOption: $deliveryOption, user: $user, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal, showErrorMessage: $showErrorMessage)';
   }
 
   @override
@@ -1436,8 +1299,6 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
                 other.shipInfo == shipInfo) &&
             (identical(other.deliveryOption, deliveryOption) ||
                 other.deliveryOption == deliveryOption) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.zpSubtotal, zpSubtotal) ||
                 other.zpSubtotal == zpSubtotal) &&
@@ -1459,7 +1320,6 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
       customerCodeInfo,
       shipInfo,
       deliveryOption,
-      orderType,
       user,
       zpSubtotal,
       mpSubtotal,
@@ -1483,7 +1343,6 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipInfo,
       required final DeliveryOption deliveryOption,
-      required final String orderType,
       required final User user,
       required final double zpSubtotal,
       required final double mpSubtotal,
@@ -1505,8 +1364,6 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
   ShipToInfo get shipInfo;
   @override
   DeliveryOption get deliveryOption;
-  @override
-  String get orderType;
   @override
   User get user;
   @override

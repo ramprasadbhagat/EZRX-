@@ -29,7 +29,6 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -70,7 +69,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -122,7 +120,6 @@ void main() {
   late ProductDetailBloc productDetailBloc;
   late LoginFormBloc loginFormBloc;
   late ProductImageBloc productImageBloc;
-  late OrderDocumentTypeBloc orderDocumentTypeMock;
   late AnnouncementBloc announcementBlocMock;
   late AnnouncementInfoBloc announcementInfoBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
@@ -219,7 +216,6 @@ void main() {
       authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
-      orderDocumentTypeMock = OrderDocumentTypeBlocMock();
       salesRepBlocMock = SalesRepBlocMock();
       aupTcBlocMock = AupTcBlocMock();
       cartBlocMock = CartBlocMock();
@@ -265,12 +261,6 @@ void main() {
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
-      when(() => orderDocumentTypeMock.state).thenReturn(
-        OrderDocumentTypeState.initial().copyWith(
-          selectedOrderType: OrderDocumentType.empty()
-              .copyWith(documentType: DocumentType('ZPOR Test (ZPOR)')),
-        ),
-      );
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
 
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -382,9 +372,6 @@ void main() {
             ),
             BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeMock,
             ),
             BlocProvider<UsageCodeBloc>(
               create: (context) => usageCodeBlocMock,
@@ -853,45 +840,6 @@ void main() {
         () => UpgraderLocalizationMessage().message(UpgraderMessage.title),
         isNotNull,
       );
-    });
-
-    testWidgets('OrderDocumentType change triggers MaterialList Fetch',
-        (tester) async {
-      final salesOrg = salesOrgBlocMock.state.salesOrg;
-
-      final expectedStates = [
-        OrderDocumentTypeState.initial().copyWith(
-          selectedOrderType: OrderDocumentType.empty().copyWith(
-            salesOrg: salesOrg,
-          ),
-        ),
-      ];
-      whenListen(orderDocumentTypeMock, Stream.fromIterable(expectedStates));
-
-      await getWidget(tester);
-      await tester.pump();
-
-      orderDocumentTypeMock.add(
-        OrderDocumentTypeEvent.selectedOrderType(
-          isReasonSelected: true,
-          selectedOrderType: OrderDocumentType.empty().copyWith(
-            salesOrg: salesOrg,
-          ),
-        ),
-      );
-
-      verify(
-        () => materialListBlocMock.add(
-          MaterialListEvent.initialized(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            configs: salesOrgBlocMock.state.configs,
-            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
-            shipToInfo: eligibilityBlocMock.state.shipToInfo,
-            selectedMaterialFilter: materialFilterBlocMock.state.materialFilter,
-            user: fakeClientUser,
-          ),
-        ),
-      ).called(2);
     });
 
     testWidgets('Return Request Type fetch on Eligibility Change - Failure',

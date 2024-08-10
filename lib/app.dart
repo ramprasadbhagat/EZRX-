@@ -77,7 +77,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -97,7 +96,6 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -174,7 +172,6 @@ Future<void> initialSetup({
   await locator<OktaLoginServices>().init();
   await locator<AccountSelectorStorage>().init();
   await locator<SettingStorage>().init();
-  await locator<OrderStorage>().init();
   await locator<DeviceStorage>().init();
   await locator<BannerStorage>().init();
   await locator<ProductSuggestionHistoryStorage>().init();
@@ -309,9 +306,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AdditionalDetailsBloc>(
           create: (context) => locator<AdditionalDetailsBloc>(),
-        ),
-        BlocProvider<OrderDocumentTypeBloc>(
-          create: (context) => locator<OrderDocumentTypeBloc>(),
         ),
         BlocProvider<ViewByOrderDetailsBloc>(
           create: (context) => locator<ViewByOrderDetailsBloc>(),

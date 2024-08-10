@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
@@ -47,7 +46,6 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
             shipToInfo: value.shipToInfo,
             customerCodeInfo: value.customerCodeInfo,
             salesOrgConfig: value.salesOrgConfig,
-            orderDocumentType: value.orderDocumentType,
             salesOrganisation: value.salesOrganisation,
           ),
         );
@@ -72,7 +70,6 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
           data: value.data,
-          orderDocumentType: state.orderDocumentType,
           configs: state.salesOrgConfig,
           totalTax: value.totalTax,
           salesRepAuthorizedDetails: value.salesRepAuthorizedDetails,

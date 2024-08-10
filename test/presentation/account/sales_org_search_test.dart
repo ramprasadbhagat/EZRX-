@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -12,33 +11,16 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
-import '../order_history/order_history_details_widget_test.dart';
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   final availableSalesOrgList = [
@@ -66,7 +48,7 @@ void main() {
 
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator.registerLazySingleton(() => AppRouter());
   });
 

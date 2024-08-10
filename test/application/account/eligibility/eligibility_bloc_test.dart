@@ -20,7 +20,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
@@ -217,7 +216,6 @@ void main() {
             user: fakeUser,
             salesOrganisation: fakeSaleOrg,
             salesOrgConfigs: fakeSaleOrgConfig,
-            selectedOrderType: OrderDocumentType.empty(),
           ),
         );
       },
@@ -1610,10 +1608,9 @@ void main() {
       expect(
         EligibilityState.initial()
             .copyWith(
-              user: fakeClient,
+              user:
+                  fakeClient.copyWith(selectedOrderType: DocumentType('fake')),
               salesOrgConfigs: fakeMYSalesOrgConfigs,
-              selectedOrderType: OrderDocumentType.empty()
-                  .copyWith(documentType: DocumentType('fake')),
             )
             .isBonusSampleItemVisible,
         true,
@@ -1622,10 +1619,9 @@ void main() {
       expect(
         EligibilityState.initial()
             .copyWith(
-              user: fakeClient,
+              user:
+                  fakeClient.copyWith(selectedOrderType: DocumentType('zpfb')),
               salesOrgConfigs: fakeMYSalesOrgConfigs,
-              selectedOrderType: OrderDocumentType.empty()
-                  .copyWith(documentType: DocumentType('zpfb')),
             )
             .isBonusSampleItemVisible,
         false,
@@ -1634,10 +1630,9 @@ void main() {
       expect(
         EligibilityState.initial()
             .copyWith(
-              user: fakeClient,
+              user:
+                  fakeClient.copyWith(selectedOrderType: DocumentType('fake')),
               salesOrgConfigs: fakeIDSalesOrgConfigs,
-              selectedOrderType: OrderDocumentType.empty()
-                  .copyWith(documentType: DocumentType('fake')),
             )
             .isBonusSampleItemVisible,
         false,
@@ -1699,9 +1694,8 @@ void main() {
             .copyWith(
               user: fakeSalesRepUser.copyWith(
                 hasBonusOverride: true,
+                selectedOrderType: DocumentType('fake'),
               ),
-              selectedOrderType: OrderDocumentType.empty()
-                  .copyWith(documentType: DocumentType('fake')),
               salesOrgConfigs: fakeMYSalesOrgConfigs,
             )
             .isCounterOfferVisible,
@@ -2614,8 +2608,9 @@ void main() {
     expect(
       EligibilityState.initial()
           .copyWith(
-            selectedOrderType: OrderDocumentType.empty()
-                .copyWith(documentType: DocumentType('fake')),
+            user: fakeExternalSalesRepUser.copyWith(
+              selectedOrderType: DocumentType('fake'),
+            ),
           )
           .isOrderTypeEnableAndSpecialOrderType,
       true,
@@ -2625,10 +2620,10 @@ void main() {
       EligibilityState.initial()
           .copyWith(
             salesOrganisation: fakeMYSalesOrganisation,
-            user: fakeSalesRepUser,
+            user: fakeSalesRepUser.copyWith(
+              selectedOrderType: DocumentType('zpfb'),
+            ),
             salesOrgConfigs: fakeMYSalesOrgConfigs,
-            selectedOrderType: OrderDocumentType.empty()
-                .copyWith(documentType: DocumentType('zpfb')),
           )
           .isOrderTypeEnableAndSpecialOrderType,
       false,

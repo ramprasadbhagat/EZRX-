@@ -10,7 +10,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -95,7 +94,6 @@ void main() {
   late PoAttachmentBloc poAttachmentBloc;
   late PriceOverrideBloc priceOverrideBloc;
   late ComboDealListBloc comboDealListBloc;
-  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late List<PriceAggregate> mockCartItems;
@@ -207,7 +205,6 @@ void main() {
       paymentTermBlocMock = PaymentTermBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
-      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       poAttachmentBloc = PoAttachmentBlocMock();
       priceOverrideBloc = PriceOverrideBlocMock();
       comboDealListBloc = ComboDealListBlocMock();
@@ -215,10 +212,6 @@ void main() {
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
-
-      when(() => orderDocumentTypeBlocMock.state).thenReturn(
-        OrderDocumentTypeState.initial(),
-      );
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(),
       );
@@ -278,9 +271,6 @@ void main() {
           ),
           BlocProvider<OrderSummaryBloc>(
             create: (context) => orderSummaryBlocMock,
-          ),
-          BlocProvider<OrderDocumentTypeBloc>(
-            create: (context) => orderDocumentTypeBlocMock,
           ),
           BlocProvider<CustomerLicenseBloc>(
             create: (context) => customerLicenseBlocMock,

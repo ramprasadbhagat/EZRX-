@@ -8,11 +8,9 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipInfo,
-    required String orderType,
   }) = _Initialized;
   const factory OrderEligibilityEvent.update({
     required List<PriceAggregate> cartItems,
-    required String orderType,
     required double grandTotal,
     required double zpSubtotal,
     required double mpSubtotal,

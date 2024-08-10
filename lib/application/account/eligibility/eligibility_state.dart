@@ -11,7 +11,6 @@ class EligibilityState with _$EligibilityState {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required CustomerCodeConfig customerCodeConfig,
-    required OrderDocumentType selectedOrderType,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoadingCustomerCode,
     required bool preSelectShipTo,
@@ -26,7 +25,6 @@ class EligibilityState with _$EligibilityState {
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
         customerCodeConfig: CustomerCodeConfig.empty(),
-        selectedOrderType: OrderDocumentType.empty(),
         failureOrSuccessOption: none(),
         preSelectShipTo: false,
         isLoadingCustomerCode: false,
@@ -103,7 +101,7 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isOrderTypeEnableAndSpecialOrderType =>
-      !isOrderTypeEnable || !selectedOrderType.documentType.isSpecialOrderType;
+      !isOrderTypeEnable || !user.selectedOrderType.isSpecialOrderType;
 
   // ***pickAndPack values***
   String get getPNPValueMaterial {
@@ -214,7 +212,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get isBundleMaterialEnable =>
       !salesOrgConfigs.disableBundles &&
-      !selectedOrderType.documentType.isSpecialOrderType;
+      !user.selectedOrderType.isSpecialOrderType;
 
   //============================================================
   // 1. user role type must be SalesRep
@@ -224,11 +222,10 @@ class EligibilityState with _$EligibilityState {
       user.role.type.isSalesRepRole && !salesOrgConfigs.disableOrderType;
 
   bool get isBonusSampleItemVisible =>
-      isBonusOverrideEnable &&
-      !selectedOrderType.documentType.isSpecialOrderType;
+      isBonusOverrideEnable && !user.selectedOrderType.isSpecialOrderType;
 
   bool get _isOrderTypeEligibleAndSpecialOrderType =>
-      isOrderTypeEligible && selectedOrderType.documentType.isSpecialOrderType;
+      isOrderTypeEligible && user.selectedOrderType.isSpecialOrderType;
 
   bool get isCounterOfferVisible =>
       !_isOrderTypeEligibleAndSpecialOrderType &&

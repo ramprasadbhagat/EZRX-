@@ -6,7 +6,6 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required User user,
     required ShipToInfo shipToInfo,
     required CustomerCodeInfo customerCodeInfo,
-    required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs salesOrgConfig,
     required SalesOrganisation salesOrganisation,
   }) = _Initialized;

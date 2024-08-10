@@ -8,7 +8,6 @@ class EligibilityEvent with _$EligibilityEvent {
     required User user,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfigs,
-    required OrderDocumentType selectedOrderType,
   }) = _Update;
 
   const factory EligibilityEvent.registerChatBot() = _RegisterChatBot;

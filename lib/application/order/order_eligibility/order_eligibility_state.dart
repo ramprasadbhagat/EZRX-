@@ -12,7 +12,6 @@ class OrderEligibilityState with _$OrderEligibilityState {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipInfo,
     required DeliveryOption deliveryOption,
-    required String orderType,
     required User user,
     required double zpSubtotal,
     required double mpSubtotal,
@@ -25,7 +24,6 @@ class OrderEligibilityState with _$OrderEligibilityState {
         grandTotal: 0.0,
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipInfo: ShipToInfo.empty(),
-        orderType: '',
         configs: SalesOrganisationConfigs.empty(),
         salesOrg: SalesOrganisation.empty(),
         user: User.empty(),
@@ -118,7 +116,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       .any((element) => !element.materialInfo.isSpecialOrderTypeMaterial);
 
   bool get validateRegularOrderType =>
-      isContainIgnoreCase(orderType, 'zpor') && !configs.salesOrg.isTH
+      user.selectedOrderType.isZPOR && !configs.salesOrg.isTH
           ? containsRegularMaterials
           : true;
 
@@ -371,8 +369,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       cartItems.where((e) => e.hasSalesRepPrincipal).isNotEmpty;
 
   bool get _eligibleOrderType =>
-      orderType.isNotEmpty && isContainIgnoreCase(orderType, 'zpfc') ||
-      isContainIgnoreCase(orderType, 'zpfb');
+      user.selectedOrderType.isZPFC || user.selectedOrderType.isZPFC;
 
   bool get _isCartItemsContainsFOCMaterial => cartItems
       .where((element) => element.materialInfo.isFOCMaterial)

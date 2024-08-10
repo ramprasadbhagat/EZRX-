@@ -22,7 +22,6 @@ mixin _$OrderSummaryEvent {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)
         initialized,
@@ -51,7 +50,6 @@ mixin _$OrderSummaryEvent {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -80,7 +78,6 @@ mixin _$OrderSummaryEvent {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -164,14 +161,12 @@ abstract class _$$InitializedImplCopyWith<$Res> {
       {User user,
       ShipToInfo shipToInfo,
       CustomerCodeInfo customerCodeInfo,
-      OrderDocumentType orderDocumentType,
       SalesOrganisationConfigs salesOrgConfig,
       SalesOrganisation salesOrganisation});
 
   $UserCopyWith<$Res> get user;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
@@ -190,7 +185,6 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? user = null,
     Object? shipToInfo = null,
     Object? customerCodeInfo = null,
-    Object? orderDocumentType = null,
     Object? salesOrgConfig = null,
     Object? salesOrganisation = null,
   }) {
@@ -207,10 +201,6 @@ class __$$InitializedImplCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      orderDocumentType: null == orderDocumentType
-          ? _value.orderDocumentType
-          : orderDocumentType // ignore: cast_nullable_to_non_nullable
-              as OrderDocumentType,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -248,14 +238,6 @@ class __$$InitializedImplCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType {
-    return $OrderDocumentTypeCopyWith<$Res>(_value.orderDocumentType, (value) {
-      return _then(_value.copyWith(orderDocumentType: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
         (value) {
@@ -279,7 +261,6 @@ class _$InitializedImpl implements _Initialized {
       {required this.user,
       required this.shipToInfo,
       required this.customerCodeInfo,
-      required this.orderDocumentType,
       required this.salesOrgConfig,
       required this.salesOrganisation});
 
@@ -290,15 +271,13 @@ class _$InitializedImpl implements _Initialized {
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
-  final OrderDocumentType orderDocumentType;
-  @override
   final SalesOrganisationConfigs salesOrgConfig;
   @override
   final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.initialized(user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, orderDocumentType: $orderDocumentType, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation)';
+    return 'OrderSummaryEvent.initialized(user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -311,8 +290,6 @@ class _$InitializedImpl implements _Initialized {
                 other.shipToInfo == shipToInfo) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.orderDocumentType, orderDocumentType) ||
-                other.orderDocumentType == orderDocumentType) &&
             (identical(other.salesOrgConfig, salesOrgConfig) ||
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -321,7 +298,7 @@ class _$InitializedImpl implements _Initialized {
 
   @override
   int get hashCode => Object.hash(runtimeType, user, shipToInfo,
-      customerCodeInfo, orderDocumentType, salesOrgConfig, salesOrganisation);
+      customerCodeInfo, salesOrgConfig, salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
@@ -336,7 +313,6 @@ class _$InitializedImpl implements _Initialized {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)
         initialized,
@@ -358,8 +334,8 @@ class _$InitializedImpl implements _Initialized {
         confirmedOrderStockInfo,
     required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
-    return initialized(user, shipToInfo, customerCodeInfo, orderDocumentType,
-        salesOrgConfig, salesOrganisation);
+    return initialized(
+        user, shipToInfo, customerCodeInfo, salesOrgConfig, salesOrganisation);
   }
 
   @override
@@ -369,7 +345,6 @@ class _$InitializedImpl implements _Initialized {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -391,8 +366,8 @@ class _$InitializedImpl implements _Initialized {
         confirmedOrderStockInfo,
     TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
-    return initialized?.call(user, shipToInfo, customerCodeInfo,
-        orderDocumentType, salesOrgConfig, salesOrganisation);
+    return initialized?.call(
+        user, shipToInfo, customerCodeInfo, salesOrgConfig, salesOrganisation);
   }
 
   @override
@@ -402,7 +377,6 @@ class _$InitializedImpl implements _Initialized {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -426,8 +400,8 @@ class _$InitializedImpl implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(user, shipToInfo, customerCodeInfo, orderDocumentType,
-          salesOrgConfig, salesOrganisation);
+      return initialized(user, shipToInfo, customerCodeInfo, salesOrgConfig,
+          salesOrganisation);
     }
     return orElse();
   }
@@ -480,14 +454,12 @@ abstract class _Initialized implements OrderSummaryEvent {
       {required final User user,
       required final ShipToInfo shipToInfo,
       required final CustomerCodeInfo customerCodeInfo,
-      required final OrderDocumentType orderDocumentType,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final SalesOrganisation salesOrganisation}) = _$InitializedImpl;
 
   User get user;
   ShipToInfo get shipToInfo;
   CustomerCodeInfo get customerCodeInfo;
-  OrderDocumentType get orderDocumentType;
   SalesOrganisationConfigs get salesOrgConfig;
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
@@ -691,7 +663,6 @@ class _$SubmitOrderImpl implements _SubmitOrder {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)
         initialized,
@@ -732,7 +703,6 @@ class _$SubmitOrderImpl implements _SubmitOrder {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -773,7 +743,6 @@ class _$SubmitOrderImpl implements _SubmitOrder {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -961,7 +930,6 @@ class _$OrderConfirmationDetailImpl implements _OrderConfirmationDetail {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)
         initialized,
@@ -993,7 +961,6 @@ class _$OrderConfirmationDetailImpl implements _OrderConfirmationDetail {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -1025,7 +992,6 @@ class _$OrderConfirmationDetailImpl implements _OrderConfirmationDetail {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -1210,7 +1176,6 @@ class _$ConfirmedOrderStockInfoImpl implements _ConfirmedOrderStockInfo {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)
         initialized,
@@ -1242,7 +1207,6 @@ class _$ConfirmedOrderStockInfoImpl implements _ConfirmedOrderStockInfo {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -1275,7 +1239,6 @@ class _$ConfirmedOrderStockInfoImpl implements _ConfirmedOrderStockInfo {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -1430,7 +1393,6 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)
         initialized,
@@ -1462,7 +1424,6 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -1494,7 +1455,6 @@ class _$updateIsExpandedImpl implements _updateIsExpanded {
             User user,
             ShipToInfo shipToInfo,
             CustomerCodeInfo customerCodeInfo,
-            OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs salesOrgConfig,
             SalesOrganisation salesOrganisation)?
         initialized,
@@ -1589,7 +1549,6 @@ mixin _$OrderSummaryState {
   User get user => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
-  OrderDocumentType get orderDocumentType => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
@@ -1615,7 +1574,6 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
       User user,
       ShipToInfo shipToInfo,
       CustomerCodeInfo customerCodeInfo,
-      OrderDocumentType orderDocumentType,
       SalesOrganisationConfigs salesOrgConfig,
       SalesOrganisation salesOrganisation,
       bool isExpanded});
@@ -1624,7 +1582,6 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
   $UserCopyWith<$Res> get user;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
@@ -1650,7 +1607,6 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
     Object? user = null,
     Object? shipToInfo = null,
     Object? customerCodeInfo = null,
-    Object? orderDocumentType = null,
     Object? salesOrgConfig = null,
     Object? salesOrganisation = null,
     Object? isExpanded = null,
@@ -1688,10 +1644,6 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      orderDocumentType: null == orderDocumentType
-          ? _value.orderDocumentType
-          : orderDocumentType // ignore: cast_nullable_to_non_nullable
-              as OrderDocumentType,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -1742,14 +1694,6 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType {
-    return $OrderDocumentTypeCopyWith<$Res>(_value.orderDocumentType, (value) {
-      return _then(_value.copyWith(orderDocumentType: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
         (value) {
@@ -1783,7 +1727,6 @@ abstract class _$$OrderSummaryStateImplCopyWith<$Res>
       User user,
       ShipToInfo shipToInfo,
       CustomerCodeInfo customerCodeInfo,
-      OrderDocumentType orderDocumentType,
       SalesOrganisationConfigs salesOrgConfig,
       SalesOrganisation salesOrganisation,
       bool isExpanded});
@@ -1796,8 +1739,6 @@ abstract class _$$OrderSummaryStateImplCopyWith<$Res>
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  @override
-  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
   @override
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   @override
@@ -1823,7 +1764,6 @@ class __$$OrderSummaryStateImplCopyWithImpl<$Res>
     Object? user = null,
     Object? shipToInfo = null,
     Object? customerCodeInfo = null,
-    Object? orderDocumentType = null,
     Object? salesOrgConfig = null,
     Object? salesOrganisation = null,
     Object? isExpanded = null,
@@ -1861,10 +1801,6 @@ class __$$OrderSummaryStateImplCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      orderDocumentType: null == orderDocumentType
-          ? _value.orderDocumentType
-          : orderDocumentType // ignore: cast_nullable_to_non_nullable
-              as OrderDocumentType,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -1893,7 +1829,6 @@ class _$OrderSummaryStateImpl extends _OrderSummaryState {
       required this.user,
       required this.shipToInfo,
       required this.customerCodeInfo,
-      required this.orderDocumentType,
       required this.salesOrgConfig,
       required this.salesOrganisation,
       required this.isExpanded})
@@ -1924,8 +1859,6 @@ class _$OrderSummaryStateImpl extends _OrderSummaryState {
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
-  final OrderDocumentType orderDocumentType;
-  @override
   final SalesOrganisationConfigs salesOrgConfig;
   @override
   final SalesOrganisation salesOrganisation;
@@ -1934,7 +1867,7 @@ class _$OrderSummaryStateImpl extends _OrderSummaryState {
 
   @override
   String toString() {
-    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, isConfirming: $isConfirming, submitOrderResponse: $submitOrderResponse, orderHistoryDetailsList: $orderHistoryDetailsList, user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, orderDocumentType: $orderDocumentType, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation, isExpanded: $isExpanded)';
+    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, isConfirming: $isConfirming, submitOrderResponse: $submitOrderResponse, orderHistoryDetailsList: $orderHistoryDetailsList, user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation, isExpanded: $isExpanded)';
   }
 
   @override
@@ -1958,8 +1891,6 @@ class _$OrderSummaryStateImpl extends _OrderSummaryState {
                 other.shipToInfo == shipToInfo) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.orderDocumentType, orderDocumentType) ||
-                other.orderDocumentType == orderDocumentType) &&
             (identical(other.salesOrgConfig, salesOrgConfig) ||
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -1979,7 +1910,6 @@ class _$OrderSummaryStateImpl extends _OrderSummaryState {
       user,
       shipToInfo,
       customerCodeInfo,
-      orderDocumentType,
       salesOrgConfig,
       salesOrganisation,
       isExpanded);
@@ -2003,7 +1933,6 @@ abstract class _OrderSummaryState extends OrderSummaryState {
       required final User user,
       required final ShipToInfo shipToInfo,
       required final CustomerCodeInfo customerCodeInfo,
-      required final OrderDocumentType orderDocumentType,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final SalesOrganisation salesOrganisation,
       required final bool isExpanded}) = _$OrderSummaryStateImpl;
@@ -2025,8 +1954,6 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   ShipToInfo get shipToInfo;
   @override
   CustomerCodeInfo get customerCodeInfo;
-  @override
-  OrderDocumentType get orderDocumentType;
   @override
   SalesOrganisationConfigs get salesOrgConfig;
   @override

@@ -48,7 +48,6 @@ import 'package:ezrxmobile/application/order/cart/discount_override/discount_ove
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
@@ -62,7 +61,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -104,7 +102,6 @@ void main() {
   late TenderContractBloc tenderContractBlocMock;
   late TenderContractListBloc tenderContractListBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
-  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late DiscountOverrideBloc discountOverrideBlocMock;
   late List<PriceAggregate> mockCartItemWithDataListOverride;
   late List<PriceAggregate> mockCartItemOOS;
@@ -192,7 +189,6 @@ void main() {
       eligibilityBloc = EligibilityBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       tenderContractListBlocMock = TenderContractListBlocMock();
-      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       discountOverrideBlocMock = DiscountOverrideBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
       priceOverrideBloc = PriceOverrideBlocMock();
@@ -595,13 +591,6 @@ void main() {
           .thenReturn(TenderContractState.initial());
       when(() => tenderContractListBlocMock.state)
           .thenReturn(TenderContractListState.initial());
-      when(() => orderDocumentTypeBlocMock.state).thenReturn(
-        OrderDocumentTypeState.initial().copyWith(
-          selectedOrderType: OrderDocumentType.empty().copyWith(
-            documentType: DocumentType('Test (ZPOR)'),
-          ),
-        ),
-      );
       when(() => priceOverrideBloc.state)
           .thenReturn(PriceOverrideState.initial());
       when(() => customerLicenseBlocMock.state)
@@ -659,9 +648,6 @@ void main() {
             ),
             BlocProvider<TenderContractListBloc>(
               create: (context) => tenderContractListBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
             ),
             BlocProvider<OrderEligibilityBloc>(
               create: (context) => orderEligibilityBlocMock,
@@ -2222,9 +2208,6 @@ void main() {
       testWidgets(
         'Init OrderEligibilityBloc and Fetch detail when cart has items in initState',
         (tester) async {
-          final fakeOrderType = OrderDocumentType.empty().copyWith(
-            documentType: DocumentType('test'),
-          );
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -2232,7 +2215,6 @@ void main() {
               salesOrganisation: fakeSGSalesOrganisation,
               shipToInfo: fakeShipToInfo,
               user: fakeClientUser,
-              selectedOrderType: fakeOrderType,
             ),
           );
           final cartItem = mockCartItems.last.copyWith
@@ -2263,7 +2245,6 @@ void main() {
                 salesOrg: fakeSGSalesOrganisation,
                 shipInfo: fakeShipToInfo,
                 user: fakeClientUser,
-                orderType: fakeOrderType.documentType.getOrDefaultValue(''),
               ),
             ),
           ).called(1);
@@ -3343,8 +3324,6 @@ void main() {
       testWidgets(
           'Order Eligibility Bloc should be initialized every time EligibilityState change',
           (tester) async {
-        final orderType =
-            OrderDocumentType.defaultSelected(salesOrg: fakeMYSalesOrg);
         whenListen(
           eligibilityBloc,
           Stream.fromIterable([
@@ -3353,7 +3332,6 @@ void main() {
               salesOrgConfigs: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
-              selectedOrderType: orderType,
               shipToInfo: fakeShipToInfo,
               user: fakeClientUser,
             ),
@@ -3369,7 +3347,6 @@ void main() {
               configs: fakeMYSalesOrgConfigs,
               salesOrg: fakeMYSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
-              orderType: orderType.documentType.getOrDefaultValue(''),
               shipInfo: fakeShipToInfo,
               user: fakeClientUser,
             ),

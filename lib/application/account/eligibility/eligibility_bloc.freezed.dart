@@ -19,11 +19,8 @@ mixin _$EligibilityEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -44,11 +41,8 @@ mixin _$EligibilityEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -67,11 +61,8 @@ mixin _$EligibilityEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -206,11 +197,8 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -234,11 +222,8 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -260,11 +245,8 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -371,13 +353,11 @@ abstract class _$$UpdateImplCopyWith<$Res> {
   $Res call(
       {User user,
       SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs salesOrgConfigs,
-      OrderDocumentType selectedOrderType});
+      SalesOrganisationConfigs salesOrgConfigs});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
-  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
 }
 
 /// @nodoc
@@ -394,7 +374,6 @@ class __$$UpdateImplCopyWithImpl<$Res>
     Object? user = null,
     Object? salesOrganisation = null,
     Object? salesOrgConfigs = null,
-    Object? selectedOrderType = null,
   }) {
     return _then(_$UpdateImpl(
       user: null == user
@@ -409,10 +388,6 @@ class __$$UpdateImplCopyWithImpl<$Res>
           ? _value.salesOrgConfigs
           : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      selectedOrderType: null == selectedOrderType
-          ? _value.selectedOrderType
-          : selectedOrderType // ignore: cast_nullable_to_non_nullable
-              as OrderDocumentType,
     ));
   }
 
@@ -440,14 +415,6 @@ class __$$UpdateImplCopyWithImpl<$Res>
       return _then(_value.copyWith(salesOrgConfigs: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType {
-    return $OrderDocumentTypeCopyWith<$Res>(_value.selectedOrderType, (value) {
-      return _then(_value.copyWith(selectedOrderType: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -456,8 +423,7 @@ class _$UpdateImpl implements _Update {
   const _$UpdateImpl(
       {required this.user,
       required this.salesOrganisation,
-      required this.salesOrgConfigs,
-      required this.selectedOrderType});
+      required this.salesOrgConfigs});
 
   @override
   final User user;
@@ -465,12 +431,10 @@ class _$UpdateImpl implements _Update {
   final SalesOrganisation salesOrganisation;
   @override
   final SalesOrganisationConfigs salesOrgConfigs;
-  @override
-  final OrderDocumentType selectedOrderType;
 
   @override
   String toString() {
-    return 'EligibilityEvent.update(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, selectedOrderType: $selectedOrderType)';
+    return 'EligibilityEvent.update(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs)';
   }
 
   @override
@@ -482,14 +446,12 @@ class _$UpdateImpl implements _Update {
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.salesOrgConfigs, salesOrgConfigs) ||
-                other.salesOrgConfigs == salesOrgConfigs) &&
-            (identical(other.selectedOrderType, selectedOrderType) ||
-                other.selectedOrderType == selectedOrderType));
+                other.salesOrgConfigs == salesOrgConfigs));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, salesOrganisation, salesOrgConfigs, selectedOrderType);
+  int get hashCode =>
+      Object.hash(runtimeType, user, salesOrganisation, salesOrgConfigs);
 
   @JsonKey(ignore: true)
   @override
@@ -501,11 +463,8 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -522,18 +481,15 @@ class _$UpdateImpl implements _Update {
     required TResult Function(bool isNetworkAvailable)
         updateNetworkAvailability,
   }) {
-    return update(user, salesOrganisation, salesOrgConfigs, selectedOrderType);
+    return update(user, salesOrganisation, salesOrgConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -548,19 +504,15 @@ class _$UpdateImpl implements _Update {
     TResult? Function()? watchConnectivityStatus,
     TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
-    return update?.call(
-        user, salesOrganisation, salesOrgConfigs, selectedOrderType);
+    return update?.call(user, salesOrganisation, salesOrgConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -576,8 +528,7 @@ class _$UpdateImpl implements _Update {
     required TResult orElse(),
   }) {
     if (update != null) {
-      return update(
-          user, salesOrganisation, salesOrgConfigs, selectedOrderType);
+      return update(user, salesOrganisation, salesOrgConfigs);
     }
     return orElse();
   }
@@ -659,13 +610,11 @@ abstract class _Update implements EligibilityEvent {
   const factory _Update(
       {required final User user,
       required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs salesOrgConfigs,
-      required final OrderDocumentType selectedOrderType}) = _$UpdateImpl;
+      required final SalesOrganisationConfigs salesOrgConfigs}) = _$UpdateImpl;
 
   User get user;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesOrgConfigs;
-  OrderDocumentType get selectedOrderType;
   @JsonKey(ignore: true)
   _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -710,11 +659,8 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -738,11 +684,8 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -764,11 +707,8 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -963,11 +903,8 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -991,11 +928,8 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1017,11 +951,8 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1208,11 +1139,8 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -1236,11 +1164,8 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1262,11 +1187,8 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1413,11 +1335,8 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -1441,11 +1360,8 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1467,11 +1383,8 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1613,11 +1526,8 @@ class _$FetchAndPreSelectCustomerCodeImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -1641,11 +1551,8 @@ class _$FetchAndPreSelectCustomerCodeImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1667,11 +1574,8 @@ class _$FetchAndPreSelectCustomerCodeImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1843,11 +1747,8 @@ class _$UpdateStockInfoAvailabilityImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -1871,11 +1772,8 @@ class _$UpdateStockInfoAvailabilityImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -1897,11 +1795,8 @@ class _$UpdateStockInfoAvailabilityImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -2046,11 +1941,8 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -2074,11 +1966,8 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -2100,11 +1989,8 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -2244,11 +2130,8 @@ class _$WatchConnectivityStatusImpl implements _WatchConnectivityStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -2272,11 +2155,8 @@ class _$WatchConnectivityStatusImpl implements _WatchConnectivityStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -2298,11 +2178,8 @@ class _$WatchConnectivityStatusImpl implements _WatchConnectivityStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -2470,11 +2347,8 @@ class _$UpdateNetworkAvailabilityImpl implements _UpdateNetworkAvailability {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)
+    required TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)
         update,
     required TResult Function() registerChatBot,
     required TResult Function(
@@ -2498,11 +2372,8 @@ class _$UpdateNetworkAvailabilityImpl implements _UpdateNetworkAvailability {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult? Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -2524,11 +2395,8 @@ class _$UpdateNetworkAvailabilityImpl implements _UpdateNetworkAvailability {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            OrderDocumentType selectedOrderType)?
+    TResult Function(User user, SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs)?
         update,
     TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
@@ -2643,7 +2511,6 @@ mixin _$EligibilityState {
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   CustomerCodeConfig get customerCodeConfig =>
       throw _privateConstructorUsedError;
-  OrderDocumentType get selectedOrderType => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoadingCustomerCode => throw _privateConstructorUsedError;
@@ -2669,7 +2536,6 @@ abstract class $EligibilityStateCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       CustomerCodeConfig customerCodeConfig,
-      OrderDocumentType selectedOrderType,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoadingCustomerCode,
       bool preSelectShipTo,
@@ -2682,7 +2548,6 @@ abstract class $EligibilityStateCopyWith<$Res> {
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $CustomerCodeConfigCopyWith<$Res> get customerCodeConfig;
-  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
 }
 
 /// @nodoc
@@ -2704,7 +2569,6 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? customerCodeConfig = null,
-    Object? selectedOrderType = null,
     Object? failureOrSuccessOption = null,
     Object? isLoadingCustomerCode = null,
     Object? preSelectShipTo = null,
@@ -2736,10 +2600,6 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
           ? _value.customerCodeConfig
           : customerCodeConfig // ignore: cast_nullable_to_non_nullable
               as CustomerCodeConfig,
-      selectedOrderType: null == selectedOrderType
-          ? _value.selectedOrderType
-          : selectedOrderType // ignore: cast_nullable_to_non_nullable
-              as OrderDocumentType,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -2812,14 +2672,6 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
       return _then(_value.copyWith(customerCodeConfig: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType {
-    return $OrderDocumentTypeCopyWith<$Res>(_value.selectedOrderType, (value) {
-      return _then(_value.copyWith(selectedOrderType: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -2837,7 +2689,6 @@ abstract class _$$EligibilityStateImplCopyWith<$Res>
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       CustomerCodeConfig customerCodeConfig,
-      OrderDocumentType selectedOrderType,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoadingCustomerCode,
       bool preSelectShipTo,
@@ -2856,8 +2707,6 @@ abstract class _$$EligibilityStateImplCopyWith<$Res>
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
   $CustomerCodeConfigCopyWith<$Res> get customerCodeConfig;
-  @override
-  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
 }
 
 /// @nodoc
@@ -2877,7 +2726,6 @@ class __$$EligibilityStateImplCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? customerCodeConfig = null,
-    Object? selectedOrderType = null,
     Object? failureOrSuccessOption = null,
     Object? isLoadingCustomerCode = null,
     Object? preSelectShipTo = null,
@@ -2909,10 +2757,6 @@ class __$$EligibilityStateImplCopyWithImpl<$Res>
           ? _value.customerCodeConfig
           : customerCodeConfig // ignore: cast_nullable_to_non_nullable
               as CustomerCodeConfig,
-      selectedOrderType: null == selectedOrderType
-          ? _value.selectedOrderType
-          : selectedOrderType // ignore: cast_nullable_to_non_nullable
-              as OrderDocumentType,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -2947,7 +2791,6 @@ class _$EligibilityStateImpl extends _EligibilityState {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.customerCodeConfig,
-      required this.selectedOrderType,
       required this.failureOrSuccessOption,
       required this.isLoadingCustomerCode,
       required this.preSelectShipTo,
@@ -2968,8 +2811,6 @@ class _$EligibilityStateImpl extends _EligibilityState {
   @override
   final CustomerCodeConfig customerCodeConfig;
   @override
-  final OrderDocumentType selectedOrderType;
-  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
   final bool isLoadingCustomerCode;
@@ -2982,7 +2823,7 @@ class _$EligibilityStateImpl extends _EligibilityState {
 
   @override
   String toString() {
-    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, customerCodeConfig: $customerCodeConfig, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption, isLoadingCustomerCode: $isLoadingCustomerCode, preSelectShipTo: $preSelectShipTo, isStockInfoNotAvailable: $isStockInfoNotAvailable, isNetworkAvailable: $isNetworkAvailable)';
+    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, customerCodeConfig: $customerCodeConfig, failureOrSuccessOption: $failureOrSuccessOption, isLoadingCustomerCode: $isLoadingCustomerCode, preSelectShipTo: $preSelectShipTo, isStockInfoNotAvailable: $isStockInfoNotAvailable, isNetworkAvailable: $isNetworkAvailable)';
   }
 
   @override
@@ -3001,8 +2842,6 @@ class _$EligibilityStateImpl extends _EligibilityState {
                 other.shipToInfo == shipToInfo) &&
             (identical(other.customerCodeConfig, customerCodeConfig) ||
                 other.customerCodeConfig == customerCodeConfig) &&
-            (identical(other.selectedOrderType, selectedOrderType) ||
-                other.selectedOrderType == selectedOrderType) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.isLoadingCustomerCode, isLoadingCustomerCode) ||
@@ -3025,7 +2864,6 @@ class _$EligibilityStateImpl extends _EligibilityState {
       customerCodeInfo,
       shipToInfo,
       customerCodeConfig,
-      selectedOrderType,
       failureOrSuccessOption,
       isLoadingCustomerCode,
       preSelectShipTo,
@@ -3048,7 +2886,6 @@ abstract class _EligibilityState extends EligibilityState {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final CustomerCodeConfig customerCodeConfig,
-      required final OrderDocumentType selectedOrderType,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoadingCustomerCode,
       required final bool preSelectShipTo,
@@ -3068,8 +2905,6 @@ abstract class _EligibilityState extends EligibilityState {
   ShipToInfo get shipToInfo;
   @override
   CustomerCodeConfig get customerCodeConfig;
-  @override
-  OrderDocumentType get selectedOrderType;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

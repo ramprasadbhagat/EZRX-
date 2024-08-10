@@ -1,4 +1,3 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
@@ -29,14 +28,12 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -53,42 +50,8 @@ import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class OrderEligibilityBlocMock
-    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
-    implements OrderEligibilityBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class OrderSummaryBlocMock
-    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
-    implements OrderSummaryBloc {}
-
-class BonusMaterialBlocMock
-    extends MockBloc<BonusMaterialEvent, BonusMaterialState>
-    implements BonusMaterialBloc {}
 
 void main() {
   late CartBloc cartBloc;
@@ -96,7 +59,6 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late PriceAggregate cartItem;
   late OrderEligibilityBloc orderEligibilityBloc;
-  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late Map<MaterialNumber, Price> mockPriceList;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
@@ -127,7 +89,6 @@ void main() {
       cartBloc = CartBlocMock();
       materialPriceBloc = MaterialPriceBlocMock();
       eligibilityBloc = EligibilityBlocMock();
-      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       orderEligibilityBloc = OrderEligibilityBlocMock();
       priceOverrideBloc = PriceOverrideBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
@@ -170,13 +131,6 @@ void main() {
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(),
       );
-      when(() => orderDocumentTypeBlocMock.state).thenReturn(
-        OrderDocumentTypeState.initial().copyWith(
-          selectedOrderType: OrderDocumentType.empty().copyWith(
-            documentType: DocumentType('Test (ZPOR)'),
-          ),
-        ),
-      );
       when(() => orderEligibilityBloc.state).thenReturn(
         OrderEligibilityState.initial(),
       );
@@ -210,9 +164,6 @@ void main() {
             ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
-            ),
             BlocProvider<OrderEligibilityBloc>(
               create: (context) => orderEligibilityBloc,
             ),
@@ -423,9 +374,7 @@ void main() {
                 type: RoleType('internal_sales_rep'),
               ),
               hasPriceOverride: true,
-            ),
-            selectedOrderType: OrderDocumentType.empty().copyWith(
-              documentType: DocumentType('zpfc'),
+              selectedOrderType: DocumentType('zpfc'),
             ),
           ),
         );
@@ -454,9 +403,7 @@ void main() {
                 type: RoleType('internal_sales_rep'),
               ),
               hasPriceOverride: true,
-            ),
-            selectedOrderType: OrderDocumentType.empty().copyWith(
-              documentType: DocumentType('ZPOR'),
+              selectedOrderType: DocumentType('ZPOR'),
             ),
           ),
         );
@@ -559,9 +506,8 @@ void main() {
               ),
               hasBonusOverride: true,
               hasPriceOverride: true,
+              selectedOrderType: DocumentType('ZPOR'),
             ),
-            selectedOrderType: OrderDocumentType.empty()
-                .copyWith(documentType: DocumentType('ZPOR')),
           ),
         );
 
@@ -1193,8 +1139,8 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeSGSalesOrgConfigs,
-            selectedOrderType: OrderDocumentType.empty().copyWith(
-              documentType: DocumentType('ZPOR'),
+            user: fakeExternalSalesRepUser.copyWith(
+              selectedOrderType: DocumentType('ZPOR'),
             ),
           ),
         );

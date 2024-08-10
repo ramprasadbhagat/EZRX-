@@ -90,8 +90,6 @@ class _CartPageState extends State<CartPage> {
           OrderEligibilityEvent.initialized(
             configs: eligibilityState.salesOrgConfigs,
             customerCodeInfo: eligibilityState.customerCodeInfo,
-            orderType: eligibilityState.selectedOrderType.documentType
-                .getOrDefaultValue(''),
             salesOrg: eligibilityState.salesOrganisation,
             shipInfo: eligibilityState.shipToInfo,
             user: eligibilityState.user,
@@ -166,8 +164,6 @@ class _CartPageState extends State<CartPage> {
                   OrderEligibilityEvent.initialized(
                     configs: state.salesOrgConfigs,
                     customerCodeInfo: state.customerCodeInfo,
-                    orderType: state.selectedOrderType.documentType
-                        .getOrDefaultValue(''),
                     salesOrg: state.salesOrganisation,
                     shipInfo: state.shipToInfo,
                     user: state.user,
@@ -308,12 +304,6 @@ class _CartPageState extends State<CartPage> {
                   OrderEligibilityEvent.update(
                     cartItems: state.cartProducts,
                     grandTotal: state.grandTotal,
-                    orderType: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .selectedOrderType
-                        .documentType
-                        .getOrDefaultValue(''),
                     zpSubtotal: state.zpSubtotal,
                     mpSubtotal: state.mpSubtotal,
                     subTotal: state.subTotal,

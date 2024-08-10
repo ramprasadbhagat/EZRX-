@@ -28,7 +28,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -36,7 +35,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -61,9 +59,6 @@ void main() {
   late CustomerCodeBloc customerCodeBloc;
   late OrderEligibilityBloc orderEligibilityBloc;
   late TenderContractListBloc tenderContractListBlocMock;
-
-  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
-
   late Map<MaterialNumber, Price> mockPriceList;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
@@ -89,7 +84,6 @@ void main() {
     customerCodeBloc = CustomerCodeBlocMock();
     eligibilityBloc = EligibilityBlocMock();
     userBloc = UserBlocMock();
-    orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
     orderEligibilityBloc = OrderEligibilityBlocMock();
     priceOverrideBloc = PriceOverrideBlocMock();
     orderSummaryBlocMock = OrderSummaryBlocMock();
@@ -154,13 +148,6 @@ void main() {
           ),
         ),
       );
-      when(() => orderDocumentTypeBlocMock.state).thenReturn(
-        OrderDocumentTypeState.initial().copyWith(
-          selectedOrderType: OrderDocumentType.empty().copyWith(
-            documentType: DocumentType('Test (ZPOR)'),
-          ),
-        ),
-      );
       when(() => orderEligibilityBloc.state).thenReturn(
         OrderEligibilityState.initial(),
       );
@@ -197,9 +184,6 @@ void main() {
             ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
-            ),
             BlocProvider<OrderEligibilityBloc>(
               create: (context) => orderEligibilityBloc,
             ),

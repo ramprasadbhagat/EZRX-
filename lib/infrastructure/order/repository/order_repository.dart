@@ -13,7 +13,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
@@ -89,7 +88,6 @@ class OrderRepository implements IOrderRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required DeliveryInfoData data,
-    required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs configs,
     required SalesRepAuthorizedDetails salesRepAuthorizedDetails,
   }) async {

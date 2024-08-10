@@ -63,7 +63,6 @@ void main() {
               customerCodeInfo: initializedState.customerCodeInfo,
               configs: initializedState.configs,
               shipInfo: initializedState.shipInfo,
-              orderType: initializedState.orderType,
             ),
           );
         },
@@ -211,7 +210,6 @@ void main() {
           OrderEligibilityEvent.update(
             cartItems: [fakeCartItem],
             grandTotal: 200.0,
-            orderType: '',
             subTotal: 180.0,
             mpSubtotal: 222.2,
             zpSubtotal: 333.3,
@@ -220,7 +218,6 @@ void main() {
         expect: () => [
           initializedState.copyWith(
             cartItems: <PriceAggregate>[fakeCartItem],
-            orderType: '',
             grandTotal: 200.0,
             subTotal: 180.0,
             mpSubtotal: 222.2,
@@ -260,7 +257,9 @@ void main() {
         act: (bloc) {
           final isMinOrderValuePassed = initializedState
               .copyWith(
-                orderType: 'ZPFC',
+                user: fakeSalesRepUser.copyWith(
+                  selectedOrderType: DocumentType('ZPFC'),
+                ),
               )
               .isMinOrderValuePassed;
           expect(isMinOrderValuePassed, true);

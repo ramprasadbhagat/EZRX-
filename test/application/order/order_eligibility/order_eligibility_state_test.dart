@@ -90,7 +90,9 @@ void main() {
 
       // validateRegularOrderType equals containsRegularMaterials
       final changeState = initializedState.copyWith(
-        orderType: 'ZPOR',
+        user: fakeSalesRepUser.copyWith(
+          selectedOrderType: DocumentType('ZPOR'),
+        ),
       );
       expect(
         changeState.validateRegularOrderType,
@@ -359,7 +361,9 @@ void main() {
       expect(initializedState.isCheckoutDisabled, false);
 
       final modifiedState = initializedState.copyWith(
-        orderType: 'ZPFC',
+        user: fakeSalesRepUser.copyWith(
+          selectedOrderType: DocumentType('ZPFC'),
+        ),
         cartItems: [
           fakeCartItem.copyWith(
             materialInfo: MaterialInfo.empty().copyWith(

@@ -42,7 +42,6 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -213,7 +212,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
@@ -268,9 +266,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
@@ -302,7 +297,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_information_repository.dart';
@@ -469,7 +463,6 @@ void setupLocator() {
     () => CredStorage(secureStorage: locator<SecureStorage>()),
   );
   locator.registerLazySingleton(() => SettingStorage());
-  locator.registerLazySingleton(() => OrderStorage());
   locator.registerLazySingleton(
     () => MaterialInfoScanner(config: locator<Config>()),
   );
@@ -1355,39 +1348,6 @@ void setupLocator() {
     ),
   );
 
-  //============================================================
-  //  Order Document Type
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => OrderDocumentTypeLocalDataSource());
-  locator.registerLazySingleton(() => OrderDocumentTypeQueryMutation());
-
-  locator.registerLazySingleton(
-    () => OrderDocumentTypeRemoteDataSource(
-      httpService: locator<HttpService>(),
-      config: locator<Config>(),
-      queryMutation: locator<OrderDocumentTypeQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => OrderDocumentTypeRepository(
-      config: locator<Config>(),
-      orderDocumentTypLocalDataSource:
-          locator<OrderDocumentTypeLocalDataSource>(),
-      orderDocumentTypRemoteDataSource:
-          locator<OrderDocumentTypeRemoteDataSource>(),
-      orderStorage: locator<OrderStorage>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => OrderDocumentTypeBloc(
-      orderDocumentTypeRepository: locator<OrderDocumentTypeRepository>(),
-    ),
-  );
 
   //============================================================
   //  Order History Details Po Document Type

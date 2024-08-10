@@ -39,7 +39,6 @@ import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/order_encryption.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -314,8 +313,6 @@ void main() {
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
       data: deliveryInfoData,
-      orderDocumentType: OrderDocumentType.empty()
-          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
       configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
@@ -410,8 +407,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -471,8 +466,6 @@ void main() {
       salesOrganisation: fakeSGSalesOrganisation,
       data:
           DeliveryInfoData.empty().copyWith(paymentTerm: PaymentTerm('A004-')),
-      orderDocumentType: OrderDocumentType.empty()
-          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
       configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
@@ -502,8 +495,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -544,8 +535,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -584,8 +573,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -629,8 +616,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -688,8 +673,6 @@ void main() {
         ),
         salesOrganisation: fakeSGSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
         configs: fakeSGSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -751,8 +734,6 @@ void main() {
         ),
         salesOrganisation: fakePHSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -810,8 +791,6 @@ void main() {
         ),
         salesOrganisation: fakePHSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPVF'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -888,8 +867,6 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           data: deliveryInfoData,
-          orderDocumentType: OrderDocumentType.empty()
-              .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
           configs: fakePHSalesOrgConfigs,
           orderValue: 100.0,
           totalTax: 100,
@@ -932,8 +909,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -1056,8 +1031,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
@@ -1110,8 +1083,6 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeIDSalesOrganisation,
           data: deliveryInfoData,
-          orderDocumentType: OrderDocumentType.empty()
-              .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
           configs: fakeIDSalesOrgConfigs,
           orderValue: 100.0,
           totalTax: 100,
@@ -1212,8 +1183,6 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
@@ -1289,8 +1258,6 @@ void main() {
             fakeCustomerCodeInfo.copyWith(customerGrp4: CustomerGrp4('VR')),
         salesOrganisation: fakePHSalesOrganisation,
         data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: '802'),
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
@@ -1344,8 +1311,6 @@ void main() {
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeIDSalesOrganisation,
       data: deliveryInfoData,
-      orderDocumentType: OrderDocumentType.empty()
-          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
       configs: fakePHSalesOrgConfigs,
       orderValue: 310000.00,
       totalTax: 100,
@@ -1392,8 +1357,6 @@ void main() {
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeSalesOrganisation,
       data: deliveryInfoData,
-      orderDocumentType: OrderDocumentType.empty()
-          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
       configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
@@ -1445,8 +1408,6 @@ void main() {
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisation: fakeIDSalesOrganisation,
       data: deliveryInfoData,
-      orderDocumentType: OrderDocumentType.empty()
-          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
       configs: fakePHSalesOrgConfigs,
       orderValue: 310000.00,
       totalTax: 100,
@@ -1755,7 +1716,7 @@ void main() {
                 TrackingProps.bonuses: item.bonusSampleItems
                     .map(
                       (e) => BonusSampleItemDto.fromDomain(e).toJson(),
-                )
+                    )
                     .toList(),
                 TrackingProps.market: fakeNormalMarket,
               },
@@ -1842,14 +1803,14 @@ void main() {
             props: {
               if (item.processingStatus.isInQueue)
                 TrackingProps.queueNumber:
-                item.orderNumber.getOrDefaultValue(''),
+                    item.orderNumber.getOrDefaultValue(''),
               TrackingProps.orderNumber: item.orderNumber.getOrDefaultValue(''),
               TrackingProps.grandTotal: item.totalValue,
               TrackingProps.totalQty: item.orderItemsCount,
               TrackingProps.requestDeliveryDate:
-              item.requestedDeliveryDate.dateOrNaString,
+                  item.requestedDeliveryDate.dateOrNaString,
               TrackingProps.lineNumber:
-              item.orderHistoryDetailsOrderItem.length,
+                  item.orderHistoryDetailsOrderItem.length,
               TrackingProps.forceUpgradeVersionInfo:
                   upgrader.state.versionInfo.toString(),
               TrackingProps.forceUpgradeAlertTooSoon: upgrader.isTooSoon(),
