@@ -44,18 +44,8 @@ stages:
       displayName: flutter setup
       inputs:
         targetType: 'inline'
-        script: |
-          brew tap leoafarias/fvm
-          brew install fvm
-          echo Y | fvm global 3.22.1
-          fvm flutter clean
-          cd ios
-          rm -rf Pods
-          rm Podfile.lock
-          fvm flutter pub get
-          pod install
-          cd ..
-
+        script: make app_setup FLAVOR=uat PLATFORM=ios
+     
     - task: Bash@3
       displayName: build IOS Uat
       inputs:
@@ -155,11 +145,7 @@ stages:
       displayName: flutter setup
       inputs:
         targetType: 'inline'
-        script: |
-          brew tap leoafarias/fvm
-          brew install fvm
-          echo Y | fvm global 3.22.1
-          fvm flutter pub get
+        script: make app_setup FLAVOR=uat PLATFORM=android
 
     - task: Bash@3
       displayName: build Android Uat

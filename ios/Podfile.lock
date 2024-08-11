@@ -12,23 +12,23 @@ PODS:
   - cunning_document_scanner (1.0.0):
     - Flutter
   - datadog_flutter_plugin (0.0.1):
-    - DatadogCore (= 2.11.0)
-    - DatadogCrashReporting (= 2.11.0)
-    - DatadogInternal (= 2.11.0)
-    - DatadogLogs (= 2.11.0)
-    - DatadogRUM (= 2.11.0)
+    - DatadogCore (= 2.13.0)
+    - DatadogCrashReporting (= 2.13.0)
+    - DatadogInternal (= 2.13.0)
+    - DatadogLogs (= 2.13.0)
+    - DatadogRUM (= 2.13.0)
     - DictionaryCoder (= 1.0.8)
     - Flutter
-  - DatadogCore (2.11.0):
-    - DatadogInternal (= 2.11.0)
-  - DatadogCrashReporting (2.11.0):
-    - DatadogInternal (= 2.11.0)
-    - PLCrashReporter (~> 1.11.1)
-  - DatadogInternal (2.11.0)
-  - DatadogLogs (2.11.0):
-    - DatadogInternal (= 2.11.0)
-  - DatadogRUM (2.11.0):
-    - DatadogInternal (= 2.11.0)
+  - DatadogCore (2.13.0):
+    - DatadogInternal (= 2.13.0)
+  - DatadogCrashReporting (2.13.0):
+    - DatadogInternal (= 2.13.0)
+    - PLCrashReporter (~> 1.11.2)
+  - DatadogInternal (2.13.0)
+  - DatadogLogs (2.13.0):
+    - DatadogInternal (= 2.13.0)
+  - DatadogRUM (2.13.0):
+    - DatadogInternal (= 2.13.0)
   - device_info_plus (0.0.1):
     - Flutter
   - DictionaryCoder (1.0.8)
@@ -268,6 +268,7 @@ PODS:
     - PhoneNumberKit
   - local_auth_darwin (0.0.1):
     - Flutter
+    - FlutterMacOS
   - Mixpanel-swift (4.2.5):
     - Mixpanel-swift/Complete (= 4.2.5)
   - Mixpanel-swift/Complete (4.2.5)
@@ -282,11 +283,11 @@ PODS:
   - okta_oidc (0.0.1):
     - Flutter
     - OktaOidc
-  - OktaOidc (3.11.5):
-    - OktaOidc/AppAuth (= 3.11.5)
-    - OktaOidc/Okta (= 3.11.5)
-  - OktaOidc/AppAuth (3.11.5)
-  - OktaOidc/Okta (3.11.5):
+  - OktaOidc (3.11.7):
+    - OktaOidc/AppAuth (= 3.11.7)
+    - OktaOidc/Okta (= 3.11.7)
+  - OktaOidc/AppAuth (3.11.7)
+  - OktaOidc/Okta (3.11.7):
     - OktaOidc/AppAuth
   - open_file_safe (0.0.1):
     - Flutter
@@ -339,7 +340,7 @@ PODS:
     - Flutter
   - wakelock (0.0.1):
     - Flutter
-  - YMChat (1.18.0)
+  - YMChat (1.18.1)
   - ymchat_flutter (0.0.1):
     - Flutter
     - YMChat (~> 1.18)
@@ -509,12 +510,12 @@ SPEC CHECKSUMS:
   clevertap_plugin: 81d30133ce84661238d3dc02d1321e15cfe46e12
   connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
   cunning_document_scanner: 7cb9bd173f7cc7b11696dde98d01492187fc3a67
-  datadog_flutter_plugin: cecd0430743a2a35e065c1367bb2a43d2c7b5290
-  DatadogCore: 362ac6fb821444c45a9abb6cd0fe99c4ef8c109c
-  DatadogCrashReporting: 5cbe61e5dad779146e77335fcfde4feb17d6d2d3
-  DatadogInternal: 63af31e44c7edcf4ce6aacf8dd6bf36c51a61641
-  DatadogLogs: fd8dece68eb5682d6b388c4b559012910abeb208
-  DatadogRUM: 226a5c97559d54e3e76d19e901f6646525bcd758
+  datadog_flutter_plugin: 620cefeb0a26a9271190d918059e33309416c603
+  DatadogCore: 9390fd07a89f57a23983de66fbec5bf3c2034f7a
+  DatadogCrashReporting: 79b67b790df186524fc76d45c0b8ce751c36ef41
+  DatadogInternal: 61ab12516d2faad79e35973534c29a72b0d44382
+  DatadogLogs: 912d7b3fd3d75df856de060082b785f92f7cefe6
+  DatadogRUM: b5629479d4553d80f2a57ef9db44ce37e56f8b97
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   DictionaryCoder: 5f84fff69f54cb806071538430bdafe04a89d658
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
@@ -552,12 +553,12 @@ SPEC CHECKSUMS:
   image_gallery_saver: cb43cc43141711190510e92c460eb1655cd343cb
   integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
   libphonenumber_plugin: 48bf4078546377eedaab4aa54978cd0f6fa23072
-  local_auth_darwin: 4d56c90c2683319835a61274b57620df9c4520ab
+  local_auth_darwin: 66e40372f1c29f383a314c738c7446e2f7fdadc3
   Mixpanel-swift: 1fb0322037fa4db64042ab8eb4430848bc90ea43
   mixpanel_flutter: 36d73b7a2502b5782cd8f1d1f6b1b4aa4f2cfd07
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   okta_oidc: bc6da484c380ea7f036b55db794a49ea7ea8153f
-  OktaOidc: d1673c544771a6ef5772de0cc899c42f15206ec7
+  OktaOidc: 2e6ddf3b1658766bfe1f2b19ef853df1504ae0e5
   open_file_safe: 84c01ac91378bd9166ab570d7f22f4fb3532141a
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
@@ -580,9 +581,9 @@ SPEC CHECKSUMS:
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
-  YMChat: df0f677b33bdf6f07aa8c475403efe15738a3582
+  YMChat: d4d7a54832a3142ea6c2ab40aae54b6dc0f7e173
   ymchat_flutter: e42ffa7f01bbca9e33506a173130a0924399d7fe
 
 PODFILE CHECKSUM: 180d60dd70b55c2916d8f6b9c8a5fc5866f7196c
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2
