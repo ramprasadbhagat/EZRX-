@@ -87,7 +87,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         centreTitle: centreTitle,
         leadingWidget: leadingWidget,
         leadingWidth: leadingWidth,
-        appBarHeight: customerBlockedOrSuspended ? 140.0 : 56.0,
+        appBarHeight: customerBlockedOrSuspended
+            ? kToolbarHeight + CustomerBlockedBanner.height
+            : kToolbarHeight,
         key: key,
         titleSpacing: titleSpacing,
       );
@@ -105,8 +107,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         actionWidget: const [],
         backGroundColor: ZPColors.primary,
         centreTitle: false,
-        appBarHeight: (customerBlockedOrSuspended ? 140.0 : 56.0) + 50.0,
-        toolBarHeight: (customerBlockedOrSuspended ? 140.0 : 56.0) + 50.0,
+        appBarHeight: (customerBlockedOrSuspended
+                ? CustomerBlockedBanner.height + kToolbarHeight
+                : kToolbarHeight) +
+            50.0,
+        toolBarHeight: (customerBlockedOrSuspended
+                ? CustomerBlockedBanner.height + kToolbarHeight
+                : kToolbarHeight) +
+            50.0,
         key: key,
         titleSpacing: 0,
       );
@@ -166,7 +174,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Column(
                 children: [
                   if (customerBlockedOrSuspended)
-                    _CustomerBlockedBanner(
+                    CustomerBlockedBanner(
                       isCustomerBlocked: customerBlockedOrSuspended,
                     ),
                   bottomWidget ?? const SizedBox.shrink(),
@@ -193,7 +201,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       isCustomerBlocked: customerBlockedOrSuspended,
                       boxShadowColor: boxShadowColor,
                     ),
-                  _CustomerBlockedBanner(
+                  CustomerBlockedBanner(
                     isCustomerBlocked: customerBlockedOrSuspended,
                   ),
                 ],

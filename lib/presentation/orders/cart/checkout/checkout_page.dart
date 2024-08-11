@@ -32,6 +32,7 @@ import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/widgets/order_type_banner.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bundle_item/checkout_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
@@ -43,11 +44,13 @@ import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/checkout_page_app_bar.dart';
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/delivery_info.dart';
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/request_delivery_date.dart';
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bonus_item.dart';
@@ -89,23 +92,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
       builder: (context, cartState) {
         return Scaffold(
           key: WidgetKeys.checkoutPage,
-          appBar: AppBar(
-            title: Text(
-              context.tr('Checkout'),
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            centerTitle: false,
-            titleSpacing: 0,
-            leading: IconButton(
-              key: WidgetKeys.closeButton,
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 16,
-              ),
-              onPressed: () {
-                context.router.maybePop();
-              },
-            ),
+          appBar: _CheckoutPageAppbar(
+            context: context,
+            enableOrderType:
+                context.read<EligibilityBloc>().state.isShowOrderType,
           ),
           body: Column(
             children: [

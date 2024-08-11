@@ -10,7 +10,9 @@ import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/home/widgets/order_type_banner.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -53,6 +55,7 @@ import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_messa
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_app_bar.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list_item.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_checkout_section.dart';
@@ -345,8 +348,7 @@ class _CartPageState extends State<CartPage> {
                 );
           }
 
-          if (context.router.current.path == '/orders/cart' &&
-              errorMessage.isNotEmpty) {
+          if (context.routeData.isActive && errorMessage.isNotEmpty) {
             CustomSnackBar(
               messageText: context.tr(errorMessage),
             ).show(context);
@@ -354,59 +356,17 @@ class _CartPageState extends State<CartPage> {
         },
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
+          final eligiblityState = context.read<EligibilityBloc>().state;
+
           return GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: Scaffold(
               key: WidgetKeys.cartPage,
-              appBar: CustomAppBar.commonAppBar(
-                title: Text(
-                  '${context.tr('Cart')} (${state.totalCartCount})',
-                  key: WidgetKeys.cartPageAppBarTitle,
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-                titleSpacing: 0,
-                leadingWidget: IconButton(
-                  key: WidgetKeys.closeButton,
-                  icon: const Icon(
-                    Icons.close,
-                  ),
-                  onPressed: () => context.router.removeUntil(
-                    (route) => route.path != '/orders/cart',
-                  ),
-                ),
-                actionWidget: state.cartProducts.isNotEmpty
-                    ? [
-                        state.isClearing
-                            ? Align(
-                                alignment: Alignment.center,
-                                child: LoadingAnimationWidget
-                                    .horizontalRotatingDots(
-                                  key: WidgetKeys.soaLoadingAnimationWidgetKey,
-                                  color: ZPColors.red,
-                                  size: 24,
-                                ),
-                              )
-                            : IconButton(
-                                key: WidgetKeys.cartClearButton,
-                                icon: const Icon(
-                                  Icons.delete_outlined,
-                                  color: ZPColors.red,
-                                ),
-                                onPressed: () {
-                                  context.read<CartBloc>().add(
-                                        const CartEvent.clearCart(),
-                                      );
-                                  context.read<PriceOverrideBloc>().add(
-                                        const PriceOverrideEvent.initialized(),
-                                      );
-                                },
-                              ),
-                      ]
-                    : [],
-                customerBlockedOrSuspended: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .customerBlockOrSuspended,
+              appBar: _CartPageAppBar(
+                context: context,
+                state: state,
+                enableOrderType: eligiblityState.isShowOrderType,
+                isCustomerBlocked: eligiblityState.customerBlockOrSuspended,
               ),
               body: Column(
                 children: [

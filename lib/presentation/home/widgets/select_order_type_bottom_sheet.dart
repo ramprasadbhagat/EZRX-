@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class SelectOrderTypeBottomSheet extends StatefulWidget {
   const SelectOrderTypeBottomSheet({super.key});
 
@@ -29,53 +30,58 @@ class _SelectOrderTypeBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(padding12),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: padding12),
-              child: Text(
-                'Change order type',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(fontSize: 20, color: ZPColors.primary),
-              ),
-            ),
-            if (context.read<CartBloc>().state.cartProducts.isNotEmpty)
-              const _CartNotEmptyWarningMessage(),
-            Flexible(
-              child: Padding(
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.sizeOf(context).height * 0.8,
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(padding12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
                 padding: const EdgeInsets.symmetric(vertical: padding12),
-                child: _OrderTypeList(
-                  onSelectOrderType: (newOrderType) => setState(() {
-                    selectedOrderType = newOrderType;
-                  }),
-                  selectedOrderType: selectedOrderType,
+                child: Text(
+                  'Change order type',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(fontSize: 20, color: ZPColors.primary),
                 ),
               ),
-            ),
-            const SizedBox(height: padding24),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    key: WidgetKeys.cancelButton,
-                    onPressed: () => context.router.maybePop(),
-                    child: Text(context.tr('Cancel')),
+              if (context.read<CartBloc>().state.cartProducts.isNotEmpty)
+                const _CartNotEmptyWarningMessage(),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: padding12),
+                  child: _OrderTypeList(
+                    onSelectOrderType: (newOrderType) => setState(() {
+                      selectedOrderType = newOrderType;
+                    }),
+                    selectedOrderType: selectedOrderType,
                   ),
                 ),
-                const SizedBox(width: padding12),
-                Expanded(
-                  child: _ConfirmButton(selectedOrderType: selectedOrderType),
-                ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(height: padding24),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      key: WidgetKeys.cancelButton,
+                      onPressed: () => context.router.maybePop(),
+                      child: Text(context.tr('Cancel')),
+                    ),
+                  ),
+                  const SizedBox(width: padding12),
+                  Expanded(
+                    child: _ConfirmButton(selectedOrderType: selectedOrderType),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

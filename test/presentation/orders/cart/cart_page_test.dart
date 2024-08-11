@@ -630,6 +630,7 @@ void main() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           usingLocalization: true,
+          routeName: CartPageRoute.name,
           providers: [
             BlocProvider<CartBloc>(create: (context) => cartBloc),
             BlocProvider<MaterialPriceBloc>(
@@ -817,6 +818,8 @@ void main() {
         ).called(1);
       });
       testWidgets('Display snackbar when delete item', (tester) async {
+        when(() => autoRouterMock.isRouteActive(CartPageRoute.name))
+            .thenReturn(true);
         final currentState = CartState.initial().copyWith(
           cartProducts: [...mockCartItemWithDataList2]..removeLast(),
         );
@@ -845,6 +848,8 @@ void main() {
       testWidgets(
           'Display snackbar and clear additional info and po attachment bloc when clear cart',
           (tester) async {
+        when(() => autoRouterMock.isRouteActive(CartPageRoute.name))
+            .thenReturn(true);
         final currentState = CartState.initial().copyWith(
           cartProducts: [],
         );
@@ -3046,9 +3051,9 @@ void main() {
 
       testWidgets('Test Navigate back while snackbar appear for delete cart',
           (tester) async {
-        when(
-          () => autoRouterMock.currentPath,
-        ).thenReturn('orders/cart');
+        when(() => autoRouterMock.isRouteActive(CartPageRoute.name))
+            .thenReturn(true);
+
         final currentState = CartState.initial().copyWith(
           cartProducts: [],
         );

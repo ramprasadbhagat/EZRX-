@@ -322,6 +322,12 @@ class AppRouter extends $AppRouter {
           barrierDismissible: false,
         ),
         CustomRoute(
+          path: '/select_order_type',
+          page: SelectOrderTypeBottomSheetRoute.page,
+          customRouteBuilder: modalSheetBuilder,
+          barrierDismissible: false,
+        ),
+        CustomRoute(
           path: '/national_privacy_commission',
           page: NationalPrivacyCommissionPageRoute.page,
           transitionsBuilder: TransitionsBuilders.slideBottom,
@@ -338,6 +344,7 @@ Route<T> modalSheetBuilder<T>(
     settings: page,
     builder: (context) => child,
     isScrollControlled: true,
+    isDismissible: false,
   );
 }
 
