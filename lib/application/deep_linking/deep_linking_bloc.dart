@@ -9,9 +9,11 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/order_item_params.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_params.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -86,19 +88,9 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectContactUs(market),
                 ),
               );
-            }
-
-            if (event.selectedShipTo == ShipToInfo.empty() &&
-                !link.isResetPassword) {
-              emit(
-                const DeepLinkingState.error(
-                  ApiFailure.other('Please login to proceed'),
-                ),
-              );
 
               return;
-            }
-            if (link.isResetPassword) {
+            } else if (link.isResetPassword) {
               final failureOrSuccess = repository.extractResetPasswordCred(
                 link: link.resetPasswordFilteredUri,
               );
@@ -109,6 +101,24 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                 ),
                 (resetPassword) => emit(
                   DeepLinkingState.redirectResetPassword(resetPassword),
+                ),
+              );
+
+              return;
+            } else if (link.isTnC) {
+              emit(const DeepLinkingState.redirectTnC());
+
+              return;
+            } else if (link.isPrivacy) {
+              emit(const DeepLinkingState.redirectPrivacy());
+
+              return;
+            }
+
+            if (event.selectedShipTo == ShipToInfo.empty()) {
+              emit(
+                const DeepLinkingState.error(
+                  ApiFailure.other('Please login to proceed'),
                 ),
               );
 
@@ -184,9 +194,7 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                 ),
               );
             } else if (link.isReturnSummaryDetail) {
-              final failureOrSuccess = repository.extractReturnId(
-                selectedCustomerCode: event.selectedCustomerCode,
-                selectedShipTo: event.selectedShipTo,
+              final failureOrSuccess = repository.extractReturnItem(
                 link: link.uri,
               );
 
@@ -194,8 +202,8 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                 (error) => emit(
                   DeepLinkingState.error(error),
                 ),
-                (returnId) => emit(
-                  DeepLinkingState.redirectReturnDetail(returnId),
+                (returnItem) => emit(
+                  DeepLinkingState.redirectReturnDetail(returnItem),
                 ),
               );
             } else if (link.isZPPaymentSummaryDetail ||
@@ -229,10 +237,21 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   ),
                 ),
               );
-            } else if (link.isZPMyAccountPayment) {
-              emit(const DeepLinkingState.redirectZPPaymentHome());
-            } else if (link.isMPMyAccountPayment) {
-              emit(const DeepLinkingState.redirectMPPaymentHome());
+            } else if (link.isZPMyAccountPayment || link.isMPMyAccountPayment) {
+              final failureOrSuccess =
+                  repository.extractPaymentParams(link: link.uri);
+
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (params) => emit(
+                  DeepLinkingState.redirectPaymentHome(
+                    params: params,
+                    isMarketPlace: link.isMPMyAccountPayment,
+                  ),
+                ),
+              );
             } else if (link.isFaq) {
               emit(const DeepLinkingState.redirectFAQ());
             } else if (link.isAboutUs) {
@@ -241,6 +260,48 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               emit(const DeepLinkingState.redirectUserGuide());
             } else if (link.isOrder) {
               emit(const DeepLinkingState.redirectOrder());
+            } else if (link.isSetting) {
+              emit(const DeepLinkingState.redirectSetting());
+            } else if (link.isCart) {
+              emit(const DeepLinkingState.redirectCart());
+            } else if (link.isOrderItemDetail) {
+              final failureOrSuccess = repository.extractOrderItemParams(
+                link: link.uri,
+                selectedCustomerCode: event.selectedCustomerCode,
+                selectedShipTo: event.selectedShipTo,
+              );
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (params) => emit(
+                  DeepLinkingState.redirectOrderItemDetail(params: params),
+                ),
+              );
+            } else if (link.isAnnouncement) {
+              emit(const DeepLinkingState.redirectAnnouncement());
+            } else if (link.isArticle) {
+              emit(const DeepLinkingState.redirectArticle());
+            } else if (link.isReturn) {
+              emit(const DeepLinkingState.redirectReturn());
+            } else if (link.isZPCreditDetail || link.isMPCreditDetail) {
+              final failureOrSuccess =
+                  repository.extractCreditId(link: link.uri);
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (creditId) => emit(
+                  DeepLinkingState.redirectCreditDetail(
+                    creditId: creditId,
+                    isMarketPlace: link.isMPCreditDetail,
+                  ),
+                ),
+              );
+            } else if (link.isClaimSubmission) {
+              emit(const DeepLinkingState.redirectClaimSubmission());
+            } else if (link.isNewReturnRequest) {
+              emit(const DeepLinkingState.redirectNewReturnRequest());
             } else {
               emit(
                 const DeepLinkingState.error(

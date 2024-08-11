@@ -43,7 +43,7 @@
 				<data android:host="uat-vnp.ezrx.com" />
 				<data android:host="uat-id.ezrx.com" />
 				<data android:host="uat-kr.ezrx.com" />
-				<data android:host="uat-hk.ezrx.com" />
+				<data android:host="uat-hk.ezrxplus.com" />
 			</intent-filter>
 
 		</activity>

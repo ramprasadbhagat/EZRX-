@@ -2,8 +2,15 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/payments/claim_management/claim_management_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
+import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/order_item_params.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_params.dart';
 import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -798,142 +805,251 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 }
               },
               redirectProductDetail: (materialNumber, banner) {
-                if (eligibilityState.user.userCanAccessProducts) {
-                  final materialInfo = MaterialInfo.empty().copyWith(
-                    materialNumber: materialNumber,
-                    type: MaterialInfoType.material(),
-                  );
-                  if (eligibilityState.isZDP5eligible) {
-                    context.read<MaterialPriceBloc>().add(
-                          MaterialPriceEvent.fetchPriceForZDP5Materials(
-                            materialInfo: materialInfo,
-                          ),
-                        );
-                  }
+                if (!eligibilityState.user.userCanAccessProducts) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                final materialInfo = MaterialInfo.empty().copyWith(
+                  materialNumber: materialNumber,
+                  type: MaterialInfoType.material(),
+                );
+                if (eligibilityState.isZDP5eligible) {
                   context.read<MaterialPriceBloc>().add(
-                        MaterialPriceEvent.fetch(
-                          comboDealEligible: eligibilityState.comboDealEligible,
-                          materials: [materialInfo],
+                        MaterialPriceEvent.fetchPriceForZDP5Materials(
+                          materialInfo: materialInfo,
                         ),
                       );
-
-                  context.router.push(
-                    ProductDetailsPageRoute(
-                      materialInfo: materialInfo,
-                      banner: banner,
-                    ),
-                  );
-                } else {
-                  _showNoAccessSnackbar();
                 }
-              },
-              redirectBundleDetail: (materialNumber, banner) {
-                if (eligibilityState.user.userCanAccessProducts &&
-                    !eligibilityState.salesOrgConfigs.disableBundles) {
-                  context.router.push(
-                    BundleDetailPageRoute(
-                      materialInfo: MaterialInfo.empty().copyWith(
-                        materialNumber: materialNumber,
-                        type: MaterialInfoType.bundle(),
-                      ),
-                      banner: banner,
-                    ),
-                  );
-                } else {
-                  _showNoAccessSnackbar();
-                }
-              },
-              redirectProductsTab: (searchKey, materialFilter) {
-                if (eligibilityState.user.userCanAccessProducts) {
-                  //to update search key and fetch on product listing page
-                  context.read<MaterialListBloc>()
-                    ..add(
-                      MaterialListEvent.updateSearchKey(
-                        searchKey: searchKey.getValue(),
-                      ),
-                    )
-                    ..add(
-                      MaterialListEvent.fetch(
-                        selectedMaterialFilter: materialFilter,
+                context.read<MaterialPriceBloc>().add(
+                      MaterialPriceEvent.fetch(
+                        comboDealEligible: eligibilityState.comboDealEligible,
+                        materials: [materialInfo],
                       ),
                     );
 
-                  context.navigateTo(const ProductsTabRoute());
-                } else {
+                context.router.push(
+                  ProductDetailsPageRoute(
+                    materialInfo: materialInfo,
+                    banner: banner,
+                  ),
+                );
+              },
+              redirectBundleDetail: (materialNumber, banner) {
+                if (!eligibilityState.user.userCanAccessProducts ||
+                    eligibilityState.salesOrgConfigs.disableBundles) {
                   _showNoAccessSnackbar();
+
+                  return;
                 }
+                context.router.push(
+                  BundleDetailPageRoute(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: materialNumber,
+                      type: MaterialInfoType.bundle(),
+                    ),
+                    banner: banner,
+                  ),
+                );
+              },
+              redirectProductsTab: (searchKey, materialFilter) {
+                if (!eligibilityState.user.userCanAccessProducts) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                //to update search key and fetch on product listing page
+                context.read<MaterialListBloc>()
+                  ..add(
+                    MaterialListEvent.updateSearchKey(
+                      searchKey: searchKey.getValue(),
+                    ),
+                  )
+                  ..add(
+                    MaterialListEvent.fetch(
+                      selectedMaterialFilter: materialFilter,
+                    ),
+                  );
+
+                context.navigateTo(const ProductsTabRoute());
               },
               redirectOrderDetail: (orderNumber) {
-                if (eligibilityState.user.userCanAccessOrderHistory) {
-                  context.read<ViewByOrderDetailsBloc>().add(
-                        ViewByOrderDetailsEvent.fetch(orderNumber: orderNumber),
-                      );
-
-                  context.router.push(const ViewByOrderDetailsPageRoute());
-                } else {
+                if (!eligibilityState.user.userCanAccessOrderHistory) {
                   _showNoAccessSnackbar(isOrder: true);
+
+                  return;
                 }
+                context.read<ViewByOrderDetailsBloc>().add(
+                      ViewByOrderDetailsEvent.fetch(orderNumber: orderNumber),
+                    );
+
+                context.router.push(const ViewByOrderDetailsPageRoute());
               },
-              redirectReturnDetail: (returnId) {
-                if (eligibilityState.isReturnsEnable) {
-                  context.read<ReturnDetailsByRequestBloc>().add(
-                        ReturnDetailsByRequestEvent.fetch(
-                          returnId: returnId.requestId,
+              redirectReturnDetail: (returnItem) {
+                if (!eligibilityState.isReturnsEnable) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                if (returnItem.invoiceID.isNotEmpty &&
+                    returnItem.lineNumber.isNotEmpty) {
+                  context.read<ReturnSummaryDetailsBloc>().add(
+                        ReturnSummaryDetailsEvent.fetch(
+                          returnItem: returnItem,
                         ),
                       );
-                  //Navigate to return Detail Page
-                  context.router.push(const ReturnRequestDetailsRoute());
+
+                  context.router.push(
+                    const ReturnRequestSummaryByItemDetailsRoute(),
+                  );
                 } else {
-                  _showNoAccessSnackbar();
+                  context.read<ReturnDetailsByRequestBloc>().add(
+                        ReturnDetailsByRequestEvent.fetch(
+                          returnId: returnItem.requestId,
+                        ),
+                      );
+                  context.router.push(const ReturnRequestDetailsRoute());
                 }
               },
               redirectPaymentDetail: (paymentIdentifierInfo, isMarketPlace) {
-                if (eligibilityState.isPaymentEnabled) {
-                  context.read<PaymentSummaryDetailsBloc>().add(
-                        PaymentSummaryDetailsEvent
-                            .fetchPaymentSummaryDetailsInfo(
-                          details: paymentIdentifierInfo,
-                          isMarketPlace: isMarketPlace,
+                if (!eligibilityState.isPaymentEnabled) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                context.read<PaymentSummaryDetailsBloc>().add(
+                      PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+                        details: paymentIdentifierInfo,
+                        isMarketPlace: isMarketPlace,
+                      ),
+                    );
+                context.router.push(
+                  PaymentSummaryDetailsPageRoute(
+                    isMarketPlace: isMarketPlace,
+                  ),
+                );
+              },
+              redirectPaymentHome: (PaymentParams params, bool isMarketPlace) {
+                if (!eligibilityState.isPaymentEnabled ||
+                    (isMarketPlace &&
+                        eligibilityState.marketPlacePaymentEligible)) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                if (params.tab == PaymentTab.paymentSummary()) {
+                  context.router.pushAll(
+                    [
+                      PaymentPageRoute(isMarketPlace: isMarketPlace),
+                      PaymentSummaryPageRoute(isMarketPlace: isMarketPlace),
+                    ],
+                  );
+
+                  return;
+                }
+                if (params.tab == PaymentTab.statementOfAccs()) {
+                  if (!eligibilityState
+                      .salesOrgConfigs.statementOfAccountEnabled) {
+                    _showNoAccessSnackbar();
+
+                    return;
+                  }
+
+                  context.router.pushAll(
+                    [
+                      PaymentPageRoute(isMarketPlace: isMarketPlace),
+                      StatementAccountsPageRoute(isMarketPlace: isMarketPlace),
+                    ],
+                  );
+
+                  return;
+                }
+                if (params.tab == PaymentTab.claimManagement()) {
+                  if (!eligibilityState.salesOrg.isPaymentClaimEnabled) {
+                    _showNoAccessSnackbar();
+
+                    return;
+                  }
+                  context.read<ClaimManagementBloc>().add(
+                        ClaimManagementEvent.initialized(
+                          salesOrganisation: eligibilityState.salesOrganisation,
+                          customerCodeInfo: eligibilityState.customerCodeInfo,
+                          user: eligibilityState.user,
                         ),
                       );
-                  context.router.push(
-                    PaymentSummaryDetailsPageRoute(
-                      isMarketPlace: isMarketPlace,
-                    ),
+
+                  context.router.pushAll(
+                    [
+                      PaymentPageRoute(isMarketPlace: isMarketPlace),
+                      const ClaimManagementPageRoute(),
+                    ],
                   );
-                } else {
-                  _showNoAccessSnackbar();
+
+                  return;
                 }
-              },
-              redirectZPPaymentHome: () {
-                if (eligibilityState.isPaymentEnabled) {
-                  context.router.push(PaymentPageRoute(isMarketPlace: false));
-                } else {
-                  _showNoAccessSnackbar();
+                if (params.subTab == PaymentSubTab.allInvoices()) {
+                  context.router.pushAll(
+                    [
+                      PaymentPageRoute(isMarketPlace: isMarketPlace),
+                      AccountSummaryRoute(
+                        isMarketPlace: isMarketPlace,
+                        children: [
+                          AllInvoicesPageRoute(isMarketPlace: isMarketPlace),
+                        ],
+                      ),
+                    ],
+                  );
+
+                  return;
                 }
-              },
-              redirectMPPaymentHome: () {
-                if (eligibilityState.isPaymentEnabled &&
-                    eligibilityState.marketPlacePaymentEligible) {
-                  context.router.push(PaymentPageRoute(isMarketPlace: true));
-                } else {
-                  _showNoAccessSnackbar();
+                if (params.subTab == PaymentSubTab.allCreditNotes()) {
+                  context.router.pushAll(
+                    [
+                      PaymentPageRoute(isMarketPlace: isMarketPlace),
+                      AccountSummaryRoute(
+                        isMarketPlace: isMarketPlace,
+                        children: [
+                          AllCreditsPageRoute(isMarketPlace: isMarketPlace),
+                        ],
+                      ),
+                    ],
+                  );
+
+                  return;
                 }
+                if (params.subTab == PaymentSubTab.fullSummary()) {
+                  context.router.pushAll(
+                    [
+                      PaymentPageRoute(isMarketPlace: isMarketPlace),
+                      AccountSummaryRoute(
+                        isMarketPlace: isMarketPlace,
+                        children: [
+                          FullSummaryPageRoute(isMarketPlace: isMarketPlace),
+                        ],
+                      ),
+                    ],
+                  );
+
+                  return;
+                }
+                context.router
+                    .push(PaymentPageRoute(isMarketPlace: isMarketPlace));
               },
               redirectInvoiceDetail: (invoiceNumber, isMarketPlace) {
-                if (eligibilityState.isPaymentEnabled) {
-                  context.read<CreditAndInvoiceDetailsBloc>().add(
-                        CreditAndInvoiceDetailsEvent.fetchInvoiceById(
-                          invoiceId: invoiceNumber,
-                          isMarketPlace: isMarketPlace,
-                        ),
-                      );
-                  context.router.push(
-                    InvoiceDetailsPageRoute(isMarketPlace: isMarketPlace),
-                  );
-                } else {
+                if (!eligibilityState.isPaymentEnabled) {
                   _showNoAccessSnackbar();
+
+                  return;
                 }
+                context.read<CreditAndInvoiceDetailsBloc>().add(
+                      CreditAndInvoiceDetailsEvent.fetchInvoiceById(
+                        invoiceId: invoiceNumber,
+                        isMarketPlace: isMarketPlace,
+                      ),
+                    );
+                context.router.push(
+                  InvoiceDetailsPageRoute(isMarketPlace: isMarketPlace),
+                );
               },
               redirectFAQ: () {
                 context.router.push(const FAQPageRoute());
@@ -974,7 +1090,135 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 }
               },
               redirectOrder: () {
+                if (!eligibilityState.user.userCanAccessOrderHistory) {
+                  _showNoAccessSnackbar(isOrder: true);
+
+                  return;
+                }
                 context.navigateTo(const OrdersTabRoute());
+              },
+              redirectTnC: () {
+                context.navigateTo(
+                  StaticHtmlViewerRoute(
+                    title: 'Terms of Use',
+                    htmlPath: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .user
+                        .tncStaticFile,
+                  ),
+                );
+              },
+              redirectPrivacy: () {
+                context.navigateTo(
+                  StaticHtmlViewerRoute(
+                    title: 'Privacy policy',
+                    htmlPath: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .user
+                        .privacyPolicyStaticFile,
+                  ),
+                );
+              },
+              redirectSetting: () {
+                context.navigateTo(const MoreTabRoute());
+              },
+              redirectCart: () {
+                context.router.push(CartPageRoute());
+              },
+              redirectOrderItemDetail: (OrderItemParams params) {
+                if (!eligibilityState.user.userCanAccessOrderHistory) {
+                  _showNoAccessSnackbar(isOrder: true);
+
+                  return;
+                }
+                context.read<ViewByItemDetailsBloc>().add(
+                      ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+                        orderNumber: params.orderNumber,
+                        lineNumber: params.lineNumber,
+                      ),
+                    );
+
+                context.router.push(
+                  const ViewByItemDetailsPageRoute(),
+                );
+              },
+              redirectAnnouncement: () {
+                context.router.push(
+                  const AnnouncementsTabRoute(),
+                );
+              },
+              redirectArticle: () {
+                context.router.push(
+                  const ArticlesTabRoute(),
+                );
+              },
+              redirectReturn: () {
+                if (!eligibilityState.isReturnsEnable) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                context.navigateTo(const ReturnRootRoute());
+              },
+              redirectCreditDetail: (String creditId, bool isMarketPlace) {
+                // TODO: Revisit after the Credit Detail Page refactored so the page only need creditID to fetch Apis
+                // if (eligibilityState.isPaymentEnabled) {
+                //   context.router.push(
+                //       CreditDetailsPageRoute(isMarketPlace: isMarketPlace));
+                // } else {
+                //   _showNoAccessSnackbar();
+                // }
+              },
+              redirectClaimSubmission: () {
+                if (!eligibilityState.isPaymentEnabled ||
+                    !eligibilityState.salesOrg.isPaymentClaimEnabled) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                context.read<ClaimManagementBloc>().add(
+                      ClaimManagementEvent.initialized(
+                        salesOrganisation: eligibilityState.salesOrganisation,
+                        customerCodeInfo: eligibilityState.customerCodeInfo,
+                        user: eligibilityState.user,
+                      ),
+                    );
+
+                context.router.pushAll([
+                  const ClaimManagementPageRoute(),
+                  const NewClaimSubmissionPageRoute(),
+                ]);
+              },
+              redirectNewReturnRequest: () {
+                if (!eligibilityState.isReturnsEnable) {
+                  _showNoAccessSnackbar();
+
+                  return;
+                }
+                context.read<UsageCodeBloc>().add(
+                      UsageCodeEvent.fetch(
+                        salesOrg: eligibilityState.salesOrg,
+                      ),
+                    );
+                context.read<ReturnItemsBloc>().add(
+                      ReturnItemsEvent.initialized(
+                        salesOrganisation: eligibilityState.salesOrganisation,
+                        customerCodeInfo: eligibilityState.customerCodeInfo,
+                        shipToInfo: eligibilityState.shipToInfo,
+                        user: eligibilityState.user,
+                      ),
+                    );
+                context.read<NewRequestBloc>().add(
+                      NewRequestEvent.initialized(
+                        salesOrg: eligibilityState.salesOrg,
+                      ),
+                    );
+                context.router.pushAll([
+                  const ReturnRootRoute(),
+                  const NewRequestPageRoute(),
+                ]);
               },
             );
           },

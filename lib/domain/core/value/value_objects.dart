@@ -518,6 +518,30 @@ class EzrxLink extends ValueObject<String> {
 
   bool get isOrder => isOrderLink(uri.path);
 
+  bool get isSetting => isSettingLink(uri.path);
+
+  bool get isCart => isCartLink(uri.path);
+
+  bool get isOrderItemDetail => isOrderItemDetailLink(uri.path);
+
+  bool get isTnC => isTnCLink(uri.path);
+
+  bool get isPrivacy => isPrivacyLink(uri.path);
+
+  bool get isAnnouncement => isAnnouncementLink(uri.path);
+
+  bool get isArticle => isArticleLink(uri.path);
+
+  bool get isReturn => isReturnLink(uri.path);
+
+  bool get isZPCreditDetail => isZPCreditDetailLink(uri.path);
+
+  bool get isMPCreditDetail => isMPCreditDetailLink(uri.path);
+
+  bool get isClaimSubmission => isClaimSubmissionLink(uri.path);
+
+  bool get isNewReturnRequest => isNewReturnRequestLink(uri.path);
+
   const EzrxLink._(this.value);
 }
 
@@ -599,4 +623,38 @@ class FilterOption extends ValueObject<String> {
   factory FilterOption.status() => FilterOption('status');
 
   const FilterOption._(this.value);
+}
+
+class PaymentTab extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentTab(String input) =>
+      PaymentTab._(validateStringNotEmpty(input));
+
+  factory PaymentTab.accountSummary() => PaymentTab('account-summary');
+
+  factory PaymentTab.paymentSummary() => PaymentTab('payment-summary');
+
+  factory PaymentTab.statementOfAccs() => PaymentTab('statementOfAccs');
+
+  factory PaymentTab.claimManagement() => PaymentTab('claim-management');
+
+  const PaymentTab._(this.value);
+}
+
+class PaymentSubTab extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentSubTab(String input) =>
+      PaymentSubTab._(validateStringNotEmpty(input));
+
+  factory PaymentSubTab.allInvoices() => PaymentSubTab('all-invoices');
+
+  factory PaymentSubTab.allCreditNotes() => PaymentSubTab('all-creditnotes');
+
+  factory PaymentSubTab.fullSummary() => PaymentSubTab('full-summary');
+
+  const PaymentSubTab._(this.value);
 }

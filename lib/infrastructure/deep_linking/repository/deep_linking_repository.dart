@@ -13,9 +13,11 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/order_item_params.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_params.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 
@@ -113,15 +115,15 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   }
 
   @override
-  Either<ApiFailure, ReturnRequestsId> extractReturnId({
+  Either<ApiFailure, OrderItemParams> extractOrderItemParams({
     required CustomerCodeInfo selectedCustomerCode,
     required ShipToInfo selectedShipTo,
     required Uri link,
   }) {
-    final returnId =
-        ReturnRequestsId(requestId: link.queryParameters['requestID'] ?? '');
-    final customerCode = link.queryParameters['soldTo'];
-    final shipToCode = link.queryParameters['shipTo'];
+    final orderNumber = OrderNumber(link.queryParameters['orderNumber'] ?? '');
+    final lineNumber = LineNumber(link.queryParameters['lineNumber'] ?? '');
+    final customerCode = link.queryParameters['SoldTo'];
+    final shipToCode = link.queryParameters['ShipTo'];
 
     final isValidCustomerCode = customerCode == null ||
         customerCode == selectedCustomerCode.customerCodeSoldTo;
@@ -131,10 +133,63 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
     final isValidLink = _validDomain(link) &&
         isValidCustomerCode &&
         isValidShipToCode &&
-        returnId.isValidRequestId;
+        orderNumber.isValid() &&
+        lineNumber.isValid();
 
     return isValidLink
-        ? Right(returnId)
+        ? Right(
+            OrderItemParams(lineNumber: lineNumber, orderNumber: orderNumber),
+          )
+        : const Left(ApiFailure.orderDetailRoute());
+  }
+
+  @override
+  Either<ApiFailure, PaymentParams> extractPaymentParams({
+    required Uri link,
+  }) {
+    final tab = PaymentTab(link.queryParameters['tab'] ?? '');
+    final subTab = PaymentSubTab(link.queryParameters['subtab'] ?? '');
+
+    final isValidLink = _validDomain(link);
+
+    return isValidLink
+        ? Right(
+            PaymentParams(tab: tab, subTab: subTab),
+          )
+        : const Left(ApiFailure.invalidDomain());
+  }
+
+  @override
+  Either<ApiFailure, String> extractCreditId({
+    required Uri link,
+  }) {
+    final creditId = link.queryParameters['creditNoteNumber'] ?? '';
+
+    final isValidLink = _validDomain(link) && creditId.isNotEmpty;
+
+    return isValidLink
+        ? Right(creditId)
+        : const Left(ApiFailure.creditDetailRoute());
+  }
+
+  @override
+  Either<ApiFailure, ReturnItem> extractReturnItem({
+    required Uri link,
+  }) {
+    final returnId = link.queryParameters['requestID'] ?? '';
+    final invoiceId = link.queryParameters['invoice'] ?? '';
+    final lineItemNumber = link.queryParameters['lineItemNumber'] ?? '';
+
+    final isValidLink = _validDomain(link) && returnId.isNotEmpty;
+
+    return isValidLink
+        ? Right(
+            ReturnItem.empty().copyWith(
+              requestId: returnId,
+              invoiceID: invoiceId,
+              lineNumber: lineItemNumber,
+            ),
+          )
         : const Left(ApiFailure.returnDetailRoute());
   }
 

@@ -4,6 +4,9 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/order_item_params.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_params.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -12,7 +15,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
@@ -50,6 +52,18 @@ void main() {
   const faqLink = '/faq';
   const resetPasswordLink =
       'https://clicktime.symantec.com/15tStdYPVXVZm3CGiHwjj?h=AajXDPaRNcBc9HqeqM_8ZyhyH7ej6-GwTxaPE9fxEqU=&amp;u=https://uat-sg.ezrx.com/login/set-password?username%3DFakeUser%26token%3DFakeToken';
+  const tncLink = '/tnc';
+  const privacyLink = '/privacy';
+  const settingLink = '/my-account/Settings';
+  const cartLink = '/cart';
+  const orderItemDetailLink = '/my-account/orders/item-detail';
+  const annoucementLink = '/announcement/view-all/announcements';
+  const articleLink = '/announcement/view-all/articles';
+  const returnLink = '/my-account/returns';
+  const creditDetailLink =
+      '/marketplace-payments/account-summary/creditnote-details';
+  const claimSubmissionLink = '/my-account/payments/claim-submission';
+  const returnRequestLink = '/my-account/new-return-request';
 
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
@@ -257,7 +271,6 @@ void main() {
       ),
       expect: () => [
         DeepLinkingState.redirectContactUs(AppMarket.defaultMarket()),
-        const DeepLinkingState.error(fakeLinkInvalid),
       ],
     );
     blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -283,7 +296,6 @@ void main() {
       ),
       expect: () => [
         const DeepLinkingState.error(fakeError),
-        const DeepLinkingState.error(fakeLinkInvalid),
       ],
     );
   });
@@ -474,12 +486,12 @@ void main() {
       ),
       setUp: () {
         when(
-          () => repository.extractReturnId(
-            selectedCustomerCode: fakeCustomerCode,
-            selectedShipTo: fakeShipToCode,
+          () => repository.extractReturnItem(
             link: Uri(path: returnSummaryLink),
           ),
-        ).thenReturn(Right(ReturnRequestsId(requestId: 'fake-request-id')));
+        ).thenReturn(
+          Right(ReturnItem.empty().copyWith(requestId: 'fake-request-id')),
+        );
       },
       seed: () => DeepLinkingState.linkPending(
         EzrxLink(returnSummaryLink),
@@ -493,7 +505,7 @@ void main() {
       ),
       expect: () => [
         DeepLinkingState.redirectReturnDetail(
-          ReturnRequestsId(requestId: 'fake-request-id'),
+          ReturnItem.empty().copyWith(requestId: 'fake-request-id'),
         ),
       ],
     );
@@ -505,9 +517,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => repository.extractReturnId(
-            selectedCustomerCode: fakeCustomerCode,
-            selectedShipTo: fakeShipToCode,
+          () => repository.extractReturnItem(
             link: Uri(path: returnSummaryLink),
           ),
         ).thenReturn(const Left(fakeError));
@@ -535,6 +545,13 @@ void main() {
         repository: repository,
         chatBotService: chatBotService,
       ),
+      setUp: () {
+        when(
+          () => repository.extractPaymentParams(
+            link: Uri(path: paymentLink),
+          ),
+        ).thenAnswer((_) => Right(PaymentParams.empty()));
+      },
       seed: () => DeepLinkingState.linkPending(
         EzrxLink(paymentLink),
       ),
@@ -546,7 +563,10 @@ void main() {
         ),
       ),
       expect: () => [
-        const DeepLinkingState.redirectZPPaymentHome(),
+        DeepLinkingState.redirectPaymentHome(
+          params: PaymentParams.empty(),
+          isMarketPlace: false,
+        ),
       ],
     );
 
@@ -559,6 +579,13 @@ void main() {
       seed: () => DeepLinkingState.linkPending(
         EzrxLink('/my-account/marketplace-payments'),
       ),
+      setUp: () {
+        when(
+          () => repository.extractPaymentParams(
+            link: Uri(path: '/my-account/marketplace-payments'),
+          ),
+        ).thenAnswer((_) => Right(PaymentParams.empty()));
+      },
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
@@ -567,7 +594,10 @@ void main() {
         ),
       ),
       expect: () => [
-        const DeepLinkingState.redirectMPPaymentHome(),
+        DeepLinkingState.redirectPaymentHome(
+          params: PaymentParams.empty(),
+          isMarketPlace: true,
+        ),
       ],
     );
 
@@ -847,6 +877,341 @@ void main() {
     ],
   );
 
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume tnc link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(tncLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectTnC(),
+    ],
+  );
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume privacy link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(privacyLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectPrivacy(),
+    ],
+  );
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume my payment account link failure',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractPaymentParams(
+          link: Uri(path: paymentLink),
+        ),
+      ).thenReturn(const Left(fakeError));
+    },
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(paymentLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.error(fakeError),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume setting link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(settingLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectSetting(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume cart link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(cartLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectCart(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume order item detail link failure',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractOrderItemParams(
+          link: Uri(path: orderItemDetailLink),
+          selectedShipTo: fakeShipToCode,
+          selectedCustomerCode: fakeCustomerCode,
+        ),
+      ).thenReturn(const Left(fakeError));
+    },
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(orderItemDetailLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.error(fakeError),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume order item detail link success',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractOrderItemParams(
+          link: Uri(path: orderItemDetailLink),
+          selectedShipTo: fakeShipToCode,
+          selectedCustomerCode: fakeCustomerCode,
+        ),
+      ).thenReturn(Right(OrderItemParams.empty()));
+    },
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(orderItemDetailLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      DeepLinkingState.redirectOrderItemDetail(
+        params: OrderItemParams.empty(),
+      ),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume announcement link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(annoucementLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectAnnouncement(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume article link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(articleLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectArticle(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume return link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(returnLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectReturn(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume claim submission link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(claimSubmissionLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectClaimSubmission(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume return request link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(returnRequestLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectNewReturnRequest(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume credit detail link failure',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractCreditId(
+          link: Uri(path: creditDetailLink),
+        ),
+      ).thenReturn(const Left(fakeError));
+    },
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(creditDetailLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.error(fakeError),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume credit detail link success',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractCreditId(
+          link: Uri(path: creditDetailLink),
+        ),
+      ).thenReturn(const Right('fake-id'));
+    },
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(creditDetailLink),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectCreditDetail(
+        creditId: 'fake-id',
+        isMarketPlace: true,
+      ),
+    ],
+  );
   group('Redirect To Reset Password', () {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume reset password link success',

@@ -9,9 +9,11 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/order_item_params.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_params.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
@@ -218,9 +220,9 @@ void main() {
   });
 
   group('Extract return id', () {
-    final returnId = ReturnRequestsId(requestId: 'fake-return-Id');
+    const returnId = 'fake-return-Id';
     final returnDetailLink = Uri.parse(
-      '$domain/my-account/return-summary-details?requestID=${returnId.requestId}&soldTo=${fakeCustomerCodeInfo.customerCodeSoldTo}&shipTo=${fakeShipToInfo.shipToCustomerCode}',
+      '$domain/my-account/return-summary-details?requestID=$returnId&soldTo=${fakeCustomerCodeInfo.customerCodeSoldTo}&shipTo=${fakeShipToInfo.shipToCustomerCode}',
     );
     test('=> success', () {
       when(
@@ -233,15 +235,13 @@ void main() {
         ),
       ).thenAnswer((_) => domain);
 
-      final result = repository.extractReturnId(
-        selectedCustomerCode: fakeCustomerCodeInfo,
-        selectedShipTo: fakeShipToInfo,
+      final result = repository.extractReturnItem(
         link: returnDetailLink,
       );
 
       expect(
         result,
-        Right(returnId),
+        Right(ReturnItem.empty().copyWith(requestId: returnId)),
       );
     });
 
@@ -256,9 +256,7 @@ void main() {
         ),
       ).thenAnswer((_) => domain);
 
-      final result = repository.extractReturnId(
-        selectedCustomerCode: fakeCustomerCodeInfo,
-        selectedShipTo: fakeShipToInfo,
+      final result = repository.extractReturnItem(
         link: returnDetailLink,
       );
 
@@ -424,9 +422,11 @@ void main() {
       );
 
       final data = json.decode(
-        await rootBundle.loadString('assets/json/getMaterialFilterForDeepLink.json'),
+        await rootBundle
+            .loadString('assets/json/getMaterialFilterForDeepLink.json'),
       )['data']['GetFilterList'];
-      final materialFilterMockData =  MaterialFilterDto.fromJson(data).toDomain();
+      final materialFilterMockData =
+          MaterialFilterDto.fromJson(data).toDomain();
 
       final result = repository.extractMaterialFilter(
         link: materialFilterUri,
@@ -452,6 +452,180 @@ void main() {
           isTender: true,
           brandList: [],
         ),
+      );
+    });
+  });
+
+  group('Extract Order Item params', () {
+    test('=> success', () {
+      const orderNumber = '0200524347';
+      const lineNumber = '000040';
+      final orderItemUri = Uri.parse(
+        '$domain/my-account/orders/item-detail?&SoldTo=${fakeCustomerCodeInfo.customerCodeSoldTo}&ShipTo=${fakeShipToInfo.shipToCustomerCode}&orderNumber=$orderNumber&lineNumber=$lineNumber',
+      );
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => domain);
+
+      final result = repository.extractOrderItemParams(
+        link: orderItemUri,
+        selectedCustomerCode: fakeCustomerCodeInfo,
+        selectedShipTo: fakeShipToInfo,
+      );
+
+      expect(
+        result,
+        Right(
+          OrderItemParams(
+            lineNumber: LineNumber(lineNumber),
+            orderNumber: OrderNumber(orderNumber),
+          ),
+        ),
+      );
+    });
+
+    test('=> failure', () {
+      const orderNumber = '0200524347';
+      const lineNumber = '000040';
+      final orderItemUri = Uri.parse(
+        '$domain/my-account/orders/item-detail?&SoldTo=${fakeCustomerCodeInfo.customerCodeSoldTo}&ShipTo=${fakeShipToInfo.shipToCustomerCode}&orderNumber=$orderNumber&lineNumber=$lineNumber',
+      );
+
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => '');
+
+      final result = repository.extractOrderItemParams(
+        link: orderItemUri,
+        selectedCustomerCode: fakeCustomerCodeInfo,
+        selectedShipTo: fakeShipToInfo,
+      );
+
+      expect(
+        result,
+        const Left(ApiFailure.orderDetailRoute()),
+      );
+    });
+  });
+
+  group('Extract Payment Params', () {
+    test('=> success', () {
+      const tab = 'account-summary';
+      const subTab = 'full-summary';
+      final paymentUri = Uri.parse(
+        '$domain/my-account/payments?tab=$tab&subtab=$subTab',
+      );
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => domain);
+
+      final result = repository.extractPaymentParams(
+        link: paymentUri,
+      );
+
+      expect(
+        result,
+        Right(
+          PaymentParams(tab: PaymentTab(tab), subTab: PaymentSubTab(subTab)),
+        ),
+      );
+    });
+
+    test('=> failure', () {
+      const tab = 'account-summary';
+      const subTab = 'full-summary';
+      final paymentUri = Uri.parse(
+        '$domain/my-account/payments?tab=$tab&subtab=$subTab',
+      );
+
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => '');
+
+      final result = repository.extractPaymentParams(
+        link: paymentUri,
+      );
+
+      expect(
+        result,
+        const Left(ApiFailure.invalidDomain()),
+      );
+    });
+  });
+
+  group('Extract credit id', () {
+    test('=> success', () {
+      const creditId = 'fake-id';
+      final creditUri = Uri.parse(
+        '$domain/payments/account-summary/creditnote-details?creditNoteNumber=$creditId',
+      );
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => domain);
+
+      final result = repository.extractCreditId(
+        link: creditUri,
+      );
+
+      expect(
+        result,
+        const Right(creditId),
+      );
+    });
+
+    test('=> failure', () {
+      const creditId = 'fake-id';
+      final creditUri = Uri.parse(
+        '$domain/payments/account-summary/creditnote-details?creditNoteNumber=$creditId',
+      );
+
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => '');
+
+      final result = repository.extractCreditId(
+        link: creditUri,
+      );
+
+      expect(
+        result,
+        const Left(ApiFailure.creditDetailRoute()),
       );
     });
   });

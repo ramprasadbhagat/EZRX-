@@ -463,4 +463,19 @@ void main() {
       expect(MaterialOriginFilter(-1).titleViewByOrder, '');
     });
   });
+
+  group('Payment Tab Value Object -', () {
+    test('Payment tabs', () {
+      expect(PaymentTab.accountSummary(), PaymentTab('account-summary'));
+      expect(PaymentTab.paymentSummary(), PaymentTab('payment-summary'));
+      expect(PaymentTab.statementOfAccs(), PaymentTab('statementOfAccs'));
+      expect(PaymentTab.claimManagement(), PaymentTab('claim-management'));
+    });
+
+    test('Payment sub tabs', () {
+      expect(PaymentSubTab.allInvoices(), PaymentSubTab('all-invoices'));
+      expect(PaymentSubTab.allCreditNotes(), PaymentSubTab('all-creditnotes'));
+      expect(PaymentSubTab.fullSummary(), PaymentSubTab('full-summary'));
+    });
+  });
 }

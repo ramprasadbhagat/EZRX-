@@ -897,6 +897,36 @@ bool isUserGuideLink(String path) => path == '/user-guide';
 
 bool isOrderLink(String path) => path == '/my-account/Orders';
 
+bool isSettingLink(String path) => path == '/my-account/Settings';
+
+bool isCartLink(String path) => path == '/cart';
+
+bool isOrderItemDetailLink(String path) =>
+    path == '/my-account/orders/item-detail';
+
+bool isTnCLink(String path) => path == '/tnc';
+
+bool isPrivacyLink(String path) => path == '/privacy';
+
+bool isAnnouncementLink(String path) =>
+    path == '/announcement/view-all/announcements' || path == '/announcement';
+
+bool isArticleLink(String path) => path == '/announcement/view-all/articles';
+
+bool isReturnLink(String path) => path == '/my-account/returns';
+
+bool isZPCreditDetailLink(String path) =>
+    path == '/payments/account-summary/creditnote-details';
+
+bool isMPCreditDetailLink(String path) =>
+    path == '/marketplace-payments/account-summary/creditnote-details';
+
+bool isClaimSubmissionLink(String path) =>
+    path == '/my-account/payments/claim-submission';
+
+bool isNewReturnRequestLink(String path) =>
+    path == '/my-account/new-return-request';
+
 String getViewByItemTitle(int value) {
   switch (value) {
     case 0:

@@ -23,16 +23,16 @@ class DeepLinkingState with _$DeepLinkingState {
     OrderNumber orderNumber,
   ) = _RedirectOrderDetail;
   const factory DeepLinkingState.redirectReturnDetail(
-    ReturnRequestsId returnId,
+    ReturnItem returnItem,
   ) = _RedirectReturnDetail;
   const factory DeepLinkingState.redirectPaymentDetail({
     required PaymentSummaryDetails paymentIdentifierInfo,
     required bool isMarketPlace,
   }) = _RedirectPaymentDetail;
-  const factory DeepLinkingState.redirectZPPaymentHome() =
-      _RedirectZPPaymentHome;
-  const factory DeepLinkingState.redirectMPPaymentHome() =
-      _RedirectMPPaymentHome;
+  const factory DeepLinkingState.redirectPaymentHome({
+    required PaymentParams params,
+    required bool isMarketPlace,
+  }) = _RedirectPaymentHome;
   const factory DeepLinkingState.redirectInvoiceDetail({
     required String invoiceNumber,
     required bool isMarketPlace,
@@ -47,5 +47,24 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.redirectResetPassword(
     ResetPasswordCred resetPasswordCred,
   ) = _RedirectResetPassword;
+
   const factory DeepLinkingState.redirectOrder() = _RedirectOrder;
+  const factory DeepLinkingState.redirectSetting() = _RedirectSetting;
+  const factory DeepLinkingState.redirectCart() = _RedirectCart;
+  const factory DeepLinkingState.redirectOrderItemDetail({
+    required OrderItemParams params,
+  }) = _RedirectOrderItemDetail;
+  const factory DeepLinkingState.redirectTnC() = _RedirectTnC;
+  const factory DeepLinkingState.redirectPrivacy() = _RedirectPrivacy;
+  const factory DeepLinkingState.redirectAnnouncement() = _RedirectAnnouncement;
+  const factory DeepLinkingState.redirectArticle() = _RedirectArticle;
+  const factory DeepLinkingState.redirectReturn() = _RedirectReturn;
+  const factory DeepLinkingState.redirectCreditDetail({
+    required String creditId,
+    required bool isMarketPlace,
+  }) = _RedirectZPCreditDetail;
+  const factory DeepLinkingState.redirectClaimSubmission() =
+      _RedirectClaimSubmission;
+  const factory DeepLinkingState.redirectNewReturnRequest() =
+      _RedirectNewReturnRequest;
 }

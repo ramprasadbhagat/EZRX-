@@ -59,6 +59,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.returnDetailRoute() = _ReturnDetailRoute;
   const factory ApiFailure.paymentDetailRoute() = _PaymentDetailRoute;
   const factory ApiFailure.invoiceDetailRoute() = _InvoiceDetailRoute;
+  const factory ApiFailure.creditDetailRoute() = _CreditDetailRoute;
 
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
   const factory ApiFailure.scannedProductNotFound() = _ScannedProductNotFound;
@@ -151,6 +152,9 @@ extension ApiFailureExt on ApiFailure {
         ),
         invoiceDetailRoute: (_) => const TRObject(
           'This invoice is not available on your account',
+        ),
+        creditDetailRoute: (_) => const TRObject(
+          'This credit is not available on your account',
         ),
         passwordResetFail: (_) => const TRObject('Unable to reset password'),
         languageChangeFail: (_) => const TRObject('Unable to change language'),

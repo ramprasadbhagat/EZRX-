@@ -599,12 +599,12 @@ mixin _$DeepLinkingState {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -615,6 +615,18 @@ mixin _$DeepLinkingState {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -628,12 +640,12 @@ mixin _$DeepLinkingState {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -644,6 +656,18 @@ mixin _$DeepLinkingState {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -657,12 +681,12 @@ mixin _$DeepLinkingState {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -673,6 +697,17 @@ mixin _$DeepLinkingState {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -688,10 +723,7 @@ mixin _$DeepLinkingState {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -702,6 +734,21 @@ mixin _$DeepLinkingState {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -714,8 +761,7 @@ mixin _$DeepLinkingState {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -724,6 +770,18 @@ mixin _$DeepLinkingState {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -736,8 +794,7 @@ mixin _$DeepLinkingState {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -746,6 +803,17 @@ mixin _$DeepLinkingState {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -819,12 +887,12 @@ class _$InitialImpl implements _Initial {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -835,6 +903,18 @@ class _$InitialImpl implements _Initial {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return initial();
   }
@@ -851,12 +931,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -867,6 +947,18 @@ class _$InitialImpl implements _Initial {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return initial?.call();
   }
@@ -883,12 +975,12 @@ class _$InitialImpl implements _Initial {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -899,6 +991,17 @@ class _$InitialImpl implements _Initial {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -920,10 +1023,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -934,6 +1034,21 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return initial(this);
   }
@@ -949,8 +1064,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -959,6 +1073,18 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return initial?.call(this);
   }
@@ -974,8 +1100,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -984,6 +1109,17 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1095,12 +1231,12 @@ class _$LinkPendingImpl implements _LinkPending {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1111,6 +1247,18 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return linkPending(link, banner);
   }
@@ -1127,12 +1275,12 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1143,6 +1291,18 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return linkPending?.call(link, banner);
   }
@@ -1159,12 +1319,12 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -1175,6 +1335,17 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1196,10 +1367,7 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -1210,6 +1378,21 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return linkPending(this);
   }
@@ -1225,8 +1408,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1235,6 +1417,18 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return linkPending?.call(this);
   }
@@ -1250,8 +1444,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1260,6 +1453,17 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1381,12 +1585,12 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1397,6 +1601,18 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectBundleDetail(materialNumber, banner);
   }
@@ -1413,12 +1629,12 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1429,6 +1645,18 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectBundleDetail?.call(materialNumber, banner);
   }
@@ -1445,12 +1673,12 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -1461,6 +1689,17 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1482,10 +1721,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -1496,6 +1732,21 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectBundleDetail(this);
   }
@@ -1511,8 +1762,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1521,6 +1771,18 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectBundleDetail?.call(this);
   }
@@ -1536,8 +1798,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1546,6 +1807,17 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1667,12 +1939,12 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1683,6 +1955,18 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectProductDetail(materialNumber, banner);
   }
@@ -1699,12 +1983,12 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1715,6 +1999,18 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectProductDetail?.call(materialNumber, banner);
   }
@@ -1731,12 +2027,12 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -1747,6 +2043,17 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -1768,10 +2075,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -1782,6 +2086,21 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectProductDetail(this);
   }
@@ -1797,8 +2116,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1807,6 +2125,18 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectProductDetail?.call(this);
   }
@@ -1822,8 +2152,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1832,6 +2161,17 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -1949,12 +2289,12 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1965,6 +2305,18 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectProductsTab(searchKey, materialFilter);
   }
@@ -1981,12 +2333,12 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1997,6 +2349,18 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectProductsTab?.call(searchKey, materialFilter);
   }
@@ -2013,12 +2377,12 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2029,6 +2393,17 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectProductsTab != null) {
@@ -2050,10 +2425,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2064,6 +2436,21 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectProductsTab(this);
   }
@@ -2079,8 +2466,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2089,6 +2475,18 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectProductsTab?.call(this);
   }
@@ -2104,8 +2502,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2114,6 +2511,17 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectProductsTab != null) {
@@ -2213,12 +2621,12 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -2229,6 +2637,18 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectOrderDetail(orderNumber);
   }
@@ -2245,12 +2665,12 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -2261,6 +2681,18 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectOrderDetail?.call(orderNumber);
   }
@@ -2277,12 +2709,12 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2293,6 +2725,17 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -2314,10 +2757,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2328,6 +2768,21 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectOrderDetail(this);
   }
@@ -2343,8 +2798,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2353,6 +2807,18 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectOrderDetail?.call(this);
   }
@@ -2368,8 +2834,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2378,6 +2843,17 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -2403,9 +2879,9 @@ abstract class _$$RedirectReturnDetailImplCopyWith<$Res> {
           $Res Function(_$RedirectReturnDetailImpl) then) =
       __$$RedirectReturnDetailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnRequestsId returnId});
+  $Res call({ReturnItem returnItem});
 
-  $ReturnRequestsIdCopyWith<$Res> get returnId;
+  $ReturnItemCopyWith<$Res> get returnItem;
 }
 
 /// @nodoc
@@ -2419,21 +2895,21 @@ class __$$RedirectReturnDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? returnId = null,
+    Object? returnItem = null,
   }) {
     return _then(_$RedirectReturnDetailImpl(
-      null == returnId
-          ? _value.returnId
-          : returnId // ignore: cast_nullable_to_non_nullable
-              as ReturnRequestsId,
+      null == returnItem
+          ? _value.returnItem
+          : returnItem // ignore: cast_nullable_to_non_nullable
+              as ReturnItem,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ReturnRequestsIdCopyWith<$Res> get returnId {
-    return $ReturnRequestsIdCopyWith<$Res>(_value.returnId, (value) {
-      return _then(_value.copyWith(returnId: value));
+  $ReturnItemCopyWith<$Res> get returnItem {
+    return $ReturnItemCopyWith<$Res>(_value.returnItem, (value) {
+      return _then(_value.copyWith(returnItem: value));
     });
   }
 }
@@ -2441,14 +2917,14 @@ class __$$RedirectReturnDetailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
-  const _$RedirectReturnDetailImpl(this.returnId);
+  const _$RedirectReturnDetailImpl(this.returnItem);
 
   @override
-  final ReturnRequestsId returnId;
+  final ReturnItem returnItem;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectReturnDetail(returnId: $returnId)';
+    return 'DeepLinkingState.redirectReturnDetail(returnItem: $returnItem)';
   }
 
   @override
@@ -2456,12 +2932,12 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RedirectReturnDetailImpl &&
-            (identical(other.returnId, returnId) ||
-                other.returnId == returnId));
+            (identical(other.returnItem, returnItem) ||
+                other.returnItem == returnItem));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, returnId);
+  int get hashCode => Object.hash(runtimeType, returnItem);
 
   @JsonKey(ignore: true)
   @override
@@ -2486,12 +2962,12 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -2502,8 +2978,20 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
-    return redirectReturnDetail(returnId);
+    return redirectReturnDetail(returnItem);
   }
 
   @override
@@ -2518,12 +3006,12 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -2534,8 +3022,20 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
-    return redirectReturnDetail?.call(returnId);
+    return redirectReturnDetail?.call(returnItem);
   }
 
   @override
@@ -2550,12 +3050,12 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2566,10 +3066,21 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
-      return redirectReturnDetail(returnId);
+      return redirectReturnDetail(returnItem);
     }
     return orElse();
   }
@@ -2587,10 +3098,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2601,6 +3109,21 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectReturnDetail(this);
   }
@@ -2616,8 +3139,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2626,6 +3148,18 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectReturnDetail?.call(this);
   }
@@ -2641,8 +3175,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2651,6 +3184,17 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
@@ -2661,10 +3205,10 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
 }
 
 abstract class _RedirectReturnDetail implements DeepLinkingState {
-  const factory _RedirectReturnDetail(final ReturnRequestsId returnId) =
+  const factory _RedirectReturnDetail(final ReturnItem returnItem) =
       _$RedirectReturnDetailImpl;
 
-  ReturnRequestsId get returnId;
+  ReturnItem get returnItem;
   @JsonKey(ignore: true)
   _$$RedirectReturnDetailImplCopyWith<_$RedirectReturnDetailImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2771,12 +3315,12 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -2787,6 +3331,18 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectPaymentDetail(paymentIdentifierInfo, isMarketPlace);
   }
@@ -2803,12 +3359,12 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -2819,6 +3375,18 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectPaymentDetail?.call(paymentIdentifierInfo, isMarketPlace);
   }
@@ -2835,12 +3403,12 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2851,6 +3419,17 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -2872,10 +3451,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2886,6 +3462,21 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectPaymentDetail(this);
   }
@@ -2901,8 +3492,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2911,6 +3501,18 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectPaymentDetail?.call(this);
   }
@@ -2926,8 +3528,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2936,6 +3537,17 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -2958,41 +3570,86 @@ abstract class _RedirectPaymentDetail implements DeepLinkingState {
 }
 
 /// @nodoc
-abstract class _$$RedirectZPPaymentHomeImplCopyWith<$Res> {
-  factory _$$RedirectZPPaymentHomeImplCopyWith(
-          _$RedirectZPPaymentHomeImpl value,
-          $Res Function(_$RedirectZPPaymentHomeImpl) then) =
-      __$$RedirectZPPaymentHomeImplCopyWithImpl<$Res>;
+abstract class _$$RedirectPaymentHomeImplCopyWith<$Res> {
+  factory _$$RedirectPaymentHomeImplCopyWith(_$RedirectPaymentHomeImpl value,
+          $Res Function(_$RedirectPaymentHomeImpl) then) =
+      __$$RedirectPaymentHomeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PaymentParams params, bool isMarketPlace});
+
+  $PaymentParamsCopyWith<$Res> get params;
 }
 
 /// @nodoc
-class __$$RedirectZPPaymentHomeImplCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectZPPaymentHomeImpl>
-    implements _$$RedirectZPPaymentHomeImplCopyWith<$Res> {
-  __$$RedirectZPPaymentHomeImplCopyWithImpl(_$RedirectZPPaymentHomeImpl _value,
-      $Res Function(_$RedirectZPPaymentHomeImpl) _then)
+class __$$RedirectPaymentHomeImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectPaymentHomeImpl>
+    implements _$$RedirectPaymentHomeImplCopyWith<$Res> {
+  __$$RedirectPaymentHomeImplCopyWithImpl(_$RedirectPaymentHomeImpl _value,
+      $Res Function(_$RedirectPaymentHomeImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? params = null,
+    Object? isMarketPlace = null,
+  }) {
+    return _then(_$RedirectPaymentHomeImpl(
+      params: null == params
+          ? _value.params
+          : params // ignore: cast_nullable_to_non_nullable
+              as PaymentParams,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentParamsCopyWith<$Res> get params {
+    return $PaymentParamsCopyWith<$Res>(_value.params, (value) {
+      return _then(_value.copyWith(params: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
-  const _$RedirectZPPaymentHomeImpl();
+class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
+  const _$RedirectPaymentHomeImpl(
+      {required this.params, required this.isMarketPlace});
+
+  @override
+  final PaymentParams params;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectZPPaymentHome()';
+    return 'DeepLinkingState.redirectPaymentHome(params: $params, isMarketPlace: $isMarketPlace)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RedirectZPPaymentHomeImpl);
+            other is _$RedirectPaymentHomeImpl &&
+            (identical(other.params, params) || other.params == params) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, params, isMarketPlace);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RedirectPaymentHomeImplCopyWith<_$RedirectPaymentHomeImpl> get copyWith =>
+      __$$RedirectPaymentHomeImplCopyWithImpl<_$RedirectPaymentHomeImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3009,12 +3666,12 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3025,8 +3682,20 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
-    return redirectZPPaymentHome();
+    return redirectPaymentHome(params, isMarketPlace);
   }
 
   @override
@@ -3041,12 +3710,12 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -3057,8 +3726,20 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
-    return redirectZPPaymentHome?.call();
+    return redirectPaymentHome?.call(params, isMarketPlace);
   }
 
   @override
@@ -3073,12 +3754,12 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -3089,10 +3770,21 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
-    if (redirectZPPaymentHome != null) {
-      return redirectZPPaymentHome();
+    if (redirectPaymentHome != null) {
+      return redirectPaymentHome(params, isMarketPlace);
     }
     return orElse();
   }
@@ -3110,10 +3802,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -3124,8 +3813,23 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
-    return redirectZPPaymentHome(this);
+    return redirectPaymentHome(this);
   }
 
   @override
@@ -3139,8 +3843,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3149,8 +3852,20 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
-    return redirectZPPaymentHome?.call(this);
+    return redirectPaymentHome?.call(this);
   }
 
   @override
@@ -3164,8 +3879,7 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3174,247 +3888,36 @@ class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
-    if (redirectZPPaymentHome != null) {
-      return redirectZPPaymentHome(this);
+    if (redirectPaymentHome != null) {
+      return redirectPaymentHome(this);
     }
     return orElse();
   }
 }
 
-abstract class _RedirectZPPaymentHome implements DeepLinkingState {
-  const factory _RedirectZPPaymentHome() = _$RedirectZPPaymentHomeImpl;
-}
+abstract class _RedirectPaymentHome implements DeepLinkingState {
+  const factory _RedirectPaymentHome(
+      {required final PaymentParams params,
+      required final bool isMarketPlace}) = _$RedirectPaymentHomeImpl;
 
-/// @nodoc
-abstract class _$$RedirectMPPaymentHomeImplCopyWith<$Res> {
-  factory _$$RedirectMPPaymentHomeImplCopyWith(
-          _$RedirectMPPaymentHomeImpl value,
-          $Res Function(_$RedirectMPPaymentHomeImpl) then) =
-      __$$RedirectMPPaymentHomeImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$RedirectMPPaymentHomeImplCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectMPPaymentHomeImpl>
-    implements _$$RedirectMPPaymentHomeImplCopyWith<$Res> {
-  __$$RedirectMPPaymentHomeImplCopyWithImpl(_$RedirectMPPaymentHomeImpl _value,
-      $Res Function(_$RedirectMPPaymentHomeImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
-  const _$RedirectMPPaymentHomeImpl();
-
-  @override
-  String toString() {
-    return 'DeepLinkingState.redirectMPPaymentHome()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RedirectMPPaymentHomeImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
-    required TResult Function(
-            MaterialNumber materialNumber, EZReachBanner? banner)
-        redirectBundleDetail,
-    required TResult Function(
-            MaterialNumber materialNumber, EZReachBanner? banner)
-        redirectProductDetail,
-    required TResult Function(
-            SearchKey searchKey, MaterialFilter materialFilter)
-        redirectProductsTab,
-    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(
-            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
-        redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
-    required TResult Function(String invoiceNumber, bool isMarketPlace)
-        redirectInvoiceDetail,
-    required TResult Function() redirectFAQ,
-    required TResult Function() redirectAboutUs,
-    required TResult Function(AppMarket market) redirectContactUs,
-    required TResult Function() redirectUserGuide,
-    required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
-    required TResult Function() redirectOrder,
-  }) {
-    return redirectMPPaymentHome();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
-    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
-        redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
-        redirectProductDetail,
-    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
-        redirectProductsTab,
-    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(
-            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
-        redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
-    TResult? Function(String invoiceNumber, bool isMarketPlace)?
-        redirectInvoiceDetail,
-    TResult? Function()? redirectFAQ,
-    TResult? Function()? redirectAboutUs,
-    TResult? Function(AppMarket market)? redirectContactUs,
-    TResult? Function()? redirectUserGuide,
-    TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
-    TResult? Function()? redirectOrder,
-  }) {
-    return redirectMPPaymentHome?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
-    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
-        redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
-        redirectProductDetail,
-    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
-        redirectProductsTab,
-    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(
-            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
-        redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
-    TResult Function(String invoiceNumber, bool isMarketPlace)?
-        redirectInvoiceDetail,
-    TResult Function()? redirectFAQ,
-    TResult Function()? redirectAboutUs,
-    TResult Function(AppMarket market)? redirectContactUs,
-    TResult Function()? redirectUserGuide,
-    TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
-    TResult Function()? redirectOrder,
-    required TResult orElse(),
-  }) {
-    if (redirectMPPaymentHome != null) {
-      return redirectMPPaymentHome();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LinkPending value) linkPending,
-    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
-    required TResult Function(_RedirectProductDetail value)
-        redirectProductDetail,
-    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
-    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
-    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
-    required TResult Function(_RedirectPaymentDetail value)
-        redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
-    required TResult Function(_RedirectInvoiceDetail value)
-        redirectInvoiceDetail,
-    required TResult Function(_RedirectFAQ value) redirectFAQ,
-    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
-    required TResult Function(_RedirectContactUs value) redirectContactUs,
-    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
-    required TResult Function(_Error value) error,
-    required TResult Function(_RedirectResetPassword value)
-        redirectResetPassword,
-    required TResult Function(_RedirectOrder value) redirectOrder,
-  }) {
-    return redirectMPPaymentHome(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_LinkPending value)? linkPending,
-    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
-    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
-    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
-    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
-    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
-    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
-    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
-    TResult? Function(_RedirectFAQ value)? redirectFAQ,
-    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
-    TResult? Function(_RedirectContactUs value)? redirectContactUs,
-    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
-    TResult? Function(_RedirectOrder value)? redirectOrder,
-  }) {
-    return redirectMPPaymentHome?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LinkPending value)? linkPending,
-    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
-    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
-    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
-    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
-    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
-    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
-    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
-    TResult Function(_RedirectFAQ value)? redirectFAQ,
-    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
-    TResult Function(_RedirectContactUs value)? redirectContactUs,
-    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
-    TResult Function(_Error value)? error,
-    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
-    TResult Function(_RedirectOrder value)? redirectOrder,
-    required TResult orElse(),
-  }) {
-    if (redirectMPPaymentHome != null) {
-      return redirectMPPaymentHome(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _RedirectMPPaymentHome implements DeepLinkingState {
-  const factory _RedirectMPPaymentHome() = _$RedirectMPPaymentHomeImpl;
+  PaymentParams get params;
+  bool get isMarketPlace;
+  @JsonKey(ignore: true)
+  _$$RedirectPaymentHomeImplCopyWith<_$RedirectPaymentHomeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -3506,12 +4009,12 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3522,6 +4025,18 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectInvoiceDetail(invoiceNumber, isMarketPlace);
   }
@@ -3538,12 +4053,12 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -3554,6 +4069,18 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectInvoiceDetail?.call(invoiceNumber, isMarketPlace);
   }
@@ -3570,12 +4097,12 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -3586,6 +4113,17 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -3607,10 +4145,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -3621,6 +4156,21 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectInvoiceDetail(this);
   }
@@ -3636,8 +4186,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3646,6 +4195,18 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectInvoiceDetail?.call(this);
   }
@@ -3661,8 +4222,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3671,6 +4231,17 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -3742,12 +4313,12 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3758,6 +4329,18 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectFAQ();
   }
@@ -3774,12 +4357,12 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -3790,6 +4373,18 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectFAQ?.call();
   }
@@ -3806,12 +4401,12 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -3822,6 +4417,17 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -3843,10 +4449,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -3857,6 +4460,21 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectFAQ(this);
   }
@@ -3872,8 +4490,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3882,6 +4499,18 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectFAQ?.call(this);
   }
@@ -3897,8 +4526,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3907,6 +4535,17 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -3970,12 +4609,12 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3986,6 +4625,18 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectAboutUs();
   }
@@ -4002,12 +4653,12 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -4018,6 +4669,18 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectAboutUs?.call();
   }
@@ -4034,12 +4697,12 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -4050,6 +4713,17 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -4071,10 +4745,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -4085,6 +4756,21 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectAboutUs(this);
   }
@@ -4100,8 +4786,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4110,6 +4795,18 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectAboutUs?.call(this);
   }
@@ -4125,8 +4822,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4135,6 +4831,17 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -4225,12 +4932,12 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -4241,6 +4948,18 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectContactUs(market);
   }
@@ -4257,12 +4976,12 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -4273,6 +4992,18 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectContactUs?.call(market);
   }
@@ -4289,12 +5020,12 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -4305,6 +5036,17 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -4326,10 +5068,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -4340,6 +5079,21 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectContactUs(this);
   }
@@ -4355,8 +5109,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4365,6 +5118,18 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectContactUs?.call(this);
   }
@@ -4380,8 +5145,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4390,6 +5154,17 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -4459,12 +5234,12 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -4475,6 +5250,18 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectUserGuide();
   }
@@ -4491,12 +5278,12 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -4507,6 +5294,18 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectUserGuide?.call();
   }
@@ -4523,12 +5322,12 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -4539,6 +5338,17 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectUserGuide != null) {
@@ -4560,10 +5370,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -4574,6 +5381,21 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectUserGuide(this);
   }
@@ -4589,8 +5411,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4599,6 +5420,18 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectUserGuide?.call(this);
   }
@@ -4614,8 +5447,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4624,6 +5456,17 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectUserGuide != null) {
@@ -4723,12 +5566,12 @@ class _$ErrorImpl implements _Error {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -4739,6 +5582,18 @@ class _$ErrorImpl implements _Error {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return error(failure);
   }
@@ -4755,12 +5610,12 @@ class _$ErrorImpl implements _Error {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -4771,6 +5626,18 @@ class _$ErrorImpl implements _Error {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return error?.call(failure);
   }
@@ -4787,12 +5654,12 @@ class _$ErrorImpl implements _Error {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -4803,6 +5670,17 @@ class _$ErrorImpl implements _Error {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -4824,10 +5702,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -4838,6 +5713,21 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return error(this);
   }
@@ -4853,8 +5743,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4863,6 +5752,18 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return error?.call(this);
   }
@@ -4878,8 +5779,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4888,6 +5788,17 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -4995,12 +5906,12 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -5011,6 +5922,18 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectResetPassword(resetPasswordCred);
   }
@@ -5027,12 +5950,12 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -5043,6 +5966,18 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectResetPassword?.call(resetPasswordCred);
   }
@@ -5059,12 +5994,12 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -5075,6 +6010,17 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectResetPassword != null) {
@@ -5096,10 +6042,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -5110,6 +6053,21 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectResetPassword(this);
   }
@@ -5125,8 +6083,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -5135,6 +6092,18 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectResetPassword?.call(this);
   }
@@ -5150,8 +6119,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -5160,6 +6128,17 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectResetPassword != null) {
@@ -5229,12 +6208,12 @@ class _$RedirectOrderImpl implements _RedirectOrder {
             SearchKey searchKey, MaterialFilter materialFilter)
         redirectProductsTab,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
-    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectZPPaymentHome,
-    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -5245,6 +6224,18 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
     required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
   }) {
     return redirectOrder();
   }
@@ -5261,12 +6252,12 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectZPPaymentHome,
-    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -5277,6 +6268,18 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
   }) {
     return redirectOrder?.call();
   }
@@ -5293,12 +6296,12 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         redirectProductsTab,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
-    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectZPPaymentHome,
-    TResult Function()? redirectMPPaymentHome,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -5309,6 +6312,17 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
     TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectOrder != null) {
@@ -5330,10 +6344,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectZPPaymentHome value)
-        redirectZPPaymentHome,
-    required TResult Function(_RedirectMPPaymentHome value)
-        redirectMPPaymentHome,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -5344,6 +6355,21 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
     required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
   }) {
     return redirectOrder(this);
   }
@@ -5359,8 +6385,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -5369,6 +6394,18 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
   }) {
     return redirectOrder?.call(this);
   }
@@ -5384,8 +6421,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
-    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -5394,6 +6430,17 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult Function(_Error value)? error,
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
     required TResult orElse(),
   }) {
     if (redirectOrder != null) {
@@ -5405,4 +6452,3360 @@ class _$RedirectOrderImpl implements _RedirectOrder {
 
 abstract class _RedirectOrder implements DeepLinkingState {
   const factory _RedirectOrder() = _$RedirectOrderImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectSettingImplCopyWith<$Res> {
+  factory _$$RedirectSettingImplCopyWith(_$RedirectSettingImpl value,
+          $Res Function(_$RedirectSettingImpl) then) =
+      __$$RedirectSettingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectSettingImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectSettingImpl>
+    implements _$$RedirectSettingImplCopyWith<$Res> {
+  __$$RedirectSettingImplCopyWithImpl(
+      _$RedirectSettingImpl _value, $Res Function(_$RedirectSettingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectSettingImpl implements _RedirectSetting {
+  const _$RedirectSettingImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectSetting()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RedirectSettingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectSetting();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectSetting?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectSetting != null) {
+      return redirectSetting();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectSetting(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectSetting?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectSetting != null) {
+      return redirectSetting(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectSetting implements DeepLinkingState {
+  const factory _RedirectSetting() = _$RedirectSettingImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectCartImplCopyWith<$Res> {
+  factory _$$RedirectCartImplCopyWith(
+          _$RedirectCartImpl value, $Res Function(_$RedirectCartImpl) then) =
+      __$$RedirectCartImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectCartImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectCartImpl>
+    implements _$$RedirectCartImplCopyWith<$Res> {
+  __$$RedirectCartImplCopyWithImpl(
+      _$RedirectCartImpl _value, $Res Function(_$RedirectCartImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectCartImpl implements _RedirectCart {
+  const _$RedirectCartImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectCart()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RedirectCartImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectCart();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectCart?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectCart != null) {
+      return redirectCart();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectCart != null) {
+      return redirectCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectCart implements DeepLinkingState {
+  const factory _RedirectCart() = _$RedirectCartImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectOrderItemDetailImplCopyWith<$Res> {
+  factory _$$RedirectOrderItemDetailImplCopyWith(
+          _$RedirectOrderItemDetailImpl value,
+          $Res Function(_$RedirectOrderItemDetailImpl) then) =
+      __$$RedirectOrderItemDetailImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OrderItemParams params});
+
+  $OrderItemParamsCopyWith<$Res> get params;
+}
+
+/// @nodoc
+class __$$RedirectOrderItemDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectOrderItemDetailImpl>
+    implements _$$RedirectOrderItemDetailImplCopyWith<$Res> {
+  __$$RedirectOrderItemDetailImplCopyWithImpl(
+      _$RedirectOrderItemDetailImpl _value,
+      $Res Function(_$RedirectOrderItemDetailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? params = null,
+  }) {
+    return _then(_$RedirectOrderItemDetailImpl(
+      params: null == params
+          ? _value.params
+          : params // ignore: cast_nullable_to_non_nullable
+              as OrderItemParams,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderItemParamsCopyWith<$Res> get params {
+    return $OrderItemParamsCopyWith<$Res>(_value.params, (value) {
+      return _then(_value.copyWith(params: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
+  const _$RedirectOrderItemDetailImpl({required this.params});
+
+  @override
+  final OrderItemParams params;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectOrderItemDetail(params: $params)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectOrderItemDetailImpl &&
+            (identical(other.params, params) || other.params == params));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, params);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RedirectOrderItemDetailImplCopyWith<_$RedirectOrderItemDetailImpl>
+      get copyWith => __$$RedirectOrderItemDetailImplCopyWithImpl<
+          _$RedirectOrderItemDetailImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectOrderItemDetail(params);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectOrderItemDetail?.call(params);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectOrderItemDetail != null) {
+      return redirectOrderItemDetail(params);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectOrderItemDetail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectOrderItemDetail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectOrderItemDetail != null) {
+      return redirectOrderItemDetail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectOrderItemDetail implements DeepLinkingState {
+  const factory _RedirectOrderItemDetail(
+      {required final OrderItemParams params}) = _$RedirectOrderItemDetailImpl;
+
+  OrderItemParams get params;
+  @JsonKey(ignore: true)
+  _$$RedirectOrderItemDetailImplCopyWith<_$RedirectOrderItemDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RedirectTnCImplCopyWith<$Res> {
+  factory _$$RedirectTnCImplCopyWith(
+          _$RedirectTnCImpl value, $Res Function(_$RedirectTnCImpl) then) =
+      __$$RedirectTnCImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectTnCImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectTnCImpl>
+    implements _$$RedirectTnCImplCopyWith<$Res> {
+  __$$RedirectTnCImplCopyWithImpl(
+      _$RedirectTnCImpl _value, $Res Function(_$RedirectTnCImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectTnCImpl implements _RedirectTnC {
+  const _$RedirectTnCImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectTnC()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RedirectTnCImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectTnC();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectTnC?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectTnC != null) {
+      return redirectTnC();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectTnC(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectTnC?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectTnC != null) {
+      return redirectTnC(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectTnC implements DeepLinkingState {
+  const factory _RedirectTnC() = _$RedirectTnCImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectPrivacyImplCopyWith<$Res> {
+  factory _$$RedirectPrivacyImplCopyWith(_$RedirectPrivacyImpl value,
+          $Res Function(_$RedirectPrivacyImpl) then) =
+      __$$RedirectPrivacyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectPrivacyImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectPrivacyImpl>
+    implements _$$RedirectPrivacyImplCopyWith<$Res> {
+  __$$RedirectPrivacyImplCopyWithImpl(
+      _$RedirectPrivacyImpl _value, $Res Function(_$RedirectPrivacyImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectPrivacyImpl implements _RedirectPrivacy {
+  const _$RedirectPrivacyImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectPrivacy()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RedirectPrivacyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectPrivacy();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectPrivacy?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectPrivacy != null) {
+      return redirectPrivacy();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectPrivacy(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectPrivacy?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectPrivacy != null) {
+      return redirectPrivacy(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectPrivacy implements DeepLinkingState {
+  const factory _RedirectPrivacy() = _$RedirectPrivacyImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectAnnouncementImplCopyWith<$Res> {
+  factory _$$RedirectAnnouncementImplCopyWith(_$RedirectAnnouncementImpl value,
+          $Res Function(_$RedirectAnnouncementImpl) then) =
+      __$$RedirectAnnouncementImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectAnnouncementImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectAnnouncementImpl>
+    implements _$$RedirectAnnouncementImplCopyWith<$Res> {
+  __$$RedirectAnnouncementImplCopyWithImpl(_$RedirectAnnouncementImpl _value,
+      $Res Function(_$RedirectAnnouncementImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
+  const _$RedirectAnnouncementImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectAnnouncement()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectAnnouncementImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectAnnouncement();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectAnnouncement?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectAnnouncement != null) {
+      return redirectAnnouncement();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectAnnouncement(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectAnnouncement?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectAnnouncement != null) {
+      return redirectAnnouncement(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectAnnouncement implements DeepLinkingState {
+  const factory _RedirectAnnouncement() = _$RedirectAnnouncementImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectArticleImplCopyWith<$Res> {
+  factory _$$RedirectArticleImplCopyWith(_$RedirectArticleImpl value,
+          $Res Function(_$RedirectArticleImpl) then) =
+      __$$RedirectArticleImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectArticleImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectArticleImpl>
+    implements _$$RedirectArticleImplCopyWith<$Res> {
+  __$$RedirectArticleImplCopyWithImpl(
+      _$RedirectArticleImpl _value, $Res Function(_$RedirectArticleImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectArticleImpl implements _RedirectArticle {
+  const _$RedirectArticleImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectArticle()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RedirectArticleImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectArticle();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectArticle?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectArticle != null) {
+      return redirectArticle();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectArticle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectArticle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectArticle != null) {
+      return redirectArticle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectArticle implements DeepLinkingState {
+  const factory _RedirectArticle() = _$RedirectArticleImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectReturnImplCopyWith<$Res> {
+  factory _$$RedirectReturnImplCopyWith(_$RedirectReturnImpl value,
+          $Res Function(_$RedirectReturnImpl) then) =
+      __$$RedirectReturnImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectReturnImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectReturnImpl>
+    implements _$$RedirectReturnImplCopyWith<$Res> {
+  __$$RedirectReturnImplCopyWithImpl(
+      _$RedirectReturnImpl _value, $Res Function(_$RedirectReturnImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectReturnImpl implements _RedirectReturn {
+  const _$RedirectReturnImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectReturn()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RedirectReturnImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectReturn();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectReturn?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectReturn != null) {
+      return redirectReturn();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectReturn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectReturn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectReturn != null) {
+      return redirectReturn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectReturn implements DeepLinkingState {
+  const factory _RedirectReturn() = _$RedirectReturnImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectZPCreditDetailImplCopyWith<$Res> {
+  factory _$$RedirectZPCreditDetailImplCopyWith(
+          _$RedirectZPCreditDetailImpl value,
+          $Res Function(_$RedirectZPCreditDetailImpl) then) =
+      __$$RedirectZPCreditDetailImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String creditId, bool isMarketPlace});
+}
+
+/// @nodoc
+class __$$RedirectZPCreditDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectZPCreditDetailImpl>
+    implements _$$RedirectZPCreditDetailImplCopyWith<$Res> {
+  __$$RedirectZPCreditDetailImplCopyWithImpl(
+      _$RedirectZPCreditDetailImpl _value,
+      $Res Function(_$RedirectZPCreditDetailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? creditId = null,
+    Object? isMarketPlace = null,
+  }) {
+    return _then(_$RedirectZPCreditDetailImpl(
+      creditId: null == creditId
+          ? _value.creditId
+          : creditId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
+  const _$RedirectZPCreditDetailImpl(
+      {required this.creditId, required this.isMarketPlace});
+
+  @override
+  final String creditId;
+  @override
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectCreditDetail(creditId: $creditId, isMarketPlace: $isMarketPlace)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectZPCreditDetailImpl &&
+            (identical(other.creditId, creditId) ||
+                other.creditId == creditId) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, creditId, isMarketPlace);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RedirectZPCreditDetailImplCopyWith<_$RedirectZPCreditDetailImpl>
+      get copyWith => __$$RedirectZPCreditDetailImplCopyWithImpl<
+          _$RedirectZPCreditDetailImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectCreditDetail(creditId, isMarketPlace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectCreditDetail?.call(creditId, isMarketPlace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectCreditDetail != null) {
+      return redirectCreditDetail(creditId, isMarketPlace);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectCreditDetail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectCreditDetail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectCreditDetail != null) {
+      return redirectCreditDetail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectZPCreditDetail implements DeepLinkingState {
+  const factory _RedirectZPCreditDetail(
+      {required final String creditId,
+      required final bool isMarketPlace}) = _$RedirectZPCreditDetailImpl;
+
+  String get creditId;
+  bool get isMarketPlace;
+  @JsonKey(ignore: true)
+  _$$RedirectZPCreditDetailImplCopyWith<_$RedirectZPCreditDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RedirectClaimSubmissionImplCopyWith<$Res> {
+  factory _$$RedirectClaimSubmissionImplCopyWith(
+          _$RedirectClaimSubmissionImpl value,
+          $Res Function(_$RedirectClaimSubmissionImpl) then) =
+      __$$RedirectClaimSubmissionImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectClaimSubmissionImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectClaimSubmissionImpl>
+    implements _$$RedirectClaimSubmissionImplCopyWith<$Res> {
+  __$$RedirectClaimSubmissionImplCopyWithImpl(
+      _$RedirectClaimSubmissionImpl _value,
+      $Res Function(_$RedirectClaimSubmissionImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
+  const _$RedirectClaimSubmissionImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectClaimSubmission()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectClaimSubmissionImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectClaimSubmission();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectClaimSubmission?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectClaimSubmission != null) {
+      return redirectClaimSubmission();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectClaimSubmission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectClaimSubmission?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectClaimSubmission != null) {
+      return redirectClaimSubmission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectClaimSubmission implements DeepLinkingState {
+  const factory _RedirectClaimSubmission() = _$RedirectClaimSubmissionImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectNewReturnRequestImplCopyWith<$Res> {
+  factory _$$RedirectNewReturnRequestImplCopyWith(
+          _$RedirectNewReturnRequestImpl value,
+          $Res Function(_$RedirectNewReturnRequestImpl) then) =
+      __$$RedirectNewReturnRequestImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectNewReturnRequestImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectNewReturnRequestImpl>
+    implements _$$RedirectNewReturnRequestImplCopyWith<$Res> {
+  __$$RedirectNewReturnRequestImplCopyWithImpl(
+      _$RedirectNewReturnRequestImpl _value,
+      $Res Function(_$RedirectNewReturnRequestImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
+  const _$RedirectNewReturnRequestImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectNewReturnRequest()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectNewReturnRequestImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+  }) {
+    return redirectNewReturnRequest();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+  }) {
+    return redirectNewReturnRequest?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectNewReturnRequest != null) {
+      return redirectNewReturnRequest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+  }) {
+    return redirectNewReturnRequest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+  }) {
+    return redirectNewReturnRequest?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    required TResult orElse(),
+  }) {
+    if (redirectNewReturnRequest != null) {
+      return redirectNewReturnRequest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectNewReturnRequest implements DeepLinkingState {
+  const factory _RedirectNewReturnRequest() = _$RedirectNewReturnRequestImpl;
 }
