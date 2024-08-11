@@ -13,7 +13,7 @@ import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
-
+import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -160,6 +160,11 @@ class _ProductTile extends StatelessWidget {
                               bottomRight: Radius.circular(20.0),
                               topLeft: Radius.circular(10.0),
                             ),
+                          ),
+                        if (product.isCovid)
+                          const Positioned(
+                            top: kToolbarHeight,
+                            child: CovidTag(),
                           ),
                       ],
                     ),

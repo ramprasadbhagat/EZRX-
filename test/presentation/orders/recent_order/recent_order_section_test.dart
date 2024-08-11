@@ -385,4 +385,26 @@ void main() {
     final freeText = find.text('List price: FREE', findRichText: true);
     expect(freeText, findsNothing);
   });
+
+  testWidgets('Show covid tag for covid materials', (tester) async {
+    final fakeOrderHistory = OrderHistory.empty().copyWith(
+      orderHistoryItems: [
+        OrderHistoryItem.empty().copyWith(
+          isCovid: true,
+        ),
+      ],
+    );
+    when(
+      () => viewByItemsBlocMock.state,
+    ).thenAnswer(
+      (invocation) => ViewByItemsState.initial().copyWith(
+        orderHistory: fakeOrderHistory,
+      ),
+    );
+
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(WidgetKeys.covidLabel), findsOneWidget);
+  });
 }

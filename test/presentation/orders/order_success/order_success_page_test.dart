@@ -1327,6 +1327,24 @@ void main() {
         expect(find.byKey(WidgetKeys.offerTag), findsOneWidget);
       });
 
+      testWidgets('Show covid tag when material is covid material',
+          (tester) async {
+        when(() => orderSummaryBlocMock.state).thenAnswer(
+          (invocation) => OrderSummaryState.initial().copyWith(
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  fakeMaterialItem.copyWith(isCovid: true),
+                ],
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.covidLabel), findsOneWidget);
+      });
+
       testWidgets(
         'Display Price Not Available Message for hide price materials',
         (tester) async {

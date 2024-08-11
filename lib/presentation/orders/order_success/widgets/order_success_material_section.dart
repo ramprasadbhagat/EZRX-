@@ -177,6 +177,7 @@ class _MaterialItem extends StatelessWidget {
             ),
         ],
       ),
+      isCovidItem: orderItem.isCovid,
     );
   }
 }
