@@ -310,7 +310,7 @@ class AcceptButton extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.isLoading != current.isLoading && !current.isLoading,
         listener: (context, state) {
-          state.userFailureOrSuccessOption.fold(
+          state.failureOrSuccessOption.fold(
             () {},
             (either) => either.fold(
               (failure) => ErrorUtils.handleApiFailure(context, failure),

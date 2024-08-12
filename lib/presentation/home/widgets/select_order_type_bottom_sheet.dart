@@ -111,7 +111,7 @@ class _ConfirmButton extends StatelessWidget {
             previous.isSelectingOrderType != current.isSelectingOrderType &&
             !current.isSelectingOrderType,
         listener: (context, state) {
-          state.userFailureOrSuccessOption.fold(
+          state.failureOrSuccessOption.fold(
             () {},
             (either) => either.fold(
               (failure) => ErrorUtils.handleApiFailure(context, failure),

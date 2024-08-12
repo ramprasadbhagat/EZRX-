@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -15,22 +14,7 @@ class ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserBloc, UserState>(
-      listenWhen: (previous, current) =>
-          previous.user != current.user ||
-          previous.userFailureOrSuccessOption !=
-              current.userFailureOrSuccessOption,
-      listener: (context, state) {
-        state.userFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
-          ),
-        );
-      },
+    return BlocBuilder<UserBloc, UserState>(
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         return ListTile(

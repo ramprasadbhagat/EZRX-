@@ -84,7 +84,6 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -288,9 +287,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<PaymentCustomerInformationBloc>(
           create: (context) => locator<PaymentCustomerInformationBloc>(),
-        ),
-        BlocProvider<SalesRepBloc>(
-          create: (context) => locator<SalesRepBloc>(),
         ),
         BlocProvider<PaymentTermBloc>(
           create: (context) => locator<PaymentTermBloc>(),

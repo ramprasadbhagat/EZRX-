@@ -1,5 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -11,7 +10,6 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
 import 'package:ezrxmobile/presentation/more/section/login_on_behalf_sheet.dart';
@@ -23,7 +21,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/mock_bloc.dart';
-import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -242,25 +239,5 @@ void main() {
         expect(usernameErrorText, findsOneWidget);
       },
     );
-
-    testWidgets('Error on User fetch', (tester) async {
-      final expectedUserListStates = [
-        UserState.initial().copyWith(
-          user: fakeClientUser,
-        ),
-        UserState.initial().copyWith(
-          user: fakeClientUser,
-          userFailureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('Fake-Error'),
-            ),
-          ),
-        ),
-      ];
-      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      expect(find.text('Fake-Error'), findsOneWidget);
-    });
   });
 }

@@ -23,7 +23,6 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -229,13 +228,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               current.user.copyWith(selectedOrderType: DocumentType('')),
           listener: (context, state) {
             _initializeSalesOrg(state);
-            if (state.isSalesRep) {
-              context.read<SalesRepBloc>().add(
-                    SalesRepEvent.fetch(
-                      user: state.user,
-                    ),
-                  );
-            }
             if (state.isNotEmpty) {
               context.setLocale(state.user.preferredLanguage.locale);
             }
@@ -264,6 +256,27 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               ),
             );
             //Re-fetch product list here
+          },
+        ),
+        BlocListener<UserBloc, UserState>(
+          listenWhen: (previous, current) =>
+              previous.userFailureOrSuccessOption !=
+              current.userFailureOrSuccessOption,
+          listener: (context, state) => {
+            state.userFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                  if (context.mounted) {
+                    context.read<AuthBloc>().add(
+                          const AuthEvent.logout(),
+                        );
+                  }
+                },
+                (_) {},
+              ),
+            ),
           },
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
@@ -374,7 +387,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       salesOrganisationConfigs:
                           context.read<SalesOrgBloc>().state.configs,
                       salesRepresentativeInfo:
-                          context.read<SalesRepBloc>().state.salesRepInfo,
+                          context.read<UserBloc>().state.salesRepInfo,
                       user: context.read<UserBloc>().state.user,
                     ),
                   );

@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -11,6 +12,8 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +26,17 @@ class UserRepoMock extends Mock implements UserRepository {}
 
 class AuthRepositoryMock extends Mock implements AuthRepository {}
 
+class SalesRepRepositoryMock extends Mock implements SalesRepRepository {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late UserRepository userRepoMock;
   late AuthRepository authRepositoryMock;
+  late SalesRepRepository salesRepRepositoryMock;
   late UserState userState;
+  late SalesRepresentativeInfo salesRepresentativeInfo;
+  const fakeError = ApiFailure.other('fake-error');
   const refreshToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
 
@@ -37,6 +45,8 @@ void main() {
     userState = UserState.initial();
     userRepoMock = UserRepoMock();
     authRepositoryMock = AuthRepositoryMock();
+    salesRepRepositoryMock = SalesRepRepositoryMock();
+    salesRepresentativeInfo = await SalesRepLocalDataSource().getSalesRepInfo();
   });
   group('User Bloc Testing', () {
     blocTest<UserBloc, UserState>(
@@ -44,6 +54,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       act: (UserBloc bloc) => bloc.add(const UserEvent.initialized()),
       expect: () => [userState],
@@ -54,6 +65,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -76,6 +88,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -93,10 +106,69 @@ void main() {
     );
 
     blocTest<UserBloc, UserState>(
+      'Fetch salesrep user success',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.getUser()).thenAnswer(
+          (invocation) async => Right(
+            fakeSalesRepUser,
+          ),
+        );
+        when(() => authRepositoryMock.getRefreshToken())
+            .thenAnswer((_) async => Right(JWT(refreshToken)));
+
+        when(
+          () => salesRepRepositoryMock.getSalesRepInfo(user: fakeSalesRepUser),
+        ).thenAnswer(
+          (invocation) async => Right(
+            salesRepresentativeInfo,
+          ),
+        );
+      },
+      act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
+      expect: () => [
+        userState.copyWith(user: fakeSalesRepUser),
+        userState.copyWith(
+          user: fakeSalesRepUser,
+          salesRepInfo: salesRepresentativeInfo,
+        ),
+      ],
+    );
+
+    blocTest<UserBloc, UserState>(
+      'Fetch salesrep info failure',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+        authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
+      ),
+      seed: () => userState.copyWith(user: fakeSalesRepUser),
+      setUp: () {
+        when(
+          () => salesRepRepositoryMock.getSalesRepInfo(user: fakeSalesRepUser),
+        ).thenAnswer(
+          (_) async => const Left(fakeError),
+        );
+      },
+      act: (UserBloc bloc) => bloc.add(const UserEvent.fetchSalesRepInfo()),
+      expect: () => [
+        userState.copyWith(
+          user: fakeSalesRepUser,
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+      ],
+    );
+
+    blocTest<UserBloc, UserState>(
       'Fetch user success when login on behalf',
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -118,6 +190,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -140,6 +213,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -188,6 +262,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -205,6 +280,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -228,6 +304,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -276,6 +353,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -310,7 +388,7 @@ void main() {
       expect: () => [
         userState.copyWith(
           user: fakeClientUser,
-          userFailureOrSuccessOption:
+          failureOrSuccessOption:
               some(const Left(ApiFailure.other('Fake Error'))),
         ),
       ],
@@ -320,6 +398,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -355,6 +434,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -390,6 +470,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -411,7 +492,7 @@ void main() {
       expect: () => [
         userState,
         userState.copyWith(
-          userFailureOrSuccessOption:
+          failureOrSuccessOption:
               some(const Left(ApiFailure.other('Fake Error'))),
         ),
       ],
@@ -421,6 +502,7 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
+        salesRepRepository: salesRepRepositoryMock,
       ),
       act: (UserBloc bloc) => bloc.add(
         UserEvent.selectLanguage(Language.vietnamese()),
@@ -439,6 +521,7 @@ void main() {
         build: () => UserBloc(
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
+          salesRepRepository: salesRepRepositoryMock,
         ),
         setUp: () {
           when(
@@ -456,6 +539,7 @@ void main() {
         build: () => UserBloc(
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
+          salesRepRepository: salesRepRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserTc()).thenAnswer(
@@ -466,7 +550,7 @@ void main() {
         expect: () => [
           userState.copyWith(isLoading: true),
           userState.copyWith(
-            userFailureOrSuccessOption: optionOf(const Left(fakeError)),
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
           ),
         ],
       );
@@ -480,6 +564,7 @@ void main() {
         build: () => UserBloc(
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
+          salesRepRepository: salesRepRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))
@@ -490,7 +575,7 @@ void main() {
         expect: () => [
           userState.copyWith(isLoading: true),
           userState.copyWith(
-            userFailureOrSuccessOption: optionOf(const Left(fakeError)),
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
           ),
         ],
       );
@@ -500,6 +585,7 @@ void main() {
         build: () => UserBloc(
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
+          salesRepRepository: salesRepRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))
@@ -526,6 +612,7 @@ void main() {
         build: () => UserBloc(
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
+          salesRepRepository: salesRepRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateSelectedOrderType(fakeOrderType))
@@ -536,7 +623,7 @@ void main() {
         expect: () => [
           userState.copyWith(isSelectingOrderType: true),
           userState.copyWith(
-            userFailureOrSuccessOption:
+            failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.poorConnection())),
           ),
         ],
@@ -547,6 +634,7 @@ void main() {
         build: () => UserBloc(
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
+          salesRepRepository: salesRepRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateSelectedOrderType(fakeOrderType))
@@ -559,7 +647,7 @@ void main() {
           userState.copyWith(user: fakeClientUser, isSelectingOrderType: true),
           userState.copyWith(
             user: fakeClientUser.copyWith(selectedOrderType: fakeOrderType),
-            userFailureOrSuccessOption: optionOf(Right(fakeOrderType)),
+            failureOrSuccessOption: optionOf(Right(fakeOrderType)),
           ),
         ],
       );

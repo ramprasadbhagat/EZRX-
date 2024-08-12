@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -27,9 +26,6 @@ class PaymentTermsRepoMock extends Mock implements PaymentTermsRepository {}
 class PaymentCustomerInfoMockBloc extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
-
-class SalesRepMockBloc extends MockBloc<SalesRepEvent, SalesRepState>
-    implements SalesRepBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

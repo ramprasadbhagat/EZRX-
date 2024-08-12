@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/national_privacy_commission/national_privacy_commission_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -646,6 +645,7 @@ void setupLocator() {
     () => UserBloc(
       userRepository: locator<UserRepository>(),
       authRepository: locator<AuthRepository>(),
+      salesRepRepository: locator<SalesRepRepository>(),
     ),
   );
 
@@ -921,12 +921,6 @@ void setupLocator() {
       config: locator<Config>(),
       remoteDataSource: locator<SalesRepRemoteDataSource>(),
       localDataSource: locator<SalesRepLocalDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => SalesRepBloc(
-      salesRepRepository: locator<SalesRepRepository>(),
     ),
   );
 

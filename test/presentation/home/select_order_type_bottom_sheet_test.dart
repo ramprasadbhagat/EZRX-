@@ -213,7 +213,7 @@ void main() async {
         Stream.fromIterable([
           UserState.initial().copyWith(isSelectingOrderType: true),
           UserState.initial().copyWith(
-            userFailureOrSuccessOption: optionOf(Right(fakeOrderType)),
+            failureOrSuccessOption: optionOf(Right(fakeOrderType)),
           ),
         ]),
       );
@@ -246,7 +246,7 @@ void main() async {
         Stream.fromIterable([
           UserState.initial().copyWith(isSelectingOrderType: true),
           UserState.initial().copyWith(
-            userFailureOrSuccessOption: optionOf(Right(fakeOrderType)),
+            failureOrSuccessOption: optionOf(Right(fakeOrderType)),
           ),
         ]),
       );
@@ -275,7 +275,7 @@ void main() async {
         Stream.fromIterable([
           UserState.initial().copyWith(isSelectingOrderType: true),
           UserState.initial().copyWith(
-            userFailureOrSuccessOption:
+            failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-message'))),
           ),
         ]),

@@ -517,7 +517,7 @@ void main() {
           UserState.initial().copyWith(isLoading: true),
           UserState.initial().copyWith(
             isLoading: false,
-            userFailureOrSuccessOption:
+            failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-error'))),
           ),
         ]),

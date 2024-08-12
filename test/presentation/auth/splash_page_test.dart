@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -56,6 +55,7 @@ import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -102,7 +102,6 @@ void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late SalesRepBloc salesRepBlocMock;
   late AupTcBloc aupTcBlocMock;
   late CartBloc cartBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
@@ -216,7 +215,6 @@ void main() {
       authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
-      salesRepBlocMock = SalesRepBlocMock();
       aupTcBlocMock = AupTcBlocMock();
       cartBlocMock = CartBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
@@ -266,7 +264,6 @@ void main() {
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => salesRepBlocMock.state).thenReturn(SalesRepState.initial());
       when(() => aupTcBlocMock.state).thenReturn(AupTcState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => aboutUsBlocMock.state).thenReturn(AboutUsState.initial());
@@ -361,7 +358,6 @@ void main() {
             BlocProvider<AboutUsBloc>(
               create: (context) => aboutUsBlocMock,
             ),
-            BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
             BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
             BlocProvider<CartBloc>(create: (context) => cartBlocMock),
             BlocProvider<PaymentCustomerInformationBloc>(
@@ -601,21 +597,36 @@ void main() {
 
     testWidgets('When PaymentCustomerInformation bloc is listening',
         (tester) async {
+      final fakeSalesRepInfo = SalesRepresentativeInfo.empty();
+      const fakePaymentCustomerInformation = PaymentCustomerInformation(
+        paymentTerm: 'paymentTerm',
+        shipToInfoList: <ShipToInfo>[],
+        billToInfo: [],
+      );
       final expectedPaymentStates = [
         PaymentCustomerInformationState.initial(),
         PaymentCustomerInformationState.initial().copyWith(
-          paymentCustomerInformation: const PaymentCustomerInformation(
-            paymentTerm: 'paymentTerm',
-            shipToInfoList: <ShipToInfo>[],
-            billToInfo: [],
-          ),
+          paymentCustomerInformation: fakePaymentCustomerInformation,
         ),
       ];
+
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+      );
 
       when(() => salesOrgBlocMock.state).thenAnswer(
         (invocation) => SalesOrgState.initial().copyWith(
           salesOrganisation: fakeTWSalesOrganisation,
-          configs: fakeSalesOrganisationConfigs,
+          configs: fakeTWSalesOrgConfigs,
+        ),
+      );
+
+      when(() => userBlocMock.state).thenAnswer(
+        (invocation) => UserState.initial().copyWith(
+          salesRepInfo: fakeSalesRepInfo,
+          user: fakeSalesRepUser,
         ),
       );
 
@@ -630,16 +641,12 @@ void main() {
       verify(
         () => paymentTermBlocMock.add(
           PaymentTermEvent.fetch(
-            customeCodeInfo: CustomerCodeInfo.empty(),
+            customeCodeInfo: fakeCustomerCodeInfo,
+            paymentCustomerInformation: fakePaymentCustomerInformation,
             salesOrganisation: fakeTWSalesOrganisation,
-            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
-            salesRepresentativeInfo: salesRepBlocMock.state.salesRepInfo,
-            paymentCustomerInformation:
-                PaymentCustomerInformation.empty().copyWith(
-              paymentTerm: 'paymentTerm',
-              shipToInfoList: <ShipToInfo>[],
-            ),
-            user: fakeUser,
+            salesOrganisationConfigs: fakeTWSalesOrgConfigs,
+            salesRepresentativeInfo: fakeSalesRepInfo,
+            user: fakeSalesRepUser,
           ),
         ),
       ).called(1);
@@ -1678,6 +1685,26 @@ void main() {
 
       verify(
         () => autoRouterMock.push(const AboutUsPageRoute()),
+      ).called(1);
+    });
+
+    testWidgets('Log user out when get user api failure', (tester) async {
+      whenListen(
+        userBlocMock,
+        Stream.fromIterable([
+          UserState.initial().copyWith(
+            userFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-message'))),
+          ),
+        ]),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+      verify(
+        () => authBlocMock.add(
+          const AuthEvent.logout(),
+        ),
       ).called(1);
     });
   });

@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/repository/i_sales_rep_repository.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
@@ -20,10 +22,12 @@ part 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final IUserRepository userRepository;
   final IAuthRepository authRepository;
+  final ISalesRepRepository salesRepRepository;
 
   UserBloc({
     required this.userRepository,
     required this.authRepository,
+    required this.salesRepRepository,
   }) : super(UserState.initial()) {
     on<UserEvent>(_onEvent);
   }
@@ -62,6 +66,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                 userFailureOrSuccessOption: none(),
               ),
             );
+            if (state.isSalesRep) {
+              add(const UserEvent.fetchSalesRepInfo());
+            }
           },
         );
       },
@@ -74,7 +81,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           (failure) => emit(
             state.copyWith(
               isLoading: false,
-              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (settingTc) => emit(
@@ -83,7 +90,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                 acceptPrivacyPolicy: settingTc.acceptTC,
               ),
               isLoading: false,
-              userFailureOrSuccessOption: none(),
+              failureOrSuccessOption: none(),
             ),
           ),
         );
@@ -98,14 +105,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           (failure) => emit(
             state.copyWith(
               isLoading: false,
-              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (_) => emit(
             state.copyWith(
               isLoading: false,
               user: state.user.copyWith(acceptMPTC: e.value),
-              userFailureOrSuccessOption: none(),
+              failureOrSuccessOption: none(),
             ),
           ),
         );
@@ -124,7 +131,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (user) => emit(
@@ -135,7 +142,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                   languagePreference: user.settings.languagePreference,
                 ),
               ),
-              userFailureOrSuccessOption: none(),
+              failureOrSuccessOption: none(),
             ),
           ),
         );
@@ -154,7 +161,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       updateLanguage: (_UpdateLanguage e) async {
         emit(
           state.copyWith(
-            userFailureOrSuccessOption: none(),
+            failureOrSuccessOption: none(),
           ),
         );
         final failureOrSuccessOption =
@@ -163,13 +170,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         failureOrSuccessOption.fold(
           (failure) => emit(
             state.copyWith(
-              userFailureOrSuccessOption: optionOf(failureOrSuccessOption),
+              failureOrSuccessOption: optionOf(failureOrSuccessOption),
             ),
           ),
           (_) {
             emit(
               state.copyWith(
-                userFailureOrSuccessOption: none(),
+                failureOrSuccessOption: none(),
                 user: state.user.copyWith(
                   preferredLanguage: e.language,
                 ),
@@ -189,7 +196,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(
           state.copyWith(
             isSelectingOrderType: true,
-            userFailureOrSuccessOption: none(),
+            failureOrSuccessOption: none(),
           ),
         );
 
@@ -201,24 +208,40 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
               isSelectingOrderType: false,
             ),
           ),
           (newOrderType) => emit(
             state.copyWith(
               user: state.user.copyWith(selectedOrderType: newOrderType),
-              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
               isSelectingOrderType: false,
             ),
           ),
         );
       },
+      fetchSalesRepInfo: (e) async {
+        final failureOrSuccess = await salesRepRepository.getSalesRepInfo(
+          user: state.user,
+        );
+        if (isClosed) return;
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (info) => emit(
+            state.copyWith(
+              salesRepInfo: info,
+              failureOrSuccessOption: none(),
+            ),
+          ),
+        );
+      },
     );
-  }
-
-  @override
-  void onChange(Change<UserState> change) {
-    super.onChange(change);
   }
 }

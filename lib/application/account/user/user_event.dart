@@ -20,4 +20,5 @@ class UserEvent with _$UserEvent {
   const factory UserEvent.selectOrderType({
     required DocumentType orderType,
   }) = _SelectOrderType;
+  const factory UserEvent.fetchSalesRepInfo() = _FetchSalesRepinfo;
 }
