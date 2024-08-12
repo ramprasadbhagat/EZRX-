@@ -43,6 +43,10 @@ class AppRouter extends $AppRouter {
           path: '/notification_settings',
           page: NotificationSettingsPageRoute.page,
         ),
+        AutoRoute(
+          path: '/privacy_consent',
+          page: PrivacyConsentPageRoute.page,
+        ),
         CustomRoute(
           path: '/customer_search',
           page: CustomerSearchPageRoute.page,

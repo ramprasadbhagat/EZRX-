@@ -23,6 +23,7 @@ import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 import '../../robots/more/contact_us_robot.dart';
 import '../../robots/more/more_robot.dart';
+import '../../robots/more/privacy_consent_robot.dart';
 import '../../robots/more/profile_robot.dart';
 import '../../robots/more/security_robot.dart';
 import '../../robots/notification/notification_robot.dart';
@@ -63,6 +64,7 @@ void main() {
   late ProfileRobot profileRobot;
   late ContactUsRobot contactUsRobot;
   late SecurityRobot securityRobot;
+  late PrivacyConsentRobot privacyConsentRobot;
 
   late NotificationRobot notificationRobot;
   late MoreRobot moreRobot;
@@ -111,6 +113,7 @@ void main() {
     securityRobot = SecurityRobot(tester);
     moreRobot = MoreRobot(tester);
     notificationRobot = NotificationRobot(tester);
+    privacyConsentRobot = PrivacyConsentRobot(tester);
 
     announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
     articleRobot = ArticleRobot(tester);
@@ -1848,6 +1851,22 @@ void main() {
       //Cannot change Language because MY market has only English language,
       //So that cannot verify update profile after clear changes,
       //Skip this test cases
+    });
+  });
+
+  group('Privacy Consent -', () {
+
+    testWidgets('EZRX-T2827 | Verify Privacy Consent Page', (tester) async {
+      //navigate to page
+      await pumpAppWithHomeScreen(tester);
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapPrivacyConsentTitle();
+
+      //verify
+      privacyConsentRobot.verifyPageContentVisible();
+
+      await privacyConsentRobot.verifyCheckBoxesTap();
+      await privacyConsentRobot.tapClearChangeButton();
     });
   });
 

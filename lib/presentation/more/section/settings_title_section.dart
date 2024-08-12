@@ -36,7 +36,7 @@ class SettingsTile extends StatelessWidget {
                     .state
                     .isNotificationSettingsEnable)
                   MoreDetailsTile.notifications(context),
-
+                MoreDetailsTile.privacyConsent(context),
                 // MoreDetailsTile.privacy(), //  implement yet
               ].map((item) {
                 return ListTile(

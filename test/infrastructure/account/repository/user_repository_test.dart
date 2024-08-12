@@ -620,5 +620,99 @@ void main() {
         },
       );
     });
+
+    group('update privacy control -', () {
+      test(
+        'from local datasource successfully',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+          when(() => localDataSourceMock.updatePrivacyControl())
+              .thenAnswer((_) async => true);
+
+          final result = await repository.updatePrivacyControl(
+            automatedPersonalisation: true,
+            viaEmails: true,
+            viaPushNotification: true,
+            viaSMS: true,
+          );
+          expect(result, const Right(true));
+        },
+      );
+
+      test(
+        'from local datasource throws error',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+          when(() => localDataSourceMock.updatePrivacyControl())
+              .thenThrow(mockException);
+
+          final result = await repository.updatePrivacyControl(
+            automatedPersonalisation: true,
+            viaEmails: true,
+            viaPushNotification: true,
+            viaSMS: true,
+          );
+          expect(result, Left(ApiFailure.other(mockException.message)));
+        },
+      );
+
+      test(
+        'from remote datasource successfully',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => remoteDataSourceMock.updatePrivacyControl(
+              automatedPersonalisation: true,
+              viaEmails: true,
+              viaPushNotification: true,
+              viaSMS: true,
+            ),
+          ).thenAnswer((_) async => true);
+
+          when(
+            () => mockClevertapService.updateUserProfile(
+              updatedProfile: {
+                'MSG-email': true,
+                'MSG-push': true,
+                'MSG-sms': true,
+              },
+            ),
+          ).thenAnswer((_) => Future.value());
+
+          final result = await repository.updatePrivacyControl(
+            automatedPersonalisation: true,
+            viaEmails: true,
+            viaPushNotification: true,
+            viaSMS: true,
+          );
+          expect(result, const Right(true));
+        },
+      );
+
+      test(
+        'from remote datasource throws error',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => remoteDataSourceMock.updatePrivacyControl(
+              automatedPersonalisation: true,
+              viaEmails: true,
+              viaPushNotification: true,
+              viaSMS: true,
+            ),
+          ).thenThrow(mockException);
+
+          final result = await repository.updatePrivacyControl(
+            automatedPersonalisation: true,
+            viaEmails: true,
+            viaPushNotification: true,
+            viaSMS: true,
+          );
+          expect(result, Left(ApiFailure.other(mockException.message)));
+        },
+      );
+    });
   });
 }

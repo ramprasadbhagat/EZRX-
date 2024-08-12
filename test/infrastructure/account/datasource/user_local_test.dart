@@ -60,5 +60,16 @@ void main() {
           await userLocal.updateUserNotificationAndLanguagePreference();
       expect(user.username.getOrCrash(), 'ezrxtest05');
     });
+
+    test(
+      'Update Privacy Control',
+      () async {
+        final result = await userLocal.updatePrivacyControl();
+        expect(
+          result,
+          true,
+        );
+      },
+    );
   });
 }

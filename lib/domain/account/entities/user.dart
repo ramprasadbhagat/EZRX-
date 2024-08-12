@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
+import 'package:ezrxmobile/domain/account/entities/privacy_control.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
@@ -42,6 +43,7 @@ class User with _$User {
     required bool isFirstLogin,
     required bool isResetUserPassword,
     required bool isPPATriggerMaintained,
+    required PrivacyControl privacyControl,
   }) = _User;
 
   factory User.empty() => User(
@@ -75,6 +77,7 @@ class User with _$User {
         isFirstLogin: false,
         isResetUserPassword: false,
         isPPATriggerMaintained: false,
+        privacyControl: PrivacyControl.empty(),
       );
 
   bool get eligibleForResetPassword =>

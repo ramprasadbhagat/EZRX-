@@ -58,6 +58,12 @@ class ClevertapService {
     );
   }
 
+  Future<void> updateUserProfile({
+    required Map<String, dynamic> updatedProfile,
+  }) async {
+    await CleverTapPlugin.profileSet(updatedProfile);
+  }
+
   Future<void> logout() async {
     await CleverTapPlugin.profileSet(
       {'MSG-push': false},

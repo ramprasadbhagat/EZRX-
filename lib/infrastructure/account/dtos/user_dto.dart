@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
+import 'package:ezrxmobile/domain/account/entities/privacy_control.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
@@ -12,6 +13,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_expiry_notification_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/privacy_control_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
@@ -94,6 +96,9 @@ class UserDto with _$UserDto {
     required bool isResetUserPassword,
     @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
     required bool isPPATriggerMaintained,
+    @Default(PrivacyControlDto.emptyPrivacyControlDto)
+    @JsonKey(name: 'privacyControls')
+    PrivacyControlDto privacyControl,
     @JsonKey(name: 'selectedOrderType', defaultValue: '')
     required String selectedOrderType,
   }) = _UserDto;
@@ -135,6 +140,7 @@ class UserDto with _$UserDto {
       isFirstLogin: user.isFirstLogin,
       isResetUserPassword: user.isResetUserPassword,
       isPPATriggerMaintained: user.isPPATriggerMaintained,
+      privacyControl: PrivacyControlDto.fromDomain(user.privacyControl),
     );
   }
   static const emptyUserDto = UserDto(
@@ -165,6 +171,7 @@ class UserDto with _$UserDto {
     isFirstLogin: false,
     isResetUserPassword: false,
     isPPATriggerMaintained: false,
+    privacyControl: PrivacyControlDto.emptyPrivacyControlDto,
     selectedOrderType: '',
   );
 
@@ -211,6 +218,13 @@ class UserDto with _$UserDto {
       isFirstLogin: isFirstLogin,
       isResetUserPassword: isResetUserPassword,
       isPPATriggerMaintained: isPPATriggerMaintained,
+      privacyControl: PrivacyControl(
+        automatedPersonalisation: privacyControl.automatedPersonalisation,
+        directMarketing: privacyControl.directMarketing,
+        viaEmails: privacyControl.viaEmails,
+        viaPushNotification: privacyControl.viaPushNotification,
+        viaSMS: privacyControl.viaSMS,
+      ),
     );
   }
 

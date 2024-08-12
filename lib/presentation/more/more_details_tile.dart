@@ -272,4 +272,17 @@ class MoreDetailsTile {
           context.navigateTo(const NotificationSettingsPageRoute());
         },
       );
+
+  factory MoreDetailsTile.privacyConsent(BuildContext context) =>
+      MoreDetailsTile(
+        icon: const Icon(
+          Icons.notifications_none_outlined,
+          color: ZPColors.greenIconColor,
+        ),
+        key: WidgetKeys.privacyConsentTile,
+        label: 'Privacy consent',
+        onTap: () {
+          context.navigateTo(const PrivacyConsentPageRoute());
+        },
+      );
 }

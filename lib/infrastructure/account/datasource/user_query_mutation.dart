@@ -99,7 +99,10 @@ class UserQueryMutation {
             privacyControls {
               enableBrowserCookies
               automatedPersonalisation
-             directMarketing
+              directMarketing
+              viaEmails
+              viaPushNotification
+              viaSMS
             }
             ${enableMarketPlace ? 'acceptMPTC' : ''}
             isPPATriggerMaintained
@@ -164,6 +167,16 @@ class UserQueryMutation {
         updateAcceptanceStatus(isAcceptMPTC: \$isAcceptMPTC)
 
     }
+    ''';
+  }
+
+  String updatePrivacyControl() {
+    return '''
+      mutation updatePrivacyControl(\$input: UpdatePrivacyControlsInput!) {
+        updatePrivacyControls(input: \$input) {
+          message
+        }
+      }
     ''';
   }
 

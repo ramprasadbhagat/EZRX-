@@ -91,6 +91,8 @@ mixin _$UserDto {
   bool get isResetUserPassword => throw _privateConstructorUsedError;
   @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
   bool get isPPATriggerMaintained => throw _privateConstructorUsedError;
+  @JsonKey(name: 'privacyControls')
+  PrivacyControlDto get privacyControl => throw _privateConstructorUsedError;
   @JsonKey(name: 'selectedOrderType', defaultValue: '')
   String get selectedOrderType => throw _privateConstructorUsedError;
 
@@ -162,11 +164,13 @@ abstract class $UserDtoCopyWith<$Res> {
       bool isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
       bool isPPATriggerMaintained,
+      @JsonKey(name: 'privacyControls') PrivacyControlDto privacyControl,
       @JsonKey(name: 'selectedOrderType', defaultValue: '')
       String selectedOrderType});
 
   $RoleDtoCopyWith<$Res> get role;
   $AccessRightDtoCopyWith<$Res> get accessRight;
+  $PrivacyControlDtoCopyWith<$Res> get privacyControl;
 }
 
 /// @nodoc
@@ -211,6 +215,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
+    Object? privacyControl = null,
     Object? selectedOrderType = null,
   }) {
     return _then(_value.copyWith(
@@ -330,6 +335,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.isPPATriggerMaintained
           : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
               as bool,
+      privacyControl: null == privacyControl
+          ? _value.privacyControl
+          : privacyControl // ignore: cast_nullable_to_non_nullable
+              as PrivacyControlDto,
       selectedOrderType: null == selectedOrderType
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
@@ -350,6 +359,14 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
   $AccessRightDtoCopyWith<$Res> get accessRight {
     return $AccessRightDtoCopyWith<$Res>(_value.accessRight, (value) {
       return _then(_value.copyWith(accessRight: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrivacyControlDtoCopyWith<$Res> get privacyControl {
+    return $PrivacyControlDtoCopyWith<$Res>(_value.privacyControl, (value) {
+      return _then(_value.copyWith(privacyControl: value) as $Val);
     });
   }
 }
@@ -419,6 +436,7 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       bool isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
       bool isPPATriggerMaintained,
+      @JsonKey(name: 'privacyControls') PrivacyControlDto privacyControl,
       @JsonKey(name: 'selectedOrderType', defaultValue: '')
       String selectedOrderType});
 
@@ -426,6 +444,8 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   $RoleDtoCopyWith<$Res> get role;
   @override
   $AccessRightDtoCopyWith<$Res> get accessRight;
+  @override
+  $PrivacyControlDtoCopyWith<$Res> get privacyControl;
 }
 
 /// @nodoc
@@ -468,6 +488,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
+    Object? privacyControl = null,
     Object? selectedOrderType = null,
   }) {
     return _then(_$UserDtoImpl(
@@ -587,6 +608,10 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.isPPATriggerMaintained
           : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
               as bool,
+      privacyControl: null == privacyControl
+          ? _value.privacyControl
+          : privacyControl // ignore: cast_nullable_to_non_nullable
+              as PrivacyControlDto,
       selectedOrderType: null == selectedOrderType
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
@@ -642,17 +667,14 @@ class _$UserDtoImpl extends _UserDto {
           defaultValue: <PaymentAdviceExpiryNotificationDto>[])
       required final List<PaymentAdviceExpiryNotificationDto>
           paymentNotification,
-      @JsonKey(
-          name: 'preferredLanguage',
-          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
+      @JsonKey(name: 'preferredLanguage', readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       required this.preferredLanguage,
       @JsonKey(
           name: 'supportedLanguages',
           readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
-      @JsonKey(
-          name: 'MobileNumber', defaultValue: '')
+      @JsonKey(name: 'MobileNumber', defaultValue: '')
       required this.mobileNumber,
       @JsonKey(
           name: 'acceptMPTC',
@@ -664,6 +686,8 @@ class _$UserDtoImpl extends _UserDto {
       required this.isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
       required this.isPPATriggerMaintained,
+      @JsonKey(name: 'privacyControls')
+      this.privacyControl = PrivacyControlDto.emptyPrivacyControlDto,
       @JsonKey(name: 'selectedOrderType', defaultValue: '')
       required this.selectedOrderType})
       : _userSalesOrganisations = userSalesOrganisations,
@@ -802,12 +826,15 @@ class _$UserDtoImpl extends _UserDto {
   @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
   final bool isPPATriggerMaintained;
   @override
+  @JsonKey(name: 'privacyControls')
+  final PrivacyControlDto privacyControl;
+  @override
   @JsonKey(name: 'selectedOrderType', defaultValue: '')
   final String selectedOrderType;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, selectedOrderType: $selectedOrderType)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl, selectedOrderType: $selectedOrderType)';
   }
 
   @override
@@ -872,6 +899,8 @@ class _$UserDtoImpl extends _UserDto {
                 other.isResetUserPassword == isResetUserPassword) &&
             (identical(other.isPPATriggerMaintained, isPPATriggerMaintained) ||
                 other.isPPATriggerMaintained == isPPATriggerMaintained) &&
+            (identical(other.privacyControl, privacyControl) ||
+                other.privacyControl == privacyControl) &&
             (identical(other.selectedOrderType, selectedOrderType) ||
                 other.selectedOrderType == selectedOrderType));
   }
@@ -909,6 +938,7 @@ class _$UserDtoImpl extends _UserDto {
         isFirstLogin,
         isResetUserPassword,
         isPPATriggerMaintained,
+        privacyControl,
         selectedOrderType
       ]);
 
@@ -994,6 +1024,7 @@ abstract class _UserDto extends UserDto {
       required final bool isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
       required final bool isPPATriggerMaintained,
+      @JsonKey(name: 'privacyControls') final PrivacyControlDto privacyControl,
       @JsonKey(name: 'selectedOrderType', defaultValue: '')
       required final String selectedOrderType}) = _$UserDtoImpl;
   const _UserDto._() : super._();
@@ -1098,6 +1129,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
   bool get isPPATriggerMaintained;
+  @override
+  @JsonKey(name: 'privacyControls')
+  PrivacyControlDto get privacyControl;
   @override
   @JsonKey(name: 'selectedOrderType', defaultValue: '')
   String get selectedOrderType;

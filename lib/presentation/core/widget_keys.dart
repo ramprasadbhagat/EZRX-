@@ -205,6 +205,7 @@ class WidgetKeys {
   static const Key orderTile = Key('orderTile');
   static const Key securityTile = Key('securityTile');
   static const Key notificationTile = Key('notificationTile');
+  static const Key privacyConsentTile = Key('privacyConsentTile');
   static const Key contactUsTile = Key('contactUsTile');
   static const Key acceptableUsePolicy = Key('acceptableUsePolicy');
   static const Key userGuideTile = Key('userGuideTile');
@@ -1644,6 +1645,21 @@ class WidgetKeys {
   static Key orderConfirmationTile = const Key('orderConfirmationTile');
   static Key paymentConfirmationTile = const Key('paymentConfirmationTile');
   static Key returnConfirmationTile = const Key('returnConfirmationTile');
+  //============================================================
+  // Privacy Consent Page
+  //============================================================
+  static Key privacyConsentPage = const Key('privacyConsentPage');
+  static Key privacyConsentSuccessSnackBar =
+      const Key('privacyConsentSuccessSnackBar');
+  static Key privacyConsentClearButton = const Key('privacyConsentClearButton');
+  static Key privacyConsentSubmitButton =
+      const Key('privacyConsentSubmitButton');
+  static Key autoTile = const Key('orderConfirmationTile');
+  static Key automatedPersonalisationTile =
+      const Key('automatedPersonalisationTile');
+  static Key viaEmailTile = const Key('viaEmailTile');
+  static Key viaPushNotificationTile = const Key('viaPushNotificationTile');
+  static Key viaSMSTile = const Key('viaSMSTile');
   //============================================================
   // About Us Page
   //============================================================

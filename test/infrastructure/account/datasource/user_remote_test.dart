@@ -88,6 +88,7 @@ void main() {
         );
         final resTest = UserDto.fromJson(res['data']['user']).toDomain();
         expect(result.fullName, resTest.fullName);
+        expect(result.privacyControl, resTest.privacyControl);
       },
     );
     test(
@@ -370,7 +371,7 @@ void main() {
     );
   });
 
-  group('Upadte user selected order type -', () {
+  group('Update user selected order type -', () {
     test(
       'success',
       () async {
@@ -442,6 +443,119 @@ void main() {
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(DocumentType(''));
+        });
+      },
+    );
+  });
+
+  group('Update privacy control -', () {
+    test(
+      'success',
+      () async {
+        final response = json.decode(
+          await rootBundle
+              .loadString('assets/json/updatePrivacyControlResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(200, response),
+          data: jsonEncode({
+            'query': remoteDataSource.userQueryMutation.updatePrivacyControl(),
+            'variables': {
+              'input': {
+                'privacyControls': {
+                  'automatedPersonalisation': true,
+                  'viaEmails': true,
+                  'viaPushNotification': true,
+                  'viaSMS': true,
+                },
+              },
+            },
+          }),
+        );
+        final result = await remoteDataSource.updatePrivacyControl(
+          automatedPersonalisation: true,
+          viaEmails: true,
+          viaPushNotification: true,
+          viaSMS: true,
+        );
+        expect(result, true);
+      },
+    );
+
+    test(
+      'server exception',
+      () async {
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(
+            200,
+            {
+              'data': null,
+              'errors': [
+                {'message': 'fake-error'},
+              ],
+            },
+          ),
+          data: jsonEncode({
+            'query': remoteDataSource.userQueryMutation.updatePrivacyControl(),
+            'variables': {
+              'input': {
+                'privacyControls': {
+                  'automatedPersonalisation': true,
+                  'viaEmails': true,
+                  'viaPushNotification': true,
+                  'viaSMS': true,
+                },
+              },
+            },
+          }),
+        );
+        await remoteDataSource
+            .updatePrivacyControl(
+          automatedPersonalisation: true,
+          viaEmails: true,
+          viaPushNotification: true,
+          viaSMS: true,
+        )
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(true);
+        });
+      },
+    );
+
+    test(
+      'Status code != 200',
+      () async {
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(201, {'data': null}),
+          data: jsonEncode({
+            'query': remoteDataSource.userQueryMutation.updatePrivacyControl(),
+            'variables': {
+              'input': {
+                'privacyControls': {
+                  'automatedPersonalisation': true,
+                  'viaEmails': true,
+                  'viaPushNotification': true,
+                  'viaSMS': true,
+                },
+              },
+            },
+          }),
+        );
+        await remoteDataSource
+            .updatePrivacyControl(
+          automatedPersonalisation: true,
+          viaEmails: true,
+          viaPushNotification: true,
+          viaSMS: true,
+        )
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(true);
         });
       },
     );

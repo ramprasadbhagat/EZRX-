@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/entities/privacy_control.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -135,5 +136,14 @@ final fakeUserWithLanguageCode = User.empty().copyWith(
     description: _fakeRoleDesc,
     id: _fakeRoleId,
     type: RoleType(_roleTypeRootAdmin),
+  ),
+);
+
+final fakeUserWithPrivacyControl = User.empty().copyWith(
+  privacyControl: PrivacyControl.empty().copyWith(
+    automatedPersonalisation: true,
+    viaEmails: false,
+    viaPushNotification: false,
+    viaSMS: true,
   ),
 );

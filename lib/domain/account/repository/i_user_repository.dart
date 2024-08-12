@@ -17,6 +17,14 @@ abstract class IUserRepository {
   Future<Either<ApiFailure, UpdateLanguageResponse>> updateLanguage({
     required Language language,
   });
+
+  Future<Either<ApiFailure, bool>> updatePrivacyControl({
+    required bool automatedPersonalisation,
+    required bool viaEmails,
+    required bool viaPushNotification,
+    required bool viaSMS,
+  });
+
   Future<Either<ApiFailure, DocumentType>> updateSelectedOrderType(
     DocumentType value,
   );

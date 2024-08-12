@@ -42,6 +42,7 @@ mixin _$User {
   bool get isFirstLogin => throw _privateConstructorUsedError;
   bool get isResetUserPassword => throw _privateConstructorUsedError;
   bool get isPPATriggerMaintained => throw _privateConstructorUsedError;
+  PrivacyControl get privacyControl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -77,12 +78,14 @@ abstract class $UserCopyWith<$Res> {
       MarketPlaceTnCAcceptance acceptMPTC,
       bool isFirstLogin,
       bool isResetUserPassword,
-      bool isPPATriggerMaintained});
+      bool isPPATriggerMaintained,
+      PrivacyControl privacyControl});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
   $AccessRightCopyWith<$Res> get accessRight;
   $SettingsCopyWith<$Res> get settings;
+  $PrivacyControlCopyWith<$Res> get privacyControl;
 }
 
 /// @nodoc
@@ -123,6 +126,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
+    Object? privacyControl = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -225,6 +229,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.isPPATriggerMaintained
           : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
               as bool,
+      privacyControl: null == privacyControl
+          ? _value.privacyControl
+          : privacyControl // ignore: cast_nullable_to_non_nullable
+              as PrivacyControl,
     ) as $Val);
   }
 
@@ -257,6 +265,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $SettingsCopyWith<$Res> get settings {
     return $SettingsCopyWith<$Res>(_value.settings, (value) {
       return _then(_value.copyWith(settings: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrivacyControlCopyWith<$Res> get privacyControl {
+    return $PrivacyControlCopyWith<$Res>(_value.privacyControl, (value) {
+      return _then(_value.copyWith(privacyControl: value) as $Val);
     });
   }
 }
@@ -293,7 +309,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       MarketPlaceTnCAcceptance acceptMPTC,
       bool isFirstLogin,
       bool isResetUserPassword,
-      bool isPPATriggerMaintained});
+      bool isPPATriggerMaintained,
+      PrivacyControl privacyControl});
 
   @override
   $FullNameCopyWith<$Res> get fullName;
@@ -303,6 +320,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $AccessRightCopyWith<$Res> get accessRight;
   @override
   $SettingsCopyWith<$Res> get settings;
+  @override
+  $PrivacyControlCopyWith<$Res> get privacyControl;
 }
 
 /// @nodoc
@@ -340,6 +359,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
+    Object? privacyControl = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -442,6 +462,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.isPPATriggerMaintained
           : isPPATriggerMaintained // ignore: cast_nullable_to_non_nullable
               as bool,
+      privacyControl: null == privacyControl
+          ? _value.privacyControl
+          : privacyControl // ignore: cast_nullable_to_non_nullable
+              as PrivacyControl,
     ));
   }
 }
@@ -474,7 +498,8 @@ class _$UserImpl extends _User {
       required this.acceptMPTC,
       required this.isFirstLogin,
       required this.isResetUserPassword,
-      required this.isPPATriggerMaintained})
+      required this.isPPATriggerMaintained,
+      required this.privacyControl})
       : _userSalesOrganisations = userSalesOrganisations,
         _salesOrganisations = salesOrganisations,
         _supportedLanguages = supportedLanguages,
@@ -551,10 +576,12 @@ class _$UserImpl extends _User {
   final bool isResetUserPassword;
   @override
   final bool isPPATriggerMaintained;
+  @override
+  final PrivacyControl privacyControl;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, selectedOrderType: $selectedOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, selectedOrderType: $selectedOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl)';
   }
 
   @override
@@ -608,7 +635,9 @@ class _$UserImpl extends _User {
             (identical(other.isResetUserPassword, isResetUserPassword) ||
                 other.isResetUserPassword == isResetUserPassword) &&
             (identical(other.isPPATriggerMaintained, isPPATriggerMaintained) ||
-                other.isPPATriggerMaintained == isPPATriggerMaintained));
+                other.isPPATriggerMaintained == isPPATriggerMaintained) &&
+            (identical(other.privacyControl, privacyControl) ||
+                other.privacyControl == privacyControl));
   }
 
   @override
@@ -638,7 +667,8 @@ class _$UserImpl extends _User {
         acceptMPTC,
         isFirstLogin,
         isResetUserPassword,
-        isPPATriggerMaintained
+        isPPATriggerMaintained,
+        privacyControl
       ]);
 
   @JsonKey(ignore: true)
@@ -674,7 +704,8 @@ abstract class _User extends User {
       required final MarketPlaceTnCAcceptance acceptMPTC,
       required final bool isFirstLogin,
       required final bool isResetUserPassword,
-      required final bool isPPATriggerMaintained}) = _$UserImpl;
+      required final bool isPPATriggerMaintained,
+      required final PrivacyControl privacyControl}) = _$UserImpl;
   const _User._() : super._();
 
   @override
@@ -727,6 +758,8 @@ abstract class _User extends User {
   bool get isResetUserPassword;
   @override
   bool get isPPATriggerMaintained;
+  @override
+  PrivacyControl get privacyControl;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

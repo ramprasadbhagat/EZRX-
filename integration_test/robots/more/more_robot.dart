@@ -89,6 +89,13 @@ class MoreRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> tapPrivacyConsentTitle() async {
+    final privacyConsentTile = find.byKey(WidgetKeys.privacyConsentTile);
+    expect(privacyConsentTile, findsOneWidget);
+    await tester.tap(privacyConsentTile);
+    await tester.pumpAndSettle();
+  }
+
   void verifyMoreScreenVisible() {
     expect(find.byKey(WidgetKeys.moreScreen), findsOneWidget);
   }

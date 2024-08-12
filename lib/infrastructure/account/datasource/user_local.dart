@@ -43,6 +43,16 @@ class UserLocalDataSource {
     return UserDto.fromJson(data['data']['updateUser']['user']).toDomain();
   }
 
+  Future<bool> updatePrivacyControl() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/updatePrivacyControlResponse.json',
+      ),
+    );
+
+    return data == 'Successfully updated the privacy controls';
+  }
+
   Future<DocumentType> updateSelectedOrderType() async {
     final data = json.decode(
       await rootBundle.loadString(

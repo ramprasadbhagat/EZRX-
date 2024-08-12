@@ -138,6 +138,42 @@ class UserRemoteDataSource {
     );
   }
 
+  Future<bool> updatePrivacyControl({
+    required bool automatedPersonalisation,
+    required bool viaEmails,
+    required bool viaPushNotification,
+    required bool viaSMS,
+  }) async {
+    return await dataSourceExceptionHandler.handle(
+      () async {
+        final data = {
+          'input': {
+            'privacyControls': {
+              'automatedPersonalisation': automatedPersonalisation,
+              'viaEmails': viaEmails,
+              'viaPushNotification': viaPushNotification,
+              'viaSMS': viaSMS,
+            },
+          },
+        };
+
+        final res = await httpService.request(
+          method: 'POST',
+          url: '${config.urlConstants}license',
+          data: jsonEncode(
+            {
+              'query': userQueryMutation.updatePrivacyControl(),
+              'variables': data,
+            },
+          ),
+        );
+        dataSourceExceptionHandler.handleExceptionChecker(res: res);
+
+        return true;
+      },
+    );
+  }
+
   Future<DocumentType> updateSelectedOrderType({required String value}) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(

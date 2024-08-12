@@ -63,6 +63,10 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
       isFirstLogin: json['isFirstLogin'] as bool? ?? false,
       isResetUserPassword: json['isResetUserPassword'] as bool? ?? false,
       isPPATriggerMaintained: json['isPPATriggerMaintained'] as bool? ?? false,
+      privacyControl: json['privacyControls'] == null
+          ? PrivacyControlDto.emptyPrivacyControlDto
+          : PrivacyControlDto.fromJson(
+              json['privacyControls'] as Map<String, dynamic>),
       selectedOrderType: json['selectedOrderType'] as String? ?? '',
     );
 
@@ -99,5 +103,6 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
       'isFirstLogin': instance.isFirstLogin,
       'isResetUserPassword': instance.isResetUserPassword,
       'isPPATriggerMaintained': instance.isPPATriggerMaintained,
+      'privacyControls': instance.privacyControl.toJson(),
       'selectedOrderType': instance.selectedOrderType,
     };

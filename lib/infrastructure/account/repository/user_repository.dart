@@ -213,6 +213,44 @@ class UserRepository implements IUserRepository {
   }
 
   @override
+  Future<Either<ApiFailure, bool>> updatePrivacyControl({
+    required bool automatedPersonalisation,
+    required bool viaEmails,
+    required bool viaPushNotification,
+    required bool viaSMS,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final result = await localDataSource.updatePrivacyControl();
+
+        return Right(result);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final result = await remoteDataSource.updatePrivacyControl(
+        automatedPersonalisation: automatedPersonalisation,
+        viaEmails: viaEmails,
+        viaPushNotification: viaPushNotification,
+        viaSMS: viaSMS,
+      );
+
+      await clevertapService.updateUserProfile(
+        updatedProfile: {
+          'MSG-email': viaEmails,
+          'MSG-push': viaPushNotification,
+          'MSG-sms': viaSMS,
+        },
+      );
+
+      return Right(result);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
   Future<Either<ApiFailure, DocumentType>> updateSelectedOrderType(
     DocumentType value,
   ) async {

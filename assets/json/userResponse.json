@@ -92,7 +92,10 @@
          "privacyControls": {
             "enableBrowserCookies": true,
             "automatedPersonalisation": true,
-            "directMarketing": true
+            "directMarketing": true,
+            "viaEmails": true,
+            "viaPushNotification": true,
+            "viaSMS": true
          },
          "acceptMPTC": 0,
          "isPPATriggerMaintained": false,

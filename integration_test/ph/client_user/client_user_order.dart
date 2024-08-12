@@ -21,6 +21,7 @@ import '../../robots/login_robot.dart';
 import '../../robots/more/contact_us_robot.dart';
 import '../../robots/more/more_robot.dart';
 import '../../robots/more/national_privacy_commission_robot.dart';
+import '../../robots/more/privacy_consent_robot.dart';
 import '../../robots/more/profile_robot.dart';
 import '../../robots/more/security_robot.dart';
 import '../../robots/notification/notification_robot.dart';
@@ -63,6 +64,7 @@ void main() {
   late SecurityRobot securityRobot;
   late NotificationRobot notificationRobot;
   late MoreRobot moreRobot;
+  late PrivacyConsentRobot privacyConsentRobot;
 
   late AnnouncementArticleRootRobot announcementArticleRootRobot;
   late ArticleRobot articleRobot;
@@ -108,6 +110,7 @@ void main() {
     securityRobot = SecurityRobot(tester);
     moreRobot = MoreRobot(tester);
     notificationRobot = NotificationRobot(tester);
+    privacyConsentRobot = PrivacyConsentRobot(tester);
 
     announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
     // announcementDetailRobot = AnnouncementDetailRobot(tester);
@@ -3883,6 +3886,22 @@ void main() {
       nationalPrivacyCommissionRobot.verifyCloseButton();
       await nationalPrivacyCommissionRobot.tapCloseButton();
       moreRobot.verifyMoreScreenVisible();
+    });
+  });
+
+  group('Privacy Consent -', () {
+
+    testWidgets('EZRX-T2827 | Verify Privacy Consent Page', (tester) async {
+      //navigate to page
+      await pumpAppWithHomeScreen(tester);
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapPrivacyConsentTitle();
+
+      //verify
+      privacyConsentRobot.verifyPageContentVisible();
+
+      await privacyConsentRobot.verifyCheckBoxesTap();
+      await privacyConsentRobot.tapClearChangeButton();
     });
   });
 

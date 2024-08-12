@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/national_privacy_commission/national_privacy_commission_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
+import 'package:ezrxmobile/application/account/privacy_consent/privacy_consent_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -2894,6 +2895,12 @@ void setupLocator() {
   locator.registerFactory(
     () => NotificationSettingsBloc(
       notificationSettingsRepository: locator<NotificationSettingsRepository>(),
+    ),
+  );
+
+  locator.registerFactory(
+        () => PrivacyConsentBloc(
+      userRepository: locator<UserRepository>(),
     ),
   );
 
