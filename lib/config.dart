@@ -238,7 +238,7 @@ class Config {
     switch (appFlavor) {
       case Flavor.dev:
       case Flavor.mock:
-        return '54d0f06f471767440cbe387ea9b35eb6';
+        return 'd54077d895c2f2ab9b78f6a70d5f0e6f';
       case Flavor.uat:
         return '3d6a7eee1377f95ad8b24f204b112f24';
       case Flavor.prod:
