@@ -1,7 +1,13 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:flutter/services.dart';
 // import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../core/common.dart';
 // import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
@@ -18,6 +24,10 @@ import '../../robots/payments/account_summary/account_invoice/account_invoice_ro
 import '../../robots/payments/account_summary/account_summary_root_robot.dart';
 import '../../robots/payments/account_summary/account_summary_tab/account_summary_tab_filter_robot.dart';
 import '../../robots/payments/account_summary/account_summary_tab/account_summary_tab_robot.dart';
+import '../../robots/payments/claim/claim_management_filter_robot.dart';
+import '../../robots/payments/claim/claim_management_robot.dart';
+import '../../robots/payments/claim/claim_submission_robot.dart';
+import '../../robots/payments/claim/claim_submitted_robot.dart';
 import '../../robots/payments/new_payment/new_payment_robot.dart';
 import '../../robots/payments/new_payment/new_payment_step1_robot.dart';
 import '../../robots/payments/new_payment/new_payment_step2_robot.dart';
@@ -54,6 +64,10 @@ void main() {
   // late NewPaymentStep3Robot newPaymentStep3Robot;
   late CustomerSearchRobot customerSearchRobot;
   // late ViewByOrdersDetailRobot viewByOrdersDetailRobot;
+  late ClaimManagementRobot claimManagementRobot;
+  late ClaimManagementFilterRobot claimManagementFilterRobot;
+  late ClaimSubmissionRobot claimSubmissionRobot;
+  late ClaimSubmittedRobot claimSubmittedRobot;
 
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
@@ -79,6 +93,10 @@ void main() {
     accountSummaryTabRobot = AccountSummaryTabRobot(tester);
     accountSummaryTabFilterRobot = AccountSummaryTabFilterRobot(tester);
     customerSearchRobot = CustomerSearchRobot(tester);
+    claimManagementRobot = ClaimManagementRobot(tester);
+    claimManagementFilterRobot = ClaimManagementFilterRobot(tester);
+    claimSubmissionRobot = ClaimSubmissionRobot(tester);
+    claimSubmittedRobot = ClaimSubmittedRobot(tester);
   }
 
   //Initialize Variable
@@ -1043,7 +1061,6 @@ void main() {
       //verify clear status credit filter list
       accountCreditsRobot.verifyCreditsItemListWithStatus(
         creditStatus,
-        isVisible: true,
       );
       accountCreditsRobot.verifyFilterAppliedCount(1);
 
@@ -2331,6 +2348,230 @@ void main() {
     // });
   });
 
+  group('Claim - ', () {
+    const invalidSearchKey = '123456789';
+    const principalCode = '100480';
+    final claimType = ClaimType(7);
+
+    void mockFilePicker({int numberOfFile = 1, int? fileSize}) {
+      const channel = MethodChannel('miguelruivo.flutter.plugins.filepicker');
+      // channel
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+        final data = await rootBundle.load('assets/images/ezrxlogo.png');
+        final bytes = data.buffer.asUint8List();
+        final tempDir = await getTemporaryDirectory();
+        final file = await File(
+          '${tempDir.path}/tmp.png',
+        ).writeAsBytes(bytes);
+
+        return List.generate(
+          numberOfFile,
+          (index) => {
+            'name': 'tmp.png',
+            'path': file.path,
+            'bytes': bytes,
+            'size': fileSize ?? bytes.lengthInBytes,
+          },
+        );
+      });
+    }
+
+    Future<void> goToClaimManagementPage(WidgetTester tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapClaimMenu();
+      claimManagementRobot.verifyPage();
+    }
+
+    Future<void> goToClaimSubmissionPage(WidgetTester tester) async {
+      //init app
+      await goToClaimManagementPage(tester);
+      await claimManagementRobot.tapNewClaimButton();
+      claimSubmissionRobot.verifyPage();
+    }
+
+    Future<void> goToClaimSubmittedPage(WidgetTester tester) async {
+      //init app
+      await goToClaimSubmissionPage(tester);
+      await claimSubmissionRobot.verifyPrincipalField();
+      await claimSubmissionRobot.enterFirstPrincipal();
+      await claimSubmissionRobot.verifyClaimTypeField();
+      await claimSubmissionRobot.enterClaimType(claimType.title);
+      await claimSubmissionRobot.verifyAmountField();
+      await claimSubmissionRobot.enterAmountField('10');
+      await claimSubmissionRobot.verifyDetailField();
+      await claimSubmissionRobot.enterDetailField('fake-data');
+      mockFilePicker(numberOfFile: 3);
+      await claimSubmissionRobot.tapUploadButton();
+      await claimSubmissionRobot.tapOpenGallery();
+
+      await claimSubmissionRobot.tapSubmitClaimButton();
+      claimSubmittedRobot.verifyPage();
+    }
+
+    group('Claim Management - ', () {
+      testWidgets('EZRX-T2367 | Verify Claim Management Page', (tester) async {
+        await goToClaimManagementPage(tester);
+        claimManagementRobot.verifySearchBar();
+        claimManagementRobot.verifyFilterButton();
+        claimManagementRobot.verifyItems();
+      });
+
+      testWidgets('EZRX-T2368 | Verify New Claim Feature', (tester) async {
+        await goToClaimManagementPage(tester);
+
+        //verify
+        claimManagementRobot.verifyNewClaimButton();
+        await claimManagementRobot.tapNewClaimButton();
+        claimSubmissionRobot.verifyPage();
+      });
+
+      testWidgets('EZRX-T2369 | Verify Claim filter tune icon', (tester) async {
+        await goToClaimManagementPage(tester);
+
+        //verify
+        await claimManagementRobot.tapFilterButton();
+        claimManagementFilterRobot.verifyDefaultFilterApplied();
+        await claimManagementFilterRobot
+            .tapToChangeStatusCheckbox(claimType.data);
+
+        await claimManagementFilterRobot.tapApplyButton();
+        claimManagementRobot.verifyFilterApplied(1);
+        claimManagementRobot.verifyClaimListWithType(claimType.title);
+
+        await claimManagementRobot.tapFilterButton();
+        claimManagementFilterRobot.verifyStatusFilter(claimType.data, true);
+        await claimManagementFilterRobot.tapResetButton();
+        claimManagementRobot.verifyFilterApplied(0);
+        await claimManagementRobot.tapFilterButton();
+        claimManagementFilterRobot.verifyDefaultFilterApplied();
+        await accountInvoiceFilterRobot.tapCloseIcon();
+      });
+
+      testWidgets('EZRX-T2370 | Verify claim pull to refresh', (tester) async {
+        await goToClaimManagementPage(tester);
+
+        //verify
+        claimManagementRobot.verifyItems();
+        await claimManagementRobot.searchWithKeyboardAction(invalidSearchKey);
+        claimManagementRobot.verifySearchBarText(invalidSearchKey);
+        claimManagementRobot.verifyNoRecordFound();
+        await claimManagementRobot.pullToRefresh();
+        claimManagementRobot.verifyItems();
+      });
+
+      testWidgets('EZRX-T2371 | Verify claim search by keyword',
+          (tester) async {
+        await goToClaimManagementPage(tester);
+
+        //verify
+
+        await claimManagementRobot.searchWithSearchIcon(principalCode);
+        await claimManagementRobot.waitAutoSearchDuration();
+        claimManagementRobot.verifyItemsWithSearchKey(principalCode);
+        await claimManagementRobot.tapClearSearch();
+
+        await claimManagementRobot.searchWithKeyboardAction(principalCode);
+        claimManagementRobot.verifyItemsWithSearchKey(principalCode);
+        await claimManagementRobot.tapClearSearch();
+
+        await claimManagementRobot.searchWithKeyboardAction(invalidSearchKey);
+        claimManagementRobot.verifyNoRecordFound();
+      });
+    });
+
+    group('Claim Submission - ', () {
+      testWidgets(
+          'EZRX-T2372 | Verify Claim Submission Fill All Fields And Submit',
+          (tester) async {
+        const numberOfRequiredFile = 3;
+
+        await goToClaimSubmissionPage(tester);
+        claimSubmissionRobot.verifyPage();
+        claimSubmissionRobot.verifySubmitButton();
+        await claimSubmissionRobot.tapSubmitClaimButton();
+        claimSubmissionRobot.verifyPage();
+        await claimSubmissionRobot.verifyPrincipalField();
+        await claimSubmissionRobot.enterFirstPrincipal();
+        await claimSubmissionRobot.tapSubmitClaimButton();
+        claimSubmissionRobot.verifyPage();
+        await claimSubmissionRobot.verifyClaimTypeField();
+        await claimSubmissionRobot.enterClaimType(claimType.title);
+        await claimSubmissionRobot.tapSubmitClaimButton();
+        claimSubmissionRobot.verifyPage();
+        await claimSubmissionRobot.verifyAmountField();
+        await claimSubmissionRobot.enterAmountField('10');
+        await claimSubmissionRobot.tapSubmitClaimButton();
+        claimSubmissionRobot.verifyPage();
+        await claimSubmissionRobot.verifyDetailField();
+        await claimSubmissionRobot.enterDetailField('fake-data');
+        await claimSubmissionRobot.tapSubmitClaimButton();
+        claimSubmissionRobot.verifyPage();
+        mockFilePicker(
+          numberOfFile: 1,
+          fileSize: (20 * pow(1024, 2) + 100).round(),
+        );
+        await claimSubmissionRobot.tapUploadButton();
+        claimSubmissionRobot.verifyUploadBottomSheet();
+        await claimSubmissionRobot.tapOpenGallery();
+        claimSubmissionRobot.verifyUploadBottomSheet(isVisible: false);
+
+        await claimSubmissionRobot.verifyUploadItems(numberOfFile: 1);
+        claimSubmissionRobot.verifyUploadExceedMaximumSizeMessage();
+        await claimSubmissionRobot.tapSubmitClaimButton();
+        claimSubmissionRobot.verifyPage();
+
+        await claimSubmissionRobot.tapDocumentDeleteButton(0);
+        claimSubmissionRobot.verifyUploadExceedMaximumSizeMessage(
+          isVisible: false,
+        );
+        await claimSubmissionRobot.verifyUploadItems(numberOfFile: 0);
+        mockFilePicker(numberOfFile: numberOfRequiredFile);
+        await claimSubmissionRobot.tapUploadButton();
+        await claimSubmissionRobot.tapOpenGallery();
+        await claimSubmissionRobot.verifyUploadItems(
+          numberOfFile: numberOfRequiredFile,
+        );
+
+        await claimSubmissionRobot.tapSubmitClaimButton();
+        claimSubmittedRobot.verifyPage();
+      });
+    });
+
+    group('Claim Submitted - ', () {
+      testWidgets('EZRX-T2373 | Verify Claim Submitted Tap Close Button',
+          (tester) async {
+        await goToClaimSubmittedPage(tester);
+        claimSubmittedRobot.verifyThankYouText(username);
+        claimSubmittedRobot.verifyCloseButton();
+        await claimSubmittedRobot.tapCloseButton();
+        claimManagementRobot.verifyPage();
+      });
+      testWidgets('EZRX-T2374 | Verify Claim Submitted Tap View List Button',
+          (tester) async {
+        await goToClaimSubmittedPage(tester);
+
+        claimSubmittedRobot.verifyViewClaimListButton();
+        await claimSubmittedRobot.tapViewClaimListButton();
+        claimManagementRobot.verifyPage();
+      });
+      testWidgets(
+        'EZRX-T2375 | Verify Claim Submitted Tap Create New Claim Button',
+        (tester) async {
+          await goToClaimSubmittedPage(tester);
+
+          claimSubmittedRobot.verifyCreateNewClaimButton();
+          await claimSubmittedRobot.tapCreateClaimButton();
+          claimSubmissionRobot.verifyPage();
+          await claimSubmissionRobot.tapCloseButton();
+          claimManagementRobot.verifyPage();
+        },
+      );
+    });
+  });
   // tearDown(() async {
   //   locator<ZephyrService>().setNameAndStatus();
   //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);

@@ -10,6 +10,7 @@ class PaymentHomeRobot extends CommonRobot {
 
   final accountSummaryMenu = find.byKey(WidgetKeys.accountSummaryMenu);
   final paymentSummaryMenu = find.byKey(WidgetKeys.paymentSummaryMenu);
+  final claimMenu = find.byKey(WidgetKeys.claimsMenu);
   final statementOfAccountsMenu =
       find.byKey(WidgetKeys.statementOfAccountsMenu);
   final totalOutstanding = find.byKey(WidgetKeys.totalOutstanding);
@@ -37,6 +38,11 @@ class PaymentHomeRobot extends CommonRobot {
 
   Future<void> tapPaymentSummaryMenu() async {
     await tester.tap(paymentSummaryMenu);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapClaimMenu() async {
+    await tester.tap(claimMenu);
     await tester.pumpAndSettle();
   }
 
