@@ -228,5 +228,26 @@ void main() {
     test('isFilterEmpty test', () {
       expect(ClaimManagementState.initial().isFilterEmpty, true);
     });
+
+    test('get filterItems test', () {
+      final state = ClaimManagementState.initial().copyWith(
+        items: [
+          ClaimItem.empty().copyWith(
+            principalName: 'fake-principal-name',
+            claimType: ClaimType(1),
+          ),
+        ],
+        appliedFilter: ClaimManagementFilter.empty().copyWith(
+          claimTypes: [ClaimType(1)],
+          searchKey: SearchKey.search('fake-principal-name'),
+        ),
+      );
+      expect(state.filterItems, [
+        ClaimItem.empty().copyWith(
+          principalName: 'fake-principal-name',
+          claimType: ClaimType(1),
+        ),
+      ]);
+    });
   });
 }
