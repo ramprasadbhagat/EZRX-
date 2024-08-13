@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -113,47 +112,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               isLoading: false,
               user: state.user.copyWith(acceptMPTC: e.value),
               failureOrSuccessOption: none(),
-            ),
-          ),
-        );
-      },
-      updateNotificationSettings: (e) async {
-        final user = state.user.copyWith(
-          settings: state.user.settings.copyWith(
-            languagePreference: e.languagePreference,
-            emailNotifications: e.emailNotifications,
-          ),
-        );
-
-        final failureOrSuccess =
-            await userRepository.updateNotificationSettings(user);
-        if (isClosed) return;
-        failureOrSuccess.fold(
-          (failure) => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (user) => emit(
-            state.copyWith(
-              user: state.user.copyWith(
-                settings: state.user.settings.copyWith(
-                  emailNotifications: user.settings.emailNotifications,
-                  languagePreference: user.settings.languagePreference,
-                ),
-              ),
-              failureOrSuccessOption: none(),
-            ),
-          ),
-        );
-      },
-      updatePaymentNotificationSettings: (e) {
-        emit(
-          state.copyWith(
-            user: state.user.copyWith(
-              settings: state.user.settings.copyWith(
-                paymentNotification: e.paymentNotification,
-              ),
             ),
           ),
         );

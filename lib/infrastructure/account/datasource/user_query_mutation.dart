@@ -128,28 +128,6 @@ class UserQueryMutation {
   }
   /* Query for updation of the users's notification preference accordingly for their language preference  */
 
-  String updateNotification() {
-    return '''
-      mutation updateUserMutation(\$input: UpdateUserInput!) {
-        updateUser(input: \$input) {
-          user {
-              username
-              email
-              provider
-              role{
-                  id
-              }
-              customerCode
-              shipToAddr
-              mobileNumber
-              emailNotifications
-              languagePreference
-          }
-        }
-      }
-    ''';
-  }
-
   String updatePrivacyPolicy() {
     return '''
       mutation updateAcceptanceStatus(\$isAcceptTC: Boolean!) {

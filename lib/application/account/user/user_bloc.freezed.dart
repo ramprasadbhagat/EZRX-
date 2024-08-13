@@ -23,11 +23,6 @@ mixin _$UserEvent {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -41,10 +36,6 @@ mixin _$UserEvent {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -58,10 +49,6 @@ mixin _$UserEvent {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -76,10 +63,6 @@ mixin _$UserEvent {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -93,10 +76,6 @@ mixin _$UserEvent {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -110,10 +89,6 @@ mixin _$UserEvent {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -183,11 +158,6 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -204,10 +174,6 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -224,10 +190,6 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -248,10 +210,6 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -268,10 +226,6 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -288,10 +242,6 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -352,11 +302,6 @@ class _$FetchImpl implements _Fetch {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -373,10 +318,6 @@ class _$FetchImpl implements _Fetch {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -393,10 +334,6 @@ class _$FetchImpl implements _Fetch {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -417,10 +354,6 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -437,10 +370,6 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -457,10 +386,6 @@ class _$FetchImpl implements _Fetch {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -521,11 +446,6 @@ class _$AcceptTncImpl implements _AcceptTnc {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -542,10 +462,6 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -562,10 +478,6 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -586,10 +498,6 @@ class _$AcceptTncImpl implements _AcceptTnc {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -606,10 +514,6 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -626,10 +530,6 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -720,11 +620,6 @@ class _$SetMarketPlaceTncAcceptanceImpl
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -741,10 +636,6 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -761,10 +652,6 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -785,10 +672,6 @@ class _$SetMarketPlaceTncAcceptanceImpl
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -805,10 +688,6 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -825,10 +704,6 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -849,448 +724,6 @@ abstract class _SetMarketPlaceTncAcceptance implements UserEvent {
   MarketPlaceTnCAcceptance get value;
   @JsonKey(ignore: true)
   _$$SetMarketPlaceTncAcceptanceImplCopyWith<_$SetMarketPlaceTncAcceptanceImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdateNotificationSettingsImplCopyWith<$Res> {
-  factory _$$UpdateNotificationSettingsImplCopyWith(
-          _$UpdateNotificationSettingsImpl value,
-          $Res Function(_$UpdateNotificationSettingsImpl) then) =
-      __$$UpdateNotificationSettingsImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Language languagePreference, bool emailNotifications});
-}
-
-/// @nodoc
-class __$$UpdateNotificationSettingsImplCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$UpdateNotificationSettingsImpl>
-    implements _$$UpdateNotificationSettingsImplCopyWith<$Res> {
-  __$$UpdateNotificationSettingsImplCopyWithImpl(
-      _$UpdateNotificationSettingsImpl _value,
-      $Res Function(_$UpdateNotificationSettingsImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? languagePreference = null,
-    Object? emailNotifications = null,
-  }) {
-    return _then(_$UpdateNotificationSettingsImpl(
-      languagePreference: null == languagePreference
-          ? _value.languagePreference
-          : languagePreference // ignore: cast_nullable_to_non_nullable
-              as Language,
-      emailNotifications: null == emailNotifications
-          ? _value.emailNotifications
-          : emailNotifications // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
-  const _$UpdateNotificationSettingsImpl(
-      {required this.languagePreference, required this.emailNotifications});
-
-  @override
-  final Language languagePreference;
-  @override
-  final bool emailNotifications;
-
-  @override
-  String toString() {
-    return 'UserEvent.updateNotificationSettings(languagePreference: $languagePreference, emailNotifications: $emailNotifications)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateNotificationSettingsImpl &&
-            (identical(other.languagePreference, languagePreference) ||
-                other.languagePreference == languagePreference) &&
-            (identical(other.emailNotifications, emailNotifications) ||
-                other.emailNotifications == emailNotifications));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, languagePreference, emailNotifications);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateNotificationSettingsImplCopyWith<_$UpdateNotificationSettingsImpl>
-      get copyWith => __$$UpdateNotificationSettingsImplCopyWithImpl<
-          _$UpdateNotificationSettingsImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function() acceptTnc,
-    required TResult Function(MarketPlaceTnCAcceptance value)
-        setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
-    required TResult Function(Language language) updateLanguage,
-    required TResult Function(Language language) selectLanguage,
-    required TResult Function(DocumentType orderType) selectOrderType,
-    required TResult Function() fetchSalesRepInfo,
-  }) {
-    return updateNotificationSettings(languagePreference, emailNotifications);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? fetch,
-    TResult? Function()? acceptTnc,
-    TResult? Function(MarketPlaceTnCAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
-    TResult? Function(Language language)? updateLanguage,
-    TResult? Function(Language language)? selectLanguage,
-    TResult? Function(DocumentType orderType)? selectOrderType,
-    TResult? Function()? fetchSalesRepInfo,
-  }) {
-    return updateNotificationSettings?.call(
-        languagePreference, emailNotifications);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? acceptTnc,
-    TResult Function(MarketPlaceTnCAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
-    TResult Function(Language language)? updateLanguage,
-    TResult Function(Language language)? selectLanguage,
-    TResult Function(DocumentType orderType)? selectOrderType,
-    TResult Function()? fetchSalesRepInfo,
-    required TResult orElse(),
-  }) {
-    if (updateNotificationSettings != null) {
-      return updateNotificationSettings(languagePreference, emailNotifications);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AcceptTnc value) acceptTnc,
-    required TResult Function(_SetMarketPlaceTncAcceptance value)
-        setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
-    required TResult Function(_UpdateLanguage value) updateLanguage,
-    required TResult Function(_SelectLanguage value) selectLanguage,
-    required TResult Function(_SelectOrderType value) selectOrderType,
-    required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
-  }) {
-    return updateNotificationSettings(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AcceptTnc value)? acceptTnc,
-    TResult? Function(_SetMarketPlaceTncAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
-    TResult? Function(_UpdateLanguage value)? updateLanguage,
-    TResult? Function(_SelectLanguage value)? selectLanguage,
-    TResult? Function(_SelectOrderType value)? selectOrderType,
-    TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
-  }) {
-    return updateNotificationSettings?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AcceptTnc value)? acceptTnc,
-    TResult Function(_SetMarketPlaceTncAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
-    TResult Function(_UpdateLanguage value)? updateLanguage,
-    TResult Function(_SelectLanguage value)? selectLanguage,
-    TResult Function(_SelectOrderType value)? selectOrderType,
-    TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
-    required TResult orElse(),
-  }) {
-    if (updateNotificationSettings != null) {
-      return updateNotificationSettings(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateNotificationSettings implements UserEvent {
-  const factory _UpdateNotificationSettings(
-          {required final Language languagePreference,
-          required final bool emailNotifications}) =
-      _$UpdateNotificationSettingsImpl;
-
-  Language get languagePreference;
-  bool get emailNotifications;
-  @JsonKey(ignore: true)
-  _$$UpdateNotificationSettingsImplCopyWith<_$UpdateNotificationSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdatePaymentNotificationSettingsImplCopyWith<$Res> {
-  factory _$$UpdatePaymentNotificationSettingsImplCopyWith(
-          _$UpdatePaymentNotificationSettingsImpl value,
-          $Res Function(_$UpdatePaymentNotificationSettingsImpl) then) =
-      __$$UpdatePaymentNotificationSettingsImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({PaymentNotification paymentNotification});
-
-  $PaymentNotificationCopyWith<$Res> get paymentNotification;
-}
-
-/// @nodoc
-class __$$UpdatePaymentNotificationSettingsImplCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res,
-        _$UpdatePaymentNotificationSettingsImpl>
-    implements _$$UpdatePaymentNotificationSettingsImplCopyWith<$Res> {
-  __$$UpdatePaymentNotificationSettingsImplCopyWithImpl(
-      _$UpdatePaymentNotificationSettingsImpl _value,
-      $Res Function(_$UpdatePaymentNotificationSettingsImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? paymentNotification = null,
-  }) {
-    return _then(_$UpdatePaymentNotificationSettingsImpl(
-      paymentNotification: null == paymentNotification
-          ? _value.paymentNotification
-          : paymentNotification // ignore: cast_nullable_to_non_nullable
-              as PaymentNotification,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaymentNotificationCopyWith<$Res> get paymentNotification {
-    return $PaymentNotificationCopyWith<$Res>(_value.paymentNotification,
-        (value) {
-      return _then(_value.copyWith(paymentNotification: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$UpdatePaymentNotificationSettingsImpl
-    implements _UpdatePaymentNotificationSettings {
-  const _$UpdatePaymentNotificationSettingsImpl(
-      {required this.paymentNotification});
-
-  @override
-  final PaymentNotification paymentNotification;
-
-  @override
-  String toString() {
-    return 'UserEvent.updatePaymentNotificationSettings(paymentNotification: $paymentNotification)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdatePaymentNotificationSettingsImpl &&
-            (identical(other.paymentNotification, paymentNotification) ||
-                other.paymentNotification == paymentNotification));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, paymentNotification);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdatePaymentNotificationSettingsImplCopyWith<
-          _$UpdatePaymentNotificationSettingsImpl>
-      get copyWith => __$$UpdatePaymentNotificationSettingsImplCopyWithImpl<
-          _$UpdatePaymentNotificationSettingsImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function() acceptTnc,
-    required TResult Function(MarketPlaceTnCAcceptance value)
-        setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
-    required TResult Function(Language language) updateLanguage,
-    required TResult Function(Language language) selectLanguage,
-    required TResult Function(DocumentType orderType) selectOrderType,
-    required TResult Function() fetchSalesRepInfo,
-  }) {
-    return updatePaymentNotificationSettings(paymentNotification);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? fetch,
-    TResult? Function()? acceptTnc,
-    TResult? Function(MarketPlaceTnCAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
-    TResult? Function(Language language)? updateLanguage,
-    TResult? Function(Language language)? selectLanguage,
-    TResult? Function(DocumentType orderType)? selectOrderType,
-    TResult? Function()? fetchSalesRepInfo,
-  }) {
-    return updatePaymentNotificationSettings?.call(paymentNotification);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? acceptTnc,
-    TResult Function(MarketPlaceTnCAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
-    TResult Function(Language language)? updateLanguage,
-    TResult Function(Language language)? selectLanguage,
-    TResult Function(DocumentType orderType)? selectOrderType,
-    TResult Function()? fetchSalesRepInfo,
-    required TResult orElse(),
-  }) {
-    if (updatePaymentNotificationSettings != null) {
-      return updatePaymentNotificationSettings(paymentNotification);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AcceptTnc value) acceptTnc,
-    required TResult Function(_SetMarketPlaceTncAcceptance value)
-        setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
-    required TResult Function(_UpdateLanguage value) updateLanguage,
-    required TResult Function(_SelectLanguage value) selectLanguage,
-    required TResult Function(_SelectOrderType value) selectOrderType,
-    required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
-  }) {
-    return updatePaymentNotificationSettings(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AcceptTnc value)? acceptTnc,
-    TResult? Function(_SetMarketPlaceTncAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
-    TResult? Function(_UpdateLanguage value)? updateLanguage,
-    TResult? Function(_SelectLanguage value)? selectLanguage,
-    TResult? Function(_SelectOrderType value)? selectOrderType,
-    TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
-  }) {
-    return updatePaymentNotificationSettings?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AcceptTnc value)? acceptTnc,
-    TResult Function(_SetMarketPlaceTncAcceptance value)?
-        setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
-    TResult Function(_UpdateLanguage value)? updateLanguage,
-    TResult Function(_SelectLanguage value)? selectLanguage,
-    TResult Function(_SelectOrderType value)? selectOrderType,
-    TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
-    required TResult orElse(),
-  }) {
-    if (updatePaymentNotificationSettings != null) {
-      return updatePaymentNotificationSettings(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdatePaymentNotificationSettings implements UserEvent {
-  const factory _UpdatePaymentNotificationSettings(
-          {required final PaymentNotification paymentNotification}) =
-      _$UpdatePaymentNotificationSettingsImpl;
-
-  PaymentNotification get paymentNotification;
-  @JsonKey(ignore: true)
-  _$$UpdatePaymentNotificationSettingsImplCopyWith<
-          _$UpdatePaymentNotificationSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1365,11 +798,6 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -1386,10 +814,6 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -1406,10 +830,6 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -1430,10 +850,6 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -1450,10 +866,6 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -1470,10 +882,6 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -1567,11 +975,6 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -1588,10 +991,6 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -1608,10 +1007,6 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -1632,10 +1027,6 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -1652,10 +1043,6 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -1672,10 +1059,6 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -1769,11 +1152,6 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -1790,10 +1168,6 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -1810,10 +1184,6 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -1834,10 +1204,6 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -1854,10 +1220,6 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -1874,10 +1236,6 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
@@ -1944,11 +1302,6 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     required TResult Function() acceptTnc,
     required TResult Function(MarketPlaceTnCAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(
-            Language languagePreference, bool emailNotifications)
-        updateNotificationSettings,
-    required TResult Function(PaymentNotification paymentNotification)
-        updatePaymentNotificationSettings,
     required TResult Function(Language language) updateLanguage,
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
@@ -1965,10 +1318,6 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult? Function()? acceptTnc,
     TResult? Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult? Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult? Function(Language language)? updateLanguage,
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
@@ -1985,10 +1334,6 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult Function()? acceptTnc,
     TResult Function(MarketPlaceTnCAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(Language languagePreference, bool emailNotifications)?
-        updateNotificationSettings,
-    TResult Function(PaymentNotification paymentNotification)?
-        updatePaymentNotificationSettings,
     TResult Function(Language language)? updateLanguage,
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
@@ -2009,10 +1354,6 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     required TResult Function(_AcceptTnc value) acceptTnc,
     required TResult Function(_SetMarketPlaceTncAcceptance value)
         setMarketPlaceTncAcceptance,
-    required TResult Function(_UpdateNotificationSettings value)
-        updateNotificationSettings,
-    required TResult Function(_UpdatePaymentNotificationSettings value)
-        updatePaymentNotificationSettings,
     required TResult Function(_UpdateLanguage value) updateLanguage,
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
@@ -2029,10 +1370,6 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult? Function(_AcceptTnc value)? acceptTnc,
     TResult? Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult? Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult? Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult? Function(_UpdateLanguage value)? updateLanguage,
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
@@ -2049,10 +1386,6 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult Function(_AcceptTnc value)? acceptTnc,
     TResult Function(_SetMarketPlaceTncAcceptance value)?
         setMarketPlaceTncAcceptance,
-    TResult Function(_UpdateNotificationSettings value)?
-        updateNotificationSettings,
-    TResult Function(_UpdatePaymentNotificationSettings value)?
-        updatePaymentNotificationSettings,
     TResult Function(_UpdateLanguage value)? updateLanguage,
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,

@@ -13,7 +13,6 @@ abstract class IUserRepository {
   Future<Either<ApiFailure, Unit>> updateUserMarketPlaceTc(
     MarketPlaceTnCAcceptance value,
   );
-  Future<Either<ApiFailure, User>> updateNotificationSettings(User user);
   Future<Either<ApiFailure, UpdateLanguageResponse>> updateLanguage({
     required Language language,
   });

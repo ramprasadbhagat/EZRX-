@@ -236,49 +236,6 @@ void main() {
         );
       },
     );
-    test(
-      'update notification',
-      () async {
-        final res = json.decode(
-          await rootBundle.loadString(
-            'assets/json/updateUserNotificationAndLanguagePreferenceResponse.json',
-          ),
-        );
-        final data = {
-          'input': {
-            'where': {'id': 2601},
-            'data': {
-              'emailNotifications': false,
-              'languagePreference': '',
-            },
-          },
-        };
-
-        dioAdapter.onPost(
-          '/api/strapiEngineMutation',
-          (server) => server.reply(
-            200,
-            res,
-            delay: const Duration(seconds: 1),
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: jsonEncode({
-            'query': remoteDataSource.userQueryMutation.updateNotification(),
-            'variables': data,
-          }),
-        );
-
-        final result =
-            await remoteDataSource.updateUserNotificationAndLanguagePreference(
-          languagePreference: '',
-          emailNotification: false,
-        );
-
-        final resTest =
-            UserDto.fromJson(res['data']['updateUser']['user']).toDomain();
-        expect(result.fullName, resTest.fullName);
-      },
-    );
   });
 
   group('Update User MarketPlace TnC -', () {

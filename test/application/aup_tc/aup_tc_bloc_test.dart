@@ -43,8 +43,6 @@ void main() {
           JWTDto(access: rootAdminToken, refresh: refreshToken),
     );
     user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
-    await UserLocalDataSource(tokenStorage: tokenStorage)
-        .updateUserNotificationAndLanguagePreference();
     await UserLocalDataSource(tokenStorage: tokenStorage).updateUserTC();
 
     // tncDate = TncDate(date: DateTime.parse('1970-01-01 00:00:00'));

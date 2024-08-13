@@ -55,12 +55,6 @@ void main() {
       expect(settingTc.acceptTC, true);
     });
 
-    test('updateUserNotificationAndLanguagePreference successfully', () async {
-      final user =
-          await userLocal.updateUserNotificationAndLanguagePreference();
-      expect(user.username.getOrCrash(), 'ezrxtest05');
-    });
-
     test(
       'Update Privacy Control',
       () async {

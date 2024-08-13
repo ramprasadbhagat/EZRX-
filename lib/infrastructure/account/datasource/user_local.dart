@@ -33,16 +33,6 @@ class UserLocalDataSource {
     return SettingTcDto.fromJson(data['data']).toDomain();
   }
 
-  Future<User> updateUserNotificationAndLanguagePreference() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/updateUserNotificationAndLanguagePreferenceResponse.json',
-      ),
-    );
-
-    return UserDto.fromJson(data['data']['updateUser']['user']).toDomain();
-  }
-
   Future<bool> updatePrivacyControl() async {
     final data = json.decode(
       await rootBundle.loadString(

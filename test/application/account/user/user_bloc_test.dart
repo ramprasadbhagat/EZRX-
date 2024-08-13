@@ -1,11 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
-import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -299,136 +297,6 @@ void main() {
       ],
     );
 
-    blocTest<UserBloc, UserState>(
-      'on [updateNotificationSettings] emits successful user state',
-      build: () => UserBloc(
-        userRepository: userRepoMock,
-        authRepository: authRepositoryMock,
-        salesRepRepository: salesRepRepositoryMock,
-      ),
-      seed: () => UserState.initial().copyWith(
-        user: fakeClientUser,
-      ),
-      setUp: () {
-        when(
-          () => userRepoMock.updateNotificationSettings(
-            fakeClientUser.copyWith(
-              settings: Settings.empty().copyWith(
-                languagePreference: Language.english(),
-                emailNotifications: true,
-              ),
-            ),
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            fakeClientUser.copyWith(
-              settings: Settings.empty().copyWith(
-                languagePreference: Language.english(),
-                emailNotifications: true,
-              ),
-            ),
-          ),
-        );
-      },
-      act: (UserBloc bloc) => bloc.add(
-        UserEvent.updateNotificationSettings(
-          languagePreference: Language.english(),
-          emailNotifications: true,
-        ),
-      ),
-      expect: () => [
-        userState.copyWith(
-          user: fakeClientUser.copyWith(
-            settings: Settings.empty().copyWith(
-              languagePreference: Language.english(),
-              emailNotifications: true,
-            ),
-          ),
-        ),
-      ],
-    );
-
-    blocTest<UserBloc, UserState>(
-      'on [updateNotifificationSettings] throws error',
-      build: () => UserBloc(
-        userRepository: userRepoMock,
-        authRepository: authRepositoryMock,
-        salesRepRepository: salesRepRepositoryMock,
-      ),
-      seed: () => UserState.initial().copyWith(
-        user: fakeClientUser,
-      ),
-      setUp: () {
-        when(() => userRepoMock.getUser()).thenAnswer(
-          (invocation) async => Right(
-            fakeClientUser,
-          ),
-        );
-        when(
-          () => userRepoMock.updateNotificationSettings(
-            fakeClientUser.copyWith(
-              settings: Settings.empty().copyWith(
-                languagePreference: Language.english(),
-                emailNotifications: true,
-              ),
-            ),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('Fake Error'),
-          ),
-        );
-      },
-      act: (UserBloc bloc) => bloc.add(
-        UserEvent.updateNotificationSettings(
-          languagePreference: Language.english(),
-          emailNotifications: true,
-        ),
-      ),
-      expect: () => [
-        userState.copyWith(
-          user: fakeClientUser,
-          failureOrSuccessOption:
-              some(const Left(ApiFailure.other('Fake Error'))),
-        ),
-      ],
-    );
-    blocTest<UserBloc, UserState>(
-      'on updatePaymentNotificationSettings',
-      build: () => UserBloc(
-        userRepository: userRepoMock,
-        authRepository: authRepositoryMock,
-        salesRepRepository: salesRepRepositoryMock,
-      ),
-      seed: () => UserState.initial().copyWith(
-        user: fakeClientUser,
-      ),
-      setUp: () {
-        when(() => userRepoMock.getUser()).thenAnswer(
-          (invocation) async => Right(
-            fakeClientUser,
-          ),
-        );
-      },
-      act: (UserBloc bloc) => bloc.add(
-        UserEvent.updatePaymentNotificationSettings(
-          paymentNotification: PaymentNotification.empty().copyWith(
-            disablePaymentNotification: false,
-          ),
-        ),
-      ),
-      expect: () => [
-        userState.copyWith(
-          user: fakeClientUser.copyWith(
-            settings: Settings.empty().copyWith(
-              paymentNotification: PaymentNotification.empty().copyWith(
-                disablePaymentNotification: false,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
     blocTest<UserBloc, UserState>(
       'update language successful',
       build: () => UserBloc(
