@@ -16,7 +16,6 @@ Future<void> runAppForTesting(
   await locator.reset(dispose: true);
   await initialSetup(
     flavor: flavor,
-    bypassNotificationPermission: true,
   );
   await runAppWithCrashlyticsAndLocalization();
   test.setUpTestLocator();

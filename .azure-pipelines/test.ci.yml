@@ -292,7 +292,7 @@ stages:
                     val=$(curl --location -X POST 'https://mobile-api.lambdatest.com/framework/v1/flutter/build' \
                     -H 'Content-Type: application/json' \
                     -u $LAMBDATEST_CREDENTIALS \
-                    -d '{"app": "'"${app_url}"'", "testSuite": "'"$(test_suite_url)"'", "device": ["'"${{ parameters.device_name }}"'"], "build": "'"${testSuite[0]}"'", "geoLocation":"'"${testSuite[1]}"'", "queueTimeout": 10800, "idleTimeout": 150, "testTimeout": 7200, "deviceLog":true, "network":false, "autoGrantPermissions":false, "projectName":"eZRxPlus"}')
+                    -d '{"app": "'"${app_url}"'", "testSuite": "'"$(test_suite_url)"'", "device": ["'"${{ parameters.device_name }}"'"], "build": "'"${testSuite[0]}"'","geoLocation":"'"${testSuite[1]}"'", "queueTimeout": 10800, "idleTimeout": 150, "testTimeout": 7200, "deviceLog":true, "network":true, "autoGrantPermissions":true, "projectName":"eZRxPlus"}')
 
                     result_build_id=$(echo $val | sed -E 's/.*"buildId":\["([^"]*)".*/\1/')
 

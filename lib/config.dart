@@ -24,7 +24,6 @@ class Config {
   int maximumCartQuantity = 99999;
   int maximumUploadSize = 20;
   String customScheme = 'ezrx://';
-  bool bypassNotificationPermission = false;
   String channelName = 'eZRx notification';
 
   DateTime newReturnRequestFilterStartDate = DateTime(
