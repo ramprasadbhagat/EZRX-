@@ -323,4 +323,11 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
         )
         .last;
   }
+
+  void verifywareHouseStorageConditionTag() {
+    expect(
+      find.byKey(WidgetKeys.wareHouseStorageConditionTag),
+      findsOneWidget,
+    );
+  }
 }

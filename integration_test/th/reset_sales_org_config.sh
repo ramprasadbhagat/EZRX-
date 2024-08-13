@@ -42,7 +42,7 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-th.ezrxplus.com/a
       "enableUnreferencedReturn": false,
       "disableReturnsAccess": false,
       "disablePayment": false,
-      "disableReturnsAccessSR": true,
+      "disableReturnsAccessSR": false,
       "enableMobileNumber": false,
       "enableRemarks": false,
       "enableListPrice": true,

@@ -3,9 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-// import '../../core/test_locator.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
@@ -13,7 +10,7 @@ import '../../robots/home/customer_search_robot.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 import '../../robots/more/more_robot.dart';
-import '../../robots/more/national_privacy_commission_robot.dart';
+import '../../robots/more/profile_robot.dart';
 import '../../robots/returns/new_return/step1/new_return_step1_robot.dart';
 import '../../robots/returns/new_return/step2/new_return_step2_robot.dart';
 import '../../robots/returns/new_return/step3/new_return_step3_robot.dart';
@@ -41,18 +38,19 @@ void main() {
   late NewReturnStep1Robot newReturnRobot;
   late NewReturnStep2Robot newReturnStep2Robot;
   late NewReturnStep3Robot newReturnStep3Robot;
-  late NationalPrivacyCommissionRobot nationalPrivacyCommissionRobot;
+  late ProfileRobot profileRobot;
+  late String language;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   // initialize variables
-  const marketSingapore = 'Philippines';
-  const username = 'phexternalsalesrep';
+  const username = 'thexternalsalesrep';
   const password = 'St@ysafe01';
-  const customerCode = '0000100296';
-  const shipToCode = '0070023239';
-  const shipToAddress = 'PASCUAL ANALGESIC';
-  const currency = 'PHP';
+  const shipToCode = '0071168407';
+  const marketThailand = 'Thailand';
+  const customerCode = '0030250030';
+  const shipToAddress = 'คุณ นุชสุรางค์ วีระพันธ์ุ';
+  const currency = 'THB';
   const invalidSearchKey = 'auto-testtttttttttttt';
   const invalidLengthSearchKey = 'a';
   const validSearchKey = 'EZ';
@@ -62,43 +60,46 @@ void main() {
   const toAmount = '1000.0';
 
   //Return detail data
-  const returnStatus = 'Approved';
-  const returnId = 'EZRE-250024001930';
-  // const returnIdWithBonus = '-';
-  const returnReference = 'ph-ext-return-reference';
-  const specialInstructions = 'ph-ext-sp-instructions';
-  const materialNumber = '21000057';
-  const materialName = "10010323 AIRPILLO PLS 5-6 'S";
+  const returnStatus = 'Pending Approval';
+  const returnId = 'EZRE-290224002427';
+  const returnReference = '-';
+  const specialInstructions = '-';
+  const materialNumber = '23263173';
+  const materialName = 'ACTRAPID HM 100 IU/ML, 10ML';
   const materialQty = 1;
-  const materialTotalPrice = '$currency 143.22';
-  const materialPrincipalName = 'RECKITT BENCKISER (SINGAPORE) PTE';
-  const materialPrincipalCode = '0000100486';
-  const materialInvoiceNumber = '1510000815';
-  const materialReturnReason = 'Did Not Order';
+  const materialTotalPrice = '$currency 400.00';
+  const materialPrincipalName = 'Novo Nordisk Pharma (Thailand)';
+  const materialPrincipalCode = '0000102538';
+  const materialInvoiceNumber = '1310000599';
+  const materialReturnReason = 'Wrong Bill-To';
   const materialReturnComments = '-';
   //Material data
   const materialIndex = 0;
 
   //New Return Request step - 1
   final fromDateForStep1 = DateTime.now().subtract(const Duration(days: 360));
-  final toDateForStep1 = DateTime.now();
-  const validSearchKeyForStep1 = 'AIR';
+  final toDateForStep1 = DateTime.now().subtract(const Duration(days: 2));
+
+  const validSearchKeyForStep1 = 'ACTRAPID';
   const inValidSearchKey = '1';
   const noResultSearchKey = 'asdasfxzc';
 
-  const exceedReturnQuantity = '1001';
+  const exceedReturnQuantity = '100';
   const validReturnQuantity = '1';
-  final fromDateToNextForStep2 = DateTime(2024, 3, 1);
-  final toDateToNextForStep2 = DateTime(2024, 5, 5);
+  const returnTypeReturn = 'Return';
+  const returnTypeExcange = 'Exchange';
+  final fromDateToNextForStep2 =
+      DateTime.now().subtract(const Duration(days: 360));
+  final toDateToNextForStep2 = DateTime.now().subtract(const Duration(days: 2));
   final reason = 'Expired Within Policy'.tr();
-  const materialId = materialNumber;
-  final materialTitle = materialName.toUpperCase();
-  const materialUUID = '1510000815000010';
+  const materialId = '23263173';
+  const materialTitle = 'ACTRAPID HM 100 IU/ML, 10ML';
+  const materialUUID = '1310000599000010';
 
   //Return detail data
-  const returnRequestStatus = 'Failed';
-  final returnSubTotal = '$currency ${143.22.priceFormatted}';
-  final returnGrandTotal = '$currency ${143.22.priceFormatted}';
+  const returnRequestStatus = 'Pending Review';
+  final returnSubTotal = '$currency ${400.00.priceFormatted}';
+  final returnGrandTotal = '$currency ${400.00.priceFormatted}';
 
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
@@ -116,7 +117,7 @@ void main() {
     newReturnRobot = NewReturnStep1Robot(tester);
     newReturnStep2Robot = NewReturnStep2Robot(tester);
     newReturnStep3Robot = NewReturnStep3Robot(tester);
-    nationalPrivacyCommissionRobot = NationalPrivacyCommissionRobot(tester);
+    profileRobot = ProfileRobot(tester);
   }
 
   Future<void> pumpAppWithLogin(
@@ -126,22 +127,32 @@ void main() {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRobot.isLoginPage) {
-      await loginRobot.loginToHomeScreen(username, password, marketSingapore);
+      await loginRobot.loginToHomeScreen(username, password, marketThailand);
       await customerSearchRobot.waitForCustomerCodePageToLoad();
-      await commonRobot.closeAnnouncementAlertDialog();
-      if (commonRobot.isCustomerCodeSelectorVisible) {
-        await commonRobot.tapCustomerCodeSelector();
-      }
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapProfileTile();
+      language = profileRobot.getLanguage();
+      await commonRobot.tapToBackScreen();
+      await commonRobot.navigateToScreen(NavigationTab.home);
     } else {
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.changeDeliveryAddress(
         shipToCode,
       );
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.tapProfileTile();
+      language = profileRobot.getLanguage();
+      await commonRobot.tapToBackScreen();
+      await commonRobot.navigateToScreen(NavigationTab.home);
       await commonRobot.closeAnnouncementAlertDialog();
     }
+  }
+
+  Future<String> getDateFormatBasedOnUserLanguage() async {
+    return language == 'English' ? 'MM/dd/yyyy' : 'dd/MM/yyyy';
   }
 
   Future<void> goToReturns({required WidgetTester tester}) async {
@@ -165,6 +176,7 @@ void main() {
     await commonRobot.setDateRangePickerValue(
       fromDate: fromDateToNextForStep2,
       toDate: toDateToNextForStep2,
+      dateStringFormat: await getDateFormatBasedOnUserLanguage(),
     );
     await newReturnRobot.tapApply();
     await newReturnRobot.tapItemAt(index: 0);
@@ -281,9 +293,10 @@ void main() {
       //verify
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
-      await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-      await commonRobot.searchWithSearchIcon(materialName);
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.autoSearch(materialName);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductNameVisible(materialName);
@@ -303,6 +316,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
@@ -314,6 +328,7 @@ void main() {
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductCodeVisible(materialNumber);
       await commonRobot.tapClearSearch();
+
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
     });
@@ -332,10 +347,12 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(returnId);
       returnsByItemsRobot.verifyReturnsWithIdVisible(returnId);
+      returnsByItemsRobot.verifywareHouseStorageConditionTag();
     });
 
     testWidgets('EZRX-T556 | Verify display items in View by items tab',
@@ -351,12 +368,14 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(returnId);
       returnsByItemsRobot.verifyReturnsWithIdVisible(returnId);
+      returnsByItemsRobot.verifywareHouseStorageConditionTag();
     });
-// //TODO Need to revisit this test as we do not have data for now
+//TODO Need to revisit this test as we do not have data for now
     // testWidgets(
     //     'EZRX-T557 | Verify display items with bonus in View by items tab',
     //     (tester) async {
@@ -408,6 +427,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       returnsByItemsRobot.verifyFilterApplied(1);
@@ -420,10 +440,10 @@ void main() {
     testWidgets(
         'EZRX-T146 | Verify Filter by Request amount when no having result found in View by items tab',
         (tester) async {
-      const fromAmount = '100.123400';
+      const fromAmount = '40.123400';
       const toAmount = '200.20';
       const invalidToAmount = '1';
-      const formattedFromAmount = '100.12';
+      const formattedFromAmount = '40.12';
       const formattedToAmount = '200.2';
       await goToReturns(tester: tester);
 
@@ -478,6 +498,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.enterFromAmount(fromAmount);
       await returnsByItemsFilterRobot.enterToAmount(toAmount);
@@ -514,6 +535,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.enterFromAmount(fromAmount);
       await returnsByItemsFilterRobot.enterToAmount(toAmount);
@@ -539,6 +561,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(returnId);
@@ -558,6 +581,8 @@ void main() {
         materialQty,
         materialTotalPrice,
       );
+      returnsByItemsDetailRobot.verifywareHouseStorageConditionTag();
+      returnsByItemsDetailRobot.verifywareHouseStorageConditionTag();
       returnsByItemsDetailRobot.verifyMaterialDetailCollapsed(true);
     });
 
@@ -573,6 +598,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(returnId);
@@ -639,7 +665,14 @@ void main() {
         'EZRX-T138 | Verify display items in View by return requests tab with no data available with auto search',
         (tester) async {
       //initialize necessary robots
-      await goToReturns(tester: tester);
+      initializeRobot(tester);
+
+      //init app
+      await runAppForTesting(tester);
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
+      await homeRobot.tapReturnsQuickAccess();
 
       //verify
       returnsRootRobot.verifyTabBarVisible();
@@ -654,6 +687,7 @@ void main() {
 
       await commonRobot.autoSearch(validSearchKey);
       returnsByRequestRobot.verifyReturnRequestVisible();
+      await commonRobot.tapClearSearch();
 
       await commonRobot.autoSearch(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
@@ -670,16 +704,17 @@ void main() {
       returnsRootRobot.verifyTabBarVisible();
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
-      await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await returnsByRequestRobot.tapFilterButton();
       await returnsByRequestFilterRobot.tapFromDateField();
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByRequestFilterRobot.tapApplyButton();
-      await commonRobot.searchWithSearchIcon(returnId);
+      await commonRobot.searchWithKeyboardAction(returnId);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByRequestRobot.verifyReturnsWithIdVisible(returnId);
@@ -694,7 +729,6 @@ void main() {
       returnsRootRobot.verifyTabBarVisible();
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
-
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -703,7 +737,6 @@ void main() {
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.pullToRefresh();
       returnsByRequestRobot.verifyReturnRequestVisible();
-
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
     });
@@ -721,6 +754,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByRequestFilterRobot.tapApplyButton();
       returnsByRequestRobot.verifyReturnGroupInDateRangeVisible(
@@ -737,10 +771,10 @@ void main() {
     testWidgets(
         'EZRX-T149 | Verify Filter by Request amount when having result found in View by return requests tab',
         (tester) async {
-      const fromAmount = '99.123400';
+      const fromAmount = '40.123400';
       const toAmount = '500.20';
       const invalidToAmount = '1';
-      const formattedFromAmount = '99.12';
+      const formattedFromAmount = '40.12';
       const formattedToAmount = '500.2';
       await goToReturns(tester: tester);
 
@@ -752,6 +786,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByRequestFilterRobot.enterFromAmount(fromAmount);
       await returnsByRequestFilterRobot.enterToAmount(invalidToAmount);
@@ -776,7 +811,7 @@ void main() {
         'EZRX-T150 | Verify Filter by Status when selecting 2 checkboxes in View by return requests tab',
         (tester) async {
       const filterStatus1 = 'Pending Review';
-      const filterStatus2 = 'Failed';
+      const filterStatus2 = 'Reviewed';
       await goToReturns(tester: tester);
 
       //verify
@@ -816,6 +851,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByRequestFilterRobot.tapStatusCheckbox(returnRequestStatus);
       await returnsByRequestFilterRobot.enterFromAmount(fromAmount);
@@ -852,6 +888,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await returnsByRequestFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(returnId);
@@ -891,7 +928,7 @@ void main() {
         (tester) async {
       await pumpAppWithLogin(tester);
       await goToNewRequest();
-      // newReturnRobot.verifyNewReturnStep1Display(shipToAddress);
+      newReturnRobot.verifyNewReturnStep1Display(shipToAddress);
     });
 
     testWidgets(
@@ -924,6 +961,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDateForStep1,
         toDate: toDateForStep1,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await newReturnRobot.tapApply();
       await newReturnRobot.verifyTheReturnListBaseOnFilter(
@@ -946,6 +984,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDateForStep1,
         toDate: toDateForStep1,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await newReturnRobot.tapApply();
       newReturnRobot.collectTheFirstItemTitleWithoutFilter();
@@ -969,6 +1008,7 @@ void main() {
       await newReturnRobot.tapShowDetailButton();
       newReturnRobot.verifyDetailCollapsed(false);
     });
+
     testWidgets(
         'EZRX-T235 | Verify new return request Step 1 of 3: Text fields - Happy flow - search icon button',
         (tester) async {
@@ -978,27 +1018,27 @@ void main() {
       await newReturnRobot.tapFilterIcon();
       await newReturnRobot.tapTheDateField();
       await commonRobot.setDateRangePickerValue(
-        fromDate: fromDateForStep1,
+        fromDate: fromDateToNextForStep2,
         toDate: toDateToNextForStep2,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await newReturnRobot.tapApply();
       await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
-
     testWidgets(
         'EZRX-T233 | Verify new return request Step 1 of 3: Text fields - UnHappy flow',
         (tester) async {
       await pumpAppWithLogin(tester);
       await goToNewRequest();
 
-      await commonRobot.searchWithSearchIcon('a');
+      await commonRobot.searchWithKeyboardAction('a');
       await newReturnRobot.verifySnackbarVisible();
       await commonRobot.dismissSnackbar();
       await commonRobot.searchWithKeyboardAction(inValidSearchKey);
       await newReturnRobot.verifySnackbarVisible();
-      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.dismissSnackbar();
       await commonRobot.searchWithKeyboardAction(noResultSearchKey);
       newReturnRobot.verifyNoItemFound();
     });
@@ -1020,7 +1060,7 @@ void main() {
       await pumpAppWithLogin(tester);
       await goToNewRequest();
       await goToStep2();
-      newReturnStep2Robot.verifyReturnDetailDisplayed(
+      newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
         materialId,
         materialTitle,
       );
@@ -1042,7 +1082,6 @@ void main() {
         materialUUID,
       );
       await newReturnStep2Robot.tapNextButton();
-      await tester.pumpAndSettle();
       newReturnStep2Robot.verifyReturnQuantityCannotExceedBalanceQuantity();
     });
     testWidgets(
@@ -1062,24 +1101,57 @@ void main() {
     });
 
     testWidgets(
-        'EZRX-T236 | Verify new return request step 2 of 3: Next button clicked with all valid fields',
+        'EZRX-T236 | Verify new return request step 2 of 3: Next button clicked with all valid fields selecting return Type as Return',
         (tester) async {
       await pumpAppWithLogin(tester);
-      await goToNewRequest();
 
+      await goToNewRequest();
       await goToStep2();
       newReturnStep2Robot.verifyReturnDetailDisplayed(
         materialId,
         materialTitle,
       );
+      await newReturnStep2Robot.selectReturnType(
+        returnTypeReturn,
+        materialUUID,
+      );
       await newReturnStep2Robot.enterReturnQuantity(
         validReturnQuantity,
         materialUUID,
       );
-      await newReturnStep2Robot.selectReason(
-        reason,
+      newReturnStep2Robot.verifyReturnCounterOfferField(
+        isVisible: true,
+        uuid: materialUUID,
+      );
+      await newReturnStep2Robot.selectReason(reason, materialUUID);
+      await newReturnStep2Robot.tapNextButton();
+      newReturnStep2Robot.verifyNextToStep3(materialId, materialTitle);
+      newReturnStep3Robot.verifyStep3Visible();
+    });
+    testWidgets(
+        'EZRX-T236 | Verify new return request step 2 of 3: Next button clicked with all valid fields selecting return Type as Exchange',
+        (tester) async {
+      await pumpAppWithLogin(tester);
+
+      await goToNewRequest();
+      await goToStep2();
+      newReturnStep2Robot.verifyReturnDetailDisplayed(
+        materialId,
+        materialTitle,
+      );
+      await newReturnStep2Robot.selectReturnType(
+        returnTypeExcange,
         materialUUID,
       );
+      await newReturnStep2Robot.enterReturnQuantity(
+        validReturnQuantity,
+        materialUUID,
+      );
+      newReturnStep2Robot.verifyReturnCounterOfferField(
+        isVisible: false,
+        uuid: materialUUID,
+      );
+      await newReturnStep2Robot.selectReason(reason, materialUUID);
       await newReturnStep2Robot.tapNextButton();
       newReturnStep2Robot.verifyNextToStep3(materialId, materialTitle);
       newReturnStep3Robot.verifyStep3Visible();
@@ -1099,8 +1171,10 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDateToNextForStep2,
         toDate: toDateToNextForStep2,
+        dateStringFormat: await getDateFormatBasedOnUserLanguage(),
       );
       await newReturnRobot.tapApply();
+      await tester.pump(const Duration(seconds: 1));
       await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
@@ -1153,25 +1227,9 @@ void main() {
       await newReturnRobot.closeBottomSheetDetail();
       newReturnRobot.verifyDetailBottomSheetIsHide();
       newReturnStep3Robot.collectInfoBeforeSubmit();
+      // no need to submit because it change the maintained data
       // await newReturnStep3Robot.tapSubmit();
       // newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
-    });
-  });
-
-  group('National Privacy Commission -', () {
-    testWidgets('EZRX-T2655 | Verify national privacy commission page',
-        (tester) async {
-      await pumpAppWithLogin(tester);
-      await commonRobot.navigateToScreen(NavigationTab.more);
-      await moreRobot.verifyNationalPrivacyCommissionTile();
-      await moreRobot.tapNationalPrivacyCommissionTile();
-      nationalPrivacyCommissionRobot.verify();
-      nationalPrivacyCommissionRobot.verifyDescriptionText();
-      nationalPrivacyCommissionRobot.verifySaveImagesButton();
-      await nationalPrivacyCommissionRobot.verifyImages();
-      nationalPrivacyCommissionRobot.verifyCloseButton();
-      await nationalPrivacyCommissionRobot.tapCloseButton();
-      moreRobot.verifyMoreScreenVisible();
     });
   });
 

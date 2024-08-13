@@ -208,6 +208,16 @@ class ReturnsByItemsRobot extends CommonRobot {
     );
   }
 
+  void verifywareHouseStorageConditionTag() {
+    expect(
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.wareHouseStorageConditionTag),
+      ),
+      findsAtLeastNWidgets(1),
+    );
+  }
+
   void verifyReturnGroupInDateRangeVisible({
     required DateTime fromDate,
     required DateTime toDate,

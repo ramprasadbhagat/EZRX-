@@ -52,7 +52,7 @@ class ReturnListItemCard extends StatelessWidget {
           isMarketPlace: data.isMarketPlace,
           outsidePolicy: data.outsidePolicy,
           prsfd: data.prsfd,
-          materialDescription: data.materialName,
+          materialDescription: data.defaultMaterialDescription,
           batch: data.batch,
           expiryDate: data.expiry,
           returnQuantity: data.itemQty.getIntValue,
