@@ -840,7 +840,7 @@ String fileTypeFromPath(String source) {
 /// Filters and extracts the query parameter from the provided [uri] that contains ezrx domain.
 /// This is necessary when the redirecting URI is passed as a query parameter
 /// to the original URI.
-/// Example url -> EZRX://clicktime.symantec.com/15tStdWWRBCjGxB6bujRD?h=zRUjvnB-oJ7CeZWGKRQJobPyV8b1EJMcAlvzEMzuV0Y=&amp;u=https://uat-my.ezrx.com/login/set-password?username%3D****%26token%3D******
+/// Example url -> EZRX://clicktime.symantec.com/15tStdWWRBCjGxB6bujRD?h=zRUjvnB-oJ7CeZWGKRQJobPyV8b1EJMcAlvzEMzuV0Y=&amp;u=https://uat-my.ezrxplus.com/login/set-password?username%3D****%26token%3D******
 Uri getFilteredResetPasswordUri(Uri uri) {
   final link = uri.queryParameters.values.firstWhere(
     (element) => element.contains(GetIt.instance<Config>().domain),

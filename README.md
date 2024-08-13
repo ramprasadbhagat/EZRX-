@@ -79,9 +79,9 @@ You need to run the below commands from a shell.
 
 | Flavor| Package name | App Name | Endpoint |
 |--|--|--|--|
-| PROD |  `com.zuelligpharma.ezrxplus`| eZRx+ | <https://my.ezrx.com> |
-| UAT  |  `com.zuelligpharma.ezrxplus.uat`| eZRx+ Uat | <https://uat-my.ezrx.com> |
-| DEV  |  `com.zuelligpharma.ezrxplus.dev`| eZRx+ Dev | <https://dev-my.ezrx.com> |
+| PROD |  `com.zuelligpharma.ezrxplus`| eZRx+ | <https://my.ezrxplus.com> |
+| UAT  |  `com.zuelligpharma.ezrxplus.uat`| eZRx+ Uat | <https://uat-my.ezrxplus.com> |
+| DEV  |  `com.zuelligpharma.ezrxplus.dev`| eZRx+ Dev | <https://ezrxplus-dev.ezrx.com> |
 | MOCK  |  `com.zuelligpharma.ezrxplus.mock`| eZRx+ Mock | local assets json |
 
 ### Build app

@@ -8,7 +8,7 @@ void main() {
 
   group('EZReachBannerLink value object', () {
     setUpAll(
-      () => locator.registerSingleton<Config>(Config()..appFlavor = Flavor.dev),
+      () => locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat),
     );
     test(
       'valid External url',
@@ -32,7 +32,7 @@ void main() {
       'valid External url',
       () {
         const input =
-            'https://uat-ph.ezrx.com/product-details/000000000011002079';
+            'https://uat-ph.ezrxplus.com/product-details/000000000011002079';
         final username = EZReachBannerLink(input);
         expect(username.isInternalLink, true);
       },

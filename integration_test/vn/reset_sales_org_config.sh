@@ -1,11 +1,11 @@
 #!/bin/bash
 echo -e "\n"
 echo "Presetting sales org config for VN."
-loginApiResponse=$(curl -s --location 'https://uat-vn.ezrx.com/api/license' \
+loginApiResponse=$(curl -s --location 'https://uat-vn.ezrxplus.com/api/license' \
 --header 'Content-Type: application/json' \
 --data '{"variables": { "input": { "username": "auto_root_admin", "password": "Pa55word@1234" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
 response=$(echo $loginApiResponse | sed -e 's/^.*"eZRxJWT":"\([^"]*\)".*$/\1/')
-updateSalesorgconfigMutationReqFor3070=$(curl --location 'https://uat-vn.ezrx.com/api/license' \
+updateSalesorgconfigMutationReqFor3070=$(curl --location 'https://uat-vn.ezrxplus.com/api/license' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer v2 '"$response" \
 --data '
@@ -105,7 +105,7 @@ updateSalesorgconfigMutationReqFor3070=$(curl --location 'https://uat-vn.ezrx.co
       }
     }
 ')
-updateSalesorgconfigMutationReqFor3050=$(curl --location 'https://uat-vn.ezrx.com/api/license' \
+updateSalesorgconfigMutationReqFor3050=$(curl --location 'https://uat-vn.ezrxplus.com/api/license' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer v2 '"$response" \
 --data '

@@ -88,7 +88,7 @@ void main() {
 
   final fakeUser = User.empty().copyWith(username: Username(fakeUserName));
 
-  const domain = 'https://uat-my.ezrx.com';
+  const domain = 'https://uat-my.ezrxplus.com';
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();

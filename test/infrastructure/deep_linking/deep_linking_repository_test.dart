@@ -36,7 +36,7 @@ void main() {
   late _DeepLinkServiceMock deepLinkServiceMock;
   late DeepLinkingRepository repository;
   final fakeError = MockException(message: 'fake-exception');
-  const domain = 'https://uat-my.ezrx.com';
+  const domain = 'https://uat-my.ezrxplus.com';
 
   setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();

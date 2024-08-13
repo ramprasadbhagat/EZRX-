@@ -26,7 +26,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat.ezrxplus.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
@@ -57,7 +57,8 @@ void main() {
         '=> getUsages',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/getUsageListResponse.json'),
+            await rootBundle
+                .loadString('assets/json/getUsageListResponse.json'),
           );
 
           dioAdapter.onPost(

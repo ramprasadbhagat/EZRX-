@@ -21,7 +21,7 @@ void main() {
   late Config config;
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat.ezrxplus.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());

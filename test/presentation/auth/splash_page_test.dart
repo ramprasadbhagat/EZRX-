@@ -1391,7 +1391,7 @@ void main() {
           'When Redirecting Products tab with manufacturer name search - success',
           (tester) async {
         final link = Uri.parse(
-          'https://uat-mm.ezrx.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
+          'https://uat-mm.ezrxplus.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
         );
         final parameters = EzrxLinkQueryParameter(link.queryParameters);
         final searchKey = parameters.extractMaterialNumber;
@@ -1454,7 +1454,7 @@ void main() {
           'When Redirecting Products tab with unknown manufacturer name search - success',
           (tester) async {
         final link = Uri.parse(
-          'https://uat-mm.ezrx.com/product-listing?unknown=Daiichi+Sankyo+%28Thailand%29+Ltd',
+          'https://uat-mm.ezrxplus.com/product-listing?unknown=Daiichi+Sankyo+%28Thailand%29+Ltd',
         );
         final parameters = EzrxLinkQueryParameter(link.queryParameters);
         final searchKey = parameters.extractMaterialNumber;
@@ -1517,7 +1517,7 @@ void main() {
           'Unable to Redirect to Products tab with manufacturer name search, if don\'t have access - success',
           (tester) async {
         final link = Uri.parse(
-          'https://uat-mm.ezrx.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
+          'https://uat-mm.ezrxplus.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
         );
         final parameters = EzrxLinkQueryParameter(link.queryParameters);
         final searchKey = parameters.extractMaterialNumber;
@@ -1565,7 +1565,7 @@ void main() {
           'Unable to Redirect to Order Details Page, if don\'t have access - success',
           (tester) async {
         final link = Uri.parse(
-          'https://uat-mm.ezrx.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
+          'https://uat-mm.ezrxplus.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
         );
 
         final expectedDeepLinkStates = [
@@ -1653,7 +1653,7 @@ void main() {
 
     testWidgets('When Redirecting About Us Page', (tester) async {
       final link = Uri.parse(
-        'https://uat-id.ezrx.com/about-us',
+        'https://uat-id.ezrxplus.com/about-us',
       );
 
       when(() => autoRouterMock.push(const AboutUsPageRoute())).thenAnswer(

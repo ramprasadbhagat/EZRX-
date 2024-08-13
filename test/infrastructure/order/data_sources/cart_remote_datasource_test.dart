@@ -32,7 +32,7 @@ void main() async {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://my.ezrx.com',
+      baseUrl: 'https://my.ezrxplus.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
@@ -554,7 +554,8 @@ void main() async {
         () async {
           upsertCartListJson = json.decode(
             await rootBundle.loadString(
-                'assets/json/upsertCartItemsWithBundleOffersResponse.json',),
+              'assets/json/upsertCartItemsWithBundleOffersResponse.json',
+            ),
           );
 
           final finalData =

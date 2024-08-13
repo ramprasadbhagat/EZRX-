@@ -425,9 +425,9 @@
               "buttonUrl": {
                 "jsonValue": {
                   "value": {
-                    "href": "https://uat-my.ezrx.com/login/password-changed",
+                    "href": "https://uat-my.ezrxplus.com/login/password-changed",
                     "linktype": "external",
-                    "url": "https://uat-my.ezrx.com/login/password-changed",
+                    "url": "https://uat-my.ezrxplus.com/login/password-changed",
                     "anchor": "",
                     "target": ""
                   }

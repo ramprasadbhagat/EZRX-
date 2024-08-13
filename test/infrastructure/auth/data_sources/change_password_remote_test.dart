@@ -22,7 +22,7 @@ void main() {
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
   late ChangePasswordRemoteDataSource changePasswordRemoteDataSource;
 
-  final dio = Dio(BaseOptions(baseUrl: 'https://uat.ezrx.com'));
+  final dio = Dio(BaseOptions(baseUrl: 'https://uat.ezrxplus.com'));
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
 

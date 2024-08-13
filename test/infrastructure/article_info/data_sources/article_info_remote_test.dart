@@ -28,7 +28,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat-my.ezrx.com',
+      baseUrl: 'https://uat-my.ezrxplus.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
@@ -203,7 +203,7 @@ void main() {
 
       dioAdapter.onPost(
         '/api/announcement',
-            (server) => server.reply(
+        (server) => server.reply(
           200,
           infoRes,
           delay: const Duration(seconds: 1),
@@ -235,7 +235,7 @@ void main() {
     test('statuscode not equal to 200', () async {
       dioAdapter.onPost(
         '/api/announcement',
-            (server) => server.reply(
+        (server) => server.reply(
           205,
           {'data': []},
           delay: const Duration(seconds: 1),
@@ -266,7 +266,7 @@ void main() {
     test('response with error', () async {
       dioAdapter.onPost(
         '/api/announcement',
-            (server) => server.reply(
+        (server) => server.reply(
           200,
           {
             'data': null,
@@ -303,7 +303,7 @@ void main() {
     test('response with others error', () async {
       dioAdapter.onPost(
         '/api/announcement',
-            (other) => other.reply(
+        (other) => other.reply(
           200,
           {
             'data': {'search': null},

@@ -1,11 +1,11 @@
 #!/bin/bash
 echo -e "\n"
 echo "Presetting sales org config for SG."
-loginApiResponse=$(curl -s --location 'https://uat-sg.ezrx.com/api/license' \
+loginApiResponse=$(curl -s --location 'https://uat-sg.ezrxplus.com/api/license' \
 --header 'Content-Type: application/json' \
 --data '{"variables": { "input": { "username": "sgrootadmin", "password": "St@ysafe01" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
 response=$(echo $loginApiResponse | sed -e 's/^.*"eZRxJWT":"\([^"]*\)".*$/\1/')
-updateSalesorgconfigMutationReq=$(curl --location 'https://uat-sg.ezrx.com/api/license' \
+updateSalesorgconfigMutationReq=$(curl --location 'https://uat-sg.ezrxplus.com/api/license' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer v2 '"$response" \
 --data '{

@@ -3,7 +3,7 @@
 echo -e "\n"
 echo "Presetting sales org config for MY."
 
-endpoint=https://uat-my.ezrx.com/api/license
+endpoint=https://uat-my.ezrxplus.com/api/license
 
 marketplaceUsername=mpmyclientuser
 marketplacePassword=St@ysafe01

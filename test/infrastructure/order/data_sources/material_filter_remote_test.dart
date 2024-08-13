@@ -23,7 +23,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat-my.ezrx.com',
+      baseUrl: 'https://uat-my.ezrxplus.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());

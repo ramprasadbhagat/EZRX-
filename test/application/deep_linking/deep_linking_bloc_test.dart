@@ -51,7 +51,7 @@ void main() {
   const paymentLink = '/my-account/payments';
   const faqLink = '/faq';
   const resetPasswordLink =
-      'https://clicktime.symantec.com/15tStdYPVXVZm3CGiHwjj?h=AajXDPaRNcBc9HqeqM_8ZyhyH7ej6-GwTxaPE9fxEqU=&amp;u=https://uat-sg.ezrx.com/login/set-password?username%3DFakeUser%26token%3DFakeToken';
+      'https://clicktime.symantec.com/15tStdYPVXVZm3CGiHwjj?h=AajXDPaRNcBc9HqeqM_8ZyhyH7ej6-GwTxaPE9fxEqU=&amp;u=https://uat-sg.ezrxplus.com/login/set-password?username%3DFakeUser%26token%3DFakeToken';
   const tncLink = '/tnc';
   const privacyLink = '/privacy';
   const settingLink = '/my-account/Settings';
@@ -69,7 +69,7 @@ void main() {
     repository = DeepLinkingRepositoryMock();
     chatBotService = ChatBotServiceMock();
     materialFilter = MaterialFilter.empty();
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
   });
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -1224,7 +1224,7 @@ void main() {
           () => repository.extractResetPasswordCred(
             link: Uri(
               path: '/login/set-password',
-              host: 'uat-sg.ezrx.com',
+              host: 'uat-sg.ezrxplus.com',
               port: 443,
               queryParameters: {'username': 'FakeUser', 'token': 'FakeToken'},
               scheme: 'https',
@@ -1257,7 +1257,7 @@ void main() {
           () => repository.extractResetPasswordCred(
             link: Uri(
               path: '/login/set-password',
-              host: 'uat-sg.ezrx.com',
+              host: 'uat-sg.ezrxplus.com',
               port: 443,
               queryParameters: {'username': 'FakeUser', 'token': 'FakeToken'},
               scheme: 'https',

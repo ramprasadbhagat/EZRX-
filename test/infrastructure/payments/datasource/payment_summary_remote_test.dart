@@ -17,7 +17,7 @@ void main() {
   late PaymentSummaryRemoteDataSource remoteDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
-  final dio = Dio(BaseOptions(baseUrl: 'https://uat.ezrx.com'));
+  final dio = Dio(BaseOptions(baseUrl: 'https://uat.ezrxplus.com'));
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
   const fakeCustomerCode = 'fake-customer-code';

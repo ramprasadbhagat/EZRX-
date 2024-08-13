@@ -25,7 +25,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat.ezrxplus.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
@@ -166,7 +166,8 @@ void main() {
               'data': null,
               'errors': [
                 {
-                  'message': 'something went wrong in the stock information API',
+                  'message':
+                      'something went wrong in the stock information API',
                 },
               ],
             },

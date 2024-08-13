@@ -1,11 +1,11 @@
 #!/bin/bash
 echo -e "\n"
 echo "Presetting sales org config for MM."
-loginApiResponse=$(curl -s --location 'https://uat-mm.ezrx.com/api/license' \
+loginApiResponse=$(curl -s --location 'https://uat-mm.ezrxplus.com/api/license' \
 --header 'Content-Type: application/json' \
 --data '{"variables": { "input": { "username": "mmrootadmin", "password": "St@ysafe01" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
 response=$(echo $loginApiResponse | sed -e 's/^.*"eZRxJWT":"\([^"]*\)".*$/\1/')
-updateSalesorgconfigMutationReq=$(curl --location 'https://uat-mm.ezrx.com/api/license' \
+updateSalesorgconfigMutationReq=$(curl --location 'https://uat-mm.ezrxplus.com/api/license' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer v2 '"$response" \
 --data '{ "query":"mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) { updateSalesOrgConfig(input: $input) { salesOrgConfig { salesOrgCode ponRequired priceOverride expiryDateDisplay enableBatchNumber currency netPriceOverride enableVat enableZDP5 materialWithoutPrice enableZDP8Override displayOrderDiscount enableIRN enableTaxClassification disableBundles disableProcessingStatus enableCollectiveNumber enableGimmickMaterial hideStockDisplay showPOAttachment disableDeliveryDate enableTaxAtTotalLevelOnly enableGreenDelivery greenDeliveryDelayInDays greenDeliveryUserRole minOrderAmount hideCustomer disableOrderType vatValue enableSpecialInstructions enableReferenceNote enableMobileNumber enablePaymentTerms enableGMC enableListPrice enableDefaultMD disablePaymentTermsDisplay enableBillTo enableOHPrice addOosMaterials oosValue enableRemarks enableTaxDisplay enableGMN } } } ", 

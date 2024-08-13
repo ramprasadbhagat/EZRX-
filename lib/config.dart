@@ -36,9 +36,9 @@ class Config {
   String get domain {
     switch (appFlavor) {
       case Flavor.prod:
-        return '.ezrxplus.com';
       case Flavor.uat:
-        return '.ezrx.com';
+        return '.ezrxplus.com';
+      case Flavor.dev:
       default:
         return '.ezrx.com';
     }
@@ -52,15 +52,10 @@ class Config {
       // https://ezrxplus-dev.ezrx.com/
       case Flavor.dev:
         return '${schema}ezrxplus-$env$domain';
-      // https://my.ezrx.com/
+      // https://uat-my.ezrxplus.com/
       case Flavor.mock:
       case Flavor.uat:
-        //TODO: Revisit to update domain of UAT market to .ezrxplus.com
-        // This check here is required for HK market because its domain is different
-        // from the rest now
-        return marketDomain == 'hk'
-            ? '$schema$env-$marketDomain.ezrxplus.com'
-            : '$schema$env-$marketDomain$domain';
+        return '$schema$env-$marketDomain$domain';
     }
   }
 

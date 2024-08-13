@@ -51,9 +51,9 @@ class PaymentInfoDto with _$PaymentInfoDto {
     }
 
     if (Currency(transactionCurrency).isTH) {
-      // We need to replace form action from post /api/thankyou-page to "https://uat-th.ezrx.com/api/thankyou-page"
+      // We need to replace form action from post /api/thankyou-page to "https://uat-th.ezrxplus.com/api/thankyou-page"
       // by using baseURL call API to load the success page when form success and redirect to
-      // https://uat-th.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5f9e6445a22f88ac275415afdf861f1a360b3c9d40e1d1afa2&paymentId=53616c7465645f5fa366a6a3b8e9bc690c839d598e55995f7d98a6198d77462e&transactionReference=53616c7465645f5fbd8415d149a249d8fb7ac3b4443f650f7ae710c09892b2cc&isCancelled=false
+      // https://uat-th.ezrxplus.com/my-account/thankyou?TxnStatus=53616c7465645f5f9e6445a22f88ac275415afdf861f1a360b3c9d40e1d1afa2&paymentId=53616c7465645f5fa366a6a3b8e9bc690c839d598e55995f7d98a6198d77462e&transactionReference=53616c7465645f5fbd8415d149a249d8fb7ac3b4443f650f7ae710c09892b2cc&isCancelled=false
 
       final regexSplitAction = RegExp(r'(action=")([^"]+)(")');
 

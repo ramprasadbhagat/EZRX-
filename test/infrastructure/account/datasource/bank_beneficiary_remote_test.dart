@@ -28,7 +28,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat.ezrxplus.com',
     ),
   );
 
