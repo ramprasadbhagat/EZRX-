@@ -118,8 +118,8 @@ void main() {
   }
 
   const marketVietnam = 'Vietnam';
-  const username = 'auto_root_admin';
-  const password = 'Pa55word@1234';
+  const username = 'vnrootadmin';
+  const password = 'St@ysafe01';
   const proxyUserName = 'vnexternalsalesrep';
   const customerCode = '0030282241';
   const shipToCode = '0071209479';
