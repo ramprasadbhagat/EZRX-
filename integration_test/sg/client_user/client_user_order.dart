@@ -207,6 +207,13 @@ void main() {
   const twentySixSeriesMaterialNumber = '26031206';
   const materialWithListPriceZero = '21026761';
   final materialPriceWithListPriceZero = 'Price Not Available'.tr();
+  const shipToBatchAndExp = '0070042401';
+  const orderIdMultipleBatchAndExp = '0200328990';
+  const materialNumberMultipleBatchAndExp = '21017890';
+  const batch1 = 'UAT3';
+  const batch2 = 'GLOW-01';
+  const expiry1 = '20260111';
+  const expiry2 = '20991231';
 
   var loginRequired = true;
 
@@ -3758,6 +3765,40 @@ void main() {
         await cartRobot.verifyMaterial(covidMaterialNumber);
         cartRobot.verifyMaterialQty(covidMaterialNumber, qty);
       });
+
+      testWidgets(
+        'EZRX-T2737 | Verify multiple batch and expiry in view by items detail',
+            (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester);
+
+          await commonRobot.changeDeliveryAddress(shipToBatchAndExp);
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.pullToRefresh();
+          await commonRobot
+              .searchWithKeyboardAction(orderIdMultipleBatchAndExp);
+          await viewByItemsRobot
+              .tapFirstOrderWithMaterial(materialNumberMultipleBatchAndExp);
+          await viewByItemsDetailRobot.verifyItemComponent();
+          viewByItemsDetailRobot
+              .verifyMaterialNumber(materialNumberMultipleBatchAndExp);
+          viewByItemsDetailRobot.verifyBatchExpiryDate(
+            StockInfo.empty().copyWith(
+              batch: StringValue(batch1),
+              expiryDate: DateTimeStringValue(expiry1),
+            ),
+          );
+          viewByItemsDetailRobot.verifyBatchExpiryDate(
+            StockInfo.empty().copyWith(
+              batch: StringValue(batch2),
+              expiryDate: DateTimeStringValue(expiry2),
+            ),
+          );
+        },
+      );
     });
 
     group('View by orders -', () {

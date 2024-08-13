@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -174,29 +176,57 @@ void main() {
   const mandatoryTenderContractMaterialTenderReferenceNumber = 'HNO-56789';
   const mandatoryTenderContractMaterialTenderExpiryDate = '31 Dec 2025';
   const mandatoryTenderContractNumberWithInsufficientQty = '21129394';
+  const shipToBatchAndExp = '0071196014';
+  const orderIdMultipleBatchAndExp = '0200367645';
+  const materialNumberMultipleBatchAndExp = '21129643';
+  const batch1 = '6R1582';
+  const batch2 = '6R1580';
+  const expiry1 = '20300601';
+  const expiry2 = '20300601';
 
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
 
   var loginRequired = true;
 
+  Future<void> changeSalesOrgAndShipToCode(
+    String shipToCode,
+    String salesOrg,
+  ) async {
+    await customerSearchRobot.waitForCustomerCodePageToLoad();
+    await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
+      shipToCode,
+      salesOrg,
+    );
+  }
+
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
     String shipToCode = shipToCode,
+    String? salesOrg,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, market);
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
+      if (salesOrg != null) {
+        await changeSalesOrgAndShipToCode(shipToCode, salesOrg);
+      } else {
+        await customerSearchRobot.selectCustomerSearch(shipToCode);
+      }
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
     } else {
       await commonRobot.dismissSnackbar(dismissAll: true);
-      await commonRobot.changeDeliveryAddress(
-        shipToCode,
-      );
+      if (salesOrg != null) {
+        await commonRobot.tapCustomerCodeSelector();
+        await changeSalesOrgAndShipToCode(shipToCode, salesOrg);
+      } else {
+        await commonRobot.changeDeliveryAddress(
+          shipToCode,
+        );
+      }
       await commonRobot.closeAnnouncementAlertDialog();
     }
   }
@@ -2994,6 +3024,45 @@ void main() {
           await viewByItemsDetailRobot.tapBuyAgainButton();
           tenderContractDetailRobot
               .verifyNonMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2737 | Verify multiple batch and expiry in view by items detail',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(
+            tester,
+            salesOrg: '3050',
+            shipToCode: shipToBatchAndExp,
+          );
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.pullToRefresh();
+          await commonRobot
+              .searchWithKeyboardAction(orderIdMultipleBatchAndExp);
+          await viewByItemsRobot
+              .tapFirstOrderWithMaterial(materialNumberMultipleBatchAndExp);
+
+          await viewByItemsDetailRobot.verifyOtherItemsComponent();
+          await viewByItemsDetailRobot.verifyItemComponent();
+          viewByItemsDetailRobot
+              .verifyMaterialNumber(materialNumberMultipleBatchAndExp);
+
+          viewByItemsDetailRobot.verifyBatchExpiryDate(
+            StockInfo.empty().copyWith(
+              batch: StringValue(batch1),
+              expiryDate: DateTimeStringValue(expiry1),
+            ),
+          );
+          viewByItemsDetailRobot.verifyBatchExpiryDate(
+            StockInfo.empty().copyWith(
+              batch: StringValue(batch2),
+              expiryDate: DateTimeStringValue(expiry2),
+            ),
+          );
         },
       );
     });

@@ -201,6 +201,14 @@ void main() {
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
   const shipToWithDisableReturn = '0000002010';
+  const orderIdMultipleBatchAndExp = '0200317406';
+  const materialNumberMultipleBatchAndExp = '21253447';
+  const batch1 = 'TEST01';
+  const batch2 = 'TEST03';
+  const batch3 = 'TEST04';
+  const expiry1 = '20261230';
+  const expiry2 = '20281230';
+  const expiry3 = '20291230';
 
   final bundleStockInfoList = [
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23046003')),
@@ -3146,6 +3154,42 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(bundleMaterialNumber1);
         cartRobot.verifyMaterialQty(bundleMaterialNumber1, bundleMaterialQty1);
+      });
+
+      testWidgets('EZRX-T2737 | Verify multiple batch and expiry in view by items detail',
+          (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        ordersRootRobot.verifyViewByItemsPage();
+        await commonRobot.pullToRefresh();
+        await commonRobot.searchWithKeyboardAction(orderIdMultipleBatchAndExp);
+        await viewByItemsRobot
+            .tapFirstOrderWithMaterial(materialNumberMultipleBatchAndExp);
+        await viewByItemsDetailRobot.verifyManufacturerName('NA');
+        await viewByItemsDetailRobot.verifyItemComponent();
+        viewByItemsDetailRobot
+            .verifyMaterialNumber(materialNumberMultipleBatchAndExp);
+        viewByItemsDetailRobot.verifyBatchExpiryDate(
+          StockInfo.empty().copyWith(
+            batch: StringValue(batch1),
+            expiryDate: DateTimeStringValue(expiry1),
+          ),
+        );
+        viewByItemsDetailRobot.verifyBatchExpiryDate(
+          StockInfo.empty().copyWith(
+            batch: StringValue(batch2),
+            expiryDate: DateTimeStringValue(expiry2),
+          ),
+        );
+        viewByItemsDetailRobot.verifyBatchExpiryDate(
+          StockInfo.empty().copyWith(
+            batch: StringValue(batch3),
+            expiryDate: DateTimeStringValue(expiry3),
+          ),
+        );
       });
     });
 
