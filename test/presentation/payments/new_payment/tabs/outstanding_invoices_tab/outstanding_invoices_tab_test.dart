@@ -635,5 +635,23 @@ void main() {
       final invoiceOrderIdFinder = find.text('Order #0239453435');
       expect(invoiceOrderIdFinder, findsOneWidget);
     });
+
+    testWidgets('Search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        outstandingInvoicesBlocMock,
+        Stream.fromIterable([
+          OutstandingInvoicesState.initial().copyWith(
+            searchKey: SearchKey.search(searchKey),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
   });
 }

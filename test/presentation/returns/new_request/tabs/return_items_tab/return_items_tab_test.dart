@@ -422,9 +422,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final searchBarFinder = find.byKey(
-        WidgetKeys.genericKey(key: '12'),
-      );
+      final searchBarFinder = find.byKey(WidgetKeys.searchBar);
       expect(searchBarFinder, findsOneWidget);
       await tester.enterText(searchBarFinder, '123');
       await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -545,6 +543,25 @@ void main() {
         (tester.widget(find.byKey(WidgetKeys.itemTitleKey)) as Text).data,
         fakeReturnMaterial.materialDescription,
       );
+    });
+
+    testWidgets('Search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+
+      whenListen(
+        returnItemsBlocMock,
+        Stream.fromIterable([
+          ReturnItemsState.initial().copyWith(
+            searchKey: SearchKey.search(searchKey),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
     });
   });
 }

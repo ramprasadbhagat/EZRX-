@@ -2484,6 +2484,24 @@ void main() {
           expect(bestDealText, findsOneWidget);
         },
       );
+      testWidgets('Search bar should display keyword same as searchKey state',
+          (tester) async {
+        const searchKey = 'fake-search-key';
+        whenListen(
+          comboDetailMockBloc,
+          Stream.fromIterable([
+            ComboDealMaterialDetailState.initial().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        final searchField =
+            tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+        expect(searchField.controller?.text, searchKey);
+      });
     },
   );
 }

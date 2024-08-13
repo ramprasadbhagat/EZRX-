@@ -7,32 +7,32 @@ class _PaymentSummarySearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initialSearchKey = context
-        .paymentSummaryBloc(context.isMPPayment)
-        .state
-        .appliedFilter
-        .searchKey;
-
-    return CustomSearchBar(
-      key: WidgetKeys.genericKey(key: initialSearchKey.searchValueOrEmpty),
-      hintText: context.isMPPayment
-          ? 'Search by MP payment advice / voucher no.'
-          : 'Search by payment advice / voucher no.',
-      enabled: true,
-      initialValue: initialSearchKey.searchValueOrEmpty,
-      onSearchChanged: (value) => _fetchPaymentSummary(
-        searchValue: value,
-        context: context,
-      ),
-      onSearchSubmitted: (value) => _fetchPaymentSummary(
-        searchValue: value,
-        context: context,
-      ),
-      customValidator: (value) => SearchKey.search(value).isValid(),
-      onClear: () => _fetchPaymentSummary(
-        searchValue: '',
-        context: context,
-      ),
+    return BlocBuilder<PaymentSummaryBloc, PaymentSummaryState>(
+      bloc: context.paymentSummaryBloc(context.isMPPayment),
+      buildWhen: (previous, current) =>
+          previous.appliedFilter.searchKey != current.appliedFilter.searchKey,
+      builder: (context, state) {
+        return CustomSearchBar(
+          hintText: context.isMPPayment
+              ? 'Search by MP payment advice / voucher no.'
+              : 'Search by payment advice / voucher no.',
+          enabled: true,
+          initialValue: state.appliedFilter.searchKey.searchValueOrEmpty,
+          onSearchChanged: (value) => _fetchPaymentSummary(
+            searchValue: value,
+            context: context,
+          ),
+          onSearchSubmitted: (value) => _fetchPaymentSummary(
+            searchValue: value,
+            context: context,
+          ),
+          customValidator: (value) => SearchKey.search(value).isValid(),
+          onClear: () => _fetchPaymentSummary(
+            searchValue: '',
+            context: context,
+          ),
+        );
+      },
     );
   }
 

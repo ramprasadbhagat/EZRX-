@@ -536,12 +536,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byKey(
-          WidgetKeys.genericKey(
-            key: paymentSummaryBloc
-                .state.appliedFilter.searchKey.searchValueOrEmpty,
-          ),
-        ),
+        find.byKey(WidgetKeys.searchBar),
         findsOneWidget,
       );
 
@@ -573,12 +568,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byKey(
-          WidgetKeys.genericKey(
-            key: paymentSummaryBloc
-                .state.appliedFilter.searchKey.searchValueOrEmpty,
-          ),
-        ),
+        find.byKey(WidgetKeys.searchBar),
         findsOneWidget,
       );
 
@@ -980,12 +970,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byKey(
-          WidgetKeys.genericKey(
-            key: paymentSummaryBloc
-                .state.appliedFilter.searchKey.searchValueOrEmpty,
-          ),
-        ),
+        find.byKey(WidgetKeys.searchBar),
         findsOneWidget,
       );
 
@@ -1321,6 +1306,27 @@ void main() {
         ),
         findsOne,
       );
+    });
+
+    testWidgets('Search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        paymentSummaryBloc,
+        Stream.fromIterable([
+          PaymentSummaryState.initial().copyWith(
+            appliedFilter: PaymentSummaryFilter.empty().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ),
+        ]),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
     });
   });
 }

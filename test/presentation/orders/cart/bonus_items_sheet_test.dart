@@ -792,5 +792,23 @@ void main() {
           ).callCount >
           0;
     });
+    testWidgets('Search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+
+      whenListen(
+        bonusMaterialBloc,
+        Stream.fromIterable([
+          bonusMaterialState.copyWith(
+            searchKey: SearchKey.search(searchKey),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidgetToTest(priceAggregate));
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
   });
 }

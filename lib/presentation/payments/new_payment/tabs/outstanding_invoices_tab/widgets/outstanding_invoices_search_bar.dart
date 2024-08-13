@@ -5,26 +5,27 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initialSearchKey =
-        context.read<OutstandingInvoicesBloc>().state.searchKey;
-
-    return CustomSearchBar(
-      key: WidgetKeys.genericKey(
-        key: initialSearchKey.searchValueOrEmpty,
-      ),
-      onSearchChanged: (value) => _search(context: context, searchKey: value),
-      onSearchSubmitted: (value) => _search(context: context, searchKey: value),
-      hintText: context.tr(
-        context.isMPPayment ? 'Search by MP document number' : 'Search',
-      ),
-      keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly,
-      ],
-      customValidator: (value) => SearchKey.search(value).isValid(),
-      enabled: true,
-      onClear: () => _search(context: context, searchKey: ''),
-      initialValue: initialSearchKey.searchValueOrEmpty,
+    return BlocBuilder<OutstandingInvoicesBloc, OutstandingInvoicesState>(
+      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
+      builder: (context, state) {
+        return CustomSearchBar(
+          onSearchChanged: (value) =>
+              _search(context: context, searchKey: value),
+          onSearchSubmitted: (value) =>
+              _search(context: context, searchKey: value),
+          hintText: context.tr(
+            context.isMPPayment ? 'Search by MP document number' : 'Search',
+          ),
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+          customValidator: (value) => SearchKey.search(value).isValid(),
+          enabled: true,
+          onClear: () => _search(context: context, searchKey: ''),
+          initialValue: state.searchKey.searchValueOrEmpty,
+        );
+      },
     );
   }
 

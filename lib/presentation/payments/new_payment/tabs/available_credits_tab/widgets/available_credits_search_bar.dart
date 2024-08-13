@@ -5,26 +5,24 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initialSearchKey =
-        context.read<AvailableCreditsBloc>().state.searchKey;
-
-    return CustomSearchBar(
-      key: WidgetKeys.genericKey(
-        key: initialSearchKey.searchValueOrEmpty,
+    return BlocBuilder<AvailableCreditsBloc, AvailableCreditsState>(
+      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
+      builder: (context, state) => CustomSearchBar(
+        onSearchChanged: (value) => _search(context: context, searchKey: value),
+        onSearchSubmitted: (value) =>
+            _search(context: context, searchKey: value),
+        hintText: context.tr(
+          context.isMPPayment ? 'Search by MP document number' : 'Search',
+        ),
+        keyboardType: TextInputType.number,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly,
+        ],
+        customValidator: (value) => SearchKey.search(value).isValid(),
+        enabled: true,
+        onClear: () => _search(context: context, searchKey: ''),
+        initialValue: state.searchKey.searchValueOrEmpty,
       ),
-      onSearchChanged: (value) => _search(context: context, searchKey: value),
-      onSearchSubmitted: (value) => _search(context: context, searchKey: value),
-      hintText: context.tr(
-        context.isMPPayment ? 'Search by MP document number' : 'Search',
-      ),
-      keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly,
-      ],
-      customValidator: (value) => SearchKey.search(value).isValid(),
-      enabled: true,
-      onClear: () => _search(context: context, searchKey: ''),
-      initialValue: initialSearchKey.searchValueOrEmpty,
     );
   }
 

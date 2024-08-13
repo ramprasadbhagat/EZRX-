@@ -5,25 +5,27 @@ class _ReturnItemsSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initialSearchKey = context.read<ReturnItemsBloc>().state.searchKey;
-
-    return CustomSearchBar(
-      key: WidgetKeys.genericKey(key: initialSearchKey.searchValueOrEmpty),
-      initialValue: initialSearchKey.searchValueOrEmpty,
-      enabled: true,
-      onSearchChanged: (value) => _search(
-        context: context,
-        searchKey: value,
-      ),
-      onSearchSubmitted: (value) => _search(
-        context: context,
-        searchKey: value,
-      ),
-      customValidator: (value) => SearchKey.search(value).isValid(),
-      onClear: () => _search(
-        context: context,
-        searchKey: '',
-      ),
+    return BlocBuilder<ReturnItemsBloc, ReturnItemsState>(
+      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
+      builder: (context, state) {
+        return CustomSearchBar(
+          initialValue: state.searchKey.searchValueOrEmpty,
+          enabled: true,
+          onSearchChanged: (value) => _search(
+            context: context,
+            searchKey: value,
+          ),
+          onSearchSubmitted: (value) => _search(
+            context: context,
+            searchKey: value,
+          ),
+          customValidator: (value) => SearchKey.search(value).isValid(),
+          onClear: () => _search(
+            context: context,
+            searchKey: '',
+          ),
+        );
+      },
     );
   }
 

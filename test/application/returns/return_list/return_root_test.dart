@@ -127,6 +127,8 @@ void main() {
       StringUtils.changeToCamelCase(sentence: 'View by return requests'),
     ),
   );
+  final customSearchBar = find.byKey(WidgetKeys.searchBar);
+
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -281,11 +283,6 @@ void main() {
         final returnByItemPage = find.byKey(WidgetKeys.returnByItemPage);
         expect(returnByItemPage, findsOneWidget);
         await tester.pumpAndSettle();
-        final customSearchBar = find.byKey(
-          WidgetKeys.genericKey(
-            key: 'fake_search_key',
-          ),
-        );
         expect(
           customSearchBar,
           findsOneWidget,
@@ -358,11 +355,6 @@ void main() {
         expect(viewByRequest, findsOneWidget);
         await tester.tap(viewByRequest);
         await tester.pumpAndSettle();
-        final customSearchBar = find.byKey(
-          WidgetKeys.genericKey(
-            key: 'fake_search_key',
-          ),
-        );
         expect(
           customSearchBar,
           findsOneWidget,
@@ -684,6 +676,23 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+      testWidgets('Search bar should display keyword same as searchKey state',
+          (tester) async {
+        const searchKey = 'fake-search-key';
+        whenListen(
+          mockReturnListByItemBloc,
+          Stream.fromIterable([
+            ReturnListByItemState.initial().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pumpAndSettle();
+        final searchField = tester.widget<TextFormField>(customSearchBar);
+        expect(searchField.controller?.text, searchKey);
       });
       // testWidgets('Return Root Page List By Request Export error snack bar',
       //     (tester) async {

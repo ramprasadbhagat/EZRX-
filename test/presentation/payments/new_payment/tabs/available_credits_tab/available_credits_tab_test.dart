@@ -783,5 +783,23 @@ void main() {
       final postingDate = find.text('31 Jul 2016');
       expect(postingDate, findsOneWidget);
     });
+
+    testWidgets('Search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        availableCreditsBlocMock,
+        Stream.fromIterable([
+          AvailableCreditsState.initial().copyWith(
+            searchKey: SearchKey.search(searchKey),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
   });
 }

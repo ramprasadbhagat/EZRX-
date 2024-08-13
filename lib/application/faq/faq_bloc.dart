@@ -34,6 +34,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
           state.copyWith(
             isFetching: true,
             faqInfo: FAQInfo.empty(),
+            searchKey: SearchKey.empty(),
           ),
         );
 
@@ -56,7 +57,6 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
               isFetching: false,
               apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               selectedCategory: FAQCategory('All'),
-              searchKey: SearchKey.empty(),
               canLoadMore: faqInfo.faqList.length > config.pageSize,
             ),
           ),

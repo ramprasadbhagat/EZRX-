@@ -183,6 +183,23 @@ void main() {
           ),
         ).called(1);
       });
+      testWidgets('Search bar should display keyword same as searchKey state',
+          (tester) async {
+        const searchKey = 'fake-search-key';
+        whenListen(
+          announcementInfoBloc,
+          Stream.fromIterable([
+            AnnouncementInfoState.initial().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final searchField =
+            tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+        expect(searchField.controller?.text, searchKey);
+      });
     });
 
     group('Articles Search Bar', () {
@@ -251,6 +268,25 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+      testWidgets('Search bar should display keyword same as searchKey state',
+          (tester) async {
+        const searchKey = 'fake-search-key';
+        whenListen(
+          articlesInfoBloc,
+          Stream.fromIterable([
+            ArticlesInfoState.initial().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        await setUpWidgetArticleTab(tester);
+        final searchField =
+            tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+        expect(searchField.controller?.text, searchKey);
       });
     });
   });

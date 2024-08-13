@@ -535,6 +535,27 @@ void main() {
       expect(customerFlag, findsOneWidget);
     });
 
+    testWidgets('Search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        customerCodeBlocMock,
+        Stream.fromIterable(
+          [
+            CustomerCodeState.initial().copyWith(
+              searchKey: SearchKey.search(searchKey),
+              isFetching: false,
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
+
     //TODO: Fix customer search widget because change flow of select customer code
 
     // testWidgets('Clear Customer code Search', (tester) async {

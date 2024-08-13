@@ -11,42 +11,42 @@ class _AccountSummarySearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (currentActiveTabName == AllInvoicesPageRoute.name) {
-      return _SummarySearchBar(
-        searchKey: context
-            .allInvoicesBloc(context.isMPPayment)
-            .state
-            .appliedFilter
-            .searchKey
-            .getOrDefaultValue(''),
-        hintText: context.isMPPayment
-            ? 'Search by MP full invoice number'
-            : 'Search by full invoice number',
+      return BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
+        bloc: context.allInvoicesBloc(context.isMPPayment),
+        buildWhen: (previous, current) =>
+            previous.appliedFilter.searchKey != current.appliedFilter.searchKey,
+        builder: (context, state) => _SummarySearchBar(
+          searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+          hintText: context.isMPPayment
+              ? 'Search by MP full invoice number'
+              : 'Search by full invoice number',
+        ),
       );
     }
     if (currentActiveTabName == AllCreditsPageRoute.name) {
-      return _SummarySearchBar(
-        searchKey: context
-            .allCreditsBloc(context.isMPPayment)
-            .state
-            .appliedFilter
-            .searchKey
-            .getOrDefaultValue(''),
-        hintText: context.isMPPayment
-            ? 'Search by MP full credit note number'
-            : 'Search by full credit note number',
+      return BlocBuilder<AllCreditsBloc, AllCreditsState>(
+        bloc: context.allCreditsBloc(context.isMPPayment),
+        buildWhen: (previous, current) =>
+            previous.appliedFilter.searchKey != current.appliedFilter.searchKey,
+        builder: (context, state) => _SummarySearchBar(
+          searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+          hintText: context.isMPPayment
+              ? 'Search by MP full credit note number'
+              : 'Search by full credit note number',
+        ),
       );
     }
     if (currentActiveTabName == FullSummaryPageRoute.name) {
-      return _SummarySearchBar(
-        searchKey: context
-            .fullSummaryBloc(context.isMPPayment)
-            .state
-            .appliedFilter
-            .searchKey
-            .getOrDefaultValue(''),
-        hintText: context.isMPPayment
-            ? 'Search by MP full invoice/credit number'
-            : 'Search by invoice/credit number',
+      return BlocBuilder<FullSummaryBloc, FullSummaryState>(
+        bloc: context.fullSummaryBloc(context.isMPPayment),
+        buildWhen: (previous, current) =>
+            previous.appliedFilter.searchKey != current.appliedFilter.searchKey,
+        builder: (context, state) => _SummarySearchBar(
+          searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+          hintText: context.isMPPayment
+              ? 'Search by MP full invoice/credit number'
+              : 'Search by invoice/credit number',
+        ),
       );
     }
 
@@ -67,7 +67,6 @@ class _SummarySearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: CustomSearchBar(
-        key: WidgetKeys.genericKey(key: searchKey),
         hintText: hintText,
         initialValue: searchKey,
         enabled: true,

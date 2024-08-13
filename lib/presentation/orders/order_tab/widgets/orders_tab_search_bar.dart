@@ -11,21 +11,21 @@ class _OrdersTabSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isFromViewByOrder
-        ? _SummarySearchBar(
-            isFromViewByOrder: isFromViewByOrder,
-            searchKey: context
-                .read<ViewByOrderBloc>()
-                .state
-                .searchKey
-                .searchValueOrEmpty,
+        ? BlocBuilder<ViewByOrderBloc, ViewByOrderState>(
+            buildWhen: (previous, current) =>
+                previous.searchKey != current.searchKey,
+            builder: (context, state) => _SummarySearchBar(
+              isFromViewByOrder: isFromViewByOrder,
+              searchKey: state.searchKey.searchValueOrEmpty,
+            ),
           )
-        : _SummarySearchBar(
-            searchKey: context
-                .read<ViewByItemsBloc>()
-                .state
-                .searchKey
-                .searchValueOrEmpty,
-            isFromViewByOrder: isFromViewByOrder,
+        : BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
+            buildWhen: (previous, current) =>
+                previous.searchKey != current.searchKey,
+            builder: (context, state) => _SummarySearchBar(
+              searchKey: state.searchKey.searchValueOrEmpty,
+              isFromViewByOrder: isFromViewByOrder,
+            ),
           );
   }
 }
@@ -43,7 +43,6 @@ class _SummarySearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: CustomSearchBar(
-        key: WidgetKeys.genericKey(key: searchKey),
         initialValue: searchKey,
         enabled: true,
         onSearchChanged: (value) => _search(

@@ -790,5 +790,70 @@ void main() {
         ),
       ).called(1);
     });
+
+    testWidgets(
+        'All invoice search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        allInvoicesBlocMock,
+        Stream.fromIterable([
+          AllInvoicesState.initial().copyWith(
+            appliedFilter: AllInvoicesFilter.empty().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
+    testWidgets(
+        'All credit search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        allCreditsBlocMock,
+        Stream.fromIterable([
+          AllCreditsState.initial().copyWith(
+            appliedFilter: AllCreditsFilter.empty().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      await tester.tap(creditsTab);
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
+    testWidgets(
+        'Full summary search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        fullSummaryBlocMock,
+        Stream.fromIterable([
+          FullSummaryState.initial().copyWith(
+            appliedFilter: FullSummaryFilter.empty().copyWith(
+              searchKey: SearchKey.search(searchKey),
+            ),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      await tester.tap(fullSummaryTab);
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
   });
 }

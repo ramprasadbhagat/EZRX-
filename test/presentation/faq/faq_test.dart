@@ -526,5 +526,23 @@ void main() {
         ).called(1);
       },
     );
+
+    testWidgets('Search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+      whenListen(
+        faqBlocMock,
+        Stream.fromIterable([
+          FaqState.initial().copyWith(
+            searchKey: SearchKey.search(searchKey),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
   });
 }

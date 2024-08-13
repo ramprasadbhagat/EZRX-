@@ -5,24 +5,27 @@ class _FAQSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initialSearchKey = context.read<FaqBloc>().state.searchKey;
-
     return Padding(
       padding: const EdgeInsets.all(padding12),
-      child: CustomSearchBar(
-        key: WidgetKeys.genericKey(key: initialSearchKey.searchValueOrEmpty),
-        initialValue: initialSearchKey.searchValueOrEmpty,
-        enabled: true,
-        onSearchChanged: (value) => context.read<FaqBloc>().add(
-              FaqEvent.updateSearchKey(searchKey: SearchKey.search(value)),
-            ),
-        onSearchSubmitted: (value) => context.read<FaqBloc>().add(
-              FaqEvent.updateSearchKey(searchKey: SearchKey.search(value)),
-            ),
-        customValidator: (value) => SearchKey.search(value).isValid(),
-        onClear: () => context.read<FaqBloc>().add(
-              FaqEvent.updateSearchKey(searchKey: SearchKey.empty()),
-            ),
+      child: BlocBuilder<FaqBloc, FaqState>(
+        buildWhen: (previous, current) =>
+            previous.searchKey != current.searchKey,
+        builder: (context, state) {
+          return CustomSearchBar(
+            initialValue: state.searchKey.searchValueOrEmpty,
+            enabled: true,
+            onSearchChanged: (value) => context.read<FaqBloc>().add(
+                  FaqEvent.updateSearchKey(searchKey: SearchKey.search(value)),
+                ),
+            onSearchSubmitted: (value) => context.read<FaqBloc>().add(
+                  FaqEvent.updateSearchKey(searchKey: SearchKey.search(value)),
+                ),
+            customValidator: (value) => SearchKey.search(value).isValid(),
+            onClear: () => context.read<FaqBloc>().add(
+                  FaqEvent.updateSearchKey(searchKey: SearchKey.empty()),
+                ),
+          );
+        },
       ),
     );
   }

@@ -57,6 +57,16 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   }
 
   @override
+  void didUpdateWidget(covariant CustomSearchBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (controller.text != widget.initialValue) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.text = widget.initialValue;
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _debounce?.cancel();
     controller.dispose();

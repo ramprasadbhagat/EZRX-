@@ -51,6 +51,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
           state.copyWith(
             isFetching: true,
             canLoadMore: true,
+            searchKey: SearchKey.empty(),
             articleInfo: AnnouncementArticleInfo.empty(),
             apiFailureOrSuccessOption: none(),
           ),

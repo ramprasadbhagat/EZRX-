@@ -5,28 +5,31 @@ class _SearchArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initialSearchKey = context.read<ArticlesInfoBloc>().state.searchKey;
-
-    return CustomSearchBar(
-      key: WidgetKeys.searchSectionTab('Articles'),
-      enabled: true,
-      initialValue: initialSearchKey.searchValueOrEmpty,
-      onSearchChanged: (value) => context.read<ArticlesInfoBloc>().add(
-            ArticlesInfoEvent.setSearchKey(
-              searchKey: SearchKey.search(value),
-            ),
-          ),
-      onSearchSubmitted: (value) => context.read<ArticlesInfoBloc>().add(
-            ArticlesInfoEvent.setSearchKey(
-              searchKey: SearchKey.search(value),
-            ),
-          ),
-      customValidator: (value) => SearchKey.search(value).isValid(),
-      onClear: () => context.read<ArticlesInfoBloc>().add(
-            ArticlesInfoEvent.setSearchKey(
-              searchKey: SearchKey.empty(),
-            ),
-          ),
+    return BlocBuilder<ArticlesInfoBloc, ArticlesInfoState>(
+      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
+      builder: (context, state) {
+        return CustomSearchBar(
+          key: WidgetKeys.searchSectionTab('Articles'),
+          enabled: true,
+          initialValue: state.searchKey.searchValueOrEmpty,
+          onSearchChanged: (value) => context.read<ArticlesInfoBloc>().add(
+                ArticlesInfoEvent.setSearchKey(
+                  searchKey: SearchKey.search(value),
+                ),
+              ),
+          onSearchSubmitted: (value) => context.read<ArticlesInfoBloc>().add(
+                ArticlesInfoEvent.setSearchKey(
+                  searchKey: SearchKey.search(value),
+                ),
+              ),
+          customValidator: (value) => SearchKey.search(value).isValid(),
+          onClear: () => context.read<ArticlesInfoBloc>().add(
+                ArticlesInfoEvent.setSearchKey(
+                  searchKey: SearchKey.empty(),
+                ),
+              ),
+        );
+      },
     );
   }
 }

@@ -853,7 +853,7 @@ void main() {
       await tester.tap(find.byKey(WidgetKeys.viewByItemsTabKey));
       await tester.pumpAndSettle();
       expect(find.byType(ViewByItemsPage), findsOneWidget);
-      final searchBar = find.byKey(WidgetKeys.genericKey(key: ''));
+      final searchBar = find.byKey(WidgetKeys.searchBar);
       await tester.enterText(searchBar, 'dummy');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
@@ -873,7 +873,7 @@ void main() {
       await tester.tap(find.byKey(WidgetKeys.viewByOrdersTabKey));
       await tester.pumpAndSettle();
       expect(find.byType(ViewByOrdersPage), findsOneWidget);
-      final searchBar = find.byKey(WidgetKeys.genericKey(key: ''));
+      final searchBar = find.byKey(WidgetKeys.searchBar);
       await tester.enterText(searchBar, 'dummy');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
@@ -997,5 +997,49 @@ void main() {
         expect(licenseExpiredBannerSubTitle, findsNothing);
       },
     );
+
+    testWidgets(
+        'View by item search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+
+      whenListen(
+        viewByItemsBlocMock,
+        Stream.fromIterable([
+          ViewByItemsState.initial()
+              .copyWith(searchKey: SearchKey.search(searchKey)),
+        ]),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(WidgetKeys.viewByItemsTabKey));
+      await tester.pumpAndSettle();
+
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
+
+    testWidgets(
+        'View by order search bar should display keyword same as searchKey state',
+        (tester) async {
+      const searchKey = 'fake-search-key';
+
+      whenListen(
+        viewByOrderBlocMock,
+        Stream.fromIterable([
+          ViewByOrderState.initial()
+              .copyWith(searchKey: SearchKey.search(searchKey)),
+        ]),
+      );
+      await tester.pumpWidget(testWidget(const OrdersTab()));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(WidgetKeys.viewByOrdersTabKey));
+      await tester.pumpAndSettle();
+
+      final searchField =
+          tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
+      expect(searchField.controller?.text, searchKey);
+    });
   });
 }
