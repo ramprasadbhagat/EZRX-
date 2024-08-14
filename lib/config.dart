@@ -13,6 +13,7 @@ class Config {
   Duration dateRangePickerDuration = const Duration(days: 1095);
   int pageSize = 10;
   int productTabPageSize = 24;
+  bool bypassNotificationPermission = false;
 
   // For article and announcement lists, due to technical bottlenecks on the Sitecore side, the backend is unable to provide search and filter support.
   // Therefore, we need to address this issue locally, we handle filter data from our side

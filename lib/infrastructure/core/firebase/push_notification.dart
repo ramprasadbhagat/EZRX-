@@ -22,7 +22,9 @@ class PushNotificationService {
     required this.appRouter,
     required this.config,
   }) {
-    _initFirebaseMessaging();
+    if (!config.bypassNotificationPermission) {
+      _initFirebaseMessaging();
+    }
   }
 
   Future<String> getFCMToken() async {

@@ -129,6 +129,7 @@ final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> initialSetup({
   required Flavor flavor,
+  bool bypassNotificationPermission = false,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -137,6 +138,8 @@ Future<void> initialSetup({
 
   final config = locator<Config>();
   config.appFlavor = flavor;
+  //TODO(Hob): Will remove this when lambda support auto grant permission
+  config.bypassNotificationPermission = bypassNotificationPermission;
 
   await Firebase.initializeApp(options: kIsWeb ? config.firebaseOptions : null);
 
