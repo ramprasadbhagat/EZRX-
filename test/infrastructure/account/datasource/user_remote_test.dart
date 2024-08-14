@@ -79,7 +79,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation
                 .getUserQuery(fakeConfigValue, true),
-            'variables': {'id': userId, 'ignoreCustomerCode': true},
+            'variables': {'id': userId},
           }),
         );
         final result = await remoteDataSource.getUser(
@@ -112,7 +112,6 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation
                 .getUserQuery(fakeConfigValue, false),
-            'variables': {'ignoreCustomerCode': true},
           }),
         );
         await remoteDataSource
@@ -145,7 +144,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation
                 .getUserQuery(fakeConfigValue, true),
-            'variables': {'id': userId, 'ignoreCustomerCode': true},
+            'variables': {'id': userId},
           }),
         );
         await remoteDataSource

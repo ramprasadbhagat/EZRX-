@@ -7,12 +7,10 @@ class UserQueryMutation {
   String getUserQuery(bool enableMarketPlace, bool userIdRequired) {
     return '''
       query userQuery(
-        ${userIdRequired ? '\$id: Int!,' : ''} 
-        \$ignoreCustomerCode: Boolean
+        ${userIdRequired ? '\$id: Int!' : ''} 
       ) {
         user(
-          ${userIdRequired ? 'id: \$id,' : ''} 
-          ignoreCustomerCode: \$ignoreCustomerCode
+          ${userIdRequired ? 'id: \$id' : ''} 
         ) {
             id
             username

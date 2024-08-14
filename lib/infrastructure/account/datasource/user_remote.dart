@@ -43,7 +43,6 @@ class UserRemoteDataSource {
           ),
           'variables': {
             if (remoteConfigService.passUserId) 'id': userId,
-            'ignoreCustomerCode': true,
           },
         }),
       );
