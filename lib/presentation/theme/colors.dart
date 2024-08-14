@@ -133,7 +133,7 @@ abstract class ZPColors {
   static const Color bannerBackground = Color.fromRGBO(229, 235, 236, 1);
   static const Color poisonMaterialText = Color.fromRGBO(169, 47, 47, 1);
   static const Color poisonMaterialBg = Color.fromRGBO(250, 235, 240, 1);
-
+  static const Color pdfPleaseNoteBg = Color.fromRGBO(248, 249, 251, 1);
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,
     <int, Color>{

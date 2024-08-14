@@ -48,6 +48,7 @@ class CreatePaymentInvoicePdf {
             '*': Style(
               fontSize: FontSize(10),
               color: ZPColors.neutralsGrey1,
+              lineHeight: const LineHeight(1.5),
             ),
           },
         ),
@@ -440,12 +441,15 @@ class CreatePaymentInvoicePdf {
       );
 
   Future<pw.Widget> _description({required String pleaseNote}) async {
+    if (pleaseNote.isEmpty) return pw.SizedBox.shrink();
+
     final image = await _captureImageDescription(pleaseNote: pleaseNote);
 
     return pw.Container(
       width: double.infinity,
-      color: PdfColor.fromInt(ZPColors.extraLightGrey2.value),
-      padding: const pw.EdgeInsets.symmetric(vertical: 5.0).copyWith(right: 20),
+      color: PdfColor.fromInt(ZPColors.pdfPleaseNoteBg.value),
+      padding: const pw.EdgeInsets.symmetric(vertical: 5.0)
+          .copyWith(right: 20, left: -20),
       child: pw.Image(image),
     );
   }
@@ -458,7 +462,7 @@ class CreatePaymentInvoicePdf {
             borderRadius: const pw.BorderRadius.vertical(
               bottom: pw.Radius.circular(16.0),
             ),
-            color: PdfColor.fromInt(ZPColors.extraLightGrey4.value),
+            color: PdfColor.fromInt(ZPColors.accentColor.value),
           ),
           child: pw.Center(
             child: pw.Text(
