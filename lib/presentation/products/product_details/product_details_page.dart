@@ -56,6 +56,7 @@ import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -322,31 +323,39 @@ class _BodyContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Text(
+                        materialInfo.combinationCode(
+                          showGMCPart: config.enableGMC,
+                          showIRNPart: config.enableIRN,
+                        ),
+                        key: WidgetKeys.materialDetailsMaterialNumber,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: ZPColors.darkGray),
+                      ),
                       Expanded(
-                        child: Text(
-                          materialInfo.combinationCode(
-                            showGMCPart: config.enableGMC,
-                            showIRNPart: config.enableIRN,
-                          ),
-                          key: WidgetKeys.materialDetailsMaterialNumber,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(color: ZPColors.darkGray),
+                        child: Wrap(
+                          alignment: WrapAlignment.end,
+                          spacing: padding6,
+                          runSpacing: padding6,
+                          children: [
+                            if (state
+                                .displayOOSPreorderTag(config.hideStockDisplay))
+                              StatusLabel(
+                                status: StatusType(
+                                  config.addOosMaterials
+                                      .productTag(validateOutOfStockValue),
+                                ),
+                              ),
+                            if (materialInfo.isPoison) ProductTag.poison(),
+                            if (materialInfo.isSampleMaterial)
+                              ProductTag.sample(),
+                            if (materialInfo.isGimmick) ProductTag.gimmickTag(),
+                          ],
                         ),
                       ),
-                      if (state.displayOOSPreorderTag(config.hideStockDisplay))
-                        StatusLabel(
-                          status: StatusType(
-                            config.addOosMaterials
-                                .productTag(validateOutOfStockValue),
-                          ),
-                        ),
-                      if (materialInfo.isPoison) ProductTag.poison(),
-                      if (materialInfo.isSampleMaterial) ProductTag.sample(),
-                      if (materialInfo.isGimmick) ProductTag.gimmickTag(),
                     ],
                   ),
                   const SizedBox(height: 8),

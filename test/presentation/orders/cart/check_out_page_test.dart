@@ -354,7 +354,7 @@ void main() {
             isValidated: true,
             focusTo: DeliveryInfoLabel.paymentTerm,
             deliveryInfoData: DeliveryInfoData.empty()
-                .copyWith(contactPerson: ContactPerson('fakeInput')),
+                .copyWith(contactPerson: StringValue('fakeInput')),
           ),
         ];
         whenListen(
@@ -384,7 +384,7 @@ void main() {
               mpSmallOrderFee: 0,
               zpSmallOrderFee: 0,
               data: DeliveryInfoData.empty()
-                  .copyWith(contactPerson: ContactPerson('fakeInput')),
+                  .copyWith(contactPerson: StringValue('fakeInput')),
               salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
             ),
           ),
@@ -899,12 +899,12 @@ void main() {
       final expectedState = [
         AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            referenceNote: ReferenceNote('fake'),
+            referenceNote: StringValue('fake'),
           ),
         ),
         AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            referenceNote: ReferenceNote(''),
+            referenceNote: StringValue(''),
           ),
         ),
       ];
@@ -929,7 +929,7 @@ void main() {
             newValue: 'f',
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
     testWidgets('=> test TextEditingValue on change for Payment Terms',
         (tester) async {
@@ -1255,7 +1255,7 @@ void main() {
               paymentTerm: PaymentTerm(
                 'fake_payment_term - fake_payment_term_description',
               ),
-              poReference: PoReference(''),
+              poReference: StringValue(''),
             ),
           ),
         );
@@ -1302,7 +1302,7 @@ void main() {
               paymentTerm: PaymentTerm(
                 'fake_payment_term - fake_payment_term_description',
               ),
-              poReference: PoReference('        '),
+              poReference: StringValue.trimmed('        '),
             ),
           ),
         );
@@ -1349,7 +1349,7 @@ void main() {
               paymentTerm: PaymentTerm(
                 'fake_payment_term - fake_payment_term_description',
               ),
-              poReference: PoReference('sample po reference'),
+              poReference: StringValue('sample po reference'),
             ),
           ),
         );

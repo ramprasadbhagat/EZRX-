@@ -8,6 +8,13 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
       : left(ValueFailure.empty(failedValue: input));
 }
 
+Either<ValueFailure<String>, String> validateTrimmedStringNotEmpty(
+  String input,
+) =>
+    input.trim().isNotEmpty
+        ? right(input)
+        : left(ValueFailure.empty(failedValue: input));
+
 Either<ValueFailure<Map<String, String>>, Map<String, String>>
     validateMapNotEmpty(
   Map<String, String> input,

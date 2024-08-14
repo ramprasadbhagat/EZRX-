@@ -10,37 +10,34 @@ part 'delivery_info_data.freezed.dart';
 class DeliveryInfoData with _$DeliveryInfoData {
   const DeliveryInfoData._();
   const factory DeliveryInfoData({
-    required PoReference poReference,
-    required DeliveryInstruction deliveryInstruction,
-    required ReferenceNote referenceNote,
-    required ContactPerson contactPerson,
+    required StringValue poReference,
+    required StringValue deliveryInstruction,
+    required StringValue referenceNote,
+    required StringValue contactPerson,
     required PhoneNumber mobileNumber,
     required PaymentTerm paymentTerm,
     required DateTimeStringValue deliveryDate,
     required List<PoDocuments> poDocuments,
     required bool greenDeliveryEnabled,
+    required bool poisonRefDocumentsIncluded,
   }) = _DeliveryInfoData;
 
   factory DeliveryInfoData.fromOrderHistory({
     required OrderHistoryDetails orderHistoryDetails,
   }) {
     return DeliveryInfoData.empty().copyWith(
-      poReference: PoReference(
-        orderHistoryDetails.poReference.displayPoReference,
+      poReference: StringValue.trimmed(
+        orderHistoryDetails.poReference.getOrDefaultValue(''),
       ),
-      contactPerson: ContactPerson(
+      contactPerson: StringValue.trimmed(
         orderHistoryDetails.orderBy.getOrDefaultValue(''),
       ),
-      mobileNumber: PhoneNumber(
-        orderHistoryDetails.telephoneNumber.getOrDefaultValue(''),
-      ),
-      deliveryInstruction: DeliveryInstruction(
+      mobileNumber: orderHistoryDetails.telephoneNumber,
+      deliveryInstruction: StringValue.trimmed(
         orderHistoryDetails.orderHistoryDetailsSpecialInstructions
             .getOrDefaultValue(''),
       ),
-      referenceNote: ReferenceNote(
-        orderHistoryDetails.referenceNotes,
-      ),
+      referenceNote: StringValue.trimmed(orderHistoryDetails.referenceNotes),
       // collectiveNumber: CollectiveNumber(''),
       paymentTerm: PaymentTerm(
         '${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermCode.getOrDefaultValue('')}-${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermDescription.getOrDefaultValue('')}',
@@ -50,15 +47,24 @@ class DeliveryInfoData with _$DeliveryInfoData {
   }
 
   factory DeliveryInfoData.empty() => DeliveryInfoData(
-        poReference: PoReference(''),
-        deliveryInstruction: DeliveryInstruction(''),
-        referenceNote: ReferenceNote(''),
+        poReference: StringValue.trimmed(''),
+        deliveryInstruction: StringValue.trimmed(''),
+        referenceNote: StringValue.trimmed(''),
         // collectiveNumber: CollectiveNumber(''),
-        contactPerson: ContactPerson(''),
+        contactPerson: StringValue.trimmed(''),
         mobileNumber: PhoneNumber(''),
         paymentTerm: PaymentTerm(''),
         deliveryDate: DateTimeStringValue(''),
         poDocuments: <PoDocuments>[],
         greenDeliveryEnabled: false,
+        poisonRefDocumentsIncluded: false,
+      );
+
+  DeliveryInfoData get formatted => copyWith(
+        poReference: StringValue.trimmed(poReference.formattedValue),
+        deliveryInstruction:
+            StringValue.trimmed(deliveryInstruction.formattedValue),
+        referenceNote: StringValue.trimmed(referenceNote.formattedValue),
+        contactPerson: StringValue.trimmed(contactPerson.formattedValue),
       );
 }

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/tender_tag_for_product_tile.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -136,40 +138,37 @@ class _ProductDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: padding6,
+            spacing: padding6,
             children: [
-              Flexible(
-                child: Text(
-                  cartItem.materialInfo.combinationCode(
-                    showGMCPart: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .salesOrgConfigs
-                        .enableGMC,
-                    showIRNPart: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .salesOrgConfigs
-                        .enableIRN,
-                  ),
-                  key: WidgetKeys.cartItemProductMaterialNumber,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
+              Text(
+                cartItem.materialInfo.combinationCode(
+                  showGMCPart: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .enableGMC,
+                  showIRNPart: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .enableIRN,
                 ),
+                key: WidgetKeys.cartItemProductMaterialNumber,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
-              const SizedBox(
-                width: 8,
-              ),
+              if (cartItem.materialInfo.isPoison) ProductTag.poison(),
+              if (cartItem.materialInfo.isSampleMaterial) ProductTag.sample(),
+              if (cartItem.materialInfo.isGimmick) ProductTag.gimmickTag(),
               PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),
           Text(
             cartItem.materialInfo.displayDescription,
             key: WidgetKeys.cartItemProductMaterialDescription,
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.labelMedium,
           ),
           StockInfoWidget(
             stockInfo: cartItem.stockInfoValid,

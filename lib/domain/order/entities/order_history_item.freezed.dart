@@ -29,15 +29,14 @@ mixin _$OrderHistoryItem {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   StringValue get orderBy => throw _privateConstructorUsedError;
   DocumentType get orderType => throw _privateConstructorUsedError;
-  PoReference get poReference => throw _privateConstructorUsedError;
+  StringValue get poReference => throw _privateConstructorUsedError;
   StringValue get invoiceNumber => throw _privateConstructorUsedError;
   bool get isBonusMaterial => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
   DateTimeStringValue get requestedDeliveryDate =>
       throw _privateConstructorUsedError;
-  SpecialInstructions get specialInstructions =>
-      throw _privateConstructorUsedError;
+  StringValue get specialInstructions => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
   List<PoDocuments> get orderHistoryItemPoAttachments =>
       throw _privateConstructorUsedError;
@@ -93,13 +92,13 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       DateTimeStringValue createdDate,
       StringValue orderBy,
       DocumentType orderType,
-      PoReference poReference,
+      StringValue poReference,
       StringValue invoiceNumber,
       bool isBonusMaterial,
       PhoneNumber telephoneNumber,
       ProductImages productImages,
       DateTimeStringValue requestedDeliveryDate,
-      SpecialInstructions specialInstructions,
+      StringValue specialInstructions,
       double tax,
       List<PoDocuments> orderHistoryItemPoAttachments,
       StringValue ezrxNumber,
@@ -243,7 +242,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
-              as PoReference,
+              as StringValue,
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
@@ -267,7 +266,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       specialInstructions: null == specialInstructions
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
-              as SpecialInstructions,
+              as StringValue,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
@@ -406,13 +405,13 @@ abstract class _$$OrderHistoryItemImplCopyWith<$Res>
       DateTimeStringValue createdDate,
       StringValue orderBy,
       DocumentType orderType,
-      PoReference poReference,
+      StringValue poReference,
       StringValue invoiceNumber,
       bool isBonusMaterial,
       PhoneNumber telephoneNumber,
       ProductImages productImages,
       DateTimeStringValue requestedDeliveryDate,
-      SpecialInstructions specialInstructions,
+      StringValue specialInstructions,
       double tax,
       List<PoDocuments> orderHistoryItemPoAttachments,
       StringValue ezrxNumber,
@@ -556,7 +555,7 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
-              as PoReference,
+              as StringValue,
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
@@ -580,7 +579,7 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
       specialInstructions: null == specialInstructions
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
-              as SpecialInstructions,
+              as StringValue,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
@@ -760,7 +759,7 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
   @override
   final DocumentType orderType;
   @override
-  final PoReference poReference;
+  final StringValue poReference;
   @override
   final StringValue invoiceNumber;
   @override
@@ -772,7 +771,7 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
   @override
   final DateTimeStringValue requestedDeliveryDate;
   @override
-  final SpecialInstructions specialInstructions;
+  final StringValue specialInstructions;
   @override
   final double tax;
   final List<PoDocuments> _orderHistoryItemPoAttachments;
@@ -995,13 +994,13 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final DateTimeStringValue createdDate,
       required final StringValue orderBy,
       required final DocumentType orderType,
-      required final PoReference poReference,
+      required final StringValue poReference,
       required final StringValue invoiceNumber,
       required final bool isBonusMaterial,
       required final PhoneNumber telephoneNumber,
       required final ProductImages productImages,
       required final DateTimeStringValue requestedDeliveryDate,
-      required final SpecialInstructions specialInstructions,
+      required final StringValue specialInstructions,
       required final double tax,
       required final List<PoDocuments> orderHistoryItemPoAttachments,
       required final StringValue ezrxNumber,
@@ -1055,7 +1054,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   DocumentType get orderType;
   @override
-  PoReference get poReference;
+  StringValue get poReference;
   @override
   StringValue get invoiceNumber;
   @override
@@ -1067,7 +1066,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   DateTimeStringValue get requestedDeliveryDate;
   @override
-  SpecialInstructions get specialInstructions;
+  StringValue get specialInstructions;
   @override
   double get tax;
   @override

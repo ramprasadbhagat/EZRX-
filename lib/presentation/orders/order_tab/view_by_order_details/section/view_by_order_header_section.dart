@@ -86,7 +86,7 @@ class OrderHeaderSection extends StatelessWidget {
               const SizedBox(height: 5),
               BalanceTextRow(
                 keyText: context.tr('PO reference'),
-                valueText: orderDetails.poReference.displayPoReference,
+                valueText: orderDetails.poReference.displayNAIfEmpty,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -190,8 +190,8 @@ class OrderHeaderSection extends StatelessWidget {
                 const SizedBox(height: 8),
                 BalanceTextRow(
                   keyText: context.tr('Delivery instructions'),
-                  valueText: orderDetails.orderHistoryDetailsSpecialInstructions
-                      .displaySpecialInstructions,
+                  valueText: orderDetails
+                      .orderHistoryDetailsSpecialInstructions.displayNAIfEmpty,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,

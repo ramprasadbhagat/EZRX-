@@ -21,6 +21,9 @@ class BonusSampleItem with _$BonusSampleItem {
     required StockInfo stockInfo,
     required ItemRegistrationNumber itemRegistrationNumber,
     required bool bonusOverrideFlag,
+    required bool isGimmick,
+    required bool isPoison,
+    required bool isSampleMaterial,
   }) = _BonusSampleItem;
 
   factory BonusSampleItem.empty() => BonusSampleItem(
@@ -33,6 +36,9 @@ class BonusSampleItem with _$BonusSampleItem {
         stockInfo: StockInfo.empty(),
         itemRegistrationNumber: ItemRegistrationNumber(''),
         bonusOverrideFlag: false,
+        isGimmick: false,
+        isPoison: false,
+        isSampleMaterial: false,
       );
 
   String combinationCode({required bool showIRNPart}) => <String>[

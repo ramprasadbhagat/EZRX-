@@ -145,56 +145,56 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              poReference: PoReference('Sample Reference'),
+              poReference: StringValue('Sample Reference'),
             ),
           ),
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              poReference: PoReference('Sample Reference'),
-              contactPerson: ContactPerson('Person Name'),
+              poReference: StringValue('Sample Reference'),
+              contactPerson: StringValue('Person Name'),
             ),
           ),
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              poReference: PoReference('Sample Reference'),
-              contactPerson: ContactPerson('Person Name'),
+              poReference: StringValue('Sample Reference'),
+              contactPerson: StringValue('Person Name'),
               deliveryDate: DateTimeStringValue('2012-12-10'),
             ),
           ),
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              poReference: PoReference('Sample Reference'),
-              contactPerson: ContactPerson('Person Name'),
+              poReference: StringValue('Sample Reference'),
+              contactPerson: StringValue('Person Name'),
               deliveryDate: DateTimeStringValue('2012-12-10'),
-              referenceNote: ReferenceNote('Reference Note'),
+              referenceNote: StringValue('Reference Note'),
             ),
           ),
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              poReference: PoReference('Sample Reference'),
-              contactPerson: ContactPerson('Person Name'),
+              poReference: StringValue('Sample Reference'),
+              contactPerson: StringValue('Person Name'),
               deliveryDate: DateTimeStringValue('2012-12-10'),
-              referenceNote: ReferenceNote('Reference Note'),
-              deliveryInstruction: DeliveryInstruction('Special Instruction'),
+              referenceNote: StringValue('Reference Note'),
+              deliveryInstruction: StringValue('Special Instruction'),
             ),
           ),
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              poReference: PoReference('Sample Reference'),
-              contactPerson: ContactPerson('Person Name'),
+              poReference: StringValue('Sample Reference'),
+              contactPerson: StringValue('Person Name'),
               deliveryDate: DateTimeStringValue('2012-12-10'),
-              referenceNote: ReferenceNote('Reference Note'),
-              deliveryInstruction: DeliveryInstruction('Special Instruction'),
+              referenceNote: StringValue('Reference Note'),
+              deliveryInstruction: StringValue('Special Instruction'),
               paymentTerm: PaymentTerm('0001-Test'),
             ),
           ),
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              poReference: PoReference('Sample Reference'),
-              contactPerson: ContactPerson('Person Name'),
+              poReference: StringValue('Sample Reference'),
+              contactPerson: StringValue('Person Name'),
               deliveryDate: DateTimeStringValue('2012-12-10'),
-              referenceNote: ReferenceNote('Reference Note'),
-              deliveryInstruction: DeliveryInstruction('Special Instruction'),
+              referenceNote: StringValue('Reference Note'),
+              deliveryInstruction: StringValue('Special Instruction'),
               paymentTerm: PaymentTerm('0001-Test'),
               mobileNumber: PhoneNumber('1234567890'),
             ),
@@ -207,12 +207,12 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            poReference: PoReference('CO REF'),
-            contactPerson: ContactPerson('PERSON'),
+            poReference: StringValue('CO REF'),
+            contactPerson: StringValue('PERSON'),
             mobileNumber: PhoneNumber(''),
             paymentTerm: PaymentTerm('0001-TEST'),
-            referenceNote: ReferenceNote('Reference Note Test'),
-            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+            referenceNote: StringValue('Reference Note Test'),
+            deliveryInstruction: StringValue('Instruction Test'),
           ),
           showErrorMessages: true,
         ),
@@ -227,12 +227,12 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              poReference: PoReference('CO REF'),
-              contactPerson: ContactPerson('PERSON'),
+              poReference: StringValue('CO REF'),
+              contactPerson: StringValue('PERSON'),
               mobileNumber: PhoneNumber('1234567890'),
               paymentTerm: PaymentTerm('0001-TEST'),
-              referenceNote: ReferenceNote('Reference Note Test'),
-              deliveryInstruction: DeliveryInstruction('Instruction Test'),
+              referenceNote: StringValue('Reference Note Test'),
+              deliveryInstruction: StringValue('Instruction Test'),
             ),
             showErrorMessages: true,
           ),
@@ -244,12 +244,12 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            poReference: PoReference('CO REF'),
-            contactPerson: ContactPerson('PERSON'),
+            poReference: StringValue('CO REF'),
+            contactPerson: StringValue('PERSON'),
             mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
-            referenceNote: ReferenceNote('Reference Note Test'),
-            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+            referenceNote: StringValue('Reference Note Test'),
+            deliveryInstruction: StringValue('Instruction Test'),
           ),
         ),
         act: (AdditionalDetailsBloc bloc) {
@@ -261,12 +261,12 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             isValidated: true,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              poReference: PoReference('CO REF'),
-              contactPerson: ContactPerson('PERSON'),
+              poReference: StringValue('CO REF'),
+              contactPerson: StringValue('PERSON'),
               mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
-              referenceNote: ReferenceNote('Reference Note Test'),
-              deliveryInstruction: DeliveryInstruction('Instruction Test'),
+              referenceNote: StringValue('Reference Note Test'),
+              deliveryInstruction: StringValue('Instruction Test'),
             ),
           ),
         ],
@@ -278,12 +278,12 @@ void main() {
         seed: () => AdditionalDetailsState.initial().copyWith(
           config: fakeTWSalesOrgConfigs,
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            poReference: PoReference('CO REF'),
-            contactPerson: ContactPerson('PERSON'),
+            poReference: StringValue('CO REF'),
+            contactPerson: StringValue('PERSON'),
             mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm(''),
-            referenceNote: ReferenceNote('Reference Note Test'),
-            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+            referenceNote: StringValue('Reference Note Test'),
+            deliveryInstruction: StringValue('Instruction Test'),
           ),
         ),
         act: (AdditionalDetailsBloc bloc) {
@@ -298,12 +298,12 @@ void main() {
             config: fakeTWSalesOrgConfigs,
             focusTo: DeliveryInfoLabel.paymentTerm,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              poReference: PoReference('CO REF'),
-              contactPerson: ContactPerson('PERSON'),
+              poReference: StringValue('CO REF'),
+              contactPerson: StringValue('PERSON'),
               mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm(''),
-              referenceNote: ReferenceNote('Reference Note Test'),
-              deliveryInstruction: DeliveryInstruction('Instruction Test'),
+              referenceNote: StringValue('Reference Note Test'),
+              deliveryInstruction: StringValue('Instruction Test'),
             ),
           ),
         ],
@@ -315,8 +315,8 @@ void main() {
         seed: () => AdditionalDetailsState.initial().copyWith(
           config: fakeIDSalesOrgConfigs,
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            poReference: PoReference('CO REF'),
-            referenceNote: ReferenceNote('Reference Note Test'),
+            poReference: StringValue('CO REF'),
+            referenceNote: StringValue('Reference Note Test'),
           ),
         ),
         act: (AdditionalDetailsBloc bloc) {
@@ -331,8 +331,8 @@ void main() {
             config: fakeIDSalesOrgConfigs,
             isPoAttachmentValidated: false,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              poReference: PoReference('CO REF'),
-              referenceNote: ReferenceNote('Reference Note Test'),
+              poReference: StringValue('CO REF'),
+              referenceNote: StringValue('Reference Note Test'),
             ),
           ),
         ],
@@ -343,12 +343,12 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            poReference: PoReference('CO REF'),
-            contactPerson: ContactPerson(''),
+            poReference: StringValue('CO REF'),
+            contactPerson: StringValue(''),
             mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
-            referenceNote: ReferenceNote('Reference Note Test'),
-            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+            referenceNote: StringValue('Reference Note Test'),
+            deliveryInstruction: StringValue('Instruction Test'),
           ),
           config: fakeTHSalesOrgConfigs.copyWith(enableMobileNumber: true),
         ),
@@ -364,12 +364,12 @@ void main() {
             config: fakeTHSalesOrgConfigs.copyWith(enableMobileNumber: true),
             focusTo: DeliveryInfoLabel.contactPerson,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              poReference: PoReference('CO REF'),
-              contactPerson: ContactPerson(''),
+              poReference: StringValue('CO REF'),
+              contactPerson: StringValue(''),
               mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
-              referenceNote: ReferenceNote('Reference Note Test'),
-              deliveryInstruction: DeliveryInstruction('Instruction Test'),
+              referenceNote: StringValue('Reference Note Test'),
+              deliveryInstruction: StringValue('Instruction Test'),
             ),
           ),
         ],
@@ -380,8 +380,8 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            poReference: PoReference('CO REF'),
-            contactPerson: ContactPerson(''),
+            poReference: StringValue('CO REF'),
+            contactPerson: StringValue(''),
             mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             greenDeliveryEnabled: false,
@@ -393,8 +393,8 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              poReference: PoReference('CO REF'),
-              contactPerson: ContactPerson(''),
+              poReference: StringValue('CO REF'),
+              contactPerson: StringValue(''),
               mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               greenDeliveryEnabled: true,
@@ -408,8 +408,8 @@ void main() {
         build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            poReference: PoReference('CO REF'),
-            contactPerson: ContactPerson(''),
+            poReference: StringValue('CO REF'),
+            contactPerson: StringValue(''),
             mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             greenDeliveryEnabled: true,
@@ -421,8 +421,8 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              poReference: PoReference('CO REF'),
-              contactPerson: ContactPerson(''),
+              poReference: StringValue('CO REF'),
+              contactPerson: StringValue(''),
               mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               greenDeliveryEnabled: false,

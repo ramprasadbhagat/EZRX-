@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
@@ -35,7 +34,7 @@ class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
   ReturnRequestInformationHeader toDomain() {
     return ReturnRequestInformationHeader(
       returnReference: StringValue(returnReference),
-      specialInstructions: SpecialInstructions(specialInstructions),
+      specialInstructions: StringValue(specialInstructions),
       cName1: cName1,
       createdBy: createdBy,
       createdDateTime: DateTimeStringValue('$createdDate|$createdTime'),

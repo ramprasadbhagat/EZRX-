@@ -114,10 +114,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       isBonusMaterial: orderHistoryItem.isBonusMaterial,
       telephoneNumber: orderHistoryItem.telephoneNumber.displayTelephoneNumber,
       invoiceNumber: orderHistoryItem.invoiceNumber.getOrDefaultValue(''),
-      pOReference: orderHistoryItem.poReference.displayPoReference,
+      pOReference: orderHistoryItem.poReference.displayNAIfEmpty,
       requestedDeliveryDate: orderHistoryItem.requestedDeliveryDate.dateString,
-      specialInstruction:
-          orderHistoryItem.specialInstructions.displaySpecialInstructions,
+      specialInstruction: orderHistoryItem.specialInstructions.displayNAIfEmpty,
       orderHistoryItemPoAttachments: orderHistoryItem
           .orderHistoryItemPoAttachments
           .map((e) => PoDocumentsDto.fromDomain(e))
@@ -173,11 +172,11 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       orderType: DocumentType(orderType),
       invoiceNumber: StringValue(invoiceNumber),
       isBonusMaterial: isBonusMaterial,
-      poReference: PoReference(pOReference),
+      poReference: StringValue(pOReference),
       telephoneNumber: PhoneNumber(telephoneNumber),
       productImages: ProductImages.empty(),
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
-      specialInstructions: SpecialInstructions(specialInstruction),
+      specialInstructions: StringValue(specialInstruction),
       orderHistoryItemPoAttachments:
           orderHistoryItemPoAttachments.map((e) => e.toDomain()).toList(),
       ezrxNumber: StringValue(eZRXNumber),

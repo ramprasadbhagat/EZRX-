@@ -71,6 +71,23 @@ class AdditionalDetailsBloc
               state.deliveryInfoData.copyWith(poDocuments: <PoDocuments>[]),
         ),
       ),
+      updateIncludePoisonRefDoucments: (e) {
+        final isPoAttachmentValidated = e.value
+            ? state.deliveryInfoData.poDocuments.isNotEmpty
+            : state.deliveryInfoData.poDocuments.isNotEmpty ||
+                !state.config.enablePOAttachmentRequired;
+
+        emit(
+          state.copyWith(
+            deliveryInfoData: state.deliveryInfoData.copyWith(
+              poisonRefDocumentsIncluded: e.value,
+            ),
+            isPoAttachmentValidated: state.showErrorMessages
+                ? isPoAttachmentValidated
+                : state.isPoAttachmentValidated,
+          ),
+        );
+      },
       toggleGreenDelivery: (value) {
         final currentValue = state.deliveryInfoData.greenDeliveryEnabled;
 
@@ -118,10 +135,12 @@ class AdditionalDetailsBloc
     final isPaymentTermValid = state.config.enablePaymentTerms
         ? state.deliveryInfoData.paymentTerm.isValid()
         : true;
-    final isPoUploadAttachment =
-        state.config.enablePOAttachmentRequired && state.config.showPOAttachment
-            ? state.deliveryInfoData.poDocuments.isNotEmpty
-            : true;
+    final poAttachmentRequired = (state.config.enablePOAttachmentRequired ||
+            state.deliveryInfoData.poisonRefDocumentsIncluded) &&
+        state.config.showPOAttachment;
+    final isPoUploadAttachment = poAttachmentRequired
+        ? state.deliveryInfoData.poDocuments.isNotEmpty
+        : true;
 
     final isFormValid = isCustomerPoReferenceValid &&
         isContactPersonValid &&
@@ -134,6 +153,9 @@ class AdditionalDetailsBloc
         isValidated: isFormValid,
         isPoAttachmentValidated: isPoUploadAttachment,
         showErrorMessages: !isFormValid,
+        deliveryInfoData: isFormValid
+            ? state.deliveryInfoData.formatted
+            : state.deliveryInfoData,
         focusTo: !isCustomerPoReferenceValid
             ? DeliveryInfoLabel.poReference
             : !isContactPersonValid
@@ -168,7 +190,7 @@ class AdditionalDetailsBloc
         _emitAfterOnTextChange(
           emit: emit,
           deliveryInfoData: state.deliveryInfoData.copyWith(
-            poReference: PoReference(newValue),
+            poReference: StringValue.trimmed(newValue),
           ),
         );
         break;
@@ -184,7 +206,7 @@ class AdditionalDetailsBloc
         _emitAfterOnTextChange(
           emit: emit,
           deliveryInfoData: state.deliveryInfoData.copyWith(
-            contactPerson: ContactPerson(newValue),
+            contactPerson: StringValue.trimmed(newValue),
           ),
         );
         break;
@@ -208,7 +230,7 @@ class AdditionalDetailsBloc
         _emitAfterOnTextChange(
           emit: emit,
           deliveryInfoData: state.deliveryInfoData.copyWith(
-            referenceNote: ReferenceNote(newValue),
+            referenceNote: StringValue.trimmed(newValue),
           ),
         );
         break;
@@ -216,7 +238,7 @@ class AdditionalDetailsBloc
         _emitAfterOnTextChange(
           emit: emit,
           deliveryInfoData: state.deliveryInfoData.copyWith(
-            deliveryInstruction: DeliveryInstruction(newValue),
+            deliveryInstruction: StringValue.trimmed(newValue),
           ),
         );
         break;

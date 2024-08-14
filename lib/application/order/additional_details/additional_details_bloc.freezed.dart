@@ -28,6 +28,7 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -44,6 +45,7 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) =>
@@ -59,6 +61,7 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -79,6 +82,8 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) =>
@@ -95,6 +100,8 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) =>
@@ -111,6 +118,8 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -241,6 +250,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -260,6 +270,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -278,6 +289,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -304,6 +316,8 @@ class _$InitializedImpl implements _Initialized {
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -323,6 +337,8 @@ class _$InitializedImpl implements _Initialized {
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -342,6 +358,8 @@ class _$InitializedImpl implements _Initialized {
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -455,6 +473,7 @@ class _$AdditionalDetailsTextOnChangeImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -474,6 +493,7 @@ class _$AdditionalDetailsTextOnChangeImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -492,6 +512,7 @@ class _$AdditionalDetailsTextOnChangeImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -518,6 +539,8 @@ class _$AdditionalDetailsTextOnChangeImpl
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -537,6 +560,8 @@ class _$AdditionalDetailsTextOnChangeImpl
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -556,6 +581,8 @@ class _$AdditionalDetailsTextOnChangeImpl
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -634,6 +661,7 @@ class _$AdditionalDetailsValidateFormImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -653,6 +681,7 @@ class _$AdditionalDetailsValidateFormImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -671,6 +700,7 @@ class _$AdditionalDetailsValidateFormImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -697,6 +727,8 @@ class _$AdditionalDetailsValidateFormImpl
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -716,6 +748,8 @@ class _$AdditionalDetailsValidateFormImpl
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -735,6 +769,8 @@ class _$AdditionalDetailsValidateFormImpl
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -841,6 +877,7 @@ class _$AdditionalDetailsAddPoDocumentImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -860,6 +897,7 @@ class _$AdditionalDetailsAddPoDocumentImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -878,6 +916,7 @@ class _$AdditionalDetailsAddPoDocumentImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -904,6 +943,8 @@ class _$AdditionalDetailsAddPoDocumentImpl
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -923,6 +964,8 @@ class _$AdditionalDetailsAddPoDocumentImpl
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -942,6 +985,8 @@ class _$AdditionalDetailsAddPoDocumentImpl
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1057,6 +1102,7 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -1076,6 +1122,7 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -1094,6 +1141,7 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1120,6 +1168,8 @@ class _$AdditionalDetailsRemovePoDocumentImpl
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1139,6 +1189,8 @@ class _$AdditionalDetailsRemovePoDocumentImpl
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1158,6 +1210,8 @@ class _$AdditionalDetailsRemovePoDocumentImpl
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1235,6 +1289,7 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -1254,6 +1309,7 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -1272,6 +1328,7 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1298,6 +1355,8 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1317,6 +1376,8 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1336,6 +1397,8 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1406,6 +1469,7 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -1425,6 +1489,7 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -1443,6 +1508,7 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1469,6 +1535,8 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1488,6 +1556,8 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1507,6 +1577,8 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1522,6 +1594,219 @@ abstract class _AdditionalDetailsToggleGreenDelivery
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsToggleGreenDelivery() =
       _$AdditionalDetailsToggleGreenDeliveryImpl;
+}
+
+/// @nodoc
+abstract class _$$UpdateIncludePoisonRefDoucmentsImplCopyWith<$Res> {
+  factory _$$UpdateIncludePoisonRefDoucmentsImplCopyWith(
+          _$UpdateIncludePoisonRefDoucmentsImpl value,
+          $Res Function(_$UpdateIncludePoisonRefDoucmentsImpl) then) =
+      __$$UpdateIncludePoisonRefDoucmentsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool value});
+}
+
+/// @nodoc
+class __$$UpdateIncludePoisonRefDoucmentsImplCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
+        _$UpdateIncludePoisonRefDoucmentsImpl>
+    implements _$$UpdateIncludePoisonRefDoucmentsImplCopyWith<$Res> {
+  __$$UpdateIncludePoisonRefDoucmentsImplCopyWithImpl(
+      _$UpdateIncludePoisonRefDoucmentsImpl _value,
+      $Res Function(_$UpdateIncludePoisonRefDoucmentsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$UpdateIncludePoisonRefDoucmentsImpl(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateIncludePoisonRefDoucmentsImpl
+    implements _UpdateIncludePoisonRefDoucments {
+  const _$UpdateIncludePoisonRefDoucmentsImpl(this.value);
+
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.updateIncludePoisonRefDoucments(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateIncludePoisonRefDoucmentsImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateIncludePoisonRefDoucmentsImplCopyWith<
+          _$UpdateIncludePoisonRefDoucmentsImpl>
+      get copyWith => __$$UpdateIncludePoisonRefDoucmentsImplCopyWithImpl<
+          _$UpdateIncludePoisonRefDoucmentsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(DeliveryInfoLabel label, String newValue)
+        onTextChange,
+    required TResult Function() validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+    required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
+    required TResult Function(
+            SalesOrganisationConfigs config, DeliveryInfoData data)
+        initiateFromHistory,
+  }) {
+    return updateIncludePoisonRefDoucments(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
+    TResult? Function()? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+    TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
+    TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
+  }) {
+    return updateIncludePoisonRefDoucments?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
+    TResult Function()? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
+    TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
+        initiateFromHistory,
+    required TResult orElse(),
+  }) {
+    if (updateIncludePoisonRefDoucments != null) {
+      return updateIncludePoisonRefDoucments(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
+    required TResult Function(_AdditionalDetailsInitiateFromHistory value)
+        initiateFromHistory,
+  }) {
+    return updateIncludePoisonRefDoucments(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
+    TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
+        initiateFromHistory,
+  }) {
+    return updateIncludePoisonRefDoucments?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
+    TResult Function(_AdditionalDetailsInitiateFromHistory value)?
+        initiateFromHistory,
+    required TResult orElse(),
+  }) {
+    if (updateIncludePoisonRefDoucments != null) {
+      return updateIncludePoisonRefDoucments(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateIncludePoisonRefDoucments
+    implements AdditionalDetailsEvent {
+  const factory _UpdateIncludePoisonRefDoucments(final bool value) =
+      _$UpdateIncludePoisonRefDoucmentsImpl;
+
+  bool get value;
+  @JsonKey(ignore: true)
+  _$$UpdateIncludePoisonRefDoucmentsImplCopyWith<
+          _$UpdateIncludePoisonRefDoucmentsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1632,6 +1917,7 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
+    required TResult Function(bool value) updateIncludePoisonRefDoucments,
     required TResult Function(
             SalesOrganisationConfigs config, DeliveryInfoData data)
         initiateFromHistory,
@@ -1651,6 +1937,7 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
+    TResult? Function(bool value)? updateIncludePoisonRefDoucments,
     TResult? Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
   }) {
@@ -1669,6 +1956,7 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
+    TResult Function(bool value)? updateIncludePoisonRefDoucments,
     TResult Function(SalesOrganisationConfigs config, DeliveryInfoData data)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1695,6 +1983,8 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_UpdateIncludePoisonRefDoucments value)
+        updateIncludePoisonRefDoucments,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1714,6 +2004,8 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1733,6 +2025,8 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_UpdateIncludePoisonRefDoucments value)?
+        updateIncludePoisonRefDoucments,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),

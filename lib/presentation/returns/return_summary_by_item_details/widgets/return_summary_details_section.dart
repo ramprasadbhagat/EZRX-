@@ -167,8 +167,8 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
           BalanceTextRow(
             keyText: context.tr('Special instructions'),
             keyFlex: 2,
-            valueText: widget.requestInformationHeader.specialInstructions
-                .displaySpecialInstructions,
+            valueText: widget
+                .requestInformationHeader.specialInstructions.displayNAIfEmpty,
             keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.white,
                 ),

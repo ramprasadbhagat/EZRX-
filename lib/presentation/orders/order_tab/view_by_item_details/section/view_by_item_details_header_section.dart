@@ -58,7 +58,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
             valueFlex: 1,
             key: WidgetKeys.viewByItemsOrderDetailPoReference,
             keyText: context.tr('PO reference'),
-            valueText: orderHistoryItem.poReference.displayPoReference,
+            valueText: orderHistoryItem.poReference.displayNAIfEmpty,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),
@@ -150,8 +150,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
             BalanceTextRow(
               valueFlex: 1,
               keyText: context.tr('Delivery instructions'),
-              valueText: orderHistoryItem
-                  .specialInstructions.displaySpecialInstructions,
+              valueText: orderHistoryItem.specialInstructions.displayNAIfEmpty,
               valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
                   ),

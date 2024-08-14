@@ -22,6 +22,9 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
       _AdditionalDetailsRemoveAllPoDocument;
   const factory AdditionalDetailsEvent.toggleGreenDelivery() =
       _AdditionalDetailsToggleGreenDelivery;
+  const factory AdditionalDetailsEvent.updateIncludePoisonRefDoucments(
+    bool value,
+  ) = _UpdateIncludePoisonRefDoucments;
   const factory AdditionalDetailsEvent.initiateFromHistory({
     required SalesOrganisationConfigs config,
     required DeliveryInfoData data,

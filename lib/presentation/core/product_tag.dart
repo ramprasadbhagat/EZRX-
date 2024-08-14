@@ -164,7 +164,7 @@ class ProductTag extends StatelessWidget {
         iconSpacing: 4,
         backgroundColor: bgColor,
         textColor: textColor,
-        margin: isRounded ? const EdgeInsets.only(left: 8) : null,
+        margin: isRounded ? const EdgeInsets.all(0) : null,
         padding: isRounded
             ? const EdgeInsets.symmetric(horizontal: 8, vertical: 3.5)
             : const EdgeInsets.fromLTRB(16, 4, 8, 4),

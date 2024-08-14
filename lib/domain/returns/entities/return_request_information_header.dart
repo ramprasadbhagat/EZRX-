@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_request_information_header.freezed.dart';
@@ -9,7 +8,7 @@ class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
   const ReturnRequestInformationHeader._();
   factory ReturnRequestInformationHeader({
     required StringValue returnReference,
-    required SpecialInstructions specialInstructions,
+    required StringValue specialInstructions,
     required String requestID,
     required String cName1,
     required String soldTo,
@@ -23,7 +22,7 @@ class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
   factory ReturnRequestInformationHeader.empty() =>
       ReturnRequestInformationHeader(
         returnReference: StringValue(''),
-        specialInstructions: SpecialInstructions(''),
+        specialInstructions: StringValue(''),
         refundTotal: RefundTotal(''),
         cName1: '',
         soldTo: '',

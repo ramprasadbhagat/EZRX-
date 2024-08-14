@@ -9,13 +9,13 @@ void main() {
     test('DeliveryInfoData empty', () {
       final emptyDeliveryInfoData = DeliveryInfoData.empty();
 
-      expect(emptyDeliveryInfoData.poReference, PoReference(''));
+      expect(emptyDeliveryInfoData.poReference, StringValue(''));
       expect(
         emptyDeliveryInfoData.deliveryInstruction,
-        DeliveryInstruction(''),
+        StringValue(''),
       );
-      expect(emptyDeliveryInfoData.referenceNote, ReferenceNote(''));
-      expect(emptyDeliveryInfoData.contactPerson, ContactPerson(''));
+      expect(emptyDeliveryInfoData.referenceNote, StringValue(''));
+      expect(emptyDeliveryInfoData.contactPerson, StringValue(''));
       expect(emptyDeliveryInfoData.mobileNumber, PhoneNumber(''));
       expect(emptyDeliveryInfoData.paymentTerm, PaymentTerm(''));
       expect(emptyDeliveryInfoData.deliveryDate, DateTimeStringValue(''));

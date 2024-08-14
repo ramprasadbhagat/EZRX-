@@ -102,9 +102,9 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   PriceComboDeal get firstPriceComboDealEligible => isEmpty
       ? PriceComboDeal.empty()
       : firstWhere(
-            (priceAggregate) => priceAggregate.price.comboDeal.isEligible,
-            orElse: () => PriceAggregate.empty(),
-          ).price.comboDeal;
+          (priceAggregate) => priceAggregate.price.comboDeal.isEligible,
+          orElse: () => PriceAggregate.empty(),
+        ).price.comboDeal;
 
   List<PriceAggregate> get preOrderItems =>
       expand((e) => [e, ...e.bonusMaterialPriceAggregate])
@@ -252,7 +252,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
         final bType = b.materialInfo.type;
 
         // First, compare by sortPriority
-        final priorityComparison = bType.sortPriority.compareTo(aType.sortPriority);
+        final priorityComparison =
+            bType.sortPriority.compareTo(aType.sortPriority);
         if (priorityComparison != 0) {
           return priorityComparison;
         }
@@ -262,7 +263,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             (bType.typeMaterial || bType.typeDealOrOverrideBonus) &&
             a.materialInfo.getManufactured.isNotEmpty &&
             b.materialInfo.getManufactured.isNotEmpty) {
-          return a.materialInfo.getManufactured.compareTo(b.materialInfo.getManufactured);
+          return a.materialInfo.getManufactured
+              .compareTo(b.materialInfo.getManufactured);
         }
 
         return 0;
@@ -340,6 +342,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   bool get containCovidMaterial => any(
         (element) => element.isCovid,
       );
+
+  bool get containPoisonMaterial => any((e) => e.materialInfo.isPoison);
 
   bool get containMinistryOfHealthMaterial => any(
         (element) =>

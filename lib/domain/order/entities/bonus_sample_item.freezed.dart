@@ -26,6 +26,9 @@ mixin _$BonusSampleItem {
   ItemRegistrationNumber get itemRegistrationNumber =>
       throw _privateConstructorUsedError;
   bool get bonusOverrideFlag => throw _privateConstructorUsedError;
+  bool get isGimmick => throw _privateConstructorUsedError;
+  bool get isPoison => throw _privateConstructorUsedError;
+  bool get isSampleMaterial => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BonusSampleItemCopyWith<BonusSampleItem> get copyWith =>
@@ -47,7 +50,10 @@ abstract class $BonusSampleItemCopyWith<$Res> {
       MaterialInfoType type,
       StockInfo stockInfo,
       ItemRegistrationNumber itemRegistrationNumber,
-      bool bonusOverrideFlag});
+      bool bonusOverrideFlag,
+      bool isGimmick,
+      bool isPoison,
+      bool isSampleMaterial});
 
   $PrincipalDataCopyWith<$Res> get principalData;
   $StockInfoCopyWith<$Res> get stockInfo;
@@ -75,6 +81,9 @@ class _$BonusSampleItemCopyWithImpl<$Res, $Val extends BonusSampleItem>
     Object? stockInfo = null,
     Object? itemRegistrationNumber = null,
     Object? bonusOverrideFlag = null,
+    Object? isGimmick = null,
+    Object? isPoison = null,
+    Object? isSampleMaterial = null,
   }) {
     return _then(_value.copyWith(
       qty: null == qty
@@ -113,6 +122,18 @@ class _$BonusSampleItemCopyWithImpl<$Res, $Val extends BonusSampleItem>
           ? _value.bonusOverrideFlag
           : bonusOverrideFlag // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSampleMaterial: null == isSampleMaterial
+          ? _value.isSampleMaterial
+          : isSampleMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -150,7 +171,10 @@ abstract class _$$BonusSampleItemImplCopyWith<$Res>
       MaterialInfoType type,
       StockInfo stockInfo,
       ItemRegistrationNumber itemRegistrationNumber,
-      bool bonusOverrideFlag});
+      bool bonusOverrideFlag,
+      bool isGimmick,
+      bool isPoison,
+      bool isSampleMaterial});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -178,6 +202,9 @@ class __$$BonusSampleItemImplCopyWithImpl<$Res>
     Object? stockInfo = null,
     Object? itemRegistrationNumber = null,
     Object? bonusOverrideFlag = null,
+    Object? isGimmick = null,
+    Object? isPoison = null,
+    Object? isSampleMaterial = null,
   }) {
     return _then(_$BonusSampleItemImpl(
       qty: null == qty
@@ -216,6 +243,18 @@ class __$$BonusSampleItemImplCopyWithImpl<$Res>
           ? _value.bonusOverrideFlag
           : bonusOverrideFlag // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSampleMaterial: null == isSampleMaterial
+          ? _value.isSampleMaterial
+          : isSampleMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -232,7 +271,10 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
       required this.type,
       required this.stockInfo,
       required this.itemRegistrationNumber,
-      required this.bonusOverrideFlag})
+      required this.bonusOverrideFlag,
+      required this.isGimmick,
+      required this.isPoison,
+      required this.isSampleMaterial})
       : super._();
 
   @override
@@ -253,10 +295,16 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
   final ItemRegistrationNumber itemRegistrationNumber;
   @override
   final bool bonusOverrideFlag;
+  @override
+  final bool isGimmick;
+  @override
+  final bool isPoison;
+  @override
+  final bool isSampleMaterial;
 
   @override
   String toString() {
-    return 'BonusSampleItem(qty: $qty, materialNumber: $materialNumber, itemId: $itemId, materialDescription: $materialDescription, principalData: $principalData, type: $type, stockInfo: $stockInfo, itemRegistrationNumber: $itemRegistrationNumber, bonusOverrideFlag: $bonusOverrideFlag)';
+    return 'BonusSampleItem(qty: $qty, materialNumber: $materialNumber, itemId: $itemId, materialDescription: $materialDescription, principalData: $principalData, type: $type, stockInfo: $stockInfo, itemRegistrationNumber: $itemRegistrationNumber, bonusOverrideFlag: $bonusOverrideFlag, isGimmick: $isGimmick, isPoison: $isPoison, isSampleMaterial: $isSampleMaterial)';
   }
 
   @override
@@ -278,7 +326,13 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.bonusOverrideFlag, bonusOverrideFlag) ||
-                other.bonusOverrideFlag == bonusOverrideFlag));
+                other.bonusOverrideFlag == bonusOverrideFlag) &&
+            (identical(other.isGimmick, isGimmick) ||
+                other.isGimmick == isGimmick) &&
+            (identical(other.isPoison, isPoison) ||
+                other.isPoison == isPoison) &&
+            (identical(other.isSampleMaterial, isSampleMaterial) ||
+                other.isSampleMaterial == isSampleMaterial));
   }
 
   @override
@@ -292,7 +346,10 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
       type,
       stockInfo,
       itemRegistrationNumber,
-      bonusOverrideFlag);
+      bonusOverrideFlag,
+      isGimmick,
+      isPoison,
+      isSampleMaterial);
 
   @JsonKey(ignore: true)
   @override
@@ -312,7 +369,10 @@ abstract class _BonusSampleItem extends BonusSampleItem {
       required final MaterialInfoType type,
       required final StockInfo stockInfo,
       required final ItemRegistrationNumber itemRegistrationNumber,
-      required final bool bonusOverrideFlag}) = _$BonusSampleItemImpl;
+      required final bool bonusOverrideFlag,
+      required final bool isGimmick,
+      required final bool isPoison,
+      required final bool isSampleMaterial}) = _$BonusSampleItemImpl;
   const _BonusSampleItem._() : super._();
 
   @override
@@ -333,6 +393,12 @@ abstract class _BonusSampleItem extends BonusSampleItem {
   ItemRegistrationNumber get itemRegistrationNumber;
   @override
   bool get bonusOverrideFlag;
+  @override
+  bool get isGimmick;
+  @override
+  bool get isPoison;
+  @override
+  bool get isSampleMaterial;
   @override
   @JsonKey(ignore: true)
   _$$BonusSampleItemImplCopyWith<_$BonusSampleItemImpl> get copyWith =>

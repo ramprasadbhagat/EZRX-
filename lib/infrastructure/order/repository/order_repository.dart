@@ -301,11 +301,11 @@ class OrderRepository implements IOrderRepository {
         TrackingProps.market: market,
         TrackingProps.collectiveNumber: '',
         TrackingProps.poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        TrackingProps.poReference: orderDetail.poReference.displayPoReference,
+        TrackingProps.poReference: orderDetail.poReference.displayNAIfEmpty,
         TrackingProps.purchaseOrderType: user.role.type.purchaseOrderType,
         TrackingProps.orderType: orderDetail.type.documentTypeCode,
-        TrackingProps.specialInstruction: orderDetail
-            .orderHistoryDetailsSpecialInstructions.displaySpecialInstructions,
+        TrackingProps.specialInstruction:
+            orderDetail.orderHistoryDetailsSpecialInstructions.displayNAIfEmpty,
         TrackingProps.telephone: orderDetail.telephoneNumber.validPhoneNumber,
         TrackingProps.blockOrder: configs.enablePrincipalList,
         TrackingProps.companyName: orderDetail.companyName.name,

@@ -172,13 +172,13 @@ void main() {
         )
         .toList();
     deliveryInfoData = DeliveryInfoData.empty().copyWith(
-      poReference: PoReference('CO REF'),
-      contactPerson: ContactPerson('PERSON'),
+      poReference: StringValue('CO REF'),
+      contactPerson: StringValue('PERSON'),
       mobileNumber: PhoneNumber('123456'),
       paymentTerm: PaymentTerm(''),
       deliveryDate: DateTimeStringValue('01/02/2023'),
-      deliveryInstruction: DeliveryInstruction('test'),
-      referenceNote: ReferenceNote('note'),
+      deliveryInstruction: StringValue('test'),
+      referenceNote: StringValue('note'),
     );
 
     submitOrderMock = SubmitOrder.empty().copyWith(

@@ -325,7 +325,7 @@ void main() {
             OrderSummaryState.initial().copyWith(
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
-                  poReference: PoReference(''),
+                  poReference: StringValue(''),
                 ),
               ],
             ),
@@ -344,7 +344,7 @@ void main() {
         const fakeReferenceNotes = 'fake-ref-note';
         final fakeOrderHistoryDetailsPaymentTerm =
             OrderHistoryDetailsPaymentTerm.empty();
-        final fakeInstruction = SpecialInstructions('fake-instruction');
+        final fakeInstruction = StringValue('fake-instruction');
         when(() => eligibilityBlocMock.state).thenAnswer(
           (invocation) => EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTHSalesOrgConfigs,
@@ -398,7 +398,7 @@ void main() {
           find.byKey(
             WidgetKeys.balanceTextRow(
               'Delivery instructions'.tr(),
-              fakeInstruction.displaySpecialInstructions,
+              fakeInstruction.displayNAIfEmpty,
             ),
           ),
           findsOneWidget,

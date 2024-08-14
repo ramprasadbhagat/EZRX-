@@ -16,16 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DeliveryInfoData {
-  PoReference get poReference => throw _privateConstructorUsedError;
-  DeliveryInstruction get deliveryInstruction =>
-      throw _privateConstructorUsedError;
-  ReferenceNote get referenceNote => throw _privateConstructorUsedError;
-  ContactPerson get contactPerson => throw _privateConstructorUsedError;
+  StringValue get poReference => throw _privateConstructorUsedError;
+  StringValue get deliveryInstruction => throw _privateConstructorUsedError;
+  StringValue get referenceNote => throw _privateConstructorUsedError;
+  StringValue get contactPerson => throw _privateConstructorUsedError;
   PhoneNumber get mobileNumber => throw _privateConstructorUsedError;
   PaymentTerm get paymentTerm => throw _privateConstructorUsedError;
   DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
   bool get greenDeliveryEnabled => throw _privateConstructorUsedError;
+  bool get poisonRefDocumentsIncluded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DeliveryInfoDataCopyWith<DeliveryInfoData> get copyWith =>
@@ -39,15 +39,16 @@ abstract class $DeliveryInfoDataCopyWith<$Res> {
       _$DeliveryInfoDataCopyWithImpl<$Res, DeliveryInfoData>;
   @useResult
   $Res call(
-      {PoReference poReference,
-      DeliveryInstruction deliveryInstruction,
-      ReferenceNote referenceNote,
-      ContactPerson contactPerson,
+      {StringValue poReference,
+      StringValue deliveryInstruction,
+      StringValue referenceNote,
+      StringValue contactPerson,
       PhoneNumber mobileNumber,
       PaymentTerm paymentTerm,
       DateTimeStringValue deliveryDate,
       List<PoDocuments> poDocuments,
-      bool greenDeliveryEnabled});
+      bool greenDeliveryEnabled,
+      bool poisonRefDocumentsIncluded});
 }
 
 /// @nodoc
@@ -72,24 +73,25 @@ class _$DeliveryInfoDataCopyWithImpl<$Res, $Val extends DeliveryInfoData>
     Object? deliveryDate = null,
     Object? poDocuments = null,
     Object? greenDeliveryEnabled = null,
+    Object? poisonRefDocumentsIncluded = null,
   }) {
     return _then(_value.copyWith(
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
-              as PoReference,
+              as StringValue,
       deliveryInstruction: null == deliveryInstruction
           ? _value.deliveryInstruction
           : deliveryInstruction // ignore: cast_nullable_to_non_nullable
-              as DeliveryInstruction,
+              as StringValue,
       referenceNote: null == referenceNote
           ? _value.referenceNote
           : referenceNote // ignore: cast_nullable_to_non_nullable
-              as ReferenceNote,
+              as StringValue,
       contactPerson: null == contactPerson
           ? _value.contactPerson
           : contactPerson // ignore: cast_nullable_to_non_nullable
-              as ContactPerson,
+              as StringValue,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -110,6 +112,10 @@ class _$DeliveryInfoDataCopyWithImpl<$Res, $Val extends DeliveryInfoData>
           ? _value.greenDeliveryEnabled
           : greenDeliveryEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      poisonRefDocumentsIncluded: null == poisonRefDocumentsIncluded
+          ? _value.poisonRefDocumentsIncluded
+          : poisonRefDocumentsIncluded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -123,15 +129,16 @@ abstract class _$$DeliveryInfoDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {PoReference poReference,
-      DeliveryInstruction deliveryInstruction,
-      ReferenceNote referenceNote,
-      ContactPerson contactPerson,
+      {StringValue poReference,
+      StringValue deliveryInstruction,
+      StringValue referenceNote,
+      StringValue contactPerson,
       PhoneNumber mobileNumber,
       PaymentTerm paymentTerm,
       DateTimeStringValue deliveryDate,
       List<PoDocuments> poDocuments,
-      bool greenDeliveryEnabled});
+      bool greenDeliveryEnabled,
+      bool poisonRefDocumentsIncluded});
 }
 
 /// @nodoc
@@ -154,24 +161,25 @@ class __$$DeliveryInfoDataImplCopyWithImpl<$Res>
     Object? deliveryDate = null,
     Object? poDocuments = null,
     Object? greenDeliveryEnabled = null,
+    Object? poisonRefDocumentsIncluded = null,
   }) {
     return _then(_$DeliveryInfoDataImpl(
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
-              as PoReference,
+              as StringValue,
       deliveryInstruction: null == deliveryInstruction
           ? _value.deliveryInstruction
           : deliveryInstruction // ignore: cast_nullable_to_non_nullable
-              as DeliveryInstruction,
+              as StringValue,
       referenceNote: null == referenceNote
           ? _value.referenceNote
           : referenceNote // ignore: cast_nullable_to_non_nullable
-              as ReferenceNote,
+              as StringValue,
       contactPerson: null == contactPerson
           ? _value.contactPerson
           : contactPerson // ignore: cast_nullable_to_non_nullable
-              as ContactPerson,
+              as StringValue,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -192,6 +200,10 @@ class __$$DeliveryInfoDataImplCopyWithImpl<$Res>
           ? _value.greenDeliveryEnabled
           : greenDeliveryEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      poisonRefDocumentsIncluded: null == poisonRefDocumentsIncluded
+          ? _value.poisonRefDocumentsIncluded
+          : poisonRefDocumentsIncluded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -208,18 +220,19 @@ class _$DeliveryInfoDataImpl extends _DeliveryInfoData {
       required this.paymentTerm,
       required this.deliveryDate,
       required final List<PoDocuments> poDocuments,
-      required this.greenDeliveryEnabled})
+      required this.greenDeliveryEnabled,
+      required this.poisonRefDocumentsIncluded})
       : _poDocuments = poDocuments,
         super._();
 
   @override
-  final PoReference poReference;
+  final StringValue poReference;
   @override
-  final DeliveryInstruction deliveryInstruction;
+  final StringValue deliveryInstruction;
   @override
-  final ReferenceNote referenceNote;
+  final StringValue referenceNote;
   @override
-  final ContactPerson contactPerson;
+  final StringValue contactPerson;
   @override
   final PhoneNumber mobileNumber;
   @override
@@ -236,10 +249,12 @@ class _$DeliveryInfoDataImpl extends _DeliveryInfoData {
 
   @override
   final bool greenDeliveryEnabled;
+  @override
+  final bool poisonRefDocumentsIncluded;
 
   @override
   String toString() {
-    return 'DeliveryInfoData(poReference: $poReference, deliveryInstruction: $deliveryInstruction, referenceNote: $referenceNote, contactPerson: $contactPerson, mobileNumber: $mobileNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate, poDocuments: $poDocuments, greenDeliveryEnabled: $greenDeliveryEnabled)';
+    return 'DeliveryInfoData(poReference: $poReference, deliveryInstruction: $deliveryInstruction, referenceNote: $referenceNote, contactPerson: $contactPerson, mobileNumber: $mobileNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate, poDocuments: $poDocuments, greenDeliveryEnabled: $greenDeliveryEnabled, poisonRefDocumentsIncluded: $poisonRefDocumentsIncluded)';
   }
 
   @override
@@ -264,7 +279,11 @@ class _$DeliveryInfoDataImpl extends _DeliveryInfoData {
             const DeepCollectionEquality()
                 .equals(other._poDocuments, _poDocuments) &&
             (identical(other.greenDeliveryEnabled, greenDeliveryEnabled) ||
-                other.greenDeliveryEnabled == greenDeliveryEnabled));
+                other.greenDeliveryEnabled == greenDeliveryEnabled) &&
+            (identical(other.poisonRefDocumentsIncluded,
+                    poisonRefDocumentsIncluded) ||
+                other.poisonRefDocumentsIncluded ==
+                    poisonRefDocumentsIncluded));
   }
 
   @override
@@ -278,7 +297,8 @@ class _$DeliveryInfoDataImpl extends _DeliveryInfoData {
       paymentTerm,
       deliveryDate,
       const DeepCollectionEquality().hash(_poDocuments),
-      greenDeliveryEnabled);
+      greenDeliveryEnabled,
+      poisonRefDocumentsIncluded);
 
   @JsonKey(ignore: true)
   @override
@@ -290,25 +310,26 @@ class _$DeliveryInfoDataImpl extends _DeliveryInfoData {
 
 abstract class _DeliveryInfoData extends DeliveryInfoData {
   const factory _DeliveryInfoData(
-      {required final PoReference poReference,
-      required final DeliveryInstruction deliveryInstruction,
-      required final ReferenceNote referenceNote,
-      required final ContactPerson contactPerson,
+      {required final StringValue poReference,
+      required final StringValue deliveryInstruction,
+      required final StringValue referenceNote,
+      required final StringValue contactPerson,
       required final PhoneNumber mobileNumber,
       required final PaymentTerm paymentTerm,
       required final DateTimeStringValue deliveryDate,
       required final List<PoDocuments> poDocuments,
-      required final bool greenDeliveryEnabled}) = _$DeliveryInfoDataImpl;
+      required final bool greenDeliveryEnabled,
+      required final bool poisonRefDocumentsIncluded}) = _$DeliveryInfoDataImpl;
   const _DeliveryInfoData._() : super._();
 
   @override
-  PoReference get poReference;
+  StringValue get poReference;
   @override
-  DeliveryInstruction get deliveryInstruction;
+  StringValue get deliveryInstruction;
   @override
-  ReferenceNote get referenceNote;
+  StringValue get referenceNote;
   @override
-  ContactPerson get contactPerson;
+  StringValue get contactPerson;
   @override
   PhoneNumber get mobileNumber;
   @override
@@ -319,6 +340,8 @@ abstract class _DeliveryInfoData extends DeliveryInfoData {
   List<PoDocuments> get poDocuments;
   @override
   bool get greenDeliveryEnabled;
+  @override
+  bool get poisonRefDocumentsIncluded;
   @override
   @JsonKey(ignore: true)
   _$$DeliveryInfoDataImplCopyWith<_$DeliveryInfoDataImpl> get copyWith =>

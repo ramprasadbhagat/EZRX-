@@ -41,6 +41,7 @@ class _DeliveryInfo extends StatelessWidget {
             boxBorder: const Border(
               bottom: BorderSide(color: ZPColors.extraLightGrey2),
             ),
+            expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _CheckoutTextFormField(
                 labelText: 'PO reference',
@@ -109,7 +110,15 @@ class _DeliveryInfo extends StatelessWidget {
                           FocusNode(),
                   maxLength: 132,
                 ),
-              if (config.showPOAttachment) const PoAttachmentUpload(),
+              if (config.showPOAttachment) ...[
+                if (context
+                    .read<CartBloc>()
+                    .state
+                    .cartProducts
+                    .containPoisonMaterial)
+                  const _PoisonDocumentsIncluded(),
+                const PoAttachmentUpload(),
+              ],
             ],
           ),
         );
@@ -146,18 +155,12 @@ class _CheckoutTextFormField extends StatefulWidget {
 }
 
 class _CheckoutTextFormFieldState extends State<_CheckoutTextFormField> {
-  final _controller = TextEditingController();
+  late final _controller = TextEditingController(text: _data);
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _updateValue();
   }
 
   @override
@@ -168,16 +171,9 @@ class _CheckoutTextFormFieldState extends State<_CheckoutTextFormField> {
     //the controller whenever new text is different from the current text stored inside controller
     if (_data != _controller.text) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _updateValue();
+        _controller.text = _data;
       });
     }
-  }
-
-  void _updateValue() {
-    _controller.value = TextEditingValue(
-      text: _data,
-      selection: TextSelection.collapsed(offset: _data.length),
-    );
   }
 
   String get _data {
@@ -204,39 +200,52 @@ class _CheckoutTextFormFieldState extends State<_CheckoutTextFormField> {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
-          child: TextFieldWithLabel(
-            focusNode: widget.focusNode,
-            fieldKey: WidgetKeys.genericKey(key: widget.keyText),
-            labelText: context.tr(widget.labelText),
-            controller: _controller,
-            validator: (_) => _validateForm(
-              label: widget.label,
-              context: context,
-            ),
-            maxLines: widget.keyboardType == TextInputType.multiline ? 3 : 1,
-            keyboardType: widget.keyboardType,
-            maxLength: widget.maxLength,
-            onChanged: (value) {
-              context.read<AdditionalDetailsBloc>().add(
-                    AdditionalDetailsEvent.onTextChange(
-                      label: widget.label,
-                      newValue: value,
-                    ),
-                  );
-            },
-            inputFormatters: widget.inputFormatters,
-            decoration: InputDecoration(
-              hintText: context.tr(widget.hintText),
-              suffixIcon: state.isLoading
-                  ? const Padding(
-                      padding: EdgeInsetsDirectional.only(end: 10),
-                      child: SizedBox(
-                        height: 15,
-                        width: 15,
-                        child: CircularProgressIndicator(strokeWidth: 2),
+          child: Focus(
+            onFocusChange: (hasFocus) {
+              if (!hasFocus) {
+                context.read<AdditionalDetailsBloc>().add(
+                      AdditionalDetailsEvent.onTextChange(
+                        label: widget.label,
+                        newValue: StringValue.trimmed(_controller.text)
+                            .formattedValue,
                       ),
-                    )
-                  : null,
+                    );
+              }
+            },
+            child: TextFieldWithLabel(
+              focusNode: widget.focusNode,
+              fieldKey: WidgetKeys.genericKey(key: widget.keyText),
+              labelText: context.tr(widget.labelText),
+              controller: _controller,
+              validator: (_) => _validateForm(
+                label: widget.label,
+                context: context,
+              ),
+              maxLines: widget.keyboardType == TextInputType.multiline ? 3 : 1,
+              keyboardType: widget.keyboardType,
+              maxLength: widget.maxLength,
+              onChanged: (value) {
+                context.read<AdditionalDetailsBloc>().add(
+                      AdditionalDetailsEvent.onTextChange(
+                        label: widget.label,
+                        newValue: value,
+                      ),
+                    );
+              },
+              inputFormatters: widget.inputFormatters,
+              decoration: InputDecoration(
+                hintText: context.tr(widget.hintText),
+                suffixIcon: state.isLoading
+                    ? const Padding(
+                        padding: EdgeInsetsDirectional.only(end: 10),
+                        child: SizedBox(
+                          height: 15,
+                          width: 15,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                      )
+                    : null,
+              ),
             ),
           ),
         );
@@ -393,6 +402,69 @@ class _PaymentTerm extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class _PoisonDocumentsIncluded extends StatelessWidget {
+  const _PoisonDocumentsIncluded();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            text: context.tr('Poison item(s) reference document(s)'),
+            style: Theme.of(context).textTheme.labelSmall,
+            children: const <TextSpan>[
+              TextSpan(
+                text: ' *',
+                style: TextStyle(color: ZPColors.red),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: padding6),
+        BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
+          buildWhen: (previous, current) =>
+              previous.deliveryInfoData.poisonRefDocumentsIncluded !=
+              current.deliveryInfoData.poisonRefDocumentsIncluded,
+          builder: (context, state) {
+            final bloc = context.read<AdditionalDetailsBloc>();
+            final groupValue =
+                state.deliveryInfoData.poisonRefDocumentsIncluded;
+
+            return Row(
+              children: [
+                RadioWithLabel<bool>(
+                  groupValue: groupValue,
+                  value: true,
+                  onChanged: (value) => bloc.add(
+                    AdditionalDetailsEvent.updateIncludePoisonRefDoucments(
+                      value,
+                    ),
+                  ),
+                  title: context.tr('Yes'),
+                ),
+                const SizedBox(width: padding12),
+                RadioWithLabel<bool>(
+                  groupValue: groupValue,
+                  value: false,
+                  onChanged: (value) => bloc.add(
+                    AdditionalDetailsEvent.updateIncludePoisonRefDoucments(
+                      value,
+                    ),
+                  ),
+                  title: context.tr('No'),
+                ),
+              ],
+            );
+          },
+        ),
+        const SizedBox(height: padding24),
+      ],
     );
   }
 }

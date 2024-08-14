@@ -17,8 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReturnRequestInformationHeader {
   StringValue get returnReference => throw _privateConstructorUsedError;
-  SpecialInstructions get specialInstructions =>
-      throw _privateConstructorUsedError;
+  StringValue get specialInstructions => throw _privateConstructorUsedError;
   String get requestID => throw _privateConstructorUsedError;
   String get cName1 => throw _privateConstructorUsedError;
   String get soldTo => throw _privateConstructorUsedError;
@@ -44,7 +43,7 @@ abstract class $ReturnRequestInformationHeaderCopyWith<$Res> {
   @useResult
   $Res call(
       {StringValue returnReference,
-      SpecialInstructions specialInstructions,
+      StringValue specialInstructions,
       String requestID,
       String cName1,
       String soldTo,
@@ -90,7 +89,7 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
       specialInstructions: null == specialInstructions
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
-              as SpecialInstructions,
+              as StringValue,
       requestID: null == requestID
           ? _value.requestID
           : requestID // ignore: cast_nullable_to_non_nullable
@@ -142,7 +141,7 @@ abstract class _$$ReturnRequestInformationHeaderImplCopyWith<$Res>
   @useResult
   $Res call(
       {StringValue returnReference,
-      SpecialInstructions specialInstructions,
+      StringValue specialInstructions,
       String requestID,
       String cName1,
       String soldTo,
@@ -187,7 +186,7 @@ class __$$ReturnRequestInformationHeaderImplCopyWithImpl<$Res>
       specialInstructions: null == specialInstructions
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
-              as SpecialInstructions,
+              as StringValue,
       requestID: null == requestID
           ? _value.requestID
           : requestID // ignore: cast_nullable_to_non_nullable
@@ -249,7 +248,7 @@ class _$ReturnRequestInformationHeaderImpl
   @override
   final StringValue returnReference;
   @override
-  final SpecialInstructions specialInstructions;
+  final StringValue specialInstructions;
   @override
   final String requestID;
   @override
@@ -329,7 +328,7 @@ abstract class _ReturnRequestInformationHeader
     extends ReturnRequestInformationHeader {
   factory _ReturnRequestInformationHeader(
           {required final StringValue returnReference,
-          required final SpecialInstructions specialInstructions,
+          required final StringValue specialInstructions,
           required final String requestID,
           required final String cName1,
           required final String soldTo,
@@ -345,7 +344,7 @@ abstract class _ReturnRequestInformationHeader
   @override
   StringValue get returnReference;
   @override
-  SpecialInstructions get specialInstructions;
+  StringValue get specialInstructions;
   @override
   String get requestID;
   @override

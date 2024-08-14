@@ -60,6 +60,9 @@ String naIfEmpty(String text) {
 
 bool checkIfTrimmedValueNotEmpty(String text) => text.trim().isNotEmpty;
 
+String trimAndRemoveConsecutiveSpace(String text) =>
+    text.trim().replaceAll(RegExp(r'\s+'), ' ');
+
 bool getInStock(String text) {
   return isEqualsIgnoreCase(text, 'Yes');
 }

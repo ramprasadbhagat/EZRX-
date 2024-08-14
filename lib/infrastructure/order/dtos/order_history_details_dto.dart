@@ -98,7 +98,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       referenceNotes: orderHistoryDetails.referenceNotes,
       companyName: orderHistoryDetails.companyName.getValue(),
       orderNumber: orderHistoryDetails.orderNumber.getValue(),
-      pOReference: orderHistoryDetails.poReference.displayPoReference,
+      pOReference: orderHistoryDetails.poReference.displayNAIfEmpty,
       shipTo: orderHistoryDetails.shipTo,
       soldTo: orderHistoryDetails.soldTo,
       shipToAddress: orderHistoryDetails.shipToAddress,
@@ -114,7 +114,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         orderHistoryDetails.orderHistoryDetailsPaymentTerm,
       ),
       orderHistoryDetailsSpecialInstructions: orderHistoryDetails
-          .orderHistoryDetailsSpecialInstructions.displaySpecialInstructions,
+          .orderHistoryDetailsSpecialInstructions.displayNAIfEmpty,
       orderHistoryDetailsPoDocuments:
           List.from(orderHistoryDetails.orderHistoryDetailsPoDocuments)
               .map((e) => PoDocumentsDto.fromDomain(e))
@@ -144,7 +144,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       referenceNotes: referenceNotes,
       companyName: CompanyName(companyName),
       orderNumber: OrderNumber(orderNumber),
-      poReference: PoReference(pOReference),
+      poReference: StringValue(pOReference),
       shipTo: shipTo,
       soldTo: soldTo,
       shipToAddress: shipToAddress,
@@ -155,7 +155,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           orderHistoryDetailsOrderItem.map((dto) => dto.toDomain()).toList(),
       orderHistoryDetailsPaymentTerm: orderHistoryDetailsPaymentTerm.toDomain(),
       orderHistoryDetailsSpecialInstructions:
-          SpecialInstructions(orderHistoryDetailsSpecialInstructions),
+          StringValue(orderHistoryDetailsSpecialInstructions),
       orderHistoryDetailsPoDocuments:
           orderHistoryDetailsPoDocuments.map((dto) => dto.toDomain()).toList(),
       itemCount: itemCount,

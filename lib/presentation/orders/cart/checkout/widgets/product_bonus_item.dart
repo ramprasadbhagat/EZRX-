@@ -105,33 +105,26 @@ class _ProductDetails extends StatelessWidget {
         children: [
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
-            runSpacing: 4,
+            runSpacing: padding6,
+            spacing: padding6,
             children: [
               Text(
                 bonusItem.combinationCode(
                   showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
                 ),
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.darkGray,
-                    ),
-              ),
-              const SizedBox(
-                width: 4,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
               if (eligibilityState.salesOrg.showBonus) const BonusTag(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: PreOrderLabel(
-                  stockInfo: bonusItem.stockInfo,
-                ),
-              ),
+              if (bonusItem.isPoison) ProductTag.poison(),
+              if (bonusItem.isSampleMaterial) ProductTag.sample(),
+              if (bonusItem.isGimmick) ProductTag.gimmickTag(),
+              PreOrderLabel(stockInfo: bonusItem.stockInfo),
             ],
           ),
           Text(
             bonusItem.materialDescription,
             key: WidgetKeys.cartItemBonusMaterialDescription,
-            maxLines: 2,
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.labelMedium,
           ),
           StockInfoWidget(
             materialInfo: cartProduct.materialInfo,

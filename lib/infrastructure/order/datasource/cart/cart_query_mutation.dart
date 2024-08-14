@@ -1,4 +1,5 @@
 class CartQueryMutation {
+  //TODO: Query IsGimmick, isSampleMaterial, isPoison
   String cart(bool enableMarketplace) => '''
   fragment BundleMaterialsFields on Item {
     Type

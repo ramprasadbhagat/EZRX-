@@ -204,6 +204,9 @@ class StringValue extends ValueObject<String> {
   factory StringValue(String input) =>
       StringValue._(validateStringNotEmpty(input));
 
+  factory StringValue.trimmed(String input) =>
+      StringValue._(validateTrimmedStringNotEmpty(input));
+
   String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));
 
   String get displayNAIfEmpty => naIfEmpty(value.getOrElse(() => ''));
@@ -212,6 +215,9 @@ class StringValue extends ValueObject<String> {
 
   bool get isTrimmedValueNotEmpty =>
       checkIfTrimmedValueNotEmpty(value.getOrElse(() => ''));
+
+  String get formattedValue =>
+      trimAndRemoveConsecutiveSpace(value.getOrElse(() => ''));
 
   const StringValue._(this.value);
 }

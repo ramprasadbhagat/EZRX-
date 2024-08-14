@@ -183,7 +183,7 @@ void main() {
             WidgetKeys.balanceTextRow(
               'Special instructions',
               returnRequestInformationHeader
-                  .specialInstructions.displaySpecialInstructions,
+                  .specialInstructions.displayNAIfEmpty,
             ),
           );
           expect(specialInstructions, findsOneWidget);

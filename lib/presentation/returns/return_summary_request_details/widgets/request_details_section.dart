@@ -122,8 +122,8 @@ class _ReturnDetailsSection extends StatelessWidget {
           BalanceTextRow(
             keyText: 'Special instructions'.tr(),
             keyFlex: 2,
-            valueText: requestInformationHeader
-                .specialInstructions.displaySpecialInstructions,
+            valueText:
+                requestInformationHeader.specialInstructions.displayNAIfEmpty,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),

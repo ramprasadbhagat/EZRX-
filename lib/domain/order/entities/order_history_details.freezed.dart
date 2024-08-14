@@ -38,7 +38,7 @@ mixin _$OrderHistoryDetails {
   String get soldTo => throw _privateConstructorUsedError;
   String get shipTo => throw _privateConstructorUsedError;
   CompanyName get companyName => throw _privateConstructorUsedError;
-  PoReference get poReference => throw _privateConstructorUsedError;
+  StringValue get poReference => throw _privateConstructorUsedError;
   String get shipToAddress => throw _privateConstructorUsedError;
   String get soldToAddress => throw _privateConstructorUsedError;
   StringValue get invoiceNumber => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ mixin _$OrderHistoryDetails {
       throw _privateConstructorUsedError;
   OrderHistoryDetailsPaymentTerm get orderHistoryDetailsPaymentTerm =>
       throw _privateConstructorUsedError;
-  SpecialInstructions get orderHistoryDetailsSpecialInstructions =>
+  StringValue get orderHistoryDetailsSpecialInstructions =>
       throw _privateConstructorUsedError;
   List<PoDocuments> get orderHistoryDetailsPoDocuments =>
       throw _privateConstructorUsedError;
@@ -86,7 +86,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       String soldTo,
       String shipTo,
       CompanyName companyName,
-      PoReference poReference,
+      StringValue poReference,
       String shipToAddress,
       String soldToAddress,
       StringValue invoiceNumber,
@@ -94,7 +94,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       int itemCount,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
-      SpecialInstructions orderHistoryDetailsSpecialInstructions,
+      StringValue orderHistoryDetailsSpecialInstructions,
       List<PoDocuments> orderHistoryDetailsPoDocuments,
       bool isMarketPlace,
       double taxRate});
@@ -228,7 +228,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
-              as PoReference,
+              as StringValue,
       shipToAddress: null == shipToAddress
           ? _value.shipToAddress
           : shipToAddress // ignore: cast_nullable_to_non_nullable
@@ -261,7 +261,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
               orderHistoryDetailsSpecialInstructions
           ? _value.orderHistoryDetailsSpecialInstructions
           : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
-              as SpecialInstructions,
+              as StringValue,
       orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value.orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
@@ -317,7 +317,7 @@ abstract class _$$OrderHistoryDetailsImplCopyWith<$Res>
       String soldTo,
       String shipTo,
       CompanyName companyName,
-      PoReference poReference,
+      StringValue poReference,
       String shipToAddress,
       String soldToAddress,
       StringValue invoiceNumber,
@@ -325,7 +325,7 @@ abstract class _$$OrderHistoryDetailsImplCopyWith<$Res>
       int itemCount,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
-      SpecialInstructions orderHistoryDetailsSpecialInstructions,
+      StringValue orderHistoryDetailsSpecialInstructions,
       List<PoDocuments> orderHistoryDetailsPoDocuments,
       bool isMarketPlace,
       double taxRate});
@@ -458,7 +458,7 @@ class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
-              as PoReference,
+              as StringValue,
       shipToAddress: null == shipToAddress
           ? _value.shipToAddress
           : shipToAddress // ignore: cast_nullable_to_non_nullable
@@ -491,7 +491,7 @@ class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
               orderHistoryDetailsSpecialInstructions
           ? _value.orderHistoryDetailsSpecialInstructions
           : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
-              as SpecialInstructions,
+              as StringValue,
       orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value._orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
@@ -588,7 +588,7 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
   @override
   final CompanyName companyName;
   @override
-  final PoReference poReference;
+  final StringValue poReference;
   @override
   final String shipToAddress;
   @override
@@ -611,7 +611,7 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
   @override
   final OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm;
   @override
-  final SpecialInstructions orderHistoryDetailsSpecialInstructions;
+  final StringValue orderHistoryDetailsSpecialInstructions;
   final List<PoDocuments> _orderHistoryDetailsPoDocuments;
   @override
   List<PoDocuments> get orderHistoryDetailsPoDocuments {
@@ -766,7 +766,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final String soldTo,
       required final String shipTo,
       required final CompanyName companyName,
-      required final PoReference poReference,
+      required final StringValue poReference,
       required final String shipToAddress,
       required final String soldToAddress,
       required final StringValue invoiceNumber,
@@ -776,7 +776,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
           orderHistoryDetailsOrderItem,
       required final OrderHistoryDetailsPaymentTerm
           orderHistoryDetailsPaymentTerm,
-      required final SpecialInstructions orderHistoryDetailsSpecialInstructions,
+      required final StringValue orderHistoryDetailsSpecialInstructions,
       required final List<PoDocuments> orderHistoryDetailsPoDocuments,
       required final bool isMarketPlace,
       required final double taxRate}) = _$OrderHistoryDetailsImpl;
@@ -821,7 +821,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   CompanyName get companyName;
   @override
-  PoReference get poReference;
+  StringValue get poReference;
   @override
   String get shipToAddress;
   @override
@@ -837,7 +837,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   OrderHistoryDetailsPaymentTerm get orderHistoryDetailsPaymentTerm;
   @override
-  SpecialInstructions get orderHistoryDetailsSpecialInstructions;
+  StringValue get orderHistoryDetailsSpecialInstructions;
   @override
   List<PoDocuments> get orderHistoryDetailsPoDocuments;
   @override

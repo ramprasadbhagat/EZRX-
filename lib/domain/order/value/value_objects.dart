@@ -296,21 +296,6 @@ class MaterialTaxClassification extends ValueObject<String> {
   // }
 }
 
-class SpecialInstructions extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory SpecialInstructions(String input) {
-    return SpecialInstructions._(validateStringNotEmpty(input));
-  }
-
-  String get displaySpecialInstructions {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  const SpecialInstructions._(this.value);
-}
-
 class PaymentTermCode extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -504,42 +489,6 @@ class TenderContractReason extends ValueObject<String> {
   const TenderContractReason._(this.value);
 }
 
-class PoReference extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory PoReference(String input) {
-    return PoReference._(validateStringNotEmpty(input.trim()));
-  }
-
-  String get displayPoReference {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  const PoReference._(this.value);
-}
-
-class DeliveryInstruction extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory DeliveryInstruction(String input) {
-    return DeliveryInstruction._(validateStringNotEmpty(input));
-  }
-
-  const DeliveryInstruction._(this.value);
-}
-
-class ReferenceNote extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory ReferenceNote(String input) {
-    return ReferenceNote._(validateStringNotEmpty(input));
-  }
-
-  const ReferenceNote._(this.value);
-}
 
 class CollectiveNumber extends ValueObject<String> {
   @override
@@ -550,19 +499,6 @@ class CollectiveNumber extends ValueObject<String> {
   }
 
   const CollectiveNumber._(this.value);
-}
-
-class ContactPerson extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory ContactPerson(String input) {
-    return ContactPerson._(
-      validateStringNotEmpty(input),
-    );
-  }
-
-  const ContactPerson._(this.value);
 }
 
 class PaymentTerm extends ValueObject<String> {
