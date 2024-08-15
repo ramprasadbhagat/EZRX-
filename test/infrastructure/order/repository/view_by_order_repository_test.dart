@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
@@ -186,6 +187,59 @@ void main() {
         orderBy: fakeOrderBy,
         sort: fakeSort,
         searchKey: fakeSearchKey,
+        viewByOrder: fakeViewByOrder,
+        shipToInfo: fakeShipToInfo,
+        isDetailsPage: false,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test('=> get remotely success with search ket not empty', () async {
+      final searchKey = SearchKey.search('fake-search-key');
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
+      when(
+        () => viewByOrderRemoteDataSource.getViewByOrders(
+          soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          pageSize: fakePageSize,
+          offset: fakeOffSet,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          searchKey: searchKey.getOrCrash(),
+          orderBy: fakeOrderBy,
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          filterQuery: ViewByOrdersFilterDto.fromDomain(
+            fakeFilter.copyWith(
+              orderDateFrom: DateTimeStringValue(
+                getDateStringByDateTime(DateTime(1900)),
+              ),
+              orderDateTo: DateTimeStringValue(
+                getDateStringByDateTime(DateTime.now()),
+              ),
+            ),
+          ).toJson(),
+          sort: fakeSort,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
+          isDetailsPage: false,
+          market: fakeMarket,
+        ),
+      ).thenAnswer(
+        (invocation) async => fakeViewByOrder,
+      );
+
+      final result = await viewByOrderRepository.getViewByOrders(
+        salesOrgConfig: fakeMYSalesOrgConfigs,
+        salesOrganisation: fakeSalesOrganisation,
+        soldTo: fakeCustomerCodeInfo,
+        user: fakeClientUser,
+        pageSize: fakePageSize,
+        offset: fakeOffSet,
+        viewByOrdersFilter: fakeFilter,
+        orderBy: fakeOrderBy,
+        sort: fakeSort,
+        searchKey: searchKey,
         viewByOrder: fakeViewByOrder,
         shipToInfo: fakeShipToInfo,
         isDetailsPage: false,

@@ -20,6 +20,7 @@ import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -273,6 +274,65 @@ void main() {
           selectedMaterialFilter: fakeMaterialFilterWithComboOffers,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
+          searchKey: fakeSearchKey,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('=> get remotely success with Gimmick enable and user is salesrep',
+          () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
+        when(
+          () => materialListRemoteDataSource.getProductList(
+            salesOrgCode: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            pageSize: 10,
+            gimmickMaterial: fakeVNSalesOrgConfigs.enableGimmickMaterial,
+            language: fakeSalesRepUser.preferredLanguage.languageCode,
+            isFavourite: fakeMaterialFilterWithComboOffers.isFavourite,
+            isCovidSelected: fakeMaterialFilterWithComboOffers.isCovidSelected,
+            type: fakeMaterialFilterWithComboOffers.type,
+            isProductOffer: fakeMaterialFilterWithComboOffers.isProductOffer,
+            principalCode: '',
+            offset: 0,
+            orderByName: fakeMaterialFilterWithComboOffers.sortBy.isAlphabetSort
+                ? fakeMaterialFilterWithComboOffers.sortBy.valueRequest
+                : '',
+            orderByPrice: fakeMaterialFilterWithComboOffers.sortBy.isPriceSort
+                ? fakeMaterialFilterWithComboOffers.sortBy.valueRequest
+                : '',
+            manufactureList:
+                fakeMaterialFilterWithComboOffers.manufactureListSelected,
+            countryListCode: fakeMaterialFilterWithComboOffers
+                .countryListSelected
+                .map((e) => e.code)
+                .toList(),
+            searchKey: fakeSearchKey.searchValueOrEmpty,
+            salesDeal: [],
+            isComboOffers: fakeMaterialFilterWithComboOffers.comboOffers,
+            showSampleItem: false,
+            market: fakeMarket,
+            isMarketPlace: fakeMaterialFilterWithComboOffers.isMarketPlace,
+            isTender: fakeMaterialFilter.isTender,
+          ),
+        ).thenAnswer(
+          (invocation) async => fakeMaterialResponse,
+        );
+
+        final result = await materialListRepository.getMaterialList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrgConfig: fakeVNSalesOrgConfigs,
+          salesOrganisation: fakeVNSalesOrganisation,
+          selectedMaterialFilter: fakeMaterialFilterWithComboOffers,
+          shipToInfo: fakeShipToInfo,
+          user: fakeSalesRepUser,
           searchKey: fakeSearchKey,
         );
         expect(

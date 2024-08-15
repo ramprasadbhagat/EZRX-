@@ -1,6 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:flutter/material.dart';
@@ -328,6 +332,12 @@ void main() {
           parentID: 'fake-parent-Id',
         ),
       ];
+
+      final materialTenderMap = {
+        MaterialNumber('fake-material-number'): TenderContract.empty().copyWith(
+          contractNumber: TenderContractNumber('fake-contract-number'),
+        ),
+      };
       when(
         () => cartRemoteDataSource.upsertCartItems(
           market: mockMarket,
@@ -341,7 +351,7 @@ void main() {
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: 'fake-item-Id',
               quantity: materialInfo.quantity.intValue,
-              tenderContractNumber: '',
+              tenderContractNumber: 'fake-contract-number',
             );
 
             return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -364,7 +374,7 @@ void main() {
         language: Language.english(),
         materialInfo: productList,
         salesOrganisationConfig: fakeMYSalesOrgConfigs,
-        tenderContractDetails: {},
+        tenderContractDetails: materialTenderMap,
       );
       expect(result.isRight(), true);
     });
@@ -1041,13 +1051,12 @@ void main() {
     );
 
     test('upsertCartItems local test failure', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
         () => cartLocalDataSourceMock.upsertCart(
           type: UpsertCartLocalType.upsertCartItems,
         ),
-      ).thenThrow(
-        (invocation) async => MockException(),
-      );
+      ).thenThrow(fakeException);
 
       final result = await cartRepository.upsertCartItems(
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -1056,7 +1065,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
       );
-      expect(result.isLeft(), true);
+      expect(result, Left(FailureHandler.handleFailure(fakeException)));
     });
 
     test('upsertCartItems local test success', () async {
@@ -1080,20 +1089,34 @@ void main() {
     });
 
     test('upsertCartItems remote test success', () async {
+      const bundleCode = 'fake-bundle-code';
+      final banner = EZReachBanner.empty();
+      final product = fakeCartProducts.first.copyWith(
+        materialInfo:
+            MaterialInfo.empty().copyWith(type: MaterialInfoType('bundle')),
+        bundle: Bundle.empty().copyWith(
+          bundleCode: bundleCode,
+          materials: [
+            MaterialInfo.empty().copyWith(
+              quantity: MaterialQty(0),
+              materialNumber: MaterialNumber('fake-material-number'),
+            ),
+          ],
+        ),
+      );
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
         () => cartRemoteDataSource.upsertCartItems(
           market: mockMarket,
-          requestParams:
-              fakeCartProducts.first.bundle.materials.map((materialInfo) {
+          requestParams: product.bundle.materials.map((materialInfo) {
             final upsertCartRequest = CartProductRequest.toBundlesRequest(
               salesOrg: fakeSalesOrganisation.salesOrg,
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
               language: Language.english(),
               materialInfo: materialInfo,
-              bundleCode: fakeCartProducts.first.bundle.bundleCode,
+              bundleCode: bundleCode,
             );
 
             return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -1105,9 +1128,16 @@ void main() {
 
       when(
         () => materialBannerStorageMock.delete(
-          materialNumbers: fakeCartProducts.first.bundle.materials
-              .map((e) => e.materialNumber.displayMatNo)
-              .toList(),
+          materialNumbers: ['${bundleCode}_fake-material-number'],
+        ),
+      ).thenAnswer(
+        (invocation) => Future.value(),
+      );
+
+      when(
+        () => materialBannerStorageMock.set(
+          materialNumbers: ['${bundleCode}_fake-material-number'],
+          banner: banner,
         ),
       ).thenAnswer(
         (invocation) => Future.value(),
@@ -1116,11 +1146,12 @@ void main() {
       final result = await cartRepository.upsertCartItems(
         customerCodeInfo: fakeCustomerCodeInfo,
         language: Language.english(),
-        product: fakeCartProducts.first,
+        product: product,
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
+        banner: banner,
       );
-      expect(result.isRight(), true);
+      expect(result, Right(fakeCartProducts));
     });
 
     test('upsertCartItems remote test failure', () async {
@@ -1296,6 +1327,370 @@ void main() {
         language: Language.english(),
       );
       expect(result.isLeft(), true);
+    });
+
+    group('upsertCart test - ', () {
+      final upsertCartRequest = CartProductRequest.toMaterialRequest(
+        salesOrg: fakeMYSalesOrganisation.salesOrg,
+        customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+        language: Language('EN').languageCode,
+        materialInfo: MaterialInfo.empty(),
+        itemId: 'fake-id',
+        quantity: 10,
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+        tenderContractNumber: 'fake-contract-number',
+      );
+      test('upsertCart Access maximum cart quantity', () async {
+        when(() => mockConfig.maximumCartQuantity).thenReturn(10);
+        final result = await cartRepository.upsertCart(
+          materialInfo: MaterialInfo.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('en'),
+          itemId: 'fake-id',
+          quantity: 11,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+        expect(result, const Left(ApiFailure.maximumCartQuantityExceed('10')));
+      });
+
+      test('upsertCart Local success', () async {
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+        when(() => cartLocalDataSourceMock.upsertCart())
+            .thenAnswer((_) => Future.value(fakeCartProducts));
+
+        final result = await cartRepository.upsertCart(
+          materialInfo: MaterialInfo.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('en'),
+          itemId: 'fake-id',
+          quantity: 10,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+        expect(result, Right(fakeCartProducts));
+      });
+
+      test('upsertCart Local failure', () async {
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+        when(() => cartLocalDataSourceMock.upsertCart())
+            .thenThrow(fakeException);
+
+        final result = await cartRepository.upsertCart(
+          materialInfo: MaterialInfo.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('en'),
+          itemId: 'fake-id',
+          quantity: 10,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+        expect(result, Left(FailureHandler.handleFailure(fakeException)));
+      });
+
+      test('upsertCart Remote success', () async {
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        when(() => deviceStorageMock.currentMarket()).thenReturn('MY');
+
+        when(
+          () => cartRemoteDataSource.upsertCart(
+            requestParams:
+                CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            market: 'MY',
+          ),
+        ).thenAnswer((_) => Future.value(fakeCartProducts));
+
+        final result = await cartRepository.upsertCart(
+          materialInfo: MaterialInfo.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('EN'),
+          itemId: 'fake-id',
+          quantity: 10,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+        expect(result, Right(fakeCartProducts));
+      });
+
+      test('upsertCart Remote failure', () async {
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        when(() => deviceStorageMock.currentMarket()).thenReturn('MY');
+
+        when(
+          () => cartRemoteDataSource.upsertCart(
+            requestParams:
+                CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            market: 'MY',
+          ),
+        ).thenThrow(fakeException);
+
+        final result = await cartRepository.upsertCart(
+          materialInfo: MaterialInfo.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('EN'),
+          itemId: 'fake-id',
+          quantity: 10,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+        expect(result, Left(FailureHandler.handleFailure(fakeException)));
+      });
+    });
+
+    group('upsertCartWithBonus Test - ', () {
+      test('upsertCartWithBonus failure', () async {
+        final product = PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            sampleBonusItemId: 'fake-id',
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+          ),
+          quantity: 0,
+          tenderContract: TenderContract.empty().copyWith(
+            contractNumber: TenderContractNumber('fake-contract-number'),
+          ),
+        );
+
+        final upsertCartRequest = CartProductRequest.toMaterialRequest(
+          salesOrg: fakeMYSalesOrganisation.salesOrg,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: Language('EN').languageCode,
+          materialInfo: product.materialInfo,
+          itemId: 'fake-id',
+          quantity: 0,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        when(() => deviceStorageMock.currentMarket()).thenReturn('MY');
+
+        when(
+          () => cartRemoteDataSource.upsertCart(
+            requestParams:
+                CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            market: 'MY',
+          ),
+        ).thenThrow(fakeException);
+
+        final result = await cartRepository.upsertCartWithBonus(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('EN'),
+          product: product,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+        );
+        expect(result, Left(FailureHandler.handleFailure(fakeException)));
+      });
+
+      test('upsertCartWithBonus success delete material', () async {
+        final product = PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-material-number'),
+            sampleBonusItemId: 'fake-id',
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+          ),
+          quantity: 0,
+          tenderContract: TenderContract.empty().copyWith(
+            contractNumber: TenderContractNumber('fake-contract-number'),
+          ),
+        );
+
+        final upsertCartRequest = CartProductRequest.toMaterialRequest(
+          salesOrg: fakeMYSalesOrganisation.salesOrg,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: Language('EN').languageCode,
+          materialInfo: product.materialInfo,
+          itemId: 'fake-id',
+          quantity: 0,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        when(() => deviceStorageMock.currentMarket()).thenReturn('MY');
+
+        when(
+          () => cartRemoteDataSource.upsertCart(
+            requestParams:
+                CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            market: 'MY',
+          ),
+        ).thenAnswer((_) => Future.value(fakeCartProducts));
+
+        when(
+          () => materialBannerStorageMock
+              .delete(materialNumbers: ['fake-material-number']),
+        ).thenAnswer((_) => Future.value());
+
+        final result = await cartRepository.upsertCartWithBonus(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('EN'),
+          product: product,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+        );
+        expect(result, Right(fakeCartProducts));
+      });
+
+      test('upsertCartWithBonus success delete bundle material', () async {
+        const bundleCode = 'fake-bundle-code';
+        final product = PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-material-number'),
+            type: MaterialInfoType.bundle(),
+            sampleBonusItemId: 'fake-id',
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+          ),
+          bundle: Bundle.empty().copyWith(
+            bundleCode: bundleCode,
+            materials: [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number'),
+                type: MaterialInfoType.bundle(),
+                sampleBonusItemId: 'fake-id',
+                counterOfferDetails: RequestCounterOfferDetails.empty(),
+              ),
+            ],
+          ),
+          quantity: 0,
+          tenderContract: TenderContract.empty().copyWith(
+            contractNumber: TenderContractNumber('fake-contract-number'),
+          ),
+        );
+
+        final upsertCartRequest = CartProductRequest.toMaterialRequest(
+          salesOrg: fakeMYSalesOrganisation.salesOrg,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: Language('EN').languageCode,
+          materialInfo: product.materialInfo,
+          itemId: 'fake-id',
+          quantity: 0,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        when(() => deviceStorageMock.currentMarket()).thenReturn('MY');
+
+        when(
+          () => cartRemoteDataSource.upsertCart(
+            requestParams:
+                CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            market: 'MY',
+          ),
+        ).thenAnswer((_) => Future.value(fakeCartProducts));
+
+        when(
+          () => materialBannerStorageMock
+              .delete(materialNumbers: ['${bundleCode}_fake-material-number']),
+        ).thenAnswer((_) => Future.value());
+
+        final result = await cartRepository.upsertCartWithBonus(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('EN'),
+          product: product,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+        );
+        expect(result, Right(fakeCartProducts));
+      });
+
+      test('upsertCartWithBonus add failure', () async {
+        final product = PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-material-number'),
+            sampleBonusItemId: 'fake-id',
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+          ),
+          quantity: 10,
+          tenderContract: TenderContract.empty().copyWith(
+            contractNumber: TenderContractNumber('fake-contract-number'),
+          ),
+        );
+
+        final upsertCartRequest = CartProductRequest.toMaterialRequest(
+          salesOrg: fakeMYSalesOrganisation.salesOrg,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: Language('EN').languageCode,
+          materialInfo: product.materialInfo,
+          itemId: 'fake-id',
+          quantity: 10,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          tenderContractNumber: 'fake-contract-number',
+        );
+
+        when(() => mockConfig.maximumCartQuantity).thenReturn(100);
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+        when(() => deviceStorageMock.currentMarket()).thenReturn('MY');
+
+        when(
+          () => cartRemoteDataSource.upsertCart(
+            requestParams:
+                CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            market: 'MY',
+          ),
+        ).thenAnswer((_) => Future.value(fakeCartProducts));
+
+        when(
+          () => materialBannerStorageMock.set(
+            materialNumbers: ['fake-material-number'],
+            banner: EZReachBanner.empty(),
+          ),
+        ).thenThrow(fakeException);
+
+        final result = await cartRepository.upsertCartWithBonus(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          language: Language('EN'),
+          product: product,
+          counterOfferDetails: RequestCounterOfferDetails.empty(),
+          banner: EZReachBanner.empty(),
+        );
+        expect(result, Left(FailureHandler.handleFailure(fakeException)));
+      });
     });
   });
 }

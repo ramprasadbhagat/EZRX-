@@ -127,37 +127,33 @@ class StockInfoRepository implements IStockInfoRepository {
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
   }) async {
-    try {
-      if (items.isEmpty) return const Right({});
+    if (items.isEmpty) return const Right({});
 
-      final stockInfoMap = <MaterialNumber, List<StockInfo>>{};
+    final stockInfoMap = <MaterialNumber, List<StockInfo>>{};
 
-      final response = await getStockInfoList(
-        customerCodeInfo: customerCodeInfo,
-        materials: items.map((e) => e.materialNumber).toList(),
-        salesOrganisation: salesOrganisation,
-        shipToInfo: shipToInfo,
-      );
-      final stockInfo = response.fold(
-        (failure) => <MaterialStockInfo>[],
-        (stockInfo) => stockInfo,
-      );
-      stockInfoMap.addAll(
-        {
-          for (final item in items)
-            item.materialNumber: stockInfo
-                .firstWhere(
-                  (element) => element.materialNumber == item.materialNumber,
-                  orElse: () => MaterialStockInfo.empty(),
-                )
-                .stockInfos,
-        },
-      );
+    final response = await getStockInfoList(
+      customerCodeInfo: customerCodeInfo,
+      materials: items.map((e) => e.materialNumber).toList(),
+      salesOrganisation: salesOrganisation,
+      shipToInfo: shipToInfo,
+    );
+    final stockInfo = response.fold(
+      (failure) => <MaterialStockInfo>[],
+      (stockInfo) => stockInfo,
+    );
+    stockInfoMap.addAll(
+      {
+        for (final item in items)
+          item.materialNumber: stockInfo
+              .firstWhere(
+                (element) => element.materialNumber == item.materialNumber,
+                orElse: () => MaterialStockInfo.empty(),
+              )
+              .stockInfos,
+      },
+    );
 
-      return Right(stockInfoMap);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
+    return Right(stockInfoMap);
   }
 
   @override
@@ -169,41 +165,37 @@ class StockInfoRepository implements IStockInfoRepository {
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
   }) async {
-    try {
-      final materialTemp = [...materials];
-      for (var i = 0; i < materialTemp.length; i++) {
-        final failureOrSuccess = await getMappedStockInfoList(
-          items: materialTemp[i].bonusListToMaterialInfo,
-          customerCodeInfo: customerCodeInfo,
-          salesOrganisationConfigs: salesOrganisationConfigs,
-          salesOrganisation: salesOrganisation,
-          shipToInfo: shipToInfo,
-        );
-        final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
-        final dealBonusWithStockInfo =
-            materialTemp[i].bonusSampleItems.map((bonus) {
-          final stockInfoList = bonusStockInfoMap[bonus.materialNumber] ?? [];
-          if (stockInfoList.isNotEmpty) {
-            final stockInfo = stockInfoList.firstWhere(
-              (element) => element.materialNumber == bonus.materialNumber,
-              orElse: () => StockInfo.empty(),
-            );
+    final materialTemp = [...materials];
+    for (var i = 0; i < materialTemp.length; i++) {
+      final failureOrSuccess = await getMappedStockInfoList(
+        items: materialTemp[i].bonusListToMaterialInfo,
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+      final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
+      final dealBonusWithStockInfo =
+          materialTemp[i].bonusSampleItems.map((bonus) {
+        final stockInfoList = bonusStockInfoMap[bonus.materialNumber] ?? [];
+        if (stockInfoList.isNotEmpty) {
+          final stockInfo = stockInfoList.firstWhere(
+            (element) => element.materialNumber == bonus.materialNumber,
+            orElse: () => StockInfo.empty(),
+          );
 
-            return bonus.copyWith(
-              stockInfo: stockInfo,
-            );
-          }
+          return bonus.copyWith(
+            stockInfo: stockInfo,
+          );
+        }
 
-          return bonus;
-        }).toList();
+        return bonus;
+      }).toList();
 
-        materialTemp[i] =
-            materialTemp[i].copyWith(bonusSampleItems: dealBonusWithStockInfo);
-      }
-
-      return Right(materialTemp);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
+      materialTemp[i] =
+          materialTemp[i].copyWith(bonusSampleItems: dealBonusWithStockInfo);
     }
+
+    return Right(materialTemp);
   }
 }

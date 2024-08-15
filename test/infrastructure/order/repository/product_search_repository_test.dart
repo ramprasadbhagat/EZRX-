@@ -109,8 +109,7 @@ void main() async {
       const fakeEanNumber = 'fake-ean-number';
       test('Failure in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => localDataSource.getProductList())
-            .thenThrow(fakeException);
+        when(() => localDataSource.getProductList()).thenThrow(fakeException);
 
         final result = await repository.getScanProduct(
           salesOrganization: fakeSalesOrganisation,
@@ -241,13 +240,44 @@ void main() async {
 
         expect(result, Right(fakeMaterialResponse.products.first));
       });
+
+      test('Success in remote with salesrep role', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
+        when(
+          () => remoteDataSource.getSearchedMaterialList(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            eanNumber: fakeEanNumber,
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
+            language: fakeSalesRepUser.settings.languagePreference.languageCode,
+            offset: 0,
+            pageSize: pageSize,
+            salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+            searchKey: '',
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
+            market: fakeMarket,
+          ),
+        ).thenAnswer((_) async => fakeMaterialResponse);
+
+        final result = await repository.getScanProduct(
+          salesOrganization: fakeSalesOrganisation,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeSalesRepUser,
+          eanNumber: Ean(fakeEanNumber),
+          materialFilter: MaterialFilter.empty(),
+        );
+
+        expect(result, Right(fakeMaterialResponse.products.first));
+      });
     });
 
     group('Search product list -', () {
       test('Failure in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => localDataSource.getProductList())
-            .thenThrow(fakeException);
+        when(() => localDataSource.getProductList()).thenThrow(fakeException);
 
         final result = await repository.searchProductList(
           salesOrganization: fakeSalesOrganisation,
@@ -418,6 +448,55 @@ void main() async {
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
           user: fakeClientUser,
+        );
+
+        expect(result, Right(fakeMaterialResponse));
+      });
+
+      test('Success in remote with salesrep role', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => storage.getAllSearchKey()).thenReturn(
+          ProductSuggestionHistoryDto(
+            searchKeyList: [
+              fakeSearchKey.getOrDefaultValue(''),
+              fakeSearchKey.getOrDefaultValue(''),
+            ],
+          ),
+        );
+        when(
+          () => storage.putSearchKey(
+            searchKeyList: ProductSuggestionHistoryDto.fromDomain(
+              ProductSuggestionHistory(searchKeyList: [fakeSearchKey]),
+            ),
+          ),
+        ).thenAnswer((_) => Future.value());
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
+        when(
+          () => remoteDataSource.getSearchedMaterialList(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            eanNumber: '',
+            gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
+            language: fakeClientUser.preferredLanguage.languageCode,
+            offset: fakeOffset,
+            pageSize: fakePageSize,
+            salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
+            searchKey: fakeSearchKey.getOrDefaultValue(''),
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isCovidSelected: false,
+            market: fakeMarket,
+          ),
+        ).thenAnswer((_) async => fakeMaterialResponse);
+
+        final result = await repository.searchProductList(
+          salesOrganization: fakeSalesOrganisation,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          searchKey: fakeSearchKey,
+          pageSize: fakePageSize,
+          offset: fakeOffset,
+          materialFilter: MaterialFilter.empty(),
+          user: fakeSalesRepUser,
         );
 
         expect(result, Right(fakeMaterialResponse));

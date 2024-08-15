@@ -1,7 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_by_order_request.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_request.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -9,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/invoice_by_order_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 
@@ -70,11 +75,16 @@ void main() async {
   };
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  late OrderHistory orderHistory;
+  late InvoiceDetailResponse invoiceDetailResponse;
 
-  setUpAll(() {
+  setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     when(() => remoteConfigService.enableMarketPlaceMarkets)
         .thenReturn(fakeEnableMarketPlaceMarkets);
+    orderHistory = await ViewByItemLocalDataSource().getViewByItems();
+    invoiceDetailResponse =
+        await ViewByItemLocalDataSource().getInvoiceDetailsForOrder();
   });
 
   group('View by item repository test', () {
@@ -387,6 +397,218 @@ void main() async {
         );
 
         expect(result.fold((l) => {}, (r) => r), fakeInvoiceMap);
+      });
+    });
+
+    group('=> Get View By Item Details test', () {
+      test('=> Failure in local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => viewByItemLocalDataSource.getViewByItems())
+            .thenThrow(const ApiFailure.other(fakeException));
+
+        final result = await repository.getViewByItemDetails(
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: SearchKey.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+        );
+
+        expect(
+          result,
+          Left(
+            FailureHandler.handleFailure(
+              const ApiFailure.other(fakeException),
+            ),
+          ),
+        );
+      });
+
+      test('=> Success in local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => viewByItemLocalDataSource.getViewByItems())
+            .thenAnswer((_) async => orderHistory);
+
+        final result = await repository.getViewByItemDetails(
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: SearchKey.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+        );
+
+        expect(result, Right(orderHistory));
+      });
+
+      test('=> Failure in remote', () async {
+        final viewByItemDetailRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          orderNumber: '',
+          pageSize: 1,
+          isDetailsPage: true,
+        );
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
+        when(
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables: ViewByItemRequestDto.fromDomain(viewByItemDetailRequest)
+                .toMapJson(),
+            market: fakeMarket,
+          ),
+        ).thenThrow(const ApiFailure.other(fakeException));
+
+        final result = await repository.getViewByItemDetails(
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: SearchKey.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+        );
+
+        expect(
+          result,
+          Left(
+            FailureHandler.handleFailure(
+              const ApiFailure.other(fakeException),
+            ),
+          ),
+        );
+      });
+
+      test('=> Success in local', () async {
+        final viewByItemDetailRequest = ViewByItemRequest.empty().copyWith(
+          salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          language: fakeClientUser.preferredLanguage.languageCode,
+          orderNumber: '',
+          pageSize: 1,
+          isDetailsPage: true,
+        );
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
+        when(
+          () => orderHistoryRemoteDataSource.getOrderHistory(
+            variables: ViewByItemRequestDto.fromDomain(viewByItemDetailRequest)
+                .toMapJson(),
+            market: fakeMarket,
+          ),
+        ).thenAnswer((_) async => orderHistory);
+
+        final result = await repository.getViewByItemDetails(
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          soldTo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          searchKey: SearchKey.empty(),
+          salesOrganisation: fakeMYSalesOrganisation,
+        );
+
+        expect(result, Right(orderHistory));
+      });
+    });
+
+    group('=> Get Invoice Details For Order test', () {
+      test('=> Failure in local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => viewByItemLocalDataSource.getInvoiceDetailsForOrder())
+            .thenThrow(const ApiFailure.other(fakeException));
+
+        final result = await repository.getInvoiceDetailsForOrder(
+          orderNumber: OrderNumber('fake-order-number'),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          language: Language('MY'),
+          offset: 1,
+        );
+
+        expect(
+          result,
+          Left(
+            FailureHandler.handleFailure(
+              const ApiFailure.other(fakeException),
+            ),
+          ),
+        );
+      });
+
+      test('=> Success in local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => viewByItemLocalDataSource.getInvoiceDetailsForOrder())
+            .thenAnswer((_) async => invoiceDetailResponse);
+
+        final result = await repository.getInvoiceDetailsForOrder(
+          orderNumber: OrderNumber('fake-order-number'),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          language: Language('MY'),
+          offset: 1,
+        );
+
+        expect(result, Right(invoiceDetailResponse));
+      });
+
+      test('=> Failure in remote', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => mockConfig.pageSize).thenReturn(10);
+        final invoiceByOrderRequest = InvoiceByOrderRequest(
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          language: Language('MY').languageCode,
+          orderNumber: OrderNumber('fake-order-number').getOrDefaultValue(''),
+          pageSize: 10,
+          offSet: 1,
+        );
+
+        when(
+          () => orderHistoryRemoteDataSource.getInvoiceDetailsForOrder(
+            invoicesByOrderRequest:
+                InvoiceByOrderRequestDto.fromDomain(invoiceByOrderRequest)
+                    .toMapJson(),
+          ),
+        ).thenThrow(const ApiFailure.other(fakeException));
+
+        final result = await repository.getInvoiceDetailsForOrder(
+          orderNumber: OrderNumber('fake-order-number'),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          language: Language('MY'),
+          offset: 1,
+        );
+
+        expect(
+          result,
+          Left(
+            FailureHandler.handleFailure(
+              const ApiFailure.other(fakeException),
+            ),
+          ),
+        );
+      });
+
+      test('=> Success in local', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => mockConfig.pageSize).thenReturn(10);
+        final invoiceByOrderRequest = InvoiceByOrderRequest(
+          customerCodeSoldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          language: Language('MY').languageCode,
+          orderNumber: OrderNumber('fake-order-number').getOrDefaultValue(''),
+          pageSize: 10,
+          offSet: 1,
+        );
+
+        when(
+          () => orderHistoryRemoteDataSource.getInvoiceDetailsForOrder(
+            invoicesByOrderRequest:
+                InvoiceByOrderRequestDto.fromDomain(invoiceByOrderRequest)
+                    .toMapJson(),
+          ),
+        ).thenAnswer((_) async => invoiceDetailResponse);
+
+        final result = await repository.getInvoiceDetailsForOrder(
+          orderNumber: OrderNumber('fake-order-number'),
+          customerCodeInfo: fakeCustomerCodeInfo,
+          language: Language('MY'),
+          offset: 1,
+        );
+
+        expect(result, Right(invoiceDetailResponse));
       });
     });
   });

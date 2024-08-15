@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
@@ -527,6 +529,63 @@ void main() {
         expect(
           result.isLeft(),
           true,
+        );
+      });
+
+      test('successfully - remote', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
+        final materialList = [fakeMaterialInfo];
+        when(
+          () => productDetailRemoteDataSource.getSimilarProduct(
+            materialNumber: mockMaterialNumber.getOrCrash(),
+            language: mockLanguage.languageCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            principalCode: mockPrincipalCode.getOrCrash(),
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            market: mockMarket,
+          ),
+        ).thenAnswer((invocation) async => materialList);
+
+        final result = await productDetailRepository.getSimilarProduct(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          language: mockLanguage,
+          materialNumber: mockMaterialNumber,
+          principalCode: mockPrincipalCode,
+          shipToInfo: fakeShipToInfo,
+        );
+        expect(result, Right(materialList));
+      });
+
+      test('failure - remote', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
+
+        when(
+          () => productDetailRemoteDataSource.getSimilarProduct(
+            materialNumber: mockMaterialNumber.getOrCrash(),
+            language: mockLanguage.languageCode,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            principalCode: mockPrincipalCode.getOrCrash(),
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            market: mockMarket,
+          ),
+        ).thenThrow(Exception('fake-error'));
+
+        final result = await productDetailRepository.getSimilarProduct(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          language: mockLanguage,
+          materialNumber: mockMaterialNumber,
+          principalCode: mockPrincipalCode,
+          shipToInfo: fakeShipToInfo,
+        );
+        expect(
+          result,
+          Left(FailureHandler.handleFailure(Exception('fake-error'))),
         );
       });
     });

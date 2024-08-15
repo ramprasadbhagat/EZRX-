@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/add_favourite.dart';
-import 'package:ezrxmobile/domain/order/entities/favourite_status.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/remove_favourite.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -10,8 +9,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import '../../../common_mock_data/user_mock.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -33,7 +30,6 @@ void main() {
   late MaterialNumber favouriteMaterialMock;
 
   final errorMock = Exception('fake-error');
-   
 
   setUpAll(
     () async {
@@ -334,83 +330,14 @@ void main() {
       );
 
       test(
-        'Get favourites for list success locally',
+        'get watchFavoriteStatus',
         () async {
-          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+          final stream = Stream<MaterialInfo>.fromIterable([]);
           when(
-            () => localDataSourceMock.getFavouriteStatus(),
-          ).thenAnswer(
-            (_) async => FavouriteStatus.empty(),
-          );
-          final result = await repository.getFavouritesForList(
-            preferredLanguage: fakeClientUser.preferredLanguage,
-            list: materialListMock,
-          );
-          expect(result.isRight(), true);
-          expect(result.getOrElse(() => []), materialListMock);
-        },
-      );
-
-      test(
-        'Get favourites for list failure locally',
-        () async {
-          when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-          when(
-            () => localDataSourceMock.getFavouriteStatus(),
-          ).thenThrow(errorMock);
-          final result = await repository.getFavouritesForList(
-            preferredLanguage: fakeClientUser.preferredLanguage,
-            list: materialListMock,
-          );
-          expect(result.isLeft(), true);
-        },
-      );
-
-      test(
-        'Get favourites for list success remote',
-        () async {
-          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-          when(
-            () => remoteDataSourceMock.getFavouriteStatus(
-              materialNumber: nonFavouriteMaterialMock.getOrCrash(),
-              language: fakeClientUser.preferredLanguage.languageCode,
-            ),
-          ).thenAnswer(
-            (_) async => const FavouriteStatus(isFavourite: false),
-          );
-          when(
-            () => remoteDataSourceMock.getFavouriteStatus(
-              materialNumber: favouriteMaterialMock.getOrCrash(),
-              language: fakeClientUser.preferredLanguage.languageCode,
-            ),
-          ).thenAnswer(
-            (_) async => const FavouriteStatus(isFavourite: true),
-          );
-          final result = await repository.getFavouritesForList(
-            preferredLanguage: fakeClientUser.preferredLanguage,
-            list: materialListMock,
-          );
-          expect(result.isRight(), true);
-          expect(result.getOrElse(() => []), materialListMock);
-        },
-      );
-
-      test(
-        'Get favourites for list failure remote',
-        () async {
-          when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-          when(
-            () => remoteDataSourceMock.getFavouriteStatus(
-              materialNumber: nonFavouriteMaterialMock.getOrCrash(),
-              language: fakeClientUser.preferredLanguage.languageCode,
-            ),
-          ).thenThrow(errorMock);
-
-          final result = await repository.getFavouritesForList(
-            preferredLanguage: fakeClientUser.preferredLanguage,
-            list: materialListMock,
-          );
-          expect(result.isRight(), true);
+            () => localDataSourceMock.favoriteStatusData,
+          ).thenAnswer((_) => stream);
+          final result = repository.watchFavoriteStatus();
+          expect(result, stream);
         },
       );
     },

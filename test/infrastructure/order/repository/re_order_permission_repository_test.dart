@@ -319,5 +319,40 @@ void main() {
         ),
       );
     });
+
+    test('=> get remotely success and not get valid material', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => reOrderPermissionRemoteDataSource.getPermission(
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          materialNumbers: [fakeMaterialNumbers.first.getOrCrash()],
+          isEnableGimmickMaterial:
+              fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
+          userName: fakeSalesRepUser.username.getValue(),
+        ),
+      ).thenAnswer(
+        (_) async => ReOrderPermission.empty(),
+      );
+
+      final result = await reOrderPermissionRepository.getReorderItemPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        materialNumber: fakeMaterialNumbers.first,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+      );
+      expect(
+        result,
+        Left(
+          ApiFailure.reorderItemInvalid(
+            fakeMaterialNumbers.first.displayMatNo,
+          ),
+        ),
+      );
+    });
   });
 }

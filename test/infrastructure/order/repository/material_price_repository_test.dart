@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:mocktail/mocktail.dart';
@@ -160,6 +161,44 @@ void main() {
     expect(
       result.isRight(),
       true,
+    );
+  });
+
+  test('get materialPrice successfully with new data', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+    final salesDeal = mockCustomerCodeInfo.salesDeals
+        .map((e) => e.getOrDefaultValue(''))
+        .toList();
+    final materialNumber = MaterialNumber('fake-number');
+    final price = Price.empty().copyWith(
+      finalPrice: MaterialPrice(123),
+      materialNumber: materialNumber,
+    );
+
+    when(
+      () => materialPriceRemoteDataSource.getMaterialPrice(
+        salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+        customerCode: mockCustomerCodeInfo.customerCodeSoldTo,
+        shipToCode: mockShipToInfo.shipToCustomerCode,
+        materialNumber: 'fake-number',
+        salesDeal: salesDeal,
+      ),
+    ).thenAnswer(
+      (invocation) async => price,
+    );
+
+    final result = await materialPriceRepository.getMaterialPrice(
+      customerCodeInfo: mockCustomerCodeInfo,
+      salesOrganisation: fakeSGSalesOrganisation,
+      materialNumberList: [materialNumber],
+      salesConfigs: fakeSGSalesOrgConfigs,
+      shipToInfo: mockShipToInfo,
+      comboDealEligible: false,
+    );
+    expect(result.isRight(), true);
+    expect(
+      (result as Right).value,
+      equals({materialNumber: price}),
     );
   });
 
@@ -328,21 +367,46 @@ void main() {
     });
 
     test(
-        'get discountOverride successfully locally with condition zdp8Override inValid',
+        'get discountOverride successfully locally with condition zdp8Override inValid and data has correct material number',
         () async {
+      final price = Price.empty().copyWith(
+        materialNumber: MaterialNumber('123456'),
+      );
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => materialPriceLocalDataSource.getPriceList())
-          .thenAnswer((invocation) async => <Price>[Price.empty()]);
+      when(() => materialPriceLocalDataSource.getPriceList()).thenAnswer(
+        (invocation) async => <Price>[price],
+      );
 
       final result = await materialPriceRepository.getMaterialPriceWithOverride(
         customerCodeInfo: fakeCustomerCodeInfo,
         shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
         salesOrganisation: fakeSalesOrganisation,
-        price: fakePrice,
+        price: fakePrice.copyWith(zdp8Override: Zdp8OverrideValue(0)),
+      );
+      expect(result, Right(price));
+    });
+
+    test(
+        'get discountOverride successfully locally with condition zdp8Override inValid and data has incorrect material number',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => materialPriceLocalDataSource.getPriceList()).thenAnswer(
+        (invocation) async => <Price>[Price.empty()],
+      );
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice.copyWith(zdp8Override: Zdp8OverrideValue(0)),
       );
       expect(
-        result.isRight(),
-        true,
+        result,
+        Right(
+          Price.empty().copyWith(
+            materialNumber: MaterialNumber('123456'),
+          ),
+        ),
       );
     });
 

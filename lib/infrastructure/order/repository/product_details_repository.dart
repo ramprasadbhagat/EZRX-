@@ -75,27 +75,23 @@ class ProductDetailRepository implements IProductDetailRepository {
     required Language language,
     required List<MaterialInfoType> types,
   }) async {
-    try {
-      final materialInfoList = <MaterialInfo>[];
-      for (var i = 0; i < types.length; i++) {
-        final productList = await getProductDetail(
-          materialNumber: materialNumber[i],
-          salesOrganisation: salesOrganisation,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          language: language,
-          type: types[i],
-        );
-
-        productList.fold((l) => {}, (r) => materialInfoList.add(r));
-      }
-
-      return Right(
-        materialInfoList,
+    final materialInfoList = <MaterialInfo>[];
+    for (var i = 0; i < types.length; i++) {
+      final productList = await getProductDetail(
+        materialNumber: materialNumber[i],
+        salesOrganisation: salesOrganisation,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        language: language,
+        type: types[i],
       );
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
+
+      productList.fold((l) => {}, (r) => materialInfoList.add(r));
     }
+
+    return Right(
+      materialInfoList,
+    );
   }
 
   @override
@@ -238,7 +234,7 @@ class ProductDetailRepository implements IProductDetailRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         market: deviceStorage.currentMarket(),
       );
-      
+
       return Right(products);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
