@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/notification_settings.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_local.dart';
@@ -35,6 +36,9 @@ void main() {
   late NotificationSettings settingsMock;
   late NotificationSettings newSettingsMock;
   const fakeError = ApiFailure.other('fake-error');
+  const fakeData = 'fake-data';
+  const fakeSettingItemTitle = 'fake-setting-item-title-data';
+  const fakeSettingItemDescription = 'fake-setting-item-description-data';
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -119,14 +123,33 @@ void main() {
       );
 
       testWidgets(
+        'Test Page Fetch Failure Show SnackBar Success',
+        (tester) async {
+          final expectedState = [
+            NotificationSettingsState.initial().copyWith(
+              failureOrSuccessOption: optionOf(
+                const Right(fakeData),
+              ),
+            ),
+          ];
+          whenListen(
+            notificationSettingsBlocMock,
+            Stream.fromIterable(expectedState),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final snackBarFinder = find.byKey(WidgetKeys.customSnackBar);
+          expect(snackBarFinder, findsNothing);
+        },
+      );
+
+      testWidgets(
         'Test  Submit Failure Show SnackBar Error',
         (tester) async {
           final expectedState = [
             NotificationSettingsState.initial().copyWith(
               submitFailureOrSuccessOption: optionOf(
-                const Left(
-                  fakeError,
-                ),
+                const Left(fakeError),
               ),
             ),
           ];
@@ -205,6 +228,32 @@ void main() {
       );
 
       testWidgets(
+        'Test On Tap returnConfirmationTile',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenAnswer(
+            (invocation) => EligibilityState.initial().copyWith(
+              user: fakeClientAdmin.copyWith(disableReturns: false),
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                disableReturnsAccess: false,
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final tileFinder = find.byKey(WidgetKeys.returnConfirmationTile);
+          expect(tileFinder, findsOneWidget);
+          await tester.tap(tileFinder);
+          verify(
+            () => notificationSettingsBlocMock.add(
+              const NotificationSettingsEvent.updateReturnConfirmation(
+                value: true,
+              ),
+            ),
+          );
+        },
+      );
+
+      testWidgets(
         'Test On Tap Clear Changes Button',
         (tester) async {
           await tester.pumpWidget(getScopedWidget());
@@ -241,6 +290,52 @@ void main() {
               const NotificationSettingsEvent.submit(),
             ),
           );
+        },
+      );
+    },
+  );
+
+  Widget getNotificationSectionScopedWidget() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      providers: [
+        BlocProvider<NotificationSettingsBloc>(
+          create: (context) => notificationSettingsBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
+        ),
+      ],
+      child: Scaffold(
+        body: NotificationSection(
+          items: [
+            SettingItemData(
+              title: fakeSettingItemTitle,
+              value: true,
+              onChange: (p0) {},
+              tileKey: WidgetKeys.orderConfirmationTile,
+              description: fakeSettingItemDescription,
+              subDescriptionList: [],
+            ),
+          ],
+          title: fakeData,
+        ),
+      ),
+    );
+  }
+
+  group(
+    'NotificationSection',
+    () {
+      testWidgets(
+        'Test NotificationSection Display',
+        (tester) async {
+          await tester.pumpWidget(getNotificationSectionScopedWidget());
+          await tester.pump();
+          expect(find.text(fakeData), findsOneWidget);
+          final tileKey = find.byKey(WidgetKeys.orderConfirmationTile);
+          expect(tileKey, findsOneWidget);
         },
       );
     },
