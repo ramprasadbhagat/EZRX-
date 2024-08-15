@@ -22,7 +22,7 @@ class PaymentSummaryFilterRobot {
     'Successful',
   ];
   final statusFilterOptionsForID = [
-    'In progress',
+    'In Progress',
     'Expired',
     'Successful',
     'Cancelled',

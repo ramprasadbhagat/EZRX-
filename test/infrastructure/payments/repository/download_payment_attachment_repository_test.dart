@@ -430,8 +430,7 @@ void main() {
             () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
-              filterBy:
-                  PaymentSummaryFilterDto.fromDomainForID(filter).toMapList,
+              filterBy: PaymentSummaryFilterDto.fromDomain(filter).toMapList,
               isMarketPlace: false,
             ),
           ).thenAnswer(
@@ -486,8 +485,7 @@ void main() {
             () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
-              filterBy:
-                  PaymentSummaryFilterDto.fromDomainForID(filter).toMapList,
+              filterBy: PaymentSummaryFilterDto.fromDomain(filter).toMapList,
               isMarketPlace: false,
             ),
           ).thenThrow(fakeError);

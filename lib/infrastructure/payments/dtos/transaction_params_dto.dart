@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/payments/entities/transaction_params.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,16 +11,16 @@ class TransactionParamsDto with _$TransactionParamsDto {
   const factory TransactionParamsDto({
     @JsonKey(name: 'customer', defaultValue: '') required String customer,
     @JsonKey(name: 'createdStartDate', defaultValue: '')
-        required String createdStartDate,
+    required String createdStartDate,
     @JsonKey(name: 'createdEndDate', defaultValue: '')
-        required String createdEndDate,
+    required String createdEndDate,
     @JsonKey(name: 'search', defaultValue: '') required String search,
     @JsonKey(name: 'first', defaultValue: 0) required int first,
     @JsonKey(name: 'after', defaultValue: 0) required int after,
     @JsonKey(name: 'amountMin', defaultValue: 0) required int amountMin,
     @JsonKey(name: 'amountMax', defaultValue: 0) required int amountMax,
     @JsonKey(name: 'status', defaultValue: <String>[])
-        required List<String> status,
+    required List<String> status,
   }) = _TransactionParamsDto;
 
   factory TransactionParamsDto.fromDomain(
@@ -34,8 +33,7 @@ class TransactionParamsDto with _$TransactionParamsDto {
       search: entity.filter.searchKey.searchValueOrEmpty,
       amountMin: entity.filter.amountValueFrom.intValue,
       amountMax: entity.filter.amountValueTo.intValue,
-      status:
-          entity.filter.filterStatuses.firstOrNull?.apiStatuses ?? <String>[],
+      status: entity.filter.filterStatuses.map((e) => e.getValue()).toList(),
       first: entity.first,
       after: entity.after,
     );

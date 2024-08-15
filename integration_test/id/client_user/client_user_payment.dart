@@ -79,6 +79,7 @@ void main() {
   const currency = 'IDR';
   final successSnackbarMessage = 'File downloaded successfully'.tr();
   const inValidShortText = '1';
+  const statusFilter = 'In Progress';
 
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
@@ -115,8 +116,8 @@ void main() {
     paymentSummaryRobot.verifyPageVisible();
     //change status
     await paymentSummaryRobot.tapFilterButton();
-    await paymentSummaryFilterRobot.tapStatusCheckbox('In progress');
-    paymentSummaryFilterRobot.verifyStatusFilterValue('In progress');
+    await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
+    paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter);
     await paymentSummaryFilterRobot.tapApplyButton();
     final item = find.byKey(WidgetKeys.paymentSummaryTile);
     if (item.evaluate().isNotEmpty) {
@@ -131,8 +132,8 @@ void main() {
         paymentSummaryDetailRobot.verifyPaymentSummaryDetailsBackButton();
         await paymentSummaryDetailRobot.tapPaymentSummaryDetailsBackButton();
         await paymentSummaryRobot.tapFilterButton();
-        await paymentSummaryFilterRobot.tapStatusCheckbox('In progress');
-        paymentSummaryFilterRobot.verifyStatusFilterValue('In progress');
+        await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
+        paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter);
         await paymentSummaryFilterRobot.tapApplyButton();
       }
     }
@@ -958,7 +959,6 @@ void main() {
       //verify not to go Details page
       accountCreditsRobot.verify();
     });
-
   });
 
   //Feature is not implemented on ID yet. Need to revisit when it is implemented
@@ -1552,7 +1552,7 @@ void main() {
       await paymentSummaryFilterRobot.tapApplyButton();
       paymentSummaryRobot.verifyFilterApplied(1);
 
-       //change status
+      //change status
       await paymentSummaryRobot.tapFilterButton();
       await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
       paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter);

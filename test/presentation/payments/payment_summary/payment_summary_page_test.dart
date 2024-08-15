@@ -85,7 +85,7 @@ void main() {
       FilterStatus('Successful'),
       FilterStatus('Processed'),
       FilterStatus('Payment Received'),
-      FilterStatus('In progress'),
+      FilterStatus('In Progress'),
     },
   );
 
@@ -1025,20 +1025,14 @@ void main() {
           find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed')),
           currentSalesOrgVariant.isID ? findsNothing : findsOneWidget,
         );
-        expect(
-          find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
-          currentSalesOrgVariant.isSg || currentSalesOrgVariant.isID
-              ? findsNothing
-              : findsOneWidget,
-        );
 
         expect(
           find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful')),
           currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
         );
         expect(
-          find.byKey(WidgetKeys.paymentSummaryFilterStatus('In progress')),
-          currentSalesOrgVariant.isID ? findsOneWidget : findsNothing,
+          find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress')),
+          currentSalesOrgVariant.isSg ? findsNothing : findsOneWidget,
         );
         expect(
           find.byKey(WidgetKeys.paymentSummaryFilterStatus('Expired')),

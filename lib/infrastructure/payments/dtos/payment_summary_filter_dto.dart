@@ -34,20 +34,6 @@ class PaymentSummaryFilterDto with _$PaymentSummaryFilterDto {
     );
   }
 
-  factory PaymentSummaryFilterDto.fromDomainForID(
-    PaymentSummaryFilter tempFilter,
-  ) {
-    return PaymentSummaryFilterDto(
-      createdDateTo: tempFilter.createdDateTo.apiDateWithDashString,
-      createdDateFrom: tempFilter.createdDateFrom.apiDateWithDashString,
-      amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
-      amountValueTo: tempFilter.amountValueTo.apiParameterValue,
-      filterStatuses:
-          tempFilter.filterStatuses.firstOrNull?.apiStatuses.join(',') ?? '',
-      searchKey: tempFilter.searchKey.upperCaseValue,
-    );
-  }
-
   factory PaymentSummaryFilterDto.fromJson(Map<String, dynamic> json) =>
       _$PaymentSummaryFilterDtoFromJson(json);
 

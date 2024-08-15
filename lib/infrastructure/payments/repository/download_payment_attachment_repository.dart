@@ -180,10 +180,8 @@ class DownloadPaymentAttachmentRepository
           await remoteDataSource.getPaymentSummaryFileDownloadUrl(
         salesOrg: salesOrgCode,
         customerCode: customerCode,
-        filterBy: (salesOrganization.salesOrg.isID
-                ? PaymentSummaryFilterDto.fromDomainForID(paymentSummaryFilter)
-                : PaymentSummaryFilterDto.fromDomain(paymentSummaryFilter))
-            .toMapList,
+        filterBy:
+            PaymentSummaryFilterDto.fromDomain(paymentSummaryFilter).toMapList,
         isMarketPlace: isMarketPlace,
       );
 

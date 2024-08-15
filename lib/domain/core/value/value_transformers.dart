@@ -783,7 +783,7 @@ String getStatusText(String apiStatus) {
     case 'waiting':
     case 'creating':
     case 'processing':
-      return 'In progress';
+      return 'In Progress';
     default:
       return apiStatus;
   }

@@ -34,7 +34,7 @@ class PaymentSummaryFilterState with _$PaymentSummaryFilterState {
     }
     if (salesOrg.isID) {
       return <FilterStatus>[
-        FilterStatus('In progress'),
+        FilterStatus('In Progress'),
         FilterStatus('Expired'),
         FilterStatus('Successful'),
         FilterStatus('Cancelled'),
