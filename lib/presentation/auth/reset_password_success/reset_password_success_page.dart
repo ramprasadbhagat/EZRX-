@@ -19,10 +19,13 @@ class ResetPasswordSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: isFirstLogin
-          ? _ResetPasswordSuccessBodyContent.firstLogin()
-          : _ResetPasswordSuccessBodyContent.resetPassword(context: context),
+    return PopScope(
+      canPop: !isFirstLogin,
+      child: Scaffold(
+        body: isFirstLogin
+            ? _ResetPasswordSuccessBodyContent.firstLogin()
+            : _ResetPasswordSuccessBodyContent.resetPassword(context: context),
+      ),
     );
   }
 }

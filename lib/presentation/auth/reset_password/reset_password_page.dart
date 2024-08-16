@@ -27,10 +27,13 @@ class ResetPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: isFirstLogin
-          ? _ResetPasswordPageBody.firstLogin(context: context)
-          : _ResetPasswordPageBody.resetPassword(),
+    return PopScope(
+      canPop: !isFirstLogin,
+      child: Scaffold(
+        body: isFirstLogin
+            ? _ResetPasswordPageBody.firstLogin(context: context)
+            : _ResetPasswordPageBody.resetPassword(),
+      ),
     );
   }
 }
