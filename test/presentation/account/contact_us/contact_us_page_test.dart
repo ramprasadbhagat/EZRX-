@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/contact_us/contact_us_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
+import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_local.dart';
 import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -66,6 +67,34 @@ class ContactUsDetailsBlocMock
     extends MockBloc<ContactUsDetailsEvent, ContactUsDetailsState>
     implements ContactUsDetailsBloc {}
 
+class MockPhoneNumber extends Mock implements order_value_object.PhoneNumber {
+  @override
+  String getOrDefaultValue(defaultValue) {
+    return value.fold((f) => defaultValue, id);
+  }
+}
+
+class MockEmailAddress extends Mock implements EmailAddress {
+  @override
+  String getOrDefaultValue(defaultValue) {
+    return value.fold((f) => defaultValue, id);
+  }
+}
+
+class MockStringValue extends Mock implements StringValue {
+  @override
+  String getOrDefaultValue(defaultValue) {
+    return value.fold((f) => defaultValue, id);
+  }
+}
+
+class MockUsername extends Mock implements Username {
+  @override
+  String getOrDefaultValue(defaultValue) {
+    return value.fold((f) => defaultValue, id);
+  }
+}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -89,8 +118,13 @@ void main() {
     ),
     preferredLanguage: Language.english(),
   );
-  final salesOrg =
-      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001'));
+  final salesOrg = SalesOrganisation.empty().copyWith(
+    salesOrg: SalesOrg(
+      '2001',
+    ),
+  );
+  final invalidSalesOrg =
+      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg(''));
   final contactUs = ContactUs(
     username: Username('fake-name'),
     email: EmailAddress('fake-email'),
@@ -211,7 +245,54 @@ void main() {
       expect(haveAnyQuestionsTextFinder, findsOneWidget);
     });
 
-    testWidgets('Test Contact Details', (tester) async {
+    testWidgets('Test Contact Details with loading state', (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => mockContactUsBloc.state).thenReturn(
+        ContactUsState.initial().copyWith(
+          isSubmitting: false,
+          showErrorMessage: true,
+          contactUs: contactUs,
+        ),
+      );
+
+      final initialState = ContactUsDetailsState.initial();
+      final loadingState =
+          ContactUsDetailsState.initial().copyWith(isLoading: true);
+
+      // Mock the bloc to emit the initial state followed by the loading state
+      whenListen(
+        contactUsDetailsBlocMock,
+        Stream<ContactUsDetailsState>.fromIterable(
+          [initialState, loadingState],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      // first does not show loading when initial state
+      expect(
+        find.byKey(WidgetKeys.loaderImage),
+        findsNothing,
+      );
+      // then rebuild and show loading after a pump
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.loaderImage),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Test Contact Details with valid org', (tester) async {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
@@ -232,8 +313,10 @@ void main() {
       );
       when(() => contactUsDetailsBlocMock.state).thenReturn(
         ContactUsDetailsState.initial().copyWith(
-          contactUsDetails:
-              contactUsDetails.copyWith(content: HtmlContent('fake_data')),
+          contactUsDetails: contactUsDetails.copyWith(
+            content: HtmlContent('fake_data'),
+            postloginSendToEmail: 'sample email',
+          ),
         ),
       );
 
@@ -243,13 +326,57 @@ void main() {
         find.byKey(WidgetKeys.contactDetailsSectionKey),
         findsOneWidget,
       );
-      // expect(
-      //   (tester.widget(
-      //     find.byKey(WidgetKeys.contactDetailsSectionKey),
-      //   ) as )
-      //       .data,
-      //   HtmlContent('fake_data').appendedImgSrcWithBaseUrl,
-      // );
+
+      final contactFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'sample email'));
+
+      expect(
+        contactFinder,
+        findsOneWidget,
+      );
+      // tap on the contact item
+      await tester.tap(contactFinder);
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('Test Contact Details with invalid org', (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: invalidSalesOrg,
+        ),
+      );
+      when(() => mockContactUsBloc.state).thenReturn(
+        ContactUsState.initial().copyWith(
+          isSubmitting: false,
+          showErrorMessage: true,
+          contactUs: contactUs,
+        ),
+      );
+      when(() => contactUsDetailsBlocMock.state).thenReturn(
+        ContactUsDetailsState.initial().copyWith(
+          contactUsDetails: contactUsDetails.copyWith(
+            content: HtmlContent('fake_data'),
+            preloginSendToEmail: 'sample email',
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(WidgetKeys.contactDetailsSectionKey),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.genericKey(key: 'sample email')),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Test ContactNumberTextField when isSubmit is false',
@@ -347,6 +474,38 @@ void main() {
       );
       await tester.pump();
     });
+
+    testWidgets('Test ContactNumberTextField rebuild on market change',
+        (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
+      final expectedState = [
+        ContactUsState.initial().copyWith(
+          appMarket: AppMarket('kh'),
+        ),
+        ContactUsState.initial().copyWith(
+          appMarket: AppMarket('sg'),
+        ),
+      ];
+      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final internationalPhoneNumberInput =
+          find.byKey(WidgetKeys.genericKey(key: AppMarket('sg').country));
+
+      expect(internationalPhoneNumberInput, findsOneWidget);
+    });
+
     testWidgets('Test ContactNumberTextField when isSubmit is true',
         (tester) async {
       when(() => mockSalesOrgBloc.state).thenReturn(
@@ -388,6 +547,53 @@ void main() {
       await tester.enterText(internationalPhoneNumberInput, '601234');
     });
 
+    testWidgets(
+        'Test ContactNumberTextField error for an unhandled failure type',
+        (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
+      // Mocking a ValueFailure that is not `empty`
+      const mockFailure =
+          ValueFailure<String>.exceedingMaxValue(failedValue: 'mockFailure');
+      final mockPhoneNumber = MockPhoneNumber();
+      // mocking getter method of phone number
+      when(() => mockPhoneNumber.value).thenReturn(left(mockFailure));
+
+      final expectedState = [
+        ContactUsState.initial().copyWith(
+          isSubmitting: true,
+          showErrorMessage: false,
+        ),
+        ContactUsState.initial().copyWith(
+          isSubmitting: false,
+          showErrorMessage: true,
+          contactUs: contactUs.copyWith(
+            contactNumber: mockPhoneNumber,
+          ),
+        ),
+      ];
+      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final contactNumberTextFieldKey = find.byKey(WidgetKeys.phoneNumberKey);
+      expect(contactNumberTextFieldKey, findsOneWidget);
+      final internationalPhoneNumberInput =
+          find.byType(InternationalPhoneNumberInput);
+
+      expect(internationalPhoneNumberInput, findsOneWidget);
+      await tester.enterText(internationalPhoneNumberInput, 'mockFailure');
+    });
+
     testWidgets('Test Email textfield when email is not empty', (tester) async {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
@@ -400,20 +606,14 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
-      final expectedState = [
+
+      when(() => mockContactUsBloc.state).thenReturn(
         ContactUsState.initial().copyWith(
-          isSubmitting: true,
-          showErrorMessage: false,
-        ),
-        ContactUsState.initial().copyWith(
-          isSubmitting: true,
-          showErrorMessage: true,
           contactUs: contactUs.copyWith(
             email: EmailAddress('mdas@zuelligpharma.com'),
           ),
         ),
-      ];
-      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
+      );
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
@@ -421,6 +621,12 @@ void main() {
         WidgetKeys.emailKey,
       );
       expect(emailTextFieldKey, findsOneWidget);
+
+      // Verify the initial value
+      expect(
+        (tester.widget(emailTextFieldKey) as TextFormField).initialValue,
+        'mdas@zuelligpharma.com',
+      );
     });
 
     testWidgets('Test Email textfield when email is empty', (tester) async {
@@ -456,6 +662,9 @@ void main() {
         WidgetKeys.emailKey,
       );
       expect(emailTextFieldKey, findsOneWidget);
+
+      await tester.enterText(emailTextFieldKey, '');
+      await tester.pump();
     });
 
     testWidgets('Test Email textfield on press', (tester) async {
@@ -479,7 +688,7 @@ void main() {
           isSubmitting: false,
           showErrorMessage: true,
           contactUs: contactUs.copyWith(
-            email: EmailAddress(''),
+            email: EmailAddress('valid-email@gmail.com'),
           ),
         ),
       ];
@@ -505,7 +714,62 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('Test Message textfield when Message is empty', (tester) async {
+    testWidgets('Test Email field error for an unhandled failure type',
+        (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
+      // Mocking a ValueFailure that is not `empty`
+      const mockFailure =
+          ValueFailure<String>.exceedingMaxValue(failedValue: 'mockFailure');
+      final mockEmailAddress = MockEmailAddress();
+      // mocking getter method of email address
+      when(() => mockEmailAddress.value).thenReturn(left(mockFailure));
+
+      final expectedState = [
+        ContactUsState.initial().copyWith(
+          isSubmitting: true,
+          showErrorMessage: false,
+        ),
+        ContactUsState.initial().copyWith(
+          isSubmitting: false,
+          showErrorMessage: true,
+          contactUs: contactUs.copyWith(
+            email: mockEmailAddress,
+          ),
+        ),
+      ];
+      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final emailTextFieldKey = find.byKey(
+        WidgetKeys.emailKey,
+      );
+      expect(emailTextFieldKey, findsOneWidget);
+      final emailInputTextField = find.byKey(WidgetKeys.emailKey);
+
+      expect(emailInputTextField, findsOneWidget);
+      await tester.enterText(emailInputTextField, 'mockFailure');
+      await tester.pump();
+      verify(
+        () => mockContactUsBloc.add(
+          const ContactUsEvent.onEmailChange(
+            newValue: 'mockFailure',
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Test Message field when Message is empty', (tester) async {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
@@ -538,6 +802,66 @@ void main() {
         WidgetKeys.contactMessageKey,
       );
       expect(messageinputTextField, findsOneWidget);
+      await tester.enterText(messageinputTextField, 'message');
+      await tester.pump();
+      verifyNever(
+        () => mockContactUsBloc.add(
+          const ContactUsEvent.onMessageChange(
+            newValue: 'message',
+          ),
+        ),
+      );
+    });
+
+    testWidgets('Test Message error for an unhandled failure type',
+        (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
+      // Mocking a ValueFailure that is not `empty`
+      const mockFailure =
+          ValueFailure<String>.exceedingMaxValue(failedValue: 'mockFailure');
+      final mockContactUs = MockStringValue();
+      // mocking getter method of contact us
+      when(() => mockContactUs.value).thenReturn(left(mockFailure));
+      final expectedState = [
+        ContactUsState.initial().copyWith(
+          isSubmitting: true,
+          showErrorMessage: false,
+        ),
+        ContactUsState.initial().copyWith(
+          isSubmitting: true,
+          showErrorMessage: true,
+          contactUs: contactUs.copyWith(
+            message: mockContactUs,
+          ),
+        ),
+      ];
+      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final messageinputTextField = find.byKey(
+        WidgetKeys.contactMessageKey,
+      );
+      expect(messageinputTextField, findsOneWidget);
+      await tester.enterText(messageinputTextField, 'message');
+      await tester.pump();
+      verifyNever(
+        () => mockContactUsBloc.add(
+          const ContactUsEvent.onMessageChange(
+            newValue: 'message',
+          ),
+        ),
+      );
     });
 
     testWidgets('Test Message textfield on press', (tester) async {
@@ -618,6 +942,68 @@ void main() {
         WidgetKeys.userNameKey,
       );
       expect(userNameinputTextField, findsOneWidget);
+
+      await tester.enterText(userNameinputTextField, 'userName');
+      await tester.pump();
+      verifyNever(
+        () => mockContactUsBloc.add(
+          const ContactUsEvent.onUsernameChange(
+            newValue: 'userName',
+          ),
+        ),
+      );
+    });
+
+    testWidgets('Test UserName error for an unhandled failure type',
+        (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
+      // Mocking a ValueFailure that is not `empty`
+      const mockFailure =
+          ValueFailure<String>.exceedingMaxValue(failedValue: 'mockFailure');
+      final mockUserName = MockUsername();
+      // mocking getter method of username
+      when(() => mockUserName.value).thenReturn(left(mockFailure));
+      final expectedState = [
+        ContactUsState.initial().copyWith(
+          isSubmitting: true,
+          showErrorMessage: false,
+        ),
+        ContactUsState.initial().copyWith(
+          isSubmitting: true,
+          showErrorMessage: true,
+          contactUs: contactUs.copyWith(
+            username: mockUserName,
+          ),
+        ),
+      ];
+      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final userNameinputTextField = find.byKey(
+        WidgetKeys.userNameKey,
+      );
+      expect(userNameinputTextField, findsOneWidget);
+
+      await tester.enterText(userNameinputTextField, 'userName');
+      await tester.pump();
+      verifyNever(
+        () => mockContactUsBloc.add(
+          const ContactUsEvent.onUsernameChange(
+            newValue: 'userName',
+          ),
+        ),
+      );
     });
 
     testWidgets('Test UserName textfield on press', (tester) async {
@@ -702,6 +1088,7 @@ void main() {
       );
       expect(messageHasBeenReceivedText, findsOneWidget);
     });
+
     testWidgets('Test Customer Snack bar for message not received',
         (tester) async {
       when(() => mockSalesOrgBloc.state).thenReturn(
@@ -831,6 +1218,42 @@ void main() {
       expect(
         find.byKey(WidgetKeys.customSnackBar),
         findsOneWidget,
+      );
+    });
+
+    testWidgets('Test Right Unit Failure', (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      when(() => mockCustomerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+        ),
+      );
+      final expectedState = [
+        ContactUsState.initial().copyWith(
+          isSubmitting: true,
+          showErrorMessage: false,
+        ),
+        ContactUsState.initial().copyWith(
+          isSubmitting: false,
+          apiFailureOrSuccessOption: optionOf(const Right(unit)),
+        ),
+      ];
+      whenListen(mockContactUsBloc, Stream.fromIterable(expectedState));
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(WidgetKeys.customSnackBar),
+        findsNothing,
       );
     });
   });
