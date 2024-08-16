@@ -318,14 +318,14 @@ class CommonRobot {
       scrollList.last,
       Offset(0.0, reversed ? 200 : -200),
     );
-    await tester.pump();
+    await tester.pumpAndSettle(Durations.long2);
   }
 
   //============================================================
   //  Announcement/Alert Banner/dialog
   //============================================================
 
-  Future<void> findAnnouncementAlertDialog(String market) async{
+  Future<void> findAnnouncementAlertDialog(String market) async {
     final announceAlertDialog = find.byKey(WidgetKeys.announcementBottomSheet);
     expect(announceAlertDialog, findsOneWidget);
   }

@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 final _priceFormatter = StringUtils.priceFormatter;
 final _priceFormatterForID = StringUtils.priceFormatterWithDecimal;
@@ -39,6 +40,16 @@ extension StringExt on String {
     } catch (_) {
       return 0;
     }
+  }
+
+  double get extractDouble {
+    if (this == 'Price Not Available'.tr()) return 0.0;
+
+    final cleanedInput = replaceAll(',', '');
+    final regex = RegExp(r'(\d+(\.\d+)?)');
+    final match = regex.firstMatch(cleanedInput);
+
+    return match != null ? double.parse(match.group(0)!) : 0.0;
   }
 }
 

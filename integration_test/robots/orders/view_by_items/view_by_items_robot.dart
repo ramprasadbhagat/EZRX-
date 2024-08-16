@@ -186,12 +186,14 @@ class ViewByItemsRobot extends CommonRobot {
     }
   }
 
-  String getFirstOrderId() => tester
-      .widget<RichText>(orderId.first)
-      .text
-      .toPlainText()
-      .split('${'Order'.tr()} #')[1]
-      .substring(0, 4);
+  String getFirstOrderId() {
+    final stringText =
+        tester.widget<RichText>(orderId.first).text.toPlainText();
+    if (stringText.contains('${'Order'.tr()} #')) {
+      return stringText.split('${'Order'.tr()} #')[1].substring(0, 4);
+    }
+    return stringText.split('${'Queue'.tr()} #')[1].substring(0, 4);
+  }
 
   String getFirstProductName() => _getText(productName.first);
 

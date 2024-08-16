@@ -47,23 +47,13 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
   }
 
-  double _extractDouble(String input) {
-    if (input == 'Price Not Available'.tr()) return 0.0;
-
-    final cleanedInput = input.replaceAll(',', '');
-    final regex = RegExp(r'(\d+(\.\d+)?)');
-    final match = regex.firstMatch(cleanedInput);
-
-    return match != null ? double.parse(match.group(0)!) : 0.0;
-  }
-
   double get getMaterialUnitPrice {
     final priceWidgetFinder = find.descendant(
       of: body,
       matching: find.byKey(WidgetKeys.currentPrice),
     );
     final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
-    return _extractDouble(priceString);
+    return priceString.extractDouble;
   }
 
   String getMaterialDetailsMaterialDescription() {

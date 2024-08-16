@@ -126,14 +126,69 @@ class ViewByItemsDetailRobot extends CommonRobot {
     );
   }
 
-  Future<void> verifyItemComponent() async {
-    await scrollEnsureFinderVisible(orderItem.first);
-    _verifyItemComponent(orderItem);
-    _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemTitle));
-    _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemLabel));
-    _verifyItemComponent(find.byType(ProductImage));
-    _verifyItemComponent(find.byKey(WidgetKeys.orderItemStatusKey));
-    _verifyItemComponent(qtyLabel);
+  int _getMaterialIndex({required bool isBonus}) {
+    for (var i = 0; i < orderItem.evaluate().length; i++) {
+      final isBonusMaterialPresent = find
+          .descendant(
+            of: orderItem.at(i),
+            matching: find.byWidgetPredicate(
+              (w) => w.key == WidgetKeys.commonTileItemStatusLabel,
+            ),
+          )
+          .evaluate()
+          .isNotEmpty;
+
+      if ((isBonus && isBonusMaterialPresent) ||
+          (!isBonus && !isBonusMaterialPresent)) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
+  Future<void> verifyItemComponent({bool isBonus = false}) async {
+    final item = orderItem.at(_getMaterialIndex(isBonus: isBonus));
+    await scrollEnsureFinderVisible(item);
+    _verifyItemComponent(item);
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.commonTileItemTitle),
+      ),
+    );
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.commonTileItemLabel),
+      ),
+    );
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: find.byType(ProductImage),
+      ),
+    );
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.orderItemStatusKey),
+      ),
+    );
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: qtyLabel,
+      ),
+    );
+    if (isBonus) {
+      _verifyItemComponent(
+        find.descendant(
+          of: item,
+          matching: freePrice,
+        ),
+      );
+    }
   }
 
   Future<void> verifyManufacturerName(
@@ -153,21 +208,30 @@ class ViewByItemsDetailRobot extends CommonRobot {
     }
   }
 
-  void verifyMaterialNumber(String materialNumber) => _verifyItemComponent(
-        find.byWidgetPredicate(
-          (widget) =>
-              widget.key == WidgetKeys.commonTileItemLabel &&
-              widget is Text &&
-              (widget.data ?? '').contains(materialNumber),
+  void verifyMaterialNumber(String materialNumber, {bool isBonus = false}) =>
+      _verifyItemComponent(
+        find.descendant(
+          of: orderItem.at(_getMaterialIndex(isBonus: isBonus)),
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.commonTileItemLabel &&
+                widget is Text &&
+                (widget.data ?? '').contains(materialNumber),
+          ),
         ),
       );
 
-  void verifyQty(int qty) {
-    final widget = tester.widget<Text>(
-      find.descendant(of: itemDetailSection, matching: qtyLabel),
-    );
-    expect(widget.data ?? '', contains(qty.toString()));
-  }
+  void verifyQty(int qty, {bool isBonus = false}) => _verifyItemComponent(
+        find.descendant(
+          of: orderItem.at(_getMaterialIndex(isBonus: isBonus)),
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.cartItemProductQty &&
+                widget is Text &&
+                (widget.data ?? '').contains(qty.toString()),
+          ),
+        ),
+      );
 
   void verifyBonusLabel() => _verifyItemComponent(bonusTag);
 

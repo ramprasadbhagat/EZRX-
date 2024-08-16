@@ -132,19 +132,19 @@ void main() {
   const materialPrincipalName = 'Abbott Products Operations A.G';
   const materialCountryOfOrigin = 'NA';
   const materialUnitMeasurement = 'EA';
-  const materialUnitPrice = 15.00;
-  const tax = 10;
+  var materialUnitPrice = 0.0;
+  const materialTax = 0;
+  const bonusTax = 10;
 
   const multiImageMaterialNumber = '23340125';
   const suspendedMaterialNumber = '21222875';
   const lowPriceMaterialNumber = materialNumber;
-  const lowPriceMaterialUnitPrice = materialUnitPrice;
   const bonusMaterialNumber = '23340072';
   const bonusPrincipleName = 'PharmaProduct Manufacturing';
-  const oosPreOrderMaterialNumber = '23347967';
+  const oosPreOrderMaterialNumber = '23340072';
   const bonusMaterialName = 'ALLERGYL SP 60ML FL  60ML';
   const bonusMaterialNumberTierQty = 10;
-  const bonusMaterialNumberUnitPrice = 0.45;
+  var bonusMaterialNumberUnitPrice = 0.0;
   const anotherMaterialNumber = multiImageMaterialNumber;
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
@@ -183,10 +183,16 @@ void main() {
     String materialNumber,
     int qty, {
     bool isPreOrder = false,
+    bool isBonus = false,
   }) async {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
     await productRobot.tapSearchMaterial(materialNumber);
+    if (isBonus) {
+      bonusMaterialNumberUnitPrice = productDetailRobot.getMaterialUnitPrice;
+    } else {
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+    }
     await productDetailRobot.tapAddToCart();
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
@@ -1098,13 +1104,14 @@ void main() {
   group('Cart -', () {
     testWidgets('EZRX-T98 | Verify material in cart + change material qty',
         (tester) async {
-      final materialTotalPrice = materialUnitPrice.includeTax(tax);
       //init app
       await pumpAppWithLogin(tester);
 
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+      final materialTotalPrice = materialUnitPrice.includeTax(materialTax);
       await productDetailRobot.tapAddToCart();
       productDetailRobot.verifyCartButtonQty(1);
       await productDetailRobot.tapCartButton();
@@ -1135,7 +1142,7 @@ void main() {
       var cartTotalPrice = materialTotalPrice;
       await cartRobot.increaseMaterialQty(materialNumber);
       totalPrice = materialUnitPrice * 2;
-      cartTotalPrice = totalPrice.includeTax(tax);
+      cartTotalPrice = totalPrice.includeTax(materialTax);
       cartRobot.verifyMaterialQty(materialNumber, 2);
       cartRobot.verifyMaterialTotalPrice(
         materialNumber,
@@ -1145,7 +1152,7 @@ void main() {
 
       await cartRobot.changeMaterialQty(materialNumber, 10);
       totalPrice = materialUnitPrice * 10;
-      cartTotalPrice = totalPrice.includeTax(tax);
+      cartTotalPrice = totalPrice.includeTax(materialTax);
       cartRobot.verifyMaterialQty(materialNumber, 10);
       cartRobot.verifyMaterialTotalPrice(
         materialNumber,
@@ -1155,7 +1162,7 @@ void main() {
 
       await cartRobot.decreaseMaterialQty(materialNumber);
       totalPrice = materialUnitPrice * 9;
-      cartTotalPrice = totalPrice.includeTax(tax);
+      cartTotalPrice = totalPrice.includeTax(materialTax);
       cartRobot.verifyMaterialQty(materialNumber, 9);
       cartRobot.verifyMaterialTotalPrice(
         materialNumber,
@@ -1347,12 +1354,12 @@ void main() {
         'EZRX-T119 | Verify display material with/without counter offer applied in cart & checkout',
         (tester) async {
       const qty = 100;
-      const newUnitPrice = materialUnitPrice + 100;
-      const newTotalPrice = (newUnitPrice * qty);
 
       //init app
       await pumpAppWithLogin(tester);
       await checkoutWithMaterial(materialNumber, qty);
+      final newUnitPrice = materialUnitPrice + 100;
+      final newTotalPrice = (newUnitPrice * qty);
       await updateRequiredFieldsOnCheckout();
 
       //verify
@@ -1401,11 +1408,11 @@ void main() {
       await checkoutRobot
           .verifySubTotalLabel(newTotalPrice.priceDisplay(currency));
       await checkoutRobot.verifyGrandTotalLabel(
-        newTotalPrice.includeTax(tax).priceDisplay(currency),
+        newTotalPrice.includeTax(materialTax).priceDisplay(currency),
       );
       checkoutRobot.verifyStickyTotalQty(1);
       checkoutRobot.verifyStickyGrandTotal(
-        newTotalPrice.includeTax(tax).priceDisplay(currency),
+        newTotalPrice.includeTax(materialTax).priceDisplay(currency),
       );
     });
 
@@ -1432,12 +1439,14 @@ void main() {
     });
 
     testWidgets('EZRX-T97 | Verify price summary in cart', (tester) async {
-      final materialTotalPrice = materialUnitPrice.includeTax(tax);
       //init app
       await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+      final materialTotalPrice = materialUnitPrice.includeTax(materialTax);
+
       await productDetailRobot.tapAddToCart();
       productDetailRobot.verifyCartButtonQty(1);
       await productDetailRobot.tapCartButton();
@@ -1458,12 +1467,6 @@ void main() {
 
     testWidgets('EZRX-T110 | Verify cart under minimum order value',
         (tester) async {
-      final lowPriceMaterialTotalPrice =
-          lowPriceMaterialUnitPrice.includeTax(tax);
-
-      final validQty = (minOrderAmount / lowPriceMaterialUnitPrice).ceil();
-      final validTotalPrice = lowPriceMaterialUnitPrice * validQty;
-
       //init app
       await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
@@ -1472,6 +1475,14 @@ void main() {
       await productSuggestionRobot
           .searchWithKeyboardAction(lowPriceMaterialNumber);
       await productRobot.tapSearchMaterial(lowPriceMaterialNumber);
+      materialUnitPrice = productDetailRobot.getMaterialUnitPrice;
+      final lowPriceMaterialUnitPrice = materialUnitPrice;
+      final lowPriceMaterialTotalPrice =
+          lowPriceMaterialUnitPrice.includeTax(materialTax);
+
+      final validQty = (minOrderAmount / lowPriceMaterialUnitPrice).ceil();
+      final validTotalPrice = lowPriceMaterialUnitPrice * validQty;
+
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
       await cartRobot.verifyMaterial(lowPriceMaterialNumber);
@@ -1499,7 +1510,7 @@ void main() {
         validTotalPrice.priceDisplay(currency),
       );
       cartRobot.verifyCartTotalPrice(
-        validTotalPrice.includeTax(tax).priceDisplay(currency),
+        validTotalPrice.includeTax(materialTax).priceDisplay(currency),
       );
       cartRobot.verifyMOVWarningMessage(
         minOrderAmount.priceDisplay(currency),
@@ -1561,8 +1572,7 @@ void main() {
     testWidgets('EZRX-T116 | Verify display checkout with default components',
         (tester) async {
       const qty = 1000;
-      const totalPrice = materialUnitPrice * qty;
-      final totalCheckOutPrice = (materialUnitPrice * qty).includeTax(tax);
+
       //init app
       await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
@@ -1570,6 +1580,9 @@ void main() {
         qty,
         isPreOrder: false,
       );
+      final totalPrice = materialUnitPrice * qty;
+      final totalCheckOutPrice =
+          (materialUnitPrice * qty).includeTax(materialTax);
 
       //verify
       checkoutRobot.verifyPage();
@@ -1621,88 +1634,24 @@ void main() {
     });
 
     testWidgets(
-        'EZRX-T119 | Verify display material with/without counter offer applied in checkout',
-        (tester) async {
-      const qty = 1000;
-      const newUnitPrice = materialUnitPrice + 100;
-      const newTotalPrice = (newUnitPrice * qty);
-      final newCheckoutTotalPrice = (newUnitPrice * qty).includeTax(tax);
-
-      //init app
-      await pumpAppWithLogin(tester);
-      await checkoutWithMaterial(
-        materialNumber,
-        qty,
-        isPreOrder: false,
-      );
-      await updateRequiredFieldsOnCheckout();
-
-      //verify
-      await checkoutRobot.verifyMaterialPrincipal(materialPrincipalName);
-      await checkoutRobot.verifyMaterial(materialNumber);
-      checkoutRobot.verifyMaterialQty(materialNumber, qty);
-      checkoutRobot.verifyMaterialDescription(materialNumber, materialName);
-      checkoutRobot.verifyMaterialImage(materialNumber);
-      checkoutRobot.verifyMaterialUnitPrice(
-        materialNumber,
-        materialUnitPrice.priceDisplay(currency),
-      );
-      checkoutRobot.verifyMaterialTotalPrice(
-        materialNumber,
-        (materialUnitPrice * qty).priceDisplay(currency),
-      );
-      checkoutRobot.verifyMaterialCounterOfferLabel(
-        materialNumber,
-        isVisible: false,
-      );
-      await checkoutRobot.tapCloseButton();
-      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
-      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
-      await requestCounterOfferRobot.tapConfirmButton();
-      await cartRobot.tapCheckoutButton();
-      await checkoutRobot.verifyPoReferenceField(isVisible: true);
-
-      await checkoutRobot.verifyContactPersonField(isVisible: true);
-
-      await checkoutRobot.verifyMobileNumberField(isVisible: true);
-
-      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-      await checkoutRobot.verifyMaterial(materialNumber);
-      checkoutRobot.verifyMaterialUnitPrice(
-        materialNumber,
-        newUnitPrice.priceDisplay(currency),
-      );
-      checkoutRobot.verifyMaterialTotalPrice(
-        materialNumber,
-        newTotalPrice.priceDisplay(currency),
-      );
-      checkoutRobot.verifyMaterialCounterOfferLabel(
-        materialNumber,
-        isVisible: true,
-      );
-      await checkoutRobot
-          .verifySubTotalLabel(newTotalPrice.priceDisplay(currency));
-      await checkoutRobot
-          .verifyGrandTotalLabel(newCheckoutTotalPrice.priceDisplay(currency));
-      checkoutRobot.verifyStickyTotalQty(1);
-      checkoutRobot
-          .verifyStickyGrandTotal(newCheckoutTotalPrice.priceDisplay(currency));
-    });
-
-    testWidgets(
         'EZRX-T119 | Verify display material on offer with bonus in checkout',
         (tester) async {
       const qty = 1000;
       const bonusQty = qty ~/ bonusMaterialNumberTierQty;
-      final totalPrice =
-          (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
-      final totalCheckoutPrice =
-          ((bonusMaterialNumberUnitPrice * qty).includeTax(tax))
-              .priceDisplay(currency);
 
       //init app
       await pumpAppWithLogin(tester);
-      await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        bonusMaterialNumber,
+        qty,
+        isPreOrder: true,
+        isBonus: true,
+      );
+      final totalPrice =
+          (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
+      final totalCheckoutPrice =
+          ((bonusMaterialNumberUnitPrice * qty).includeTax(bonusTax))
+              .priceDisplay(currency);
       await updateRequiredFieldsOnCheckout();
 
       //verify
@@ -1793,7 +1742,8 @@ void main() {
       await orderSuccessRobot
           .verifySubTotal((materialUnitPrice * qty).priceDisplay(currency));
       await orderSuccessRobot.verifyGrandTotal(
-        ((materialUnitPrice * qty).includeTax(tax)).priceDisplay(currency),
+        ((materialUnitPrice * qty).includeTax(materialTax))
+            .priceDisplay(currency),
       );
       await orderSuccessRobot.verifyOrderItemTotalQty(1);
       await orderSuccessRobot.startVerifyMaterial(index: 0);
@@ -1812,15 +1762,20 @@ void main() {
         (tester) async {
       const qty = 1000;
       const bonusQty = qty ~/ bonusMaterialNumberTierQty;
-      final totalPrice =
-          (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
-      final totalCheckoutPrice =
-          ((bonusMaterialNumberUnitPrice * qty).includeTax(tax))
-              .priceDisplay(currency);
 
       //init app
       await pumpAppWithLogin(tester);
-      await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        bonusMaterialNumber,
+        qty,
+        isPreOrder: true,
+        isBonus: true,
+      );
+      final totalPrice =
+          (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
+      final totalCheckoutPrice =
+          ((bonusMaterialNumberUnitPrice * qty).includeTax(bonusTax))
+              .priceDisplay(currency);
       await updateRequiredFieldsOnCheckout();
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
@@ -1906,6 +1861,7 @@ void main() {
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName.toUpperCase());
         viewByItemsRobot.verifyOrdersWithProductName(productName);
+        await commonRobot.tapClearSearch();
         await commonRobot.pullToRefresh();
         commonRobot.verifySearchBarText('');
 
@@ -1968,7 +1924,7 @@ void main() {
       testWidgets(
           'EZRX-T85 | Verify Filter by status when selecting 1 checkbox and existing data available',
           (tester) async {
-        const statusFilter = 'Pending';
+        const statusFilter = 'Pending release';
 
         //init app
         await pumpAppWithLogin(tester);
@@ -2075,7 +2031,12 @@ void main() {
 
         //init app
         await pumpAppWithLogin(tester);
-        await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+        await checkoutWithMaterial(
+          bonusMaterialNumber,
+          qty,
+          isPreOrder: true,
+          isBonus: true,
+        );
         await updateRequiredFieldsOnCheckout();
         await checkoutRobot.tapPlaceOrderButton();
         await commonRobot.dismissSnackbar(dismissAll: true);
@@ -2088,35 +2049,21 @@ void main() {
         viewByItemsRobot.verifyOfferTag();
         await viewByItemsRobot.tapFirstOfferTag();
         await viewByItemsDetailRobot.verifyManufacturerName(bonusPrincipleName);
+        //verify normal material
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemBonusLabel();
-        viewByItemsDetailRobot.verifyOtherItemFreePrice();
-        viewByItemsDetailRobot.verifyOtherItemQty(bonusQty);
-        await viewByItemsDetailRobot.tapToBackScreen();
-
-        viewByItemsRobot.verifyBonusLabel();
-        await viewByItemsRobot.tapFirstBonusLabel();
-        await viewByItemsDetailRobot.verifyManufacturerName(bonusPrincipleName);
-        await viewByItemsDetailRobot.verifyItemComponent();
-        viewByItemsDetailRobot.verifyBonusLabel();
-        viewByItemsDetailRobot.verifyFreePrice();
-        viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
-        viewByItemsDetailRobot.verifyQty(bonusQty);
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemOfferTag();
-        viewByItemsDetailRobot.verifyOtherItemQty(qty);
-        viewByItemsDetailRobot.verifyExpandButton(isVisible: true);
-        await viewByItemsDetailRobot.tapExpandButton();
-        await viewByItemsDetailRobot.verifyOtherItemsComponent(
-          isVisible: false,
+        //verify bonus material
+        await viewByItemsDetailRobot.verifyItemComponent(isBonus: true);
+        viewByItemsDetailRobot.verifyMaterialNumber(
+          bonusMaterialNumber,
+          isBonus: true,
         );
-
+        viewByItemsDetailRobot.verifyQty(
+          bonusQty,
+          isBonus: true,
+        );
         viewByItemsDetailRobot.verifyBuyAgainButton(
           isVisible: false,
         );
@@ -2277,9 +2224,6 @@ void main() {
           'EZRX-T88 | Verify view by order detail with default components',
           (tester) async {
         const qty = 1000;
-        final price = (materialUnitPrice * qty).priceDisplay(currency);
-        final totalPrice =
-            ((materialUnitPrice * qty).includeTax(tax)).priceDisplay(currency);
 
         //init app
         await pumpAppWithLogin(tester);
@@ -2287,6 +2231,10 @@ void main() {
           materialNumber,
           qty,
         );
+        final price = (materialUnitPrice * qty).priceDisplay(currency);
+        final totalPrice = ((materialUnitPrice * qty).includeTax(materialTax))
+            .priceDisplay(currency);
+
         await updateRequiredFieldsOnCheckout();
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -2294,7 +2242,6 @@ void main() {
         await ordersRootRobot.switchToViewByOrders();
 
         //verify
-        await commonRobot.pullToRefresh();
         final orderId = viewByOrdersRobot.getOrderIdText(index: 0);
         await viewByOrdersRobot.tapFirstOrder();
         viewByOrdersDetailRobot.verifyOrderId(orderId);
@@ -2363,7 +2310,12 @@ void main() {
         await pumpAppWithLogin(tester);
 
         //setup data
-        await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+        await checkoutWithMaterial(
+          bonusMaterialNumber,
+          qty,
+          isPreOrder: true,
+          isBonus: true,
+        );
         await updateRequiredFieldsOnCheckout();
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -2380,7 +2332,6 @@ void main() {
         viewByOrdersDetailRobot.verifyCustomerCode(customerCode);
         viewByOrdersDetailRobot.verifyDeliveryTo(shipToCode);
         await viewByOrdersDetailRobot.dragToVerifySummary();
-        await viewByOrdersDetailRobot.dragToVerifyItems();
         await viewByOrdersDetailRobot.dragToVerifyItemsSection();
         await viewByOrdersDetailRobot.startVerifyMaterial(bonusMaterialNumber);
         viewByOrdersDetailRobot.verifyQty(qty);
@@ -2388,9 +2339,21 @@ void main() {
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
         await viewByItemsDetailRobot.verifyManufacturerName(bonusPrincipleName);
+        //verify normal material
         await viewByItemsDetailRobot.verifyItemComponent();
+        viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
+        //verify bonus material
+        await viewByItemsDetailRobot.verifyItemComponent(isBonus: true);
+        viewByItemsDetailRobot.verifyMaterialNumber(
+          bonusMaterialNumber,
+          isBonus: true,
+        );
+        viewByItemsDetailRobot.verifyQty(
+          bonusQty,
+          isBonus: true,
+        );
         viewByItemsDetailRobot.verifyOfferTag();
         await viewByItemsDetailRobot.tapToBackScreen();
         await viewByOrdersDetailRobot.startVerifyMaterial(
@@ -2406,9 +2369,21 @@ void main() {
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
         await viewByItemsDetailRobot.verifyManufacturerName(bonusPrincipleName);
+        //verify normal material
         await viewByItemsDetailRobot.verifyItemComponent();
+        viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
-        viewByItemsDetailRobot.verifyQty(bonusQty);
+        viewByItemsDetailRobot.verifyQty(qty);
+        //verify bonus material
+        await viewByItemsDetailRobot.verifyItemComponent(isBonus: true);
+        viewByItemsDetailRobot.verifyMaterialNumber(
+          bonusMaterialNumber,
+          isBonus: true,
+        );
+        viewByItemsDetailRobot.verifyQty(
+          bonusQty,
+          isBonus: true,
+        );
         viewByItemsDetailRobot.verifyBonusLabel();
         await viewByItemsDetailRobot.tapToBackScreen();
         await viewByOrdersDetailRobot.tapBuyAgainButton();

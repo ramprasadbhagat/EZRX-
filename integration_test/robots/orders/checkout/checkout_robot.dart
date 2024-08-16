@@ -73,8 +73,15 @@ class CheckoutRobot extends CommonRobot {
     expect(tester.widget<Text>(label).data, contains(deliveryTo));
   }
 
-  Future<void> verifyPoReferenceField({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(poReferenceField, isVisible);
+  Future<void> verifyPoReferenceField({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        poReferenceField,
+        isVisible,
+        reversed,
+      );
 
   Future<void> enterPoReference(String text) async {
     await tester.tap(poReferenceField);
@@ -137,23 +144,65 @@ class CheckoutRobot extends CommonRobot {
     );
   }
 
-  Future<void> verifyDeliveryDateField({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(deliveryDateField, isVisible);
+  Future<void> verifyDeliveryDateField({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        deliveryDateField,
+        isVisible,
+        reversed,
+      );
 
-  Future<void> verifyReferenceNoteField({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(referenceNoteField, isVisible);
+  Future<void> verifyReferenceNoteField({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        referenceNoteField,
+        isVisible,
+        reversed,
+      );
 
-  Future<void> verifyPaymentTermField({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(paymentTermField, isVisible);
+  Future<void> verifyPaymentTermField({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        paymentTermField,
+        isVisible,
+        reversed,
+      );
 
-  Future<void> verifyContactPersonField({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(contactPersonField, isVisible);
+  Future<void> verifyContactPersonField({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        contactPersonField,
+        isVisible,
+        reversed,
+      );
 
-  Future<void> verifyMobileNumberField({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(mobileNumberField, isVisible);
+  Future<void> verifyMobileNumberField({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        mobileNumberField,
+        isVisible,
+        reversed,
+      );
 
-  Future<void> verifyDeliveryInstructionField({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(deliveryInstructionField, isVisible);
+  Future<void> verifyDeliveryInstructionField({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        deliveryInstructionField,
+        isVisible,
+        reversed,
+      );
 
   void verifyContactNumberFieldHasText(String text) {
     expect(
@@ -178,15 +227,23 @@ class CheckoutRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> verifyPoAttachmentSection({required bool isVisible}) =>
-      _verifyDeliveryInformationComponent(poAttachmentSection, isVisible);
+  Future<void> verifyPoAttachmentSection({
+    required bool isVisible,
+    bool reversed = false,
+  }) =>
+      _verifyDeliveryInformationComponent(
+        poAttachmentSection,
+        isVisible,
+        reversed,
+      );
 
   Future<void> _verifyDeliveryInformationComponent(
     Finder finder,
     bool isVisible,
+    bool reversed,
   ) async {
     if (isVisible) {
-      await scrollEnsureFinderVisible(finder);
+      await scrollEnsureFinderVisible(finder, reversed: reversed);
     } else {
       expect(finder, findsNothing);
     }

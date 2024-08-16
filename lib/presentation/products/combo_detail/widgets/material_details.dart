@@ -13,7 +13,6 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<ComboDealMaterialDetailBloc,
         ComboDealMaterialDetailState>(
       buildWhen: (previous, current) =>

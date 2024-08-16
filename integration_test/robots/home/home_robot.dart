@@ -272,6 +272,7 @@ class HomeRobot extends CommonRobot {
 
   Future<void> tapOnFirstProductOnOffer() async {
     final productsOnOffer = productsOnOfferList.first;
+    await tester.ensureVisible(productsOnOffer);
     await tester.tap(productsOnOffer);
     await tester.pumpAndSettle();
   }

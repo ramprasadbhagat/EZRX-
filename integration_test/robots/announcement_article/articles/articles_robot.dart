@@ -17,6 +17,8 @@ class ArticleRobot {
     expect(find.byType(CustomSearchBar), findsOneWidget);
   }
 
+  bool get noArticleFound => firstArticleItemKey.evaluate().isEmpty;
+
   void verifyNotFoundData() {
     expect(firstArticleItemKey, findsNothing);
     expect(notFoundDataKey, findsOneWidget);

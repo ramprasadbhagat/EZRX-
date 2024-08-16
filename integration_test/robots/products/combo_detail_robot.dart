@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,28 @@ class ComboDetailRobot extends CommonRobot {
   void verifyPage() {
     final comboDetail = find.byKey(WidgetKeys.comboDealDetailPage);
     expect(comboDetail, findsOneWidget);
+  }
+
+  Future<double> getMaterialUnitPrice(
+    String materialNumber, {
+    bool getOriginalPrice = false,
+  }) async {
+    final comboMaterialItem = find.byKey(
+      WidgetKeys.comboItemProductTile(
+        materialNumber,
+      ),
+    );
+    await scrollEnsureFinderVisible(comboMaterialItem);
+    final priceWidgetFinder = find.descendant(
+      of: comboMaterialItem,
+      matching: find.byKey(
+        getOriginalPrice
+            ? WidgetKeys.comboMaterialOriginalPrice
+            : WidgetKeys.comboMaterialDiscountedPrice,
+      ),
+    );
+    final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
+    return priceString.extractDouble;
   }
 
   Finder getComboTitleFinder({
@@ -702,7 +725,7 @@ class ComboDetailRobot extends CommonRobot {
     await tester.tap(comboMaterialInput);
     await tester.enterText(comboMaterialInput, quantity.toString());
     await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.long2);
   }
 
   Future<void> decreaseMaterialQuantity({
@@ -837,7 +860,7 @@ class ComboDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
     final confirmBottomSheet = find.byType(ConfirmBottomSheet);
     final confirmButton =
-    find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
+        find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
     expect(confirmBottomSheet, findsOneWidget);
     expect(confirmButton, findsOneWidget);
     await tester.tap(confirmButton);

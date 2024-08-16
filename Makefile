@@ -2,15 +2,15 @@ STR := $$(perl -MYAML -le 'print YAML::LoadFile(shift)->{version}' ./pubspec.yam
 VERSION := $$( echo $(STR) | cut -d '+' -f 1 )
 BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'client_user.dart'
-CLIENTUSERORDER := 'client_user/client_user_order.dart'
-CLIENTUSERPAYMENT := 'client_user/client_user_payment.dart'
-CLIENTUSERRETURN := 'client_user/client_user_return.dart'
-EXTERNALSALESREPORDER := 'external_sales_rep/external_sales_rep_user_order.dart'
-EXTERNALSALESREPRETURN := 'external_sales_rep/external_sales_rep_user_return.dart'
-MARKETPLACEUSERORDER := 'market_place_user/market_place_user_order.dart'
-MARKETPLACEUSERPAYMENT := 'market_place_user/market_place_user_payment.dart'
-MARKETPLACEUSERRETURN := 'market_place_user/market_place_user_return.dart'
-SALESORGCONFIG := 'reset_sales_org_config.sh'
+CLIENTUSERORDER := client_user/client_user_order.dart
+CLIENTUSERPAYMENT := client_user/client_user_payment.dart
+CLIENTUSERRETURN := client_user/client_user_return.dart
+EXTERNALSALESREPORDER := external_sales_rep/external_sales_rep_user_order.dart
+EXTERNALSALESREPRETURN := external_sales_rep/external_sales_rep_user_return.dart
+MARKETPLACEUSERORDER := market_place_user/market_place_user_order.dart
+MARKETPLACEUSERPAYMENT := market_place_user/market_place_user_payment.dart
+MARKETPLACEUSERRETURN := market_place_user/market_place_user_return.dart
+SALESORGCONFIG := reset_sales_org_config.sh
 
 app_setup:
 	@if [ $(FLAVOR) != "mock" ]; then\
@@ -105,8 +105,8 @@ run_vn_client_payment_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/vn/${CLIENTUSERPAYMENT} 
 run_vn_external_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/vn/${EXTERNALSALESREPORDER}
-run_kh_client_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENTUSER}
+run_kh_client_order_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENTUSERORDER}
 run_kh_external_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${EXTERNALSALESREPORDER}
 run_mm_client_order_test:
@@ -157,5 +157,3 @@ run_id_client_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENTUSERORDER} 
 run_id_client_payment_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENTUSERPAYMENT} 
-run_kh_client_order_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENTUSERORDER} 

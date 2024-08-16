@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class ValidationsFailedWarning extends StatelessWidget {
       ),
       mainColor: ZPColors.lightRedStatusColor,
       margin: const EdgeInsets.fromLTRB(padding12, padding12, padding12, 0),
+      key: WidgetKeys.errorRequirementsFillAllField,
     );
   }
 }
