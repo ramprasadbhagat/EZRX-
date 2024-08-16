@@ -1063,7 +1063,7 @@ void main() {
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
               fakeOrderHistoryItem.copyWith(
-                sAPStatus: OrderStepValue('Order Creating'),
+                sAPStatus: OrderStepValue('Order created'),
                 productType: MaterialInfoType('material'),
               ),
             ],

@@ -97,21 +97,8 @@ bool isBonusReturnType(String prsfd) => isEqualsIgnoreCase(prsfd, 'B');
 
 int getParentLineNumberIntValue(int value) => value - (value % 10);
 
-String getOrderStatus(String status) {
-  switch (status.toLowerCase()) {
-    case 'pending release':
-    case 'pending release on backorder':
-    case 'pending release - on backorder':
-    case 'pending release - seller approval required':
-      return 'Pending release';
-    case 'order creating':
-      return 'Order created';
-    case '':
-      return '-';
-    default:
-      return status;
-  }
-}
+String getOrderStatus(String status) =>
+    status.isEmpty ? '-' : stringCapitalize(status);
 
 bool checkIfInQueue(String value) =>
     isEqualsIgnoreCase(value, 'in queue') ||
@@ -236,14 +223,11 @@ List<OrderHistoryStep> getOrderHistorySteps({
 //We're separate with paymentStatus on core value object so we're ignore this
 //ignore: code-duplication
 String getOrderSAPStatus(String status) {
-  switch (status.toLowerCase()) {
-    case 'order creating':
-      return 'Order created';
-    case '':
-      return '-';
-    default:
-      return status;
+  if (status.isEmpty) {
+    return '-';
   }
+
+  return status.contains('-') ? status.split('-').first.trim() : status;
 }
 
 String getDeliveryDateTitle(String status) {

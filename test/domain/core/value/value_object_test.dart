@@ -311,13 +311,7 @@ void main() {
         expect(statusType.displayStatusLabelColor, ZPColors.invoiceStatusBlue);
       },
     );
-    test(
-      'Status Order Creating',
-      () {
-        final statusType = FilterStatus('Order Creating');
-        expect(statusType.displayStatusLabelColor, ZPColors.invoiceStatusBlue);
-      },
-    );
+
     test(
       'Status Order created',
       () {

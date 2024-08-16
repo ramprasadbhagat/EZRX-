@@ -139,7 +139,7 @@ class _OrderItemTile extends StatelessWidget {
           ? const SizedBox.shrink()
           : StatusLabel(
               status: StatusType(
-                orderItem.sAPStatus.displaySAPOrderStatus,
+                orderItem.sAPStatus.displayOrderStatus,
               ),
             ),
       quantity: '',
