@@ -8,6 +8,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
+import 'package:ezrxmobile/domain/announcement/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement/dtos/announcement_dto.dart';
@@ -20,6 +21,7 @@ import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/material_frame_wrapper.dart';
 
 class AnnouncementBlocMock
@@ -88,6 +90,29 @@ void main() {
           ),
         ),
       );
+
+  Widget announcementWithLocalization(String path) => MaterialFrameWrapper(
+        usingLocalization: true,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock,
+            ),
+            BlocProvider<AuthBloc>(
+              create: (context) => authBlocMock,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgBlocMock,
+            ),
+          ],
+          child: Material(
+            child: AnnouncementWidget(
+              currentPath: path,
+            ),
+          ),
+        ),
+      );
+
   setUp(() {
     announcementBlocMock = AnnouncementBlocMock();
     authBlocMock = AuthBlocMock();
@@ -102,6 +127,59 @@ void main() {
     testWidgets('doen\'t show when AuthState is unauthenticated',
         (tester) async {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      await tester.pumpWidget(announcement('core'));
+
+      expect(find.byType(SizedBox), findsOneWidget);
+    });
+
+    testWidgets('doen\'t show when AuthState is biometricDenied',
+        (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.biometricDenied());
+      await tester.pumpWidget(announcement('core'));
+
+      expect(find.byType(SizedBox), findsOneWidget);
+    });
+
+    testWidgets('doen\'t show when AuthState is visitedAppSettings',
+        (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.visitedAppSettings());
+      await tester.pumpWidget(announcement('core'));
+
+      expect(find.byType(SizedBox), findsOneWidget);
+    });
+
+    testWidgets('show when AuthState is unauthenticated and displayTime.isPre',
+        (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.unauthenticated());
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementMock.copyWith(
+            type: AnnouncementType('Pre'),
+          ),
+        ),
+      );
+      await tester.pumpWidget(announcement('core'));
+
+      expect(find.byType(SizedBox), findsOneWidget);
+    });
+
+    testWidgets(
+        'show when AuthState is unauthenticated and displayTime.isPreAndPost',
+        (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.unauthenticated());
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementMock.copyWith(
+            type: AnnouncementType('Pre and Post'),
+          ),
+        ),
+      );
       await tester.pumpWidget(announcement('core'));
 
       expect(find.byType(SizedBox), findsOneWidget);
@@ -213,6 +291,69 @@ void main() {
       final loadingIcon = find.byKey(const Key('announcementLoadingIndicator'));
 
       expect(loadingIcon, findsOneWidget);
+    });
+
+    testWidgets('test call event when change salesOrg', (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.authenticated());
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          isLoading: true,
+          announcement: announcementMock,
+        ),
+      );
+      whenListen(
+        salesOrgBlocMock,
+        Stream.fromIterable([
+          SalesOrgState.initial(),
+        ]),
+      );
+      when(
+        () => salesOrgBlocMock.state,
+      ).thenReturn(
+        SalesOrgState.initial()
+            .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+      );
+      await tester.pumpWidget(announcement('core'));
+
+      verify(
+        () => announcementBlocMock.add(
+          const AnnouncementEvent.changePreferLanguage(
+            preferSalesOrgLanguage: true,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('test update UI event when change salesOrg', (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.authenticated());
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementMock,
+          preferSalesOrgLanguage: false,
+        ),
+      );
+      whenListen(
+        salesOrgBlocMock,
+        Stream.fromIterable([
+          SalesOrgState.initial(),
+        ]),
+      );
+      when(
+        () => salesOrgBlocMock.state,
+      ).thenReturn(
+        SalesOrgState.initial()
+            .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+      );
+      await tester.pumpWidget(announcementWithLocalization('core'));
+      await tester.pump();
+      expect(
+        find.byKey(const Key('announcementDescription')),
+        findsOneWidget,
+      );
     });
 
     // testWidgets('call show event when AuthState shift to authenticated',
