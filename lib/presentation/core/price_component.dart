@@ -14,7 +14,9 @@ class PriceComponent extends StatelessWidget {
     this.trailingText = '',
     this.priceLabelStyle,
     this.obscured = false,
+    this.maxLine = 2,
     this.type = PriceStyle.commonPrice,
+    this.align = TextAlign.start,
   });
 
   final SalesOrganisationConfigs salesOrgConfig;
@@ -24,6 +26,8 @@ class PriceComponent extends StatelessWidget {
   final TextStyle? priceLabelStyle;
   final bool obscured;
   final PriceStyle type;
+  final int? maxLine;
+  final TextAlign align;
 
   bool get _isNegativePrice => type == PriceStyle.negativePrice;
 
@@ -111,8 +115,9 @@ class PriceComponent extends StatelessWidget {
       text: TextSpan(
         children: _getTextSpan(context),
       ),
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
+      maxLines: maxLine,
+      overflow: maxLine == null ? TextOverflow.clip : TextOverflow.ellipsis,
+      textAlign: align,
     );
   }
 }
@@ -150,6 +155,7 @@ enum PriceStyle {
   tenderViewOrderByItemPrice,
   tenderCartPrice,
   counterOfferListPrice,
+  deliveryOptionFee,
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -164,6 +170,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.tenderPrice:
     case PriceStyle.tenderCartPrice:
     case PriceStyle.productPrice:
+    case PriceStyle.deliveryOptionFee:
       return ZPColors.primary;
 
     case PriceStyle.summaryPrice:
@@ -288,6 +295,12 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       priceTextStyle = Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
             fontSize: 14,
+          );
+      break;
+    case PriceStyle.deliveryOptionFee:
+      priceTextStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
           );
       break;
     default:
@@ -416,6 +429,11 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           );
     case PriceStyle.returnBonusPrice:
     case PriceStyle.bundleCartPrice:
+    case PriceStyle.deliveryOptionFee:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.primary,
+            fontWeight: FontWeight.w700,
+          );
     default:
       return Theme.of(context)
           .textTheme

@@ -9,6 +9,7 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipInfo,
   }) = _Initialized;
+
   const factory OrderEligibilityEvent.update({
     required List<PriceAggregate> cartItems,
     required double grandTotal,
@@ -16,10 +17,19 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
     required double mpSubtotal,
     required double subTotal,
   }) = _Update;
+
   const factory OrderEligibilityEvent.selectDeliveryOption(
     DeliveryOption value,
   ) = _SelectDeliveryOption;
 
   const factory OrderEligibilityEvent.validateOrderEligibility() =
       _ValidateOrderEligibility;
+
+  const factory OrderEligibilityEvent.updateUrgentDeliveryFee(
+    double value,
+  ) = _UpdateUrgentDeliveryFee;
+
+  const factory OrderEligibilityEvent.selectRequestDeliveryDate(
+      String value,
+      ) = _SelectRequestDeliveryDate;
 }

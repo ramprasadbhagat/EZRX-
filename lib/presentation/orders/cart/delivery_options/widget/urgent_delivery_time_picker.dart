@@ -5,19 +5,37 @@ class _UrgentDeliveryTimePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final options = [
-      'Today, 1PM - 6PM (order before 10:30 AM)',
-      'Tomorrow, 9AM - 12AM (order before 4PM)',
-      'Saturday, 9AM - 1PM (order before 4PM)',
-    ];
+    final salesOrganisationConfigs =
+        context.read<OrderEligibilityBloc>().state.configs;
+    final urgentDeliveryOptionTitlesList =
+        salesOrganisationConfigs.urgentDeliveryOptionTitlesList;
+
+    final enabledDeliveryOptionsList =
+        salesOrganisationConfigs.enabledDeliveryOptionsList;
+
+    final optionFeesList = salesOrganisationConfigs.deliveryFeesList;
+
     const borderSide = BorderSide(color: ZPColors.inputBorderColor);
     const borderRadius = Radius.circular(8);
 
     return DropdownButtonFormField2(
       key: WidgetKeys.cartUrgentDeliveryTimePicker,
-      onChanged: (value) {},
-      value: options.elementAt(1),
-      selectedItemBuilder: (_) => options
+      onChanged: (value) {
+        if (value != null) {
+          final valueIndex = urgentDeliveryOptionTitlesList.indexOf(value);
+          context.read<OrderEligibilityBloc>().add(
+                OrderEligibilityEvent.updateUrgentDeliveryFee(
+                  optionFeesList[valueIndex],
+                ),
+              );
+        }
+      },
+      value: urgentDeliveryOptionTitlesList.elementAt(
+        optionFeesList.indexOf(
+          salesOrganisationConfigs.getDeliveryFee,
+        ),
+      ),
+      selectedItemBuilder: (_) => urgentDeliveryOptionTitlesList
           .map(
             (option) => Text(
               context.tr(option),
@@ -25,9 +43,9 @@ class _UrgentDeliveryTimePicker extends StatelessWidget {
             ),
           )
           .toList(),
-      items: options.map(
-        (option) {
-          final enabled = option != options.first;
+      items: urgentDeliveryOptionTitlesList.mapIndexed(
+        (index, option) {
+          final enabled = enabledDeliveryOptionsList[index];
 
           return DropdownMenuItem(
             value: option,

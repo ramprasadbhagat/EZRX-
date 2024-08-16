@@ -119,6 +119,27 @@ _$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
                   e as Map<String, dynamic>))
               .toList() ??
           [],
+      disclaimer: json['disclaimer'] as String? ?? '',
+      enableDeliveryOptions: json['enableDeliveryOptions'] as bool? ?? false,
+      enableRequestDeliveryDate:
+          json['enableRequestDeliveryDate'] as bool? ?? false,
+      enableSaturdayUrgentDelivery:
+          json['enableSaturdayUrgentDelivery'] as bool? ?? false,
+      enableStandardDelivery: json['enableStandardDelivery'] as bool? ?? false,
+      enableTodayUrgentDelivery:
+          json['enableTodayUrgentDelivery'] as bool? ?? false,
+      enableTomorrowUrgentDelivery:
+          json['enableTomorrowUrgentDelivery'] as bool? ?? false,
+      enableUrgentDelivery: json['enableUrgentDelivery'] as bool? ?? false,
+      saturdayDeliveryFee:
+          (json['saturdayDeliveryFee'] as num?)?.toDouble() ?? 0.0,
+      selectableDeliveryDays:
+          (json['selectableDeliveryDays'] as num?)?.toInt() ?? 0,
+      standardDeliveryDays:
+          (json['standardDeliveryDays'] as num?)?.toInt() ?? 0,
+      todayDeliveryFee: (json['todayDeliveryFee'] as num?)?.toDouble() ?? 0.0,
+      tomorrowDeliveryFee:
+          (json['tomorrowDeliveryFee'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
@@ -203,4 +224,17 @@ Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
       'orderTypes': instance.orderTypes.map((e) => e.toJson()).toList(),
       'authorizedExtSalesRep':
           instance.authorizedExtSalesRep.map((e) => e.toJson()).toList(),
+      'disclaimer': instance.disclaimer,
+      'enableDeliveryOptions': instance.enableDeliveryOptions,
+      'enableRequestDeliveryDate': instance.enableRequestDeliveryDate,
+      'enableSaturdayUrgentDelivery': instance.enableSaturdayUrgentDelivery,
+      'enableStandardDelivery': instance.enableStandardDelivery,
+      'enableTodayUrgentDelivery': instance.enableTodayUrgentDelivery,
+      'enableTomorrowUrgentDelivery': instance.enableTomorrowUrgentDelivery,
+      'enableUrgentDelivery': instance.enableUrgentDelivery,
+      'saturdayDeliveryFee': instance.saturdayDeliveryFee,
+      'selectableDeliveryDays': instance.selectableDeliveryDays,
+      'standardDeliveryDays': instance.standardDeliveryDays,
+      'todayDeliveryFee': instance.todayDeliveryFee,
+      'tomorrowDeliveryFee': instance.tomorrowDeliveryFee,
     };

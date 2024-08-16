@@ -6,7 +6,9 @@ import 'package:ezrxmobile/infrastructure/account/dtos/external_sales_representa
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_principal_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'sales_organisation_configs_dto.freezed.dart';
+
 part 'sales_organisation_configs_dto.g.dart';
 
 @freezed
@@ -160,6 +162,31 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       defaultValue: <ExternalSalesRepresentativeInfoDto>[],
     )
     required List<ExternalSalesRepresentativeInfoDto> authorizedExtSalesRep,
+    @JsonKey(name: 'disclaimer', defaultValue: '') required String disclaimer,
+    @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+    required bool enableDeliveryOptions,
+    @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+    required bool enableRequestDeliveryDate,
+    @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+    required bool enableSaturdayUrgentDelivery,
+    @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+    required bool enableStandardDelivery,
+    @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+    required bool enableTodayUrgentDelivery,
+    @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+    required bool enableTomorrowUrgentDelivery,
+    @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+    required bool enableUrgentDelivery,
+    @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+    required double saturdayDeliveryFee,
+    @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+    required int selectableDeliveryDays,
+    @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+    required int standardDeliveryDays,
+    @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+    required double todayDeliveryFee,
+    @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+    required double tomorrowDeliveryFee,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -247,6 +274,19 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       authorizedExtSalesRep: configs.authorizedExtSalesRep
           .map((e) => ExternalSalesRepresentativeInfoDto.fromDomain(e))
           .toList(),
+      enableDeliveryOptions: configs.enableDeliveryOptions,
+      disclaimer: configs.disclaimer,
+      enableStandardDelivery: configs.enableStandardDelivery,
+      standardDeliveryDays: configs.standardDeliveryDays,
+      enableRequestDeliveryDate: configs.enableRequestDeliveryDate,
+      selectableDeliveryDays: configs.selectableDeliveryDays,
+      enableUrgentDelivery: configs.enableUrgentDelivery,
+      enableTodayUrgentDelivery: configs.enableTodayUrgentDelivery,
+      enableTomorrowUrgentDelivery: configs.enableTomorrowUrgentDelivery,
+      enableSaturdayUrgentDelivery: configs.enableSaturdayUrgentDelivery,
+      todayDeliveryFee: configs.todayDeliveryFee,
+      tomorrowDeliveryFee: configs.tomorrowDeliveryFee,
+      saturdayDeliveryFee: configs.saturdayDeliveryFee,
     );
   }
 
@@ -333,6 +373,19 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       orderTypes: orderTypes.map((e) => e.toDomain()).toList(),
       authorizedExtSalesRep:
           authorizedExtSalesRep.map((e) => e.toDomain()).toList(),
+      disclaimer: disclaimer,
+      enableDeliveryOptions: enableDeliveryOptions,
+      enableRequestDeliveryDate: enableRequestDeliveryDate,
+      enableSaturdayUrgentDelivery: enableSaturdayUrgentDelivery,
+      enableStandardDelivery: enableStandardDelivery,
+      enableTodayUrgentDelivery: enableTodayUrgentDelivery,
+      enableTomorrowUrgentDelivery: enableTomorrowUrgentDelivery,
+      enableUrgentDelivery: enableUrgentDelivery,
+      saturdayDeliveryFee: saturdayDeliveryFee,
+      selectableDeliveryDays: selectableDeliveryDays,
+      standardDeliveryDays: standardDeliveryDays,
+      todayDeliveryFee: todayDeliveryFee,
+      tomorrowDeliveryFee: tomorrowDeliveryFee,
     );
   }
 

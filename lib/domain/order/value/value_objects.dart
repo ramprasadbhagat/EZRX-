@@ -130,15 +130,19 @@ class MaterialInfoType extends ValueObject<String> {
   factory MaterialInfoType(String input) {
     return MaterialInfoType._(validateStringNotEmpty(input));
   }
+
   factory MaterialInfoType.material() {
     return const MaterialInfoType._(Right('material'));
   }
+
   factory MaterialInfoType.bonus() {
     return const MaterialInfoType._(Right('bonus'));
   }
+
   factory MaterialInfoType.bundle() {
     return MaterialInfoType._(validateStringNotEmpty('bundle'));
   }
+
   factory MaterialInfoType.combo() {
     return MaterialInfoType._(validateStringNotEmpty('combo'));
   }
@@ -282,6 +286,7 @@ class MaterialTaxClassification extends ValueObject<String> {
   }
 
   const MaterialTaxClassification._(this.value);
+
   // In Tax classification we are only holding noTax value and for
   // other classifications we are checking [!isNoTax] which is considered
   // as Full Tax and Special Scheme
@@ -290,10 +295,10 @@ class MaterialTaxClassification extends ValueObject<String> {
     return materialEligibleForTaxExclusion(value.getOrElse(() => ''));
   }
 
-  // Need to revisit once Tax Exempt User story is ready
-  // bool get isExempt {
-  //   return materialTaxClassificationIsExempt(value.getOrElse(() => ''));
-  // }
+// Need to revisit once Tax Exempt User story is ready
+// bool get isExempt {
+//   return materialTaxClassificationIsExempt(value.getOrElse(() => ''));
+// }
 }
 
 class PaymentTermCode extends ValueObject<String> {
@@ -580,6 +585,7 @@ class CounterOfferDiscountValue extends ValueObject<String> {
   }
 
   double get doubleValue => getDoubleParsedValue(value.getOrElse(() => ''));
+
   Zdp8OverrideValue get toZdp8OverrideValue =>
       getZdp8OverrideValue(doubleValue);
 
@@ -595,11 +601,15 @@ class DocumentType extends ValueObject<String> {
   bool get isZPFC => isContainIgnoreCase(value.getOrElse(() => ''), 'zpfc');
 
   bool get isZPOR => isContainIgnoreCase(value.getOrElse(() => ''), 'zpor');
+
   bool get isZPVF => isContainIgnoreCase(value.getOrElse(() => ''), 'zpvf');
+
   bool get isZPFV => isContainIgnoreCase(value.getOrElse(() => ''), 'zpfv');
 
   bool get isSpecialOrderType => isZPFB || isZPFC;
+
   bool get isCovidOrderTypeForPH => isZPVF || isZPFV;
+
   bool get isCovidOrderTypeForSG => isZPFC;
 
   factory DocumentType(String input) =>
@@ -834,6 +844,29 @@ class DeliveryOption extends ValueObject<String> {
 
   String get icon => getDeliveryOptionIcon(value.getOrElse(() => ''));
 
-  String get description =>
-      getDeliveryOptionDescription(value.getOrElse(() => ''));
+  String get description => getDeliveryOptionDescription(value.getOrElse(() => ''));
+
+  String get price => getDeliveryOptionPrice(value.getOrElse(() => ''));
+}
+
+class UrgentDeliveryTimePickerOption extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory UrgentDeliveryTimePickerOption.today() =>
+      UrgentDeliveryTimePickerOption('today');
+
+  factory UrgentDeliveryTimePickerOption.tomorrow() =>
+      UrgentDeliveryTimePickerOption('tomorrow');
+
+  factory UrgentDeliveryTimePickerOption.saturday() =>
+      UrgentDeliveryTimePickerOption('saturday');
+
+  factory UrgentDeliveryTimePickerOption(String input) =>
+      UrgentDeliveryTimePickerOption._(validateStringNotEmpty(input));
+
+  const UrgentDeliveryTimePickerOption._(this.value);
+
+  String get title =>
+      getUrgentDeliveryTimePickerOptionTitle(value.getOrElse(() => ''));
 }

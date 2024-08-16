@@ -140,6 +140,7 @@ class PriceSummarySection extends StatelessWidget {
                 price: cartState
                     .grandTotalPriceDisplayed(
                       smallOrderFee: orderEligibilityState.smallOrderFee,
+                      deliveryFee: orderEligibilityState.deliveryFee,
                       displayIDPriceOnCheckout: isCheckoutPage,
                     )
                     .toString(),

@@ -15,7 +15,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 part 'order_eligibility_event.dart';
+
 part 'order_eligibility_state.dart';
+
 part 'order_eligibility_bloc.freezed.dart';
 
 class OrderEligibilityBloc
@@ -36,6 +38,7 @@ class OrderEligibilityBloc
           salesOrg: e.salesOrg,
           shipInfo: e.shipInfo,
           user: e.user,
+          currentUrgentDeliverFee: e.configs.getDeliveryFee,
         ),
       ),
       update: (e) => emit(
@@ -57,6 +60,11 @@ class OrderEligibilityBloc
       ),
       selectDeliveryOption: (e) =>
           emit(state.copyWith(deliveryOption: e.value)),
+      updateUrgentDeliveryFee: (e) async =>
+          emit(state.copyWith(currentUrgentDeliverFee: e.value)),
+      selectRequestDeliveryDate: (e) {
+        emit(state.copyWith(selectedRequestDeliveryDate: e.value));
+      },
     );
   }
 }

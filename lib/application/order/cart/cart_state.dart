@@ -296,6 +296,7 @@ class CartState with _$CartState {
   //This getter is used for displaying grandTotal value in cart, checkout page
   num grandTotalPriceDisplayed({
     double smallOrderFee = 0,
+    double deliveryFee = 0,
     bool displayIDPriceOnCheckout = false,
   }) {
     //For ID checkout page, We take aplGetTotalPrice.grandTotal as grand total price
@@ -310,7 +311,8 @@ class CartState with _$CartState {
     return totalBundlePriceWithTax +
         totalComboPriceWithTax +
         totalMaterialsPriceHidePriceWithTax +
-        smallOrderFee;
+        smallOrderFee +
+        deliveryFee;
   }
 
   //Todo : Need to implement for other market, Implemented only for ID market

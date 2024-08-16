@@ -180,6 +180,32 @@ mixin _$SalesOrganisationConfigsDto {
       defaultValue: <ExternalSalesRepresentativeInfoDto>[])
   List<ExternalSalesRepresentativeInfoDto> get authorizedExtSalesRep =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'disclaimer', defaultValue: '')
+  String get disclaimer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+  bool get enableDeliveryOptions => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+  bool get enableRequestDeliveryDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+  bool get enableSaturdayUrgentDelivery => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+  bool get enableStandardDelivery => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+  bool get enableTodayUrgentDelivery => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+  bool get enableTomorrowUrgentDelivery => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+  bool get enableUrgentDelivery => throw _privateConstructorUsedError;
+  @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+  double get saturdayDeliveryFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+  int get selectableDeliveryDays => throw _privateConstructorUsedError;
+  @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+  int get standardDeliveryDays => throw _privateConstructorUsedError;
+  @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+  double get todayDeliveryFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+  double get tomorrowDeliveryFee => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -328,7 +354,32 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(
           name: 'authorizedExtSalesRep',
           defaultValue: <ExternalSalesRepresentativeInfoDto>[])
-      List<ExternalSalesRepresentativeInfoDto> authorizedExtSalesRep});
+      List<ExternalSalesRepresentativeInfoDto> authorizedExtSalesRep,
+      @JsonKey(name: 'disclaimer', defaultValue: '') String disclaimer,
+      @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+      bool enableDeliveryOptions,
+      @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+      bool enableRequestDeliveryDate,
+      @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+      bool enableSaturdayUrgentDelivery,
+      @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+      bool enableStandardDelivery,
+      @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+      bool enableTodayUrgentDelivery,
+      @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+      bool enableTomorrowUrgentDelivery,
+      @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+      bool enableUrgentDelivery,
+      @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+      double saturdayDeliveryFee,
+      @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+      int selectableDeliveryDays,
+      @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+      int standardDeliveryDays,
+      @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+      double todayDeliveryFee,
+      @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+      double tomorrowDeliveryFee});
 }
 
 /// @nodoc
@@ -420,6 +471,19 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? mpMovThreshold = null,
     Object? orderTypes = null,
     Object? authorizedExtSalesRep = null,
+    Object? disclaimer = null,
+    Object? enableDeliveryOptions = null,
+    Object? enableRequestDeliveryDate = null,
+    Object? enableSaturdayUrgentDelivery = null,
+    Object? enableStandardDelivery = null,
+    Object? enableTodayUrgentDelivery = null,
+    Object? enableTomorrowUrgentDelivery = null,
+    Object? enableUrgentDelivery = null,
+    Object? saturdayDeliveryFee = null,
+    Object? selectableDeliveryDays = null,
+    Object? standardDeliveryDays = null,
+    Object? todayDeliveryFee = null,
+    Object? tomorrowDeliveryFee = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -722,6 +786,58 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.authorizedExtSalesRep
           : authorizedExtSalesRep // ignore: cast_nullable_to_non_nullable
               as List<ExternalSalesRepresentativeInfoDto>,
+      disclaimer: null == disclaimer
+          ? _value.disclaimer
+          : disclaimer // ignore: cast_nullable_to_non_nullable
+              as String,
+      enableDeliveryOptions: null == enableDeliveryOptions
+          ? _value.enableDeliveryOptions
+          : enableDeliveryOptions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableRequestDeliveryDate: null == enableRequestDeliveryDate
+          ? _value.enableRequestDeliveryDate
+          : enableRequestDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableSaturdayUrgentDelivery: null == enableSaturdayUrgentDelivery
+          ? _value.enableSaturdayUrgentDelivery
+          : enableSaturdayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableStandardDelivery: null == enableStandardDelivery
+          ? _value.enableStandardDelivery
+          : enableStandardDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTodayUrgentDelivery: null == enableTodayUrgentDelivery
+          ? _value.enableTodayUrgentDelivery
+          : enableTodayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTomorrowUrgentDelivery: null == enableTomorrowUrgentDelivery
+          ? _value.enableTomorrowUrgentDelivery
+          : enableTomorrowUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableUrgentDelivery: null == enableUrgentDelivery
+          ? _value.enableUrgentDelivery
+          : enableUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      saturdayDeliveryFee: null == saturdayDeliveryFee
+          ? _value.saturdayDeliveryFee
+          : saturdayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      selectableDeliveryDays: null == selectableDeliveryDays
+          ? _value.selectableDeliveryDays
+          : selectableDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      standardDeliveryDays: null == standardDeliveryDays
+          ? _value.standardDeliveryDays
+          : standardDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      todayDeliveryFee: null == todayDeliveryFee
+          ? _value.todayDeliveryFee
+          : todayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      tomorrowDeliveryFee: null == tomorrowDeliveryFee
+          ? _value.tomorrowDeliveryFee
+          : tomorrowDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -868,7 +984,32 @@ abstract class _$$SalesOrganisationConfigsDtoImplCopyWith<$Res>
       @JsonKey(
           name: 'authorizedExtSalesRep',
           defaultValue: <ExternalSalesRepresentativeInfoDto>[])
-      List<ExternalSalesRepresentativeInfoDto> authorizedExtSalesRep});
+      List<ExternalSalesRepresentativeInfoDto> authorizedExtSalesRep,
+      @JsonKey(name: 'disclaimer', defaultValue: '') String disclaimer,
+      @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+      bool enableDeliveryOptions,
+      @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+      bool enableRequestDeliveryDate,
+      @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+      bool enableSaturdayUrgentDelivery,
+      @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+      bool enableStandardDelivery,
+      @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+      bool enableTodayUrgentDelivery,
+      @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+      bool enableTomorrowUrgentDelivery,
+      @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+      bool enableUrgentDelivery,
+      @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+      double saturdayDeliveryFee,
+      @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+      int selectableDeliveryDays,
+      @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+      int standardDeliveryDays,
+      @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+      double todayDeliveryFee,
+      @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+      double tomorrowDeliveryFee});
 }
 
 /// @nodoc
@@ -959,6 +1100,19 @@ class __$$SalesOrganisationConfigsDtoImplCopyWithImpl<$Res>
     Object? mpMovThreshold = null,
     Object? orderTypes = null,
     Object? authorizedExtSalesRep = null,
+    Object? disclaimer = null,
+    Object? enableDeliveryOptions = null,
+    Object? enableRequestDeliveryDate = null,
+    Object? enableSaturdayUrgentDelivery = null,
+    Object? enableStandardDelivery = null,
+    Object? enableTodayUrgentDelivery = null,
+    Object? enableTomorrowUrgentDelivery = null,
+    Object? enableUrgentDelivery = null,
+    Object? saturdayDeliveryFee = null,
+    Object? selectableDeliveryDays = null,
+    Object? standardDeliveryDays = null,
+    Object? todayDeliveryFee = null,
+    Object? tomorrowDeliveryFee = null,
   }) {
     return _then(_$SalesOrganisationConfigsDtoImpl(
       disableProcessingStatus: null == disableProcessingStatus
@@ -1261,6 +1415,58 @@ class __$$SalesOrganisationConfigsDtoImplCopyWithImpl<$Res>
           ? _value._authorizedExtSalesRep
           : authorizedExtSalesRep // ignore: cast_nullable_to_non_nullable
               as List<ExternalSalesRepresentativeInfoDto>,
+      disclaimer: null == disclaimer
+          ? _value.disclaimer
+          : disclaimer // ignore: cast_nullable_to_non_nullable
+              as String,
+      enableDeliveryOptions: null == enableDeliveryOptions
+          ? _value.enableDeliveryOptions
+          : enableDeliveryOptions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableRequestDeliveryDate: null == enableRequestDeliveryDate
+          ? _value.enableRequestDeliveryDate
+          : enableRequestDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableSaturdayUrgentDelivery: null == enableSaturdayUrgentDelivery
+          ? _value.enableSaturdayUrgentDelivery
+          : enableSaturdayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableStandardDelivery: null == enableStandardDelivery
+          ? _value.enableStandardDelivery
+          : enableStandardDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTodayUrgentDelivery: null == enableTodayUrgentDelivery
+          ? _value.enableTodayUrgentDelivery
+          : enableTodayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTomorrowUrgentDelivery: null == enableTomorrowUrgentDelivery
+          ? _value.enableTomorrowUrgentDelivery
+          : enableTomorrowUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableUrgentDelivery: null == enableUrgentDelivery
+          ? _value.enableUrgentDelivery
+          : enableUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      saturdayDeliveryFee: null == saturdayDeliveryFee
+          ? _value.saturdayDeliveryFee
+          : saturdayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      selectableDeliveryDays: null == selectableDeliveryDays
+          ? _value.selectableDeliveryDays
+          : selectableDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      standardDeliveryDays: null == standardDeliveryDays
+          ? _value.standardDeliveryDays
+          : standardDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      todayDeliveryFee: null == todayDeliveryFee
+          ? _value.todayDeliveryFee
+          : todayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      tomorrowDeliveryFee: null == tomorrowDeliveryFee
+          ? _value.tomorrowDeliveryFee
+          : tomorrowDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1416,7 +1622,32 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
           name: 'authorizedExtSalesRep',
           defaultValue: <ExternalSalesRepresentativeInfoDto>[])
       required final List<ExternalSalesRepresentativeInfoDto>
-          authorizedExtSalesRep})
+          authorizedExtSalesRep,
+      @JsonKey(name: 'disclaimer', defaultValue: '') required this.disclaimer,
+      @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+      required this.enableDeliveryOptions,
+      @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+      required this.enableRequestDeliveryDate,
+      @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+      required this.enableSaturdayUrgentDelivery,
+      @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+      required this.enableStandardDelivery,
+      @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+      required this.enableTodayUrgentDelivery,
+      @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+      required this.enableTomorrowUrgentDelivery,
+      @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+      required this.enableUrgentDelivery,
+      @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+      required this.saturdayDeliveryFee,
+      @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+      required this.selectableDeliveryDays,
+      @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+      required this.standardDeliveryDays,
+      @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+      required this.todayDeliveryFee,
+      @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+      required this.tomorrowDeliveryFee})
       : _principalList = principalList,
         _smallOrderFeeUserRoles = smallOrderFeeUserRoles,
         _mpSmallOrderFeeUserRoles = mpSmallOrderFeeUserRoles,
@@ -1692,8 +1923,48 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
   }
 
   @override
+  @JsonKey(name: 'disclaimer', defaultValue: '')
+  final String disclaimer;
+  @override
+  @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+  final bool enableDeliveryOptions;
+  @override
+  @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+  final bool enableRequestDeliveryDate;
+  @override
+  @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+  final bool enableSaturdayUrgentDelivery;
+  @override
+  @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+  final bool enableStandardDelivery;
+  @override
+  @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+  final bool enableTodayUrgentDelivery;
+  @override
+  @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+  final bool enableTomorrowUrgentDelivery;
+  @override
+  @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+  final bool enableUrgentDelivery;
+  @override
+  @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+  final double saturdayDeliveryFee;
+  @override
+  @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+  final int selectableDeliveryDays;
+  @override
+  @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+  final int standardDeliveryDays;
+  @override
+  @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+  final double todayDeliveryFee;
+  @override
+  @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+  final double tomorrowDeliveryFee;
+
+  @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, movThreshold: $movThreshold, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpMovThreshold: $mpMovThreshold, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, movThreshold: $movThreshold, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpMovThreshold: $mpMovThreshold, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep, disclaimer: $disclaimer, enableDeliveryOptions: $enableDeliveryOptions, enableRequestDeliveryDate: $enableRequestDeliveryDate, enableSaturdayUrgentDelivery: $enableSaturdayUrgentDelivery, enableStandardDelivery: $enableStandardDelivery, enableTodayUrgentDelivery: $enableTodayUrgentDelivery, enableTomorrowUrgentDelivery: $enableTomorrowUrgentDelivery, enableUrgentDelivery: $enableUrgentDelivery, saturdayDeliveryFee: $saturdayDeliveryFee, selectableDeliveryDays: $selectableDeliveryDays, standardDeliveryDays: $standardDeliveryDays, todayDeliveryFee: $todayDeliveryFee, tomorrowDeliveryFee: $tomorrowDeliveryFee)';
   }
 
   @override
@@ -1803,7 +2074,20 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
             (identical(other.mpSmallOrderFee, mpSmallOrderFee) || other.mpSmallOrderFee == mpSmallOrderFee) &&
             (identical(other.mpMovThreshold, mpMovThreshold) || other.mpMovThreshold == mpMovThreshold) &&
             const DeepCollectionEquality().equals(other._orderTypes, _orderTypes) &&
-            const DeepCollectionEquality().equals(other._authorizedExtSalesRep, _authorizedExtSalesRep));
+            const DeepCollectionEquality().equals(other._authorizedExtSalesRep, _authorizedExtSalesRep) &&
+            (identical(other.disclaimer, disclaimer) || other.disclaimer == disclaimer) &&
+            (identical(other.enableDeliveryOptions, enableDeliveryOptions) || other.enableDeliveryOptions == enableDeliveryOptions) &&
+            (identical(other.enableRequestDeliveryDate, enableRequestDeliveryDate) || other.enableRequestDeliveryDate == enableRequestDeliveryDate) &&
+            (identical(other.enableSaturdayUrgentDelivery, enableSaturdayUrgentDelivery) || other.enableSaturdayUrgentDelivery == enableSaturdayUrgentDelivery) &&
+            (identical(other.enableStandardDelivery, enableStandardDelivery) || other.enableStandardDelivery == enableStandardDelivery) &&
+            (identical(other.enableTodayUrgentDelivery, enableTodayUrgentDelivery) || other.enableTodayUrgentDelivery == enableTodayUrgentDelivery) &&
+            (identical(other.enableTomorrowUrgentDelivery, enableTomorrowUrgentDelivery) || other.enableTomorrowUrgentDelivery == enableTomorrowUrgentDelivery) &&
+            (identical(other.enableUrgentDelivery, enableUrgentDelivery) || other.enableUrgentDelivery == enableUrgentDelivery) &&
+            (identical(other.saturdayDeliveryFee, saturdayDeliveryFee) || other.saturdayDeliveryFee == saturdayDeliveryFee) &&
+            (identical(other.selectableDeliveryDays, selectableDeliveryDays) || other.selectableDeliveryDays == selectableDeliveryDays) &&
+            (identical(other.standardDeliveryDays, standardDeliveryDays) || other.standardDeliveryDays == standardDeliveryDays) &&
+            (identical(other.todayDeliveryFee, todayDeliveryFee) || other.todayDeliveryFee == todayDeliveryFee) &&
+            (identical(other.tomorrowDeliveryFee, tomorrowDeliveryFee) || other.tomorrowDeliveryFee == tomorrowDeliveryFee));
   }
 
   @JsonKey(ignore: true)
@@ -1884,7 +2168,20 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
         mpSmallOrderFee,
         mpMovThreshold,
         const DeepCollectionEquality().hash(_orderTypes),
-        const DeepCollectionEquality().hash(_authorizedExtSalesRep)
+        const DeepCollectionEquality().hash(_authorizedExtSalesRep),
+        disclaimer,
+        enableDeliveryOptions,
+        enableRequestDeliveryDate,
+        enableSaturdayUrgentDelivery,
+        enableStandardDelivery,
+        enableTodayUrgentDelivery,
+        enableTomorrowUrgentDelivery,
+        enableUrgentDelivery,
+        saturdayDeliveryFee,
+        selectableDeliveryDays,
+        standardDeliveryDays,
+        todayDeliveryFee,
+        tomorrowDeliveryFee
       ]);
 
   @JsonKey(ignore: true)
@@ -2057,7 +2354,34 @@ abstract class _SalesOrganisationConfigsDto
           name: 'authorizedExtSalesRep',
           defaultValue: <ExternalSalesRepresentativeInfoDto>[])
       required final List<ExternalSalesRepresentativeInfoDto>
-          authorizedExtSalesRep}) = _$SalesOrganisationConfigsDtoImpl;
+          authorizedExtSalesRep,
+      @JsonKey(name: 'disclaimer', defaultValue: '')
+      required final String disclaimer,
+      @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+      required final bool enableDeliveryOptions,
+      @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+      required final bool enableRequestDeliveryDate,
+      @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+      required final bool enableSaturdayUrgentDelivery,
+      @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+      required final bool enableStandardDelivery,
+      @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+      required final bool enableTodayUrgentDelivery,
+      @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+      required final bool enableTomorrowUrgentDelivery,
+      @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+      required final bool enableUrgentDelivery,
+      @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+      required final double saturdayDeliveryFee,
+      @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+      required final int selectableDeliveryDays,
+      @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+      required final int standardDeliveryDays,
+      @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+      required final double todayDeliveryFee,
+      @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+      required final double
+          tomorrowDeliveryFee}) = _$SalesOrganisationConfigsDtoImpl;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -2293,6 +2617,45 @@ abstract class _SalesOrganisationConfigsDto
       name: 'authorizedExtSalesRep',
       defaultValue: <ExternalSalesRepresentativeInfoDto>[])
   List<ExternalSalesRepresentativeInfoDto> get authorizedExtSalesRep;
+  @override
+  @JsonKey(name: 'disclaimer', defaultValue: '')
+  String get disclaimer;
+  @override
+  @JsonKey(name: 'enableDeliveryOptions', defaultValue: false)
+  bool get enableDeliveryOptions;
+  @override
+  @JsonKey(name: 'enableRequestDeliveryDate', defaultValue: false)
+  bool get enableRequestDeliveryDate;
+  @override
+  @JsonKey(name: 'enableSaturdayUrgentDelivery', defaultValue: false)
+  bool get enableSaturdayUrgentDelivery;
+  @override
+  @JsonKey(name: 'enableStandardDelivery', defaultValue: false)
+  bool get enableStandardDelivery;
+  @override
+  @JsonKey(name: 'enableTodayUrgentDelivery', defaultValue: false)
+  bool get enableTodayUrgentDelivery;
+  @override
+  @JsonKey(name: 'enableTomorrowUrgentDelivery', defaultValue: false)
+  bool get enableTomorrowUrgentDelivery;
+  @override
+  @JsonKey(name: 'enableUrgentDelivery', defaultValue: false)
+  bool get enableUrgentDelivery;
+  @override
+  @JsonKey(name: 'saturdayDeliveryFee', defaultValue: 0.0)
+  double get saturdayDeliveryFee;
+  @override
+  @JsonKey(name: 'selectableDeliveryDays', defaultValue: 0)
+  int get selectableDeliveryDays;
+  @override
+  @JsonKey(name: 'standardDeliveryDays', defaultValue: 0)
+  int get standardDeliveryDays;
+  @override
+  @JsonKey(name: 'todayDeliveryFee', defaultValue: 0.0)
+  double get todayDeliveryFee;
+  @override
+  @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
+  double get tomorrowDeliveryFee;
   @override
   @JsonKey(ignore: true)
   _$$SalesOrganisationConfigsDtoImplCopyWith<_$SalesOrganisationConfigsDtoImpl>

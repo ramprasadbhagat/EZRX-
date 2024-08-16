@@ -4913,16 +4913,40 @@ void main() {
         });
 
         testWidgets(
-            'Should show in HK market and select standard delivery by default',
+            'Should show in HK market and select standard delivery by default when enableDeliveryOptions is true, and all deliveryOptions check are true',
             (tester) async {
           when(() => cartBloc.state).thenReturn(
-            CartState.initial().copyWith(cartProducts: mockCartItems),
+            CartState.initial().copyWith(
+              cartProducts: mockCartItems,
+            ),
           );
           when(() => eligibilityBloc.state).thenReturn(
-            EligibilityState.initial()
-                .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeHKSalesOrganisation,
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                enableDeliveryOptions: true,
+                disclaimer: 'Delivery times are estimates and may vary.',
+                standardDeliveryDays: 5,
+                enableStandardDelivery: true,
+              ),
+            ),
           );
-
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              salesOrg: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              shipInfo: fakeShipToInfo,
+              user: fakeClientUser,
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                enableDeliveryOptions: true,
+                disclaimer: 'Delivery times are estimates and may vary.',
+                standardDeliveryDays: 5,
+                enableStandardDelivery: true,
+                enableRequestDeliveryDate: true,
+                enableUrgentDelivery: true,
+              ),
+            ),
+          );
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
 
@@ -4938,7 +4962,7 @@ void main() {
             find.descendant(
               of: section,
               matching: find.text(
-                'We are unable to guarantee delivery TOMORROW if your order is placed between 04:00 and 06:00 PM',
+                'Delivery times are estimates and may vary.',
               ),
             ),
             findsOne,
@@ -4961,15 +4985,15 @@ void main() {
           );
           expect(
             find.descendant(
-              of: standardDeliveryCard,
+              of: section,
               matching: find.text('Standard delivery'),
             ),
             findsOne,
           );
           expect(
             find.descendant(
-              of: standardDeliveryCard,
-              matching: find.text('Receive your order in <5> business days.'),
+              of: section,
+              matching: find.text('Receive your order in 5 business days.'),
             ),
             findsOne,
           );
@@ -4988,17 +5012,8 @@ void main() {
           );
           expect(
             find.descendant(
-              of: requestDeliveryDateCard,
+              of: section,
               matching: find.text('Request delivery date'),
-            ),
-            findsOne,
-          );
-          expect(
-            find.descendant(
-              of: requestDeliveryDateCard,
-              matching: find.text(
-                'Schedule your delivery date. Delivery can only be requested on available days on the calendar.',
-              ),
             ),
             findsOne,
           );
@@ -5023,17 +5038,8 @@ void main() {
           );
           expect(
             find.descendant(
-              of: urgentDeliveryCard,
+              of: section,
               matching: find.text('Urgent delivery'),
-            ),
-            findsOne,
-          );
-          expect(
-            find.descendant(
-              of: urgentDeliveryCard,
-              matching: find.text(
-                'Get your items delivered in the fastest time possible. Only available on business days.',
-              ),
             ),
             findsOne,
           );
@@ -5062,11 +5068,20 @@ void main() {
           when(() => orderEligibilityBlocMock.state).thenReturn(
             OrderEligibilityState.initial().copyWith(
               deliveryOption: DeliveryOption.requestDeliveryDate(),
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                enableDeliveryOptions: true,
+                enableRequestDeliveryDate: true,
+              ),
             ),
           );
           when(() => eligibilityBloc.state).thenReturn(
-            EligibilityState.initial()
-                .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeHKSalesOrganisation,
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                enableDeliveryOptions: true,
+                enableRequestDeliveryDate: true,
+              ),
+            ),
           );
           final requestDeliveryDateCard = find.byKey(
             WidgetKeys.cartDeliveryOptionCard(
@@ -5077,16 +5092,10 @@ void main() {
 
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
-          await tester.dragUntilVisible(
-            requestDeliveryDateCard,
-            find.byKey(WidgetKeys.scrollList),
-            const Offset(0, -200),
-          );
-          await tester.pumpAndSettle();
           expect(requestDeliveryDateCard, findsOne);
           expect(
             find.descendant(
-              of: requestDeliveryDateCard,
+              of: section,
               matching: find.byKey(WidgetKeys.deliveryDate),
             ),
             findsOne,
@@ -5104,11 +5113,20 @@ void main() {
           when(() => orderEligibilityBlocMock.state).thenReturn(
             OrderEligibilityState.initial().copyWith(
               deliveryOption: DeliveryOption.urgentDelivery(),
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                enableDeliveryOptions: true,
+                enableUrgentDelivery: true,
+              ),
             ),
           );
           when(() => eligibilityBloc.state).thenReturn(
-            EligibilityState.initial()
-                .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeHKSalesOrganisation,
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                enableDeliveryOptions: true,
+                enableUrgentDelivery: true,
+              ),
+            ),
           );
           final urgentDelivery = find.byKey(
             WidgetKeys.cartDeliveryOptionCard(
@@ -5127,13 +5145,8 @@ void main() {
           );
           expect(urgentDelivery, findsOne);
           expect(
-            find.descendant(of: urgentDelivery, matching: dropdown),
+            find.descendant(of: section, matching: dropdown),
             findsOne,
-          );
-          await tester.dragUntilVisible(
-            dropdown,
-            find.byKey(WidgetKeys.scrollList),
-            const Offset(0, -100),
           );
           await tester.pumpAndSettle();
           await tester.tap(dropdown);

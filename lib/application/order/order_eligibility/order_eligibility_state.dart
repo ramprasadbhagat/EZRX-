@@ -17,6 +17,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
     required double mpSubtotal,
     required double subTotal,
     required bool showErrorMessage,
+    required double currentUrgentDeliverFee,
+    required String selectedRequestDeliveryDate,
   }) = _OrderEligibilityState;
 
   factory OrderEligibilityState.initial() => OrderEligibilityState(
@@ -32,6 +34,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
         zpSubtotal: 0,
         subTotal: 0,
         showErrorMessage: false,
+        currentUrgentDeliverFee: 0.0,
+        selectedRequestDeliveryDate: '',
       );
 
   String get orderEligibleTrackingErrorMessage {
@@ -210,8 +214,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
           (priceAggregate) => priceAggregate.copyWith(
             quantity: 0,
             price: priceAggregate.price.copyWith(
-              comboDeal:
-                  priceAggregate.price.comboDeal.copyWith(isEligible: false),
+              comboDeal: priceAggregate.price.comboDeal.copyWith(
+                isEligible: false,
+              ),
             ),
           ),
         ),
@@ -238,7 +243,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       hasInvalidTenderMaterial ||
       isMaxQtyExceedsForAnyTender ||
       atLeastOneItemInStockRequired ||
-      cartItems.hasMandatoryTenderMaterialButUnavailable;
+      cartItems.hasMandatoryTenderMaterialButUnavailable ||
+      isSelectedRequestDeliveryDateEmpty;
 
   List<bool> get activeErrorsList => [
         displayMovWarning,
@@ -576,4 +582,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
             sendPayload: user.isPPATriggerMaintained,
           );
   }
+
+  bool get isSelectedRequestDeliveryDateEmpty =>
+      deliveryOption == DeliveryOption.requestDeliveryDate() &&
+      selectedRequestDeliveryDate.isEmpty;
+
+  double get deliveryFee => deliveryOption == DeliveryOption.urgentDelivery()
+      ? currentUrgentDeliverFee
+      : 0;
 }

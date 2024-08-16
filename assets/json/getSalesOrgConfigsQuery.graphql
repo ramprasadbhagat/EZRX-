@@ -101,6 +101,19 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
       userId
       userName
       }
+    disclaimer
+    enableDeliveryOptions
+    enableRequestDeliveryDate
+    enableSaturdayUrgentDelivery
+    enableStandardDelivery
+    enableTodayUrgentDelivery
+    enableTomorrowUrgentDelivery
+    enableUrgentDelivery
+    saturdayDeliveryFee
+    selectableDeliveryDays
+    standardDeliveryDays
+    todayDeliveryFee
+    tomorrowDeliveryFee
     }
 }
 

@@ -119,7 +119,21 @@ class SalesOrgQueryMutation {
       }
     ''' : ''}
     ${enableMarketPlace ? 'enableMarketPlace \nmpMinOrderAmount \nenableMPSmallOrderFee \nmpSmallOrderFeeUserRoles \nmpSmallOrderFee \nmpMovThreshold' : ''}
-    statementOfAccountEnabled
+   statementOfAccountEnabled
+   disclaimer
+   enableDeliveryOptions
+   enableRequestDeliveryDate
+   enableSaturdayUrgentDelivery
+   enableStandardDelivery
+   enableTodayUrgentDelivery
+   enableTomorrowUrgentDelivery
+   enableUrgentDelivery
+   saturdayDeliveryFee
+   selectableDeliveryDays
+   standardDeliveryDays
+   todayDeliveryFee
+   tomorrowDeliveryFee
+   statementOfAccountEnabled
     authorizedExtSalesRep {
       userId
       userName

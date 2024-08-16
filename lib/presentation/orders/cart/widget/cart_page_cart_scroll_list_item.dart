@@ -80,14 +80,12 @@ class _CartProductMaterial extends StatelessWidget {
             _CartPageManufacturerName(cartProduct: item.materialInfo),
           CartProductTile(cartItem: item),
           if (item.sortedBonusList.isNotEmpty)
-            ...item.sortedBonusList
-                .map(
-                  (e) => CartProductTileBonus(
-                    bonusItem: e,
-                    cartProduct: item,
-                  ),
-                )
-                ,
+            ...item.sortedBonusList.map(
+              (e) => CartProductTileBonus(
+                bonusItem: e,
+                cartProduct: item,
+              ),
+            ),
         ],
       ),
     );

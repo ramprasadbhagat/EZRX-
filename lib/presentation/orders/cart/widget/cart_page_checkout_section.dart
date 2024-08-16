@@ -186,6 +186,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
         props: {
           TrackingProps.grandTotal: cartState.grandTotalPriceDisplayed(
             smallOrderFee: orderEligibilityState.smallOrderFee,
+            deliveryFee: orderEligibilityState.deliveryFee,
           ),
           TrackingProps.totalQty: cartState.totalCartCount,
           TrackingProps.errorMessage:
@@ -207,6 +208,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
       props: {
         TrackingProps.grandTotal: cartState.grandTotalPriceDisplayed(
           smallOrderFee: orderEligibilityState.smallOrderFee,
+          deliveryFee: orderEligibilityState.deliveryFee,
         ),
         TrackingProps.totalQty: cartState.totalCartCount,
         TrackingProps.cart:

@@ -7,6 +7,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
 part 'sales_organisation_configs.freezed.dart';
 
 @freezed
@@ -90,6 +92,19 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required double mpSAPMinOrderAmount,
     required List<OrderType> orderTypes,
     required List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep,
+    required bool enableDeliveryOptions,
+    required String disclaimer,
+    required bool enableStandardDelivery,
+    required int standardDeliveryDays,
+    required bool enableRequestDeliveryDate,
+    required int selectableDeliveryDays,
+    required bool enableUrgentDelivery,
+    required bool enableTodayUrgentDelivery,
+    required bool enableTomorrowUrgentDelivery,
+    required bool enableSaturdayUrgentDelivery,
+    required double todayDeliveryFee,
+    required double tomorrowDeliveryFee,
+    required double saturdayDeliveryFee,
   }) = _SalesOrganisationConfigs;
 
   //ignore:long-method
@@ -170,6 +185,19 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableTenderOrders: false,
         orderTypes: <OrderType>[],
         authorizedExtSalesRep: <ExternalSalesRepresentativeInfo>[],
+        disclaimer: '',
+        enableDeliveryOptions: false,
+        enableRequestDeliveryDate: false,
+        enableSaturdayUrgentDelivery: false,
+        enableStandardDelivery: false,
+        enableTodayUrgentDelivery: false,
+        enableTomorrowUrgentDelivery: false,
+        enableUrgentDelivery: false,
+        saturdayDeliveryFee: 0.0,
+        selectableDeliveryDays: 0,
+        standardDeliveryDays: 0,
+        todayDeliveryFee: 0,
+        tomorrowDeliveryFee: 0,
       );
 
   bool get shouldDisplayVATInPercentage =>
@@ -273,9 +301,16 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         .add(const Duration(days: 1));
   }
 
+  // Used in checkout page
   DateTime get deliveryEndDate => DateTimeUtils.addWorkingDay(
         deliveryStartDate,
         futureDeliveryDay.intValue - 1,
+      );
+
+  // Used in cart page
+  DateTime get cartDeliveryEndDate => DateTimeUtils.addWorkingDay(
+        deliveryStartDate,
+        selectableDeliveryDays - 1,
       );
 
   String get displayPrefixTax => displaySubtotalTaxBreakdown ? 'excl' : 'incl';
@@ -290,4 +325,42 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   double get zpMinOrderAmount =>
       enableSmallOrderFee ? sapMinOrderAmount : minOrderAmount;
+
+  double get getDeliveryFee {
+    if (enableTodayUrgentDelivery) {
+      return todayDeliveryFee;
+    }
+    if (enableTomorrowUrgentDelivery) {
+      return tomorrowDeliveryFee;
+    }
+    if (enableSaturdayUrgentDelivery) {
+      return saturdayDeliveryFee;
+    }
+
+    return 0.0;
+  }
+
+  bool get displayDeliveryOptions =>
+      enableDeliveryOptions &&
+      (enableStandardDelivery ||
+          enableRequestDeliveryDate ||
+          enableUrgentDelivery);
+
+  List<double> get deliveryFeesList => [
+        todayDeliveryFee,
+        tomorrowDeliveryFee,
+        saturdayDeliveryFee,
+      ];
+
+  List<bool> get enabledDeliveryOptionsList => [
+        enableTodayUrgentDelivery,
+        enableTomorrowUrgentDelivery,
+        enableSaturdayUrgentDelivery,
+      ];
+
+  List<String> get urgentDeliveryOptionTitlesList => [
+        UrgentDeliveryTimePickerOption.today().title,
+        UrgentDeliveryTimePickerOption.tomorrow().title,
+        UrgentDeliveryTimePickerOption.saturday().title,
+      ];
 }

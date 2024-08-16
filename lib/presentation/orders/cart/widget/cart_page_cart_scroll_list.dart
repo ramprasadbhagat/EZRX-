@@ -30,8 +30,11 @@ class _CartPageCartScrollList extends StatelessWidget {
             slivers: state.cartProducts.isEmpty
                 ? [SliverToBoxAdapter(child: NoRecordFound.cart(context))]
                 : [
-                    //TODO: Revisit to change market check to sales org config check in other ticket
-                    if (context.read<EligibilityBloc>().state.salesOrg.isHK)
+                    if (context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .displayDeliveryOptions)
                       const SliverToBoxAdapter(
                         child: _CartPageDeliveryOptions(),
                       ),

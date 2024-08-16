@@ -24,6 +24,7 @@ class EdgeCheckbox extends StatelessWidget {
       child: Stack(
         children: [
           Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(
                 color: value ? ZPColors.greenIconColor : ZPColors.transparent,

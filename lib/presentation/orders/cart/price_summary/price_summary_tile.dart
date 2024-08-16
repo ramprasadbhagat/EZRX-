@@ -47,26 +47,31 @@ class PriceSummaryTile extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              PriceDisplayWidget(
-                priceComponent: PriceComponent(
-                  key: WidgetKeys.priceSummaryGrandTotal,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartState
-                      .grandTotalPriceDisplayed(
-                        smallOrderFee: context
-                            .read<OrderEligibilityBloc>()
-                            .state
-                            .smallOrderFee,
-                        displayIDPriceOnCheckout: isCheckoutPage,
-                      )
-                      .toString(),
-                  title: '${context.tr('Grand total')}: ',
-                  priceLabelStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.extraLightGrey4,
-                          ),
-                ),
+              BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
+                buildWhen: (previous, current) =>
+                    previous.smallOrderFee != current.smallOrderFee ||
+                    previous.deliveryFee != current.deliveryFee,
+                builder: (context, state) {
+                  return PriceDisplayWidget(
+                    priceComponent: PriceComponent(
+                      key: WidgetKeys.priceSummaryGrandTotal,
+                      salesOrgConfig:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      price: cartState
+                          .grandTotalPriceDisplayed(
+                            smallOrderFee: state.smallOrderFee,
+                            deliveryFee: state.deliveryFee,
+                            displayIDPriceOnCheckout: isCheckoutPage,
+                          )
+                          .toString(),
+                      title: '${context.tr('Grand total')}: ',
+                      priceLabelStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.extraLightGrey4,
+                              ),
+                    ),
+                  );
+                },
               ),
             ],
           ),

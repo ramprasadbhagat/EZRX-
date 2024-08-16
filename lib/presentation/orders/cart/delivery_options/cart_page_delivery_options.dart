@@ -8,12 +8,17 @@ class _CartPageDeliveryOptions extends StatelessWidget {
     return Container(
       key: WidgetKeys.cartDeliveryOptionsSection,
       color: Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+      padding: const EdgeInsets.all(padding12),
       child: BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
         buildWhen: (prev, current) =>
-            prev.deliveryOption != current.deliveryOption,
+            prev.deliveryOption != current.deliveryOption ||
+            prev.configs.displayDeliveryOptions !=
+                current.configs.displayDeliveryOptions ||
+            prev.isSelectedRequestDeliveryDateEmpty !=
+                current.isSelectedRequestDeliveryDateEmpty,
         builder: (context, state) {
           return Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -22,28 +27,72 @@ class _CartPageDeliveryOptions extends StatelessWidget {
                       color: ZPColors.neutralsBlack,
                     ),
               ),
-              InfoLabel(
-                margin: const EdgeInsets.symmetric(vertical: 12),
-                mainColor: ZPColors.blueAccent,
-                textColor: ZPColors.neutralsBlack,
-                textValue: context.tr(
-                  'We are unable to guarantee delivery TOMORROW if your order is placed between 04:00 and 06:00 PM',
+              if (state.configs.disclaimer.isNotEmpty)
+                InfoLabel(
+                  margin: const EdgeInsets.symmetric(vertical: padding12),
+                  mainColor: ZPColors.blueAccent,
+                  textColor: ZPColors.neutralsBlack,
+                  textValue: state.configs.disclaimer,
+                ),
+              IntrinsicHeight(
+                child: Row(
+                  children: () {
+                    final options = [
+                      if (state.configs.enableStandardDelivery)
+                        DeliveryOption.standardDelivery(),
+                      if (state.configs.enableRequestDeliveryDate)
+                        DeliveryOption.requestDeliveryDate(),
+                      if (state.configs.enableUrgentDelivery)
+                        DeliveryOption.urgentDelivery(),
+                    ];
+                    final children = <Widget>[];
+                    for (var i = 0; i < options.length; i++) {
+                      children.add(
+                        Expanded(
+                          child: _DeliveryOptionCard(
+                            deliveryOption: options[i],
+                            selectedDeliveryOption: state.deliveryOption,
+                          ),
+                        ),
+                      );
+                      if (i != options.length - 1) {
+                        children.add(const SizedBox(width: padding12));
+                      }
+                    }
+
+                    return children;
+                  }(),
                 ),
               ),
-              _DeliveryOptionCard(
-                deliveryOption: DeliveryOption.standardDelivery(),
-                selectedDeliveryOption: state.deliveryOption,
-                price: 'FREE',
+              const SizedBox(height: padding12),
+              Text(
+                context.tr(
+                  state.deliveryOption.description,
+                  namedArgs: {
+                    'number':
+                        '${context.read<OrderEligibilityBloc>().state.configs.standardDeliveryDays}',
+                  },
+                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: ZPColors.neutralsGrey1),
               ),
-              _DeliveryOptionCard(
-                deliveryOption: DeliveryOption.requestDeliveryDate(),
-                selectedDeliveryOption: state.deliveryOption,
-                price: 'FREE',
-              ),
-              _DeliveryOptionCard(
-                deliveryOption: DeliveryOption.urgentDelivery(),
-                selectedDeliveryOption: state.deliveryOption,
-                price: '-',
+              if (state.deliveryOption ==
+                  DeliveryOption.requestDeliveryDate()) ...[
+                const SizedBox(height: padding12),
+                const _RequestDeliveryDatePicker(),
+              ] else if (state.deliveryOption ==
+                  DeliveryOption.urgentDelivery()) ...[
+                const SizedBox(height: padding12),
+                const _UrgentDeliveryTimePicker(),
+              ],
+              const SizedBox(height: padding24),
+              const Divider(
+                endIndent: 0,
+                indent: 0,
+                color: ZPColors.lightGrey,
+                height: 1,
               ),
             ],
           );

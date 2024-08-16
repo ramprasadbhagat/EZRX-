@@ -97,6 +97,19 @@ mixin _$SalesOrganisationConfigs {
   List<OrderType> get orderTypes => throw _privateConstructorUsedError;
   List<ExternalSalesRepresentativeInfo> get authorizedExtSalesRep =>
       throw _privateConstructorUsedError;
+  bool get enableDeliveryOptions => throw _privateConstructorUsedError;
+  String get disclaimer => throw _privateConstructorUsedError;
+  bool get enableStandardDelivery => throw _privateConstructorUsedError;
+  int get standardDeliveryDays => throw _privateConstructorUsedError;
+  bool get enableRequestDeliveryDate => throw _privateConstructorUsedError;
+  int get selectableDeliveryDays => throw _privateConstructorUsedError;
+  bool get enableUrgentDelivery => throw _privateConstructorUsedError;
+  bool get enableTodayUrgentDelivery => throw _privateConstructorUsedError;
+  bool get enableTomorrowUrgentDelivery => throw _privateConstructorUsedError;
+  bool get enableSaturdayUrgentDelivery => throw _privateConstructorUsedError;
+  double get todayDeliveryFee => throw _privateConstructorUsedError;
+  double get tomorrowDeliveryFee => throw _privateConstructorUsedError;
+  double get saturdayDeliveryFee => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -185,7 +198,20 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       double mpSmallOrderFee,
       double mpSAPMinOrderAmount,
       List<OrderType> orderTypes,
-      List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep});
+      List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep,
+      bool enableDeliveryOptions,
+      String disclaimer,
+      bool enableStandardDelivery,
+      int standardDeliveryDays,
+      bool enableRequestDeliveryDate,
+      int selectableDeliveryDays,
+      bool enableUrgentDelivery,
+      bool enableTodayUrgentDelivery,
+      bool enableTomorrowUrgentDelivery,
+      bool enableSaturdayUrgentDelivery,
+      double todayDeliveryFee,
+      double tomorrowDeliveryFee,
+      double saturdayDeliveryFee});
 }
 
 /// @nodoc
@@ -278,6 +304,19 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? mpSAPMinOrderAmount = null,
     Object? orderTypes = null,
     Object? authorizedExtSalesRep = null,
+    Object? enableDeliveryOptions = null,
+    Object? disclaimer = null,
+    Object? enableStandardDelivery = null,
+    Object? standardDeliveryDays = null,
+    Object? enableRequestDeliveryDate = null,
+    Object? selectableDeliveryDays = null,
+    Object? enableUrgentDelivery = null,
+    Object? enableTodayUrgentDelivery = null,
+    Object? enableTomorrowUrgentDelivery = null,
+    Object? enableSaturdayUrgentDelivery = null,
+    Object? todayDeliveryFee = null,
+    Object? tomorrowDeliveryFee = null,
+    Object? saturdayDeliveryFee = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -584,6 +623,58 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.authorizedExtSalesRep
           : authorizedExtSalesRep // ignore: cast_nullable_to_non_nullable
               as List<ExternalSalesRepresentativeInfo>,
+      enableDeliveryOptions: null == enableDeliveryOptions
+          ? _value.enableDeliveryOptions
+          : enableDeliveryOptions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disclaimer: null == disclaimer
+          ? _value.disclaimer
+          : disclaimer // ignore: cast_nullable_to_non_nullable
+              as String,
+      enableStandardDelivery: null == enableStandardDelivery
+          ? _value.enableStandardDelivery
+          : enableStandardDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      standardDeliveryDays: null == standardDeliveryDays
+          ? _value.standardDeliveryDays
+          : standardDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      enableRequestDeliveryDate: null == enableRequestDeliveryDate
+          ? _value.enableRequestDeliveryDate
+          : enableRequestDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectableDeliveryDays: null == selectableDeliveryDays
+          ? _value.selectableDeliveryDays
+          : selectableDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      enableUrgentDelivery: null == enableUrgentDelivery
+          ? _value.enableUrgentDelivery
+          : enableUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTodayUrgentDelivery: null == enableTodayUrgentDelivery
+          ? _value.enableTodayUrgentDelivery
+          : enableTodayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTomorrowUrgentDelivery: null == enableTomorrowUrgentDelivery
+          ? _value.enableTomorrowUrgentDelivery
+          : enableTomorrowUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableSaturdayUrgentDelivery: null == enableSaturdayUrgentDelivery
+          ? _value.enableSaturdayUrgentDelivery
+          : enableSaturdayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      todayDeliveryFee: null == todayDeliveryFee
+          ? _value.todayDeliveryFee
+          : todayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      tomorrowDeliveryFee: null == tomorrowDeliveryFee
+          ? _value.tomorrowDeliveryFee
+          : tomorrowDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      saturdayDeliveryFee: null == saturdayDeliveryFee
+          ? _value.saturdayDeliveryFee
+          : saturdayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -673,7 +764,20 @@ abstract class _$$SalesOrganisationConfigsImplCopyWith<$Res>
       double mpSmallOrderFee,
       double mpSAPMinOrderAmount,
       List<OrderType> orderTypes,
-      List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep});
+      List<ExternalSalesRepresentativeInfo> authorizedExtSalesRep,
+      bool enableDeliveryOptions,
+      String disclaimer,
+      bool enableStandardDelivery,
+      int standardDeliveryDays,
+      bool enableRequestDeliveryDate,
+      int selectableDeliveryDays,
+      bool enableUrgentDelivery,
+      bool enableTodayUrgentDelivery,
+      bool enableTomorrowUrgentDelivery,
+      bool enableSaturdayUrgentDelivery,
+      double todayDeliveryFee,
+      double tomorrowDeliveryFee,
+      double saturdayDeliveryFee});
 }
 
 /// @nodoc
@@ -765,6 +869,19 @@ class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
     Object? mpSAPMinOrderAmount = null,
     Object? orderTypes = null,
     Object? authorizedExtSalesRep = null,
+    Object? enableDeliveryOptions = null,
+    Object? disclaimer = null,
+    Object? enableStandardDelivery = null,
+    Object? standardDeliveryDays = null,
+    Object? enableRequestDeliveryDate = null,
+    Object? selectableDeliveryDays = null,
+    Object? enableUrgentDelivery = null,
+    Object? enableTodayUrgentDelivery = null,
+    Object? enableTomorrowUrgentDelivery = null,
+    Object? enableSaturdayUrgentDelivery = null,
+    Object? todayDeliveryFee = null,
+    Object? tomorrowDeliveryFee = null,
+    Object? saturdayDeliveryFee = null,
   }) {
     return _then(_$SalesOrganisationConfigsImpl(
       enableIRN: null == enableIRN
@@ -1071,6 +1188,58 @@ class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
           ? _value._authorizedExtSalesRep
           : authorizedExtSalesRep // ignore: cast_nullable_to_non_nullable
               as List<ExternalSalesRepresentativeInfo>,
+      enableDeliveryOptions: null == enableDeliveryOptions
+          ? _value.enableDeliveryOptions
+          : enableDeliveryOptions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disclaimer: null == disclaimer
+          ? _value.disclaimer
+          : disclaimer // ignore: cast_nullable_to_non_nullable
+              as String,
+      enableStandardDelivery: null == enableStandardDelivery
+          ? _value.enableStandardDelivery
+          : enableStandardDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      standardDeliveryDays: null == standardDeliveryDays
+          ? _value.standardDeliveryDays
+          : standardDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      enableRequestDeliveryDate: null == enableRequestDeliveryDate
+          ? _value.enableRequestDeliveryDate
+          : enableRequestDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectableDeliveryDays: null == selectableDeliveryDays
+          ? _value.selectableDeliveryDays
+          : selectableDeliveryDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      enableUrgentDelivery: null == enableUrgentDelivery
+          ? _value.enableUrgentDelivery
+          : enableUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTodayUrgentDelivery: null == enableTodayUrgentDelivery
+          ? _value.enableTodayUrgentDelivery
+          : enableTodayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTomorrowUrgentDelivery: null == enableTomorrowUrgentDelivery
+          ? _value.enableTomorrowUrgentDelivery
+          : enableTomorrowUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableSaturdayUrgentDelivery: null == enableSaturdayUrgentDelivery
+          ? _value.enableSaturdayUrgentDelivery
+          : enableSaturdayUrgentDelivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      todayDeliveryFee: null == todayDeliveryFee
+          ? _value.todayDeliveryFee
+          : todayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      tomorrowDeliveryFee: null == tomorrowDeliveryFee
+          ? _value.tomorrowDeliveryFee
+          : tomorrowDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      saturdayDeliveryFee: null == saturdayDeliveryFee
+          ? _value.saturdayDeliveryFee
+          : saturdayDeliveryFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1155,7 +1324,20 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
       required this.mpSAPMinOrderAmount,
       required final List<OrderType> orderTypes,
       required final List<ExternalSalesRepresentativeInfo>
-          authorizedExtSalesRep})
+          authorizedExtSalesRep,
+      required this.enableDeliveryOptions,
+      required this.disclaimer,
+      required this.enableStandardDelivery,
+      required this.standardDeliveryDays,
+      required this.enableRequestDeliveryDate,
+      required this.selectableDeliveryDays,
+      required this.enableUrgentDelivery,
+      required this.enableTodayUrgentDelivery,
+      required this.enableTomorrowUrgentDelivery,
+      required this.enableSaturdayUrgentDelivery,
+      required this.todayDeliveryFee,
+      required this.tomorrowDeliveryFee,
+      required this.saturdayDeliveryFee})
       : _principalList = principalList,
         _smallOrderFeeUserRoles = smallOrderFeeUserRoles,
         _mpSmallOrderFeeUserRoles = mpSmallOrderFeeUserRoles,
@@ -1349,8 +1531,35 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
   }
 
   @override
+  final bool enableDeliveryOptions;
+  @override
+  final String disclaimer;
+  @override
+  final bool enableStandardDelivery;
+  @override
+  final int standardDeliveryDays;
+  @override
+  final bool enableRequestDeliveryDate;
+  @override
+  final int selectableDeliveryDays;
+  @override
+  final bool enableUrgentDelivery;
+  @override
+  final bool enableTodayUrgentDelivery;
+  @override
+  final bool enableTomorrowUrgentDelivery;
+  @override
+  final bool enableSaturdayUrgentDelivery;
+  @override
+  final double todayDeliveryFee;
+  @override
+  final double tomorrowDeliveryFee;
+  @override
+  final double saturdayDeliveryFee;
+
+  @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep, enableDeliveryOptions: $enableDeliveryOptions, disclaimer: $disclaimer, enableStandardDelivery: $enableStandardDelivery, standardDeliveryDays: $standardDeliveryDays, enableRequestDeliveryDate: $enableRequestDeliveryDate, selectableDeliveryDays: $selectableDeliveryDays, enableUrgentDelivery: $enableUrgentDelivery, enableTodayUrgentDelivery: $enableTodayUrgentDelivery, enableTomorrowUrgentDelivery: $enableTomorrowUrgentDelivery, enableSaturdayUrgentDelivery: $enableSaturdayUrgentDelivery, todayDeliveryFee: $todayDeliveryFee, tomorrowDeliveryFee: $tomorrowDeliveryFee, saturdayDeliveryFee: $saturdayDeliveryFee)';
   }
 
   @override
@@ -1461,7 +1670,20 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
             (identical(other.mpSmallOrderFee, mpSmallOrderFee) || other.mpSmallOrderFee == mpSmallOrderFee) &&
             (identical(other.mpSAPMinOrderAmount, mpSAPMinOrderAmount) || other.mpSAPMinOrderAmount == mpSAPMinOrderAmount) &&
             const DeepCollectionEquality().equals(other._orderTypes, _orderTypes) &&
-            const DeepCollectionEquality().equals(other._authorizedExtSalesRep, _authorizedExtSalesRep));
+            const DeepCollectionEquality().equals(other._authorizedExtSalesRep, _authorizedExtSalesRep) &&
+            (identical(other.enableDeliveryOptions, enableDeliveryOptions) || other.enableDeliveryOptions == enableDeliveryOptions) &&
+            (identical(other.disclaimer, disclaimer) || other.disclaimer == disclaimer) &&
+            (identical(other.enableStandardDelivery, enableStandardDelivery) || other.enableStandardDelivery == enableStandardDelivery) &&
+            (identical(other.standardDeliveryDays, standardDeliveryDays) || other.standardDeliveryDays == standardDeliveryDays) &&
+            (identical(other.enableRequestDeliveryDate, enableRequestDeliveryDate) || other.enableRequestDeliveryDate == enableRequestDeliveryDate) &&
+            (identical(other.selectableDeliveryDays, selectableDeliveryDays) || other.selectableDeliveryDays == selectableDeliveryDays) &&
+            (identical(other.enableUrgentDelivery, enableUrgentDelivery) || other.enableUrgentDelivery == enableUrgentDelivery) &&
+            (identical(other.enableTodayUrgentDelivery, enableTodayUrgentDelivery) || other.enableTodayUrgentDelivery == enableTodayUrgentDelivery) &&
+            (identical(other.enableTomorrowUrgentDelivery, enableTomorrowUrgentDelivery) || other.enableTomorrowUrgentDelivery == enableTomorrowUrgentDelivery) &&
+            (identical(other.enableSaturdayUrgentDelivery, enableSaturdayUrgentDelivery) || other.enableSaturdayUrgentDelivery == enableSaturdayUrgentDelivery) &&
+            (identical(other.todayDeliveryFee, todayDeliveryFee) || other.todayDeliveryFee == todayDeliveryFee) &&
+            (identical(other.tomorrowDeliveryFee, tomorrowDeliveryFee) || other.tomorrowDeliveryFee == tomorrowDeliveryFee) &&
+            (identical(other.saturdayDeliveryFee, saturdayDeliveryFee) || other.saturdayDeliveryFee == saturdayDeliveryFee));
   }
 
   @override
@@ -1542,7 +1764,20 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
         mpSmallOrderFee,
         mpSAPMinOrderAmount,
         const DeepCollectionEquality().hash(_orderTypes),
-        const DeepCollectionEquality().hash(_authorizedExtSalesRep)
+        const DeepCollectionEquality().hash(_authorizedExtSalesRep),
+        enableDeliveryOptions,
+        disclaimer,
+        enableStandardDelivery,
+        standardDeliveryDays,
+        enableRequestDeliveryDate,
+        selectableDeliveryDays,
+        enableUrgentDelivery,
+        enableTodayUrgentDelivery,
+        enableTomorrowUrgentDelivery,
+        enableSaturdayUrgentDelivery,
+        todayDeliveryFee,
+        tomorrowDeliveryFee,
+        saturdayDeliveryFee
       ]);
 
   @JsonKey(ignore: true)
@@ -1555,83 +1790,97 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
 
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   const factory _SalesOrganisationConfigs(
-      {required final bool enableIRN,
-      required final bool enableDefaultMD,
-      required final bool disableProcessingStatus,
-      required final Currency currency,
-      required final bool hideCustomer,
-      required final bool enableGimmickMaterial,
-      required final bool disablePrincipals,
-      required final List<SalesOrganisationConfigsPrincipal> principalList,
-      required final bool disableOrderType,
-      required final bool enableBatchNumber,
-      required final bool disableBundles,
-      required final bool enableZDP5,
-      required final bool enableVat,
-      required final bool enableTaxAtTotalLevelOnly,
-      required final bool enablePOAttachmentRequired,
-      required final bool enableTaxClassification,
-      required final int vatValue,
-      required final bool materialWithoutPrice,
-      required final bool enableSpecialInstructions,
-      required final bool enableReferenceNote,
-      required final bool enableCollectiveNumber,
-      required final bool enableMobileNumber,
-      required final bool enableFutureDeliveryDay,
-      required final bool enablePaymentTerms,
-      required final FutureDeliveryDay futureDeliveryDay,
-      required final bool enableGMC,
-      required final bool enableListPrice,
-      required final bool priceOverride,
-      required final bool disablePaymentTermsDisplay,
-      required final bool disablePayment,
-      required final bool disableDeliveryDate,
-      required final bool enableBillTo,
-      required final bool enableGreenDelivery,
-      required final int greenDeliveryDelayInDays,
-      required final GreenDeliveryUserRole greenDeliveryUserRole,
-      required final bool showPOAttachment,
-      required final bool hideStockDisplay,
-      required final bool expiryDateDisplay,
-      required final bool batchNumDisplay,
-      required final OosMaterial addOosMaterials,
-      required final OosValue oosValue,
-      required final bool enableRemarks,
-      required final bool enableOHPrice,
-      required final PoNumberRequired poNumberRequired,
-      required final bool enableTaxDisplay,
-      required final bool enableTenderOrders,
-      required final bool netPriceOverride,
-      required final bool displayOrderDiscount,
-      required final double minOrderAmount,
-      required final SalesOrg salesOrg,
-      required final bool enableZDP8Override,
-      required final bool disableReturnsAccessSR,
-      required final bool disableReturnsAccess,
-      required final bool enableComboDeals,
-      required final ComboDealUserRole comboDealsUserRole,
-      required final bool enableGMN,
-      required final bool displayItemTaxBreakdown,
-      required final bool displaySubtotalTaxBreakdown,
-      required final bool disableOverrideFieldCustomer,
-      required final bool disableOverrideFieldSR,
-      required final bool hideCredit,
-      required final bool allowReturnsOutsidePolicy,
-      required final bool enableMarketPlace,
-      required final double mpMinOrderAmount,
-      required final bool statementOfAccountEnabled,
-      required final bool disablePromotion,
-      required final bool enableSmallOrderFee,
-      required final List<String> smallOrderFeeUserRoles,
-      required final double smallOrderFee,
-      required final double sapMinOrderAmount,
-      required final bool enableMPSmallOrderFee,
-      required final List<String> mpSmallOrderFeeUserRoles,
-      required final double mpSmallOrderFee,
-      required final double mpSAPMinOrderAmount,
-      required final List<OrderType> orderTypes,
-      required final List<ExternalSalesRepresentativeInfo>
-          authorizedExtSalesRep}) = _$SalesOrganisationConfigsImpl;
+          {required final bool enableIRN,
+          required final bool enableDefaultMD,
+          required final bool disableProcessingStatus,
+          required final Currency currency,
+          required final bool hideCustomer,
+          required final bool enableGimmickMaterial,
+          required final bool disablePrincipals,
+          required final List<SalesOrganisationConfigsPrincipal> principalList,
+          required final bool disableOrderType,
+          required final bool enableBatchNumber,
+          required final bool disableBundles,
+          required final bool enableZDP5,
+          required final bool enableVat,
+          required final bool enableTaxAtTotalLevelOnly,
+          required final bool enablePOAttachmentRequired,
+          required final bool enableTaxClassification,
+          required final int vatValue,
+          required final bool materialWithoutPrice,
+          required final bool enableSpecialInstructions,
+          required final bool enableReferenceNote,
+          required final bool enableCollectiveNumber,
+          required final bool enableMobileNumber,
+          required final bool enableFutureDeliveryDay,
+          required final bool enablePaymentTerms,
+          required final FutureDeliveryDay futureDeliveryDay,
+          required final bool enableGMC,
+          required final bool enableListPrice,
+          required final bool priceOverride,
+          required final bool disablePaymentTermsDisplay,
+          required final bool disablePayment,
+          required final bool disableDeliveryDate,
+          required final bool enableBillTo,
+          required final bool enableGreenDelivery,
+          required final int greenDeliveryDelayInDays,
+          required final GreenDeliveryUserRole greenDeliveryUserRole,
+          required final bool showPOAttachment,
+          required final bool hideStockDisplay,
+          required final bool expiryDateDisplay,
+          required final bool batchNumDisplay,
+          required final OosMaterial addOosMaterials,
+          required final OosValue oosValue,
+          required final bool enableRemarks,
+          required final bool enableOHPrice,
+          required final PoNumberRequired poNumberRequired,
+          required final bool enableTaxDisplay,
+          required final bool enableTenderOrders,
+          required final bool netPriceOverride,
+          required final bool displayOrderDiscount,
+          required final double minOrderAmount,
+          required final SalesOrg salesOrg,
+          required final bool enableZDP8Override,
+          required final bool disableReturnsAccessSR,
+          required final bool disableReturnsAccess,
+          required final bool enableComboDeals,
+          required final ComboDealUserRole comboDealsUserRole,
+          required final bool enableGMN,
+          required final bool displayItemTaxBreakdown,
+          required final bool displaySubtotalTaxBreakdown,
+          required final bool disableOverrideFieldCustomer,
+          required final bool disableOverrideFieldSR,
+          required final bool hideCredit,
+          required final bool allowReturnsOutsidePolicy,
+          required final bool enableMarketPlace,
+          required final double mpMinOrderAmount,
+          required final bool statementOfAccountEnabled,
+          required final bool disablePromotion,
+          required final bool enableSmallOrderFee,
+          required final List<String> smallOrderFeeUserRoles,
+          required final double smallOrderFee,
+          required final double sapMinOrderAmount,
+          required final bool enableMPSmallOrderFee,
+          required final List<String> mpSmallOrderFeeUserRoles,
+          required final double mpSmallOrderFee,
+          required final double mpSAPMinOrderAmount,
+          required final List<OrderType> orderTypes,
+          required final List<ExternalSalesRepresentativeInfo>
+              authorizedExtSalesRep,
+          required final bool enableDeliveryOptions,
+          required final String disclaimer,
+          required final bool enableStandardDelivery,
+          required final int standardDeliveryDays,
+          required final bool enableRequestDeliveryDate,
+          required final int selectableDeliveryDays,
+          required final bool enableUrgentDelivery,
+          required final bool enableTodayUrgentDelivery,
+          required final bool enableTomorrowUrgentDelivery,
+          required final bool enableSaturdayUrgentDelivery,
+          required final double todayDeliveryFee,
+          required final double tomorrowDeliveryFee,
+          required final double saturdayDeliveryFee}) =
+      _$SalesOrganisationConfigsImpl;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -1786,6 +2035,32 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   List<OrderType> get orderTypes;
   @override
   List<ExternalSalesRepresentativeInfo> get authorizedExtSalesRep;
+  @override
+  bool get enableDeliveryOptions;
+  @override
+  String get disclaimer;
+  @override
+  bool get enableStandardDelivery;
+  @override
+  int get standardDeliveryDays;
+  @override
+  bool get enableRequestDeliveryDate;
+  @override
+  int get selectableDeliveryDays;
+  @override
+  bool get enableUrgentDelivery;
+  @override
+  bool get enableTodayUrgentDelivery;
+  @override
+  bool get enableTomorrowUrgentDelivery;
+  @override
+  bool get enableSaturdayUrgentDelivery;
+  @override
+  double get todayDeliveryFee;
+  @override
+  double get tomorrowDeliveryFee;
+  @override
+  double get saturdayDeliveryFee;
   @override
   @JsonKey(ignore: true)
   _$$SalesOrganisationConfigsImplCopyWith<_$SalesOrganisationConfigsImpl>

@@ -282,12 +282,30 @@ String getDeliveryOptionIcon(String value) {
 }
 
 String getDeliveryOptionDescription(String value) {
+  final descriptions = {
+    'standardDelivery': 'Receive your order in {number} business days.',
+    'requestDeliveryDate': 'Schedule your delivery date. Delivery can only be requested on available days on the calendar.',
+    'urgentDelivery': 'Get your items delivered in the fastest time possible. Only available on business days.',
+  };
+
+  return descriptions[value] ?? '';
+}
+
+String getUrgentDeliveryTimePickerOptionTitle(String value){
   final result = {
-    'standardDelivery': 'Receive your order in <5> business days.',
-    'requestDeliveryDate':
-        'Schedule your delivery date. Delivery can only be requested on available days on the calendar.',
-    'urgentDelivery':
-        'Get your items delivered in the fastest time possible. Only available on business days.',
+    'today': 'Today, 1PM - 6PM (order before 10:30 AM)',
+    'tomorrow': 'Tomorrow, 9AM - 12AM (order before 4PM)',
+    'saturday': 'Saturday, 9AM - 1PM (order before 4PM)',
+  };
+
+  return result[value] ?? '';
+}
+
+String getDeliveryOptionPrice(String value){
+  final result = {
+    'standardDelivery': 'FREE',
+    'requestDeliveryDate': 'FREE',
+    'urgentDelivery': '{urgentDeliveryPrice}',
   };
 
   return result[value] ?? '';
