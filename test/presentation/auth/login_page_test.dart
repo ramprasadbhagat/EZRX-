@@ -16,7 +16,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -90,9 +89,6 @@ class PaymentCustomerInformationBlocMock extends MockBloc<
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
-class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
-    implements IntroBloc {}
-
 class AutoRouterMock extends Mock implements AppRouter {
   @override
   String currentPath = '';
@@ -141,7 +137,6 @@ class AupTcBlocMock extends MockBloc<AupTcEvent, AupTcState>
 
 void main() {
   late GetIt locator;
-  late IntroBloc introBlocMock;
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
   late AboutUsBloc aboutUsBlocMock;
@@ -212,7 +207,6 @@ void main() {
     setUp(() {
       WidgetsFlutterBinding.ensureInitialized();
       loginBlocMock = LoginFormBlocMock();
-      introBlocMock = IntroBlocMock();
       autoRouterMock = locator<AppRouter>();
       authBlocMock = AuthBlocMock();
       aboutUsBlocMock = AboutUsBlocMock();
@@ -248,7 +242,6 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => scanMaterialInfoBlocMock.state)
           .thenReturn(ScanMaterialInfoState.initial());
-      when(() => introBlocMock.state).thenReturn(IntroState.initial());
       when(() => deepLinkingBlocMock.state)
           .thenReturn(const DeepLinkingState.initial());
       when(() => materialListBloc.state)
@@ -280,9 +273,6 @@ void main() {
             providers: [
               BlocProvider<LoginFormBloc>(
                 create: (context) => loginBlocMock,
-              ),
-              BlocProvider<IntroBloc>(
-                create: (context) => introBlocMock,
               ),
               BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock,
@@ -421,9 +411,6 @@ void main() {
               ),
               BlocProvider(
                 create: (context) => authBlocMock,
-              ),
-              BlocProvider<IntroBloc>(
-                create: (context) => introBlocMock,
               ),
               BlocProvider<UserBloc>(
                 create: (context) => userBlocMock,

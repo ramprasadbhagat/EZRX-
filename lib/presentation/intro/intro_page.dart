@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
@@ -76,18 +74,8 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   void _getStarted(BuildContext context) {
-    context.read<IntroBloc>().add(const IntroEvent.setAppFirstLaunch());
-    //Here we are using userBloc instead of eligibilityBloc,
-    //as our integration test is too fast that sometimes
-    //it taps on getStarted button, before we update eligibility bloc.
-    final userState = context.read<UserBloc>().state;
-    if (userState.haveSalesOrganisation) {
-      context.read<SalesOrgBloc>().add(
-            SalesOrgEvent.loadSavedOrganisation(
-              salesOrganisations: userState.user.userSalesOrganisations,
-            ),
-          );
-    }
+    context.read<UserBloc>().add(const UserEvent.setAppFirstLaunch());
+    context.router.popUntilRouteWithName(HomeNavigationTabbarRoute.name);
   }
 
   @override
@@ -100,67 +88,50 @@ class _IntroPageState extends State<IntroPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      child: BlocConsumer<IntroBloc, IntroState>(
-        buildWhen: (previous, current) => previous.index != current.index,
-        listenWhen: (previous, current) =>
-            previous.isAppFirstLaunch != current.isAppFirstLaunch &&
-            !current.isAppFirstLaunch,
-        listener: (context, state) {
-          if (!state.isAppFirstLaunch) {
-            context.router
-                .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
-          }
-        },
-        builder: (context, state) {
-          return BlocBuilder<EligibilityBloc, EligibilityState>(
-            buildWhen: (pre, cur) => pre != cur,
-            builder: (context, eligibilityState) {
-              final list = getOnBoardingObject(eligibilityState);
+      child: BlocBuilder<EligibilityBloc, EligibilityState>(
+        buildWhen: (pre, cur) => pre != cur,
+        builder: (context, eligibilityState) {
+          final list = getOnBoardingObject(eligibilityState);
 
-              return PageView.builder(
-                allowImplicitScrolling: true,
-                onPageChanged: (index) => context
-                    .read<IntroBloc>()
-                    .add(IntroEvent.setIndex(index: index)),
-                scrollDirection: Axis.horizontal,
-                controller: _pageController,
-                itemCount: list.length,
-                itemBuilder: (context, i) {
-                  return Scaffold(
-                    body: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            PngImage.introBackground,
-                          ),
-                          fit: BoxFit.cover,
+          return PageView.builder(
+            allowImplicitScrolling: true,
+            scrollDirection: Axis.horizontal,
+            controller: _pageController,
+            itemCount: list.length,
+            itemBuilder: (context, i) {
+              return Scaffold(
+                body: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        PngImage.introBackground,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: _CustomIndicator(
+                          index: i,
+                          lastIndex: list.length - 1,
+                          length: list.length,
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: _CustomIndicator(
-                              index: state.index,
-                              lastIndex: list.length - 1,
-                              length: list.length,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 9,
-                            child: IntroStep(
-                              introObject: list[i],
-                              isLastPage: i == (list.length - 1),
-                              getStarted: () => _getStarted(context),
-                              nextPage: _nextPage,
-                            ),
-                          ),
-                        ],
+                      Expanded(
+                        flex: 9,
+                        child: IntroStep(
+                          introObject: list[i],
+                          isLastPage: i == (list.length - 1),
+                          getStarted: () => _getStarted(context),
+                          nextPage: _nextPage,
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    ],
+                  ),
+                ),
               );
             },
           );

@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -13,6 +12,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -285,15 +285,12 @@ class AcceptButton extends StatelessWidget {
         if (!isMarketPlace)
           BlocListener<UserBloc, UserState>(
             listenWhen: (pre, cur) =>
-                (pre.showTermsAndConditionDialog !=
-                            cur.showTermsAndConditionDialog &&
-                        !cur.showTermsAndConditionDialog ||
-                    cur.isLoginOnBehalf) &&
-                cur.user != User.empty(),
+                pre.showTermsAndConditionDialog !=
+                    cur.showTermsAndConditionDialog &&
+                !cur.showTermsAndConditionDialog,
             listener: (context, _) {
-              context.read<IntroBloc>().add(
-                    const IntroEvent.checkAppFirstLaunch(),
-                  );
+              context.router
+                  .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
             },
           ),
         if (isMarketPlace)

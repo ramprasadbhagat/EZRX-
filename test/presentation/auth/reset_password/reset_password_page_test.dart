@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -10,6 +9,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/password_validation.dart';
@@ -19,29 +19,11 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../utils/widget_utils.dart';
-
-class ResetPasswordBlocMock
-    extends MockBloc<ResetPasswordEvent, ResetPasswordState>
-    implements ResetPasswordBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AppRouterMock extends Mock implements AppRouter {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MaterialPageXMock extends Mock implements AutoRoutePage {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   late AppRouter autoRouterMock;
@@ -57,11 +39,11 @@ void main() {
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => AppRouterMock());
+    locator.registerLazySingleton<AppRouter>(() => AutoRouteMock());
   });
   group('ResetPasswordPage', () {
     setUp(() {
-      autoRouterMock = locator<AppRouterMock>();
+      autoRouterMock = locator<AppRouter>();
       resetPasswordBlocMock = ResetPasswordBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       authBlocMock = AuthBlocMock();
@@ -419,7 +401,7 @@ void main() {
           ResetPasswordState.initial(),
         ];
         when(
-          () => autoRouterMock.replace(
+          () => autoRouterMock.push(
             ResetPasswordSuccessRoute(isFirstLogin: true),
           ),
         ).thenAnswer(
@@ -429,7 +411,7 @@ void main() {
         await tester.pumpWidget(getWidget(isFirstLogin: true));
         await tester.pumpAndSettle();
         verify(
-          () => autoRouterMock.replace(
+          () => autoRouterMock.push(
             ResetPasswordSuccessRoute(isFirstLogin: true),
           ),
         ).called(1);

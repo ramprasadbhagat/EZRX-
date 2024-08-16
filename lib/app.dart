@@ -16,7 +16,6 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
@@ -407,9 +406,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AllCreditsFilterBloc>(
           create: (context) => locator<AllCreditsFilterBloc>(),
-        ),
-        BlocProvider<IntroBloc>(
-          create: (context) => locator<IntroBloc>(),
         ),
         BlocProvider<ZPAccountSummaryBloc>(
           create: (context) => locator<ZPAccountSummaryBloc>(),

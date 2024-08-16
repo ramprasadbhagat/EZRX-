@@ -14,11 +14,13 @@ class _ResetPasswordForm extends StatelessWidget {
           !current.isSubmitting,
       listener: (context, state) => {
         state.passwordResetFailureOrSuccessOption.fold(
-          () => context.router.replace(
-            ResetPasswordSuccessRoute(
-              isFirstLogin: isFirstLogin,
-            ),
-          ),
+          () => isFirstLogin
+              ? context.router.push(
+                  ResetPasswordSuccessRoute(isFirstLogin: isFirstLogin),
+                )
+              : context.router.replace(
+                  ResetPasswordSuccessRoute(isFirstLogin: isFirstLogin),
+                ),
           (either) => either.fold(
             (failure) => ErrorUtils.handleApiFailure(context, failure),
             (_) {},

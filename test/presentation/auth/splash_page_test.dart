@@ -19,7 +19,6 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -113,7 +112,6 @@ void main() {
   late MaterialListBloc materialListBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
   late SettingBloc settingBlocMock;
-  late IntroBloc introBlocMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late MaterialFilterBloc materialFilterBlocMock;
   late ProductDetailBloc productDetailBloc;
@@ -173,18 +171,22 @@ void main() {
 
   final valueVariantForResetPassword = ValueVariant<User>({
     User.empty().copyWith(
+      id: 'fake-id',
       isFirstLogin: false,
       isResetUserPassword: false,
     ),
     User.empty().copyWith(
+      id: 'fake-id',
       isFirstLogin: true,
       isResetUserPassword: false,
     ),
     User.empty().copyWith(
+      id: 'fake-id',
       isFirstLogin: false,
       isResetUserPassword: true,
     ),
     User.empty().copyWith(
+      id: 'fake-id',
       isFirstLogin: true,
       isResetUserPassword: true,
     ),
@@ -231,7 +233,6 @@ void main() {
       scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
       settingBlocMock = SettingMockBloc();
       mockMaterialPriceBloc = MaterialPriceBlocMock();
-      introBlocMock = IntroBlocMock();
       viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
       productDetailBloc = ProductDetailBlocMock();
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsBlocMock();
@@ -294,7 +295,6 @@ void main() {
           .thenReturn(ViewByOrderState.initial());
       when(() => mockMaterialPriceBloc.state)
           .thenReturn(MaterialPriceState.initial());
-      when(() => introBlocMock.state).thenReturn(IntroState.initial());
       when(() => viewByItemDetailsBlocMock.state)
           .thenReturn(ViewByItemDetailsState.initial());
       when(() => productDetailBloc.state)
@@ -341,6 +341,7 @@ void main() {
           .thenReturn(PoAttachmentState.initial());
       when(() => paymentSummaryDetailsBlocMock.state)
           .thenReturn(PaymentSummaryDetailsState.initial());
+      when(() => autoRouterMock.currentPath).thenReturn('/main');
     });
 
     Future getWidget(tester) async {
@@ -411,7 +412,6 @@ void main() {
             BlocProvider<MaterialPriceBloc>(
               create: (context) => mockMaterialPriceBloc,
             ),
-            BlocProvider<IntroBloc>(create: (context) => introBlocMock),
             BlocProvider<ViewByItemDetailsBloc>(
               create: (context) => viewByItemDetailsBlocMock,
             ),
@@ -524,20 +524,6 @@ void main() {
       verify(() => userBlocMock.add(const UserEvent.fetch())).called(1);
     });
 
-    testWidgets('When Intro Bloc is listener and isAppFirstLaunch == true',
-        (tester) async {
-      final expectedStates = [
-        IntroState.initial().copyWith(isLoading: true),
-        IntroState.initial().copyWith(isAppFirstLaunch: true, isLoading: false),
-      ];
-      whenListen(introBlocMock, Stream.fromIterable(expectedStates));
-      when(() => autoRouterMock.push(const IntroPageRoute()))
-          .thenAnswer((_) async => true);
-      await getWidget(tester);
-      await tester.pump();
-      verify(() => autoRouterMock.push(const IntroPageRoute())).called(1);
-    });
-
     testWidgets('Should reset products filter', (tester) async {
       when(() => materialListBlocMock.state).thenReturn(
         MaterialListState.initial().copyWith(
@@ -560,39 +546,6 @@ void main() {
         () =>
             materialFilterBlocMock.add(const MaterialFilterEvent.resetFilter()),
       ).called(1);
-    });
-
-    testWidgets('When Intro Bloc is listener and showTermsAndCondition == true',
-        (tester) async {
-      final auptcRoute = AupTCPageRoute(
-        key: WidgetKeys.aupTcScreen,
-        user: fakeUser,
-        isMarketPlace: false,
-      );
-      when((() => autoRouterMock.push(auptcRoute)))
-          .thenAnswer((_) async => true);
-      whenListen(
-        introBlocMock,
-        Stream.fromIterable([
-          IntroState.initial().copyWith(isLoading: true),
-          IntroState.initial()
-              .copyWith(isAppFirstLaunch: false, isLoading: false),
-        ]),
-      );
-      whenListen(
-        userBlocMock,
-        Stream.fromIterable([
-          UserState.initial().copyWith(
-            user: fakeUser,
-            isLoginOnBehalf: false,
-          ),
-        ]),
-      );
-
-      await getWidget(tester);
-      await tester.pumpAndSettle(Durations.extralong1);
-      verifyNever(() => autoRouterMock.push(const IntroPageRoute()));
-      verify(() => autoRouterMock.push(auptcRoute)).called(1);
     });
 
     testWidgets('When PaymentCustomerInformation bloc is listening',
@@ -756,9 +709,6 @@ void main() {
 
       await getWidget(tester);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
-
-      verify(() => introBlocMock.add(const IntroEvent.checkAppFirstLaunch()))
-          .called(1);
 
       verify(
         () => cartBlocMock.add(
@@ -1629,6 +1579,9 @@ void main() {
         ).thenAnswer((_) async => true);
         await getWidget(tester);
         await tester.pump();
+        await tester.pump(
+          const Duration(milliseconds: 500),
+        ); //Welcome message delay duration
 
         if (isFirstLogin || isResetUserPassword) {
           verify(

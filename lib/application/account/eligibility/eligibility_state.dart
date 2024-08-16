@@ -341,8 +341,13 @@ class EligibilityState with _$EligibilityState {
     final isSelectNewLanguage =
         previous.user.preferredLanguage != user.preferredLanguage &&
             user != User.empty();
+    final isUpdateMarketPlaceTnC =
+        previous.user.acceptMPTC != user.acceptMPTC && user != User.empty();
 
-    return isLoadShipToSuccess || isSelectNewShipTo || isSelectNewLanguage;
+    return isLoadShipToSuccess ||
+        isSelectNewShipTo ||
+        isSelectNewLanguage ||
+        isUpdateMarketPlaceTnC;
   }
 
   double get paymentHomeItemWidthRatio => salesOrg.isPaymentClaimEnabled ||

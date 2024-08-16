@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/repository/i_sales_rep_repository.dart
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
+import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -22,11 +23,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final IUserRepository userRepository;
   final IAuthRepository authRepository;
   final ISalesRepRepository salesRepRepository;
+  final IDeviceRepository deviceRepository;
 
   UserBloc({
     required this.userRepository,
     required this.authRepository,
     required this.salesRepRepository,
+    required this.deviceRepository,
   }) : super(UserState.initial()) {
     on<UserEvent>(_onEvent);
   }
@@ -49,6 +52,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             );
           },
           (user) async {
+            final isFirstLaunch =
+                (await deviceRepository.getDeviceData()).getOrElse(() => false);
             final refreshTokenFailureOrSuccess =
                 await authRepository.getRefreshToken();
             if (isClosed) return;
@@ -62,6 +67,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               state.copyWith(
                 user: user,
                 isLoginOnBehalf: isLoginOnBehalf,
+                isAppFirstLaunch: isFirstLaunch,
                 userFailureOrSuccessOption: none(),
               ),
             );
@@ -199,6 +205,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             ),
           ),
         );
+      },
+      setAppFirstLaunch: (e) async {
+        await deviceRepository.setDeviceData(isAppFirstLaunch: false);
+        if (isClosed) return;
+        emit(state.copyWith(isAppFirstLaunch: false));
       },
     );
   }

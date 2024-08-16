@@ -15,7 +15,6 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -131,10 +130,7 @@ class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
 
 class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
     implements ChatBotBloc {}
-
-class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
-    implements IntroBloc {}
-
+    
 class ResetPasswordBlocMock
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
     implements ResetPasswordBloc {}

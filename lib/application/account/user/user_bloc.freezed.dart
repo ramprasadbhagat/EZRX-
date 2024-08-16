@@ -27,6 +27,7 @@ mixin _$UserEvent {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +41,7 @@ mixin _$UserEvent {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$UserEvent {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,6 +70,7 @@ mixin _$UserEvent {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +84,7 @@ mixin _$UserEvent {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -93,6 +98,7 @@ mixin _$UserEvent {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,6 +168,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return initialized();
   }
@@ -178,6 +185,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return initialized?.call();
   }
@@ -194,6 +202,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -214,6 +223,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return initialized(this);
   }
@@ -230,6 +240,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return initialized?.call(this);
   }
@@ -246,6 +257,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -306,6 +318,7 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return fetch();
   }
@@ -322,6 +335,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return fetch?.call();
   }
@@ -338,6 +352,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -358,6 +373,7 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return fetch(this);
   }
@@ -374,6 +390,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return fetch?.call(this);
   }
@@ -390,6 +407,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -450,6 +468,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return acceptTnc();
   }
@@ -466,6 +485,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return acceptTnc?.call();
   }
@@ -482,6 +502,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (acceptTnc != null) {
@@ -502,6 +523,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return acceptTnc(this);
   }
@@ -518,6 +540,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return acceptTnc?.call(this);
   }
@@ -534,6 +557,7 @@ class _$AcceptTncImpl implements _AcceptTnc {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (acceptTnc != null) {
@@ -624,6 +648,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return setMarketPlaceTncAcceptance(value);
   }
@@ -640,6 +665,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return setMarketPlaceTncAcceptance?.call(value);
   }
@@ -656,6 +682,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (setMarketPlaceTncAcceptance != null) {
@@ -676,6 +703,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return setMarketPlaceTncAcceptance(this);
   }
@@ -692,6 +720,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return setMarketPlaceTncAcceptance?.call(this);
   }
@@ -708,6 +737,7 @@ class _$SetMarketPlaceTncAcceptanceImpl
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (setMarketPlaceTncAcceptance != null) {
@@ -802,6 +832,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return updateLanguage(language);
   }
@@ -818,6 +849,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return updateLanguage?.call(language);
   }
@@ -834,6 +866,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (updateLanguage != null) {
@@ -854,6 +887,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return updateLanguage(this);
   }
@@ -870,6 +904,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return updateLanguage?.call(this);
   }
@@ -886,6 +921,7 @@ class _$UpdateLanguageImpl implements _UpdateLanguage {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (updateLanguage != null) {
@@ -979,6 +1015,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return selectLanguage(language);
   }
@@ -995,6 +1032,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return selectLanguage?.call(language);
   }
@@ -1011,6 +1049,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (selectLanguage != null) {
@@ -1031,6 +1070,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return selectLanguage(this);
   }
@@ -1047,6 +1087,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return selectLanguage?.call(this);
   }
@@ -1063,6 +1104,7 @@ class _$SelectLanguageImpl implements _SelectLanguage {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (selectLanguage != null) {
@@ -1156,6 +1198,7 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return selectOrderType(orderType);
   }
@@ -1172,6 +1215,7 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return selectOrderType?.call(orderType);
   }
@@ -1188,6 +1232,7 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (selectOrderType != null) {
@@ -1208,6 +1253,7 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return selectOrderType(this);
   }
@@ -1224,6 +1270,7 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return selectOrderType?.call(this);
   }
@@ -1240,6 +1287,7 @@ class _$SelectOrderTypeImpl implements _SelectOrderType {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (selectOrderType != null) {
@@ -1306,6 +1354,7 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     required TResult Function(Language language) selectLanguage,
     required TResult Function(DocumentType orderType) selectOrderType,
     required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return fetchSalesRepInfo();
   }
@@ -1322,6 +1371,7 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult? Function(Language language)? selectLanguage,
     TResult? Function(DocumentType orderType)? selectOrderType,
     TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return fetchSalesRepInfo?.call();
   }
@@ -1338,6 +1388,7 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult Function(Language language)? selectLanguage,
     TResult Function(DocumentType orderType)? selectOrderType,
     TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (fetchSalesRepInfo != null) {
@@ -1358,6 +1409,7 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     required TResult Function(_SelectLanguage value) selectLanguage,
     required TResult Function(_SelectOrderType value) selectOrderType,
     required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return fetchSalesRepInfo(this);
   }
@@ -1374,6 +1426,7 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult? Function(_SelectLanguage value)? selectLanguage,
     TResult? Function(_SelectOrderType value)? selectOrderType,
     TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return fetchSalesRepInfo?.call(this);
   }
@@ -1390,6 +1443,7 @@ class _$FetchSalesRepinfoImpl implements _FetchSalesRepinfo {
     TResult Function(_SelectLanguage value)? selectLanguage,
     TResult Function(_SelectOrderType value)? selectOrderType,
     TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (fetchSalesRepInfo != null) {
@@ -1404,6 +1458,156 @@ abstract class _FetchSalesRepinfo implements UserEvent {
 }
 
 /// @nodoc
+abstract class _$$SetAppFirstLaunchImplCopyWith<$Res> {
+  factory _$$SetAppFirstLaunchImplCopyWith(_$SetAppFirstLaunchImpl value,
+          $Res Function(_$SetAppFirstLaunchImpl) then) =
+      __$$SetAppFirstLaunchImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SetAppFirstLaunchImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$SetAppFirstLaunchImpl>
+    implements _$$SetAppFirstLaunchImplCopyWith<$Res> {
+  __$$SetAppFirstLaunchImplCopyWithImpl(_$SetAppFirstLaunchImpl _value,
+      $Res Function(_$SetAppFirstLaunchImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SetAppFirstLaunchImpl implements _SetAppFirstLaunch {
+  const _$SetAppFirstLaunchImpl();
+
+  @override
+  String toString() {
+    return 'UserEvent.setAppFirstLaunch()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SetAppFirstLaunchImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
+    required TResult Function(Language language) updateLanguage,
+    required TResult Function(Language language) selectLanguage,
+    required TResult Function(DocumentType orderType) selectOrderType,
+    required TResult Function() fetchSalesRepInfo,
+    required TResult Function() setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult? Function(Language language)? updateLanguage,
+    TResult? Function(Language language)? selectLanguage,
+    TResult? Function(DocumentType orderType)? selectOrderType,
+    TResult? Function()? fetchSalesRepInfo,
+    TResult? Function()? setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult Function(Language language)? updateLanguage,
+    TResult Function(Language language)? selectLanguage,
+    TResult Function(DocumentType orderType)? selectOrderType,
+    TResult Function()? fetchSalesRepInfo,
+    TResult Function()? setAppFirstLaunch,
+    required TResult orElse(),
+  }) {
+    if (setAppFirstLaunch != null) {
+      return setAppFirstLaunch();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
+    required TResult Function(_SelectLanguage value) selectLanguage,
+    required TResult Function(_SelectOrderType value) selectOrderType,
+    required TResult Function(_FetchSalesRepinfo value) fetchSalesRepInfo,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
+    TResult? Function(_SelectLanguage value)? selectLanguage,
+    TResult? Function(_SelectOrderType value)? selectOrderType,
+    TResult? Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
+    TResult Function(_SelectLanguage value)? selectLanguage,
+    TResult Function(_SelectOrderType value)? selectOrderType,
+    TResult Function(_FetchSalesRepinfo value)? fetchSalesRepInfo,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
+    required TResult orElse(),
+  }) {
+    if (setAppFirstLaunch != null) {
+      return setAppFirstLaunch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetAppFirstLaunch implements UserEvent {
+  const factory _SetAppFirstLaunch() = _$SetAppFirstLaunchImpl;
+}
+
+/// @nodoc
 mixin _$UserState {
   User get user => throw _privateConstructorUsedError;
   bool get isLoginOnBehalf => throw _privateConstructorUsedError;
@@ -1414,6 +1618,7 @@ mixin _$UserState {
   Language get activeLanguage => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isSelectingOrderType => throw _privateConstructorUsedError;
+  bool get isAppFirstLaunch => throw _privateConstructorUsedError;
   SalesRepresentativeInfo get salesRepInfo =>
       throw _privateConstructorUsedError;
 
@@ -1435,6 +1640,7 @@ abstract class $UserStateCopyWith<$Res> {
       Language activeLanguage,
       bool isLoading,
       bool isSelectingOrderType,
+      bool isAppFirstLaunch,
       SalesRepresentativeInfo salesRepInfo});
 
   $UserCopyWith<$Res> get user;
@@ -1461,6 +1667,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
     Object? activeLanguage = null,
     Object? isLoading = null,
     Object? isSelectingOrderType = null,
+    Object? isAppFirstLaunch = null,
     Object? salesRepInfo = null,
   }) {
     return _then(_value.copyWith(
@@ -1491,6 +1698,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
       isSelectingOrderType: null == isSelectingOrderType
           ? _value.isSelectingOrderType
           : isSelectingOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAppFirstLaunch: null == isAppFirstLaunch
+          ? _value.isAppFirstLaunch
+          : isAppFirstLaunch // ignore: cast_nullable_to_non_nullable
               as bool,
       salesRepInfo: null == salesRepInfo
           ? _value.salesRepInfo
@@ -1532,6 +1743,7 @@ abstract class _$$UserStateImplCopyWith<$Res>
       Language activeLanguage,
       bool isLoading,
       bool isSelectingOrderType,
+      bool isAppFirstLaunch,
       SalesRepresentativeInfo salesRepInfo});
 
   @override
@@ -1558,6 +1770,7 @@ class __$$UserStateImplCopyWithImpl<$Res>
     Object? activeLanguage = null,
     Object? isLoading = null,
     Object? isSelectingOrderType = null,
+    Object? isAppFirstLaunch = null,
     Object? salesRepInfo = null,
   }) {
     return _then(_$UserStateImpl(
@@ -1589,6 +1802,10 @@ class __$$UserStateImplCopyWithImpl<$Res>
           ? _value.isSelectingOrderType
           : isSelectingOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAppFirstLaunch: null == isAppFirstLaunch
+          ? _value.isAppFirstLaunch
+          : isAppFirstLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
       salesRepInfo: null == salesRepInfo
           ? _value.salesRepInfo
           : salesRepInfo // ignore: cast_nullable_to_non_nullable
@@ -1608,6 +1825,7 @@ class _$UserStateImpl extends _UserState {
       required this.activeLanguage,
       required this.isLoading,
       required this.isSelectingOrderType,
+      required this.isAppFirstLaunch,
       required this.salesRepInfo})
       : super._();
 
@@ -1626,11 +1844,13 @@ class _$UserStateImpl extends _UserState {
   @override
   final bool isSelectingOrderType;
   @override
+  final bool isAppFirstLaunch;
+  @override
   final SalesRepresentativeInfo salesRepInfo;
 
   @override
   String toString() {
-    return 'UserState(user: $user, isLoginOnBehalf: $isLoginOnBehalf, userFailureOrSuccessOption: $userFailureOrSuccessOption, failureOrSuccessOption: $failureOrSuccessOption, activeLanguage: $activeLanguage, isLoading: $isLoading, isSelectingOrderType: $isSelectingOrderType, salesRepInfo: $salesRepInfo)';
+    return 'UserState(user: $user, isLoginOnBehalf: $isLoginOnBehalf, userFailureOrSuccessOption: $userFailureOrSuccessOption, failureOrSuccessOption: $failureOrSuccessOption, activeLanguage: $activeLanguage, isLoading: $isLoading, isSelectingOrderType: $isSelectingOrderType, isAppFirstLaunch: $isAppFirstLaunch, salesRepInfo: $salesRepInfo)';
   }
 
   @override
@@ -1653,6 +1873,8 @@ class _$UserStateImpl extends _UserState {
                 other.isLoading == isLoading) &&
             (identical(other.isSelectingOrderType, isSelectingOrderType) ||
                 other.isSelectingOrderType == isSelectingOrderType) &&
+            (identical(other.isAppFirstLaunch, isAppFirstLaunch) ||
+                other.isAppFirstLaunch == isAppFirstLaunch) &&
             (identical(other.salesRepInfo, salesRepInfo) ||
                 other.salesRepInfo == salesRepInfo));
   }
@@ -1667,6 +1889,7 @@ class _$UserStateImpl extends _UserState {
       activeLanguage,
       isLoading,
       isSelectingOrderType,
+      isAppFirstLaunch,
       salesRepInfo);
 
   @JsonKey(ignore: true)
@@ -1686,6 +1909,7 @@ abstract class _UserState extends UserState {
       required final Language activeLanguage,
       required final bool isLoading,
       required final bool isSelectingOrderType,
+      required final bool isAppFirstLaunch,
       required final SalesRepresentativeInfo salesRepInfo}) = _$UserStateImpl;
   const _UserState._() : super._();
 
@@ -1703,6 +1927,8 @@ abstract class _UserState extends UserState {
   bool get isLoading;
   @override
   bool get isSelectingOrderType;
+  @override
+  bool get isAppFirstLaunch;
   @override
   SalesRepresentativeInfo get salesRepInfo;
   @override

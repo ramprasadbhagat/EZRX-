@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dar
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -26,6 +27,8 @@ class AuthRepositoryMock extends Mock implements AuthRepository {}
 
 class SalesRepRepositoryMock extends Mock implements SalesRepRepository {}
 
+class DeviceRepositoryMock extends Mock implements DeviceRepository {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -34,6 +37,7 @@ void main() {
   late SalesRepRepository salesRepRepositoryMock;
   late UserState userState;
   late SalesRepresentativeInfo salesRepresentativeInfo;
+  late DeviceRepository deviceRepositoryMock;
   const fakeError = ApiFailure.other('fake-error');
   const refreshToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
@@ -44,6 +48,7 @@ void main() {
     userRepoMock = UserRepoMock();
     authRepositoryMock = AuthRepositoryMock();
     salesRepRepositoryMock = SalesRepRepositoryMock();
+    deviceRepositoryMock = DeviceRepositoryMock();
     salesRepresentativeInfo = await SalesRepLocalDataSource().getSalesRepInfo();
   });
   group('User Bloc Testing', () {
@@ -53,6 +58,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       act: (UserBloc bloc) => bloc.add(const UserEvent.initialized()),
       expect: () => [userState],
@@ -64,6 +70,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -87,8 +94,11 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
+        when(() => deviceRepositoryMock.getDeviceData())
+            .thenAnswer((_) async => const Right(true));
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
             fakeClientUser,
@@ -99,7 +109,7 @@ void main() {
       },
       act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
       expect: () => [
-        userState.copyWith(user: fakeClientUser),
+        userState.copyWith(user: fakeClientUser, isAppFirstLaunch: true),
       ],
     );
 
@@ -109,8 +119,11 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
+        when(() => deviceRepositoryMock.getDeviceData())
+            .thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
             fakeSalesRepUser,
@@ -143,6 +156,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       seed: () => userState.copyWith(user: fakeSalesRepUser),
       setUp: () {
@@ -167,8 +181,11 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
+        when(() => deviceRepositoryMock.getDeviceData())
+            .thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
             fakeClientUser,
@@ -189,8 +206,11 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
+        when(() => deviceRepositoryMock.getDeviceData())
+            .thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
             fakeClientUser,
@@ -212,8 +232,11 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
+        when(() => deviceRepositoryMock.getDeviceData())
+            .thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
             fakeClientUser,
@@ -261,6 +284,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -279,6 +303,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -303,6 +328,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       seed: () => UserState.initial().copyWith(
         user: fakeClientUser,
@@ -339,6 +365,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
@@ -371,6 +398,7 @@ void main() {
         userRepository: userRepoMock,
         authRepository: authRepositoryMock,
         salesRepRepository: salesRepRepositoryMock,
+        deviceRepository: deviceRepositoryMock,
       ),
       act: (UserBloc bloc) => bloc.add(
         UserEvent.selectLanguage(Language.vietnamese()),
@@ -390,6 +418,7 @@ void main() {
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
           salesRepRepository: salesRepRepositoryMock,
+          deviceRepository: deviceRepositoryMock,
         ),
         setUp: () {
           when(
@@ -408,6 +437,7 @@ void main() {
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
           salesRepRepository: salesRepRepositoryMock,
+          deviceRepository: deviceRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserTc()).thenAnswer(
@@ -433,6 +463,7 @@ void main() {
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
           salesRepRepository: salesRepRepositoryMock,
+          deviceRepository: deviceRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))
@@ -454,6 +485,7 @@ void main() {
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
           salesRepRepository: salesRepRepositoryMock,
+          deviceRepository: deviceRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))
@@ -481,6 +513,7 @@ void main() {
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
           salesRepRepository: salesRepRepositoryMock,
+          deviceRepository: deviceRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateSelectedOrderType(fakeOrderType))
@@ -503,6 +536,7 @@ void main() {
           userRepository: userRepoMock,
           authRepository: authRepositoryMock,
           salesRepRepository: salesRepRepositoryMock,
+          deviceRepository: deviceRepositoryMock,
         ),
         setUp: () {
           when(() => userRepoMock.updateSelectedOrderType(fakeOrderType))

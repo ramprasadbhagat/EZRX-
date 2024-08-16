@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -24,9 +23,6 @@ import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
-class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
-    implements IntroBloc {}
-
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -42,7 +38,6 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 final locator = GetIt.instance;
 
 void main() {
-  late IntroBloc introBlocMock;
   late AppRouter autoRouterMock;
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
@@ -57,7 +52,6 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     autoRouterMock = locator<AppRouter>();
-    introBlocMock = IntroBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     aupTcBlocMock = AupTcBlocMock();
@@ -72,7 +66,6 @@ void main() {
       ),
     );
     when(() => aupTcBlocMock.state).thenReturn(AupTcState.initial());
-    when(() => introBlocMock.state).thenReturn(IntroState.initial());
     announcementBlocMock = AnnouncementBlocMock();
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
@@ -84,9 +77,6 @@ void main() {
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
       providers: [
-        BlocProvider<IntroBloc>(
-          create: (context) => introBlocMock,
-        ),
         BlocProvider<EligibilityBloc>(
           create: ((context) => eligibilityBlocMock),
         ),
@@ -150,8 +140,8 @@ void main() {
 
       await tester.tap(introSkipButton);
       verify(
-        () => introBlocMock.add(
-          const IntroEvent.setAppFirstLaunch(),
+        () => userBlocMock.add(
+          const UserEvent.setAppFirstLaunch(),
         ),
       ).called(1);
       verify(
@@ -192,8 +182,8 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => introBlocMock.add(
-          const IntroEvent.setAppFirstLaunch(),
+        () => userBlocMock.add(
+          const UserEvent.setAppFirstLaunch(),
         ),
       ).called(1);
       verify(
@@ -242,8 +232,8 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => introBlocMock.add(
-          const IntroEvent.setAppFirstLaunch(),
+        () => userBlocMock.add(
+          const UserEvent.setAppFirstLaunch(),
         ),
       ).called(1);
       verify(
@@ -288,8 +278,8 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => introBlocMock.add(
-          const IntroEvent.setAppFirstLaunch(),
+        () => userBlocMock.add(
+          const UserEvent.setAppFirstLaunch(),
         ),
       ).called(1);
       // await tester.pumpAndSettle();
@@ -340,8 +330,8 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => introBlocMock.add(
-          const IntroEvent.setAppFirstLaunch(),
+        () => userBlocMock.add(
+          const UserEvent.setAppFirstLaunch(),
         ),
       ).called(1);
       // await tester.pumpAndSettle();

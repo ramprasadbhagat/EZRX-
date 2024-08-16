@@ -54,7 +54,7 @@ class _ResetPasswordSuccessBodyContent extends StatelessWidget {
             ),
           ),
         ),
-        trailingWidget: const CountDownSection(),
+        trailingWidget: const _CountDownSection(),
       );
 
   factory _ResetPasswordSuccessBodyContent.resetPassword({
@@ -110,14 +110,14 @@ class _ResetPasswordSuccessBodyContent extends StatelessWidget {
   }
 }
 
-class CountDownSection extends StatefulWidget {
-  const CountDownSection({super.key});
+class _CountDownSection extends StatefulWidget {
+  const _CountDownSection();
 
   @override
-  State<CountDownSection> createState() => _CountDownSectionState();
+  State<_CountDownSection> createState() => _CountDownSectionState();
 }
 
-class _CountDownSectionState extends State<CountDownSection> {
+class _CountDownSectionState extends State<_CountDownSection> {
   static const maxSeconds = 5;
   int remainingSeconds = maxSeconds;
   Timer? countdownTimer;
@@ -142,13 +142,7 @@ class _CountDownSectionState extends State<CountDownSection> {
         } else {
           timer.cancel();
           context.read<UserBloc>().add(const UserEvent.fetch());
-
-          context.router.replaceAll(
-            const [
-              SplashPageRoute(),
-              HomeNavigationTabbarRoute(),
-            ],
-          );
+          context.router.popUntilRouteWithName(HomeNavigationTabbarRoute.name);
         }
       });
     });

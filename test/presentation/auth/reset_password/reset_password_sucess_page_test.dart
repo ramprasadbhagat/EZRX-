@@ -1,9 +1,8 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password_success/reset_password_success_page.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -12,43 +11,29 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../utils/widget_utils.dart';
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AppRouterMock extends Mock implements AppRouter {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MaterialPageXMock extends Mock implements AutoRoutePage {}
-
-class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   late AppRouter autoRouterMock;
   late UserBloc mockUserBloc;
   late AnnouncementBloc announcementBlocMock;
-
   late AuthBloc authBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => AppRouterMock());
+    locator.registerLazySingleton(() => AutoRouteMock());
   });
   group('ResetPasswordPageSuccess', () {
     setUp(() {
-      autoRouterMock = locator<AppRouterMock>();
+      autoRouterMock = locator<AutoRouteMock>();
 
       announcementBlocMock = AnnouncementBlocMock();
       authBlocMock = AuthBlocMock();
-      mockUserBloc = MockUserBloc();
+      mockUserBloc = UserBlocMock();
       when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -142,13 +127,10 @@ void main() {
     testWidgets('test auto route after 5 seconds for the first time login',
         (tester) async {
       when(
-        () => autoRouterMock.replaceAll([
-          const SplashPageRoute(),
-          const HomeNavigationTabbarRoute(),
-        ]),
-      ).thenAnswer(
-        (_) => Future.value(),
-      );
+        () => autoRouterMock
+            .popUntilRouteWithName(HomeNavigationTabbarRoute.name),
+      ).thenAnswer((_) => Future.value());
+
       await tester.pumpWidget(getWidget(isFirstLogin: true));
       await tester.pumpAndSettle();
 
@@ -161,10 +143,8 @@ void main() {
         () => mockUserBloc.add(const UserEvent.fetch()),
       ).called(1);
       verify(
-        () => autoRouterMock.replaceAll([
-          const SplashPageRoute(),
-          const HomeNavigationTabbarRoute(),
-        ]),
+        () => autoRouterMock
+            .popUntilRouteWithName(HomeNavigationTabbarRoute.name),
       ).called(1);
     });
   });

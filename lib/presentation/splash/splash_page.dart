@@ -35,7 +35,6 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -207,45 +206,54 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) =>
-              previous.user.id != current.user.id && current.user.id.isNotEmpty,
-          listener: (context, state) {
-            context
-                .setLocale(state.user.preferredLanguage.locale)
-                .then((value) async {
-              /* We need delay for a short time here before display message because when change locale
+              previous.user.id != current.user.id,
+          listener: (context, state) async {
+            final salesOrgBloc = context.read<SalesOrgBloc>();
+            salesOrgBloc.add(const SalesOrgEvent.initialized());
+            final router = context.router;
+            if (state.user.id.isEmpty) return;
+
+            unawaited(
+              context
+                  .setLocale(state.user.preferredLanguage.locale)
+                  .then((value) async {
+                /* We need delay for a short time here before display message because when change locale
                        the system need time to re-load the new translation files, so if we create string
                        translate variables before reloaded, we won't use the lastest locale changed
                     */
-              await Future.delayed(const Duration(milliseconds: 500));
-              _welcomeUserMessage(state);
-            });
-          },
-        ),
-        BlocListener<UserBloc, UserState>(
-          //Avoid refetching the whole API after selecting new order type
-          listenWhen: (previous, current) =>
-              previous.user.copyWith(selectedOrderType: DocumentType('')) !=
-              current.user.copyWith(selectedOrderType: DocumentType('')),
-          listener: (context, state) {
-            _initializeSalesOrg(state);
-            if (state.isNotEmpty) {
-              context.setLocale(state.user.preferredLanguage.locale);
+                await Future.delayed(const Duration(milliseconds: 500));
+                _welcomeUserMessage(state);
+              }),
+            );
+
+            if (state.isAppFirstLaunch) {
+              //Fetch sales org to show content in IntroPage
+              _initializeSalesOrg(state);
+              await router.push(const IntroPageRoute());
+            }
+            if (state.showTermsAndConditionDialog) {
+              await router.push(
+                AupTCPageRoute(
+                  key: WidgetKeys.aupTcScreen,
+                  user: state.user,
+                  isMarketPlace: false,
+                ),
+              );
+            }
+            //If user reject classic TnC, we will logout the user
+            //This check is to prevent the code below is called
+            if (!router.currentPath.contains('/main')) return;
+            if (state.showResetPasswordScreen) {
+              await router.push(ResetPasswordPageRoute(isFirstLogin: true));
             }
 
-            context.read<IntroBloc>().add(
-                  const IntroEvent.checkAppFirstLaunch(),
-                );
+            _initializeSalesOrg(state);
           },
         ),
         BlocListener<UserBloc, UserState>(
-          // This buildWhen is for re-fetching API after user select new order type
-          // previous.isNotEmpty check is to avoid triggering after login. We already got selectedOrderType in EligibilityBloc from EligibilityEvent.update event
-          // previous.isLoginOnBehalf == current.isLoginOnBehalf check is to avoid triggering because the UserState is reset after login on behalf
           listenWhen: (previous, current) =>
-              previous.user.selectedOrderType !=
-                  current.user.selectedOrderType &&
-              previous.isNotEmpty &&
-              previous.isLoginOnBehalf == current.isLoginOnBehalf,
+              previous.user != current.user &&
+              previous.user.id == current.user.id,
           listener: (context, state) {
             final eligibilityBloc = context.read<EligibilityBloc>();
             eligibilityBloc.add(
@@ -255,7 +263,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 salesOrgConfigs: eligibilityBloc.state.salesOrgConfigs,
               ),
             );
-            //Re-fetch product list here
           },
         ),
         BlocListener<UserBloc, UserState>(
@@ -293,47 +300,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 ),
               );
             }
-          },
-        ),
-        BlocListener<UserBloc, UserState>(
-          listenWhen: (previous, current) =>
-              previous.showTermsAndConditionDialog !=
-                  current.showTermsAndConditionDialog &&
-              current.showTermsAndConditionDialog,
-          listener: (context, state) {
-            context.router.push(
-              AupTCPageRoute(
-                key: WidgetKeys.aupTcScreen,
-                user: state.user,
-                isMarketPlace: false,
-              ),
-            );
-          },
-        ),
-        BlocListener<UserBloc, UserState>(
-          listenWhen: (previous, current) =>
-              previous.showResetPasswordScreen !=
-                  current.showResetPasswordScreen &&
-              current.showResetPasswordScreen,
-          listener: (context, state) {
-            context.router.push(
-              ResetPasswordPageRoute(isFirstLogin: true),
-            );
-          },
-        ),
-        BlocListener<IntroBloc, IntroState>(
-          listenWhen: (previous, current) =>
-              previous.isLoading != current.isLoading && !current.isLoading,
-          listener: (context, state) {
-            final showTermsAndCondition =
-                context.read<UserBloc>().state.showTermsAndConditionDialog;
-            final showResetPasswordScreen =
-                context.read<UserBloc>().state.showResetPasswordScreen;
-            if (showTermsAndCondition ||
-                !state.isAppFirstLaunch ||
-                showResetPasswordScreen) return;
-
-            context.router.push(const IntroPageRoute());
           },
         ),
         BlocListener<CartBloc, CartState>(
@@ -1294,14 +1260,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
               !current.isLoadingCustomerCode,
           listener: (context, state) {
-            final appFirstLaunch = context
-                    .read<IntroBloc>()
-                    .state
-                    .isAppFirstLaunch ||
-                context.read<UserBloc>().state.showTermsAndConditionDialog ||
-                context.read<UserBloc>().state.showResetPasswordScreen;
-
-            final mandatoryShipTo = !state.preSelectShipTo && !appFirstLaunch;
+            final mandatoryShipTo = !state.preSelectShipTo &&
+                !context.read<UserBloc>().state.isAppFirstLaunch;
 
             if (mandatoryShipTo) {
               context.router.push(const CustomerSearchPageRoute());
@@ -1403,9 +1363,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context
           .read<SettingBloc>()
           .add(const SettingEvent.checkIfBiometricPossible());
-      CustomSnackBar(
-        messageText: message,
-      ).show(context);
+      CustomSnackBar(messageText: message).show(context);
     }
   }
 
@@ -1417,8 +1375,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           salesOrganisations: userState.userSalesOrganisations,
         ),
       );
-    } else {
-      salesOrgBloc.add(const SalesOrgEvent.initialized());
     }
   }
 

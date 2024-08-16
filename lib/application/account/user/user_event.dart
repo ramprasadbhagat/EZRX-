@@ -14,4 +14,5 @@ class UserEvent with _$UserEvent {
     required DocumentType orderType,
   }) = _SelectOrderType;
   const factory UserEvent.fetchSalesRepInfo() = _FetchSalesRepinfo;
+  const factory UserEvent.setAppFirstLaunch() = _SetAppFirstLaunch;
 }

@@ -12,6 +12,7 @@ class UserState with _$UserState {
     required Language activeLanguage,
     required bool isLoading,
     required bool isSelectingOrderType,
+    required bool isAppFirstLaunch,
     required SalesRepresentativeInfo salesRepInfo,
   }) = _UserState;
 
@@ -24,6 +25,7 @@ class UserState with _$UserState {
         isLoading: false,
         isSelectingOrderType: false,
         salesRepInfo: SalesRepresentativeInfo.empty(),
+        isAppFirstLaunch: false,
       );
 
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;

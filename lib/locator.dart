@@ -29,7 +29,6 @@ import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/contact_us/contact_us_details_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -647,6 +646,7 @@ void setupLocator() {
       userRepository: locator<UserRepository>(),
       authRepository: locator<AuthRepository>(),
       salesRepRepository: locator<SalesRepRepository>(),
+      deviceRepository: locator<DeviceRepository>(),
     ),
   );
 
@@ -2234,17 +2234,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => SettingBloc(
       authRepository: locator<AuthRepository>(),
-    ),
-  );
-
-  //============================================================
-  //  Intro Code
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => IntroBloc(
-      deviceRepository: locator<DeviceRepository>(),
     ),
   );
 

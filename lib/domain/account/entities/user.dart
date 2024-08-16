@@ -80,8 +80,7 @@ class User with _$User {
         privacyControl: PrivacyControl.empty(),
       );
 
-  bool get eligibleForResetPassword =>
-      acceptPrivacyPolicy && (isFirstLogin || isResetUserPassword);
+  bool get eligibleForResetPassword => isFirstLogin || isResetUserPassword;
 
   bool get userCanCreateOrder {
     // For Root / ZP admin the it will always return true

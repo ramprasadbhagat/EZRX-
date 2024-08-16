@@ -12,7 +12,6 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -83,7 +82,6 @@ void main() {
   late BannerBloc mockBannerBloc;
   late AuthBloc authBlocMock;
   late AupTcBlocMock mockAupTcBloc;
-  late IntroBlocMock mockIntroBloc;
   late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
   late AppRouter autoRouterMock;
@@ -150,7 +148,6 @@ void main() {
       productSearchBlocMock = ProductSearchBlocMock();
       announcementInfoBlocMock = AnnouncementInfoBlocMock();
       productImageBlocMock = ProductImageBlocMock();
-      mockIntroBloc = IntroBlocMock();
       notificationBlocMock = NotificationBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
 
@@ -160,11 +157,6 @@ void main() {
         AupTcState.initial().copyWith(
           privacyConsent: false,
           tncConsent: false,
-        ),
-      );
-      when(() => mockIntroBloc.state).thenReturn(
-        IntroState.initial().copyWith(
-          index: 2,
         ),
       );
       when(() => salesOrgBlocMock.state).thenReturn(
@@ -233,7 +225,6 @@ void main() {
           useMediaQuery: false,
           providers: [
             BlocProvider<AupTcBloc>(create: (context) => mockAupTcBloc),
-            BlocProvider<IntroBloc>(create: (context) => mockIntroBloc),
             BlocProvider<SalesOrgBloc>(
               create: (context) => salesOrgBlocMock,
             ),
