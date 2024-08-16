@@ -448,17 +448,26 @@ class OrderEligibilityState with _$OrderEligibilityState {
           'mpSmallOrderFee': mpSAPMOV,
         },
       );
-    } else if (zpSmallOrderFeeApplied) {
+    }
+
+    if (zpSmallOrderFeeApplied) {
       return TRObject(
         'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.',
         arguments: {'smallOrderFee': zpSAPMOV},
       );
-    } else {
+    }
+
+    if (mpSmallOrderFeeApplied) {
       return TRObject(
         'A small order fee applies to orders with MP in-stock items that are under the minimum order value of {smallOrderFee} for MP subtotal.',
         arguments: {'smallOrderFee': mpSAPMOV},
       );
     }
+
+    return TRObject(
+      'Small order fee is applied to orders with in-stock items that are under the minimum order value of {smallOrderFee}. This will be charged to client.',
+      arguments: {'smallOrderFee': zpSAPMOV},
+    );
   }
 
   bool get showSmallOrderFeeForID => salesOrg.salesOrg.showSmallOrderFee;

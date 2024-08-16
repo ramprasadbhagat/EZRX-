@@ -1531,17 +1531,44 @@ void main() {
               materialInfo: MaterialInfo.empty().copyWith(
                 isMarketPlace: true,
               ),
+              stockInfoList: [
+                StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+              ],
             ),
           ],
           configs: fakeMYSalesOrgConfigsWithSmallOrderFee.copyWith(
             mpMinOrderAmount: 200.0,
           ),
+          user: fakeClientUser,
         );
         expect(
           state.smallOrderFeeAppliedMessage,
           const TRObject(
             'A small order fee applies to orders with MP in-stock items that are under the minimum order value of {smallOrderFee} for MP subtotal.',
             arguments: {'smallOrderFee': 'MYR 300.00'},
+          ),
+        );
+      });
+
+      test('Check if external sales rep has small order fee', () {
+        final state = OrderEligibilityState.initial().copyWith(
+          cartItems: [
+            PriceAggregate.empty().copyWith(
+              stockInfoList: [
+                StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+              ],
+            ),
+          ],
+          configs: fakeSGSalesOrgConfigsWithSmallOrderFee.copyWith(
+            mpMinOrderAmount: 200.0,
+          ),
+          user: fakeExternalSalesRepUser,
+        );
+        expect(
+          state.smallOrderFeeAppliedMessage,
+          const TRObject(
+            'Small order fee is applied to orders with in-stock items that are under the minimum order value of {smallOrderFee}. This will be charged to client.',
+            arguments: {'smallOrderFee': 'SGD 300.00'},
           ),
         );
       });
