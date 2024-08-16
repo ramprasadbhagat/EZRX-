@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -167,6 +169,64 @@ void main() {
 
       final firstSaleOrgItem = find.widgetWithText(Text, '2502');
       expect(firstSaleOrgItem, findsNothing);
+    });
+
+    testWidgets('Test when user submit Search Sales Org', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        salesOrgState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(TextFormField), '2501');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      final firstSaleOrgItem = find.widgetWithText(ListTile, '2501');
+      expect(firstSaleOrgItem, findsOneWidget);
+    });
+
+    testWidgets('Test when user clear Search Sales Org', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        salesOrgState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(TextFormField), '2501');
+      await tester.pumpAndSettle(
+        Duration(milliseconds: locator<Config>().autoSearchTimeout),
+      );
+
+      await tester.tap(find.byKey(const Key('clearIconKey')));
+      await tester.pumpAndSettle();
+
+      final firstSaleOrgItem = find.widgetWithText(TextFormField, '2501');
+      expect(firstSaleOrgItem, findsNothing);
+    });
+
+    testWidgets('Test when SalesOrgState is changed and re-build', (tester) async {
+      final expectedState = [
+        SalesOrgState.initial().copyWith(
+          salesOrgFailureOrSuccessOption: none(),
+          searchKey: SearchKey.empty(),
+          isLoading: false,
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrgFailureOrSuccessOption: some(right(true)),
+          searchKey: SearchKey.search('2501'),
+          isLoading: true,
+        ),
+      ];
+      whenListen(salesOrgBlocMock, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final firstSaleOrgItem = find.byType(ListView).first;
+      expect(firstSaleOrgItem, findsOneWidget);
     });
 
     testWidgets('Tap on SaleOrgItem', (tester) async {
