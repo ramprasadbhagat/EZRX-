@@ -156,13 +156,13 @@ abstract class ReturnsFilterRobot {
   }
 
   Future<void> tapStatusCheckbox(String name) async {
-    await tester.tap(find.widgetWithText(CheckboxListTile, name));
+    await tester.tap(find.widgetWithText(CheckboxListTile, name.tr()));
     await tester.pump();
   }
 
   void verifyStatusFilterValue(String name, bool value) {
     expect(
-      find.byKey(WidgetKeys.returnStatusFilter(name, value)),
+      find.byKey(WidgetKeys.returnStatusFilter(name.tr(), value)),
       findsOneWidget,
     );
   }

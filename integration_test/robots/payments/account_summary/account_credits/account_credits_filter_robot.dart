@@ -105,11 +105,13 @@ class AccountCreditsFilterRobot {
   }
 
   Future<void> tapToChangeStatusCheckbox(String name) async {
-    await _tester.tap(find.byWidgetPredicate(
+    await _tester.tap(
+      find.byWidgetPredicate(
         (widget) =>
             widget is CheckboxListTile &&
             widget.key == WidgetKeys.genericKey(key: name),
-      ),);
+      ),
+    );
     await _tester.pump();
   }
 
@@ -149,14 +151,14 @@ class AccountCreditsFilterRobot {
     await _tester.tap(_fromAmountValue);
     await _tester.enterText(_fromAmountValue, text);
     await _tester.testTextInput.receiveAction(TextInputAction.done);
-    await _tester.pump(Durations.medium2);
+    await _tester.pumpAndSettle(Durations.medium2);
   }
 
   Future<void> enterToAmount(String text) async {
     await _tester.tap(_toAmountValue);
     await _tester.enterText(_toAmountValue, text);
     await _tester.testTextInput.receiveAction(TextInputAction.done);
-    await _tester.pump(Durations.medium4);
+    await _tester.pumpAndSettle(Durations.medium4);
   }
 
   void verifyInvalidAmountError() {

@@ -192,6 +192,7 @@ class _ProductDetails extends StatelessWidget {
                 ),
               _DisplayMaterialDetails(
                 child: PriceComponent(
+                  key: WidgetKeys.checkoutItemProductUnitPrice,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartItem.itemUnitPriceForCheckout,

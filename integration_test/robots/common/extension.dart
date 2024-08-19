@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 final _priceFormatter = StringUtils.priceFormatter;
 final _priceFormatterForID = StringUtils.priceFormatterWithDecimal;

@@ -47,15 +47,6 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
   }
 
-  double get getMaterialUnitPrice {
-    final priceWidgetFinder = find.descendant(
-      of: body,
-      matching: find.byKey(WidgetKeys.currentPrice),
-    );
-    final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
-    return priceString.extractDouble;
-  }
-
   String getMaterialDetailsMaterialDescription() {
     return tester
             .widget<Text>(
@@ -613,5 +604,14 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.comboOfferSection), findsOneWidget);
     await tester.tap(find.byKey(WidgetKeys.getComboDealButton));
     await tester.pumpAndSettle(Durations.long2);
+  }
+
+  double get getMaterialUnitPrice {
+    final priceWidgetFinder = find.descendant(
+      of: body,
+      matching: find.byKey(WidgetKeys.currentPrice),
+    );
+    final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
+    return priceString.extractDouble;
   }
 }

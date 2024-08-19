@@ -218,6 +218,18 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
     }
   }
 
+  Future<void> tapToHideDetailForBonus() async {
+    final finder = find.descendant(
+      of: showDetailButtonFoBonus,
+      matching: find.text('Hide details'.tr()),
+    );
+    if (finder.evaluate().isNotEmpty) {
+      await scrollEnsureFinderVisible(showDetailButtonFoBonus);
+      await tester.tap(showDetailButtonFoBonus);
+      await tester.pumpAndSettle();
+    }
+  }
+
   void verifyMaterialPrincipalCode(String code) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Principal code'.tr(), code)),

@@ -1062,4 +1062,13 @@ class CartRobot extends CommonRobot {
       findsOneWidget,
     );
   }
+
+  double getMaterialUnitPrice(String materialNumber) {
+    final priceWidgetFinder = find.descendant(
+      of: _materialItem(materialNumber),
+      matching: find.byKey(WidgetKeys.cartItemProductUnitPrice),
+    );
+    final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
+    return priceString.extractDouble;
+  }
 }

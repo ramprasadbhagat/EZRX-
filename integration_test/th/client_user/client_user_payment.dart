@@ -320,7 +320,8 @@ void main() {
 
       //verify
       accountInvoiceRobot.verifyItems();
-      await accountInvoiceRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await accountInvoiceRobot
+          .searchWithKeyboardAction(invalidLengthSearchKey);
       await accountInvoiceRobot
           .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await accountInvoiceRobot.dismissSnackbar();
@@ -356,7 +357,7 @@ void main() {
       //verify
       await getFilterDataDocumentDate();
 
-      await accountInvoiceRobot.searchWithSearchIcon(invoiceId);
+      await accountInvoiceRobot.searchWithKeyboardAction(invoiceId);
       await accountInvoiceRobot.waitAutoSearchDuration();
       accountInvoiceRobot.verifyLoadingImage(isVisible: false);
       accountInvoiceRobot.verifyItemsWithSearchKey(invoiceId);
@@ -670,7 +671,7 @@ void main() {
       await commonRobot.tapClearSearch();
 
       //No credit found - search icon
-      await commonRobot.searchWithSearchIcon(inValidCreditId);
+      await commonRobot.searchWithKeyboardAction(inValidCreditId);
       accountCreditsRobot.verifyNoCreditFound();
       await commonRobot.tapClearSearch();
     });
@@ -733,7 +734,7 @@ void main() {
       await commonRobot.tapClearSearch();
 
       //search bar -  valid input with on search icon
-      await commonRobot.searchWithSearchIcon(creditId);
+      await commonRobot.searchWithKeyboardAction(creditId);
       if (accountCreditsRobot.noCreditFound) {
         accountCreditsRobot.verifyNoCreditFound();
       } else {
@@ -760,8 +761,8 @@ void main() {
       commonRobot.verifyLoadingImage(isVisible: false);
       await commonRobot.tapClearSearch();
 
-      //search bar - combine search icon & auto search
-      await commonRobot.searchWithSearchIcon(creditId);
+      //search bar - combine search by keyboard action & auto search
+      await commonRobot.searchWithKeyboardAction(creditId);
       if (accountCreditsRobot.noCreditFound) {
         accountCreditsRobot.verifyNoCreditFound();
       } else {
@@ -1279,8 +1280,8 @@ void main() {
         accountSummaryTabRobot.verifyNoRecordFound();
         await commonRobot.tapClearSearch();
 
-        //No payment summary found - search icon
-        await commonRobot.searchWithSearchIcon(invalidSearchKey);
+        //No payment summary found - search by keyboard
+        await commonRobot.searchWithKeyboardAction(invalidSearchKey);
         await commonRobot.dismissSnackbar(dismissAll: true);
         accountSummaryTabRobot.verifyNoRecordFound();
         await commonRobot.tapClearSearch();
@@ -1371,16 +1372,16 @@ void main() {
       );
       await commonRobot.tapClearSearch();
 
-      //search bar -  valid input with on search icon
-      await commonRobot.searchWithSearchIcon(creditId);
+      //search bar -  valid input with on search by keyboard
+      await commonRobot.searchWithKeyboardAction(creditId);
       accountSummaryTabRobot.verifyItemWithId(
         creditId,
         true,
       );
       await commonRobot.tapClearSearch();
 
-      //search bar -  valid input with on search icon
-      await commonRobot.searchWithSearchIcon(debitId);
+      //search bar -  valid input with on search by keyboard
+      await commonRobot.searchWithKeyboardAction(debitId);
       accountSummaryTabRobot.verifyItemWithId(
         debitId,
         false,
@@ -1398,7 +1399,7 @@ void main() {
       await commonRobot.tapClearSearch();
 
       //search bar - combine search icon & auto search
-      await commonRobot.searchWithSearchIcon(creditId);
+      await commonRobot.searchWithKeyboardAction(creditId);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       accountSummaryTabRobot.verifyItemWithId(
@@ -1686,7 +1687,7 @@ void main() {
 
       paymentId = paymentSummaryRobot.getPaymentId(index);
 
-      await commonRobot.searchWithSearchIcon(validLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(validLengthSearchKey);
       paymentSummaryRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
 
@@ -1698,7 +1699,7 @@ void main() {
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
       await commonRobot.tapClearSearch();
 
-      await commonRobot.searchWithSearchIcon(paymentId);
+      await commonRobot.searchWithKeyboardAction(paymentId);
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
 
       await commonRobot.tapClearSearch();
@@ -1710,7 +1711,7 @@ void main() {
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
       await commonRobot.tapClearSearch();
 
-      await commonRobot.searchWithSearchIcon(paymentId);
+      await commonRobot.searchWithKeyboardAction(paymentId);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
@@ -1810,7 +1811,7 @@ void main() {
       paymentId = paymentSummaryRobot.getPaymentId(index);
       totalPrice = paymentSummaryRobot.getPaymentIdPrice(index);
 
-      await commonRobot.searchWithSearchIcon(paymentId);
+      await commonRobot.searchWithKeyboardAction(paymentId);
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
       await paymentSummaryRobot.tapItem();
 
@@ -1942,10 +1943,10 @@ void main() {
           (tester) async {
         await goToPaymentStep1Page(tester);
 
-        await commonRobot.searchWithSearchIcon('');
+        await commonRobot.searchWithKeyboardAction('1');
         await commonRobot.verifySnackbarVisible();
         await commonRobot.dismissSnackbar();
-        await commonRobot.searchWithSearchIcon(inValidKeyword);
+        await commonRobot.searchWithKeyboardAction(inValidKeyword);
         newPaymentStep1Robot.verifyNoItemFound();
       });
 

@@ -97,7 +97,7 @@ void main() {
   final toDateForStep1 = DateTime.now().subtract(const Duration(days: 2));
   final fromDateToNext = DateTime(2023, 9, 1);
   final toDateToNext = DateTime(2024, 5, 6);
-  const validSearchKeyForStep1 = 'BENZAC';
+  const validSearchKeyForStep1 = 'Solution';
   const inValidSearchKey = '1';
   const noResultSearchKey = 'asdasfxzc';
 
@@ -109,9 +109,9 @@ void main() {
   final fromDateToNextForStep2 = fromDateToNext;
   final toDateToNextForStep2 = toDateToNext;
   final reason = 'Wrong Bill-To'.tr();
-  const materialId = '21122520';
-  const materialTitle = 'BENZAC AC 5% GEL 60G';
-  const materialUUID = '1310000573000020';
+  const materialId = '23268403';
+  const materialTitle = 'Solution Administration Set';
+  const materialUUID = '1310000442000030';
 
   const otherReturnBonusId = 'EZRE-290224002370';
 
@@ -289,9 +289,9 @@ void main() {
       //verify
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
-      await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-      await commonRobot.searchWithSearchIcon(materialName);
+      await commonRobot.searchWithKeyboardAction(materialName);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductNameVisible(materialName);
@@ -373,25 +373,18 @@ void main() {
       returnsByItemsRobot.verifyReturnItemsVisible();
       await commonRobot.searchWithKeyboardAction(returnIdWithBonus);
       returnsByItemsRobot.verifyReturnItemWithBonusVisible();
-      await returnsByItemsRobot.tapFirstReturn();
+      await returnsByItemsRobot.tapFirstReturnBonusItem();
       returnsByItemsDetailRobot.verifyDeliveryToVisible(shipToCode);
       returnsByItemsDetailRobot.verifyCustomerCodeVisible(customerCode);
       returnsByItemsDetailRobot.verifyReturnAddressVisible(shipToAddress);
-      returnsByItemsDetailRobot.verifyMaterialVisible(
+      returnsByItemsDetailRobot.verifyOnlyBonusMaterial(
         bonusMaterialNumber,
         bonusMaterialQty,
         bonusMaterialPrice,
       );
-      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
-      await returnsByItemsDetailRobot.tapToShowDetailForBonus();
       returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
-
-      await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
-      returnsByItemsDetailRobot.verifyMaterialVisibleWithBonus(
-        bonusMaterialNumber,
-        bonusMaterialQty,
-        bonusMaterialPrice,
-      );
+      await returnsByItemsDetailRobot.tapToHideDetailForBonus();
+      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
     });
 
     testWidgets(
@@ -712,7 +705,7 @@ void main() {
       returnsRootRobot.verifyTabBarVisible();
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
-      await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await returnsByRequestRobot.tapFilterButton();
       await returnsByRequestFilterRobot.tapFromDateField();
@@ -721,7 +714,7 @@ void main() {
         toDate: toDate,
       );
       await returnsByRequestFilterRobot.tapApplyButton();
-      await commonRobot.searchWithSearchIcon(returnId);
+      await commonRobot.searchWithKeyboardAction(returnId);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByRequestRobot.verifyReturnsWithIdVisible(returnId);
@@ -1041,7 +1034,12 @@ void main() {
       await pumpAppWithHomeScreen(tester);
       await goToNewRequest();
       await newReturnRobot.tapFilterIcon();
-      await newReturnRobot.tapReset();
+      await newReturnRobot.tapTheDateField();
+      await commonRobot.setDateRangePickerValue(
+        fromDate: fromDateToNext,
+        toDate: toDateToNext,
+      );
+      await newReturnRobot.tapApply();
       await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
       newReturnRobot.verifyReturnItemVisible();
       newReturnRobot.verifyDetailCollapsed(true);
@@ -1062,7 +1060,7 @@ void main() {
         toDate: toDateToNext,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
@@ -1072,7 +1070,7 @@ void main() {
       await pumpAppWithHomeScreen(tester);
 
       await goToNewRequest();
-      await commonRobot.searchWithSearchIcon('a');
+      await commonRobot.searchWithKeyboardAction('a');
       await newReturnRobot.verifySnackbarVisible();
       await commonRobot.dismissSnackbar();
       await commonRobot.searchWithKeyboardAction(inValidSearchKey);
@@ -1240,7 +1238,12 @@ void main() {
 
       await goToNewRequest();
       await newReturnRobot.tapFilterIcon();
-      await newReturnRobot.tapReset();
+      await newReturnRobot.tapTheDateField();
+      await commonRobot.setDateRangePickerValue(
+        fromDate: fromDateToNext,
+        toDate: toDateToNext,
+      );
+      await newReturnRobot.tapApply();
       await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
       await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();

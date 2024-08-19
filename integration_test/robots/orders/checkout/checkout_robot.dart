@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../common/common_robot.dart';
+import '../../common/extension.dart';
 
 class CheckoutRobot extends CommonRobot {
   CheckoutRobot(super.tester);
@@ -834,5 +835,14 @@ class CheckoutRobot extends CommonRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  double getMaterialUnitPrice(String materialNumber) {
+    final priceWidgetFinder = find.descendant(
+      of: _material(materialNumber),
+      matching: find.byKey(WidgetKeys.checkoutItemProductUnitPrice),
+    );
+    final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
+    return priceString.extractDouble;
   }
 }

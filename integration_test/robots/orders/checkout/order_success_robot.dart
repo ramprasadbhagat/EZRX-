@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:flutter/material.dart';
@@ -445,5 +446,14 @@ class OrderSuccessRobot extends CommonRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  double get getMaterialUnitPrice {
+    final priceWidgetFinder = find.descendant(
+      of: _verifyingItem,
+      matching: find.byKey(WidgetKeys.orderItemUnitPrice),
+    );
+    final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
+    return priceString.extractDouble;
   }
 }

@@ -776,6 +776,8 @@ class WidgetKeys {
       Key('promotionLabel$materialNumber');
   static const Key checkoutMaterialWithBonusItem =
       Key('checkoutMaterialWithBonusItem');
+  static const Key checkoutItemProductUnitPrice =
+      Key('checkoutItemProductUnitPrice');
 
   //============================================================
   //  Material List

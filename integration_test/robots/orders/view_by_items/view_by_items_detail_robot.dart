@@ -191,6 +191,25 @@ class ViewByItemsDetailRobot extends CommonRobot {
     }
   }
 
+  Future<void> verifyItemComponentWithBonus() async {
+    await scrollEnsureFinderVisible(orderItem.first);
+    _verifyItemComponent(orderItem, isMoreThanOne: true);
+    _verifyItemComponent(
+      find.byKey(WidgetKeys.commonTileItemTitle),
+      isMoreThanOne: true,
+    );
+    _verifyItemComponent(
+      find.byKey(WidgetKeys.commonTileItemLabel),
+      isMoreThanOne: true,
+    );
+    _verifyItemComponent(find.byType(ProductImage), isMoreThanOne: true);
+    _verifyItemComponent(
+      find.byKey(WidgetKeys.orderItemStatusKey),
+      isMoreThanOne: true,
+    );
+    _verifyItemComponent(qtyLabel, isMoreThanOne: true);
+  }
+
   Future<void> verifyManufacturerName(
     String manufacturerName, {
     bool isVisible = true,
@@ -244,9 +263,10 @@ class ViewByItemsDetailRobot extends CommonRobot {
   void verifyBatchExpiryDate(StockInfo stockInfo) =>
       verifyStockInfo(stockInfo, itemDetailSection);
 
-  void _verifyItemComponent(Finder finder) => expect(
+  void _verifyItemComponent(Finder finder, {bool isMoreThanOne = false}) =>
+      expect(
         find.descendant(of: itemDetailSection, matching: finder),
-        findsOneWidget,
+        isMoreThanOne ? findsWidgets : findsOneWidget,
       );
 
   Future<void> verifyOtherItemsComponent({bool isVisible = true}) async {
@@ -309,4 +329,47 @@ class ViewByItemsDetailRobot extends CommonRobot {
     }
     return contactNumberText;
   }
+
+  late Finder _verifyingSelectedItem;
+  Future<void> startVerifyItem(int index) async {
+    final item = find.descendant(
+      of: itemDetailSection,
+      matching: find.byKey(WidgetKeys.genericKey(key: index.toString())),
+    );
+    await scrollEnsureFinderVisible(
+      find.descendant(of: item, matching: qtyLabel),
+    );
+    _verifyingSelectedItem = item;
+  }
+
+  void verifySelectedItemQty(int qty) {
+    final widget = tester.widget<Text>(
+      find.descendant(of: _verifyingSelectedItem, matching: qtyLabel),
+    );
+    expect(widget.data ?? '', contains(qty.toString()));
+  }
+
+  void verifySelectedItemOfferTag() => expect(
+        find.descendant(of: _verifyingSelectedItem, matching: offerTag),
+        findsOneWidget,
+      );
+  void verifySelectedItemMaterialNo(String materialNumber) {
+    final widget = tester.widget<Text>(
+      find.descendant(
+        of: _verifyingSelectedItem,
+        matching: find.byKey(WidgetKeys.commonTileItemLabel),
+      ),
+    );
+    expect(widget.data ?? '', contains(materialNumber));
+  }
+
+  void verifySelectedItemFreePrice() => expect(
+        find.descendant(of: _verifyingSelectedItem, matching: freePrice),
+        findsOneWidget,
+      );
+
+  void verifySelectedItemBonusLabel() => expect(
+        find.descendant(of: _verifyingSelectedItem, matching: bonusTag),
+        findsOneWidget,
+      );
 }

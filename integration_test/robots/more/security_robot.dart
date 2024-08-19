@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -94,8 +95,12 @@ class SecurityRobot extends CommonRobot {
 
   void verifyErrorMessageAllFieldRequire() {
     expect(
-      find.byKey(WidgetKeys.errorRequirementsFillAllField),
+      find.byType(InfoLabel),
       findsOneWidget,
+    );
+    expect(
+      (tester.widget(find.byType(InfoLabel)) as InfoLabel).textValue,
+      'Please ensure all requirements are met for your new password.'.tr(),
     );
   }
 
