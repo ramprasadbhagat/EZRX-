@@ -548,6 +548,8 @@ class EzrxLink extends ValueObject<String> {
 
   bool get isNewReturnRequest => isNewReturnRequestLink(uri.path);
 
+  bool get isRaiseTicket => isRaiseTicketLink(uri.path);
+
   const EzrxLink._(this.value);
 }
 

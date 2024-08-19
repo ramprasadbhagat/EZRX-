@@ -1199,6 +1199,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   const NewRequestPageRoute(),
                 ]);
               },
+              redirectRaiseTicket: (String chatUrl) {
+                //TODO: implement route to submit ticket page EZRX-25500
+              },
             );
           },
         ),

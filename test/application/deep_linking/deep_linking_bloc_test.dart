@@ -64,7 +64,8 @@ void main() {
       '/marketplace-payments/account-summary/creditnote-details';
   const claimSubmissionLink = '/my-account/payments/claim-submission';
   const returnRequestLink = '/my-account/new-return-request';
-
+  const raiseTicketLink = '/raise-ticket';
+  final fakeEzrxLink = EzrxLink(raiseTicketLink);
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
     chatBotService = ChatBotServiceMock();
@@ -1151,6 +1152,36 @@ void main() {
     ),
     expect: () => [
       const DeepLinkingState.redirectNewReturnRequest(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume raise ticket link',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractChatUrl(
+          link: fakeEzrxLink.uri,
+        ),
+      ).thenReturn(const Right('fake-chatUrl'));
+    },
+    seed: () => DeepLinkingState.linkPending(
+      fakeEzrxLink,
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectRaiseTicket(
+        chatUrl: 'fake-chatUrl',
+      ),
     ],
   );
 

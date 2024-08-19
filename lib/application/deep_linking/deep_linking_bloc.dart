@@ -302,6 +302,20 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               emit(const DeepLinkingState.redirectClaimSubmission());
             } else if (link.isNewReturnRequest) {
               emit(const DeepLinkingState.redirectNewReturnRequest());
+            } else if (link.isRaiseTicket) {
+              final failureOrSuccess =
+                  repository.extractChatUrl(link: link.uri);
+
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (chatUrl) => emit(
+                  DeepLinkingState.redirectRaiseTicket(
+                    chatUrl: chatUrl,
+                  ),
+                ),
+              );
             } else {
               emit(
                 const DeepLinkingState.error(

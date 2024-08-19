@@ -928,6 +928,8 @@ bool isClaimSubmissionLink(String path) =>
 bool isNewReturnRequestLink(String path) =>
     path == '/my-account/new-return-request';
 
+bool isRaiseTicketLink(String path) => path == '/raise-ticket';
+
 String getViewByItemTitle(int value) {
   switch (value) {
     case 0:

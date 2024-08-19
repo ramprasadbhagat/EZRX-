@@ -276,6 +276,18 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   @override
   Stream<EzrxLink> watchDeepLinkValue() => service.getStream;
 
+  @override
+  Either<ApiFailure, String> extractChatUrl({required Uri link}) {
+    final chatUrl = link.queryParameters['chatURL'] ??
+        link.queryParameters.values.firstOrNull ??
+        '';
+    final isValidLink = _validDomain(link) && chatUrl.isNotEmpty;
+
+    return isValidLink
+        ? Right(chatUrl)
+        : const Left(ApiFailure.submitTicketRoute());
+  }
+
   bool _validDomain(Uri link) {
     final domain = link.host;
     final availableMarketDomain =

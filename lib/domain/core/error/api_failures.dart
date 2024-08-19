@@ -60,7 +60,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.paymentDetailRoute() = _PaymentDetailRoute;
   const factory ApiFailure.invoiceDetailRoute() = _InvoiceDetailRoute;
   const factory ApiFailure.creditDetailRoute() = _CreditDetailRoute;
-
+  const factory ApiFailure.submitTicketRoute() = _SubmitTicketRoute;
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
   const factory ApiFailure.scannedProductNotFound() = _ScannedProductNotFound;
   const factory ApiFailure.cameraPermissionFailed(bool permanentlyDenied) =
@@ -200,6 +200,9 @@ extension ApiFailureExt on ApiFailure {
             const TRObject('Unable to get stock info'),
         accountCreationIncomplete: (_) => const TRObject(
           'Your account creation is incomplete. Please contact the local customer service team for assistance.',
+        ),
+        submitTicketRoute: (_) => const TRObject(
+          'Chat url is not available to submit ticket.',
         ),
         refreshTokenInvalid: (_) => const TRObject('Invalid Refresh Token'),
       );

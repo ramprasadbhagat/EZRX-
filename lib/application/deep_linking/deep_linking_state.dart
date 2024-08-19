@@ -67,4 +67,7 @@ class DeepLinkingState with _$DeepLinkingState {
       _RedirectClaimSubmission;
   const factory DeepLinkingState.redirectNewReturnRequest() =
       _RedirectNewReturnRequest;
+  const factory DeepLinkingState.redirectRaiseTicket({
+    required String chatUrl,
+  }) = _RedirectRaiseTicket;
 }

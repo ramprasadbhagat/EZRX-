@@ -627,6 +627,7 @@ mixin _$DeepLinkingState {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -668,6 +669,7 @@ mixin _$DeepLinkingState {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -708,6 +710,7 @@ mixin _$DeepLinkingState {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -749,6 +752,7 @@ mixin _$DeepLinkingState {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -782,6 +786,7 @@ mixin _$DeepLinkingState {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -814,6 +819,7 @@ mixin _$DeepLinkingState {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -915,6 +921,7 @@ class _$InitialImpl implements _Initial {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return initial();
   }
@@ -959,6 +966,7 @@ class _$InitialImpl implements _Initial {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return initial?.call();
   }
@@ -1002,6 +1010,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1049,6 +1058,7 @@ class _$InitialImpl implements _Initial {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return initial(this);
   }
@@ -1085,6 +1095,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return initial?.call(this);
   }
@@ -1120,6 +1131,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1259,6 +1271,7 @@ class _$LinkPendingImpl implements _LinkPending {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return linkPending(link, banner);
   }
@@ -1303,6 +1316,7 @@ class _$LinkPendingImpl implements _LinkPending {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return linkPending?.call(link, banner);
   }
@@ -1346,6 +1360,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1393,6 +1408,7 @@ class _$LinkPendingImpl implements _LinkPending {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return linkPending(this);
   }
@@ -1429,6 +1445,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return linkPending?.call(this);
   }
@@ -1464,6 +1481,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1613,6 +1631,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectBundleDetail(materialNumber, banner);
   }
@@ -1657,6 +1676,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectBundleDetail?.call(materialNumber, banner);
   }
@@ -1700,6 +1720,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1747,6 +1768,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectBundleDetail(this);
   }
@@ -1783,6 +1805,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectBundleDetail?.call(this);
   }
@@ -1818,6 +1841,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1967,6 +1991,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectProductDetail(materialNumber, banner);
   }
@@ -2011,6 +2036,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectProductDetail?.call(materialNumber, banner);
   }
@@ -2054,6 +2080,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -2101,6 +2128,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectProductDetail(this);
   }
@@ -2137,6 +2165,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectProductDetail?.call(this);
   }
@@ -2172,6 +2201,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -2317,6 +2347,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectProductsTab(searchKey, materialFilter);
   }
@@ -2361,6 +2392,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectProductsTab?.call(searchKey, materialFilter);
   }
@@ -2404,6 +2436,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectProductsTab != null) {
@@ -2451,6 +2484,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectProductsTab(this);
   }
@@ -2487,6 +2521,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectProductsTab?.call(this);
   }
@@ -2522,6 +2557,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectProductsTab != null) {
@@ -2649,6 +2685,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectOrderDetail(orderNumber);
   }
@@ -2693,6 +2730,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectOrderDetail?.call(orderNumber);
   }
@@ -2736,6 +2774,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -2783,6 +2822,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectOrderDetail(this);
   }
@@ -2819,6 +2859,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectOrderDetail?.call(this);
   }
@@ -2854,6 +2895,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -2990,6 +3032,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectReturnDetail(returnItem);
   }
@@ -3034,6 +3077,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectReturnDetail?.call(returnItem);
   }
@@ -3077,6 +3121,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
@@ -3124,6 +3169,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectReturnDetail(this);
   }
@@ -3160,6 +3206,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectReturnDetail?.call(this);
   }
@@ -3195,6 +3242,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
@@ -3343,6 +3391,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectPaymentDetail(paymentIdentifierInfo, isMarketPlace);
   }
@@ -3387,6 +3436,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectPaymentDetail?.call(paymentIdentifierInfo, isMarketPlace);
   }
@@ -3430,6 +3480,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -3477,6 +3528,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectPaymentDetail(this);
   }
@@ -3513,6 +3565,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectPaymentDetail?.call(this);
   }
@@ -3548,6 +3601,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -3694,6 +3748,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectPaymentHome(params, isMarketPlace);
   }
@@ -3738,6 +3793,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectPaymentHome?.call(params, isMarketPlace);
   }
@@ -3781,6 +3837,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectPaymentHome != null) {
@@ -3828,6 +3885,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectPaymentHome(this);
   }
@@ -3864,6 +3922,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectPaymentHome?.call(this);
   }
@@ -3899,6 +3958,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectPaymentHome != null) {
@@ -4037,6 +4097,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectInvoiceDetail(invoiceNumber, isMarketPlace);
   }
@@ -4081,6 +4142,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectInvoiceDetail?.call(invoiceNumber, isMarketPlace);
   }
@@ -4124,6 +4186,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -4171,6 +4234,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectInvoiceDetail(this);
   }
@@ -4207,6 +4271,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectInvoiceDetail?.call(this);
   }
@@ -4242,6 +4307,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -4341,6 +4407,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectFAQ();
   }
@@ -4385,6 +4452,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectFAQ?.call();
   }
@@ -4428,6 +4496,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -4475,6 +4544,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectFAQ(this);
   }
@@ -4511,6 +4581,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectFAQ?.call(this);
   }
@@ -4546,6 +4617,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -4637,6 +4709,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectAboutUs();
   }
@@ -4681,6 +4754,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectAboutUs?.call();
   }
@@ -4724,6 +4798,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -4771,6 +4846,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectAboutUs(this);
   }
@@ -4807,6 +4883,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectAboutUs?.call(this);
   }
@@ -4842,6 +4919,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -4960,6 +5038,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectContactUs(market);
   }
@@ -5004,6 +5083,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectContactUs?.call(market);
   }
@@ -5047,6 +5127,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -5094,6 +5175,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectContactUs(this);
   }
@@ -5130,6 +5212,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectContactUs?.call(this);
   }
@@ -5165,6 +5248,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -5262,6 +5346,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectUserGuide();
   }
@@ -5306,6 +5391,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectUserGuide?.call();
   }
@@ -5349,6 +5435,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectUserGuide != null) {
@@ -5396,6 +5483,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectUserGuide(this);
   }
@@ -5432,6 +5520,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectUserGuide?.call(this);
   }
@@ -5467,6 +5556,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectUserGuide != null) {
@@ -5594,6 +5684,7 @@ class _$ErrorImpl implements _Error {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return error(failure);
   }
@@ -5638,6 +5729,7 @@ class _$ErrorImpl implements _Error {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return error?.call(failure);
   }
@@ -5681,6 +5773,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -5728,6 +5821,7 @@ class _$ErrorImpl implements _Error {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return error(this);
   }
@@ -5764,6 +5858,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return error?.call(this);
   }
@@ -5799,6 +5894,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -5934,6 +6030,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectResetPassword(resetPasswordCred);
   }
@@ -5978,6 +6075,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectResetPassword?.call(resetPasswordCred);
   }
@@ -6021,6 +6119,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectResetPassword != null) {
@@ -6068,6 +6167,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectResetPassword(this);
   }
@@ -6104,6 +6204,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectResetPassword?.call(this);
   }
@@ -6139,6 +6240,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectResetPassword != null) {
@@ -6236,6 +6338,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectOrder();
   }
@@ -6280,6 +6383,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectOrder?.call();
   }
@@ -6323,6 +6427,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectOrder != null) {
@@ -6370,6 +6475,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectOrder(this);
   }
@@ -6406,6 +6512,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectOrder?.call(this);
   }
@@ -6441,6 +6548,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectOrder != null) {
@@ -6532,6 +6640,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectSetting();
   }
@@ -6576,6 +6685,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectSetting?.call();
   }
@@ -6619,6 +6729,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectSetting != null) {
@@ -6666,6 +6777,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectSetting(this);
   }
@@ -6702,6 +6814,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectSetting?.call(this);
   }
@@ -6737,6 +6850,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectSetting != null) {
@@ -6828,6 +6942,7 @@ class _$RedirectCartImpl implements _RedirectCart {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectCart();
   }
@@ -6872,6 +6987,7 @@ class _$RedirectCartImpl implements _RedirectCart {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectCart?.call();
   }
@@ -6915,6 +7031,7 @@ class _$RedirectCartImpl implements _RedirectCart {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectCart != null) {
@@ -6962,6 +7079,7 @@ class _$RedirectCartImpl implements _RedirectCart {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectCart(this);
   }
@@ -6998,6 +7116,7 @@ class _$RedirectCartImpl implements _RedirectCart {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectCart?.call(this);
   }
@@ -7033,6 +7152,7 @@ class _$RedirectCartImpl implements _RedirectCart {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectCart != null) {
@@ -7163,6 +7283,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectOrderItemDetail(params);
   }
@@ -7207,6 +7328,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectOrderItemDetail?.call(params);
   }
@@ -7250,6 +7372,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectOrderItemDetail != null) {
@@ -7297,6 +7420,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectOrderItemDetail(this);
   }
@@ -7333,6 +7457,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectOrderItemDetail?.call(this);
   }
@@ -7368,6 +7493,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectOrderItemDetail != null) {
@@ -7465,6 +7591,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectTnC();
   }
@@ -7509,6 +7636,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectTnC?.call();
   }
@@ -7552,6 +7680,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectTnC != null) {
@@ -7599,6 +7728,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectTnC(this);
   }
@@ -7635,6 +7765,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectTnC?.call(this);
   }
@@ -7670,6 +7801,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectTnC != null) {
@@ -7761,6 +7893,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectPrivacy();
   }
@@ -7805,6 +7938,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectPrivacy?.call();
   }
@@ -7848,6 +7982,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectPrivacy != null) {
@@ -7895,6 +8030,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectPrivacy(this);
   }
@@ -7931,6 +8067,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectPrivacy?.call(this);
   }
@@ -7966,6 +8103,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectPrivacy != null) {
@@ -8058,6 +8196,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectAnnouncement();
   }
@@ -8102,6 +8241,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectAnnouncement?.call();
   }
@@ -8145,6 +8285,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectAnnouncement != null) {
@@ -8192,6 +8333,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectAnnouncement(this);
   }
@@ -8228,6 +8370,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectAnnouncement?.call(this);
   }
@@ -8263,6 +8406,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectAnnouncement != null) {
@@ -8354,6 +8498,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectArticle();
   }
@@ -8398,6 +8543,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectArticle?.call();
   }
@@ -8441,6 +8587,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectArticle != null) {
@@ -8488,6 +8635,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectArticle(this);
   }
@@ -8524,6 +8672,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectArticle?.call(this);
   }
@@ -8559,6 +8708,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectArticle != null) {
@@ -8650,6 +8800,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectReturn();
   }
@@ -8694,6 +8845,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectReturn?.call();
   }
@@ -8737,6 +8889,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectReturn != null) {
@@ -8784,6 +8937,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectReturn(this);
   }
@@ -8820,6 +8974,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectReturn?.call(this);
   }
@@ -8855,6 +9010,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectReturn != null) {
@@ -8986,6 +9142,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectCreditDetail(creditId, isMarketPlace);
   }
@@ -9030,6 +9187,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectCreditDetail?.call(creditId, isMarketPlace);
   }
@@ -9073,6 +9231,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectCreditDetail != null) {
@@ -9120,6 +9279,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectCreditDetail(this);
   }
@@ -9156,6 +9316,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectCreditDetail?.call(this);
   }
@@ -9191,6 +9352,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectCreditDetail != null) {
@@ -9293,6 +9455,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectClaimSubmission();
   }
@@ -9337,6 +9500,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectClaimSubmission?.call();
   }
@@ -9380,6 +9544,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectClaimSubmission != null) {
@@ -9427,6 +9592,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectClaimSubmission(this);
   }
@@ -9463,6 +9629,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectClaimSubmission?.call(this);
   }
@@ -9498,6 +9665,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectClaimSubmission != null) {
@@ -9592,6 +9760,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
         redirectCreditDetail,
     required TResult Function() redirectClaimSubmission,
     required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
     return redirectNewReturnRequest();
   }
@@ -9636,6 +9805,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
         redirectCreditDetail,
     TResult? Function()? redirectClaimSubmission,
     TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
     return redirectNewReturnRequest?.call();
   }
@@ -9679,6 +9849,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
     TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
     TResult Function()? redirectClaimSubmission,
     TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectNewReturnRequest != null) {
@@ -9726,6 +9897,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
         redirectClaimSubmission,
     required TResult Function(_RedirectNewReturnRequest value)
         redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
   }) {
     return redirectNewReturnRequest(this);
   }
@@ -9762,6 +9934,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
     TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult? Function(_RedirectNewReturnRequest value)?
         redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
   }) {
     return redirectNewReturnRequest?.call(this);
   }
@@ -9797,6 +9970,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
     TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
     TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
     TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
     required TResult orElse(),
   }) {
     if (redirectNewReturnRequest != null) {
@@ -9808,4 +9982,339 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
 
 abstract class _RedirectNewReturnRequest implements DeepLinkingState {
   const factory _RedirectNewReturnRequest() = _$RedirectNewReturnRequestImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectRaiseTicketImplCopyWith<$Res> {
+  factory _$$RedirectRaiseTicketImplCopyWith(_$RedirectRaiseTicketImpl value,
+          $Res Function(_$RedirectRaiseTicketImpl) then) =
+      __$$RedirectRaiseTicketImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String chatUrl});
+}
+
+/// @nodoc
+class __$$RedirectRaiseTicketImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectRaiseTicketImpl>
+    implements _$$RedirectRaiseTicketImplCopyWith<$Res> {
+  __$$RedirectRaiseTicketImplCopyWithImpl(_$RedirectRaiseTicketImpl _value,
+      $Res Function(_$RedirectRaiseTicketImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? chatUrl = null,
+  }) {
+    return _then(_$RedirectRaiseTicketImpl(
+      chatUrl: null == chatUrl
+          ? _value.chatUrl
+          : chatUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RedirectRaiseTicketImpl implements _RedirectRaiseTicket {
+  const _$RedirectRaiseTicketImpl({required this.chatUrl});
+
+  @override
+  final String chatUrl;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectRaiseTicket(chatUrl: $chatUrl)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectRaiseTicketImpl &&
+            (identical(other.chatUrl, chatUrl) || other.chatUrl == chatUrl));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, chatUrl);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RedirectRaiseTicketImplCopyWith<_$RedirectRaiseTicketImpl> get copyWith =>
+      __$$RedirectRaiseTicketImplCopyWithImpl<_$RedirectRaiseTicketImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        redirectProductsTab,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnItem returnItem) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function(PaymentParams params, bool isMarketPlace)
+        redirectPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+    required TResult Function() redirectOrder,
+    required TResult Function() redirectSetting,
+    required TResult Function() redirectCart,
+    required TResult Function(OrderItemParams params) redirectOrderItemDetail,
+    required TResult Function() redirectTnC,
+    required TResult Function() redirectPrivacy,
+    required TResult Function() redirectAnnouncement,
+    required TResult Function() redirectArticle,
+    required TResult Function() redirectReturn,
+    required TResult Function(String creditId, bool isMarketPlace)
+        redirectCreditDetail,
+    required TResult Function() redirectClaimSubmission,
+    required TResult Function() redirectNewReturnRequest,
+    required TResult Function(String chatUrl) redirectRaiseTicket,
+  }) {
+    return redirectRaiseTicket(chatUrl);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult? Function()? redirectOrder,
+    TResult? Function()? redirectSetting,
+    TResult? Function()? redirectCart,
+    TResult? Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult? Function()? redirectTnC,
+    TResult? Function()? redirectPrivacy,
+    TResult? Function()? redirectAnnouncement,
+    TResult? Function()? redirectArticle,
+    TResult? Function()? redirectReturn,
+    TResult? Function(String creditId, bool isMarketPlace)?
+        redirectCreditDetail,
+    TResult? Function()? redirectClaimSubmission,
+    TResult? Function()? redirectNewReturnRequest,
+    TResult? Function(String chatUrl)? redirectRaiseTicket,
+  }) {
+    return redirectRaiseTicket?.call(chatUrl);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        redirectProductsTab,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnItem returnItem)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function(PaymentParams params, bool isMarketPlace)?
+        redirectPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    TResult Function()? redirectOrder,
+    TResult Function()? redirectSetting,
+    TResult Function()? redirectCart,
+    TResult Function(OrderItemParams params)? redirectOrderItemDetail,
+    TResult Function()? redirectTnC,
+    TResult Function()? redirectPrivacy,
+    TResult Function()? redirectAnnouncement,
+    TResult Function()? redirectArticle,
+    TResult Function()? redirectReturn,
+    TResult Function(String creditId, bool isMarketPlace)? redirectCreditDetail,
+    TResult Function()? redirectClaimSubmission,
+    TResult Function()? redirectNewReturnRequest,
+    TResult Function(String chatUrl)? redirectRaiseTicket,
+    required TResult orElse(),
+  }) {
+    if (redirectRaiseTicket != null) {
+      return redirectRaiseTicket(chatUrl);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductsTab value) redirectProductsTab,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+    required TResult Function(_RedirectOrder value) redirectOrder,
+    required TResult Function(_RedirectSetting value) redirectSetting,
+    required TResult Function(_RedirectCart value) redirectCart,
+    required TResult Function(_RedirectOrderItemDetail value)
+        redirectOrderItemDetail,
+    required TResult Function(_RedirectTnC value) redirectTnC,
+    required TResult Function(_RedirectPrivacy value) redirectPrivacy,
+    required TResult Function(_RedirectAnnouncement value) redirectAnnouncement,
+    required TResult Function(_RedirectArticle value) redirectArticle,
+    required TResult Function(_RedirectReturn value) redirectReturn,
+    required TResult Function(_RedirectZPCreditDetail value)
+        redirectCreditDetail,
+    required TResult Function(_RedirectClaimSubmission value)
+        redirectClaimSubmission,
+    required TResult Function(_RedirectNewReturnRequest value)
+        redirectNewReturnRequest,
+    required TResult Function(_RedirectRaiseTicket value) redirectRaiseTicket,
+  }) {
+    return redirectRaiseTicket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult? Function(_RedirectOrder value)? redirectOrder,
+    TResult? Function(_RedirectSetting value)? redirectSetting,
+    TResult? Function(_RedirectCart value)? redirectCart,
+    TResult? Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult? Function(_RedirectTnC value)? redirectTnC,
+    TResult? Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult? Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult? Function(_RedirectArticle value)? redirectArticle,
+    TResult? Function(_RedirectReturn value)? redirectReturn,
+    TResult? Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult? Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult? Function(_RedirectNewReturnRequest value)?
+        redirectNewReturnRequest,
+    TResult? Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
+  }) {
+    return redirectRaiseTicket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductsTab value)? redirectProductsTab,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    TResult Function(_RedirectOrder value)? redirectOrder,
+    TResult Function(_RedirectSetting value)? redirectSetting,
+    TResult Function(_RedirectCart value)? redirectCart,
+    TResult Function(_RedirectOrderItemDetail value)? redirectOrderItemDetail,
+    TResult Function(_RedirectTnC value)? redirectTnC,
+    TResult Function(_RedirectPrivacy value)? redirectPrivacy,
+    TResult Function(_RedirectAnnouncement value)? redirectAnnouncement,
+    TResult Function(_RedirectArticle value)? redirectArticle,
+    TResult Function(_RedirectReturn value)? redirectReturn,
+    TResult Function(_RedirectZPCreditDetail value)? redirectCreditDetail,
+    TResult Function(_RedirectClaimSubmission value)? redirectClaimSubmission,
+    TResult Function(_RedirectNewReturnRequest value)? redirectNewReturnRequest,
+    TResult Function(_RedirectRaiseTicket value)? redirectRaiseTicket,
+    required TResult orElse(),
+  }) {
+    if (redirectRaiseTicket != null) {
+      return redirectRaiseTicket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectRaiseTicket implements DeepLinkingState {
+  const factory _RedirectRaiseTicket({required final String chatUrl}) =
+      _$RedirectRaiseTicketImpl;
+
+  String get chatUrl;
+  @JsonKey(ignore: true)
+  _$$RedirectRaiseTicketImplCopyWith<_$RedirectRaiseTicketImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

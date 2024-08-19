@@ -67,4 +67,8 @@ abstract class IDeepLinkingRepository {
     required Uri link,
     required MaterialFilter materialFilter,
   });
+
+  Either<ApiFailure, String> extractChatUrl({
+    required Uri link,
+  });
 }
