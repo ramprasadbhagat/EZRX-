@@ -9,16 +9,17 @@ class BonusTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       margin: margin,
       decoration: const BoxDecoration(
         color: ZPColors.primary,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
       child: Text(
         'Bonus'.tr(),
-        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: ZPColors.white,
+              fontWeight: FontWeight.w600,
             ),
       ),
     );

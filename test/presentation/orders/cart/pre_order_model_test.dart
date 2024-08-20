@@ -504,6 +504,13 @@ void main() async {
         expect(dealBonusItem, findsOneWidget);
         final bonusTag = find.byType(BonusTag);
         expect(bonusTag, findsNWidgets(3));
+        // verify the fontSize of Bonus is 12
+        final bonusTextFinders = find.text('Bonus');
+        expect(bonusTextFinders, findsNWidgets(3));
+        bonusTextFinders.evaluate().forEach((element) {
+          final textWidget = element.widget as Text;
+          expect(textWidget.style?.fontSize, 12);
+        });
       },
     );
 
