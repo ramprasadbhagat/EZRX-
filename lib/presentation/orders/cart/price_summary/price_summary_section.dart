@@ -19,6 +19,8 @@ class PriceSummarySection extends StatelessWidget {
     final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
     final isCheckoutPage =
         context.router.current.name == CheckoutPageRoute.name;
+    final smallOrderFeeForExtSalesRep =
+        orderEligibilityState.smallOrderFeeForExtSalesRep && !isCheckoutPage;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +108,7 @@ class PriceSummarySection extends StatelessWidget {
         if (salesOrgConfig.displaySubtotalTaxBreakdown)
           _TaxWidget(cartState: cartState),
         if (orderEligibilityState.smallOrderFeeApplied ||
-            orderEligibilityState.smallOrderFeeForExtSalesRep)
+            smallOrderFeeForExtSalesRep)
           SmallOrderFee(
             value: orderEligibilityState.showSmallOrderFeeForID
                 ? cartState.aplSmallOrderFees(
