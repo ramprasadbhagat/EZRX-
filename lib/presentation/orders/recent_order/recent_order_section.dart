@@ -5,10 +5,9 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/icon_label.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
@@ -83,14 +82,14 @@ class _BodyContent extends StatelessWidget {
                     ),
                     child: SectionTitle(
                       key: WidgetKeys.recentlyOrder,
-                      title: 'Recently ordered',
+                      title: 'Your recent order items',
                       onTapIconButton: () => state.isFetching
                           ? null
                           : context.navigateTo(const OrdersTabRoute()),
                     ),
                   ),
                   SizedBox(
-                    height: 140,
+                    height: 120,
                     child: state.isFetching
                         ? LoadingShimmer.logo(
                             key: WidgetKeys.recentOrderSectionLoaderImage,
@@ -118,8 +117,6 @@ class _ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-
     return InkWell(
       onTap: () => _navigateToOrderDetails(context, product),
       child: SizedBox(
@@ -146,21 +143,7 @@ class _ProductTile extends StatelessWidget {
                             height: 90,
                           ),
                         ),
-                        if (product.isOfferItem)
-                          const IconLabel(
-                            key: WidgetKeys.iconLabelOffer,
-                            icon: Icons.local_offer_outlined,
-                            backgroundColor: ZPColors.darkYellow,
-                            iconSize: 20,
-                            margin: EdgeInsets.zero,
-                            padding: EdgeInsets.all(3),
-                            labelText: '',
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20.0),
-                              bottomRight: Radius.circular(20.0),
-                              topLeft: Radius.circular(10.0),
-                            ),
-                          ),
+                        if (product.isOfferItem) ProductTag.onOfferIcon(),
                         if (product.isCovid)
                           const Positioned(
                             top: kToolbarHeight,
@@ -184,7 +167,14 @@ class _ProductTile extends StatelessWidget {
                                   child: MarketPlaceLogo.small(),
                                 ),
                               Text(
-                                product.materialNumber.displayMatNo,
+                                product.combinationCode(
+                                  showGMCPart: context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .salesOrgConfigs
+                                      .enableGMC,
+                                  showIRNPart: false,
+                                ),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall
@@ -213,15 +203,6 @@ class _ProductTile extends StatelessWidget {
                                       fontSize: 10,
                                     ),
                             overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          PriceComponent(
-                            price: product.itemUnitPrice(
-                              eligibilityState.salesOrg.isID,
-                            ),
-                            salesOrgConfig: eligibilityState.salesOrgConfigs,
                           ),
                         ],
                       ),

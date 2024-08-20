@@ -161,7 +161,6 @@ class WidgetKeys {
   static const Key productsOnOffer = Key('productsOnOffer');
   static const Key bundles = Key('bundles');
   static const Key productOnOffer = Key('productOnOffer');
-  static const Key iconLabelOffer = Key('iconLabelOffer');
   static const Key materialNumberInfo = Key('materialNumberInfo');
   static const Key bundlesLabel = Key('bundlesLabel');
   static const Key bundlesNumber = Key('bundlesNumber');

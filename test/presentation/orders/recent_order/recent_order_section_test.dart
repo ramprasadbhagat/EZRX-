@@ -150,8 +150,8 @@ void main() {
         find.byKey(WidgetKeys.recentOrderSectionLoaderImage),
         findsOneWidget,
       );
-      final recentOrderButtonFinder =
-          find.byKey(WidgetKeys.sectionTileIcon('Recently ordered'.tr()));
+      final recentOrderButtonFinder = find
+          .byKey(WidgetKeys.sectionTileIcon('Your recent order items'.tr()));
       expect(recentOrderButtonFinder, findsOneWidget);
       await tester.tap(recentOrderButtonFinder);
       verifyNever(() => autoRouterMock.navigate(const OrdersTabRoute()));
@@ -178,8 +178,8 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final recentOrderButtonFinder =
-          find.byKey(WidgetKeys.sectionTileIcon('Recently ordered'.tr()));
+      final recentOrderButtonFinder = find
+          .byKey(WidgetKeys.sectionTileIcon('Your recent order items'.tr()));
       expect(recentOrderButtonFinder, findsOneWidget);
       await tester.tap(recentOrderButtonFinder);
       verify(() => autoRouterMock.navigate(const OrdersTabRoute())).called(1);
@@ -230,44 +230,6 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('Find Free tag for bonus items', (tester) async {
-      final fakeOrderHistory = OrderHistory.empty().copyWith(
-        orderHistoryItems: [
-          OrderHistoryItem.empty().copyWith(
-            totalPrice: 40.0,
-            unitPrice: 10.0,
-          ),
-          OrderHistoryItem.empty().copyWith(
-            isBonusMaterial: true,
-            totalPrice: 20.0,
-          ),
-        ],
-      );
-      when(
-        () => eligibilityBlocMock.state,
-      ).thenAnswer(
-        (invocation) => EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-        ),
-      );
-      when(
-        () => viewByItemsBlocMock.state,
-      ).thenAnswer(
-        (invocation) => ViewByItemsState.initial().copyWith(
-          orderHistory: fakeOrderHistory,
-        ),
-      );
-
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-
-      final bonusMaterialFreeTag = find.text('FREE', findRichText: true);
-      final commercialMaterialTotalPrice =
-          find.text('MYR 10.00', findRichText: true);
-      expect(bonusMaterialFreeTag, findsOneWidget);
-      expect(commercialMaterialTotalPrice, findsOneWidget);
-    });
-
     testWidgets('Show GovtListPriceComponent for material item',
         (tester) async {
       when(
@@ -312,7 +274,7 @@ void main() {
     await tester.pumpWidget(getScopedWidget());
     await tester.pumpAndSettle();
 
-    final offerTagProduct = find.byKey(WidgetKeys.iconLabelOffer);
+    final offerTagProduct = find.byKey(WidgetKeys.offerTag);
 
     expect(offerTagProduct, findsOneWidget);
   });

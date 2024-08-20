@@ -266,7 +266,7 @@ class HomeRobot extends CommonRobot {
   }
 
   void verifyDisplayProductsWithOfferTag() {
-    final offerTag = find.byKey(WidgetKeys.iconLabelOffer);
+    final offerTag = find.byKey(WidgetKeys.offerTag);
     expect(offerTag, findsWidgets);
   }
 

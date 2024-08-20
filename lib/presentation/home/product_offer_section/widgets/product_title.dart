@@ -35,20 +35,7 @@ class _ProductTile extends StatelessWidget {
                             width: 100,
                           ),
                         ),
-                        const IconLabel(
-                          key: WidgetKeys.iconLabelOffer,
-                          icon: Icons.local_offer_outlined,
-                          backgroundColor: ZPColors.darkYellow,
-                          iconSize: 20,
-                          margin: EdgeInsets.zero,
-                          padding: EdgeInsets.all(3),
-                          labelText: '',
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20.0),
-                            bottomRight: Radius.circular(20.0),
-                            topLeft: Radius.circular(10.0),
-                          ),
-                        ),
+                        ProductTag.onOfferIcon(),
                       ],
                     ),
                     const SizedBox(
