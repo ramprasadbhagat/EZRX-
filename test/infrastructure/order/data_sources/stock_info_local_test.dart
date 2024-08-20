@@ -54,6 +54,27 @@ void main() {
           );
         },
       );
+      test('notifyStockApiStatusUpdated', () async {
+        // Listen to the stream before the action
+        final statusUpdates = <bool>[];
+        final subscription = localDataSource.stockApiStatusData.listen(
+          (status) {
+            statusUpdates.add(status);
+          },
+        );
+
+        // Trigger the API status update
+        localDataSource.notifyStockApiStatusUpdated(true);
+
+        // Allow some time for the stream to emit
+        await Future.delayed(const Duration(milliseconds: 100));
+
+        // Assert that the stream emitted the correct value
+        expect(statusUpdates, [true]);
+
+        // Cancel the subscription to prevent memory leaks
+        await subscription.cancel();
+      });
     },
   );
 }

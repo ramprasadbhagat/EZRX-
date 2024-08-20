@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -116,6 +117,244 @@ void main() {
             SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
                 .toDomain(),
           );
+        },
+      );
+      test(
+        'Submit Order when sales Document and Sales Documents both are empty',
+        () async {
+          const submitOrder = SubmitOrderDto(
+            userName: '',
+            companyName: '',
+            customer: SubmitOrderCustomerDto(
+              customerNumber: '',
+              customerNumberShipTo: '',
+              division: '',
+              salesOrganisation: '',
+            ),
+            poReference: '',
+            materials: [],
+            poDate: '',
+            totalTax: 0,
+            requestedDeliveryDate: '',
+            specialInstructions: '',
+            telephone: '',
+            referenceNotes: '',
+            paymentTerms: '',
+            collectiveNumber: '',
+            blockOrder: false,
+            poDocuments: [],
+            orderValue: 0,
+            language: '',
+            paymentMethod: '',
+            purchaseOrderType: '',
+            orderReason: '',
+          );
+          final encryptedData = encryption.encryptionData(
+            data: submitOrder.toJson(),
+            secretKey: locator<Config>().orderEncryptionSecret,
+          );
+          final variables = {
+            'NewOrderInput': {
+              'data': encryptedData.data,
+              'hash': encryptedData.hash,
+            },
+          };
+
+          final res = json.decode(
+            await rootBundle.loadString('assets/json/submitOrderResponse.json'),
+          );
+
+          dioAdapter.onPost(
+            '/api/order',
+            (server) => server.reply(
+              200,
+              {
+                'data': {
+                  'submitOrder': {
+                    'SalesDocument': '',
+                    'SalesDocuments': [],
+                    'Messages': [
+                      {
+                        'Type': 'S',
+                        'Message': 'EZRX-b628ca8',
+                      }
+                    ],
+                  },
+                },
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.submitOrder(true),
+              'variables': variables,
+            }),
+          );
+          await remoteDataSource
+              .submitOrder(
+            orderEncryption: encryptedData,
+            enableMarketPlace: true,
+          )
+              .onError((e, _) async {
+            expect(e, isA<OtherException>());
+            return SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
+                .toDomain();
+          });
+        },
+      );
+
+      test(
+        'Submit Order status != 200',
+        () async {
+          const submitOrder = SubmitOrderDto(
+            userName: '',
+            companyName: '',
+            customer: SubmitOrderCustomerDto(
+              customerNumber: '',
+              customerNumberShipTo: '',
+              division: '',
+              salesOrganisation: '',
+            ),
+            poReference: '',
+            materials: [],
+            poDate: '',
+            totalTax: 0,
+            requestedDeliveryDate: '',
+            specialInstructions: '',
+            telephone: '',
+            referenceNotes: '',
+            paymentTerms: '',
+            collectiveNumber: '',
+            blockOrder: false,
+            poDocuments: [],
+            orderValue: 0,
+            language: '',
+            paymentMethod: '',
+            purchaseOrderType: '',
+            orderReason: '',
+          );
+          final encryptedData = encryption.encryptionData(
+            data: submitOrder.toJson(),
+            secretKey: locator<Config>().orderEncryptionSecret,
+          );
+          final variables = {
+            'NewOrderInput': {
+              'data': encryptedData.data,
+              'hash': encryptedData.hash,
+            },
+          };
+
+          final res = json.decode(
+            await rootBundle.loadString('assets/json/submitOrderResponse.json'),
+          );
+
+          dioAdapter.onPost(
+            '/api/order',
+            (server) => server.reply(
+              201,
+              {
+                'data': null,
+                'errors': [
+                  {'message': 'fake-error'},
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.submitOrder(true),
+              'variables': variables,
+            }),
+          );
+          await remoteDataSource
+              .submitOrder(
+            orderEncryption: encryptedData,
+            enableMarketPlace: true,
+          )
+              .onError((error, _) async {
+            expect(error, isA<ServerException>());
+            return Future.value(
+              SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
+                  .toDomain(),
+            );
+          });
+        },
+      );
+      test(
+        'Submit Order with error',
+        () async {
+          const submitOrder = SubmitOrderDto(
+            userName: '',
+            companyName: '',
+            customer: SubmitOrderCustomerDto(
+              customerNumber: '',
+              customerNumberShipTo: '',
+              division: '',
+              salesOrganisation: '',
+            ),
+            poReference: '',
+            materials: [],
+            poDate: '',
+            totalTax: 0,
+            requestedDeliveryDate: '',
+            specialInstructions: '',
+            telephone: '',
+            referenceNotes: '',
+            paymentTerms: '',
+            collectiveNumber: '',
+            blockOrder: false,
+            poDocuments: [],
+            orderValue: 0,
+            language: '',
+            paymentMethod: '',
+            purchaseOrderType: '',
+            orderReason: '',
+          );
+          final encryptedData = encryption.encryptionData(
+            data: submitOrder.toJson(),
+            secretKey: locator<Config>().orderEncryptionSecret,
+          );
+          final variables = {
+            'NewOrderInput': {
+              'data': encryptedData.data,
+              'hash': encryptedData.hash,
+            },
+          };
+
+          final res = json.decode(
+            await rootBundle.loadString('assets/json/submitOrderResponse.json'),
+          );
+
+          dioAdapter.onPost(
+            '/api/order',
+            (server) => server.reply(
+              200,
+              {
+                'data': null,
+                'errors': [
+                  {'message': 'fake-error'},
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.submitOrder(true),
+              'variables': variables,
+            }),
+          );
+          await remoteDataSource
+              .submitOrder(
+            orderEncryption: encryptedData,
+            enableMarketPlace: true,
+          )
+              .onError((error, _) async {
+            expect(error, isA<ServerException>());
+            return Future.value(
+              SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
+                  .toDomain(),
+            );
+          });
         },
       );
     },

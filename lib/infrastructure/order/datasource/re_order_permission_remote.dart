@@ -32,7 +32,7 @@ class ReOrderPermissionRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}/license',
+        url: '${config.urlConstants}license',
         data: jsonEncode(
           {
             'query': reOrderPermissionQuery.getReOrderPermission(),

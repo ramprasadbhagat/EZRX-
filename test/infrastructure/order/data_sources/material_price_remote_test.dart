@@ -51,7 +51,11 @@ void main() {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
           'shipToCode': 'fake-ship-to-code',
-          'request': [],
+          'request': [
+            {
+              'MaterialNumber': 'fake_material_no',
+            }
+          ],
         };
         final res = json.decode(
           await rootBundle
@@ -74,7 +78,7 @@ void main() {
 
         final result = await remoteDataSource.getMaterialPriceList(
           customerCode: 'fake-customer-code',
-          materialNumbers: [],
+          materialNumbers: ['fake_material_no'],
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
         );
@@ -253,6 +257,47 @@ void main() {
           result,
           PriceDto.fromJson(makeResponseCamelCase(jsonEncode(priceData)))
               .toDomain(),
+        );
+      });
+
+      test('Get Material Price For ZDP5 test when price is empty', () async {
+        final variables = {
+          'salesOrganisation': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-to-code',
+          'request': {
+            'MaterialNumber': 'fake-number',
+            'exceedQty': true,
+          },
+        };
+
+        dioAdapter.onPost(
+          '/api/price',
+          (server) => server.reply(
+            200,
+            {
+              'data': {'price': []},
+            },
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'variables': variables,
+          }),
+        );
+
+        final result = await remoteDataSource.getMaterialPriceForZDP5(
+          customerCode: 'fake-customer-code',
+          materialNumber: 'fake-number',
+          salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
+          exceedQty: true,
+        );
+
+        expect(
+          result,
+          Price.empty(),
         );
       });
 

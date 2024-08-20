@@ -104,6 +104,50 @@ void main() {
         );
       });
 
+      test('Get OrderHistory Details when orderHeaders is empry', () async {
+        final variables = {
+          'searchKey': 'fake-searchKey',
+          'language': 'fake-language',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
+        };
+
+        dioAdapter.onPost(
+          '/api/order',
+          (server) => server.reply(
+            200,
+            {
+              'data': {
+                'orderHistoryV3': {'orderHeaders': []},
+              },
+            },
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
+                .getOrderHistoryDetails(fakeConfigValue),
+            'variables': variables,
+          }),
+        );
+
+        final result = await remoteDataSource.getOrderHistoryDetails(
+          salesOrg: 'fake-salesOrg',
+          searchKey: 'fake-searchKey',
+          soldTo: 'fake-soldTo',
+          language: 'fake-language',
+          shipTo: 'fake-shipTo',
+          market: fakeMarket,
+        );
+
+        expect(
+          result,
+          OrderHistoryDetails.empty(),
+        );
+      });
+
       test('status code not equal to 200', () async {
         final variables = {
           'searchKey': 'fake-searchKey',
@@ -314,6 +358,51 @@ void main() {
         );
 
         expect(result, <OrderHistoryDetails>[]);
+      });
+
+      test('with error', () async {
+        final variables = {
+          'orderNumbers': ['test', 'test2'],
+          'language': 'fake-language',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
+        };
+
+        dioAdapter.onPost(
+          '/api/order',
+          (server) => server.reply(
+            205,
+            {
+              'data': null,
+              'errors': [
+                {'message': 'fake-error'},
+              ],
+            },
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
+                .getOrderHistoryDetails(fakeConfigValue),
+            'variables': variables,
+          }),
+        );
+
+        await remoteDataSource
+            .getOrderHistoryDetailsList(
+          salesOrg: 'fake-salesOrg',
+          orderNumbers: ['test', 'test2'],
+          soldTo: 'fake-soldTo',
+          language: 'fake-language',
+          shipTo: 'fake-shipTo',
+          market: fakeMarket,
+        )
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+
+          return Future.value([]);
+        });
       });
     },
   );
