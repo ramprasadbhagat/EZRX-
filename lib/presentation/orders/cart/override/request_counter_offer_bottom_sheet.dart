@@ -6,7 +6,9 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -14,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/regexes.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,169 +36,284 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CartBloc, CartState>(
-      listenWhen: (previous, current) =>
-          previous.isUpserting != current.isUpserting && !current.isUpserting,
-      listener: (context, state) {
-        state.apiFailureOrSuccessOption.fold(
-          () {
-            context.read<PriceOverrideBloc>().add(
-                  PriceOverrideEvent.fetch(
-                    salesOrganisation:
-                        context.read<EligibilityBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<EligibilityBloc>().state.customerCodeInfo,
-                  ),
-                );
-          },
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
-          ),
-        );
-      },
-      child: BlocConsumer<PriceOverrideBloc, PriceOverrideState>(
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
+    return BlocProvider<PriceOverrideBloc>(
+      create: (context) => locator<PriceOverrideBloc>()
+        ..add(PriceOverrideEvent.initialized(item: cartItem)),
+      child: BlocListener<CartBloc, CartState>(
         listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
-            current.apiFailureOrSuccessOption,
+            previous.isUpserting != current.isUpserting && !current.isUpserting,
         listener: (context, state) {
           state.apiFailureOrSuccessOption.fold(
-            () {},
+            () {
+              context.read<PriceOverrideBloc>().add(
+                    PriceOverrideEvent.fetch(
+                      salesOrganisation: eligibilityState.salesOrganisation,
+                      customerCodeInfo: eligibilityState.customerCodeInfo,
+                    ),
+                  );
+            },
             (either) => either.fold(
               (failure) {
                 ErrorUtils.handleApiFailure(context, failure);
               },
-              (_) {
-                context.read<CartBloc>().add(
-                      CartEvent.updateCartProductWithCounterOffer(
-                        overriddenProductPrice: state.item.price,
-                      ),
-                    );
-                context.router.maybePop();
-              },
+              (_) {},
             ),
           );
         },
-        buildWhen: (previous, current) =>
-            previous.showErrorMessages != current.showErrorMessages,
-        builder: (context, state) {
-          final isDiscountOverrideEnable =
-              context.read<EligibilityBloc>().state.isZDP8Override;
-          final isPriceOverrideEnable =
-              context.read<EligibilityBloc>().state.isPriceOverrideEnable;
+        child: BlocConsumer<PriceOverrideBloc, PriceOverrideState>(
+          listenWhen: (previous, current) =>
+              previous.apiFailureOrSuccessOption !=
+              current.apiFailureOrSuccessOption,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {
+                  context.read<CartBloc>().add(
+                        CartEvent.updateCartProductWithCounterOffer(
+                          overriddenProductPrice: state.item.price,
+                        ),
+                      );
+                  context.router.maybePop();
+                },
+              ),
+            );
+          },
+          buildWhen: (previous, current) => previous.item != current.item,
+          builder: (context, state) {
+            final isDiscountOverrideEnable = eligibilityState.isZDP8Override;
+            final isPriceOverrideEnable =
+                eligibilityState.isPriceOverrideEnable;
 
-          return Padding(
-            key: WidgetKeys.counterOfferBottomSheet,
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 20,
-              top: 20,
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                Text(
-                  context.tr('Request counter offer'),
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                if (cartItem.isListPriceNotAvailableForProduct ||
-                    !state.item.showMaterialListPrice)
-                  PriceComponent(
-                    key: WidgetKeys.counterOfferListPriceWithoutStrikeWidget,
-                    title: '${context.tr('List price')} : ',
-                    salesOrgConfig:
-                        context.read<EligibilityBloc>().state.salesOrgConfigs,
-                    price: cartItem.display(PriceType.listPrice),
-                    priceLabelStyle:
-                        Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: ZPColors.darkGray,
-                              fontSize: 14,
-                            ),
-                    type: PriceStyle.counterOfferListPrice,
+            return Padding(
+              key: WidgetKeys.counterOfferBottomSheet,
+              padding: EdgeInsets.only(
+                top: 20,
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: padding24,
+                      right: padding6,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            context.tr('Request counter offer'),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  color: ZPColors.primary,
+                                ),
+                          ),
+                        ),
+                        IconButton(
+                          key: WidgetKeys.counterOfferCancelButton,
+                          onPressed: () => context.router.maybePop(),
+                          icon: const Icon(Icons.close),
+                        ),
+                      ],
+                    ),
                   ),
-                ListPriceStrikeThroughComponent(
-                  key: WidgetKeys.counterOfferListPriceWidget,
-                  priceAggregate: state.item,
-                  title: '${context.tr('List price')} : ',
-                ),
-                if (state.item.showMaterialListPrice)
-                  PriceComponent(
-                    key: WidgetKeys.counterOfferPriceWidget,
-                    title: '${context.tr('Offer price')} : ',
-                    salesOrgConfig:
-                        context.read<EligibilityBloc>().state.salesOrgConfigs,
-                    price: cartItem.display(PriceType.finalPrice),
-                    priceLabelStyle:
-                        Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: ZPColors.darkGray,
-                            ),
-                  ),
-                if (isPriceOverrideEnable)
-                  _CounterOfferPriceTextField(
-                    isDiscountOverrideEnable: isDiscountOverrideEnable,
-                    cartItem: state.item,
-                  ),
-                if (isDiscountOverrideEnable) ...[
-                  _CounterOfferDiscountTextField(
-                    cartItem: state.item,
-                    isPriceOverrideEnable: isPriceOverrideEnable,
-                  ),
-                  const _CounterOfferDiscountedPriceField(),
-                  const Divider(
-                    indent: 0,
-                    endIndent: 0,
-                    color: ZPColors.extraLightGrey3,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: padding24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        if (cartItem.isListPriceNotAvailableForProduct ||
+                            !state.item.showMaterialListPrice)
+                          PriceComponent(
+                            key: WidgetKeys
+                                .counterOfferListPriceWithoutStrikeWidget,
+                            title: '${context.tr('List price')} : ',
+                            salesOrgConfig: eligibilityState.salesOrgConfigs,
+                            price: cartItem.display(PriceType.listPrice),
+                            priceLabelStyle:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: ZPColors.darkGray,
+                                      fontSize: 14,
+                                    ),
+                            type: PriceStyle.counterOfferListPrice,
+                          ),
+                        ListPriceStrikeThroughComponent(
+                          key: WidgetKeys.counterOfferListPriceWidget,
+                          priceAggregate: state.item,
+                          title: '${context.tr('List price')}: ',
+                          priceLabelStyle:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: ZPColors.neutralsGrey1,
+                                  ),
+                        ),
+                        if (state.item.showMaterialListPrice)
+                          PriceComponent(
+                            key: WidgetKeys.counterOfferPriceWidget,
+                            title: '${context.tr('Discounted price')}: ',
+                            salesOrgConfig: eligibilityState.salesOrgConfigs,
+                            price: cartItem.display(PriceType.finalPrice),
+                            priceLabelStyle:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: ZPColors.neutralsGrey1,
+                                    ),
+                          ),
+                        if (isPriceOverrideEnable)
+                          _CounterOfferPriceTextField(
+                            isDiscountOverrideEnable: isDiscountOverrideEnable,
+                            cartItem: state.item,
+                          ),
+                        if (isDiscountOverrideEnable) ...[
+                          _CounterOfferDiscountTextField(
+                            cartItem: state.item,
+                            isPriceOverrideEnable: isPriceOverrideEnable,
+                          ),
+                          const _CounterOfferDiscountedPriceField(),
+                        ],
+                        _CounterOfferWarningMessage(
+                          isDiscountOverrideEnable: isDiscountOverrideEnable,
+                        ),
+                        if (isDiscountOverrideEnable) ...[
+                          const Divider(
+                            height: 48,
+                            indent: 0,
+                            endIndent: 0,
+                            color: ZPColors.extraLightGrey3,
+                          ),
+                        ] else
+                          const SizedBox(height: padding24),
+                        _CounterOfferRemarksTextField(
+                          remarks: state
+                              .item.materialInfo.counterOfferDetails.comment
+                              .getOrDefaultValue(''),
+                        ),
+                        _CounterOfferEmptyFieldsErrorMessage(
+                          isPriceOverrideEnable: isPriceOverrideEnable,
+                          isDiscountOverrideEnable: isDiscountOverrideEnable,
+                        ),
+                        _CounterOfferButtons(
+                          cartItem: cartItem,
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
-                _CounterOfferRemarksTextField(
-                  remarks: state.item.materialInfo.counterOfferDetails.comment
-                      .getOrDefaultValue(''),
-                ),
-                if (state.showErrorMessages &&
-                    isPriceOverrideEnable &&
-                    isDiscountOverrideEnable)
-                  const _CounterOfferEmptyFieldsErrorMessage(
-                    key: WidgetKeys.counterOfferEmptyFieldErrorMessage,
-                  ),
-                _CounterOfferButtons(
-                  cartItem: cartItem,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-              ],
-            ),
-          );
-        },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
 class _CounterOfferEmptyFieldsErrorMessage extends StatelessWidget {
-  const _CounterOfferEmptyFieldsErrorMessage({super.key});
+  final bool isPriceOverrideEnable;
+  final bool isDiscountOverrideEnable;
+  const _CounterOfferEmptyFieldsErrorMessage({
+    required this.isPriceOverrideEnable,
+    required this.isDiscountOverrideEnable,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      padding: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(
-        color: ZPColors.lightRedStatusColor,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-      ),
-      child: Text(
-        context.tr(
-          'Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.',
-        ),
-        style: Theme.of(context).textTheme.bodyLarge,
-      ),
+    return BlocBuilder<PriceOverrideBloc, PriceOverrideState>(
+      buildWhen: (previous, current) =>
+          previous.showErrorMessages != current.showErrorMessages,
+      builder: (context, state) {
+        if (state.showErrorMessages &&
+            isPriceOverrideEnable &&
+            isDiscountOverrideEnable) {
+          return InfoLabel(
+            key: WidgetKeys.counterOfferEmptyFieldErrorMessage,
+            margin: const EdgeInsets.symmetric(vertical: padding12),
+            mainColor: ZPColors.lightRedStatusColor,
+            textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.neutralsDarkBlack,
+                ),
+            textValue: context.tr(
+              'Please input value for Counter offer price ({currency}) or Discount counter offer (%) to proceed.',
+              namedArgs: {
+                'currency': context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .currency
+                    .code,
+              },
+            ),
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
+    );
+  }
+}
+
+class _CounterOfferWarningMessage extends StatelessWidget {
+  final bool isDiscountOverrideEnable;
+  const _CounterOfferWarningMessage({
+    required this.isDiscountOverrideEnable,
+  });
+
+  String _warningMessage({required bool hasDiscount}) {
+    if (hasDiscount) {
+      if (isDiscountOverrideEnable) {
+        return 'Final Counter offer price is higher than discounted price';
+      }
+
+      return 'Counter offer price is higher than discounted price';
+    }
+    if (isDiscountOverrideEnable) {
+      return 'Final counter offer price is higher than list price';
+    }
+
+    return 'Counter offer price is higher than list price';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PriceOverrideBloc, PriceOverrideState>(
+      buildWhen: (previous, current) =>
+          previous.showWarningMessage != current.showWarningMessage,
+      builder: (context, state) {
+        if (state.showWarningMessage) {
+          return InfoLabel(
+            key: WidgetKeys.counterOfferWarningMessage,
+            icon: const Icon(
+              Icons.error,
+              color: ZPColors.warning,
+            ),
+            margin: const EdgeInsets.only(top: padding12),
+            mainColor: ZPColors.priceWarning,
+            textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.neutralsDarkBlack,
+                  height: 2,
+                ),
+            textValue: context.tr(
+              _warningMessage(
+                hasDiscount: state.hasDiscount,
+              ),
+            ),
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 }

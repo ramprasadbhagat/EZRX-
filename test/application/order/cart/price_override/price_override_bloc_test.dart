@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -38,18 +39,7 @@ void main() {
           priceOverrideRepository: priceOverrideRepositoryMock,
         ),
         act: (bloc) => bloc.add(
-          const PriceOverrideEvent.initialized(),
-        ),
-        expect: () => [PriceOverrideState.initial()],
-      );
-
-      blocTest<PriceOverrideBloc, PriceOverrideState>(
-        'Price Override Bloc Set Product',
-        build: () => PriceOverrideBloc(
-          priceOverrideRepository: priceOverrideRepositoryMock,
-        ),
-        act: (bloc) => bloc.add(
-          PriceOverrideEvent.setProduct(
+          PriceOverrideEvent.initialized(
             item: cartItems.first.copyWith(
               materialInfo: cartItems.first.materialInfo.copyWith(
                 counterOfferDetails: RequestCounterOfferDetails.empty(),
@@ -498,7 +488,7 @@ void main() {
       );
 
       test(
-        'Check finalCounterOfferPrice not hide price',
+        'Check finalCounterOfferPrice not hide price and not has counter offer',
         () {
           final priceOverrideState = PriceOverrideState.initial().copyWith(
             item: PriceAggregate.empty().copyWith(
@@ -513,39 +503,9 @@ void main() {
               priceOverrideState.finalCounterOfferPrice;
           expect(
             finalCounterOfferPrice,
-            '90.0',
+            'Not requested'.tr(),
           );
         },
-      );
-      blocTest<PriceOverrideBloc, PriceOverrideState>(
-        'Price Override Bloc Set Product Counter Offer Details has Value',
-        build: () => PriceOverrideBloc(
-          priceOverrideRepository: priceOverrideRepositoryMock,
-        ),
-        act: (bloc) => bloc.add(
-          PriceOverrideEvent.setProduct(
-            item: cartItems.first.copyWith(
-              materialInfo: cartItems.first.materialInfo.copyWith(
-                counterOfferDetails:
-                    RequestCounterOfferDetails.empty().copyWith(
-                  counterOfferPrice: CounterOfferValue('100.0'),
-                ),
-              ),
-            ),
-          ),
-        ),
-        expect: () => [
-          PriceOverrideState.initial().copyWith(
-            item: cartItems.first.copyWith(
-              materialInfo: cartItems.first.materialInfo.copyWith(
-                counterOfferDetails:
-                    RequestCounterOfferDetails.empty().copyWith(
-                  counterOfferPrice: CounterOfferValue('100.0'),
-                ),
-              ),
-            ),
-          ),
-        ],
       );
     },
   );

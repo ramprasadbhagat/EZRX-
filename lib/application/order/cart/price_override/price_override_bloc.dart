@@ -29,12 +29,7 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
     await event.map(
       initialized: (e) {
         emit(
-          PriceOverrideState.initial(),
-        );
-      },
-      setProduct: (e) {
-        emit(
-          state.copyWith(
+          PriceOverrideState.initial().copyWith(
             item: e.item,
           ),
         );

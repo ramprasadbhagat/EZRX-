@@ -415,13 +415,6 @@ void main() {
             find.byKey(WidgetKeys.counterOfferPriceButtonKey);
         expect(counterOfferButton, findsOneWidget);
         await tester.tap(counterOfferButton);
-        verify(
-          () => priceOverrideBloc.add(
-            PriceOverrideEvent.setProduct(
-              item: cartItem,
-            ),
-          ),
-        ).called(1);
       });
 
       testWidgets(

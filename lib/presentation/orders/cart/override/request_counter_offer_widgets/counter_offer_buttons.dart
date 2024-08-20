@@ -19,18 +19,6 @@ class _CounterOfferButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: OutlinedButton(
-                key: WidgetKeys.counterOfferCancelButton,
-                onPressed: () {
-                  context.router.maybePop();
-                },
-                child: Text(context.tr('Cancel')),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
               child: ElevatedButton(
                 key: WidgetKeys.counterOfferConfirmButton,
                 onPressed: () {

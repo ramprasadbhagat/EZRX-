@@ -98,12 +98,12 @@ class RequestCounterOfferRobot {
     );
   }
 
-  void verifyPriceTextErrorMessage() {
+  void verifyPriceTextErrorMessage(currency) {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.counterOfferEmptyFieldErrorMessage),
         matching: find.text(
-          'Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.'
+          'Please input value for Counter offer price ($currency) or Discount counter offer (%) to proceed.'
               .tr(),
         ),
       ),

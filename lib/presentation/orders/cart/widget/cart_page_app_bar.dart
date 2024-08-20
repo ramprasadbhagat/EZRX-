@@ -59,9 +59,6 @@ class _CartPageAppBar extends AppBar {
                               context.read<CartBloc>().add(
                                     const CartEvent.clearCart(),
                                   );
-                              context.read<PriceOverrideBloc>().add(
-                                    const PriceOverrideEvent.initialized(),
-                                  );
                             },
                           ),
                 ],

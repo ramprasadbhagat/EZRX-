@@ -635,6 +635,8 @@ class WidgetKeys {
   static const Key counterOfferCancelButton = Key('counterOfferCancelButton');
   static const Key counterOfferEmptyFieldErrorMessage =
       Key('counterOfferEmptyFieldErrorMessage');
+  static const Key counterOfferWarningMessage =
+      Key('counterOfferWarningMessage');
   static const Key counterOfferDiscountedPriceWidget =
       Key('counterDiscountedPriceWidget');
   static const Key counterOfferListPriceWidget =

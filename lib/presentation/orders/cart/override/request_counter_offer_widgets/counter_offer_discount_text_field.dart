@@ -27,6 +27,16 @@ class _CounterOfferDiscountTextFieldState
   }
 
   @override
+  void didUpdateWidget(covariant _CounterOfferDiscountTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_discountController.text != _counterOfferDiscountText) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _discountController.text = _counterOfferDiscountText;
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _discountController.dispose();
     super.dispose();
@@ -49,7 +59,7 @@ class _CounterOfferDiscountTextFieldState
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: CustomNumericTextField.wholeNumber(
               fieldKey: WidgetKeys.counterOfferDiscountField,
-              labelText: 'Discount counter offer (%)'.tr(),
+              labelText: context.tr('Discount counter offer (%)'),
               decoration: InputDecoration(
                 hintText: context.tr('Enter counter offer percentage discount'),
                 errorMaxLines: 2,
@@ -65,21 +75,21 @@ class _CounterOfferDiscountTextFieldState
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.deny(ZPRegexes.specialCharacters),
               ],
-              validator: (value) =>
-                  state.isPriceOverride && _discountController.text.isEmpty
-                      ? null
-                      : CounterOfferDiscountValue(value ?? '').value.fold(
-                            (f) => f.mapOrNull(
-                              empty: (_) =>
-                                  'Please enter discount counter offer'.tr(),
-                              numberMustBiggerThanZero: (_) =>
-                                  'Discount offer price cannot be zero'.tr(),
-                              exceedingMaxValue: (_) =>
-                                  'Please input counter offer percentage discount of less than 100%'
-                                      .tr(),
-                            ),
-                            (_) => null,
+              validator: (value) => state.isPriceOverride &&
+                      _discountController.text.isEmpty
+                  ? null
+                  : CounterOfferDiscountValue(value ?? '').value.fold(
+                        (f) => f.mapOrNull(
+                          empty: (_) =>
+                              context.tr('Please enter discount counter offer'),
+                          numberMustBiggerThanZero: (_) =>
+                              context.tr('Discount offer price cannot be zero'),
+                          exceedingMaxValue: (_) => context.tr(
+                            'Please input counter offer percentage discount of less than 100%',
                           ),
+                        ),
+                        (_) => null,
+                      ),
             ),
           ),
         );

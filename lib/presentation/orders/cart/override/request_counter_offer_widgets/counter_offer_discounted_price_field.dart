@@ -11,16 +11,18 @@ class _CounterOfferDiscountedPriceField extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           key: WidgetKeys.counterOfferDiscountedPriceWidget,
-          padding: const EdgeInsets.only(top: 10, bottom: 20),
+          padding: const EdgeInsets.only(top: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Final counter offer price:'.tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: ZPColors.darkerGrey),
+              Expanded(
+                child: Text(
+                  context.tr('Final counter offer price:'),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: ZPColors.darkerGrey),
+                ),
               ),
               PriceComponent(
                 salesOrgConfig:

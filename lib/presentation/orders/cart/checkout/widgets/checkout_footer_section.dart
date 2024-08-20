@@ -102,9 +102,6 @@ class _CheckoutFooterSection extends StatelessWidget {
                                       .cartProducts,
                                 ),
                               );
-                          context.read<PriceOverrideBloc>().add(
-                                const PriceOverrideEvent.initialized(),
-                              );
                           context.read<PoAttachmentBloc>().add(
                                 const PoAttachmentEvent.initialized(),
                               );

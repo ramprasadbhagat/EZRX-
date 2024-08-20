@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -75,9 +74,6 @@ class CartProductTile extends StatelessWidget {
                     CartEvent.upsertCart(
                       priceAggregate: cartItem.copyWith(quantity: 0),
                     ),
-                  );
-              context.read<PriceOverrideBloc>().add(
-                    const PriceOverrideEvent.initialized(),
                   );
             },
           ),
@@ -434,9 +430,6 @@ class _BonusPriceCounterSection extends StatelessWidget {
                 child: TextButton.icon(
                   key: WidgetKeys.counterOfferPriceButtonKey,
                   onPressed: () {
-                    context
-                        .read<PriceOverrideBloc>()
-                        .add(PriceOverrideEvent.setProduct(item: cartItem));
                     showModalBottomSheet(
                       isDismissible: false,
                       context: context,

@@ -472,11 +472,7 @@ void main() {
             ),
           ),
         ).called(1);
-        verify(
-          () => priceOverrideBloc.add(
-            const PriceOverrideEvent.initialized(),
-          ),
-        ).called(1);
+
         verify(
           () => poAttachmentBloc.add(
             const PoAttachmentEvent.initialized(),

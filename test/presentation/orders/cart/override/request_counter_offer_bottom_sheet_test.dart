@@ -34,7 +34,8 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     cartBlocMock = CartBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
-    priceOverrideBlocMock = PriceOverrideBlocMock();
+    locator.registerSingleton<PriceOverrideBloc>(PriceOverrideBlocMock());
+    priceOverrideBlocMock = locator.get<PriceOverrideBloc>();
   });
 
   setUp(() {

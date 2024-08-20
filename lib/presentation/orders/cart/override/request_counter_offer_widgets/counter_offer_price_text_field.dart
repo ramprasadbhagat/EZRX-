@@ -29,6 +29,16 @@ class _CounterOfferPriceTextFieldState
   }
 
   @override
+  void didUpdateWidget(covariant _CounterOfferPriceTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_priceController.text != _counterOfferPriceText) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _priceController.text = _counterOfferPriceText;
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _priceController.dispose();
     super.dispose();
@@ -54,10 +64,11 @@ class _CounterOfferPriceTextFieldState
                     : AutovalidateMode.disabled,
             child: CustomNumericTextField.decimalNumber(
               fieldKey: WidgetKeys.counterOfferPriceField,
-              labelText: '${'Counter offer price'.tr()} (${currency.code})',
+              labelText:
+                  '${context.tr('Counter offer price')} (${currency.code})',
               mandatory: !widget.isDiscountOverrideEnable,
               decoration: InputDecoration(
-                hintText: 'Enter counter offer price'.tr(),
+                hintText: context.tr('Enter counter offer price'),
               ),
               controller: _priceController,
               onChanged: (value) {
@@ -72,9 +83,10 @@ class _CounterOfferPriceTextFieldState
                   ? null
                   : CounterOfferValue(value ?? '').value.fold(
                         (f) => f.mapOrNull(
-                          empty: (_) => 'Please enter counter offer price'.tr(),
+                          empty: (_) =>
+                              context.tr('Please enter counter offer price'),
                           numberMustBiggerThanZero: (_) =>
-                              'Counter offer price cannot be zero'.tr(),
+                              context.tr('Counter offer price cannot be zero'),
                         ),
                         (_) => null,
                       ),

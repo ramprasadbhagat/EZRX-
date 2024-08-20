@@ -38,9 +38,27 @@ class PriceOverrideState with _$PriceOverrideState {
             : item.price.priceValueForPriceOverride;
   }
 
-  String get finalCounterOfferPrice => !item.materialInfo.hidePrice
-      ? discountedPrice.toString()
-      : 'Price Not Available ';
+  String get finalCounterOfferPrice {
+    if (item.materialInfo.hidePrice) {
+      return 'Price Not Available';
+    }
+    if (!_hasPriceOrDiscountOverride) {
+      return 'Not requested';
+    }
+
+    return discountedPrice.toString();
+  }
 
   bool get isInputFieldValid => isPriceOverride || isDiscountOverride;
+
+  bool get hasDiscount => item.showMaterialListPrice;
+
+  double get itemFinalPrice => hasDiscount ? item.finalPrice : item.listPrice;
+
+  bool get _hasPriceOrDiscountOverride => isPriceOverride || isDiscountOverride;
+
+  bool get showWarningMessage =>
+      _hasPriceOrDiscountOverride &&
+      !item.materialInfo.hidePrice &&
+      discountedPrice > itemFinalPrice;
 }

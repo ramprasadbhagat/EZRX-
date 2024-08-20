@@ -38,7 +38,6 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -67,7 +66,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -1425,12 +1423,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             user: eligibilityState.user,
           ),
         );
-    if (!eligibilityState.isCounterOfferVisible &&
-        context.read<PriceOverrideBloc>().state.item.price != Price.empty()) {
-      context.read<PriceOverrideBloc>().add(
-            const PriceOverrideEvent.initialized(),
-          );
-    }
   }
 
   void _initBlocs(BuildContext context) {

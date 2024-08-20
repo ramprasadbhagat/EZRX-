@@ -1841,7 +1841,7 @@ void main() {
 
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
       await requestCounterOfferRobot.tapConfirmButton();
-      requestCounterOfferRobot.verifyPriceTextErrorMessage();
+      requestCounterOfferRobot.verifyPriceTextErrorMessage('SGD');
       await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
       await requestCounterOfferRobot.enterRemark(remark);
       await requestCounterOfferRobot.tapConfirmButton();

@@ -722,7 +722,7 @@ void setupLocator() {
       mixpanelService: locator<MixpanelService>(),
     ),
   );
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => PriceOverrideBloc(
       priceOverrideRepository: locator<PriceOverrideRepository>(),
     ),
@@ -1342,7 +1342,6 @@ void setupLocator() {
       materialFilterRepository: locator<MaterialFilterRepository>(),
     ),
   );
-
 
   //============================================================
   //  Order History Details Po Document Type
@@ -2888,7 +2887,7 @@ void setupLocator() {
   );
 
   locator.registerFactory(
-        () => PrivacyConsentBloc(
+    () => PrivacyConsentBloc(
       userRepository: locator<UserRepository>(),
     ),
   );

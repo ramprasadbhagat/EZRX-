@@ -73,6 +73,8 @@ void main() {
     );
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerFactory(() => AppRouter());
+    locator.registerSingleton<PriceOverrideBloc>(PriceOverrideBlocMock());
+    priceOverrideBloc = locator.get<PriceOverrideBloc>();
     autoRouter = locator<AppRouter>();
     cartItems = (await CartLocalDataSource().upsertCart())
         .where((e) => e.materialInfo.type.typeMaterial)
@@ -101,7 +103,7 @@ void main() {
         userBloc = UserBlocMock();
         customerLicenseBlocMock = CustomerLicenseBlocMock();
         orderEligibilityBloc = OrderEligibilityBlocMock();
-        priceOverrideBloc = PriceOverrideBlocMock();
+
         orderSummaryBlocMock = OrderSummaryBlocMock();
         authBlocMock = AuthBlocMock();
         announcementBlocMock = AnnouncementBlocMock();
@@ -240,11 +242,6 @@ void main() {
 
       await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
-      verify(
-        () => priceOverrideBloc.add(
-          PriceOverrideEvent.setProduct(item: cartItems.first),
-        ),
-      ).called(1);
       expect(counterOfferBottomSheetFinder, findsOneWidget);
     });
 
@@ -283,11 +280,6 @@ void main() {
 
       await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
-      verify(
-        () => priceOverrideBloc.add(
-          PriceOverrideEvent.setProduct(item: cartItems.first),
-        ),
-      ).called(1);
       final counterOfferPriceFieldFinder =
           find.byKey(WidgetKeys.counterOfferPriceField);
       final counterOfferDiscountFieldFinder =
@@ -357,13 +349,6 @@ void main() {
 
       await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
-      verify(
-        () => priceOverrideBloc.add(
-          PriceOverrideEvent.setProduct(
-            item: cartItems.first,
-          ),
-        ),
-      ).called(1);
 
       final counterOfferPriceFieldFinder =
           find.byKey(WidgetKeys.counterOfferPriceField);
@@ -433,11 +418,6 @@ void main() {
 
       await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
-      verify(
-        () => priceOverrideBloc.add(
-          PriceOverrideEvent.setProduct(item: cartItems.first),
-        ),
-      ).called(1);
 
       final counterOfferDiscountFieldFinder =
           find.byKey(WidgetKeys.counterOfferDiscountField);
@@ -479,11 +459,6 @@ void main() {
 
       await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
-      verify(
-        () => priceOverrideBloc.add(
-          PriceOverrideEvent.setProduct(item: cartItems.first),
-        ),
-      ).called(1);
 
       final counterOfferDiscountFieldFinder =
           find.byKey(WidgetKeys.counterOfferDiscountField);
@@ -1329,7 +1304,7 @@ void main() {
       expect(
         find.descendant(
           of: listPriceStrikeThroughComponent,
-          matching: find.text('List price : VND 20.00', findRichText: true),
+          matching: find.text('List price: VND 20.00', findRichText: true),
         ),
         findsOneWidget,
       );

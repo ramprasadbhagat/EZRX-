@@ -18,8 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PriceOverrideEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
+    required TResult Function(PriceAggregate item) initialized,
     required TResult Function(String newPrice) onPriceValueChange,
     required TResult Function(String newValue) onDiscountValueChanged,
     required TResult Function(String newRemarks) onRemarksValueChange,
@@ -31,8 +30,7 @@ mixin _$PriceOverrideEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
+    TResult? Function(PriceAggregate item)? initialized,
     TResult? Function(String newPrice)? onPriceValueChange,
     TResult? Function(String newValue)? onDiscountValueChanged,
     TResult? Function(String newRemarks)? onRemarksValueChange,
@@ -44,8 +42,7 @@ mixin _$PriceOverrideEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
+    TResult Function(PriceAggregate item)? initialized,
     TResult Function(String newPrice)? onPriceValueChange,
     TResult Function(String newValue)? onDiscountValueChanged,
     TResult Function(String newRemarks)? onRemarksValueChange,
@@ -59,7 +56,6 @@ mixin _$PriceOverrideEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
     required TResult Function(_OnPriceValueChange value) onPriceValueChange,
     required TResult Function(_OnDiscountValueChanged value)
         onDiscountValueChanged,
@@ -71,7 +67,6 @@ mixin _$PriceOverrideEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
     TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -82,7 +77,6 @@ mixin _$PriceOverrideEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
     TResult Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -116,6 +110,10 @@ abstract class _$$InitializedImplCopyWith<$Res> {
   factory _$$InitializedImplCopyWith(
           _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
       __$$InitializedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PriceAggregate item});
+
+  $PriceAggregateCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -125,156 +123,13 @@ class __$$InitializedImplCopyWithImpl<$Res>
   __$$InitializedImplCopyWithImpl(
       _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$InitializedImpl implements _Initialized {
-  const _$InitializedImpl();
-
-  @override
-  String toString() {
-    return 'PriceOverrideEvent.initialized()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
-    required TResult Function(String newPrice) onPriceValueChange,
-    required TResult Function(String newValue) onDiscountValueChanged,
-    required TResult Function(String newRemarks) onRemarksValueChange,
-    required TResult Function() validateInputFields,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        fetch,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
-    TResult? Function(String newPrice)? onPriceValueChange,
-    TResult? Function(String newValue)? onDiscountValueChanged,
-    TResult? Function(String newRemarks)? onRemarksValueChange,
-    TResult? Function()? validateInputFields,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
-    TResult Function(String newPrice)? onPriceValueChange,
-    TResult Function(String newValue)? onDiscountValueChanged,
-    TResult Function(String newRemarks)? onRemarksValueChange,
-    TResult Function()? validateInputFields,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
-    required TResult Function(_OnPriceValueChange value) onPriceValueChange,
-    required TResult Function(_OnDiscountValueChanged value)
-        onDiscountValueChanged,
-    required TResult Function(_OnRemarksValueChange value) onRemarksValueChange,
-    required TResult Function(_ValidateInputFields value) validateInputFields,
-    required TResult Function(_Fetch value) fetch,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
-    TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
-    TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
-    TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
-    TResult? Function(_ValidateInputFields value)? validateInputFields,
-    TResult? Function(_Fetch value)? fetch,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
-    TResult Function(_OnPriceValueChange value)? onPriceValueChange,
-    TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
-    TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
-    TResult Function(_ValidateInputFields value)? validateInputFields,
-    TResult Function(_Fetch value)? fetch,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initialized implements PriceOverrideEvent {
-  const factory _Initialized() = _$InitializedImpl;
-}
-
-/// @nodoc
-abstract class _$$SetProductImplCopyWith<$Res> {
-  factory _$$SetProductImplCopyWith(
-          _$SetProductImpl value, $Res Function(_$SetProductImpl) then) =
-      __$$SetProductImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({PriceAggregate item});
-
-  $PriceAggregateCopyWith<$Res> get item;
-}
-
-/// @nodoc
-class __$$SetProductImplCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$SetProductImpl>
-    implements _$$SetProductImplCopyWith<$Res> {
-  __$$SetProductImplCopyWithImpl(
-      _$SetProductImpl _value, $Res Function(_$SetProductImpl) _then)
-      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? item = null,
   }) {
-    return _then(_$SetProductImpl(
+    return _then(_$InitializedImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -293,22 +148,22 @@ class __$$SetProductImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SetProductImpl implements _SetProduct {
-  const _$SetProductImpl({required this.item});
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({required this.item});
 
   @override
   final PriceAggregate item;
 
   @override
   String toString() {
-    return 'PriceOverrideEvent.setProduct(item: $item)';
+    return 'PriceOverrideEvent.initialized(item: $item)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SetProductImpl &&
+            other is _$InitializedImpl &&
             (identical(other.item, item) || other.item == item));
   }
 
@@ -318,14 +173,13 @@ class _$SetProductImpl implements _SetProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SetProductImplCopyWith<_$SetProductImpl> get copyWith =>
-      __$$SetProductImplCopyWithImpl<_$SetProductImpl>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
+    required TResult Function(PriceAggregate item) initialized,
     required TResult Function(String newPrice) onPriceValueChange,
     required TResult Function(String newValue) onDiscountValueChanged,
     required TResult Function(String newRemarks) onRemarksValueChange,
@@ -334,14 +188,13 @@ class _$SetProductImpl implements _SetProduct {
             CustomerCodeInfo customerCodeInfo)
         fetch,
   }) {
-    return setProduct(item);
+    return initialized(item);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
+    TResult? Function(PriceAggregate item)? initialized,
     TResult? Function(String newPrice)? onPriceValueChange,
     TResult? Function(String newValue)? onDiscountValueChanged,
     TResult? Function(String newRemarks)? onRemarksValueChange,
@@ -350,14 +203,13 @@ class _$SetProductImpl implements _SetProduct {
             CustomerCodeInfo customerCodeInfo)?
         fetch,
   }) {
-    return setProduct?.call(item);
+    return initialized?.call(item);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
+    TResult Function(PriceAggregate item)? initialized,
     TResult Function(String newPrice)? onPriceValueChange,
     TResult Function(String newValue)? onDiscountValueChanged,
     TResult Function(String newRemarks)? onRemarksValueChange,
@@ -367,8 +219,8 @@ class _$SetProductImpl implements _SetProduct {
         fetch,
     required TResult orElse(),
   }) {
-    if (setProduct != null) {
-      return setProduct(item);
+    if (initialized != null) {
+      return initialized(item);
     }
     return orElse();
   }
@@ -377,7 +229,6 @@ class _$SetProductImpl implements _SetProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
     required TResult Function(_OnPriceValueChange value) onPriceValueChange,
     required TResult Function(_OnDiscountValueChanged value)
         onDiscountValueChanged,
@@ -385,28 +236,26 @@ class _$SetProductImpl implements _SetProduct {
     required TResult Function(_ValidateInputFields value) validateInputFields,
     required TResult Function(_Fetch value) fetch,
   }) {
-    return setProduct(this);
+    return initialized(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
     TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
     TResult? Function(_ValidateInputFields value)? validateInputFields,
     TResult? Function(_Fetch value)? fetch,
   }) {
-    return setProduct?.call(this);
+    return initialized?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
     TResult Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -414,20 +263,20 @@ class _$SetProductImpl implements _SetProduct {
     TResult Function(_Fetch value)? fetch,
     required TResult orElse(),
   }) {
-    if (setProduct != null) {
-      return setProduct(this);
+    if (initialized != null) {
+      return initialized(this);
     }
     return orElse();
   }
 }
 
-abstract class _SetProduct implements PriceOverrideEvent {
-  const factory _SetProduct({required final PriceAggregate item}) =
-      _$SetProductImpl;
+abstract class _Initialized implements PriceOverrideEvent {
+  const factory _Initialized({required final PriceAggregate item}) =
+      _$InitializedImpl;
 
   PriceAggregate get item;
   @JsonKey(ignore: true)
-  _$$SetProductImplCopyWith<_$SetProductImpl> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -497,8 +346,7 @@ class _$OnPriceValueChangeImpl implements _OnPriceValueChange {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
+    required TResult Function(PriceAggregate item) initialized,
     required TResult Function(String newPrice) onPriceValueChange,
     required TResult Function(String newValue) onDiscountValueChanged,
     required TResult Function(String newRemarks) onRemarksValueChange,
@@ -513,8 +361,7 @@ class _$OnPriceValueChangeImpl implements _OnPriceValueChange {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
+    TResult? Function(PriceAggregate item)? initialized,
     TResult? Function(String newPrice)? onPriceValueChange,
     TResult? Function(String newValue)? onDiscountValueChanged,
     TResult? Function(String newRemarks)? onRemarksValueChange,
@@ -529,8 +376,7 @@ class _$OnPriceValueChangeImpl implements _OnPriceValueChange {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
+    TResult Function(PriceAggregate item)? initialized,
     TResult Function(String newPrice)? onPriceValueChange,
     TResult Function(String newValue)? onDiscountValueChanged,
     TResult Function(String newRemarks)? onRemarksValueChange,
@@ -550,7 +396,6 @@ class _$OnPriceValueChangeImpl implements _OnPriceValueChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
     required TResult Function(_OnPriceValueChange value) onPriceValueChange,
     required TResult Function(_OnDiscountValueChanged value)
         onDiscountValueChanged,
@@ -565,7 +410,6 @@ class _$OnPriceValueChangeImpl implements _OnPriceValueChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
     TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -579,7 +423,6 @@ class _$OnPriceValueChangeImpl implements _OnPriceValueChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
     TResult Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -672,8 +515,7 @@ class _$OnDiscountValueChangedImpl implements _OnDiscountValueChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
+    required TResult Function(PriceAggregate item) initialized,
     required TResult Function(String newPrice) onPriceValueChange,
     required TResult Function(String newValue) onDiscountValueChanged,
     required TResult Function(String newRemarks) onRemarksValueChange,
@@ -688,8 +530,7 @@ class _$OnDiscountValueChangedImpl implements _OnDiscountValueChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
+    TResult? Function(PriceAggregate item)? initialized,
     TResult? Function(String newPrice)? onPriceValueChange,
     TResult? Function(String newValue)? onDiscountValueChanged,
     TResult? Function(String newRemarks)? onRemarksValueChange,
@@ -704,8 +545,7 @@ class _$OnDiscountValueChangedImpl implements _OnDiscountValueChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
+    TResult Function(PriceAggregate item)? initialized,
     TResult Function(String newPrice)? onPriceValueChange,
     TResult Function(String newValue)? onDiscountValueChanged,
     TResult Function(String newRemarks)? onRemarksValueChange,
@@ -725,7 +565,6 @@ class _$OnDiscountValueChangedImpl implements _OnDiscountValueChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
     required TResult Function(_OnPriceValueChange value) onPriceValueChange,
     required TResult Function(_OnDiscountValueChanged value)
         onDiscountValueChanged,
@@ -740,7 +579,6 @@ class _$OnDiscountValueChangedImpl implements _OnDiscountValueChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
     TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -754,7 +592,6 @@ class _$OnDiscountValueChangedImpl implements _OnDiscountValueChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
     TResult Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -846,8 +683,7 @@ class _$OnRemarksValueChangeImpl implements _OnRemarksValueChange {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
+    required TResult Function(PriceAggregate item) initialized,
     required TResult Function(String newPrice) onPriceValueChange,
     required TResult Function(String newValue) onDiscountValueChanged,
     required TResult Function(String newRemarks) onRemarksValueChange,
@@ -862,8 +698,7 @@ class _$OnRemarksValueChangeImpl implements _OnRemarksValueChange {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
+    TResult? Function(PriceAggregate item)? initialized,
     TResult? Function(String newPrice)? onPriceValueChange,
     TResult? Function(String newValue)? onDiscountValueChanged,
     TResult? Function(String newRemarks)? onRemarksValueChange,
@@ -878,8 +713,7 @@ class _$OnRemarksValueChangeImpl implements _OnRemarksValueChange {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
+    TResult Function(PriceAggregate item)? initialized,
     TResult Function(String newPrice)? onPriceValueChange,
     TResult Function(String newValue)? onDiscountValueChanged,
     TResult Function(String newRemarks)? onRemarksValueChange,
@@ -899,7 +733,6 @@ class _$OnRemarksValueChangeImpl implements _OnRemarksValueChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
     required TResult Function(_OnPriceValueChange value) onPriceValueChange,
     required TResult Function(_OnDiscountValueChanged value)
         onDiscountValueChanged,
@@ -914,7 +747,6 @@ class _$OnRemarksValueChangeImpl implements _OnRemarksValueChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
     TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -928,7 +760,6 @@ class _$OnRemarksValueChangeImpl implements _OnRemarksValueChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
     TResult Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -992,8 +823,7 @@ class _$ValidateInputFieldsImpl implements _ValidateInputFields {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
+    required TResult Function(PriceAggregate item) initialized,
     required TResult Function(String newPrice) onPriceValueChange,
     required TResult Function(String newValue) onDiscountValueChanged,
     required TResult Function(String newRemarks) onRemarksValueChange,
@@ -1008,8 +838,7 @@ class _$ValidateInputFieldsImpl implements _ValidateInputFields {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
+    TResult? Function(PriceAggregate item)? initialized,
     TResult? Function(String newPrice)? onPriceValueChange,
     TResult? Function(String newValue)? onDiscountValueChanged,
     TResult? Function(String newRemarks)? onRemarksValueChange,
@@ -1024,8 +853,7 @@ class _$ValidateInputFieldsImpl implements _ValidateInputFields {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
+    TResult Function(PriceAggregate item)? initialized,
     TResult Function(String newPrice)? onPriceValueChange,
     TResult Function(String newValue)? onDiscountValueChanged,
     TResult Function(String newRemarks)? onRemarksValueChange,
@@ -1045,7 +873,6 @@ class _$ValidateInputFieldsImpl implements _ValidateInputFields {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
     required TResult Function(_OnPriceValueChange value) onPriceValueChange,
     required TResult Function(_OnDiscountValueChanged value)
         onDiscountValueChanged,
@@ -1060,7 +887,6 @@ class _$ValidateInputFieldsImpl implements _ValidateInputFields {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
     TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -1074,7 +900,6 @@ class _$ValidateInputFieldsImpl implements _ValidateInputFields {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
     TResult Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -1189,8 +1014,7 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) setProduct,
+    required TResult Function(PriceAggregate item) initialized,
     required TResult Function(String newPrice) onPriceValueChange,
     required TResult Function(String newValue) onDiscountValueChanged,
     required TResult Function(String newRemarks) onRemarksValueChange,
@@ -1205,8 +1029,7 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? setProduct,
+    TResult? Function(PriceAggregate item)? initialized,
     TResult? Function(String newPrice)? onPriceValueChange,
     TResult? Function(String newValue)? onDiscountValueChanged,
     TResult? Function(String newRemarks)? onRemarksValueChange,
@@ -1221,8 +1044,7 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? setProduct,
+    TResult Function(PriceAggregate item)? initialized,
     TResult Function(String newPrice)? onPriceValueChange,
     TResult Function(String newValue)? onDiscountValueChanged,
     TResult Function(String newRemarks)? onRemarksValueChange,
@@ -1242,7 +1064,6 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_SetProduct value) setProduct,
     required TResult Function(_OnPriceValueChange value) onPriceValueChange,
     required TResult Function(_OnDiscountValueChanged value)
         onDiscountValueChanged,
@@ -1257,7 +1078,6 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_SetProduct value)? setProduct,
     TResult? Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult? Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult? Function(_OnRemarksValueChange value)? onRemarksValueChange,
@@ -1271,7 +1091,6 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_SetProduct value)? setProduct,
     TResult Function(_OnPriceValueChange value)? onPriceValueChange,
     TResult Function(_OnDiscountValueChanged value)? onDiscountValueChanged,
     TResult Function(_OnRemarksValueChange value)? onRemarksValueChange,
