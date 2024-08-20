@@ -7,6 +7,7 @@ class SalesOrgQueryMutation {
   String getSalesOrgConfigsQuery(
     bool enableMarketPlace,
     bool enableOrderType,
+    bool enableReferenceLength,
   ) {
     return '''
       query salesOrgConfigs(\$request: SalesOrgConfigRequest) {
@@ -138,6 +139,8 @@ class SalesOrgQueryMutation {
       userId
       userName
     }
+    ${enableReferenceLength ? 'poReferenceLength' : ''}
+    ${enableReferenceLength ? 'referenceNoteLength' : ''}
   }
 }
 

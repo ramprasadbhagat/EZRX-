@@ -66,4 +66,6 @@ final fakeMMSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableComboDeals: false,
   comboDealsUserRole: ComboDealUserRole(0),
   statementOfAccountEnabled: true,
+  poReferenceLength: 35,
+  referenceNoteLength: 132,
 );

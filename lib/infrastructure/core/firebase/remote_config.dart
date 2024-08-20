@@ -65,6 +65,9 @@ class RemoteConfigService {
   bool get enableProductTypeFilter =>
       _remoteConfig.getBool(RemoteConfigConstants.enableProductTypesFilter);
 
+  bool get enableReferenceLength =>
+      _remoteConfig.getBool(RemoteConfigConstants.enableReferenceLength);
+
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
   Future<void> _setInAppDefaultValues() async {
@@ -80,6 +83,7 @@ class RemoteConfigService {
         RemoteConfigConstants.passUserId: false,
         RemoteConfigConstants.enableProductTypesFilter: false,
         RemoteConfigConstants.enableOrderTypeConfig: false,
+        RemoteConfigConstants.enableReferenceLength: false,
       },
     );
   }

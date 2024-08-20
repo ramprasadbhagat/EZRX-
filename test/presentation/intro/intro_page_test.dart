@@ -10,12 +10,14 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
@@ -49,9 +51,9 @@ void main() {
 
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
-    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => AutoRouteMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    autoRouterMock = locator<AppRouter>();
+    autoRouterMock = locator<AutoRouteMock>();
     eligibilityBlocMock = EligibilityBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     aupTcBlocMock = AupTcBlocMock();
@@ -145,10 +147,8 @@ void main() {
         ),
       ).called(1);
       verify(
-        () => salesOrgBlocMock.add(
-          SalesOrgEvent.loadSavedOrganisation(
-            salesOrganisations: [fakeSalesOrganisation],
-          ),
+        () => autoRouterMock.popUntilRouteWithName(
+          HomeNavigationTabbarRoute.name,
         ),
       ).called(1);
     });
@@ -187,10 +187,8 @@ void main() {
         ),
       ).called(1);
       verify(
-        () => salesOrgBlocMock.add(
-          SalesOrgEvent.loadSavedOrganisation(
-            salesOrganisations: [fakeSalesOrganisation],
-          ),
+        () => autoRouterMock.popUntilRouteWithName(
+          HomeNavigationTabbarRoute.name,
         ),
       ).called(1);
     });
@@ -237,10 +235,8 @@ void main() {
         ),
       ).called(1);
       verify(
-        () => salesOrgBlocMock.add(
-          SalesOrgEvent.loadSavedOrganisation(
-            salesOrganisations: [fakeSalesOrganisation],
-          ),
+        () => autoRouterMock.popUntilRouteWithName(
+          HomeNavigationTabbarRoute.name,
         ),
       ).called(1);
     });
@@ -284,10 +280,8 @@ void main() {
       ).called(1);
       // await tester.pumpAndSettle();
       verify(
-        () => salesOrgBlocMock.add(
-          SalesOrgEvent.loadSavedOrganisation(
-            salesOrganisations: [fakeSalesOrganisation],
-          ),
+        () => autoRouterMock.popUntilRouteWithName(
+          HomeNavigationTabbarRoute.name,
         ),
       ).called(1);
     });
@@ -336,10 +330,8 @@ void main() {
       ).called(1);
       // await tester.pumpAndSettle();
       verify(
-        () => salesOrgBlocMock.add(
-          SalesOrgEvent.loadSavedOrganisation(
-            salesOrganisations: [fakeSalesOrganisation],
-          ),
+        () => autoRouterMock.popUntilRouteWithName(
+          HomeNavigationTabbarRoute.name,
         ),
       ).called(1);
     });

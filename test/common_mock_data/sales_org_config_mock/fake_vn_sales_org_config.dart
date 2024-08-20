@@ -67,4 +67,6 @@ final fakeVNSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   comboDealsUserRole: ComboDealUserRole(1),
   statementOfAccountEnabled: true,
   enableTenderOrders: true,
+  poReferenceLength: 35,
+  referenceNoteLength: 132,
 );

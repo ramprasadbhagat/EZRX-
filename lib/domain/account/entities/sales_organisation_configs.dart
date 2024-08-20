@@ -105,6 +105,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required double todayDeliveryFee,
     required double tomorrowDeliveryFee,
     required double saturdayDeliveryFee,
+    required int poReferenceLength,
+    required int referenceNoteLength,
   }) = _SalesOrganisationConfigs;
 
   //ignore:long-method
@@ -198,6 +200,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         standardDeliveryDays: 0,
         todayDeliveryFee: 0,
         tomorrowDeliveryFee: 0,
+        referenceNoteLength: 0,
+        poReferenceLength: 0,
       );
 
   bool get shouldDisplayVATInPercentage =>

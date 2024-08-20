@@ -187,6 +187,10 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     required double todayDeliveryFee,
     @JsonKey(name: 'tomorrowDeliveryFee', defaultValue: 0.0)
     required double tomorrowDeliveryFee,
+    @JsonKey(name: 'poReferenceLength', defaultValue: 0) 
+    required int poReferenceLength,
+    @JsonKey(name: 'referenceNoteLength', defaultValue: 0) 
+    required int referenceNoteLength,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -287,6 +291,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       todayDeliveryFee: configs.todayDeliveryFee,
       tomorrowDeliveryFee: configs.tomorrowDeliveryFee,
       saturdayDeliveryFee: configs.saturdayDeliveryFee,
+      poReferenceLength: configs.poReferenceLength,
+      referenceNoteLength: configs.referenceNoteLength,
     );
   }
 
@@ -386,6 +392,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       standardDeliveryDays: standardDeliveryDays,
       todayDeliveryFee: todayDeliveryFee,
       tomorrowDeliveryFee: tomorrowDeliveryFee,
+      poReferenceLength: poReferenceLength,
+      referenceNoteLength: referenceNoteLength,
     );
   }
 

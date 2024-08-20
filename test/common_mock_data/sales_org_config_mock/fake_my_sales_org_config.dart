@@ -68,6 +68,8 @@ final fakeMYSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableMarketPlace: true,
   mpMinOrderAmount: 0.0,
   statementOfAccountEnabled: true,
+  poReferenceLength: 35,
+  referenceNoteLength: 132,
 );
 
 final fakeMYSalesOrgConfigsWithSmallOrderFee = fakeMYSalesOrgConfigs.copyWith(

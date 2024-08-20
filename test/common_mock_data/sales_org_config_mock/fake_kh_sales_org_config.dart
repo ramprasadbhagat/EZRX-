@@ -66,4 +66,6 @@ final fakeKHSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableComboDeals: true,
   comboDealsUserRole: ComboDealUserRole(1),
   statementOfAccountEnabled: true,
+  poReferenceLength: 35,
+  referenceNoteLength: 132,
 );

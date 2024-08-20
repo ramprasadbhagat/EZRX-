@@ -36,6 +36,7 @@ void main() {
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeEnablePromotionBlacklist = ['ID'];
   const fakeEnableOrderType = true;
+  const fakeEnableReferenceLength = false;
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   setUpAll(
@@ -47,6 +48,8 @@ void main() {
           .thenReturn(fakeEnablePromotionBlacklist);
       when(() => remoteConfigService.enableOrderType)
           .thenReturn(fakeEnableOrderType);
+      when(() => remoteConfigService.enableReferenceLength)
+          .thenReturn(fakeEnableReferenceLength);
       remoteDataSource = SalesOrgRemoteDataSource(
         httpService: service,
         salesOrgQueryMutation: SalesOrgQueryMutation(),
@@ -79,6 +82,7 @@ void main() {
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
               fakeEnableOrderType,
+              fakeEnableReferenceLength,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -116,6 +120,7 @@ void main() {
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
               fakeEnableOrderType,
+              fakeEnableReferenceLength,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -153,6 +158,7 @@ void main() {
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
               fakeEnableOrderType,
+              fakeEnableReferenceLength,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -186,6 +192,7 @@ void main() {
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
               fakeEnableOrderType,
+              fakeEnableReferenceLength,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -224,6 +231,7 @@ void main() {
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
               fakeEnableOrderType,
+              fakeEnableReferenceLength,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -262,6 +270,7 @@ void main() {
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
               fakeEnableOrderType,
+              fakeEnableReferenceLength,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},

@@ -115,6 +115,8 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     todayDeliveryFee
     tomorrowDeliveryFee
     }
+    poReferenceLength
+    referenceNoteLength
 }
 
 "variables": {

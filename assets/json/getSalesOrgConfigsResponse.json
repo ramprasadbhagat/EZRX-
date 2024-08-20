@@ -163,7 +163,9 @@
             "userId": 3368,
             "userName": "testextsalesrep"
           }
-        ]
+        ],
+        "poReferenceLength": 0,
+        "referenceNoteLength": 0
       }
     ]
   }

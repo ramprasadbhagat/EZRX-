@@ -67,4 +67,6 @@ final fakeIDSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   comboDealsUserRole: ComboDealUserRole(0),
   statementOfAccountEnabled: false,
   disablePromotion: true,
+  poReferenceLength: 35,
+  referenceNoteLength: 132,
 );

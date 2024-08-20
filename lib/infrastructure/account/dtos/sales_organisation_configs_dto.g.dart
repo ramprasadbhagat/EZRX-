@@ -140,6 +140,8 @@ _$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
       todayDeliveryFee: (json['todayDeliveryFee'] as num?)?.toDouble() ?? 0.0,
       tomorrowDeliveryFee:
           (json['tomorrowDeliveryFee'] as num?)?.toDouble() ?? 0.0,
+      poReferenceLength: (json['poReferenceLength'] as num?)?.toInt() ?? 0,
+      referenceNoteLength: (json['referenceNoteLength'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
@@ -237,4 +239,6 @@ Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
       'standardDeliveryDays': instance.standardDeliveryDays,
       'todayDeliveryFee': instance.todayDeliveryFee,
       'tomorrowDeliveryFee': instance.tomorrowDeliveryFee,
+      'poReferenceLength': instance.poReferenceLength,
+      'referenceNoteLength': instance.referenceNoteLength,
     };

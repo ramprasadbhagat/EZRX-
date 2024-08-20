@@ -51,7 +51,7 @@ class _DeliveryInfo extends StatelessWidget {
                 deliveryInfoData: state.deliveryInfoData,
                 focusNode:
                     focusNodes[DeliveryInfoLabel.poReference] ?? FocusNode(),
-                maxLength: 35,
+                maxLength: config.poReferenceLength == 0 ? null : config.poReferenceLength,
               ),
               if (config.enableFutureDeliveryDay) const _RequestDeliveryDate(),
               if (config.enableReferenceNote)
@@ -59,7 +59,7 @@ class _DeliveryInfo extends StatelessWidget {
                   labelText: 'Reference note',
                   keyText: 'referenceNoteKey',
                   hintText: 'Enter reference note (Optional)',
-                  maxLength: 132,
+                  maxLength: config.referenceNoteLength == 0 ? null : config.referenceNoteLength,
                   label: DeliveryInfoLabel.referenceNote,
                   deliveryInfoData: state.deliveryInfoData,
                   focusNode: focusNodes[DeliveryInfoLabel.referenceNote] ??

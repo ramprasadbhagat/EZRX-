@@ -32,6 +32,7 @@ class SalesOrgRemoteDataSource {
           'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(
             remoteConfigService.enableMarketPlaceMarkets.contains(market),
             remoteConfigService.enableOrderType,
+            remoteConfigService.enableReferenceLength,
           ),
           'variables': {
             'request': {
