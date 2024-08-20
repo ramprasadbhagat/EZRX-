@@ -15,12 +15,17 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,6 +34,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
+import '../../common_mock_data/mock_other.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -74,6 +80,7 @@ void main() {
   late CustomerInformation customerInformationMock;
   late CartBloc cartBlocMock;
   late EligibilityBloc eligibilityBlocMock;
+  late MixpanelService mixpanelService;
 
   //final fakeMaterialNumber = MaterialNumber('000000000023168451');
   // final fakeMaterialInfo = MaterialInfo(
@@ -112,11 +119,11 @@ void main() {
   );
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+
   setUpAll(() async {
+    mixpanelService = MixpanelServiceMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+    locator.registerLazySingleton<MixpanelService>(() => mixpanelService);
     locator.registerLazySingleton(() => AppRouter());
   });
 
@@ -128,9 +135,8 @@ void main() {
       cartBlocMock = CartBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
-      autoRouterMock = locator<AppRouter>();
+      autoRouterMock = AutoRouteMock();
       eligibilityBlocMock = EligibilityBlocMock();
-
       customerInformationMock =
           await CustomerCodeLocalDataSource().getCustomerCodeList();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -144,6 +150,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial(),
       );
+      when(() => autoRouterMock.currentPath).thenReturn('fake-path');
     });
     tearDownAll(() {
       locator.unregister<AppRouter>();
@@ -172,9 +179,17 @@ void main() {
       );
     }
 
-    //TODO: Fix load customer search widget
-
     testWidgets('Load customer Search Widget', (tester) async {
+      whenListen(
+        eligibilityBlocMock,
+        Stream.fromIterable(
+          [
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ],
+        ),
+      );
       whenListen(
         customerCodeBlocMock,
         Stream.fromIterable(
@@ -190,7 +205,9 @@ void main() {
             CustomerCodeState.initial().copyWith(
               searchKey: SearchKey.search('GSK'),
               isFetching: true,
-              apiFailureOrSuccessOption: none(),
+              apiFailureOrSuccessOption: optionOf(
+                const Right(unit),
+              ),
               customerCodeList: [
                 CustomerCodeInfo.empty(),
               ],
@@ -209,6 +226,72 @@ void main() {
       final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
       expect(customerSearchPage, findsOneWidget);
     });
+
+    testWidgets('verify back button on customer search', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+      );
+
+      when(() => autoRouterMock.maybePop()).thenAnswer((_) async {
+        Navigator.of(tester.element(find.byType(Navigator))).pop();
+        return true;
+      });
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final backButton = find.byKey(WidgetKeys.backButton);
+      expect(backButton, findsOneWidget);
+      await tester.tap(backButton);
+      await tester.pumpAndSettle();
+      verify(() => autoRouterMock.maybePop()).called(1);
+    });
+
+    testWidgets('verify error api customer search', (tester) async {
+      whenListen(
+        customerCodeBlocMock,
+        Stream.fromIterable(
+          [
+            CustomerCodeState.initial().copyWith(
+              isFetching: false,
+              apiFailureOrSuccessOption: optionOf(
+                const Left(ApiFailure.other('Fake-Error')),
+              ),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final customBar = find.byKey(WidgetKeys.customSnackBar);
+      expect(customBar, findsOneWidget);
+    });
+
+    testWidgets('verify none api customer search', (tester) async {
+      whenListen(
+        customerCodeBlocMock,
+        Stream.fromIterable(
+          [
+            CustomerCodeState.initial().copyWith(
+              isFetching: false,
+              apiFailureOrSuccessOption: optionOf(
+                const Right(unit),
+              ),
+            ),
+            CustomerCodeState.initial().copyWith(
+              isFetching: false,
+              apiFailureOrSuccessOption: none(),
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final customBar = find.byKey(WidgetKeys.customSnackBar);
+      expect(customBar, findsNothing);
+    });
+
     testWidgets(
       'Find Full Ship To Name',
       (tester) async {
@@ -231,50 +314,87 @@ void main() {
         final shipToName =
             find.text('fake-name1 fake-name2 fake-name3 fake-name4');
         expect(shipToName, findsOneWidget);
+
+        final shipToAddress = find.byKey(
+          WidgetKeys.shipToAddressOption(
+            fakeCustomerCodeInfo.shipToInfos[0].shipToCustomerCode,
+          ),
+        );
+        expect(shipToAddress, findsOneWidget);
+        await tester.tap(shipToAddress);
+        await tester.pumpAndSettle();
+
+        verify(
+          () => mixpanelService.trackEvent(
+            eventName: TrackingEvents.shipToAddressSave,
+            properties: {
+              TrackingProps.shipToAddress:
+                  fakeCustomerCodeInfo.shipToInfos[0].shipToCustomerCode,
+            },
+          ),
+        ).called(1);
       },
     );
 
-    // testWidgets(
-    //   'Test Customer Code Selector tile and search',
-    //   (tester) async {
-    //     final expectedCustomerCodeListStates = [
-    //       CustomerCodeState.initial().copyWith(isFetching: true),
-    //       CustomerCodeState.initial().copyWith(
-    //         isFetching: false,
-    //         customerCodeInfo: CustomerCodeInfo.empty()
-    //             .copyWith(customerCodeSoldTo: 'fake-123456'),
-    //         customerCodeList: [
-    //           CustomerCodeInfo.empty(),
-    //         ],
-    //       ),
-    //     ];
+    testWidgets(
+      'Verify Change delivery address',
+      (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(shipToInfo: fakeShipToInfo2),
+        );
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            isFetching: false,
+            customerCodeList: [fakeCustomerCodeInfo],
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
 
-    //     whenListen(customerCodeBlocMock,
-    //         Stream.fromIterable(expectedCustomerCodeListStates));
-    //     await tester.pumpWidget(getScopedWidget());
-    //     await tester.pumpAndSettle(const Duration(seconds: 3));
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [PriceAggregate.empty()],
+          ),
+        );
 
-    //     expect(find.byKey(const Key('customerCodeSelect')), findsOneWidget);
-    //     expect(find.text('Please select a customer code'.tr()), findsOneWidget);
+        when(() => autoRouterMock.maybePop())
+            .thenAnswer((invocation) async => true);
 
-    //     if (salesOrgVariants.currentValue == SalesOrgVariant.onn) {
-    //       final customerCodeOption =
-    //           find.byKey(const Key('customerCodeOptionfake-123456'));
-    //       expect(customerCodeOption, findsOneWidget);
-    //       await tester.tap(customerCodeOption);
-    //       await tester.pump();
-    //     }
-    //   },
-    //   variant: customerCodeVariants,
-    // );
-    // testWidgets('Please enter at least 2 characters.', (tester) async {
-    //   await tester.pumpWidget(getScopedWidget());
-    //   await tester.pumpAndSettle(const Duration(seconds: 3));
+        await tester.pumpWidget(getScopedWidget());
 
-    //   final txtForm = find.byKey(const Key('customerCodeSearchField'));
-    //   await tester.enterText(txtForm, '12');
-    //   expect(find.text('12'), findsOneWidget);
-    // });
+        await tester.pumpAndSettle();
+
+        final shipToAddress = find.byKey(
+          WidgetKeys.shipToAddressOption(
+            fakeCustomerCodeInfo.shipToInfos[0].shipToCustomerCode,
+          ),
+        );
+        expect(shipToAddress, findsOneWidget);
+        await tester.tap(shipToAddress);
+        await tester.pumpAndSettle();
+        // expect to find bottom sheet contain deliveryAddress
+        final changeDeliveryAddress = find.text('Change delivery address?');
+        expect(changeDeliveryAddress, findsOneWidget);
+        // tap cancel button
+        final closeButton = find.byKey(WidgetKeys.cancelButton);
+        expect(closeButton, findsOneWidget);
+        await tester.tap(closeButton);
+        await tester.pumpAndSettle();
+        verify(() => autoRouterMock.maybePop()).called(1);
+        // tap confirm button
+        final confirmButton = find.byKey(WidgetKeys.confirmButton);
+        expect(confirmButton, findsOneWidget);
+        await tester.tap(confirmButton);
+        await tester.pumpAndSettle();
+        verify(
+          () =>
+              autoRouterMock.popUntilRouteWithName('HomeNavigationTabbarRoute'),
+        ).called(1);
+      },
+    );
 
     testWidgets('Test have customer code list and emit load more state include',
         (tester) async {
@@ -529,10 +649,30 @@ void main() {
           salesOrganisation: fakeHKSalesOrganisation,
         ),
       );
+      when(
+        () => autoRouterMock.push(
+          SalesOrgSearchRoute(
+            avialableSalesOrgList:
+                UserState.initial().user.userSalesOrganisations,
+          ),
+        ),
+      ).thenAnswer(
+        (_) => Future.value(),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      final customerFlag = find.byKey(WidgetKeys.countryFlag);
-      expect(customerFlag, findsOneWidget);
+
+      final countryFlag = find.byKey(WidgetKeys.countryFlag);
+      expect(countryFlag, findsOneWidget);
+      await tester.tap(countryFlag);
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.fetchAvailableSalesOrg(
+            avialableSalesOrgList:
+                UserState.initial().user.userSalesOrganisations,
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Search bar should display keyword same as searchKey state',
@@ -556,398 +696,73 @@ void main() {
       expect(searchField.controller?.text, searchKey);
     });
 
-    //TODO: Fix customer search widget because change flow of select customer code
+    testWidgets('Verify Search bar behavior', (tester) async {
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final searchField = find.byKey(WidgetKeys.searchBar);
 
-    // testWidgets('Clear Customer code Search', (tester) async {
-    //   when(() => customerCodeBlocMock.state).thenReturn(
-    //     CustomerCodeState.initial().copyWith(
-    //       searchKey: SearchKey.search('GSK'),
-    //       isSearchActive: true,
-    //       isFetching: false,
-    //       customerCodeInfo: CustomerCodeInfo.empty()
-    //           .copyWith(customerCodeSoldTo: 'fake-123456'),
-    //       customerCodeList: [
-    //         CustomerCodeInfo.empty(),
-    //       ],
-    //     ),
-    //   );
-    //   await tester.runAsync(() async {
-    //     await tester.pumpWidget(getScopedWidget());
-    //   });
+      // test onChanged function
+      await tester.enterText(searchField, 'new value');
+      // this pump 2 second to bypass the debounce rule
+      await tester.pump(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
+      verify(
+        () => customerCodeBlocMock.add(
+          CustomerCodeEvent.fetch(
+            searchValue: SearchKey.search('new value'),
+          ),
+        ),
+      ).called(1);
 
-    //   final clearCusromerCodeSearch =
-    //       find.byKey(const Key('clearCustomerCodeSearch'));
-    //   expect(clearCusromerCodeSearch, findsOneWidget);
-    //   await tester.tap(clearCusromerCodeSearch);
-    // });
+      // test on submit action
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      verify(
+        () => customerCodeBlocMock.add(
+          CustomerCodeEvent.fetch(
+            searchValue: SearchKey.search('new value'),
+          ),
+        ),
+      ).called(1);
 
-    // testWidgets('Test onRefresh', (tester) async {
-    //   when(() => customerCodeBlocMock.state).thenReturn(
-    //     CustomerCodeState.initial().copyWith(customerCodeList: [
-    //       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1000'),
-    //       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1100'),
-    //       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1200'),
-    //     ]),
-    //   );
+      // test on clear button
+      final clearButton = find.byKey(WidgetKeys.clearIconKey);
+      await tester.tap(clearButton);
+      await tester.pumpAndSettle();
+      verify(
+        () => customerCodeBlocMock.add(
+          CustomerCodeEvent.fetch(
+            searchValue: SearchKey.empty(),
+          ),
+        ),
+      ).called(1);
+    });
 
-    //   final handle = tester.ensureSemantics();
+    testWidgets('Test onRefresh', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [fakeCustomerCodeInfo],
+        ),
+      );
 
-    //   await tester.pumpWidget(getScopedWidget());
+      await tester.pumpWidget(getScopedWidget());
 
-    //   await tester.drag(
-    //     find.text('1000'),
-    //     const Offset(0.0, 1000.0),
-    //   );
-    //   await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
 
-    //   expect(
-    //     tester.getSemantics(find.byType(RefreshProgressIndicator)),
-    //     matchesSemantics(
-    //       label: 'Refresh',
-    //     ),
-    //   );
+      // Simulate the refresh action
+      await tester.drag(
+        find.byKey(WidgetKeys.customerCodeList),
+        const Offset(0, 300),
+      );
+      await tester.pumpAndSettle();
 
-    //   await tester
-    //       .pump(const Duration(seconds: 1)); // finish the scroll animation
-    //   await tester.pump(
-    //       const Duration(seconds: 1)); // finish the indicator settle animation
-    //   await tester.pump(
-    //       const Duration(seconds: 1)); // finish the indicator hide animation
-
-    //   handle.dispose();
-    // });
-    // testWidgets('Test loadingMore', (tester) async {
-    //   when(() => customerCodeBlocMock.state).thenReturn(
-    //     CustomerCodeState.initial().copyWith(
-    //       customerCodeList: [
-    //         fakeCustomerCodeInfo,
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100728'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100729'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100731'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100732'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100733'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100734'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100738'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100739'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100741'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100742'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100743'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100744'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100748'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100749'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100751'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100752'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100753'),
-    //         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100754')
-    //       ],
-    //       isFetching: true,
-    //     ),
-    //   );
-
-    //   await tester.pumpWidget(getScopedWidget());
-
-    //   final firstListItem = find.text('0000100730');
-
-    //   await tester.drag(
-    //     firstListItem,
-    //     const Offset(0.0, -1000.0),
-    //   );
-    //   await tester.pump(const Duration(seconds: 1));
-
-    //   final loadIndicatorWidget = find.byKey(const Key('loadIndicator'));
-
-    //   expect(loadIndicatorWidget, findsOneWidget);
-    //   await tester.pump(const Duration(seconds: 1));
-    //   await tester.pump(const Duration(seconds: 1));
-    //   await tester.pump(const Duration(seconds: 1));
-    // });
-
-    // testWidgets('Field Submitted Customer code Search', (tester) async {
-    //   final expectedCustomerCodeListStates = [
-    //     CustomerCodeState.initial().copyWith(
-    //         isFetching: false,
-    //         customerCodeList: [],
-    //         apiFailureOrSuccessOption: none(),
-    //         searchKey: SearchKey.empty()),
-    //     CustomerCodeState.initial().copyWith(
-    //       isFetching: false,
-    //       customerCodeList: [],
-    //       searchKey: SearchKey.search('GSK'),
-    //       apiFailureOrSuccessOption: optionOf(
-    //         const Left(
-    //           ApiFailure.other('fake-error'),
-    //         ),
-    //       ),
-    //     ),
-    //   ];
-
-    //   whenListen(customerCodeBlocMock,
-    //       Stream.fromIterable(expectedCustomerCodeListStates),
-    //       initialState: customerCodeBlocMock.state.copyWith(
-    //         isFetching: true,
-    //         canLoadMore: true,
-    //         customerCodeInfo: customerCodeListMock.first,
-    //         customerCodeList: customerCodeListMock,
-    //       ));
-
-    //   await tester.runAsync(() async {
-    //     await tester.pumpWidget(getScopedWidget());
-    //   });
-
-    //   await tester.pump();
-    //   await tester.enterText(
-    //       find.byKey(const Key('customerCodeSearchField')), 'GSK');
-    //   await tester.testTextInput.receiveAction(TextInputAction.done);
-    //   await tester.pump();
-    //   expect(find.text('123'), findsNothing);
-    //   expect(find.text('GSK'), findsOneWidget);
-    // });
-
-    // testWidgets('Search', (tester) async {
-    //   when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial().copyWith(
-    //       isFetching: false,
-    //       customerCodeList: [],
-    //       apiFailureOrSuccessOption: none(),
-    //       searchKey: SearchKey.empty()),);
-
-    //   await tester.runAsync(() async {
-    //     await tester.pumpWidget(getScopedWidget());
-    //   });
-
-    //   await tester.pump();
-    //   await tester.enterText(
-    //       find.byKey(const Key('customerCodeSearchField')), 'GSK');
-    //   await tester.testTextInput.receiveAction(TextInputAction.done);
-    //   verify(
-    //         () => customerCodeBlocMock.add(
-    //       CustomerCodeEvent.autoSearch(
-    //         userInfo: User.empty(),
-    //         selectedSalesOrg: SalesOrganisation.empty(),
-    //         hidecustomer: false,
-    //         searchValue: 'GSK',
-    //       ),
-    //     ),
-    //   ).called(1);
-    // });
-
-    // testWidgets('Auto Search', (tester) async {
-    //   when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial().copyWith(
-    //       isFetching: false,
-    //       customerCodeList: [],
-    //       apiFailureOrSuccessOption: none(),
-    //       searchKey: SearchKey.empty()),);
-
-    //   await tester.runAsync(() async {
-    //     await tester.pumpWidget(getScopedWidget());
-    //   });
-
-    //   await tester.pump();
-    //   await tester.enterText(
-    //       find.byKey(const Key('customerCodeSearchField')), 'GSK');
-    //   await tester.pump(const Duration(milliseconds: 3000));
-    //   verify(
-    //         () => customerCodeBlocMock.add(
-    //           CustomerCodeEvent.autoSearch(
-    //             userInfo: User.empty(),
-    //             selectedSalesOrg: SalesOrganisation.empty(),
-    //             hidecustomer: false,
-    //             searchValue: 'GSK',
-    //           ),
-    //     ),
-    //   ).called(1);
-    // });
-
-    // testWidgets('Test error Message to Customer code Search', (tester) async {
-    //   final expectedCustomerCodeListStates = [
-    //     CustomerCodeState.initial().copyWith(
-    //         isFetching: false,
-    //         customerCodeList: [],
-    //         apiFailureOrSuccessOption: none(),
-    //         searchKey: SearchKey.empty()),
-    //     CustomerCodeState.initial().copyWith(
-    //       isFetching: false,
-    //       customerCodeList: [],
-    //       searchKey: SearchKey.search('12'),
-    //       apiFailureOrSuccessOption: optionOf(
-    //         const Left(
-    //           ApiFailure.other('fake-error'),
-    //         ),
-    //       ),
-    //     ),
-    //   ];
-
-    //   whenListen(customerCodeBlocMock,
-    //       Stream.fromIterable(expectedCustomerCodeListStates),
-    //       initialState: customerCodeBlocMock.state.copyWith(
-    //         isFetching: true,
-    //         canLoadMore: true,
-    //         customerCodeInfo: customerCodeListMock.first,
-    //         customerCodeList: customerCodeListMock,
-    //       ));
-
-    //   await tester.runAsync(() async {
-    //     await tester.pumpWidget(getScopedWidget());
-    //   });
-
-    //   await tester.pump();
-    //   await tester.enterText(
-    //       find.byKey(const Key('customerCodeSearchField')), '12');
-    //   await tester.testTextInput.receiveAction(TextInputAction.done);
-    //   await tester.pump();
-    //   final errorMessage = find.byKey(const Key('snackBarMessage'));
-    //   await tester.pump();
-    //   expect(errorMessage, findsOneWidget);
-    // });
+      verify(
+        () => customerCodeBlocMock.add(
+          CustomerCodeEvent.fetch(
+            searchValue: SearchKey.empty(),
+          ),
+        ),
+      ).called(1);
+    });
   });
-
-  // group('Customer Code Change with Item on cart', () {
-  //   setUpAll(() {
-  //     locator.registerLazySingleton(() => MockAppRouter());
-  //   });
-  //   setUp(() async {
-  //     userBlocMock = UserBlocMock();
-  //     salesOrgBlocMock = SalesOrgBlocMock();
-  //     customerCodeBlocMock = CustomerCodeBlocMock();
-  //     cartBlocMock = CartBlocMock();
-  //     authBlocMock = AuthBlocMock();
-  //     announcementBlocMock = AnnouncementBlocMock();
-  //     autoRouterMock = locator<MockAppRouter>();
-  //     customerCodeListMock =
-  //         await CustomerCodeLocalDataSource().getCustomerCodeList();
-  //     when(() => userBlocMock.state).thenReturn(UserState.initial());
-  //     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-  //     when(() => customerCodeBlocMock.state)
-  //         .thenReturn(CustomerCodeState.initial());
-  //     when(() => cartBlocMock.state).thenReturn(CartState.initial());
-  //     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-  //     when(() => announcementBlocMock.state)
-  //         .thenReturn(AnnouncementState.initial());
-  //     when(() => autoRouterMock.currentPath).thenReturn('fake-path');
-  //     when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
-  //     when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
-  //     when(() => eligibilityBlocMock.state).thenReturn(
-  //       EligibilityState.initial(),
-  //     );
-  //   });
-
-  //   RouteDataScope getScopedWidget() {
-  //     return WidgetUtils.getScopedWidget(
-  //       autoRouterMock: autoRouterMock,
-  //       usingLocalization: true,
-  //       providers: [
-  //         BlocProvider<UserBloc>(create: (context) => userBlocMock),
-  //         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-  //         BlocProvider<CustomerCodeBloc>(
-  //           create: (context) => customerCodeBlocMock,
-  //         ),
-  //         BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //           create: (context) => announcementBlocMock,
-  //         ),
-  //       ],
-  //       child: const CustomerSearchPage(),
-  //     );
-  //   }
-
-  // testWidgets(
-  //   'Test when cart item is not empty',
-  //   (tester) async {
-  //     when(() => cartBlocMock.state)
-  //         .thenReturn(CartState.initial().copyWith(cartItems: [
-  //       CartItem.material(
-  //         PriceAggregate.empty().copyWith(
-  //           materialInfo: fakeMaterialInfo,
-  //         ),
-  //       ),
-  //     ]));
-
-  //     when(() => customerCodeBlocMock.state).thenReturn(
-  //       CustomerCodeState.initial().copyWith(customerCodeList: [
-  //         CustomerCodeInfo.empty().copyWith(
-  //           telephoneNumber: PhoneNumber('1234567890'),
-  //           customerCodeSoldTo: '123456789',
-  //           shipToInfos: <ShipToInfo>[
-  //             ShipToInfo.empty().copyWith(
-  //               shipToCustomerCode: '12345678',
-  //             ),
-  //           ],
-  //           paymentTermDescription: '30 days',
-  //         ),
-  //       ]),
-  //     );
-
-  //     await tester.pumpWidget(getScopedWidget());
-  //     await tester.pump();
-  //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
-  //     expect(customerCodeSelect, findsOneWidget);
-  //     await tester.pump(const Duration(seconds: 1));
-  //     expect(find.byType(ListTile), findsWidgets);
-  //     await tester.tap(
-  //       find.byType(ListTile).first,
-  //     );
-  //     await tester.pump(const Duration(seconds: 1));
-  //     expect(find.text('Change Customer Code'), findsOneWidget);
-  //     await tester.tap(find.text('Cancel'));
-  //     await tester.pumpAndSettle(const Duration(seconds: 3));
-  //     await tester.tap(find.text('Change'));
-  //     await tester.pumpAndSettle(const Duration(seconds: 3));
-  //   },
-  // );
-  // testWidgets(
-  //   'Test when cartList is empty',
-  //   (tester) async {
-  //     when(() => cartBlocMock.state).thenReturn(CartState.initial());
-
-  //     when(() => customerCodeBlocMock.state).thenReturn(
-  //       CustomerCodeState.initial().copyWith(
-  //         customerCodeList: [
-  //           CustomerCodeInfo.empty().copyWith(
-  //             telephoneNumber: PhoneNumber('1234567890'),
-  //             customerCodeSoldTo: '123456789',
-  //             shipToInfos: <ShipToInfo>[
-  //               ShipToInfo.empty().copyWith(
-  //                 shipToCustomerCode: '12345678',
-  //               ),
-  //             ],
-  //             paymentTermDescription: PaymentTermDescription('30 days'),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //     when(() => eligibilityBlocMock.state).thenReturn(
-  //       EligibilityState.initial().copyWith(
-  //         customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-  //           telephoneNumber: PhoneNumber('1234567890'),
-  //           customerCodeSoldTo: '123456789',
-  //           shipToInfos: <ShipToInfo>[
-  //             ShipToInfo.empty().copyWith(
-  //               shipToCustomerCode: '12345678',
-  //             ),
-  //           ],
-  //           paymentTermDescription: PaymentTermDescription('30 days'),
-  //         ),
-  //       ),
-  //     );
-  //     when(() => salesOrgBlocMock.state).thenReturn(
-  //       SalesOrgState.initial().copyWith(
-  //         salesOrganisation:
-  //             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
-  //       ),
-  //     );
-
-  //     await tester.pumpWidget(getScopedWidget());
-  //     await tester.pump();
-  //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
-  //     expect(customerCodeSelect, findsOneWidget);
-  //     await tester.pump(const Duration(seconds: 1));
-  //     expect(find.byType(ListTile), findsWidgets);
-  //     await tester.tap(
-  //       find.byType(ListTile).first,
-  //     );
-  //     await tester.pump(const Duration(seconds: 1));
-  //     expect(find.text('Change Customer Code'), findsNothing);
-  //   },
-  // );
-  // });
 }

@@ -8,11 +8,18 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 // Customer code info
 const _fakeBuilding = 'fakeBuilding';
 const _shipToCustomerCode = '123';
+const _shipToCustomerCode2 = '456';
 const _fakeBillToCustomerCode = 'customer1234';
 const _fakeCustomerCodeSoldTo = 'customer123';
 final fakeShipToInfo = ShipToInfo.empty().copyWith(
   building: _fakeBuilding,
   shipToCustomerCode: _shipToCustomerCode,
+  shipToName: _fakeShipToName,
+);
+
+final fakeShipToInfo2 = ShipToInfo.empty().copyWith(
+  building: _fakeBuilding,
+  shipToCustomerCode: _shipToCustomerCode2,
   shipToName: _fakeShipToName,
 );
 
