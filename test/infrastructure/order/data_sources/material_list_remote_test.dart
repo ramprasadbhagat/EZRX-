@@ -40,8 +40,10 @@ void main() {
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      when(() => remoteConfigService.enableMarketPlaceMarkets).thenReturn(fakeEnableMarketPlaceMarkets);
-      when(() => remoteConfigService.enableProductTypeFilter).thenReturn(fakeEnableProductTypeFilter);
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
+      when(() => remoteConfigService.enableProductTypeFilter)
+          .thenReturn(fakeEnableProductTypeFilter);
       remoteDataSource = MaterialListRemoteDataSource(
         httpService: service,
         config: Config(),
@@ -72,7 +74,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -84,13 +88,14 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
 
       final result = await remoteDataSource.getProductList(
-        gimmickMaterial: false,
+        isGimmickMaterial: false,
         isFavourite: false,
         type: '',
         isProductOffer: false,
@@ -113,15 +118,19 @@ void main() {
         market: fakeMarket,
         isMarketPlace: true,
         isTender: true,
+        isPoisonMaterial: false,
+        isSampleMaterial: false,
       );
 
-      final finalData = makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
       expect(
         result,
         MaterialResponseDto.fromJson(finalData).toDomain(),
       );
     });
-    test('exclude frommAddBonus and IsMarketPlace when they are false', () async {
+    test('exclude frommAddBonus and IsMarketPlace when they are false',
+        () async {
       final variables = {
         'request': {
           'After': 0,
@@ -136,7 +145,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -148,13 +159,14 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
 
       final result = await remoteDataSource.getProductList(
-        gimmickMaterial: false,
+        isGimmickMaterial: false,
         isFavourite: false,
         type: 'material',
         isProductOffer: false,
@@ -177,9 +189,12 @@ void main() {
         market: fakeMarket,
         isMarketPlace: false,
         isTender: false,
+        isPoisonMaterial: false,
+        isSampleMaterial: false,
       );
 
-      final finalData = makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
       expect(
         result,
         MaterialResponseDto.fromJson(finalData).toDomain(),
@@ -208,7 +223,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -220,13 +237,14 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
 
       final result = await remoteDataSource.getProductList(
-        gimmickMaterial: false,
+        isGimmickMaterial: false,
         isFavourite: true,
         type: 'material',
         isProductOffer: true,
@@ -249,9 +267,12 @@ void main() {
         market: fakeMarket,
         isMarketPlace: false,
         isTender: false,
+        isPoisonMaterial: false,
+        isSampleMaterial: false,
       );
 
-      final finalData = makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
       expect(
         result,
         MaterialResponseDto.fromJson(finalData).toDomain(),
@@ -276,7 +297,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
       dioAdapter.onPost(
         '/api/license',
@@ -287,14 +310,15 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
 
       await remoteDataSource
           .getProductList(
-        gimmickMaterial: false,
+        isGimmickMaterial: false,
         isFavourite: true,
         type: 'material',
         isProductOffer: true,
@@ -317,6 +341,8 @@ void main() {
         market: fakeMarket,
         isMarketPlace: false,
         isTender: false,
+        isPoisonMaterial: false,
+        isSampleMaterial: false,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -348,7 +374,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -365,14 +393,15 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
 
       await remoteDataSource
           .getProductList(
-        gimmickMaterial: false,
+        isGimmickMaterial: false,
         isFavourite: true,
         type: 'material',
         isProductOffer: true,
@@ -395,6 +424,8 @@ void main() {
         market: fakeMarket,
         isMarketPlace: false,
         isTender: false,
+        isPoisonMaterial: false,
+        isSampleMaterial: false,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -435,7 +466,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
@@ -450,7 +482,8 @@ void main() {
         market: fakeMarket,
       );
 
-      final finalData = makeResponseCamelCase(jsonEncode(res['data']['GetProductDetails']));
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetProductDetails']));
       expect(
         result,
         MaterialDto.fromJson(finalData).toDomain(),
@@ -486,7 +519,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductDetailsQuery(fakeConfigValue),
+          'query': remoteDataSource.materialListQuery
+              .getProductDetailsQuery(fakeConfigValue),
           'variables': variables,
         }),
       );
@@ -542,7 +576,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductDetailsQuery(fakeConfigValue),
+          'query': remoteDataSource.materialListQuery
+              .getProductDetailsQuery(fakeConfigValue),
           'variables': variables,
         }),
       );
@@ -596,7 +631,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
@@ -611,7 +647,8 @@ void main() {
         language: 'fake-language',
         market: fakeMarket,
       );
-      final finalData = makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
 
       expect(
         result,
@@ -648,12 +685,14 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
 
-      final finalData = makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
 
       await remoteDataSource
           .getComboDealMaterialsPrincipalCode(
@@ -701,12 +740,14 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
 
-      final finalData = makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
 
       await remoteDataSource
           .getComboDealMaterialsPrincipalCode(
@@ -744,7 +785,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
       dioAdapter.onPost(
         '/api/price',
@@ -755,7 +798,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
@@ -795,7 +839,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -807,7 +853,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );
@@ -849,7 +896,9 @@ void main() {
         },
       };
       final res = json.decode(
-        await rootBundle.loadString('assets/json/get_all_products/getAllProductsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_all_products/getAllProductsResponse.json',
+        ),
       );
       dioAdapter.onPost(
         '/api/price',
@@ -865,7 +914,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue, fakeEnableProductTypeFilter),
           'variables': variables,
         }),
       );

@@ -80,6 +80,9 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                   e.selectedMaterialFilter.manufactureListSelected,
               comboOffers: e.selectedMaterialFilter.comboOffers,
               isMarketPlace: e.selectedMaterialFilter.isMarketPlace,
+              isSample: e.selectedMaterialFilter.isSample,
+              isGimmick: e.selectedMaterialFilter.isGimmick,
+              isPoison: e.selectedMaterialFilter.isPoison,
             ),
           ),
         );

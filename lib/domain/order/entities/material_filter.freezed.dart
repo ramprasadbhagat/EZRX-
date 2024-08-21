@@ -34,6 +34,9 @@ mixin _$MaterialFilter {
       throw _privateConstructorUsedError;
   List<MaterialFilterCountry> get countryListSelected =>
       throw _privateConstructorUsedError;
+  bool get isGimmick => throw _privateConstructorUsedError;
+  bool get isSample => throw _privateConstructorUsedError;
+  bool get isPoison => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialFilterCopyWith<MaterialFilter> get copyWith =>
@@ -60,7 +63,10 @@ abstract class $MaterialFilterCopyWith<$Res> {
       Map<MaterialFilterCountry, bool> countryMapOptions,
       List<String> brandList,
       List<String> manufactureListSelected,
-      List<MaterialFilterCountry> countryListSelected});
+      List<MaterialFilterCountry> countryListSelected,
+      bool isGimmick,
+      bool isSample,
+      bool isPoison});
 }
 
 /// @nodoc
@@ -90,6 +96,9 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
     Object? brandList = null,
     Object? manufactureListSelected = null,
     Object? countryListSelected = null,
+    Object? isGimmick = null,
+    Object? isSample = null,
+    Object? isPoison = null,
   }) {
     return _then(_value.copyWith(
       isFavourite: null == isFavourite
@@ -148,6 +157,18 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
           ? _value.countryListSelected
           : countryListSelected // ignore: cast_nullable_to_non_nullable
               as List<MaterialFilterCountry>,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSample: null == isSample
+          ? _value.isSample
+          : isSample // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -174,7 +195,10 @@ abstract class _$$MaterialFilterImplCopyWith<$Res>
       Map<MaterialFilterCountry, bool> countryMapOptions,
       List<String> brandList,
       List<String> manufactureListSelected,
-      List<MaterialFilterCountry> countryListSelected});
+      List<MaterialFilterCountry> countryListSelected,
+      bool isGimmick,
+      bool isSample,
+      bool isPoison});
 }
 
 /// @nodoc
@@ -202,6 +226,9 @@ class __$$MaterialFilterImplCopyWithImpl<$Res>
     Object? brandList = null,
     Object? manufactureListSelected = null,
     Object? countryListSelected = null,
+    Object? isGimmick = null,
+    Object? isSample = null,
+    Object? isPoison = null,
   }) {
     return _then(_$MaterialFilterImpl(
       isFavourite: null == isFavourite
@@ -260,6 +287,18 @@ class __$$MaterialFilterImplCopyWithImpl<$Res>
           ? _value._countryListSelected
           : countryListSelected // ignore: cast_nullable_to_non_nullable
               as List<MaterialFilterCountry>,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSample: null == isSample
+          ? _value.isSample
+          : isSample // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -282,7 +321,10 @@ class _$MaterialFilterImpl extends _MaterialFilter {
       required final List<String> brandList,
       final List<String> manufactureListSelected = const <String>[],
       final List<MaterialFilterCountry> countryListSelected =
-          const <MaterialFilterCountry>[]})
+          const <MaterialFilterCountry>[],
+      this.isGimmick = false,
+      this.isSample = false,
+      this.isPoison = false})
       : _manufactureMapOptions = manufactureMapOptions,
         _countryMapOptions = countryMapOptions,
         _brandList = brandList,
@@ -364,8 +406,18 @@ class _$MaterialFilterImpl extends _MaterialFilter {
   }
 
   @override
+  @JsonKey()
+  final bool isGimmick;
+  @override
+  @JsonKey()
+  final bool isSample;
+  @override
+  @JsonKey()
+  final bool isPoison;
+
+  @override
   String toString() {
-    return 'MaterialFilter(isFavourite: $isFavourite, isMarketPlace: $isMarketPlace, isCovidSelected: $isCovidSelected, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, isTender: $isTender, sortBy: $sortBy, hasAccessToCovidMaterial: $hasAccessToCovidMaterial, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
+    return 'MaterialFilter(isFavourite: $isFavourite, isMarketPlace: $isMarketPlace, isCovidSelected: $isCovidSelected, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, isTender: $isTender, sortBy: $sortBy, hasAccessToCovidMaterial: $hasAccessToCovidMaterial, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected, isGimmick: $isGimmick, isSample: $isSample, isPoison: $isPoison)';
   }
 
   @override
@@ -400,7 +452,13 @@ class _$MaterialFilterImpl extends _MaterialFilter {
             const DeepCollectionEquality().equals(
                 other._manufactureListSelected, _manufactureListSelected) &&
             const DeepCollectionEquality()
-                .equals(other._countryListSelected, _countryListSelected));
+                .equals(other._countryListSelected, _countryListSelected) &&
+            (identical(other.isGimmick, isGimmick) ||
+                other.isGimmick == isGimmick) &&
+            (identical(other.isSample, isSample) ||
+                other.isSample == isSample) &&
+            (identical(other.isPoison, isPoison) ||
+                other.isPoison == isPoison));
   }
 
   @override
@@ -419,7 +477,10 @@ class _$MaterialFilterImpl extends _MaterialFilter {
       const DeepCollectionEquality().hash(_countryMapOptions),
       const DeepCollectionEquality().hash(_brandList),
       const DeepCollectionEquality().hash(_manufactureListSelected),
-      const DeepCollectionEquality().hash(_countryListSelected));
+      const DeepCollectionEquality().hash(_countryListSelected),
+      isGimmick,
+      isSample,
+      isPoison);
 
   @JsonKey(ignore: true)
   @override
@@ -431,21 +492,23 @@ class _$MaterialFilterImpl extends _MaterialFilter {
 
 abstract class _MaterialFilter extends MaterialFilter {
   const factory _MaterialFilter(
-          {final bool isFavourite,
-          final bool isMarketPlace,
-          final bool isCovidSelected,
-          final bool bundleOffers,
-          final bool comboOffers,
-          final bool isProductOffer,
-          final bool isTender,
-          final Sort sortBy,
-          final bool hasAccessToCovidMaterial,
-          required final Map<String, bool> manufactureMapOptions,
-          required final Map<MaterialFilterCountry, bool> countryMapOptions,
-          required final List<String> brandList,
-          final List<String> manufactureListSelected,
-          final List<MaterialFilterCountry> countryListSelected}) =
-      _$MaterialFilterImpl;
+      {final bool isFavourite,
+      final bool isMarketPlace,
+      final bool isCovidSelected,
+      final bool bundleOffers,
+      final bool comboOffers,
+      final bool isProductOffer,
+      final bool isTender,
+      final Sort sortBy,
+      final bool hasAccessToCovidMaterial,
+      required final Map<String, bool> manufactureMapOptions,
+      required final Map<MaterialFilterCountry, bool> countryMapOptions,
+      required final List<String> brandList,
+      final List<String> manufactureListSelected,
+      final List<MaterialFilterCountry> countryListSelected,
+      final bool isGimmick,
+      final bool isSample,
+      final bool isPoison}) = _$MaterialFilterImpl;
   const _MaterialFilter._() : super._();
 
   @override
@@ -476,6 +539,12 @@ abstract class _MaterialFilter extends MaterialFilter {
   List<String> get manufactureListSelected;
   @override
   List<MaterialFilterCountry> get countryListSelected;
+  @override
+  bool get isGimmick;
+  @override
+  bool get isSample;
+  @override
+  bool get isPoison;
   @override
   @JsonKey(ignore: true)
   _$$MaterialFilterImplCopyWith<_$MaterialFilterImpl> get copyWith =>

@@ -120,9 +120,7 @@ class HomeTab extends StatelessWidget {
                           state.user.userCanAccessProducts &&
                           !state.salesOrgConfigs.disablePromotion) ...[
                         const ProductsOnOffer(),
-                        if (!state.salesOrgConfigs.disableBundles &&
-                            !state.salesOrgConfigs.disablePromotion)
-                          const BundleSection(),
+                        if (state.bundleMaterialEnabled) const BundleSection(),
                       ],
                       if (state.haveShipTo &&
                           state.user.userCanAccessOrderHistory)

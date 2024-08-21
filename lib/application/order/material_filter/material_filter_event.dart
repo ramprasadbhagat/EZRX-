@@ -34,4 +34,7 @@ enum MaterialFilterType {
   brand,
   comboOffers,
   isTender,
+  isGimmick,
+  isSample,
+  isPoison,
 }

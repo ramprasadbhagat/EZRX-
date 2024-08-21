@@ -24,6 +24,9 @@ class MaterialFilter with _$MaterialFilter {
     @Default(<String>[]) List<String> manufactureListSelected,
     @Default(<MaterialFilterCountry>[])
     List<MaterialFilterCountry> countryListSelected,
+    @Default(false) bool isGimmick,
+    @Default(false) bool isSample,
+    @Default(false) bool isPoison,
   }) = _MaterialFilter;
 
   factory MaterialFilter.empty() => const MaterialFilter(
@@ -63,6 +66,9 @@ class MaterialFilter with _$MaterialFilter {
     if (bundleOffers) showProductFilter.add('Bundle offers');
     if (isMarketPlace) showProductFilter.add('Marketplace items');
     if (isTender) showProductFilter.add('Tender Contract');
+    if (isGimmick) showProductFilter.add('Gimmick Items');
+    if (isSample) showProductFilter.add('Sample Items');
+    if (isPoison) showProductFilter.add('Poison');
 
     return {
       if (showProductFilter.isNotEmpty)

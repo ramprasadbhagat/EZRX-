@@ -102,6 +102,45 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                 },
                 title: 'Covid-19',
               ),
+            if (eligibilityState.gimmickMaterialEnabled)
+              _ListTileThemeWidget(
+                value: state.materialFilter.isGimmick,
+                onChanged: (value) {
+                  context.read<MaterialFilterBloc>().add(
+                        MaterialFilterEvent.updateSelectedMaterialFilter(
+                          MaterialFilterType.isGimmick,
+                          !state.materialFilter.isGimmick,
+                        ),
+                      );
+                },
+                title: 'Gimmick items',
+              ),
+            if (eligibilityState.sampleMaterialEnabled)
+              _ListTileThemeWidget(
+                value: state.materialFilter.isSample,
+                onChanged: (value) {
+                  context.read<MaterialFilterBloc>().add(
+                        MaterialFilterEvent.updateSelectedMaterialFilter(
+                          MaterialFilterType.isSample,
+                          !state.materialFilter.isSample,
+                        ),
+                      );
+                },
+                title: 'Sample items',
+              ),
+            if (eligibilityState.poisonMaterialEnabled)
+              _ListTileThemeWidget(
+                value: false,
+                onChanged: (value) {
+                  context.read<MaterialFilterBloc>().add(
+                        MaterialFilterEvent.updateSelectedMaterialFilter(
+                          MaterialFilterType.isPoison,
+                          !state.materialFilter.isPoison,
+                        ),
+                      );
+                },
+                title: 'Poison',
+              ),
           ],
         );
       },

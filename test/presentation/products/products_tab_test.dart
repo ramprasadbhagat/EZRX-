@@ -34,7 +34,7 @@ import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/products_tab.dart';
-import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
+import 'package:ezrxmobile/presentation/products/widgets/filter_chip_list/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';

@@ -206,9 +206,9 @@ class EligibilityState with _$EligibilityState {
     return false;
   }
 
-  bool get isGimmickMaterialEnabled =>
-      (user.role.type.isSalesRepRole && salesOrgConfigs.salesOrg.isTH) ||
-      salesOrgConfigs.enableGimmickMaterial;
+  bool get bundleMaterialEnabled =>
+      !salesOrgConfigs.disableBundles &&
+      !salesOrgConfigs.disablePromotion;
 
   bool get isBundleMaterialEnable =>
       !salesOrgConfigs.disableBundles &&
@@ -359,6 +359,17 @@ class EligibilityState with _$EligibilityState {
   // Order type
   //
   //============================================================
+
+  bool get gimmickMaterialEnabled =>
+      user.role.type.isSalesRepRole &&
+      (salesOrgConfigs.salesOrg.isTH || salesOrgConfigs.enableGimmickMaterial);
+
+  bool get sampleMaterialEnabled =>
+      isShowOrderType &&
+      user.selectedOrderType.isZPFB &&
+      salesOrgConfigs.orderTypes.any((e) => e.categoryId.isZPFB && e.enabled);
+
+  bool get poisonMaterialEnabled => salesOrg.isHK;
 
   bool get isInvalidSelectedOrderType =>
       !salesOrgConfigs.orderTypes

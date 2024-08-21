@@ -171,7 +171,7 @@ class _BodyContent extends StatelessWidget {
                           isGimmickMaterialEnabled: context
                               .read<EligibilityBloc>()
                               .state
-                              .isGimmickMaterialEnabled,
+                              .gimmickMaterialEnabled,
                           searchKey: SearchKey.empty(),
                         ),
                       ),
@@ -196,7 +196,7 @@ class _BodyContent extends StatelessWidget {
                           isGimmickMaterialEnabled: context
                               .read<EligibilityBloc>()
                               .state
-                              .isGimmickMaterialEnabled,
+                              .gimmickMaterialEnabled,
                         ),
                       ),
                   isLoading: state.isFetching,

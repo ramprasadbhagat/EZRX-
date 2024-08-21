@@ -21,7 +21,7 @@ import 'package:ezrxmobile/presentation/home/widgets/product_loading_shimmer.dar
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
-import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
+import 'package:ezrxmobile/presentation/products/widgets/filter_chip_list/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';

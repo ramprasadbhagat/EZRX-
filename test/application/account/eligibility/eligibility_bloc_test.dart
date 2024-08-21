@@ -2546,7 +2546,7 @@ void main() {
             user: fakeSalesRepUser,
             salesOrgConfigs: fakeTHSalesOrgConfigs,
           )
-          .isGimmickMaterialEnabled,
+          .gimmickMaterialEnabled,
       true,
     );
 
@@ -2556,14 +2556,17 @@ void main() {
             user: fakeSalesRepUser,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
           )
-          .isGimmickMaterialEnabled,
+          .gimmickMaterialEnabled,
       false,
     );
 
     expect(
       EligibilityState.initial()
-          .copyWith(salesOrgConfigs: fakeTWSalesOrgConfigs)
-          .isGimmickMaterialEnabled,
+          .copyWith(
+            user: fakeSalesRepUser,
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
+          )
+          .gimmickMaterialEnabled,
       true,
     );
   });

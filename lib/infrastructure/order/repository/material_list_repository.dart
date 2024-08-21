@@ -69,9 +69,6 @@ class MaterialListRepository implements IMaterialListRepository {
         shipToCode: shipToInfo.shipToCustomerCode,
         pageSize: pageSize,
         language: user.preferredLanguage.languageCode,
-        gimmickMaterial: user.role.type.isSalesRepRole
-            ? salesOrgConfig.enableGimmickMaterial
-            : false,
         isFavourite: selectedMaterialFilter.isFavourite,
         isCovidSelected: selectedMaterialFilter.isCovidSelectedFilterValue,
         type: selectedMaterialFilter.type,
@@ -93,6 +90,9 @@ class MaterialListRepository implements IMaterialListRepository {
         market: deviceStorage.currentMarket(),
         isMarketPlace: selectedMaterialFilter.isMarketPlace,
         isTender: selectedMaterialFilter.isTender,
+        isPoisonMaterial: selectedMaterialFilter.isPoison,
+        isSampleMaterial: selectedMaterialFilter.isSample,
+        isGimmickMaterial: selectedMaterialFilter.isGimmick,
       );
 
       final bundleData = await getBundleData(
@@ -264,8 +264,6 @@ class MaterialListRepository implements IMaterialListRepository {
         shipToCode: shipToInfo.shipToCustomerCode,
         pageSize: pageSize,
         language: user.settings.languagePreference.languageCode,
-        gimmickMaterial:
-            user.role.type.isSalesRepRole ? enableGimmickMaterial : false,
         type: '',
         countryListCode: [],
         isFavourite: false,
@@ -283,6 +281,9 @@ class MaterialListRepository implements IMaterialListRepository {
         market: deviceStorage.currentMarket(),
         isMarketPlace: false,
         isTender: false,
+        isSampleMaterial: false,
+        isPoisonMaterial: false,
+        isGimmickMaterial: false,
       );
 
       return Right(materialListData);

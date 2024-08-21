@@ -30,7 +30,6 @@ class MaterialListRemoteDataSource {
     required String shipToCode,
     required int pageSize,
     required int offset,
-    required bool gimmickMaterial,
     required String language,
     required bool isFavourite,
     required bool? isCovidSelected,
@@ -48,6 +47,9 @@ class MaterialListRemoteDataSource {
     required String market,
     required bool isMarketPlace,
     required bool isTender,
+    required bool isSampleMaterial,
+    required bool isPoisonMaterial,
+    required bool isGimmickMaterial,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery(
@@ -63,12 +65,14 @@ class MaterialListRemoteDataSource {
           'Language': language,
           'SalesOrg': salesOrgCode,
           'ShipTo': shipToCode,
-          'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
           'isCovid': isCovidSelected,
           if (isMarketPlace) 'isMarketPlace': isMarketPlace,
           if (isTender) 'isTender': isTender,
           if (showSampleItem) 'fromAddBonus': showSampleItem,
+          if (isSampleMaterial) 'isSample': isSampleMaterial,
+          if (isPoisonMaterial) 'isPoison': isPoisonMaterial,
+          if (isGimmickMaterial) 'isGimmick': isGimmickMaterial,
         },
       };
       if (orderByName.isNotEmpty) {

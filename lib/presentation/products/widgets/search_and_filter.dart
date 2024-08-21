@@ -125,6 +125,9 @@ class SearchAndFilter extends StatelessWidget {
         currentFilter.comboOffers != newFilter.comboOffers ||
         currentFilter.isCovidSelected != newFilter.isCovidSelected ||
         currentFilter.isMarketPlace != newFilter.isMarketPlace ||
-        currentFilter.isTender != newFilter.isTender;
+        currentFilter.isTender != newFilter.isTender ||
+        currentFilter.isGimmick != newFilter.isGimmick ||
+        currentFilter.isPoison != newFilter.isPoison ||
+        currentFilter.isSample != newFilter.isSample;
   }
 }

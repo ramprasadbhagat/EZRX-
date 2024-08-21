@@ -178,6 +178,30 @@ class MaterialFilterBloc
               ),
             );
             break;
+          case MaterialFilterType.isGimmick:
+            emit(
+              state.copyWith(
+                materialFilter:
+                state.materialFilter.copyWith(isGimmick: e.key as bool),
+              ),
+            );
+            break;
+          case MaterialFilterType.isSample:
+            emit(
+              state.copyWith(
+                materialFilter:
+                state.materialFilter.copyWith(isSample: e.key as bool),
+              ),
+            );
+            break;
+          case MaterialFilterType.isPoison:
+            emit(
+              state.copyWith(
+                materialFilter:
+                state.materialFilter.copyWith(isPoison: e.key as bool),
+              ),
+            );
+            break;
           default:
             break;
         }
@@ -222,6 +246,8 @@ class MaterialFilterBloc
               countryListSelected: e.selectedMaterialFilter.countryListSelected,
               comboOffers: e.selectedMaterialFilter.comboOffers,
               isMarketPlace: e.selectedMaterialFilter.isMarketPlace,
+              isGimmick: e.selectedMaterialFilter.isGimmick,
+              isSample: e.selectedMaterialFilter.isSample,
             ),
             searchKey: SearchKey.empty(),
           ),

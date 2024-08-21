@@ -179,7 +179,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
-            gimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
+            isGimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.preferredLanguage.languageCode,
             isFavourite: fakeMaterialFilter.isFavourite,
             isCovidSelected: fakeMaterialFilter.isCovidSelected,
@@ -204,6 +204,8 @@ void main() {
             market: fakeMarket,
             isMarketPlace: fakeMaterialFilter.isMarketPlace,
             isTender: fakeMaterialFilter.isTender,
+            isPoisonMaterial: false,
+            isSampleMaterial: false,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -233,7 +235,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
-            gimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
+            isGimmickMaterial: fakeSGSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.preferredLanguage.languageCode,
             isFavourite: fakeMaterialFilterWithComboOffers.isFavourite,
             isCovidSelected: fakeMaterialFilterWithComboOffers.isCovidSelected,
@@ -260,6 +262,8 @@ void main() {
             market: fakeMarket,
             isMarketPlace: fakeMaterialFilterWithComboOffers.isMarketPlace,
             isTender: fakeMaterialFilter.isTender,
+            isPoisonMaterial: false,
+            isSampleMaterial: false,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,
@@ -292,7 +296,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             pageSize: 10,
-            gimmickMaterial: fakeVNSalesOrgConfigs.enableGimmickMaterial,
+            isGimmickMaterial: fakeMaterialFilter.isGimmick,
             language: fakeSalesRepUser.preferredLanguage.languageCode,
             isFavourite: fakeMaterialFilterWithComboOffers.isFavourite,
             isCovidSelected: fakeMaterialFilterWithComboOffers.isCovidSelected,
@@ -319,6 +323,8 @@ void main() {
             market: fakeMarket,
             isMarketPlace: fakeMaterialFilterWithComboOffers.isMarketPlace,
             isTender: fakeMaterialFilter.isTender,
+            isSampleMaterial: fakeMaterialFilter.isSample,
+            isPoisonMaterial: fakeMaterialFilter.isPoison,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,
@@ -618,7 +624,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             language: fakeExternalSalesRepUser
                 .settings.languagePreference.languageCode,
-            gimmickMaterial: false,
+            isGimmickMaterial: false,
             type: '',
             countryListCode: [],
             isFavourite: false,
@@ -637,6 +643,8 @@ void main() {
             market: fakeMarket,
             isMarketPlace: false,
             isTender: false,
+            isPoisonMaterial: false,
+            isSampleMaterial: false,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -668,7 +676,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             language: fakeExternalSalesRepUser
                 .settings.languagePreference.languageCode,
-            gimmickMaterial: false,
+            isGimmickMaterial: false,
             type: '',
             countryListCode: [],
             isFavourite: false,
@@ -687,6 +695,8 @@ void main() {
             market: fakeMarket,
             isMarketPlace: false,
             isTender: false,
+            isPoisonMaterial: false,
+            isSampleMaterial: false,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,

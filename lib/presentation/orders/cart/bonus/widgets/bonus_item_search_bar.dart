@@ -54,7 +54,7 @@ class _BonusItemSearchBar extends StatelessWidget {
             principalData: cartItem.materialInfo.principalData,
             user: context.read<EligibilityBloc>().state.user,
             isGimmickMaterialEnabled:
-                context.read<EligibilityBloc>().state.isGimmickMaterialEnabled,
+                context.read<EligibilityBloc>().state.gimmickMaterialEnabled,
             searchKey: SearchKey.search(searchKey),
           ),
         );
