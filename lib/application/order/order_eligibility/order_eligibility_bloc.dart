@@ -60,8 +60,13 @@ class OrderEligibilityBloc
       ),
       selectDeliveryOption: (e) =>
           emit(state.copyWith(deliveryOption: e.value)),
-      updateUrgentDeliveryFee: (e) async =>
-          emit(state.copyWith(currentUrgentDeliverFee: e.value)),
+      updateUrgentDeliveryFee: (e) async => emit(
+        state.copyWith(
+          currentUrgentDeliverFee: state.configs.deliveryFeesList[state
+              .configs.urgentDeliveryOptionTitlesList
+              .indexOf(e.urgentDeliveryTime)],
+        ),
+      ),
       selectRequestDeliveryDate: (e) {
         emit(state.copyWith(selectedRequestDeliveryDate: e.value));
       },

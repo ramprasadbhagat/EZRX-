@@ -351,20 +351,17 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
           enableUrgentDelivery);
 
   List<double> get deliveryFeesList => [
-        todayDeliveryFee,
-        tomorrowDeliveryFee,
-        saturdayDeliveryFee,
-      ];
-
-  List<bool> get enabledDeliveryOptionsList => [
-        enableTodayUrgentDelivery,
-        enableTomorrowUrgentDelivery,
-        enableSaturdayUrgentDelivery,
+        if (enableTodayUrgentDelivery) todayDeliveryFee,
+        if (enableTomorrowUrgentDelivery) tomorrowDeliveryFee,
+        if (enableSaturdayUrgentDelivery) saturdayDeliveryFee,
       ];
 
   List<String> get urgentDeliveryOptionTitlesList => [
-        UrgentDeliveryTimePickerOption.today().title,
-        UrgentDeliveryTimePickerOption.tomorrow().title,
-        UrgentDeliveryTimePickerOption.saturday().title,
+        if (enableTodayUrgentDelivery)
+          UrgentDeliveryTimePickerOption.today().title,
+        if (enableTomorrowUrgentDelivery)
+          UrgentDeliveryTimePickerOption.tomorrow().title,
+        if (enableSaturdayUrgentDelivery)
+          UrgentDeliveryTimePickerOption.saturday().title,
       ];
 }

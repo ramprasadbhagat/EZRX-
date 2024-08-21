@@ -24,4 +24,13 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
         showErrorMessages: false,
         config: SalesOrganisationConfigs.empty(),
       );
+
+  String get displayDeliveryDate {
+    final dateTime = DateFormat(DateTimeFormatString.apiDateWithDashFormat)
+        .tryParse(deliveryInfoData.deliveryDate.getValue());
+
+    return dateTime == null
+        ? ''
+        : DateTimeUtils.getDeliveryDateString(dateTime);
+  }
 }

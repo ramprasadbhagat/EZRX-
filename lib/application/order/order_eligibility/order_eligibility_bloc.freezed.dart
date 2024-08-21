@@ -30,7 +30,8 @@ mixin _$OrderEligibilityEvent {
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
-    required TResult Function(double value) updateUrgentDeliveryFee,
+    required TResult Function(String urgentDeliveryTime)
+        updateUrgentDeliveryFee,
     required TResult Function(String value) selectRequestDeliveryDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +49,7 @@ mixin _$OrderEligibilityEvent {
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
-    TResult? Function(double value)? updateUrgentDeliveryFee,
+    TResult? Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult? Function(String value)? selectRequestDeliveryDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -66,7 +67,7 @@ mixin _$OrderEligibilityEvent {
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
-    TResult Function(double value)? updateUrgentDeliveryFee,
+    TResult Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult Function(String value)? selectRequestDeliveryDate,
     required TResult orElse(),
   }) =>
@@ -297,7 +298,8 @@ class _$InitializedImpl implements _Initialized {
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
-    required TResult Function(double value) updateUrgentDeliveryFee,
+    required TResult Function(String urgentDeliveryTime)
+        updateUrgentDeliveryFee,
     required TResult Function(String value) selectRequestDeliveryDate,
   }) {
     return initialized(user, salesOrg, configs, customerCodeInfo, shipInfo);
@@ -318,7 +320,7 @@ class _$InitializedImpl implements _Initialized {
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
-    TResult? Function(double value)? updateUrgentDeliveryFee,
+    TResult? Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult? Function(String value)? selectRequestDeliveryDate,
   }) {
     return initialized?.call(
@@ -340,7 +342,7 @@ class _$InitializedImpl implements _Initialized {
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
-    TResult Function(double value)? updateUrgentDeliveryFee,
+    TResult Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult Function(String value)? selectRequestDeliveryDate,
     required TResult orElse(),
   }) {
@@ -554,7 +556,8 @@ class _$UpdateImpl implements _Update {
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
-    required TResult Function(double value) updateUrgentDeliveryFee,
+    required TResult Function(String urgentDeliveryTime)
+        updateUrgentDeliveryFee,
     required TResult Function(String value) selectRequestDeliveryDate,
   }) {
     return update(cartItems, grandTotal, zpSubtotal, mpSubtotal, subTotal);
@@ -575,7 +578,7 @@ class _$UpdateImpl implements _Update {
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
-    TResult? Function(double value)? updateUrgentDeliveryFee,
+    TResult? Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult? Function(String value)? selectRequestDeliveryDate,
   }) {
     return update?.call(
@@ -597,7 +600,7 @@ class _$UpdateImpl implements _Update {
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
-    TResult Function(double value)? updateUrgentDeliveryFee,
+    TResult Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult Function(String value)? selectRequestDeliveryDate,
     required TResult orElse(),
   }) {
@@ -754,7 +757,8 @@ class _$SelectDeliveryOptionImpl implements _SelectDeliveryOption {
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
-    required TResult Function(double value) updateUrgentDeliveryFee,
+    required TResult Function(String urgentDeliveryTime)
+        updateUrgentDeliveryFee,
     required TResult Function(String value) selectRequestDeliveryDate,
   }) {
     return selectDeliveryOption(value);
@@ -775,7 +779,7 @@ class _$SelectDeliveryOptionImpl implements _SelectDeliveryOption {
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
-    TResult? Function(double value)? updateUrgentDeliveryFee,
+    TResult? Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult? Function(String value)? selectRequestDeliveryDate,
   }) {
     return selectDeliveryOption?.call(value);
@@ -796,7 +800,7 @@ class _$SelectDeliveryOptionImpl implements _SelectDeliveryOption {
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
-    TResult Function(double value)? updateUrgentDeliveryFee,
+    TResult Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult Function(String value)? selectRequestDeliveryDate,
     required TResult orElse(),
   }) {
@@ -920,7 +924,8 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
-    required TResult Function(double value) updateUrgentDeliveryFee,
+    required TResult Function(String urgentDeliveryTime)
+        updateUrgentDeliveryFee,
     required TResult Function(String value) selectRequestDeliveryDate,
   }) {
     return validateOrderEligibility();
@@ -941,7 +946,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
-    TResult? Function(double value)? updateUrgentDeliveryFee,
+    TResult? Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult? Function(String value)? selectRequestDeliveryDate,
   }) {
     return validateOrderEligibility?.call();
@@ -962,7 +967,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
-    TResult Function(double value)? updateUrgentDeliveryFee,
+    TResult Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult Function(String value)? selectRequestDeliveryDate,
     required TResult orElse(),
   }) {
@@ -1033,7 +1038,7 @@ abstract class _$$UpdateUrgentDeliveryFeeImplCopyWith<$Res> {
           $Res Function(_$UpdateUrgentDeliveryFeeImpl) then) =
       __$$UpdateUrgentDeliveryFeeImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({double value});
+  $Res call({String urgentDeliveryTime});
 }
 
 /// @nodoc
@@ -1049,13 +1054,13 @@ class __$$UpdateUrgentDeliveryFeeImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = null,
+    Object? urgentDeliveryTime = null,
   }) {
     return _then(_$UpdateUrgentDeliveryFeeImpl(
-      null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as double,
+      null == urgentDeliveryTime
+          ? _value.urgentDeliveryTime
+          : urgentDeliveryTime // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1063,14 +1068,14 @@ class __$$UpdateUrgentDeliveryFeeImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdateUrgentDeliveryFeeImpl implements _UpdateUrgentDeliveryFee {
-  const _$UpdateUrgentDeliveryFeeImpl(this.value);
+  const _$UpdateUrgentDeliveryFeeImpl(this.urgentDeliveryTime);
 
   @override
-  final double value;
+  final String urgentDeliveryTime;
 
   @override
   String toString() {
-    return 'OrderEligibilityEvent.updateUrgentDeliveryFee(value: $value)';
+    return 'OrderEligibilityEvent.updateUrgentDeliveryFee(urgentDeliveryTime: $urgentDeliveryTime)';
   }
 
   @override
@@ -1078,11 +1083,12 @@ class _$UpdateUrgentDeliveryFeeImpl implements _UpdateUrgentDeliveryFee {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateUrgentDeliveryFeeImpl &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.urgentDeliveryTime, urgentDeliveryTime) ||
+                other.urgentDeliveryTime == urgentDeliveryTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
+  int get hashCode => Object.hash(runtimeType, urgentDeliveryTime);
 
   @JsonKey(ignore: true)
   @override
@@ -1106,10 +1112,11 @@ class _$UpdateUrgentDeliveryFeeImpl implements _UpdateUrgentDeliveryFee {
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
-    required TResult Function(double value) updateUrgentDeliveryFee,
+    required TResult Function(String urgentDeliveryTime)
+        updateUrgentDeliveryFee,
     required TResult Function(String value) selectRequestDeliveryDate,
   }) {
-    return updateUrgentDeliveryFee(value);
+    return updateUrgentDeliveryFee(urgentDeliveryTime);
   }
 
   @override
@@ -1127,10 +1134,10 @@ class _$UpdateUrgentDeliveryFeeImpl implements _UpdateUrgentDeliveryFee {
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
-    TResult? Function(double value)? updateUrgentDeliveryFee,
+    TResult? Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult? Function(String value)? selectRequestDeliveryDate,
   }) {
-    return updateUrgentDeliveryFee?.call(value);
+    return updateUrgentDeliveryFee?.call(urgentDeliveryTime);
   }
 
   @override
@@ -1148,12 +1155,12 @@ class _$UpdateUrgentDeliveryFeeImpl implements _UpdateUrgentDeliveryFee {
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
-    TResult Function(double value)? updateUrgentDeliveryFee,
+    TResult Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult Function(String value)? selectRequestDeliveryDate,
     required TResult orElse(),
   }) {
     if (updateUrgentDeliveryFee != null) {
-      return updateUrgentDeliveryFee(value);
+      return updateUrgentDeliveryFee(urgentDeliveryTime);
     }
     return orElse();
   }
@@ -1209,10 +1216,10 @@ class _$UpdateUrgentDeliveryFeeImpl implements _UpdateUrgentDeliveryFee {
 }
 
 abstract class _UpdateUrgentDeliveryFee implements OrderEligibilityEvent {
-  const factory _UpdateUrgentDeliveryFee(final double value) =
+  const factory _UpdateUrgentDeliveryFee(final String urgentDeliveryTime) =
       _$UpdateUrgentDeliveryFeeImpl;
 
-  double get value;
+  String get urgentDeliveryTime;
   @JsonKey(ignore: true)
   _$$UpdateUrgentDeliveryFeeImplCopyWith<_$UpdateUrgentDeliveryFeeImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1298,7 +1305,8 @@ class _$SelectRequestDeliveryDateImpl implements _SelectRequestDeliveryDate {
         update,
     required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
-    required TResult Function(double value) updateUrgentDeliveryFee,
+    required TResult Function(String urgentDeliveryTime)
+        updateUrgentDeliveryFee,
     required TResult Function(String value) selectRequestDeliveryDate,
   }) {
     return selectRequestDeliveryDate(value);
@@ -1319,7 +1327,7 @@ class _$SelectRequestDeliveryDateImpl implements _SelectRequestDeliveryDate {
         update,
     TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
-    TResult? Function(double value)? updateUrgentDeliveryFee,
+    TResult? Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult? Function(String value)? selectRequestDeliveryDate,
   }) {
     return selectRequestDeliveryDate?.call(value);
@@ -1340,7 +1348,7 @@ class _$SelectRequestDeliveryDateImpl implements _SelectRequestDeliveryDate {
         update,
     TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
-    TResult Function(double value)? updateUrgentDeliveryFee,
+    TResult Function(String urgentDeliveryTime)? updateUrgentDeliveryFee,
     TResult Function(String value)? selectRequestDeliveryDate,
     required TResult orElse(),
   }) {

@@ -12,10 +12,7 @@ class _CartPageDeliveryOptions extends StatelessWidget {
       child: BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
         buildWhen: (prev, current) =>
             prev.deliveryOption != current.deliveryOption ||
-            prev.configs.displayDeliveryOptions !=
-                current.configs.displayDeliveryOptions ||
-            prev.isSelectedRequestDeliveryDateEmpty !=
-                current.isSelectedRequestDeliveryDateEmpty,
+            prev.configs != current.configs,
         builder: (context, state) {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -27,9 +24,10 @@ class _CartPageDeliveryOptions extends StatelessWidget {
                       color: ZPColors.neutralsBlack,
                     ),
               ),
+              const SizedBox(height: padding12),
               if (state.configs.disclaimer.isNotEmpty)
                 InfoLabel(
-                  margin: const EdgeInsets.symmetric(vertical: padding12),
+                  margin: const EdgeInsets.only(bottom: padding12),
                   mainColor: ZPColors.blueAccent,
                   textColor: ZPColors.neutralsBlack,
                   textValue: state.configs.disclaimer,
@@ -69,8 +67,7 @@ class _CartPageDeliveryOptions extends StatelessWidget {
                 context.tr(
                   state.deliveryOption.description,
                   namedArgs: {
-                    'number':
-                        '${context.read<OrderEligibilityBloc>().state.configs.standardDeliveryDays}',
+                    'number': '${state.configs.standardDeliveryDays}',
                   },
                 ),
                 style: Theme.of(context)

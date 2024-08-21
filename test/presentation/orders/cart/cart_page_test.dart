@@ -5105,7 +5105,7 @@ void main() {
           expect(find.byType(DatePickerDialog), findsOne);
         });
 
-        testWidgets('Should show dropdown when select urgent delivery',
+        testWidgets('Should show bottom sheet when select urgent delivery',
             (tester) async {
           when(() => cartBloc.state).thenReturn(
             CartState.initial().copyWith(cartProducts: mockCartItems),
@@ -5116,6 +5116,9 @@ void main() {
               configs: SalesOrganisationConfigs.empty().copyWith(
                 enableDeliveryOptions: true,
                 enableUrgentDelivery: true,
+                enableTodayUrgentDelivery: true,
+                enableTomorrowUrgentDelivery: true,
+                enableSaturdayUrgentDelivery: true,
               ),
             ),
           );
@@ -5158,7 +5161,7 @@ void main() {
           ]) {
             expect(
               find.descendant(
-                of: find.byType(DropdownMenuItem<String>),
+                of: find.byType(RadioListTile<String>),
                 matching: find.text(option),
               ),
               findsOne,

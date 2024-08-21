@@ -44,7 +44,7 @@ class _SelectOrderTypeBottomSheetState
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: padding12),
                 child: Text(
-                  'Change order type',
+                  context.tr('Change order type'),
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
@@ -101,7 +101,10 @@ class _ConfirmButton extends StatelessWidget {
       listener: (context, state) {
         _backToHomePage(
           context,
-          'Your cart is cleared, and the Order type has changed to ${selectedOrderType.displayText}',
+          context.tr(
+            'Your cart is cleared, and the Order type has changed to {orderType}',
+            namedArgs: {'orderType': selectedOrderType.displayText},
+          ),
         );
       },
       buildWhen: (previous, current) =>
@@ -122,7 +125,10 @@ class _ConfirmButton extends StatelessWidget {
                 } else {
                   _backToHomePage(
                     context,
-                    'Order type has changed to ${selectedOrderType.displayText}',
+                    context.tr(
+                      'Order type has changed to {orderType}',
+                      namedArgs: {'orderType': selectedOrderType.displayText},
+                    ),
                   );
                 }
               },

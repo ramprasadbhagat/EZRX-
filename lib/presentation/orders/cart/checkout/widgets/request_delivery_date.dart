@@ -17,7 +17,9 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
     final salesConfig = context.read<EligibilityBloc>().state.salesOrgConfigs;
     _startDate = salesConfig.deliveryStartDate;
     _endDate = salesConfig.deliveryEndDate;
-    _deliveryDateText = TextEditingController();
+    _deliveryDateText = TextEditingController(
+      text: context.read<AdditionalDetailsBloc>().state.displayDeliveryDate,
+    );
     super.initState();
   }
 
@@ -84,7 +86,8 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
         context: context,
         firstDate: _startDate,
         lastDate: _endDate,
-        initialDate: _startDate,
+        initialDate:
+            DateTimeUtils.getDeliveryDate(_deliveryDateText.text) ?? _startDate,
         selectableDayPredicate: (DateTime val) => !DateTimeUtils.isWeekend(val),
       );
 }

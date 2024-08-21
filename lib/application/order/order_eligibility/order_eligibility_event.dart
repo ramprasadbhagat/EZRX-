@@ -26,7 +26,7 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
       _ValidateOrderEligibility;
 
   const factory OrderEligibilityEvent.updateUrgentDeliveryFee(
-    double value,
+    String urgentDeliveryTime,
   ) = _UpdateUrgentDeliveryFee;
 
   const factory OrderEligibilityEvent.selectRequestDeliveryDate(

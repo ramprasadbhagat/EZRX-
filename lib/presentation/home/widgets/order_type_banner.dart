@@ -29,7 +29,7 @@ class OrderTypeBanner extends StatelessWidget {
           contentPadding: padding,
           tileColor: ZPColors.bannerBackground,
           title: Text(
-            '${context.tr('Order Type')} : ${state.selectedOrderTypeInfo.displayText}',
+            '${context.tr('Order Type')}: ${state.selectedOrderTypeInfo.displayText}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),

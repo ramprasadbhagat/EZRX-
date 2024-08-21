@@ -5,93 +5,164 @@ class _UrgentDeliveryTimePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.selectedUrgentDeliveryTime !=
+          current.selectedUrgentDeliveryTime,
+      builder: (context, state) => InkWell(
+        onTap: () => showModalBottomSheet(
+          context: context,
+          builder: (_) => _UrgentDeliveryBottomSheet(
+            selectedDeliveryTime: state.selectedUrgentDeliveryTime,
+          ),
+        ).then((value) {
+          if (value is String) {
+            context
+                .read<OrderEligibilityBloc>()
+                .add(OrderEligibilityEvent.updateUrgentDeliveryFee(value));
+          }
+        }),
+        child: Container(
+          key: WidgetKeys.cartUrgentDeliveryTimePicker,
+          padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: ZPColors.inputBorderColor),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  state.selectedUrgentDeliveryTime,
+                  style: Theme.of(context).textTheme.titleMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 8),
+                child: Icon(Icons.keyboard_arrow_down, size: 22),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _UrgentDeliveryBottomSheet extends StatefulWidget {
+  final String selectedDeliveryTime;
+
+  const _UrgentDeliveryBottomSheet({required this.selectedDeliveryTime});
+
+  @override
+  State<_UrgentDeliveryBottomSheet> createState() =>
+      _UrgentDeliveryBottomSheetState();
+}
+
+class _UrgentDeliveryBottomSheetState
+    extends State<_UrgentDeliveryBottomSheet> {
+  late var _selectedDeliveryTime = widget.selectedDeliveryTime;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(padding12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: padding12),
+              child: Text(
+                context.tr('Urgent delivery'),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge
+                    ?.copyWith(fontSize: 20, color: ZPColors.primary),
+              ),
+            ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: padding12),
+                child: _UrgentDeliveryTimeList(
+                  onSelectDeliveryTime: (value) => setState(() {
+                    _selectedDeliveryTime = value;
+                  }),
+                  selectedDeliveryTime: _selectedDeliveryTime,
+                ),
+              ),
+            ),
+            const SizedBox(height: padding24),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    key: WidgetKeys.cancelButton,
+                    onPressed: () => context.router.maybePop(),
+                    child: Text(context.tr('Cancel')),
+                  ),
+                ),
+                const SizedBox(width: padding12),
+                Expanded(
+                  child: ElevatedButton(
+                    key: WidgetKeys.confirmButton,
+                    onPressed: () =>
+                        context.router.maybePop(_selectedDeliveryTime),
+                    child: Text(context.tr('Confirm')),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _UrgentDeliveryTimeList extends StatelessWidget {
+  final String selectedDeliveryTime;
+  final Function(String deliveryTime) onSelectDeliveryTime;
+
+  const _UrgentDeliveryTimeList({
+    required this.selectedDeliveryTime,
+    required this.onSelectDeliveryTime,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final salesOrganisationConfigs =
         context.read<OrderEligibilityBloc>().state.configs;
     final urgentDeliveryOptionTitlesList =
         salesOrganisationConfigs.urgentDeliveryOptionTitlesList;
 
-    final enabledDeliveryOptionsList =
-        salesOrganisationConfigs.enabledDeliveryOptionsList;
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final option = urgentDeliveryOptionTitlesList[index];
 
-    final optionFeesList = salesOrganisationConfigs.deliveryFeesList;
-
-    const borderSide = BorderSide(color: ZPColors.inputBorderColor);
-    const borderRadius = Radius.circular(8);
-
-    return DropdownButtonFormField2(
-      key: WidgetKeys.cartUrgentDeliveryTimePicker,
-      onChanged: (value) {
-        if (value != null) {
-          final valueIndex = urgentDeliveryOptionTitlesList.indexOf(value);
-          context.read<OrderEligibilityBloc>().add(
-                OrderEligibilityEvent.updateUrgentDeliveryFee(
-                  optionFeesList[valueIndex],
-                ),
-              );
-        }
-      },
-      value: urgentDeliveryOptionTitlesList.elementAt(
-        optionFeesList.indexOf(
-          salesOrganisationConfigs.getDeliveryFee,
-        ),
-      ),
-      selectedItemBuilder: (_) => urgentDeliveryOptionTitlesList
-          .map(
-            (option) => Text(
-              context.tr(option),
-              style: const TextStyle(overflow: TextOverflow.ellipsis),
+        return ListTileTheme(
+          horizontalTitleGap: 4,
+          child: RadioListTile<String>(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              option,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
-          )
-          .toList(),
-      items: urgentDeliveryOptionTitlesList.mapIndexed(
-        (index, option) {
-          final enabled = enabledDeliveryOptionsList[index];
-
-          return DropdownMenuItem(
+            controlAffinity: ListTileControlAffinity.leading,
+            dense: true,
+            visualDensity: VisualDensity.compact,
+            onChanged: (value) {
+              if (value != null) onSelectDeliveryTime.call(value);
+            },
+            groupValue: selectedDeliveryTime,
             value: option,
-            enabled: enabled,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                context.tr(option),
-                style: TextStyle(
-                  color: enabled ? null : ZPColors.disableTextColor,
-                ),
-              ),
-            ),
-          );
-        },
-      ).toList(),
-      isExpanded: true,
-      decoration: const InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(0, 8, 12, 8),
-        fillColor: Colors.white,
-        filled: true,
-        focusedBorder: OutlineInputBorder(
-          borderSide: borderSide,
-          borderRadius: BorderRadius.only(
-            topLeft: borderRadius,
-            topRight: borderRadius,
           ),
-        ),
-      ),
-      menuItemStyleData: const MenuItemStyleData(height: 64),
-      dropdownStyleData: const DropdownStyleData(
-        padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            bottomLeft: borderRadius,
-            bottomRight: borderRadius,
-          ),
-          border: Border(
-            bottom: borderSide,
-            right: borderSide,
-            left: borderSide,
-          ),
-          boxShadow: [],
-        ),
-      ),
+        );
+      },
+      itemCount: urgentDeliveryOptionTitlesList.length,
     );
   }
 }

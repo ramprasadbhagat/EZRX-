@@ -37,7 +37,9 @@ class _RequestDeliveryDatePickerState
             final dateTime = await showDatePicker(
               context: context,
               firstDate: state.configs.deliveryStartDate,
-              initialDate: state.configs.deliveryStartDate,
+              initialDate:
+                  DateTimeUtils.getDeliveryDate(_deliveryDateText.text) ??
+                      state.configs.deliveryStartDate,
               lastDate: state.configs.cartDeliveryEndDate,
               selectableDayPredicate: (DateTime val) =>
                   !DateTimeUtils.isWeekend(val),

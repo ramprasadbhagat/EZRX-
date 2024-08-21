@@ -587,6 +587,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
       deliveryOption == DeliveryOption.requestDeliveryDate() &&
       selectedRequestDeliveryDate.isEmpty;
 
+  String get selectedUrgentDeliveryTime =>
+      configs.urgentDeliveryOptionTitlesList.elementAtOrNull(
+        configs.deliveryFeesList.indexOf(currentUrgentDeliverFee),
+      ) ??
+      '';
+
   double get deliveryFee => deliveryOption == DeliveryOption.urgentDelivery()
       ? currentUrgentDeliverFee
       : 0;

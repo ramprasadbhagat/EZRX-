@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeUtils {
+  static DateTime? getDeliveryDate(String dateString) =>
+      DateFormat(DateTimeFormatString.displayDateFormat).tryParse(dateString);
+
   static String getDeliveryDateString(DateTime deliveryDate) =>
       DateFormat(DateTimeFormatString.displayDateFormat).format(deliveryDate);
 
