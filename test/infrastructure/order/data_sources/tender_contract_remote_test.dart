@@ -47,8 +47,9 @@ void main() {
     () {
       test('Get Tender Contract Details', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getTenderContractDetails.json'),
+          await rootBundle.loadString(
+            'assets/json/get_tender_contract_details/getTenderContractDetailsResponse.json',
+          ),
         );
 
         dioAdapter.onPost(

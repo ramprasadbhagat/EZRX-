@@ -14,7 +14,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle
-            .loadString('assets/json/listTransactionsResponse.json'),
+            .loadString('assets/json/list_transactions/listTransactionsResponse.json'),
       );
     });
 

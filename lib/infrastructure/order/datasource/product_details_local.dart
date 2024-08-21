@@ -11,7 +11,9 @@ import 'package:flutter/services.dart';
 class ProductDetailLocalDataSource {
   Future<MaterialInfo> getProductDetails() async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/materialDetailsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/material_details/materialDetailsResponse.json',
+      ),
     );
 
     final finalData = res['data']['materialDetails'];
@@ -21,7 +23,9 @@ class ProductDetailLocalDataSource {
 
   Future<List<MaterialInfo>> getSimilarProduct() async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/similarSearchesResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/similar_searches/similarSearchesResponse.json',
+      ),
     );
 
     final finalData = makeResponseCamelCase(
@@ -36,7 +40,7 @@ class ProductDetailLocalDataSource {
   Future<ProductMetaData> getItemProductMetaData() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getProductQueryResponse.json',
+        'assets/json/get_product/getProductResponse.json',
       ),
     );
     final finalData = data['data']['getProduct'];

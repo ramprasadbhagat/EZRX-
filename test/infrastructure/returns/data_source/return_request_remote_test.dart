@@ -71,8 +71,9 @@ void main() {
       'searchReturnMaterials success',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/searchReturnMaterialsV2Response.json'),
+          await rootBundle.loadString(
+            'assets/json/search_return_materials_v2/searchReturnMaterialsV2Response.json',
+          ),
         );
 
         final fakeVariables = {
@@ -112,8 +113,9 @@ void main() {
       'searchReturnMaterials failure',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/searchReturnMaterialsV2Response.json'),
+          await rootBundle.loadString(
+            'assets/json/search_return_materials_v2/searchReturnMaterialsV2Response.json',
+          ),
         );
 
         final fakeVariables = {
@@ -152,7 +154,7 @@ void main() {
       () async {
         final res = json.decode(
           await rootBundle.loadString(
-            'assets/json/searchReturnMaterialSalesRepV2Response.json',
+            'assets/json/search_return_materials_sales_rep_v2/searchReturnMaterialSalesRepV2Response.json',
           ),
         );
 
@@ -193,8 +195,9 @@ void main() {
       'searchReturnMaterialsForSalesRep failure',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/searchReturnMaterialsV2Response.json'),
+          await rootBundle.loadString(
+            'assets/json/search_return_materials_v2/searchReturnMaterialsV2Response.json',
+          ),
         );
 
         final variables = {
@@ -235,7 +238,7 @@ void main() {
       () async {
         final res = json.decode(
           await rootBundle.loadString(
-            'assets/json/addRequestV2Response.json',
+            'assets/json/add_request_v2/addRequestV2Response.json',
           ),
         );
 
@@ -274,7 +277,7 @@ void main() {
       () async {
         final res = json.decode(
           await rootBundle.loadString(
-            'assets/json/addRequestV2Response.json',
+            'assets/json/add_request_v2/addRequestV2Response.json',
           ),
         );
 

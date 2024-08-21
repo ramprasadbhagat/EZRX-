@@ -7,8 +7,9 @@ import 'package:flutter/services.dart';
 class FAQInfoLocalDataSource {
   Future<FAQInfo> getFAQInfo(String country) async {
     final res = json.decode(
-      await rootBundle
-          .loadString('assets/json/faq${country}marketStaticContent.json'),
+      await rootBundle.loadString(
+        'assets/json/faq_market_static_content/faq${country}marketStaticContent.json',
+      ),
     );
 
     return FAQInfoDto.fromJson(res).toDomain;

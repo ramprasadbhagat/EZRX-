@@ -54,8 +54,9 @@ void main() {
         'Get Notification Settings',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getNotificationSettingsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/get_notification_settings/getNotificationSettingsResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -87,8 +88,9 @@ void main() {
         'Set Notification Settings',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/setNotificationSettingsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/set_notification_settings/setNotificationSettingsResponse.json',
+            ),
           );
           final variables = {
             'request': {

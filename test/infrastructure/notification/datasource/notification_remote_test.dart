@@ -53,7 +53,7 @@ void main() {
     test('Get notification', () async {
       final res = json.decode(
         await rootBundle
-            .loadString('assets/json/getClevertapNotificationsResponse.json'),
+            .loadString('assets/json/get_clevertap_notifications/getClevertapNotificationsResponse.json'),
       );
 
       dioAdapter.onPost(
@@ -89,7 +89,7 @@ void main() {
     test('Get notification', () async {
       final res = json.decode(
         await rootBundle
-            .loadString('assets/json/getClevertapNotificationsResponse.json'),
+            .loadString('assets/json/get_clevertap_notifications/getClevertapNotificationsResponse.json'),
       );
 
       dioAdapter.onPost(
@@ -126,7 +126,7 @@ void main() {
     test('Read notification', () async {
       final res = json.decode(
         await rootBundle.loadString(
-          'assets/json/changeClevertapNotificationStatusResponse.json',
+          'assets/json/change_clevertap_notification_status/changeClevertapNotificationStatusResponse.json',
         ),
       );
 

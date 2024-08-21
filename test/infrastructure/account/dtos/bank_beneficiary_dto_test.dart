@@ -14,7 +14,7 @@ void main() {
       () async {
         data = json.decode(
           await rootBundle.loadString(
-            'assets/json/getPaymentBankInAccountsResponse.json',
+            'assets/json/get_payment_bank_in_accounts/getPaymentBankInAccountsResponse.json',
           ),
         );
       },

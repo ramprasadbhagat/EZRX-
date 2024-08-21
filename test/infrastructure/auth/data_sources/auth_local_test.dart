@@ -21,7 +21,8 @@ void main() {
       '=> loginWithPassword',
       () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/loginAdResponse.json'),
+          await rootBundle
+              .loadString('assets/json/login_ad/loginAdResponse.json'),
         );
         final result = await authLocalDataSource.loginWithPassword();
 
@@ -36,7 +37,8 @@ void main() {
       '=> loginWithOktaToken',
       () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/loginAdResponse.json'),
+          await rootBundle
+              .loadString('assets/json/login_ad/loginAdResponse.json'),
         );
         final result = await authLocalDataSource.loginWithOktaToken();
 
@@ -51,7 +53,8 @@ void main() {
       '=> proxyLoginWithUsername',
       () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
+          await rootBundle
+              .loadString('assets/json/proxy_login/proxyLoginResponse.json'),
         );
         final result = await authLocalDataSource.proxyLoginWithUsername();
 
@@ -66,7 +69,7 @@ void main() {
       '=> getAccessToken',
       () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/getAccessToken.json'),
+          await rootBundle.loadString('assets/json/common/getAccessToken.json'),
         );
         final result = await authLocalDataSource.getAccessToken();
 

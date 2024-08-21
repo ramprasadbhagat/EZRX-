@@ -43,7 +43,7 @@ void main() {
       test('get payment summary', () async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/paymentSummaryListResponse.json'),
+              .loadString('assets/json/payment_summary_list/paymentSummaryListResponse.json'),
         );
 
         final data = jsonEncode({
@@ -90,7 +90,7 @@ void main() {
       test('get transactions', () async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/listTransactionsResponse.json'),
+              .loadString('assets/json/list_transactions/listTransactionsResponse.json'),
         );
 
         final data = jsonEncode({

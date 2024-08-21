@@ -24,7 +24,7 @@ void main() {
             () async {
           final data = json.decode(
             await rootBundle.loadString(
-              'assets/json/searchReturnMaterialSalesRepV2Response.json',
+              'assets/json/search_return_materials_sales_rep_v2/searchReturnMaterialSalesRepV2Response.json',
             ),
           );
 
@@ -44,7 +44,7 @@ void main() {
             () async {
           final data = json.decode(
             await rootBundle.loadString(
-              'assets/json/addRequestV2Response.json',
+              'assets/json/add_request_v2/addRequestV2Response.json',
             ),
           );
 

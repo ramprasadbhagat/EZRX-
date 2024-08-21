@@ -44,8 +44,9 @@ void main() {
       test('Payment in progress Remote Datasource Test status code 200',
           () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/paymentInProgressResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/payment_in_progress/paymentInProgressResponse.json',
+          ),
         );
 
         final data = jsonEncode({
@@ -83,8 +84,9 @@ void main() {
           'Payment in progress should include isMarketPlace when value is true',
           () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/paymentInProgressResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/payment_in_progress/paymentInProgressResponse.json',
+          ),
         );
 
         final data = jsonEncode({

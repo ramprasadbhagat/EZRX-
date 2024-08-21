@@ -13,7 +13,7 @@ void main() {
   group('=> transaction details dto test', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle.loadString('assets/json/getTransactionResponse.json'),
+        await rootBundle.loadString('assets/json/get_transaction/getTransactionResponse.json'),
       );
     });
 

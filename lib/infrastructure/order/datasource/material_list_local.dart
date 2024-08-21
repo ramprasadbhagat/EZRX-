@@ -12,8 +12,8 @@ class MaterialListLocalDataSource {
     bool isComboDealMaterials = false,
   }) async {
     final dataPath = isComboDealMaterials
-        ? 'getComboDealDetailForPrincipleResponseK5.json'
-        : 'getAllProductsResponse.json';
+        ? 'get_combo_deal_for_principalK5/getComboDealDetailForPrincipalK5Response.json'
+        : 'get_all_products/getAllProductsResponse.json';
     final data = json.decode(
       await rootBundle.loadString('assets/json/$dataPath'),
     );
@@ -27,7 +27,7 @@ class MaterialListLocalDataSource {
   Future<MaterialInfo> getProductDetails() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getProductDetailsResponse.json',
+        'assets/json/get_product_details/getProductDetailsResponse.json',
       ),
     );
     final finalData =

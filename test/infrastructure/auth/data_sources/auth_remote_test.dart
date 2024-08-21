@@ -54,7 +54,7 @@ void main() {
         'Login with password success',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/loginAdResponse.json'),
+            await rootBundle.loadString('assets/json/login_ad/loginAdResponse.json'),
           );
 
           dioAdapter.onPost(
@@ -148,7 +148,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/loginAdResponseFailAuthenticate.json'),
+                .loadString('assets/json/login_ad/loginAdResponseFailAuthenticate.json'),
           );
 
           dioAdapter.onPost(
@@ -180,7 +180,7 @@ void main() {
         'Login with Okta success',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/loginAdResponse.json'),
+            await rootBundle.loadString('assets/json/login_ad/loginAdResponse.json'),
           );
 
           dioAdapter.onPost(
@@ -245,7 +245,7 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle
-                  .loadString('assets/json/proxyLoginResponse.json'),
+                  .loadString('assets/json/proxy_login/proxyLoginResponse.json'),
             );
 
             dioAdapter.onPost(
@@ -539,7 +539,7 @@ void main() {
             'getAccessToken success',
             () async {
               final res = json.decode(
-                await rootBundle.loadString('assets/json/getAccessToken.json'),
+                await rootBundle.loadString('assets/json/common/getAccessToken.json'),
               );
 
               final refreshToken =
@@ -606,7 +606,7 @@ void main() {
             'getAccessToken error when the authenticated is coming as false',
             () async {
               final res = json.decode(
-                await rootBundle.loadString('assets/json/getAccessToken.json'),
+                await rootBundle.loadString('assets/json/common/getAccessToken.json'),
               );
 
               final refreshToken =

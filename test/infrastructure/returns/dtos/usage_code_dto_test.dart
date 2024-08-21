@@ -12,7 +12,8 @@ void main() {
   group('Test Usage Code dto ', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle.loadString('assets/json/getUsageListResponse.json'),
+        await rootBundle
+            .loadString('assets/json/get_usage_list/getUsageListResponse.json'),
       );
     });
 

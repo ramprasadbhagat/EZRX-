@@ -26,8 +26,9 @@ void main() {
         'get stock info',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getStockInformationList.json'),
+            await rootBundle.loadString(
+              'assets/json/get_stock_infomation_list/getStockInformationListResponse.json',
+            ),
           );
 
           return List.from(res['data']['getStockInformationLists'])
@@ -40,8 +41,9 @@ void main() {
         'get Stock info list',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/stockInformationListResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/stock_information_list/stockInformationListResponse.json',
+            ),
           );
 
           final result = await localDataSource.getStockInfoList();

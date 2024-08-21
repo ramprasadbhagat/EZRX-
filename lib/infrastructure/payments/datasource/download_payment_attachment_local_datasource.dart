@@ -16,7 +16,7 @@ class DownloadPaymentAttachmentLocalDataSource {
   Future<DownloadPaymentAttachment> getFileDownloadUrl() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentAttachment.json',
+        'assets/json/payment_attachment/paymentAttachmentResponse.json',
       ),
     );
 
@@ -28,7 +28,7 @@ class DownloadPaymentAttachmentLocalDataSource {
   Future<DownloadPaymentAttachment> getPaymentSummaryFileDownloadUrl() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentSummaryAttachment.json',
+        'assets/json/payment_summary_attachment/paymentSummaryAttachmentResponse.json',
       ),
     );
 
@@ -67,7 +67,7 @@ class DownloadPaymentAttachmentLocalDataSource {
   Future<DownloadPaymentAttachment> getECreditDownloadUrl() async {
     final res = json.decode(
       await rootBundle.loadString(
-        'assets/json/eCreditResponse.json',
+        'assets/json/common/eCreditResponse.json',
       ),
     );
     final data = res['data'].first;

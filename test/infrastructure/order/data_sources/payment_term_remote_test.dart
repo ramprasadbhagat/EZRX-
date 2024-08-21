@@ -56,7 +56,7 @@ void main() {
 
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/getPaymentTermsResponse.json'),
+              .loadString('assets/json/common/getPaymentTermsResponse.json'),
         );
 
         dioAdapter.onPost(

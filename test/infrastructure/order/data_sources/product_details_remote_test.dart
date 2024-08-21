@@ -73,8 +73,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/similarSearchesResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/similar_searches/similarSearchesResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -129,8 +130,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/similarSearchesResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/similar_searches/similarSearchesResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -190,8 +192,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/similarSearchesResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/similar_searches/similarSearchesResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -250,8 +253,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/materialDetailsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/material_details/materialDetailsResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -298,8 +302,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/materialDetailsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/material_details/materialDetailsResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -347,8 +352,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/materialDetailsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/material_details/materialDetailsResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -401,8 +407,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getProductQueryResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/get_product/getProductResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -440,8 +447,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getProductQueryResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/get_product/getProductResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -479,8 +487,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getProductQueryResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/get_product/getProductResponse.json',
+            ),
           );
 
           dioAdapter.onPost(

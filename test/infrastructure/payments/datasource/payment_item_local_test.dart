@@ -24,7 +24,7 @@ void main() {
       test('get Payment Items ', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/paymentItemResponse.json',
+            'assets/json/payment_item/paymentItemResponse.json',
           ),
         )['data']['paymentItems'];
 
@@ -43,7 +43,7 @@ void main() {
       test('get Payment Summary Details ', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/paymentSummaryListResponse.json',
+            'assets/json/payment_summary_list/paymentSummaryListResponse.json',
           ),
         )['data']['customerPayment']['customerPaymentResponse'][0];
 
@@ -60,7 +60,7 @@ void main() {
       test('get Payment Summary Details By PaymentId success', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/paymentSummaryListResponse.json',
+            'assets/json/payment_summary_list/paymentSummaryListResponse.json',
           ),
         )['data']['customerPayment']['customerPaymentResponse'];
 
@@ -105,7 +105,7 @@ void main() {
       test('get transaction ', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/getTransactionResponse.json',
+            'assets/json/get_transaction/getTransactionResponse.json',
           ),
         )['data']['getTransaction'];
 

@@ -35,8 +35,9 @@ void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   late NewPaymentRemoteDataSource newPaymentRemoteDataSource;
   final updatePaymentGatewayResponse = json.decode(
-    await rootBundle
-        .loadString('assets/json/updatePaymentGatewayResponse.json'),
+    await rootBundle.loadString(
+      'assets/json/update_payment_gateway/updatePaymentGatewayResponse.json',
+    ),
   );
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
@@ -74,7 +75,7 @@ void main() async {
     () {
       test('pay with statuscode equal to 200', () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/payResponseVN.json'),
+          await rootBundle.loadString('assets/json/pay_VN/payVNResponse.json'),
         );
 
         final data = jsonEncode({
@@ -123,7 +124,7 @@ void main() async {
 
       test('pay should inclue isMarketPlace when value is true', () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/payResponseVN.json'),
+          await rootBundle.loadString('assets/json/pay_VN/payVNResponse.json'),
         );
 
         final data = jsonEncode({
@@ -266,7 +267,7 @@ void main() async {
       test('pay with error missing zzhtmcs on response', () async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/payResponseVNEmptyzzHtmcs.json'),
+              .loadString('assets/json/pay_VN/payVNEmptyzzHtmcsResponse.json'),
         );
 
         final data = jsonEncode({
@@ -319,8 +320,9 @@ void main() async {
     () {
       test('paymentInvoicePdf with statuscode equal to 200', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/paymentInvoiceInfoPdfResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/payment_invoice_info_pdf/paymentInvoiceInfoPdfResponse.json',
+          ),
         );
 
         final data = jsonEncode({
@@ -373,8 +375,9 @@ void main() async {
         'paymentInvoicePdf should include isMarketPlace when value is true',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/paymentInvoiceInfoPdfResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/payment_invoice_info_pdf/paymentInvoiceInfoPdfResponse.json',
+            ),
           );
 
           final data = jsonEncode(
@@ -661,8 +664,9 @@ void main() async {
     () {
       test('fetchPaymentMethod with statuscode equal to 200', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/paymentMethodsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/payment_methods/paymentMethodsResponse.json',
+          ),
         );
 
         final data = jsonEncode({
@@ -703,8 +707,9 @@ void main() async {
         'fetchPaymentMethod should contain isMarketPlace when value is true',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/paymentMethodsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/payment_methods/paymentMethodsResponse.json',
+            ),
           );
 
           final data = jsonEncode({
@@ -818,7 +823,9 @@ void main() async {
 
   test('get Outstanding Invoices', () async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/customerOpenItemsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/customer_open_items/customerOpenItemsResponse.json',
+      ),
     );
 
     final data = jsonEncode({
@@ -869,7 +876,9 @@ void main() async {
 
   test('get available credit notes', () async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/customerOpenItemsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/customer_open_items/customerOpenItemsResponse.json',
+      ),
     );
 
     final data = jsonEncode({
@@ -920,8 +929,9 @@ void main() async {
 
   test('create virtual account', () async {
     final res = json.decode(
-      await rootBundle
-          .loadString('assets/json/createVirtualAccountResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/create_virtual_account/createVirtualAccountResponse.json',
+      ),
     );
 
     final data = jsonEncode({
@@ -964,8 +974,9 @@ void main() async {
 
   test('get principal cutoffs', () async {
     final res = json.decode(
-      await rootBundle
-          .loadString('assets/json/getPrincipalCutoffsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_principal_cutoffs/getPrincipalCutoffsResponse.json',
+      ),
     );
 
     final data = jsonEncode({

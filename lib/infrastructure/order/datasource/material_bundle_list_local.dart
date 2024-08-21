@@ -11,7 +11,7 @@ class MaterialBundleListLocalDatasource {
   Future<List<MaterialInfo>> getMaterialBundleList() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getMaterialBundleListResponse.json',
+        'assets/json/get_material_bundle_list/getMaterialBundleListResponse.json',
       ),
     );
 
@@ -25,7 +25,7 @@ class MaterialBundleListLocalDatasource {
   Future<List<MaterialInfo>> getMaterialBundleListForSalesRep() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getMaterialBundleListForSalesRepResponse.json',
+        'assets/json/get_material_bundle_list_for_sales_rep/getMaterialBundleListForSalesRepResponse.json',
       ),
     );
 

@@ -12,7 +12,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle
-            .loadString('assets/json/getClevertapNotificationsResponse.json'),
+            .loadString('assets/json/get_clevertap_notifications/getClevertapNotificationsResponse.json'),
       );
     });
 

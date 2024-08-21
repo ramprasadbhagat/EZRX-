@@ -83,7 +83,7 @@ void main() {
               ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson();
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getorderHistoryFetchByItemsResponse.json',
+              'assets/json/get_order_history_fetch_by_items/getOrderHistoryFetchByItemsResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -183,7 +183,7 @@ void main() {
               ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson();
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getorderHistoryFetchByItemsResponse.json',
+              'assets/json/get_order_history_fetch_by_items/getOrderHistoryFetchByItemsResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -239,7 +239,7 @@ void main() {
               ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson();
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getorderHistoryFetchByItemsResponse.json',
+              'assets/json/get_order_history_fetch_by_items/getOrderHistoryFetchByItemsResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -291,7 +291,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getInvoiceForOrdersResponse.json',
+              'assets/json/get_invoice_for_orders/getInvoiceForOrdersResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -329,7 +329,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getInvoiceForOrdersResponse.json',
+              'assets/json/get_invoice_for_orders/getInvoiceForOrdersResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -368,7 +368,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getInvoiceForOrdersResponse.json',
+              'assets/json/get_invoice_for_orders/getInvoiceForOrdersResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -424,7 +424,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getInvoiceDetailsForOrder.json',
+              'assets/json/get_invoice_details_for_order/getInvoiceDetailsForOrderResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -471,7 +471,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getInvoiceDetailsForOrder.json',
+              'assets/json/get_invoice_details_for_order/getInvoiceDetailsForOrderResponse.json',
             ),
           );
           dioAdapter.onGet(
@@ -519,7 +519,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getInvoiceDetailsForOrder.json',
+              'assets/json/get_invoice_details_for_order/getInvoiceDetailsForOrderResponse.json',
             ),
           );
           dioAdapter.onGet(

@@ -15,7 +15,7 @@ void main() {
     setUp(() async {
       final listData = json.decode(
         await rootBundle.loadString(
-          'assets/json/getClaimSubmissions.json',
+          'assets/json/get_claim_submissions/getClaimSubmissionsResponse.json',
         ),
       );
       data = listData['data']['getClaimList'][0];

@@ -28,7 +28,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getorderHistoryFetchByItemsResponse.json',
+              'assets/json/get_order_history_fetch_by_items/getOrderHistoryFetchByItemsResponse.json',
             ),
           );
 

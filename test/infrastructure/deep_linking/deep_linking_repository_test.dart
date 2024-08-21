@@ -422,8 +422,9 @@ void main() {
       );
 
       final data = json.decode(
-        await rootBundle
-            .loadString('assets/json/getMaterialFilterForDeepLink.json'),
+        await rootBundle.loadString(
+          'assets/json/get_material_filter/getMaterialFilterForDeepLinkResponse.json',
+        ),
       )['data']['GetFilterList'];
       final materialFilterMockData =
           MaterialFilterDto.fromJson(data).toDomain();

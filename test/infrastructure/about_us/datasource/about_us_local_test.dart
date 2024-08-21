@@ -28,7 +28,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/$fileName',
+              'assets/json/about_us/market_static_content/$fileName',
             ),
           );
 

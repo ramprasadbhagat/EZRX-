@@ -75,7 +75,7 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle.loadString(
-                'assets/json/customerDocumentHeaderV2Response.json',
+                'assets/json/customer_document_header_v2/customerDocumentHeaderV2Response.json',
               ),
             );
 
@@ -121,7 +121,7 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle.loadString(
-                'assets/json/customerDocumentHeaderV2Response.json',
+                'assets/json/customer_document_header_v2/customerDocumentHeaderV2Response.json',
               ),
             );
             final query = {...variables};
@@ -234,7 +234,7 @@ void main() {
         test('=> filterCredits with status code 200', () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/customerDocumentHeaderV2Response.json',
+              'assets/json/customer_document_header_v2/customerDocumentHeaderV2Response.json',
             ),
           );
 
@@ -287,7 +287,7 @@ void main() {
             () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/customerDocumentHeaderV2Response.json',
+              'assets/json/customer_document_header_v2/customerDocumentHeaderV2Response.json',
             ),
           );
 
@@ -446,7 +446,7 @@ void main() {
 
             final res = json.decode(
               await rootBundle.loadString(
-                'assets/json/customerDocumentHeaderV2Response.json',
+                'assets/json/customer_document_header_v2/customerDocumentHeaderV2Response.json',
               ),
             );
 
@@ -512,7 +512,7 @@ void main() {
 
             final res = json.decode(
               await rootBundle.loadString(
-                'assets/json/customerDocumentHeaderV2Response.json',
+                'assets/json/customer_document_header_v2/customerDocumentHeaderV2Response.json',
               ),
             );
 

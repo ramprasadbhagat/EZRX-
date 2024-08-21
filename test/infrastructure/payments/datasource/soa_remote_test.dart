@@ -47,7 +47,7 @@ void main() {
   group('SOA remote data source test', () {
     test('Get Soa', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/listSoaResponse.json'),
+        await rootBundle.loadString('assets/json/common/listSoaResponse.json'),
       );
 
       dioAdapter.onPost(
@@ -71,7 +71,7 @@ void main() {
 
     test('Get Soa should include isMarketPlace when value is true', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/listSoaResponse.json'),
+        await rootBundle.loadString('assets/json/common/listSoaResponse.json'),
       );
 
       dioAdapter.onPost(

@@ -48,7 +48,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getSalesRepInfoResponse.json'),
+                .loadString('assets/json/get_sales_rep_info/getSalesRepInfoResponse.json'),
           );
           final data = {'userName': saleOrgName};
           dioAdapter.onPost(

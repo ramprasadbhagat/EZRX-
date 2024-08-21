@@ -28,7 +28,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getOrderDetailsResponse.json'),
+                .loadString('assets/json/get_order_details/getOrderDetailsResponse.json'),
           );
 
           final result = await localDataSource.getOrderHistoryDetails();

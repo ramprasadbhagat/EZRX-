@@ -46,7 +46,7 @@ void main() {
     announcementMock = await AnnouncementLocalDataSource().getAnnouncements();
     final rawData = json.decode(
       await rootBundle
-          .loadString('assets/json/getAnnouncementsCustomResponse.json'),
+          .loadString('assets/json/get_announcements/getAnnouncementsCustomResponse.json'),
     );
 
     announcementCustomMock =

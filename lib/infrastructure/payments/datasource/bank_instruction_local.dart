@@ -10,7 +10,7 @@ class BankInstructionLocalDataSource {
   Future<BankInstruction> getBankInstruction(String bankIdentification) async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/bankPaymentInstructionData.json',
+        'assets/json/common/bankPaymentInstructionData.json',
       ),
     );
     for (final dynamic detail in data) {

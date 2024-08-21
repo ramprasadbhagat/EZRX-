@@ -9,8 +9,9 @@ class SalesOrgLocalDataSource {
 
   Future<SalesOrganisationConfigs> getConfig() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getSalesOrgConfigsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_sales_org_configs/getSalesOrgConfigsResponse.json',
+      ),
     );
 
     return SalesOrganisationConfigsDto.fromJson(

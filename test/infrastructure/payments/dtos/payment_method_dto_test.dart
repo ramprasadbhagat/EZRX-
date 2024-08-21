@@ -14,7 +14,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle.loadString(
-          'assets/json/paymentMethodsResponse.json',
+          'assets/json/payment_methods/paymentMethodsResponse.json',
         ),
       );
     });

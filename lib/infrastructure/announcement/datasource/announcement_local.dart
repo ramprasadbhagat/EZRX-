@@ -9,7 +9,9 @@ import 'package:flutter/services.dart';
 class AnnouncementLocalDataSource {
   Future<Announcement> getAnnouncements() async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/getAnnouncementsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_announcements/getAnnouncementsResponse.json',
+      ),
     );
 
     return AnnouncementDto.fromJson(res['data']['getAnnouncements'][0])
@@ -18,7 +20,9 @@ class AnnouncementLocalDataSource {
 
   Future<MaintenanceItem> getMaintenanceBanners() async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/getMaintenanceBannersResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_maintenance/getMaintenanceBannersResponse.json',
+      ),
     );
 
     return MaintenanceItemDto.fromJson(res['data']['item']).toDomain;

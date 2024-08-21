@@ -28,7 +28,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/customerDocumentDetailsResponse.json',
+              'assets/json/customer_document_details/customerDocumentDetailsResponse.json',
             ),
           );
           final details = res['data']['customerDocumentDetails'];

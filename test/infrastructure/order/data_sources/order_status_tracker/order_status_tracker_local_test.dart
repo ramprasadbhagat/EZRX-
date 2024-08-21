@@ -26,7 +26,7 @@ void main() {
         'Get Order Status Tracker from local source',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/getZyllemv2Response.json'),
+            await rootBundle.loadString('assets/json/get_zyllem_v2/getZyllemv2Response.json'),
           );
           final result = await localDataSource.getOrderStatusTracker();
           final finalData = res['data']['zyllemStatusV2']['Entry'];

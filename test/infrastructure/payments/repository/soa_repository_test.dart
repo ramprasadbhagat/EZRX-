@@ -46,7 +46,7 @@ void main() {
     );
     soaMockList = [Soa.empty()];
     res = json.decode(
-      await rootBundle.loadString('assets/json/listSoaResponse.json'),
+      await rootBundle.loadString('assets/json/common/listSoaResponse.json'),
     );
     fakeSoaMockList = List.from(res['data'])
         .map((e) => SoaDto.fromJson(e).toDomain())

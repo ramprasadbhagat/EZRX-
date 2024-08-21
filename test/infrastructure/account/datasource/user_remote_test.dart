@@ -65,7 +65,7 @@ void main() {
         when(() => remoteConfigService.passUserId).thenReturn(true);
 
         final res = json.decode(
-          await rootBundle.loadString('assets/json/userResponse.json'),
+          await rootBundle.loadString('assets/json/user/userResponse.json'),
         );
 
         dioAdapter.onPost(
@@ -190,7 +190,8 @@ void main() {
       'update TC',
       () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/tncdateUpdateResponse.json'),
+          await rootBundle
+              .loadString('assets/json/tnc_date/tncdateUpdateResponse.json'),
         );
         final data = {
           'isAcceptTC': true,
@@ -218,7 +219,8 @@ void main() {
       'get announcement',
       () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/tncdateUpdateResponse.json'),
+          await rootBundle
+              .loadString('assets/json/tnc_date/tncdateUpdateResponse.json'),
         );
 
         dioAdapter.onPost(
@@ -244,7 +246,8 @@ void main() {
       'success',
       () async {
         final response = json.decode(
-          await rootBundle.loadString('assets/json/tncdateUpdateResponse.json'),
+          await rootBundle
+              .loadString('assets/json/tnc_date/tncdateUpdateResponse.json'),
         );
 
         dioAdapter.onPost(
@@ -332,8 +335,9 @@ void main() {
       'success',
       () async {
         final response = json.decode(
-          await rootBundle
-              .loadString('assets/json/updateSelectedOrderTypeResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/update_selected_order_type/updateSelectedOrderTypeResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -409,8 +413,9 @@ void main() {
       'success',
       () async {
         final response = json.decode(
-          await rootBundle
-              .loadString('assets/json/updatePrivacyControlResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/common/updatePrivacyControlResponse.json',
+          ),
         );
 
         dioAdapter.onPost(

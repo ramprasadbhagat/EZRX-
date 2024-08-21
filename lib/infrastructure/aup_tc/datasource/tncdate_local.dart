@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 class AcceptanceDateLocalDataSource {
   Future<TncDate> getAcceptanceDate() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/tncdateResponse.json'),
+      await rootBundle.loadString('assets/json/tnc_date/tncdateResponse.json'),
     );
 
     return TncDateDto.fromJson(data).toDomain();

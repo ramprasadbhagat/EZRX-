@@ -764,19 +764,19 @@ extension ComboDealSchemeExt on ComboDealScheme {
   String get comboDealMockResponsePath {
     switch (this) {
       case ComboDealScheme.k1:
-        return 'getComboDealForMaterialResponseK1.json';
+        return 'get_combo_deal_for_material/getComboDealForMaterialResponseK1.json';
       case ComboDealScheme.k21:
-        return 'getComboDealForMaterialResponseK2.1.json';
+        return 'get_combo_deal_for_material/getComboDealForMaterialResponseK2.1.json';
       case ComboDealScheme.k22:
-        return 'getComboDealForMaterialResponseK2.2.json';
+        return 'get_combo_deal_for_material/getComboDealForMaterialResponseK2.2.json';
       case ComboDealScheme.k3:
-        return 'getComboDealForMaterialResponseK3.json';
+        return 'get_combo_deal_for_material/getComboDealForMaterialResponseK3.json';
       case ComboDealScheme.k4:
-        return 'getComboDealForMaterialResponseK4.json';
+        return 'get_combo_deal_for_material/getComboDealForMaterialResponseK4.json';
       case ComboDealScheme.k42:
-        return 'getComboDealForMaterialResponseK4.2.json';
+        return 'get_combo_deal_for_material/getComboDealForMaterialResponseK4.2.json';
       case ComboDealScheme.k5:
-        return 'getComboDealForPrincipleResponseK5.json';
+        return 'get_combo_deal_for_principal/getComboDealForPrincipalK5Response.json';
     }
   }
 }

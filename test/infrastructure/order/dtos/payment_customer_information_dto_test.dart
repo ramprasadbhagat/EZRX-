@@ -13,8 +13,9 @@ void main() {
   group('Test payment customer information ', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle
-            .loadString('assets/json/getPaymentCustomerInfoResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_payment_customer_info/getPaymentCustomerInfoResponse.json',
+        ),
       );
     });
 

@@ -43,7 +43,7 @@ void main() {
         test('should include isMarketPlace when value is true', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getOutstandingBalanceResponse.json'),
+                .loadString('assets/json/get_outstanding_balance/getOutstandingBalanceResponse.json'),
           );
 
           final data = jsonEncode({
@@ -79,7 +79,7 @@ void main() {
         test('should exclude isMarketPlace when value is false', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getOutstandingBalanceResponse.json'),
+                .loadString('assets/json/get_outstanding_balance/getOutstandingBalanceResponse.json'),
           );
 
           final data = jsonEncode({
@@ -116,7 +116,7 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle.loadString(
-                'assets/json/getOutstandingBalanceEmptyResponse.json',
+                'assets/json/get_outstanding_balance/getOutstandingBalanceEmptyResponse.json',
               ),
             );
 
@@ -152,7 +152,7 @@ void main() {
         test('should include isMarketPlace when value is true', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getCreditLimitResponse.json'),
+                .loadString('assets/json/get_credit_limit/getCreditLimitResponse.json'),
           );
 
           final data = jsonEncode({
@@ -188,7 +188,7 @@ void main() {
         test('should exclude isMarketPlace when value is false', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getCreditLimitResponse.json'),
+                .loadString('assets/json/get_credit_limit/getCreditLimitResponse.json'),
           );
 
           final data = jsonEncode({
@@ -225,7 +225,7 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle
-                  .loadString('assets/json/getCreditLimitEmptyResponse.json'),
+                  .loadString('assets/json/get_credit_limit/getCreditLimitEmptyResponse.json'),
             );
 
             final data = jsonEncode({
@@ -258,7 +258,7 @@ void main() {
         test('should return error when data response is invalid', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getCreditLimitErrorResponse.json'),
+                .loadString('assets/json/get_credit_limit/getCreditLimitErrorResponse.json'),
           );
 
           final data = jsonEncode({

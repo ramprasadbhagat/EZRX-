@@ -44,8 +44,9 @@ void main() {
     () {
       test('submit success', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/submitContactUsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/submit_contact_us/submitContactUsResponse.json',
+          ),
         );
         final variables = {
           'request': {
@@ -92,8 +93,9 @@ void main() {
 
       test('submit fail return null', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/submitContactUsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/submit_contact_us/submitContactUsResponse.json',
+          ),
         );
         final variables = {
           'request': {
@@ -140,8 +142,9 @@ void main() {
 
       test('submit fail return empty', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/submitContactUsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/submit_contact_us/submitContactUsResponse.json',
+          ),
         );
         final variables = {
           'request': {
@@ -188,8 +191,9 @@ void main() {
 
       test('submit fail return status code != 200', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/submitContactUsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/submit_contact_us/submitContactUsResponse.json',
+          ),
         );
         final variables = {
           'request': {

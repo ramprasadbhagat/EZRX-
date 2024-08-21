@@ -9,7 +9,7 @@ class EZPointLocalDataSource {
 
   Future<EZPointToken> getEZPointToken() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getEZPointResponse.json'),
+      await rootBundle.loadString('assets/json/get_EZ_point/getEZPointResponse.json'),
     );
 
     return EZPointTokenResponseDto.fromJson(data['data']['getEzPointToken'])

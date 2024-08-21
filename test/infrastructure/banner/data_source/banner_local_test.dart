@@ -20,7 +20,7 @@ void main() {
     test('Get Banners Test', () async {
       final res = json.decode(
         await rootBundle
-            .loadString('assets/json/getEZReachBannerResponse.json'),
+            .loadString('assets/json/get_EZ_reach_banner/getEZReachBannerResponse.json'),
       );
       final result = await localDataSource.getEZReachBanners(
         bannerType: 'banner_carousel',

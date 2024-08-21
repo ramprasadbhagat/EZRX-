@@ -13,8 +13,9 @@ void main() {
   group('Test order history details shipping info ', () {
     setUp(() async {
       final response = json.decode(
-        await rootBundle
-            .loadString('assets/json/getorderHistoryFetchByItemsResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_order_history_fetch_by_items/getOrderHistoryFetchByItemsResponse.json',
+        ),
       );
 
       data = makeResponseCamelCase(

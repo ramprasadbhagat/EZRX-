@@ -7,8 +7,9 @@ import 'package:flutter/services.dart';
 class ForgotPasswordLocalDataSource {
   Future<ForgotPassword> requestResetPassword() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/requestResetPasswordLinkResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/request_reset_password_link/requestResetPasswordLinkResponse.json',
+      ),
     );
 
     return ForgotPasswordDto.fromJson(data['data']['requestResetPassword'])

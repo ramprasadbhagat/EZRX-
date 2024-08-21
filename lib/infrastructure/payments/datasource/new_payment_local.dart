@@ -21,7 +21,7 @@ class NewPaymentLocalDataSource {
   Future<List<CustomerOpenItem>> getCustomerOpenItems() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/customerOpenItemsResponse.json',
+        'assets/json/customer_open_items/customerOpenItemsResponse.json',
       ),
     );
     final res = data['data']['customerOpenItems']['customerOpenItemsResponse'];
@@ -51,7 +51,7 @@ class NewPaymentLocalDataSource {
   Future<void> updatePaymentGateway() async {
     json.decode(
       await rootBundle.loadString(
-        'assets/json/updatePaymentGatewayResponse.json',
+        'assets/json/update_payment_gateway/updatePaymentGatewayResponse.json',
       ),
     );
   }
@@ -59,7 +59,7 @@ class NewPaymentLocalDataSource {
   Future<PaymentInvoiceInfoPdf> getPaymentInvoiceInfoPdf() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentInvoiceInfoPdfResponse.json',
+        'assets/json/payment_invoice_info_pdf/paymentInvoiceInfoPdfResponse.json',
       ),
     );
 
@@ -70,7 +70,7 @@ class NewPaymentLocalDataSource {
   Future<List<NewPaymentMethod>> fetchPaymentMethods() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentMethodsResponse.json',
+        'assets/json/payment_methods/paymentMethodsResponse.json',
       ),
     );
 
@@ -84,7 +84,7 @@ class NewPaymentLocalDataSource {
   Future<CreateVirtualAccount> createVirtualAccount() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/createVirtualAccountResponse.json',
+        'assets/json/create_virtual_account/createVirtualAccountResponse.json',
       ),
     );
 
@@ -96,7 +96,7 @@ class NewPaymentLocalDataSource {
   Future<PrincipalCutoffs> getPrincipalCutoffs() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getPrincipalCutoffsResponse.json',
+        'assets/json/get_principal_cutoffs/getPrincipalCutoffsResponse.json',
       ),
     );
 

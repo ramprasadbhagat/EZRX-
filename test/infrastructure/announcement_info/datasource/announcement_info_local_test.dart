@@ -24,7 +24,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getAnnouncementInfoResponse.json'),
+                .loadString('assets/json/get_announcement_info/getAnnouncementInfoResponse.json'),
           );
 
           final result = await localDataSource.getAnnouncementInfo();
@@ -41,7 +41,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getAnnouncementInfoDetailsResponse.json',
+              'assets/json/get_announcement_info_details/getAnnouncementInfoDetailsResponse.json',
             ),
           );
 

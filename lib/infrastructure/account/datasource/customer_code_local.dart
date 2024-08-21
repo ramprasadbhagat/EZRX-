@@ -13,7 +13,7 @@ class CustomerCodeLocalDataSource {
   Future<CustomerInformation> getCustomerCodeList() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getCustomerInformationResponse.json',
+        'assets/json/get_customer_information/getCustomerInformationResponse.json',
       ),
     );
     final finalData = data['data']['customerInformationSearch'];
@@ -26,7 +26,7 @@ class CustomerCodeLocalDataSource {
   Future<CustomerInformation> getSalesRepCustomerCodeList() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getCustomerInformationResponseForSalesRep.json',
+        'assets/json/get_customer_information_for_sales_rep/getCustomerInformationForSalesRepResponse.json',
       ),
     );
     final finalData =
@@ -43,7 +43,7 @@ class CustomerCodeLocalDataSource {
   Future<CustomerCodeConfig> getCustomerCodeConfig() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/customerCodeConfig.json',
+        'assets/json/customer_code_config/customerCodeConfig.json',
       ),
     );
     final finalData = data['data']['customerConfig'];

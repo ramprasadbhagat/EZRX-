@@ -13,7 +13,9 @@ void main() {
   group('Test Material Dto ', () {
     setUp(() async {
       similarProductsData = json.decode(
-        await rootBundle.loadString('assets/json/similarSearchesResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/similar_searches/similarSearchesResponse.json',
+        ),
       );
     });
 

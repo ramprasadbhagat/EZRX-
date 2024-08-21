@@ -10,7 +10,7 @@ class NotificationSettingsLocalDataSource {
   Future<NotificationSettings> getNotificationSettings() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getNotificationSettingsResponse.json',
+        'assets/json/get_notification_settings/getNotificationSettingsResponse.json',
       ),
     );
 
@@ -21,8 +21,9 @@ class NotificationSettingsLocalDataSource {
 
   Future<NotificationSettings> setNotificationSettings() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/setNotificationSettingsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/set_notification_settings/setNotificationSettingsResponse.json',
+      ),
     );
 
     return NotificationSettingsResponseDto.fromJson(

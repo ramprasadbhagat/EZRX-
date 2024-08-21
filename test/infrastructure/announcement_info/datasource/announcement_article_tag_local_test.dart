@@ -22,7 +22,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/announcementArticleTag.json'),
+                .loadString('assets/json/announcement_article_tag/announcementArticleTag.json'),
           );
 
           final result = await localDataSource.getAnnouncementArticleTags();

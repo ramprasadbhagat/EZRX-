@@ -69,8 +69,9 @@ void main() {
           'isDetailsPage': false,
         };
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getOrderHistoryV3Response.json'),
+          await rootBundle.loadString(
+            'assets/json/get_order_history/getOrderHistoryV3Response.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -178,8 +179,9 @@ void main() {
           'isDetailsPage': false,
         };
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getOrderHistoryV3Response.json'),
+          await rootBundle.loadString(
+            'assets/json/get_order_history/getOrderHistoryV3Response.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -242,8 +244,9 @@ void main() {
           'isDetailsPage': false,
         };
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getOrderHistoryV3Response.json'),
+          await rootBundle.loadString(
+            'assets/json/get_order_history/getOrderHistoryV3Response.json',
+          ),
         );
 
         dioAdapter.onPost(

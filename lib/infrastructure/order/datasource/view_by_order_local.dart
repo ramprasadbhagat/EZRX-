@@ -8,7 +8,9 @@ class ViewByOrderLocalDataSource {
   ViewByOrderLocalDataSource();
   Future<ViewByOrder> getViewByOrders() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getOrderHistoryV3Response.json'),
+      await rootBundle.loadString(
+        'assets/json/get_order_history/getOrderHistoryV3Response.json',
+      ),
     );
 
     final finalData = data['data']['orderHistoryV3'];

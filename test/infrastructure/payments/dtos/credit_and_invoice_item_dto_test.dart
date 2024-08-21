@@ -14,7 +14,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle
-            .loadString('assets/json/customerDocumentHeaderV2Response.json'),
+            .loadString('assets/json/customer_document_header_v2/customerDocumentHeaderV2Response.json'),
       );
     });
 

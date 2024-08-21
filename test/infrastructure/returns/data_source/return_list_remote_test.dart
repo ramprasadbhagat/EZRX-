@@ -67,8 +67,9 @@ void main() {
       'fetchReturnByItems success',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getReturnByItemsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/get_return_by_item/getReturnByItemsResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -156,8 +157,9 @@ void main() {
       'fetchReturnByRequest success',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getReturnByRequestResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/get_return_by_request/getReturnByRequestResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -231,8 +233,9 @@ void main() {
       'getFileUrl success',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/requestsByItemsExcelResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/request_by_items_excel/requestsByItemsExcelResponse.json',
+          ),
         );
 
         dioAdapter.onPost(

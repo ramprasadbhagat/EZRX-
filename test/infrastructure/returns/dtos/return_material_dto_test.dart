@@ -11,8 +11,9 @@ void main() {
 
   setUpAll(() async {
     data = json.decode(
-      await rootBundle
-          .loadString('assets/json/searchReturnMaterialsV2Response.json'),
+      await rootBundle.loadString(
+        'assets/json/search_return_materials_v2/searchReturnMaterialsV2Response.json',
+      ),
     );
   });
 

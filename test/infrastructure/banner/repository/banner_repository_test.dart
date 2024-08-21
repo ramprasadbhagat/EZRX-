@@ -51,7 +51,7 @@ void main() {
       ).thenAnswer((invocation) async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/getEZReachBannerResponse.json'),
+              .loadString('assets/json/get_EZ_reach_banner/getEZReachBannerResponse.json'),
         );
 
         return List.from(res['data']['getLiveCampaigns']['data'])

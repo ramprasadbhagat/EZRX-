@@ -11,7 +11,7 @@ class PaymentInProgressLocalDataSource {
     await Future.delayed(const Duration(seconds: 2));
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentInProgressResponse.json',
+        'assets/json/payment_in_progress/paymentInProgressResponse.json',
       ),
     );
     final result = data['data']['paymentInProgress']['results'];

@@ -12,7 +12,7 @@ class ClaimManagementLocalDataSource {
   Future<List<ClaimItem>> getClaimSubmissions() async {
     final res = json.decode(
       await rootBundle.loadString(
-        'assets/json/getClaimSubmissions.json',
+        'assets/json/get_claim_submissions/getClaimSubmissionsResponse.json',
       ),
     );
 
@@ -28,7 +28,7 @@ class ClaimManagementLocalDataSource {
   Future<List<PrincipalData>> getPrincipalForSalesOrg() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/principalForSalesOrgResponse.json',
+        'assets/json/principal_sales_org/principalForSalesOrgResponse.json',
       ),
     );
     final res = data['data']['principalForSalesOrg']['principals'];
@@ -43,7 +43,7 @@ class ClaimManagementLocalDataSource {
   Future<bool> submitClaim() async {
     final res = json.decode(
       await rootBundle.loadString(
-        'assets/json/submitClaimResponse.json',
+        'assets/json/submit_claim/submitClaimResponse.json',
       ),
     );
 

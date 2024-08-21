@@ -46,7 +46,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/requestResetPasswordLinkResponse.json',
+              'assets/json/request_reset_password_link/requestResetPasswordLinkResponse.json',
             ),
           );
           final variable = {

@@ -24,7 +24,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/addFavouriteMaterialResponse.json',
+              'assets/json/add_favourite_material/addFavouriteMaterialResponse.json',
             ),
           );
 
@@ -42,7 +42,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/removeFavouriteMaterialResponse.json',
+              'assets/json/remove_favourite_material/removeFavouriteMaterialResponse.json',
             ),
           );
 
@@ -59,7 +59,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/fetchProductsFavouriteStatusResponse.json',
+              'assets/json/common/fetchProductsFavouriteStatusResponse.json',
             ),
           );
 
@@ -78,7 +78,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/fetchProductsFavouriteStatusResponse.json',
+              'assets/json/common/fetchProductsFavouriteStatusResponse.json',
             ),
           );
 

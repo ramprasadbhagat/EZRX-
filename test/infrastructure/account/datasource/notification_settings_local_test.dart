@@ -26,8 +26,9 @@ void main() {
         'Get Notification Settings',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getNotificationSettingsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/get_notification_settings/getNotificationSettingsResponse.json',
+            ),
           );
 
           final result = await localDataSource.getNotificationSettings();
@@ -45,8 +46,9 @@ void main() {
         'Set Notification Settings',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/setNotificationSettingsResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/set_notification_settings/setNotificationSettingsResponse.json',
+            ),
           );
 
           final result = await localDataSource.setNotificationSettings();

@@ -47,7 +47,7 @@ void main() {
       test('get Customer License', () async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/customerLicensesResponse.json'),
+              .loadString('assets/json/customer_licenses/customerLicensesResponse.json'),
         );
         final variables = {
           'request': {

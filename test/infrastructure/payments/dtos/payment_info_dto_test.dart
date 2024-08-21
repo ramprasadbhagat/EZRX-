@@ -18,27 +18,27 @@ void main() {
     setUp(() async {
       dataMY = json.decode(
         await rootBundle.loadString(
-          'assets/json/payResponseMY.json',
+          'assets/json/pay_MY/payMYResponse.json',
         ),
       );
       dataPH = json.decode(
         await rootBundle.loadString(
-          'assets/json/payResponsePH.json',
+          'assets/json/pay_PH/payPHResponse.json',
         ),
       );
       dataVN = json.decode(
         await rootBundle.loadString(
-          'assets/json/payResponseVN.json',
+          'assets/json/pay_VN/payVNResponse.json',
         ),
       );
       dataTH = json.decode(
         await rootBundle.loadString(
-          'assets/json/payResponseTH.json',
+          'assets/json/pay_TH/payTHResponse.json',
         ),
       );
       dataSG = json.decode(
         await rootBundle.loadString(
-          'assets/json/payResponseSG.json',
+          'assets/json/pay_SG/paySGResponse.json',
         ),
       );
     });

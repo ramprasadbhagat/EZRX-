@@ -588,14 +588,14 @@ String countryCustomerPaymentResponsePath(String country) {
 
 String countryPaymentInfoResponsePath(String country) {
   final salesOrgCountryMap = {
-    'MY': 'assets/json/payResponseMY.json',
-    'PH': 'assets/json/payResponsePH.json',
-    'SG': 'assets/json/payResponseSG.json',
-    'TH': 'assets/json/payResponseTH.json',
-    'VN': 'assets/json/payResponseVN.json',
+    'MY': 'assets/json/pay_MY/payMYResponse.json',
+    'PH': 'assets/json/pay_PH/payPHResponse.json',
+    'SG': 'assets/json/pay_SG/paySGResponse.json',
+    'TH': 'assets/json/pay_TH/payTHResponse.json',
+    'VN': 'assets/json/pay_VN/payVNResponse.json',
   };
 
-  return salesOrgCountryMap[country] ?? 'assets/json/payResponseMY.json';
+  return salesOrgCountryMap[country] ?? 'assets/json/pay_MY/payMYResponse.json';
 }
 
 String getPaymentIdPretext(String country) {

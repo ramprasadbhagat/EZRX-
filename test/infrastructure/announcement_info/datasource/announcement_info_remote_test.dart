@@ -60,7 +60,7 @@ void main() {
     test('Get Announcement Info ', () async {
       final infoRes = json.decode(
         await rootBundle
-            .loadString('assets/json/getAnnouncementInfoResponse.json'),
+            .loadString('assets/json/get_announcement_info/getAnnouncementInfoResponse.json'),
       );
 
       dioAdapter.onPost(
@@ -206,7 +206,7 @@ void main() {
     test('Get Announcement Info Details', () async {
       final infoRes = json.decode(
         await rootBundle
-            .loadString('assets/json/getAnnouncementInfoDetailsResponse.json'),
+            .loadString('assets/json/get_announcement_info_details/getAnnouncementInfoDetailsResponse.json'),
       );
 
       dioAdapter.onPost(

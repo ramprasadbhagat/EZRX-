@@ -48,8 +48,9 @@ void main() {
     () {
       test('Get StockInfoList', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getStockInformationList.json'),
+          await rootBundle.loadString(
+            'assets/json/get_stock_infomation_list/getStockInformationListResponse.json',
+          ),
         );
 
         dioAdapter.onPost(

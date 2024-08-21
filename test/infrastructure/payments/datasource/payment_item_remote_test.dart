@@ -54,7 +54,7 @@ void main() {
     () {
       test('get Payment Item List', () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/paymentItemResponse.json'),
+          await rootBundle.loadString('assets/json/payment_item/paymentItemResponse.json'),
         );
 
         final data = jsonEncode({
@@ -97,7 +97,7 @@ void main() {
         test('get payment  summary details have data', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/paymentSummaryListResponse.json'),
+                .loadString('assets/json/payment_summary_list/paymentSummaryListResponse.json'),
           );
 
           final data = jsonEncode({
@@ -136,7 +136,7 @@ void main() {
         test('get payment  summary details data empty', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/paymentSummaryListEmptyResponse.json'),
+                .loadString('assets/json/payment_summary_list/paymentSummaryListEmptyResponse.json'),
           );
 
           final data = jsonEncode({
@@ -173,7 +173,7 @@ void main() {
         test('delete customer payment success', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/deleteCustomerPaymentResponse.json'),
+                .loadString('assets/json/delete_customer_payment/deleteCustomerPaymentResponse.json'),
           );
 
           final data = jsonEncode({
@@ -220,7 +220,7 @@ void main() {
         test('delete customer payment fail', () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/deleteCustomerPaymentFailResponse.json',
+              'assets/json/delete_customer_payment/deleteCustomerPaymentFailResponse.json',
             ),
           );
 
@@ -274,7 +274,7 @@ void main() {
         test('get transaction success', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getTransactionResponse.json'),
+                .loadString('assets/json/get_transaction/getTransactionResponse.json'),
           );
 
           final data = jsonEncode({
@@ -310,7 +310,7 @@ void main() {
         test('get transaction fail', () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getTransactionEmptyResponse.json'),
+                .loadString('assets/json/get_transaction/getTransactionEmptyResponse.json'),
           );
 
           final data = jsonEncode({
@@ -345,7 +345,7 @@ void main() {
       test('cancel payment advice', () async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/cancelVirtualTxnResponse.json'),
+              .loadString('assets/json/cancel_virtual_txn/cancelVirtualTxnResponse.json'),
         );
 
         final data = jsonEncode({

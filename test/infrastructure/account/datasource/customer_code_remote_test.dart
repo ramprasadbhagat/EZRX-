@@ -84,7 +84,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getCustomerInformationResponse.json',
+              'assets/json/get_customer_information/getCustomerInformationResponse.json',
             ),
           );
 
@@ -201,7 +201,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getCustomerInformationResponseForSalesRep.json',
+              'assets/json/get_customer_information_for_sales_rep/getCustomerInformationForSalesRepResponse.json',
             ),
           );
 
@@ -252,7 +252,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/customerCodeConfig.json',
+              'assets/json/customer_code_config/customerCodeConfig.json',
             ),
           );
 
@@ -321,7 +321,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/customerCodeConfig.json',
+              'assets/json/customer_code_config/customerCodeConfig.json',
             ),
           );
 

@@ -13,8 +13,8 @@ class BannerLocalDataSource {
     final data = json.decode(
       await rootBundle.loadString(
         bannerType == 'banner_carousel'
-            ? 'assets/json/getEZReachBannerResponse.json'
-            : 'assets/json/getEZReachTopAdvertBoxResponse.json',
+            ? 'assets/json/get_EZ_reach_banner/getEZReachBannerResponse.json'
+            : 'assets/json/common/getEZReachTopAdvertBoxResponse.json',
       ),
     );
 

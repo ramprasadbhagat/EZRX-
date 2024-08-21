@@ -22,7 +22,7 @@ void main() {
       test('Fetch invoice summary ', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/getOutstandingBalanceResponse.json',
+            'assets/json/get_outstanding_balance/getOutstandingBalanceResponse.json',
           ),
         )['data']['outstandingBalance']['results'];
 
@@ -39,7 +39,7 @@ void main() {
       test('Fetch invoice summary ', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/getCreditLimitResponse.json',
+            'assets/json/get_credit_limit/getCreditLimitResponse.json',
           ),
         )['data']['creditLimit']['results'];
 

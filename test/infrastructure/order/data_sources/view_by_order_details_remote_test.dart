@@ -67,7 +67,7 @@ void main() {
         };
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/getOrderDetailsResponse.json'),
+              .loadString('assets/json/get_order_details/getOrderDetailsResponse.json'),
         );
 
         dioAdapter.onPost(
@@ -249,7 +249,7 @@ void main() {
         };
         final jsonResult = json.decode(
           await rootBundle.loadString(
-            'assets/json/getOrderDetailsMarketPlaceResponse.json',
+            'assets/json/get_order_details/getOrderDetailsMarketPlaceResponse.json',
           ),
         );
         final expectedResult = (jsonResult['data']['orderHistoryV3']

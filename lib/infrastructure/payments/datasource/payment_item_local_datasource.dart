@@ -19,7 +19,7 @@ class PaymentItemLocalDataSource {
   Future<List<PaymentItem>> getPaymentItems() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentItemResponse.json',
+        'assets/json/payment_item/paymentItemResponse.json',
       ),
     );
 
@@ -31,7 +31,7 @@ class PaymentItemLocalDataSource {
   Future<dynamic> get _getPaymentSummaryDetailsJson async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentSummaryListResponse.json',
+        'assets/json/payment_summary_list/paymentSummaryListResponse.json',
       ),
     );
 
@@ -67,7 +67,7 @@ class PaymentItemLocalDataSource {
   Future<bool> deleteCustomerPayment() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/deleteCustomerPaymentResponse.json',
+        'assets/json/delete_customer_payment/deleteCustomerPaymentResponse.json',
       ),
     );
 
@@ -81,7 +81,7 @@ class PaymentItemLocalDataSource {
   Future<PaymentSummaryDetails> getTransaction() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getTransactionResponse.json',
+        'assets/json/get_transaction/getTransactionResponse.json',
       ),
     );
 
@@ -93,7 +93,7 @@ class PaymentItemLocalDataSource {
   Future<String> cancelPaymentAdvice() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/cancelVirtualTxnResponse.json',
+        'assets/json/cancel_virtual_txn/cancelVirtualTxnResponse.json',
       ),
     );
 

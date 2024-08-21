@@ -21,8 +21,9 @@ void main() {
       '=> requestResetPassword',
       () async {
         final data = json.decode(
-          await rootBundle
-              .loadString('assets/json/requestResetPasswordLinkResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/request_reset_password_link/requestResetPasswordLinkResponse.json',
+          ),
         );
         final result =
             await forgotPasswordLocalDataSource.requestResetPassword();

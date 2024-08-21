@@ -8,7 +8,9 @@ class ViewByOrderDetailsLocalDataSource {
   ViewByOrderDetailsLocalDataSource();
   Future<OrderHistoryDetails> getOrderHistoryDetails() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getOrderDetailsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_order_details/getOrderDetailsResponse.json',
+      ),
     );
 
     final finalData = data['data']['orderHistoryV3']['orderHeaders'][0];
@@ -20,8 +22,9 @@ class ViewByOrderDetailsLocalDataSource {
 
   Future<List<OrderHistoryDetails>> getOrderHistoryDetailsList() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getOrderDetailsMarketPlaceResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_order_details/getOrderDetailsMarketPlaceResponse.json',
+      ),
     );
 
     final finalData = data['data']['orderHistoryV3']['orderHeaders'];

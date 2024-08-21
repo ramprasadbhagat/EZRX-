@@ -54,7 +54,7 @@ void main() {
     };
     test('Get Article Info ', () async {
       final infoRes = json.decode(
-        await rootBundle.loadString('assets/json/getArticleInfoResponse.json'),
+        await rootBundle.loadString('assets/json/get_article_info/getArticleInfoResponse.json'),
       );
 
       dioAdapter.onPost(
@@ -198,7 +198,7 @@ void main() {
     };
     test('Get Article Info ', () async {
       final infoRes = json.decode(
-        await rootBundle.loadString('assets/json/getArticleInfoResponse.json'),
+        await rootBundle.loadString('assets/json/get_article_info/getArticleInfoResponse.json'),
       );
 
       dioAdapter.onPost(

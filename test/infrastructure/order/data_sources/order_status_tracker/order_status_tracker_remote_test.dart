@@ -53,7 +53,7 @@ void main() {
     () {
       test('Get order_status_tracker override', () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/getZyllemv2Response.json'),
+          await rootBundle.loadString('assets/json/get_zyllem_v2/getZyllemv2Response.json'),
         );
 
         dioAdapter.onPost(

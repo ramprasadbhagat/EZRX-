@@ -13,8 +13,9 @@ class StockInfoLocalDataSource {
   Future<List<StockInfo>> getStockInfoList() async {
     await Future.delayed(const Duration(seconds: 1));
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/stockInformationListResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/stock_information_list/stockInformationListResponse.json',
+      ),
     );
 
     return List.from(data['data']['stockInformationList'])
@@ -25,7 +26,9 @@ class StockInfoLocalDataSource {
   Future<List<MaterialStockInfo>> getMaterialStockInfoList() async {
     await Future.delayed(const Duration(seconds: 1));
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getStockInformationList.json'),
+      await rootBundle.loadString(
+        'assets/json/get_stock_infomation_list/getStockInformationListResponse.json',
+      ),
     );
 
     return List.from(data['data']['getStockInformationLists'])
@@ -40,6 +43,5 @@ class StockInfoLocalDataSource {
         isFailure,
       );
 
-  Stream<bool> get stockApiStatusData =>
-      _stockApiStatusDataController.stream;
+  Stream<bool> get stockApiStatusData => _stockApiStatusDataController.stream;
 }

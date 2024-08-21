@@ -10,7 +10,7 @@ class AnnouncementInfoLocalDataSource {
   Future<AnnouncementArticleInfo> getAnnouncementInfo() async {
     final res = json.decode(
       await rootBundle
-          .loadString('assets/json/getAnnouncementInfoResponse.json'),
+          .loadString('assets/json/get_announcement_info/getAnnouncementInfoResponse.json'),
     );
 
     return AnnouncementArticleInfoDto.fromJson(res['data']['search']).toDomain;
@@ -19,7 +19,7 @@ class AnnouncementInfoLocalDataSource {
   Future<AnnouncementInfoDetails> getAnnouncementInfoDetails() async {
     final res = json.decode(
       await rootBundle
-          .loadString('assets/json/getAnnouncementInfoDetailsResponse.json'),
+          .loadString('assets/json/get_announcement_info_details/getAnnouncementInfoDetailsResponse.json'),
     );
 
     return AnnouncementInfoDetailsDto.fromJson(

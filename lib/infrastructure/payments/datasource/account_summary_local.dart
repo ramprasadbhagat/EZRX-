@@ -12,7 +12,7 @@ class AccountSummaryLocalDataSource {
   Future<OutstandingBalance> fetchInvoiceSummary() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getOutstandingBalanceResponse.json',
+        'assets/json/get_outstanding_balance/getOutstandingBalanceResponse.json',
       ),
     );
     final details = data['data']['outstandingBalance']['results'];
@@ -27,7 +27,7 @@ class AccountSummaryLocalDataSource {
   Future<CreditLimit> fetchCreditSummary() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getCreditLimitResponse.json',
+        'assets/json/get_credit_limit/getCreditLimitResponse.json',
       ),
     );
     final details = data['data']['creditLimit']['results'];

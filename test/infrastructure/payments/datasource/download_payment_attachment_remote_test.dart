@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
@@ -53,7 +54,8 @@ void main() {
         'Fetch e credit url Remote DataSource Test status code 200',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/eCreditResponse.json'),
+            await rootBundle
+                .loadString('assets/json/common/eCreditResponse.json'),
           );
 
           final data = jsonEncode(
@@ -150,7 +152,9 @@ void main() {
         'get File Download Url',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/paymentAttachment.json'),
+            await rootBundle.loadString(
+              'assets/json/payment_attachment/paymentAttachmentResponse.json',
+            ),
           );
 
           final data = jsonEncode(
@@ -204,8 +208,9 @@ void main() {
         'get payment summary file download url',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/paymentSummaryAttachment.json'),
+            await rootBundle.loadString(
+              'assets/json/payment_summary_attachment/paymentSummaryAttachmentResponse.json',
+            ),
           );
 
           final data = jsonEncode(

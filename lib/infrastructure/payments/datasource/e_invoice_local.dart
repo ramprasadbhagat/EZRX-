@@ -12,7 +12,7 @@ class EInvoiceLocalDataSource {
   Future<DownloadPaymentAttachment> getEInvoice() async {
     final res = json.decode(
       await rootBundle.loadString(
-        'assets/json/listSoaResponse.json',
+        'assets/json/common/listSoaResponse.json',
       ),
     );
     final data = res['data'].first;

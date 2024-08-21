@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 class AboutUsLocalDataSource {
   Future<AboutUs> getAboutUsStaticInfo(String fileName) async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/$fileName'),
+      await rootBundle
+          .loadString('assets/json/about_us/market_static_content/$fileName'),
     );
     final finalData =
         res['data']?['item']?['components'] as Map<String, dynamic>?;

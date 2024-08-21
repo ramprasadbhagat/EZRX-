@@ -13,7 +13,7 @@ void main() {
     () async {
       data = json.decode(
         await rootBundle.loadString(
-          'assets/json/getEZPointResponse.json',
+          'assets/json/get_EZ_point/getEZPointResponse.json',
         ),
       );
     },

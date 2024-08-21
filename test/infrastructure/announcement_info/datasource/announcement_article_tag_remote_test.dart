@@ -43,7 +43,7 @@ void main() {
       };
 
       final res = json.decode(
-        await rootBundle.loadString('assets/json/announcementArticleTag.json'),
+        await rootBundle.loadString('assets/json/announcement_article_tag/announcementArticleTag.json'),
       );
 
       dioAdapter.onPost(

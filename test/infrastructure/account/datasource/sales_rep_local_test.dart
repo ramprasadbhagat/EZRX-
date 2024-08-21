@@ -20,7 +20,7 @@ void main() {
       () async {
         final res = json.decode(
           await rootBundle.loadString(
-            'assets/json/getSalesRepInfoResponse.json',
+            'assets/json/get_sales_rep_info/getSalesRepInfoResponse.json',
           ),
         );
         final result = await localDataSource.getSalesRepInfo();

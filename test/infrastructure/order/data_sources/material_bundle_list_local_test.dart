@@ -28,7 +28,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getMaterialBundleListResponse.json'),
+                .loadString('assets/json/get_material_bundle_list/getMaterialBundleListResponse.json'),
           );
 
           final result = await localDataSource.getMaterialBundleList();
@@ -49,7 +49,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getMaterialBundleListForSalesRepResponse.json',
+              'assets/json/get_material_bundle_list_for_sales_rep/getMaterialBundleListForSalesRepResponse.json',
             ),
           );
 

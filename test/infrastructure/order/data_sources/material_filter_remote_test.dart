@@ -56,7 +56,7 @@ void main() {
         };
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/getMaterialFilterResponse.json'),
+              .loadString('assets/json/get_material_filter/getMaterialFilterResponse.json'),
         );
 
         dioAdapter.onPost(

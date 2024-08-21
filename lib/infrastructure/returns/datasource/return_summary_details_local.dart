@@ -10,7 +10,7 @@ class ReturnSummaryDetailsRequestInformationLocal {
   Future<RequestInformation> getReturnRequestInformation() async {
     final res = json.decode(
       await rootBundle.loadString(
-        'assets/json/returnRequestInformationV2Response.json',
+        'assets/json/return_request_information_v2/returnRequestInformationV2Response.json',
       ),
     );
     final data = res['data']['requestInformationV2'];

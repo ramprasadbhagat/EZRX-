@@ -30,7 +30,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/getClaimSubmissions.json',
+              'assets/json/get_claim_submissions/getClaimSubmissionsResponse.json',
             ),
           );
           final result = await localDataSource.getClaimSubmissions();
@@ -52,7 +52,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/principalForSalesOrgResponse.json',
+              'assets/json/principal_sales_org/principalForSalesOrgResponse.json',
             ),
           );
           final result = await localDataSource.getPrincipalForSalesOrg();
@@ -75,7 +75,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/submitClaimResponse.json',
+              'assets/json/submit_claim/submitClaimResponse.json',
             ),
           );
           final result = await localDataSource.submitClaim();

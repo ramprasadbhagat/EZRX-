@@ -10,7 +10,9 @@ class ReturnListLocalDataSource {
   Future<List<ReturnItem>> fetchReturnByItems() async {
     await Future.delayed(const Duration(seconds: 2));
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getReturnByItemsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_return_by_item/getReturnByItemsResponse.json',
+      ),
     );
 
     return List<Map<String, dynamic>>.from(
@@ -34,8 +36,9 @@ class ReturnListLocalDataSource {
   Future<List<ReturnItem>> fetchReturnByRequests() async {
     await Future.delayed(const Duration(seconds: 2));
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getReturnByRequestResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_return_by_request/getReturnByRequestResponse.json',
+      ),
     );
 
     return List<Map<String, dynamic>>.from(
@@ -46,7 +49,7 @@ class ReturnListLocalDataSource {
   Future<String> getFileUrl() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/requestsByItemsExcelResponse.json',
+        'assets/json/request_by_items_excel/requestsByItemsExcelResponse.json',
       ),
     );
 

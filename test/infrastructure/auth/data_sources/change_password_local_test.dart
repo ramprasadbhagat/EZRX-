@@ -21,8 +21,9 @@ void main() {
       '=> changePassword',
       () async {
         final data = json.decode(
-          await rootBundle
-              .loadString('assets/json/changePasswordResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/change_password/changePasswordResponse.json',
+          ),
         );
         final result = await changePasswordLocalDataSource.changePassword();
 
@@ -37,8 +38,9 @@ void main() {
       '=> resetPassword',
       () async {
         final data = json.decode(
-          await rootBundle
-              .loadString('assets/json/resetPasswordV3Response.json'),
+          await rootBundle.loadString(
+            'assets/json/reset_password_v3/resetPasswordV3Response.json',
+          ),
         );
         final result = await changePasswordLocalDataSource.resetPassword();
 
@@ -53,8 +55,9 @@ void main() {
       '=> changePasswordForFirstTime',
       () async {
         final data = json.decode(
-          await rootBundle
-              .loadString('assets/json/changePasswordFirstTimeResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/change_password_first_time/changePasswordFirstTimeResponse.json',
+          ),
         );
         final result =
             await changePasswordLocalDataSource.changePasswordForFirstTime();

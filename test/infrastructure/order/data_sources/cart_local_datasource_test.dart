@@ -24,8 +24,9 @@ void main() async {
         'Cart local data source getAddedToCartProductList',
         () async {
           final data = json.decode(
-            await rootBundle
-                .loadString('assets/json/getAddedToCartProductList.json'),
+            await rootBundle.loadString(
+              'assets/json/get_added_to_cart_product_list/getAddedToCartProductList.json',
+            ),
           );
           final finalData = data['data']['cart'];
           final result = await localDataSource.getAddedToCartProductList();
@@ -42,7 +43,8 @@ void main() async {
         'Cart local data source upsertCart',
         () async {
           final data = json.decode(
-            await rootBundle.loadString('assets/json/upsertQueryResponse.json'),
+            await rootBundle
+                .loadString('assets/json/upsert_cart/upsertCartResponse.json'),
           );
           final finalData = data['data']['upsertCart']['EzRxItems'];
           final result = await localDataSource.upsertCart();
@@ -61,11 +63,13 @@ void main() async {
         () async {
           final data = json.decode(
             await rootBundle.loadString(
-              'assets/json/upsertCartItemsWithComboOffersResponse.json',
+              'assets/json/upsert_cart_items/upsertCartItemsWithComboOffersResponse.json',
             ),
           );
           final finalData = data['data']['upsertCartItems']['EzRxItems'];
-          final result = await localDataSource.upsertCart(type: UpsertCartLocalType.upsertCartItemsComboOffer);
+          final result = await localDataSource.upsertCart(
+            type: UpsertCartLocalType.upsertCartItemsComboOffer,
+          );
 
           expect(
             result,
@@ -78,14 +82,16 @@ void main() async {
 
       test(
         'Cart local data source upsertCartReOrder',
-            () async {
+        () async {
           final data = json.decode(
             await rootBundle.loadString(
-              'assets/json/upsertCartItemsWithReorderMaterialsResponse.json',
+              'assets/json/upsert_cart_items/upsertCartItemsWithReorderMaterialsResponse.json',
             ),
           );
           final finalData = data['data']['upsertCartItems']['EzRxItems'];
-          final result = await localDataSource.upsertCart(type: UpsertCartLocalType.upsertCartItemsReorder);
+          final result = await localDataSource.upsertCart(
+            type: UpsertCartLocalType.upsertCartItemsReorder,
+          );
 
           expect(
             result,
@@ -101,7 +107,7 @@ void main() async {
         () async {
           final data = json.decode(
             await rootBundle.loadString(
-              'assets/json/aplSimulateOrderResponse.json',
+              'assets/json/apl_simulate_order/aplSimulateOrderResponse.json',
             ),
           );
           final aplSimulatorOrder = data['data']['aplSimulateOrder'];
@@ -121,7 +127,7 @@ void main() async {
         () async {
           final data = json.decode(
             await rootBundle.loadString(
-              'assets/json/aplGetTotalPriceResponse.json',
+              'assets/json/apl_get_total_price/aplGetTotalPriceResponse.json',
             ),
           );
           final aplGetTotalPrice = data['data']['AplGetTotalPrice'];

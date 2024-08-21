@@ -22,7 +22,7 @@ void main() {
       test('get bank instruction find item', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/bankPaymentInstructionData.json',
+            'assets/json/common/bankPaymentInstructionData.json',
           ),
         );
 

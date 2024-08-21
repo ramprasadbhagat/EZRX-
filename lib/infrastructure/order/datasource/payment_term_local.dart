@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 class PaymentTermLocalDataSource {
   Future<List<PaymentTerm>> getPaymentTerms() async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/getPaymentTermsResponse.json'),
+      await rootBundle
+          .loadString('assets/json/common/getPaymentTermsResponse.json'),
     );
 
     final finalData = res['data']['availablePaymentTerm'];

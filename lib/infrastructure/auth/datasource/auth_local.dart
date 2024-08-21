@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 class AuthLocalDataSource {
   Future<Login> loginWithPassword() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/loginAdResponse.json'),
+      await rootBundle.loadString('assets/json/login_ad/loginAdResponse.json'),
     );
 
     return LoginDto.fromJson(data['data']['loginV4']).toDomain();
@@ -15,7 +15,7 @@ class AuthLocalDataSource {
 
   Future<Login> loginWithOktaToken() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/loginAdResponse.json'),
+      await rootBundle.loadString('assets/json/login_ad/loginAdResponse.json'),
     );
 
     return LoginDto.fromJson(data['data']['loginV4']).toDomain();
@@ -23,7 +23,8 @@ class AuthLocalDataSource {
 
   Future<Login> proxyLoginWithUsername() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
+      await rootBundle
+          .loadString('assets/json/proxy_login/proxyLoginResponse.json'),
     );
 
     return LoginDto.fromJson(data['data']['proxyLoginV3']).toDomain();
@@ -31,7 +32,7 @@ class AuthLocalDataSource {
 
   Future<Login> getAccessToken() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getAccessToken.json'),
+      await rootBundle.loadString('assets/json/common/getAccessToken.json'),
     );
 
     return LoginDto.fromJson(data['data']['getAccessToken']).toDomain();

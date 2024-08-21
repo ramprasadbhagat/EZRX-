@@ -20,7 +20,7 @@ class FavouriteLocalDataSource {
   Future<AddFavourite> addFavouriteMaterial() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/addFavouriteMaterialResponse.json',
+        'assets/json/add_favourite_material/addFavouriteMaterialResponse.json',
       ),
     );
     final finalData = data['data'];
@@ -31,7 +31,7 @@ class FavouriteLocalDataSource {
   Future<RemoveFavourite> removeFavouriteMaterial() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/removeFavouriteMaterialResponse.json',
+        'assets/json/remove_favourite_material/removeFavouriteMaterialResponse.json',
       ),
     );
     final finalData = data['data'];
@@ -41,8 +41,9 @@ class FavouriteLocalDataSource {
 
   Future<FavouriteStatus> getFavouriteStatus() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/fetchProductsFavouriteStatusResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/common/fetchProductsFavouriteStatusResponse.json',
+      ),
     );
     final finalData = data['data']['materialDetails'];
 

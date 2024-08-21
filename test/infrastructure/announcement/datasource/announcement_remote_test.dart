@@ -53,7 +53,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getAnnouncementsResponse.json'),
+                .loadString('assets/json/get_announcements/getAnnouncementsResponse.json'),
           );
 
           dioAdapter.onPost(
@@ -162,7 +162,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getMaintenanceBannersResponse.json'),
+                .loadString('assets/json/get_maintenance/getMaintenanceBannersResponse.json'),
           );
           dioAdapter.onPost(
             '/api/announcement',

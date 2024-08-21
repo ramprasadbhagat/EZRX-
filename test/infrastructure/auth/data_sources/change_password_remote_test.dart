@@ -45,7 +45,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/changePasswordResponse.json'),
+                .loadString('assets/json/change_password/changePasswordResponse.json'),
           );
 
           dioAdapter.onPost(
@@ -186,7 +186,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/resetPasswordV3Response.json'),
+                .loadString('assets/json/reset_password_v3/resetPasswordV3Response.json'),
           );
 
           dioAdapter.onPost(
@@ -328,7 +328,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/changePasswordFirstTimeResponse.json'),
+                .loadString('assets/json/change_password_first_time/changePasswordFirstTimeResponse.json'),
           );
 
           dioAdapter.onPost(

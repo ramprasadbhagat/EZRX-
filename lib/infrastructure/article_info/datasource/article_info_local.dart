@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/announcement_info/entities/announcement_articl
 class ArticleInfoLocalDataSource {
   Future<AnnouncementArticleInfo> getArticles() async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/getArticleInfoResponse.json'),
+      await rootBundle.loadString('assets/json/get_article_info/getArticleInfoResponse.json'),
     );
 
     return AnnouncementArticleInfoDto.fromJson(res['data']['search']).toDomain;

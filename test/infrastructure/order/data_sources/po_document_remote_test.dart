@@ -153,8 +153,9 @@ void main() {
             'filePath': imageUrl,
           };
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/deleteFileQueryResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/delete_file/deleteFileQueryResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -183,8 +184,9 @@ void main() {
             'filePath': imageUrl,
           };
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/deleteFileQueryResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/delete_file/deleteFileQueryResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -218,8 +220,9 @@ void main() {
             'filePath': imageUrl,
           };
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/deleteFileQueryResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/delete_file/deleteFileQueryResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -262,7 +265,7 @@ void main() {
           });
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/poUploadResponse.json',
+              'assets/json/common/poUploadResponse.json',
             ),
           );
 
@@ -298,7 +301,7 @@ void main() {
           });
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/poUploadResponse.json',
+              'assets/json/common/poUploadResponse.json',
             ),
           );
 
@@ -336,7 +339,7 @@ void main() {
           });
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/poUploadResponse.json',
+              'assets/json/common/poUploadResponse.json',
             ),
           );
 

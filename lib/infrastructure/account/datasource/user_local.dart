@@ -18,8 +18,8 @@ class UserLocalDataSource {
     final token = await tokenStorage.get();
     final data = json.decode(
       token.access == rootAdminToken || token.access.isEmpty
-          ? await rootBundle.loadString('assets/json/userResponse.json')
-          : await rootBundle.loadString('assets/json/proxyUserResponse.json'),
+          ? await rootBundle.loadString('assets/json/user/userResponse.json')
+          : await rootBundle.loadString('assets/json/proxy_user/proxyUserResponse.json'),
     );
 
     return UserDto.fromJson(data['data']['user']).toDomain();
@@ -27,7 +27,7 @@ class UserLocalDataSource {
 
   Future<SettingTc> updateUserTC() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/tncdateUpdateResponse.json'),
+      await rootBundle.loadString('assets/json/tnc_date/tncdateUpdateResponse.json'),
     );
 
     return SettingTcDto.fromJson(data['data']).toDomain();
@@ -36,7 +36,7 @@ class UserLocalDataSource {
   Future<bool> updatePrivacyControl() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/updatePrivacyControlResponse.json',
+        'assets/json/common/updatePrivacyControlResponse.json',
       ),
     );
 
@@ -46,7 +46,7 @@ class UserLocalDataSource {
   Future<DocumentType> updateSelectedOrderType() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/updateSelectedOrderTypeResponse.json',
+        'assets/json/update_selected_order_type/updateSelectedOrderTypeResponse.json',
       ),
     );
 

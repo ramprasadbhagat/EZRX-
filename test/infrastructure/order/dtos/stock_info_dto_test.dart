@@ -13,7 +13,9 @@ void main() {
   group('Test StockInfoDto Dto', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle.loadString('assets/json/getStockInformationList.json'),
+        await rootBundle.loadString(
+          'assets/json/get_stock_infomation_list/getStockInformationListResponse.json',
+        ),
       );
     });
 

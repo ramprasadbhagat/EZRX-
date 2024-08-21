@@ -38,7 +38,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/poUploadResponse.json',
+              'assets/json/common/poUploadResponse.json',
             ),
           );
 
@@ -55,7 +55,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/deleteFileQueryResponse.json',
+              'assets/json/delete_file/deleteFileQueryResponse.json',
             ),
           );
 

@@ -16,7 +16,7 @@ void main() {
         () async {
           data = json.decode(
             await rootBundle
-                .loadString('assets/json/getAnnouncementInfoResponse.json'),
+                .loadString('assets/json/get_announcement_info/getAnnouncementInfoResponse.json'),
           );
         },
       );

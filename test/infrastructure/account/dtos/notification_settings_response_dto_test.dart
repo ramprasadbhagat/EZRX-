@@ -13,7 +13,7 @@ void main() {
     () async {
       data = json.decode(
         await rootBundle.loadString(
-          'assets/json/getNotificationSettingsResponse.json',
+          'assets/json/get_notification_settings/getNotificationSettingsResponse.json',
         ),
       );
     },

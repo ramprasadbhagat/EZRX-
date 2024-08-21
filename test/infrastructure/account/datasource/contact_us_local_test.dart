@@ -19,7 +19,7 @@ void main() {
       () async {
         final res = json.decode(
           await rootBundle.loadString(
-            'assets/json/submitContactUsResponse.json',
+            'assets/json/submit_contact_us/submitContactUsResponse.json',
           ),
         );
         final result = await localDataSource.submit();

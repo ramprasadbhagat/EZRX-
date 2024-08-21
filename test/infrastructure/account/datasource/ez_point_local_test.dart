@@ -26,7 +26,7 @@ void main() {
         'Get EZPoint Token',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/getEZPointResponse.json'),
+            await rootBundle.loadString('assets/json/get_EZ_point/getEZPointResponse.json'),
           );
 
           final result = await localDataSource.getEZPointToken();

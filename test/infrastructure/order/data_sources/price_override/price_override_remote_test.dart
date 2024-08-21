@@ -48,7 +48,8 @@ void main() {
     () {
       test('Get price override', () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/getPriceOverride.json'),
+          await rootBundle
+              .loadString('assets/json/common/getPriceOverrideResponse.json'),
         );
 
         dioAdapter.onPost(

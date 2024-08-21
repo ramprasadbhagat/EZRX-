@@ -11,7 +11,7 @@ class PaymentSummaryLocalDataSource {
   Future<List<PaymentSummaryDetails>> getPaymentSummary() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentSummaryListResponse.json',
+        'assets/json/payment_summary_list/paymentSummaryListResponse.json',
       ),
     );
 
@@ -22,7 +22,9 @@ class PaymentSummaryLocalDataSource {
 
   Future<List<PaymentSummaryDetails>> getTransactions() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/listTransactionsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/list_transactions/listTransactionsResponse.json',
+      ),
     );
 
     return List<Map<String, dynamic>>.from(

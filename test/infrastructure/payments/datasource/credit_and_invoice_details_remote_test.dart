@@ -63,7 +63,7 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle.loadString(
-                'assets/json/customerDocumentDetailsResponse.json',
+                'assets/json/customer_document_details/customerDocumentDetailsResponse.json',
               ),
             );
 
@@ -109,7 +109,7 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle.loadString(
-                'assets/json/customerDocumentDetailsResponse.json',
+                'assets/json/customer_document_details/customerDocumentDetailsResponse.json',
               ),
             );
             final mpVariables = {...variables};

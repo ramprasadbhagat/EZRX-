@@ -13,7 +13,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle.loadString(
-          'assets/json/customerDocumentDetailsResponse.json',
+          'assets/json/customer_document_details/customerDocumentDetailsResponse.json',
         ),
       );
     });

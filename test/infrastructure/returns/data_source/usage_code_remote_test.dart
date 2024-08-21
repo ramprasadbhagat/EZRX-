@@ -57,8 +57,9 @@ void main() {
         '=> getUsages',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getUsageListResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/get_usage_list/getUsageListResponse.json',
+            ),
           );
 
           dioAdapter.onPost(

@@ -49,7 +49,7 @@ void main() {
   group('FAQ remote data source test', () {
     test('Get FAQInfo', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/getFAQResponse.json'),
+        await rootBundle.loadString('assets/json/get_faq/getFAQResponse.json'),
       );
 
       dioAdapter.onPost(

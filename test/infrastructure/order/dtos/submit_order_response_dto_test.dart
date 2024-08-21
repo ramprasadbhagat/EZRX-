@@ -12,7 +12,7 @@ void main() {
   group('Test bundleInfoDto ', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle.loadString('assets/json/submitOrderResponse.json'),
+        await rootBundle.loadString('assets/json/submit_order/submitOrderResponse.json'),
       );
     });
     test('Test fromDomain', () {

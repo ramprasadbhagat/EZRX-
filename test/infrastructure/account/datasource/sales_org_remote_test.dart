@@ -65,8 +65,9 @@ void main() {
       'Get sales config details',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getSalesOrgConfigsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/get_sales_org_configs/getSalesOrgConfigsResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -103,8 +104,9 @@ void main() {
       'Get sales config details have enablePromotionBlacklist',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getSalesOrgConfigsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/get_sales_org_configs/getSalesOrgConfigsResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -141,8 +143,9 @@ void main() {
       'Get sales config details enablePromotionBlacklist empty',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getSalesOrgConfigsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/get_sales_org_configs/getSalesOrgConfigsResponse.json',
+          ),
         );
 
         dioAdapter.onPost(

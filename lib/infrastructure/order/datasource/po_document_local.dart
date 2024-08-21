@@ -22,7 +22,7 @@ class PoDocumentLocalDataSource {
   Future<PoDocuments> fileUpload() async {
     await Future.delayed(const Duration(seconds: 3));
     final data = json.decode(
-      await rootBundle.loadString('assets/json/poUploadResponse.json'),
+      await rootBundle.loadString('assets/json/common/poUploadResponse.json'),
     );
 
     return PoDocumentsDto.fromJson(data).toDomain();
@@ -30,7 +30,9 @@ class PoDocumentLocalDataSource {
 
   Future<bool> deleteFile() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/deleteFileQueryResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/delete_file/deleteFileQueryResponse.json',
+      ),
     );
 
     return data['data']['deleteFile']['isDeleted'] as bool;

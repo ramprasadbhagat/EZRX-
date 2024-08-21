@@ -61,8 +61,9 @@ void main() async {
 
       setUpAll(() async {
         getAddedToCartProductListJson = json.decode(
-          await rootBundle
-              .loadString('assets/json/getAddedToCartProductList.json'),
+          await rootBundle.loadString(
+            'assets/json/get_added_to_cart_product_list/getAddedToCartProductList.json',
+          ),
         );
       });
 
@@ -244,7 +245,7 @@ void main() async {
       setUpAll(() async {
         upsertCartItemsWithComboOfferJson = json.decode(
           await rootBundle.loadString(
-            'assets/json/upsertCartItemsWithComboOffersResponse.json',
+            'assets/json/upsert_cart_items/upsertCartItemsWithComboOffersResponse.json',
           ),
         );
       });
@@ -452,7 +453,8 @@ void main() async {
 
       setUpAll(() async {
         upsertCartListJson = json.decode(
-          await rootBundle.loadString('assets/json/upsertQueryResponse.json'),
+          await rootBundle
+              .loadString('assets/json/upsert_cart/upsertCartResponse.json'),
         );
       });
 
@@ -554,7 +556,7 @@ void main() async {
         () async {
           upsertCartListJson = json.decode(
             await rootBundle.loadString(
-              'assets/json/upsertCartItemsWithBundleOffersResponse.json',
+              'assets/json/upsert_cart_items/upsertCartItemsWithBundleOffersResponse.json',
             ),
           );
 
@@ -595,8 +597,9 @@ void main() async {
         'Cart Remote data source Success with null EZRX Items',
         () async {
           upsertCartListJson = json.decode(
-            await rootBundle
-                .loadString('assets/json/upsertNullItemsQueryResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/upsert_cart/upsertCartNullItemsResponse.json',
+            ),
           );
           final finalData = [];
 
@@ -743,8 +746,9 @@ void main() async {
 
       setUpAll(() async {
         simulateOrderJson = json.decode(
-          await rootBundle
-              .loadString('assets/json/aplSimulateOrderResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/apl_simulate_order/aplSimulateOrderResponse.json',
+          ),
         );
       });
 
@@ -870,8 +874,9 @@ void main() async {
 
       setUpAll(() async {
         totalPriceJson = json.decode(
-          await rootBundle
-              .loadString('assets/json/aplGetTotalPriceResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/apl_get_total_price/aplGetTotalPriceResponse.json',
+          ),
         );
       });
 

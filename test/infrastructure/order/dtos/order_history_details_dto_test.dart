@@ -12,7 +12,7 @@ void main() {
   group('Test OrderHistoryDetailsDto ', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle.loadString('assets/json/getOrderDetailsResponse.json'),
+        await rootBundle.loadString('assets/json/get_order_details/getOrderDetailsResponse.json'),
       );
     });
 

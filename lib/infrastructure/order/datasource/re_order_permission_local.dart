@@ -9,7 +9,9 @@ class ReOrderPermissionLocalDataSource {
 
   Future<ReOrderPermission> getPermission() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getMaterialPermissions.json'),
+      await rootBundle.loadString(
+        'assets/json/get_material_permissions/getMaterialPermissionsResponse.json',
+      ),
     );
 
     return ReOrderPermissionDto.fromJson(data['data']['validCustomerMaterials'])

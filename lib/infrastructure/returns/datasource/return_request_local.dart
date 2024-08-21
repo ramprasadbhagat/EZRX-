@@ -9,8 +9,9 @@ class ReturnRequestLocalDataSource {
 
   Future<ReturnMaterialList> searchReturnMaterials() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/searchReturnMaterialsV2Response.json'),
+      await rootBundle.loadString(
+        'assets/json/search_return_materials_v2/searchReturnMaterialsV2Response.json',
+      ),
     );
 
     return ReturnMaterialListDto.fromJson(
@@ -21,7 +22,7 @@ class ReturnRequestLocalDataSource {
   Future<ReturnMaterialList> searchReturnMaterialsForSalesRep() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/searchReturnMaterialSalesRepV2Response.json',
+        'assets/json/search_return_materials_sales_rep_v2/searchReturnMaterialSalesRepV2Response.json',
       ),
     );
 
@@ -32,7 +33,8 @@ class ReturnRequestLocalDataSource {
 
   Future<String> addRequest() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/addRequestV2Response.json'),
+      await rootBundle
+          .loadString('assets/json/add_request_v2/addRequestV2Response.json'),
     );
 
     return data['data']['addRequestV2']['requestID'] as String;

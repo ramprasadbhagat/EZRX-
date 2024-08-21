@@ -40,7 +40,7 @@ void main() {
   group('E-invoice remote data source test', () {
     test('Should send empty json to API when market is not SG or PH', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/listSoaResponse.json'),
+        await rootBundle.loadString('assets/json/common/listSoaResponse.json'),
       );
 
       when(
@@ -72,7 +72,7 @@ void main() {
 
     test('Should send payload to API when market is SG', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/listSoaResponse.json'),
+        await rootBundle.loadString('assets/json/common/listSoaResponse.json'),
       );
 
       when(
@@ -106,7 +106,7 @@ void main() {
 
     test('Should send payload to API when market is PH', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/listSoaResponse.json'),
+        await rootBundle.loadString('assets/json/common/listSoaResponse.json'),
       );
 
       when(
@@ -143,7 +143,7 @@ void main() {
 
     test('Should return download payment attachment empty if response empty', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/emptyResponse.json'),
+        await rootBundle.loadString('assets/json/common/emptyResponse.json'),
       );
 
       when(

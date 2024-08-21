@@ -11,7 +11,7 @@ void main() {
   group('Test payment term ', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle.loadString('assets/json/getPaymentTermsResponse.json'),
+        await rootBundle.loadString('assets/json/common/getPaymentTermsResponse.json'),
       );
     });
 

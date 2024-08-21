@@ -23,13 +23,13 @@ extension on UpsertCartLocalType {
   String get mockDataPath {
     switch (this) {
       case UpsertCartLocalType.upsertCart:
-        return 'upsertQueryResponse.json';
+        return 'upsert_cart/upsertCartResponse.json';
       case UpsertCartLocalType.upsertCartItems:
-        return 'upsertItemsQueryResponse.json';
+        return 'upsert_cart_items/upsertCartItemsResponse.json';
       case UpsertCartLocalType.upsertCartItemsComboOffer:
-        return 'upsertCartItemsWithComboOffersResponse.json';
+        return 'upsert_cart_items/upsertCartItemsWithComboOffersResponse.json';
       case UpsertCartLocalType.upsertCartItemsReorder:
-        return 'upsertCartItemsWithReorderMaterialsResponse.json';
+        return 'upsert_cart_items/upsertCartItemsWithReorderMaterialsResponse.json';
     }
   }
 
@@ -48,7 +48,7 @@ class CartLocalDataSource {
 
   Future<Cart> getAddedToCartProductList() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getAddedToCartProductList.json'),
+      await rootBundle.loadString('assets/json/get_added_to_cart_product_list/getAddedToCartProductList.json'),
     );
 
     final finalData = data['data']['cart'];
@@ -72,7 +72,7 @@ class CartLocalDataSource {
 
   Future<AplSimulatorOrder> aplSimulateOrder() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/aplSimulateOrderResponse.json'),
+      await rootBundle.loadString('assets/json/apl_simulate_order/aplSimulateOrderResponse.json'),
     );
     final aplSimulatorOrder = data['data']['aplSimulateOrder'];
 
@@ -81,7 +81,7 @@ class CartLocalDataSource {
 
   Future<AplGetTotalPrice> aplGetTotalPrice() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/aplGetTotalPriceResponse.json'),
+      await rootBundle.loadString('assets/json/apl_get_total_price/aplGetTotalPriceResponse.json'),
     );
 
     return AplGetTotalPriceDto.fromJson(data['data']['AplGetTotalPrice'])

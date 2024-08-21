@@ -158,7 +158,7 @@ void main() {
       test('create Virtual Account ', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/createVirtualAccountResponse.json',
+            'assets/json/create_virtual_account/createVirtualAccountResponse.json',
           ),
         )['data']['createVirtualAccount'];
 
@@ -175,7 +175,7 @@ void main() {
       test('get principal cutoffs', () async {
         final data = json.decode(
           await rootBundle.loadString(
-            'assets/json/getPrincipalCutoffsResponse.json',
+            'assets/json/get_principal_cutoffs/getPrincipalCutoffsResponse.json',
           ),
         )['data']['getPrincipalCutoffs'];
 

@@ -54,8 +54,9 @@ void main() {
             },
           };
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getMaterialPermissions.json'),
+            await rootBundle.loadString(
+              'assets/json/get_material_permissions/getMaterialPermissionsResponse.json',
+            ),
           );
           dioAdapter.onPost(
             '/api/license',
@@ -104,8 +105,9 @@ void main() {
             },
           };
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getMaterialPermissions.json'),
+            await rootBundle.loadString(
+              'assets/json/get_material_permissions/getMaterialPermissionsResponse.json',
+            ),
           );
           dioAdapter.onPost(
             '/api/license',
@@ -152,8 +154,9 @@ void main() {
             },
           };
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getMaterialPermissions.json'),
+            await rootBundle.loadString(
+              'assets/json/get_material_permissions/getMaterialPermissionsResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -201,8 +204,9 @@ void main() {
             },
           };
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getMaterialPermissions.json'),
+            await rootBundle.loadString(
+              'assets/json/get_material_permissions/getMaterialPermissionsResponse.json',
+            ),
           );
           dioAdapter.onPost(
             '/api/license',

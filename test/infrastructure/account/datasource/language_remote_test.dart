@@ -43,8 +43,9 @@ void main() {
     () {
       test('change Language', () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/updateLanguageAndHolidayResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/update_language_and_holiday/updateLanguageAndHolidayResponse.json',
+          ),
         );
         final variables = {
           'request': {

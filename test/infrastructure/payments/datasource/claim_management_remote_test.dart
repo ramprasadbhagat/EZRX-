@@ -43,7 +43,9 @@ void main() {
   group('Claim Management Remote Data Source Test', () {
     test('getClaimSubmissions success', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/getClaimSubmissions.json'),
+        await rootBundle.loadString(
+          'assets/json/get_claim_submissions/getClaimSubmissionsResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -84,8 +86,9 @@ void main() {
 
     test('getPrincipalForSalesOrg success', () async {
       final res = json.decode(
-        await rootBundle
-            .loadString('assets/json/principalForSalesOrgResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/principal_sales_org/principalForSalesOrgResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -135,7 +138,8 @@ void main() {
       final files = [mockFile];
 
       final res = json.decode(
-        await rootBundle.loadString('assets/json/submitClaimResponse.json'),
+        await rootBundle
+            .loadString('assets/json/submit_claim/submitClaimResponse.json'),
       );
 
       final formData = FormData();

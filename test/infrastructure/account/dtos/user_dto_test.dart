@@ -14,7 +14,7 @@ void main() {
   group('Test User DTO', () {
     setUp(() async {
       data = json
-          .decode(await rootBundle.loadString('assets/json/userResponse.json'));
+          .decode(await rootBundle.loadString('assets/json/user/userResponse.json'));
     });
     test('For _mergeSalesOrg', () async {
       final user = UserDto.fromJson(data['data']['user']).toDomain();

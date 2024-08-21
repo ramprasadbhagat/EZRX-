@@ -10,7 +10,9 @@ class OrderLocalDataSource {
   Future<SubmitOrderResponse> submitOrder() async {
     await Future.delayed(const Duration(seconds: 5));
     final data = json.decode(
-      await rootBundle.loadString('assets/json/submitOrderResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/submit_order/submitOrderResponse.json',
+      ),
     );
 
     return SubmitOrderResponseDto.fromJson(data['data']['submitOrder'])

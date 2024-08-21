@@ -9,7 +9,9 @@ class MaterialFilterLocalDataSource {
 
   Future<MaterialFilter> getFilters() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getMaterialFilterResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_material_filter/getMaterialFilterResponse.json',
+      ),
     );
     final finalData = data['data']['GetFilterList'];
 

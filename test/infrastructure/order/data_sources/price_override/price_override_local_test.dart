@@ -27,7 +27,8 @@ void main() {
         'Get Price override',
         () async {
           final res = json.decode(
-            await rootBundle.loadString('assets/json/getPriceOverride.json'),
+            await rootBundle
+                .loadString('assets/json/common/getPriceOverrideResponse.json'),
           );
 
           final result = await localDataSource.getOverridePrice();

@@ -27,7 +27,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/paymentAttachment.json',
+              'assets/json/payment_attachment/paymentAttachmentResponse.json',
             ),
           );
           final expectedResult = DownloadPaymentAttachmentDto.fromJson(
@@ -48,7 +48,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/paymentSummaryAttachment.json',
+              'assets/json/payment_summary_attachment/paymentSummaryAttachmentResponse.json',
             ),
           );
           final expectedResult = DownloadPaymentAttachmentDto.fromJson(
@@ -127,7 +127,7 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/eCreditResponse.json',
+              'assets/json/common/eCreditResponse.json',
             ),
           );
           final data = ECreditInvoiceDto.fromJson(res['data'].first).toDomain();

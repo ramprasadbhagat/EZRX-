@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -12,8 +13,9 @@ class ViewByItemLocalDataSource {
   ViewByItemLocalDataSource();
   Future<OrderHistory> getViewByItems() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getorderHistoryFetchByItemsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_order_history_fetch_by_items/getOrderHistoryFetchByItemsResponse.json',
+      ),
     );
 
     final finalData =
@@ -29,7 +31,7 @@ class ViewByItemLocalDataSource {
   Future<List<InvoiceData>> getInvoiceDataForOrders() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getInvoiceForOrdersResponse.json',
+        'assets/json/get_invoice_for_orders/getInvoiceForOrdersResponse.json',
       ),
     );
     final finalData = data['data']['getInvoiceIdForOrders'];
@@ -42,7 +44,7 @@ class ViewByItemLocalDataSource {
   Future<InvoiceDetailResponse> getInvoiceDetailsForOrder() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getInvoiceDetailsForOrder.json',
+        'assets/json/get_invoice_details_for_order/getInvoiceDetailsForOrderResponse.json',
       ),
     );
     final finalData = data['data']['GetInvoiceDetailsForOrder'];

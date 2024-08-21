@@ -12,7 +12,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle
-            .loadString('assets/json/getMaterialFilterResponse.json'),
+            .loadString('assets/json/get_material_filter/getMaterialFilterResponse.json'),
       );
     });
     test('Test toDomain', () {

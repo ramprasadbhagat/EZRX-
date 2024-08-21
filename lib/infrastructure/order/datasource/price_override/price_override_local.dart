@@ -11,7 +11,7 @@ class PriceOverrideLocalDataSource {
   Future<Price> getOverridePrice() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getPriceOverride.json',
+        'assets/json/common/getPriceOverrideResponse.json',
       ),
     );
 

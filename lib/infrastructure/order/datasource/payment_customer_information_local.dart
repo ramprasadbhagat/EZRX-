@@ -7,8 +7,9 @@ import 'package:flutter/services.dart';
 class PaymentCustomerInformationLocalDataSource {
   Future<PaymentCustomerInformation> getPaymentCustomerInformation() async {
     final res = json.decode(
-      await rootBundle
-          .loadString('assets/json/getPaymentCustomerInfoResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_payment_customer_info/getPaymentCustomerInfoResponse.json',
+      ),
     );
 
     final finalData = res['data']['customerInformation'];

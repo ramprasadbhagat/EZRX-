@@ -47,8 +47,9 @@ void main() {
         test('success state', () async {
           final variables = {'materialNumber': 'fake_material_number'};
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/addFavouriteMaterialResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/add_favourite_material/addFavouriteMaterialResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -77,8 +78,9 @@ void main() {
         test('statuscode not equal to 200', () async {
           final variables = {'materialNumber': 'fake_material_number'};
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/addFavouriteMaterialResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/add_favourite_material/addFavouriteMaterialResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -111,8 +113,9 @@ void main() {
         test('with error', () async {
           final variables = {'materialNumber': 'fake_material_number'};
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/addFavouriteMaterialResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/add_favourite_material/addFavouriteMaterialResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -151,8 +154,9 @@ void main() {
         test('success state', () async {
           final variables = {'materialNumber': 'fake_material_number'};
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/removeFavouriteMaterialResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/remove_favourite_material/removeFavouriteMaterialResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -181,8 +185,9 @@ void main() {
         test('statuscode not equal to 200', () async {
           final variables = {'materialNumber': 'fake_material_number'};
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/removeFavouriteMaterialResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/remove_favourite_material/removeFavouriteMaterialResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -215,8 +220,9 @@ void main() {
         test('with error', () async {
           final variables = {'materialNumber': 'fake_material_number'};
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/removeFavouriteMaterialResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/remove_favourite_material/removeFavouriteMaterialResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -259,7 +265,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/fetchProductsFavouriteStatusResponse.json',
+              'assets/json/common/fetchProductsFavouriteStatusResponse.json',
             ),
           );
 
@@ -294,7 +300,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/fetchProductsFavouriteStatusResponse.json',
+              'assets/json/common/fetchProductsFavouriteStatusResponse.json',
             ),
           );
 
@@ -334,7 +340,7 @@ void main() {
           };
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/fetchProductsFavouriteStatusResponse.json',
+              'assets/json/common/fetchProductsFavouriteStatusResponse.json',
             ),
           );
 

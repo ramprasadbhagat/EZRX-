@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 class AnnouncementArticleTagLocalDataSource {
   Future<List<String>> getAnnouncementArticleTags() async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/announcementArticleTag.json'),
+      await rootBundle.loadString('assets/json/announcement_article_tag/announcementArticleTag.json'),
     );
 
     final List<String> tagList = res['data']['search']['results']

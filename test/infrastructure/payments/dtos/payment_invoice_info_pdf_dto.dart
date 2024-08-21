@@ -13,7 +13,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle.loadString(
-          'assets/json/paymentInvoiceInfoPdfResponse.json',
+          'assets/json/payment_invoice_info_pdf/paymentInvoiceInfoPdfResponse.json',
         ),
       );
     });

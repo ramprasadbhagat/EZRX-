@@ -9,7 +9,9 @@ class SalesRepLocalDataSource {
 
   Future<SalesRepresentativeInfo> getSalesRepInfo() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getSalesRepInfoResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/get_sales_rep_info/getSalesRepInfoResponse.json',
+      ),
     );
 
     return SalesRepresentativeInfoDto.fromJson(

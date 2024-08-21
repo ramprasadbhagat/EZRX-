@@ -49,7 +49,7 @@ void main() {
     test('Get Contact Us Details ', () async {
       final infoRes = json.decode(
         await rootBundle
-            .loadString('assets/json/contactUsDetailsResponse.json'),
+            .loadString('assets/json/contact_us/contactUsDetailsResponse.json'),
       );
 
       dioAdapter.onPost(

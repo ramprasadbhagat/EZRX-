@@ -57,8 +57,9 @@ void main() {
       '=> Success',
       () async {
         final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getPaymentBankInAccountsResponse.json'),
+          await rootBundle.loadString(
+            'assets/json/get_payment_bank_in_accounts/getPaymentBankInAccountsResponse.json',
+          ),
         );
 
         dioAdapter.onPost(

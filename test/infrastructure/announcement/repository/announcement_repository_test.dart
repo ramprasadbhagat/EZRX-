@@ -40,7 +40,7 @@ void main() {
           .thenAnswer((invocation) async {
         final res = json.decode(
           await rootBundle
-              .loadString('assets/json/getAnnouncementsResponse.json'),
+              .loadString('assets/json/get_announcements/getAnnouncementsResponse.json'),
         );
 
         return AnnouncementDto.fromJson(res['data']['getAnnouncements'][0])

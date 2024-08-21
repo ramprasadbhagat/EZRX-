@@ -14,7 +14,7 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle.loadString(
-          'assets/json/principalForSalesOrgResponse.json',
+          'assets/json/principal_sales_org/principalForSalesOrgResponse.json',
         ),
       );
     });
