@@ -2,8 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -18,26 +20,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/mock_bloc.dart';
 import '../../../../utils/widget_utils.dart';
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class AnnouncementInfoBlocMock
-    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
-    implements AnnouncementInfoBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class ArticlesInfoBlocMock
-    extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
-    implements ArticlesInfoBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ConfigMock extends Mock implements Config {}
 
 void main() {
   late AppRouter autoRouterMock;
@@ -47,6 +31,8 @@ void main() {
   late AuthBloc authBloc;
   late Config configMock;
   late EligibilityBloc eligibilityBlocMock;
+  late AnnouncementFilterBloc announcementFilterBlocMock;
+  late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
   const fakeKeyWord = 'fake-keyword';
 
   setUpAll(() {
@@ -57,6 +43,8 @@ void main() {
     announcementInfoBloc = AnnouncementInfoBlocMock();
     announcementBloc = AnnouncementBlocMock();
     articlesInfoBloc = ArticlesInfoBlocMock();
+    articlesInfoFilterBlocMock = ArticlesInfoFilterBlocMock();
+    announcementFilterBlocMock = AnnouncementFilterBlocMock();
     authBloc = AuthBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     when(() => announcementInfoBloc.state)
@@ -66,6 +54,10 @@ void main() {
     when(() => articlesInfoBloc.state).thenReturn(ArticlesInfoState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => announcementFilterBlocMock.state)
+        .thenReturn(AnnouncementFilterState.initial());
+    when(() => articlesInfoFilterBlocMock.state)
+        .thenReturn(ArticlesInfoFilterState.initial());
   });
 
   Future setUpWidgetArticleTab(WidgetTester tester) async {
@@ -93,6 +85,12 @@ void main() {
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
+        ),
+        BlocProvider<AnnouncementFilterBloc>(
+          create: (context) => announcementFilterBlocMock,
+        ),
+        BlocProvider<ArticlesInfoFilterBloc>(
+          create: (context) => articlesInfoFilterBlocMock,
         ),
       ],
       child: const AnnouncementsPage(),
@@ -200,6 +198,31 @@ void main() {
             tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
         expect(searchField.controller?.text, searchKey);
       });
+
+      testWidgets('Open Announcement filter bottom sheet and tap close',
+          (tester) async {
+        final filterIcon = find.byKey(WidgetKeys.announcementFilterIcon);
+        when(
+          () => announcementInfoBloc.state,
+        ).thenAnswer(
+          (_) => AnnouncementInfoState.initial().copyWith(
+            categoryKeyList: [''],
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(filterIcon, findsOneWidget);
+        await tester.tap(filterIcon);
+        await tester.pumpAndSettle();
+        verify(
+          () => announcementFilterBlocMock.add(
+            const AnnouncementFilterEvent.setCategoryWhileOpenBottomSheet(
+              [''],
+            ),
+          ),
+        ).called(1);
+        expect(find.byKey(WidgetKeys.announcementFilterKey), findsOneWidget);
+      });
     });
 
     group('Articles Search Bar', () {
@@ -284,9 +307,37 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         await setUpWidgetArticleTab(tester);
+
         final searchField =
             tester.widget<TextFormField>(find.byKey(WidgetKeys.searchBar));
         expect(searchField.controller?.text, searchKey);
+      });
+
+      testWidgets('Open Article filter bottom sheet and tap close',
+          (tester) async {
+        final filterIcon = find.byKey(WidgetKeys.articleFilterIcon);
+        when(
+          () => articlesInfoBloc.state,
+        ).thenAnswer(
+          (_) => ArticlesInfoState.initial().copyWith(
+            categoryKeyList: [''],
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        await setUpWidgetArticleTab(tester);
+
+        expect(filterIcon, findsOneWidget);
+        await tester.tap(filterIcon);
+        await tester.pumpAndSettle();
+        verify(
+          () => articlesInfoFilterBlocMock.add(
+            const ArticlesInfoFilterEvent.setCategoryWhileOpenBottomSheet(
+              [''],
+            ),
+          ),
+        ).called(1);
+        expect(find.byKey(WidgetKeys.articleFilterKey), findsOneWidget);
       });
     });
   });

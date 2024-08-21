@@ -4,8 +4,10 @@ import 'package:ezrxmobile/application/account/customer_license_bloc/customer_li
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_attachment_bloc/announcement_attachment_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
@@ -130,7 +132,7 @@ class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
 
 class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
     implements ChatBotBloc {}
-    
+
 class ResetPasswordBlocMock
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
     implements ResetPasswordBloc {}
@@ -452,4 +454,12 @@ class AnnouncementFilterBlocMock
 class AnnouncementInfoBlocMock
     extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
     implements AnnouncementInfoBloc {}
+
+class AnnouncementInfoDetailsBlocMock
+    extends MockBloc<AnnouncementInfoDetailsEvent, AnnouncementInfoDetailsState>
+    implements AnnouncementInfoDetailsBloc {}
+
+class AnnouncementAttachmentBlocMock
+    extends MockBloc<AnnouncementAttachmentEvent, AnnouncementAttachmentState>
+    implements AnnouncementAttachmentBloc {}    
 ////////////////////////////////////////////////////////////////////////////////

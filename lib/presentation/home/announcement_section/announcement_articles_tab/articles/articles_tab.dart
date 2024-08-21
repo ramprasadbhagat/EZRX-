@@ -104,6 +104,7 @@ class _ArticlesTile extends StatelessWidget {
     return CustomCard(
       showBorder: false,
       showShadow: true,
+      clipBehavior: Clip.hardEdge,
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         onTap: () => context.router.push(
@@ -115,8 +116,10 @@ class _ArticlesTile extends StatelessWidget {
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ArticleImageBox(
+            CustomImage(
               key: WidgetKeys.articleImageKey,
+              width: MediaQuery.of(context).size.width * 0.35,
+              height: 88,
               imageUrl: article.thumbnail,
             ),
             Expanded(
@@ -173,29 +176,6 @@ class _ArticlesTile extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ArticleImageBox extends StatelessWidget {
-  final String imageUrl;
-  const _ArticleImageBox({super.key, required this.imageUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomImage(
-      width: MediaQuery.of(context).size.width * 0.35,
-      height: 88,
-      imageUrl: imageUrl,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(image: imageProvider, fit: BoxFit.fitWidth),
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(8),
-            bottomLeft: Radius.circular(8),
-          ),
         ),
       ),
     );

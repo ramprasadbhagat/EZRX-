@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
@@ -10,39 +9,19 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/mock_bloc.dart';
 import '../../../../../utils/widget_utils.dart';
-
-class AnnouncementInfoBlocMock
-    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
-    implements AnnouncementInfoBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AnnouncementInfoDetailsBlocMock
-    extends MockBloc<AnnouncementInfoDetailsEvent, AnnouncementInfoDetailsState>
-    implements AnnouncementInfoDetailsBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -231,7 +210,6 @@ void main() {
             [
               AnnouncementInfoState.initial().copyWith(isLoading: true),
               AnnouncementInfoState.initial().copyWith(
-                isLoading: false,
                 apiFailureOrSuccessOption: optionOf(
                   const Left(
                     ApiFailure.other('BE Error'),
@@ -359,17 +337,22 @@ void main() {
       testWidgets(
         'Load announcement_tab with data AND then loadMore',
         (tester) async {
-          when(() => announcementInfoBlocMock.state).thenReturn(
-            AnnouncementInfoState.initial().copyWith(
-              announcementInfo: announcementInfo.copyWith(
-                announcementList:
-                    announcementInfo.announcementList.take(10).toList(),
+          whenListen(
+            announcementInfoBlocMock,
+            Stream.fromIterable([
+              AnnouncementInfoState.initial().copyWith(
+                announcementInfo: announcementInfo.copyWith(
+                  announcementList:
+                      announcementInfo.announcementList.take(10).toList(),
+                ),
+                canLoadMore: true,
+                apiFailureOrSuccessOption: optionOf(const Right('')),
               ),
-              canLoadMore: true,
-            ),
+            ]),
           );
+
           await tester.pumpWidget(getAnnouncementListPage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
               find.byKey(WidgetKeys.announcementNotFoundRecordKey);
@@ -402,14 +385,21 @@ void main() {
       testWidgets(
         'Load announcement_tab with data and then tap item',
         (tester) async {
-          when(() => announcementInfoBlocMock.state).thenReturn(
-            AnnouncementInfoState.initial().copyWith(
-              announcementInfo: announcementInfo,
-            ),
+          whenListen(
+            announcementInfoBlocMock,
+            Stream.fromIterable([
+              AnnouncementInfoState.initial().copyWith(
+                announcementInfo: announcementInfo,
+                apiFailureOrSuccessOption: optionOf(const Right('')),
+              ),
+              AnnouncementInfoState.initial().copyWith(
+                announcementInfo: announcementInfo,
+              ),
+            ]),
           );
           await tester.pumpWidget(getAnnouncementListPage());
 
-          await tester.pump();
+          await tester.pumpAndSettle();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
               find.byKey(WidgetKeys.announcementNotFoundRecordKey);
@@ -437,6 +427,25 @@ void main() {
           ).called(1);
         },
       );
+
+      testWidgets(
+          'Test New AnnounceMent Icon  visible for announcements that has been released  7 days from now',
+          (tester) async {
+        when(() => announcementInfoBlocMock.state).thenReturn(
+          AnnouncementInfoState.initial().copyWith(
+            announcementInfo: announcementInfo.copyWith(
+              announcementList: [
+                AnnouncementArticleItem.empty(),
+              ],
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getAnnouncementListPage());
+        await tester.pump();
+        final newIcon = find.byType(NewAnnouncementIcon);
+        expect(newIcon, findsOneWidget);
+      });
     },
   );
 }

@@ -33,7 +33,7 @@ class _AnnouncementFilterIcon extends StatelessWidget {
                   top: Radius.circular(16),
                 ),
               ),
-              builder: (_) => const _AnnouncementFilterBottomSheet(),
+              builder: (_) => const AnnouncementFilterBottomSheet(),
             );
           },
         );

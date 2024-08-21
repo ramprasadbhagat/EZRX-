@@ -33,7 +33,7 @@ class _ArticleFilterIcon extends StatelessWidget {
                   top: Radius.circular(16),
                 ),
               ),
-              builder: (_) => const _ArticleFilterBottomSheet(),
+              builder: (_) => const ArticleFilterBottomSheet(),
             );
           },
         );

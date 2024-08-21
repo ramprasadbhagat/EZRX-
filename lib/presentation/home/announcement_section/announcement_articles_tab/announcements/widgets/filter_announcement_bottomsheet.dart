@@ -1,7 +1,15 @@
-part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class _AnnouncementFilterBottomSheet extends StatelessWidget {
-  const _AnnouncementFilterBottomSheet();
+class AnnouncementFilterBottomSheet extends StatelessWidget {
+  const AnnouncementFilterBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +17,7 @@ class _AnnouncementFilterBottomSheet extends StatelessWidget {
       sheetKey: WidgetKeys.announcementFilterKey,
       headerText: 'Filter',
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(

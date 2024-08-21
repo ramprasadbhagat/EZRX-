@@ -16,20 +16,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/locator.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class AnnouncementInfoBlocMock
-    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
-    implements AnnouncementInfoBloc {}
-
-class AnnouncementInfoDetailsBlocMock
-    extends MockBloc<AnnouncementInfoDetailsEvent, AnnouncementInfoDetailsState>
-    implements AnnouncementInfoDetailsBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -111,13 +101,17 @@ void main() async {
           salesOrganisation: fakeMYSalesOrganisation,
         ),
       );
-      when(() => announcementInfoBloc.state).thenReturn(
-        AnnouncementInfoState.initial().copyWith(
-          announcementInfo: announcementArticleInfo,
-        ),
+      whenListen(
+        announcementInfoBloc,
+        Stream.fromIterable([
+          AnnouncementInfoState.initial().copyWith(
+            announcementInfo: announcementArticleInfo,
+          ),
+        ]),
       );
+
       await tester.pumpWidget(getWUT());
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       final announcementIconButton = find.byKey(WidgetKeys.announcementIcon);
       expect(announcementIconButton, findsOneWidget);

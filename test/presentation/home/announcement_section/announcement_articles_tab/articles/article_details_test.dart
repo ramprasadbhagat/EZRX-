@@ -3,17 +3,15 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/article_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 
 import '../../../../../utils/widget_utils.dart';
-
-final locator = GetIt.instance;
 
 void main() {
   late AppRouter autoRouterMock;
@@ -26,11 +24,17 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     mockArticleItem = (await ArticleInfoLocalDataSource().getArticles())
         .announcementList
-        .first;
+        .first
+        .copyWith(
+          thumbnail: '',
+          manufacturer: 'fake-manufacturer',
+          tag: 'fake-tag',
+        );
   });
 
   Widget getArticleDetailsPage({required AnnouncementArticleItem article}) {
     return WidgetUtils.getScopedWidget(
+      usingLocalization: true,
       autoRouterMock: autoRouterMock,
       child: ArticleDetails(article: article),
     );
@@ -42,6 +46,7 @@ void main() {
       (tester) async {
         await tester
             .pumpWidget(getArticleDetailsPage(article: mockArticleItem));
+        await tester.pump();
         final articleDetailsPage = find.byKey(WidgetKeys.articleDetailsPageKey);
         expect(articleDetailsPage, findsOneWidget);
       },
@@ -56,6 +61,7 @@ void main() {
         await tester.pumpWidget(
           getArticleDetailsPage(article: articleItemInvalidImage),
         );
+        await tester.pump();
         final articleDetailsPage = find.byKey(WidgetKeys.articleDetailsPageKey);
         expect(articleDetailsPage, findsOneWidget);
         final BuildContext context = tester.element(articleDetailsPage);
@@ -75,10 +81,11 @@ void main() {
         );
         await tester
             .pumpWidget(getArticleDetailsPage(article: articleItemWithContent));
+        await tester.pump();
         final articleDetailsPage = find.byKey(WidgetKeys.articleDetailsPageKey);
         expect(articleDetailsPage, findsOneWidget);
         await tester.dragFrom(const Offset(100, 500), const Offset(100, -10));
-        await tester.pump(const Duration(seconds: 4));
+        await tester.pumpAndSettle();
         final scrollToTopArrowIcon =
             find.byKey(WidgetKeys.scrollToTopFloatingButton);
         final htmlBodyFinder = find.byType(Html);
@@ -88,8 +95,7 @@ void main() {
           const Offset(0, -1000),
           warnIfMissed: false,
         );
-        await tester.pump(const Duration(seconds: 1));
-        await tester.pump(const Duration(seconds: 1));
+        await tester.pumpAndSettle();
         expect(scrollToTopArrowIcon, findsOneWidget);
         await tester.tap(scrollToTopArrowIcon);
       },
@@ -104,10 +110,11 @@ void main() {
         );
         await tester
             .pumpWidget(getArticleDetailsPage(article: articleItemWithContent));
+        await tester.pump();
         final articleDetailsPage = find.byKey(WidgetKeys.articleDetailsPageKey);
         expect(articleDetailsPage, findsOneWidget);
         await tester.dragFrom(const Offset(100, 400), const Offset(100, -221));
-        await tester.pump(const Duration(seconds: 4));
+        await tester.pumpAndSettle();
         final backButton =
             find.byKey(WidgetKeys.articleDetailsBottomBackButtonKey);
         expect(backButton, findsOneWidget);
@@ -120,6 +127,7 @@ void main() {
       (tester) async {
         await tester
             .pumpWidget(getArticleDetailsPage(article: mockArticleItem));
+        await tester.pump();
         final articleDetailsPage = find.byKey(WidgetKeys.articleDetailsPageKey);
         expect(articleDetailsPage, findsOneWidget);
         final backButton = find.byKey(WidgetKeys.articleDetailsBackButtonKey);

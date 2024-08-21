@@ -4,34 +4,27 @@ import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/articles_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../../../../common_mock_data/mock_bloc.dart';
+import '../../../../../common_mock_data/mock_other.dart';
 import '../../../../../utils/widget_utils.dart';
 
-class ArticlesInfoBlocMock
-    extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
-    implements ArticlesInfoBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-final locator = GetIt.instance;
 void main() {
-  late GetIt locator;
   TestWidgetsFlutterBinding.ensureInitialized();
   late EligibilityBloc eligibilityBlocMock;
   late ArticlesInfoBloc articlesInfoBlocMock;
   late AppRouter autoRouterMock;
   late List<AnnouncementArticleItem> announcementListMock;
   setUpAll(() {
-    locator = GetIt.instance;
-    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton<AppRouter>(() => AutoRouteMock());
     locator.registerLazySingleton(() => articlesInfoBlocMock);
     autoRouterMock = locator<AppRouter>();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -263,6 +256,38 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
       expect(find.byKey(WidgetKeys.articlesListTag), findsOneWidget);
+    });
+
+    testWidgets('tap on article item', (tester) async {
+      when(
+        () => autoRouterMock.push(
+          ArticleDetailsRoute(
+            article: announcementListMock.first,
+          ),
+        ),
+      ).thenAnswer((_) => Future.value());
+      whenListen(
+        articlesInfoBlocMock,
+        Stream.fromIterable([
+          ArticlesInfoState.initial().copyWith(
+            categoryKeyList: [''],
+            articleInfo: AnnouncementArticleInfo.empty().copyWith(
+              announcementList: [announcementListMock.first],
+            ),
+          ),
+        ]),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(WidgetKeys.genericKey(key: 'articleItem0')));
+      verify(
+        () => autoRouterMock.push(
+          ArticleDetailsRoute(
+            article: announcementListMock.first,
+          ),
+        ),
+      ).called(1);
     });
   });
 }

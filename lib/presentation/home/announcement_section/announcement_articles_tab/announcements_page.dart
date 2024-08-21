@@ -3,7 +3,8 @@ import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
-import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/filter_announcement_bottomsheet.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/widgets/filter_article_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -20,9 +21,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 part 'widgets/announcement_search.dart';
 part 'articles/widgets/search_article.dart';
 part 'articles/widgets/filter_article.dart';
-part 'articles/widgets/filter_article_bottomsheet.dart';
 part 'announcements/widgets/filter_announcement.dart';
-part 'announcements/widgets/filter_announcement_bottomsheet.dart';
 
 @RoutePage()
 class AnnouncementsPage extends StatelessWidget {
