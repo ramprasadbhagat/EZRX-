@@ -130,7 +130,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
               ),
             if (eligibilityState.poisonMaterialEnabled)
               _ListTileThemeWidget(
-                value: false,
+                value: state.materialFilter.isPoison,
                 onChanged: (value) {
                   context.read<MaterialFilterBloc>().add(
                         MaterialFilterEvent.updateSelectedMaterialFilter(

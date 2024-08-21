@@ -42,7 +42,8 @@ class RecentOrdersSection extends StatelessWidget {
           ),
         ),
       child: BlocListener<EligibilityBloc, EligibilityState>(
-        listenWhen: (previous, current) => current.isRefreshed(previous),
+        listenWhen: (previous, current) =>
+            current.isRefreshed(previous, onOrderTypeChanged: false),
         listener: (context, state) {
           context.read<ViewByItemsBloc>().add(
                 ViewByItemsEvent.initialized(

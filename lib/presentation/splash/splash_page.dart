@@ -512,13 +512,19 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
+              previous.user.selectedOrderType !=
+                  current.user.selectedOrderType &&
+              previous.user.id == current.user.id,
+          listener: (context, state) => _initializeOrderingModule(state),
+        ),
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
               current != EligibilityState.initial() &&
-              current.isRefreshed(previous),
+              current.isRefreshed(previous, onOrderTypeChanged: false),
           listener: (context, state) {
             if (state.haveShipTo) {
-              _initializeHomeTabDependencies(context, state);
-              _initializeProduct();
-              _initializeCart(state);
+              _initializeOrderingModule(state);
+              _initializeOrderHistoryModule(state);
               if (state.isInvalidSelectedOrderType) {
                 context.read<CartBloc>().add(const CartEvent.clearCart());
                 context.read<UserBloc>().add(
@@ -526,17 +532,25 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     );
               }
 
-              context.read<EligibilityBloc>().add(
-                    const EligibilityEvent.registerChatBot(),
+              context.read<NotificationBloc>().add(
+                    const NotificationEvent.fetch(),
                   );
 
-              context.read<MaterialPriceBloc>().add(
-                    MaterialPriceEvent.initialized(
-                      salesOrganisation: state.salesOrganisation,
-                      salesConfigs: state.salesOrgConfigs,
-                      customerCodeInfo: state.customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
+              context.read<AnnouncementBloc>().add(
+                    AnnouncementEvent.getMaintenanceBanners(
+                      salesOrg: state.salesOrg,
                     ),
+                  );
+
+              context.read<ResetPasswordBloc>().add(
+                    ResetPasswordEvent.initialize(
+                      resetPasswordCred: ResetPasswordCred.empty(),
+                      user: state.user,
+                    ),
+                  );
+
+              context.read<EligibilityBloc>().add(
+                    const EligibilityEvent.registerChatBot(),
                   );
 
               context
@@ -548,29 +562,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       customerInfo: state.customerCodeInfo,
                       salesOrganization: state.salesOrganisation,
                       user: state.user,
-                    ),
-                  );
-
-              context.read<ProductImageBloc>().add(
-                    ProductImageEvent.initialized(
-                      salesOrganisation: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                    ),
-                  );
-
-              context.read<ViewByOrderFilterBloc>().add(
-                    ViewByOrderFilterEvent.initialized(
-                      salesOrganisation: state.salesOrganisation,
-                    ),
-                  );
-
-              context.read<ViewByItemDetailsBloc>().add(
-                    ViewByItemDetailsEvent.initialized(
-                      salesOrganisation: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                      salesOrgConfig: state.salesOrgConfigs,
-                      user: state.user,
-                      shipToInfo: state.shipToInfo,
                     ),
                   );
 
@@ -590,94 +581,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       customeCodeInfo: state.customerCodeInfo,
                       salesOrganisation: state.salesOrganisation,
                       selectedShipToCode: state.shipToInfo.shipToCustomerCode,
-                    ),
-                  );
-
-              context.read<AdditionalDetailsBloc>().add(
-                    AdditionalDetailsEvent.initialized(
-                      config: state.salesOrgConfigs,
-                      customerCodeInfo: state.customerCodeInfo,
-                    ),
-                  );
-
-              context.read<PoAttachmentBloc>().add(
-                    const PoAttachmentEvent.initialized(),
-                  );
-
-              context.read<ComboDealMaterialDetailBloc>().add(
-                    ComboDealMaterialDetailEvent.initialize(
-                      salesOrganisation: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                      salesConfigs:
-                          context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      user: state.user,
-                    ),
-                  );
-
-              context.read<OrderSummaryBloc>().add(
-                    OrderSummaryEvent.initialized(
-                      shipToInfo: state.shipToInfo,
-                      user: state.user,
-                      customerCodeInfo: state.customerCodeInfo,
-                      salesOrganisation: state.salesOrganisation,
-                      salesOrgConfig: state.salesOrgConfigs,
-                    ),
-                  );
-
-              context.read<ProductSearchBloc>().add(
-                    ProductSearchEvent.initialized(
-                      configs: state.salesOrgConfigs,
-                      salesOrganization: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                      user: state.user,
-                    ),
-                  );
-
-              if (state.user.userCanAccessOrderHistory) {
-                context.read<ViewByItemsBloc>().add(
-                      ViewByItemsEvent.initialized(
-                        customerCodeInfo: state.customerCodeInfo,
-                        salesOrgConfigs: state.salesOrgConfigs,
-                        shipToInfo: state.shipToInfo,
-                        user: state.user,
-                        salesOrganisation: state.salesOrganisation,
-                      ),
-                    );
-
-                context.read<ViewByOrderBloc>().add(
-                      ViewByOrderEvent.initialized(
-                        salesOrganisation: state.salesOrganisation,
-                        customerCodeInfo: state.customerCodeInfo,
-                        salesOrgConfigs: state.salesOrgConfigs,
-                        user: state.user,
-                        sortDirection: 'desc',
-                        shipToInfo: state.shipToInfo,
-                      ),
-                    );
-
-                context.read<ViewByOrderDetailsBloc>().add(
-                      ViewByOrderDetailsEvent.initialized(
-                        customerCodeInfo: state.customerCodeInfo,
-                        user: context.read<UserBloc>().state.user,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        shipToInfo: state.shipToInfo,
-                        configs: context.read<SalesOrgBloc>().state.configs,
-                      ),
-                    );
-              }
-
-              context.read<ReOrderPermissionBloc>().add(
-                    ReOrderPermissionEvent.initialized(
-                      customerCodeInfo: state.customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                      salesOrganisation: state.salesOrganisation,
-                      salesOrganisationConfigs: state.salesOrgConfigs,
-                      user: state.user,
                     ),
                   );
 
@@ -705,15 +608,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       salesOrg: state.salesOrg,
                     ),
                   );
-              context.read<ScanMaterialInfoBloc>().add(
-                    ScanMaterialInfoEvent.initialized(
-                      salesOrganisation: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                      user: state.user,
-                      shipToInfo: state.shipToInfo,
-                      salesOrgConfigs: state.salesOrgConfigs,
-                    ),
-                  );
 
               //Initialize for deeplink cases
               context.read<PaymentSummaryDetailsBloc>().add(
@@ -734,30 +628,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
               if (!state.user.role.type.hasReturnsAdminAccess) return;
             }
-            /**
-             * TODO: Need to revisit when special order type will be implemented also we removed the isOrderTypeEnable dependency
-             */
-
-            // if (state.isOrderTypeEnable) {
-            //   context.read<OrderDocumentTypeBloc>().add(
-            //         OrderDocumentTypeEvent.fetch(
-            //           salesOrganisation: state.salesOrganisation,
-            //           isEDI: state.customerCodeInfo.status.isEDI,
-            //         ),
-            //       );
-            // } else {
-            //   context
-            //       .read<OrderDocumentTypeBloc>()
-            //       .add(const OrderDocumentTypeEvent.initialized());
-            //   context.read<OrderDocumentTypeBloc>().add(
-            //         OrderDocumentTypeEvent.selectedOrderType(
-            //           isReasonSelected: false,
-            //           selectedOrderType: OrderDocumentType.defaultSelected(
-            //             salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-            //           ),
-            //         ),
-            //       );
-            // }
           },
         ),
         BlocListener<DeepLinkingBloc, DeepLinkingState>(
@@ -1379,17 +1249,23 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     }
   }
 
-  void _initializeProduct() {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-    context.read<MaterialFilterBloc>().add(
-          MaterialFilterEvent.fetch(
-            user: context.read<UserBloc>().state.user,
-            salesOrganisation: eligibilityState.salesOrganisation,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-            shipToInfo: eligibilityState.shipToInfo,
-            hasAccessToCovidMaterial: eligibilityState.canOrderCovidMaterial,
-          ),
-        );
+  void _initializeOrderingModule(EligibilityState state) {
+    _initializeProduct(state);
+    _initializeCart(state);
+  }
+
+  void _initializeProduct(EligibilityState eligibilityState) {
+    context.read<MaterialFilterBloc>()
+      ..add(const MaterialFilterEvent.resetFilter())
+      ..add(
+        MaterialFilterEvent.fetch(
+          user: context.read<UserBloc>().state.user,
+          salesOrganisation: eligibilityState.salesOrganisation,
+          customerCodeInfo: eligibilityState.customerCodeInfo,
+          shipToInfo: eligibilityState.shipToInfo,
+          hasAccessToCovidMaterial: eligibilityState.canOrderCovidMaterial,
+        ),
+      );
     context.read<MaterialListBloc>().add(
           MaterialListEvent.initialized(
             salesOrganisation: eligibilityState.salesOrganisation,
@@ -1400,7 +1276,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             user: eligibilityState.user,
           ),
         );
-
     context.read<ProductSearchBloc>().add(
           ProductSearchEvent.initialized(
             configs: eligibilityState.salesOrgConfigs,
@@ -1410,9 +1285,40 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             user: eligibilityState.user,
           ),
         );
+    context.read<ProductImageBloc>().add(
+          ProductImageEvent.initialized(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+          ),
+        );
+    context.read<MaterialPriceBloc>().add(
+          MaterialPriceEvent.initialized(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            salesConfigs: eligibilityState.salesOrgConfigs,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+          ),
+        );
+    context.read<ComboDealMaterialDetailBloc>().add(
+          ComboDealMaterialDetailEvent.initialize(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            salesConfigs: eligibilityState.salesOrgConfigs,
+            user: eligibilityState.user,
+          ),
+        );
+    context.read<ScanMaterialInfoBloc>().add(
+          ScanMaterialInfoEvent.initialized(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            user: eligibilityState.user,
+            shipToInfo: eligibilityState.shipToInfo,
+            salesOrgConfigs: eligibilityState.salesOrgConfigs,
+          ),
+        );
   }
 
-  /// Use for all cart related initialized bloc event here
   void _initializeCart(EligibilityState eligibilityState) {
     context.read<CartBloc>().add(
           CartEvent.initialized(
@@ -1423,6 +1329,83 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             user: eligibilityState.user,
           ),
         );
+    context.read<AdditionalDetailsBloc>().add(
+          AdditionalDetailsEvent.initialized(
+            config: eligibilityState.salesOrgConfigs,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+          ),
+        );
+    context.read<PoAttachmentBloc>().add(
+          const PoAttachmentEvent.initialized(),
+        );
+    context.read<OrderSummaryBloc>().add(
+          OrderSummaryEvent.initialized(
+            shipToInfo: eligibilityState.shipToInfo,
+            user: eligibilityState.user,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            salesOrgConfig: eligibilityState.salesOrgConfigs,
+          ),
+        );
+  }
+
+  void _initializeOrderHistoryModule(EligibilityState state) {
+    if (state.user.userCanAccessOrderHistory) {
+      context.read<ViewByItemsBloc>().add(
+            ViewByItemsEvent.initialized(
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrgConfigs: state.salesOrgConfigs,
+              shipToInfo: state.shipToInfo,
+              user: state.user,
+              salesOrganisation: state.salesOrganisation,
+            ),
+          );
+      context
+          .read<ViewByItemFilterBloc>()
+          .add(const ViewByItemFilterEvent.initialize());
+      context.read<ViewByItemDetailsBloc>().add(
+            ViewByItemDetailsEvent.initialized(
+              salesOrganisation: state.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrgConfig: state.salesOrgConfigs,
+              user: state.user,
+              shipToInfo: state.shipToInfo,
+            ),
+          );
+      context.read<ViewByOrderBloc>().add(
+            ViewByOrderEvent.initialized(
+              salesOrganisation: state.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrgConfigs: state.salesOrgConfigs,
+              user: state.user,
+              sortDirection: 'desc',
+              shipToInfo: state.shipToInfo,
+            ),
+          );
+      context.read<ViewByOrderFilterBloc>().add(
+            ViewByOrderFilterEvent.initialized(
+              salesOrganisation: state.salesOrganisation,
+            ),
+          );
+      context.read<ViewByOrderDetailsBloc>().add(
+            ViewByOrderDetailsEvent.initialized(
+              customerCodeInfo: state.customerCodeInfo,
+              user: state.user,
+              salesOrganisation: state.salesOrganisation,
+              shipToInfo: state.shipToInfo,
+              configs: state.salesOrgConfigs,
+            ),
+          );
+      context.read<ReOrderPermissionBloc>().add(
+            ReOrderPermissionEvent.initialized(
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: state.shipToInfo,
+              salesOrganisation: state.salesOrganisation,
+              salesOrganisationConfigs: state.salesOrgConfigs,
+              user: state.user,
+            ),
+          );
+    }
   }
 
   void _initBlocs(BuildContext context) {
@@ -1433,42 +1416,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context.read<SalesOrgBloc>().state.salesOrganisation,
             hideCustomer:
                 context.read<SalesOrgBloc>().state.configs.hideCustomer,
-          ),
-        );
-  }
-
-  void _initializeHomeTabDependencies(
-    BuildContext context,
-    EligibilityState eligibilityState,
-  ) {
-    context.read<MaterialFilterBloc>().add(
-          const MaterialFilterEvent.resetFilter(),
-        );
-
-    context.read<MaterialListBloc>().add(
-          const MaterialListEvent.updateSearchKey(
-            searchKey: '',
-          ),
-        );
-
-    context
-        .read<ViewByItemFilterBloc>()
-        .add(const ViewByItemFilterEvent.initialize());
-
-    context.read<NotificationBloc>().add(
-          const NotificationEvent.fetch(),
-        );
-
-    context.read<AnnouncementBloc>().add(
-          AnnouncementEvent.getMaintenanceBanners(
-            salesOrg: eligibilityState.salesOrg,
-          ),
-        );
-
-    context.read<ResetPasswordBloc>().add(
-          ResetPasswordEvent.initialize(
-            resetPasswordCred: ResetPasswordCred.empty(),
-            user: eligibilityState.user,
           ),
         );
   }

@@ -333,7 +333,10 @@ class EligibilityState with _$EligibilityState {
 
   // Used in listenWhen for BlocListener for sections in home page to refresh the data
   // when pulling to refresh or selecting a new shipTo
-  bool isRefreshed(EligibilityState previous) {
+  bool isRefreshed(
+    EligibilityState previous, {
+    bool onOrderTypeChanged = true,
+  }) {
     final isLoadShipToSuccess =
         previous.isLoadingCustomerCode != isLoadingCustomerCode &&
             !isLoadingCustomerCode;
@@ -343,11 +346,15 @@ class EligibilityState with _$EligibilityState {
             user != User.empty();
     final isUpdateMarketPlaceTnC =
         previous.user.acceptMPTC != user.acceptMPTC && user != User.empty();
+    final isSelectNewOrderType =
+        previous.user.selectedOrderType != user.selectedOrderType &&
+            user.selectedOrderType.isValid();
 
     return isLoadShipToSuccess ||
         isSelectNewShipTo ||
         isSelectNewLanguage ||
-        isUpdateMarketPlaceTnC;
+        isUpdateMarketPlaceTnC ||
+        (isSelectNewOrderType && onOrderTypeChanged);
   }
 
   double get paymentHomeItemWidthRatio => salesOrg.isPaymentClaimEnabled ||

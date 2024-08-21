@@ -161,7 +161,11 @@ class _ConfirmButton extends StatelessWidget {
   }
 
   void _backToHomePage(BuildContext context, String message) {
-    context.router.popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+    context.router
+      ..popUntilRouteWithName(HomeNavigationTabbarRoute.name)
+      ..navigate(
+        const HomeNavigationTabbarRoute(children: [ProductsTabRoute()]),
+      );
     CustomSnackBar(messageText: message).show(context);
   }
 }

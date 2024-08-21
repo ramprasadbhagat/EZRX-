@@ -89,6 +89,7 @@ import 'package:upgrader/upgrader.dart';
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/mock_other.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
@@ -1657,6 +1658,40 @@ void main() {
       verify(
         () => authBlocMock.add(
           const AuthEvent.logout(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Should refresh product tab when select new order type',
+        (tester) async {
+      final fakeEligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        salesOrganisation: fakeMYSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+      );
+      whenListen(
+        eligibilityBlocMock,
+        Stream.fromIterable([
+          fakeEligibilityState,
+          fakeEligibilityState.copyWith
+              .user(selectedOrderType: DocumentType.zpor()),
+        ]),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.initialized(
+            user: fakeUser.copyWith(selectedOrderType: DocumentType.zpor()),
+            configs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            selectedMaterialFilter: MaterialFilter.empty(),
+          ),
         ),
       ).called(1);
     });

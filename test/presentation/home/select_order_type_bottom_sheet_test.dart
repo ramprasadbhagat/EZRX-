@@ -170,8 +170,10 @@ void main() async {
     });
 
     testWidgets(
-        'Show snackbar and back to home after select order type and clear cart success',
+        'Show snackbar and back to product tab after select order type and clear cart success',
         (tester) async {
+      const navigateRoute =
+          HomeNavigationTabbarRoute(children: [ProductsTabRoute()]);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial()
             .copyWith
@@ -189,11 +191,17 @@ void main() async {
       when(
         () => appRouter.popUntilRouteWithName(HomeNavigationTabbarRoute.name),
       ).thenAnswer((_) async => true);
+      when(
+        () => appRouter.navigate(navigateRoute),
+      ).thenAnswer((_) async => true);
       await tester.pumpWidget(testWidget());
       await tester.pumpAndSettle();
 
       verify(
         () => appRouter.popUntilRouteWithName(HomeNavigationTabbarRoute.name),
+      ).called(1);
+      verify(
+        () => appRouter.navigate(navigateRoute),
       ).called(1);
       expect(
         find.descendant(
@@ -229,8 +237,10 @@ void main() async {
     });
 
     testWidgets(
-        'Show snackbar and back to home after select order type when cart is empty',
+        'Show snackbar and back to product tab after select order type when cart is empty',
         (tester) async {
+      const navigateRoute =
+          HomeNavigationTabbarRoute(children: [ProductsTabRoute()]);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial()
             .copyWith
@@ -241,6 +251,8 @@ void main() async {
       when(
         () => appRouter.popUntilRouteWithName(HomeNavigationTabbarRoute.name),
       ).thenAnswer((_) async => true);
+      when(() => appRouter.navigate(navigateRoute))
+          .thenAnswer((_) async => true);
       whenListen(
         userBlocMock,
         Stream.fromIterable([
@@ -256,6 +268,9 @@ void main() async {
 
       verify(
         () => appRouter.popUntilRouteWithName(HomeNavigationTabbarRoute.name),
+      ).called(1);
+      verify(
+        () => appRouter.navigate(navigateRoute),
       ).called(1);
       expect(
         find.descendant(
