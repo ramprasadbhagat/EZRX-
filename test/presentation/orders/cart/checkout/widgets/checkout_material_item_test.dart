@@ -480,7 +480,7 @@ void main() {
         contractNumber: TenderContractNumber(
           'fake-Number',
         ),
-        tenderPrice: TenderPrice('11832000'),
+        tenderPrice: 11832000.0,
         contractReference: StringValue('fake-Reference'),
       ),
       price: Price.empty().copyWith(
@@ -522,7 +522,7 @@ void main() {
         contractNumber: TenderContractNumber(
           'fake-Number',
         ),
-        tenderPrice: TenderPrice('11832000'),
+        tenderPrice: 11832000.0,
         contractReference: StringValue('fake-Reference'),
       ),
       price: Price.empty().copyWith(

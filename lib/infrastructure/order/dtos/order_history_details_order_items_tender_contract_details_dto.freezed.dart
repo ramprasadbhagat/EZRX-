@@ -25,8 +25,9 @@ mixin _$OrderHistoryDetailsTenderContractDto {
   String get contractNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'contractReference', defaultValue: '')
   String get contractReference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'price', defaultValue: '')
-  String get price => throw _privateConstructorUsedError;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'price', defaultValue: 0.0)
+  double get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'priceUnit', defaultValue: 0)
   int get priceUnit => throw _privateConstructorUsedError;
   @JsonKey(name: 'contractQuantity', defaultValue: 0)
@@ -63,7 +64,9 @@ abstract class $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> {
       {@JsonKey(name: 'contractNumber', defaultValue: '') String contractNumber,
       @JsonKey(name: 'contractReference', defaultValue: '')
       String contractReference,
-      @JsonKey(name: 'price', defaultValue: '') String price,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'price', defaultValue: 0.0)
+      double price,
       @JsonKey(name: 'priceUnit', defaultValue: 0) int priceUnit,
       @JsonKey(name: 'contractQuantity', defaultValue: 0) int contractQuantity,
       @JsonKey(name: 'remainingQuantity', defaultValue: 0)
@@ -115,7 +118,7 @@ class _$OrderHistoryDetailsTenderContractDtoCopyWithImpl<$Res,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       priceUnit: null == priceUnit
           ? _value.priceUnit
           : priceUnit // ignore: cast_nullable_to_non_nullable
@@ -165,7 +168,9 @@ abstract class _$$OrderHistoryDetailsTenderContractDtoImplCopyWith<$Res>
       {@JsonKey(name: 'contractNumber', defaultValue: '') String contractNumber,
       @JsonKey(name: 'contractReference', defaultValue: '')
       String contractReference,
-      @JsonKey(name: 'price', defaultValue: '') String price,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'price', defaultValue: 0.0)
+      double price,
       @JsonKey(name: 'priceUnit', defaultValue: 0) int priceUnit,
       @JsonKey(name: 'contractQuantity', defaultValue: 0) int contractQuantity,
       @JsonKey(name: 'remainingQuantity', defaultValue: 0)
@@ -216,7 +221,7 @@ class __$$OrderHistoryDetailsTenderContractDtoImplCopyWithImpl<$Res>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       priceUnit: null == priceUnit
           ? _value.priceUnit
           : priceUnit // ignore: cast_nullable_to_non_nullable
@@ -262,7 +267,9 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
       required this.contractNumber,
       @JsonKey(name: 'contractReference', defaultValue: '')
       required this.contractReference,
-      @JsonKey(name: 'price', defaultValue: '') required this.price,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'price', defaultValue: 0.0)
+      required this.price,
       @JsonKey(name: 'priceUnit', defaultValue: 0) required this.priceUnit,
       @JsonKey(name: 'contractQuantity', defaultValue: 0)
       required this.contractQuantity,
@@ -288,8 +295,9 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
   @JsonKey(name: 'contractReference', defaultValue: '')
   final String contractReference;
   @override
-  @JsonKey(name: 'price', defaultValue: '')
-  final String price;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'price', defaultValue: 0.0)
+  final double price;
   @override
   @JsonKey(name: 'priceUnit', defaultValue: 0)
   final int priceUnit;
@@ -388,7 +396,9 @@ abstract class _OrderHistoryDetailsTenderContractDto
       required final String contractNumber,
       @JsonKey(name: 'contractReference', defaultValue: '')
       required final String contractReference,
-      @JsonKey(name: 'price', defaultValue: '') required final String price,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'price', defaultValue: 0.0)
+      required final double price,
       @JsonKey(name: 'priceUnit', defaultValue: 0) required final int priceUnit,
       @JsonKey(name: 'contractQuantity', defaultValue: 0)
       required final int contractQuantity,
@@ -418,8 +428,9 @@ abstract class _OrderHistoryDetailsTenderContractDto
   @JsonKey(name: 'contractReference', defaultValue: '')
   String get contractReference;
   @override
-  @JsonKey(name: 'price', defaultValue: '')
-  String get price;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'price', defaultValue: 0.0)
+  double get price;
   @override
   @JsonKey(name: 'priceUnit', defaultValue: 0)
   int get priceUnit;

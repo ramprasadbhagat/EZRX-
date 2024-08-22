@@ -101,22 +101,11 @@ void main() {
     });
   });
 
-  group('Tender Price value object', () {
-    test('should return double value when tender price having String value',
-        () async {
-      const input = '5';
-      final tenderPrice = TenderPrice(input);
-      final result = tenderPrice.tenderPrice;
-      expect(result, 5.0);
-    });
-  });
-
   group('Tender Contract Number value object', () {
     test('should return value when Tender Contract Number having valid value',
         () async {
       const input = '55';
-      final tenderContractNumber =
-          TenderContractNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractNumber;
       expect(result, '55');
     });
@@ -124,8 +113,7 @@ void main() {
     test('should return NA when Tender Contract Number having empty value',
         () async {
       const input = '';
-      final tenderContractNumber =
-          TenderContractNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractNumber;
       expect(result, 'NA');
     });
@@ -133,8 +121,7 @@ void main() {
     test('should return value if Tender Contract Item Number have valid value',
         () async {
       const input = '55';
-      final tenderContractNumber =
-          TenderContractNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractItemNumber;
       expect(result, '55');
     });
@@ -142,8 +129,7 @@ void main() {
     test('should return NA when Tender Contract Item Number having empty value',
         () async {
       const input = '';
-      final tenderContractNumber =
-          TenderContractNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractItemNumber;
       expect(result, 'NA');
     });
@@ -168,8 +154,7 @@ void main() {
         'should return value if Tender Contract announcement letter Number have value',
         () async {
       const input = '0000000124655';
-      final tenderContractNumber =
-          TenderContractNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayAnnouncementLetterNumber;
       expect(result, '124655');
     });
@@ -178,8 +163,7 @@ void main() {
         'should return NA if Tender Contract announcement letter Number have empty value',
         () async {
       const input = '';
-      final tenderContractNumber =
-          TenderContractNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayAnnouncementLetterNumber;
       expect(result, 'NA');
     });

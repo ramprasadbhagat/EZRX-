@@ -17,7 +17,7 @@ class TenderContract with _$TenderContract {
     required TenderContractNumber tenderVisaNumber,
     required StringValue salesDistrict,
     required StringValue tenderPackageDescription,
-    required TenderPrice tenderPrice,
+    required double tenderPrice,
     required int pricingUnit,
     required int remainingTenderQuantity,
     required int contractQuantity,
@@ -26,7 +26,7 @@ class TenderContract with _$TenderContract {
     required bool isNearToExpire,
     required StringValue contractPaymentTerm,
     required bool isTenderExpired,
-    required TenderPrice tenderUnitPrice,
+    required double tenderUnitPrice,
   }) = _TenderContract;
 
   factory TenderContract.empty() => TenderContract(
@@ -37,7 +37,7 @@ class TenderContract with _$TenderContract {
         tenderVisaNumber: TenderContractNumber(''),
         salesDistrict: StringValue(''),
         tenderPackageDescription: StringValue(''),
-        tenderPrice: TenderPrice('0'),
+        tenderPrice: 0,
         pricingUnit: 0,
         remainingTenderQuantity: 0,
         contractQuantity: 0,
@@ -46,7 +46,7 @@ class TenderContract with _$TenderContract {
         isNearToExpire: false,
         isTenderExpired: false,
         contractPaymentTerm: StringValue(''),
-        tenderUnitPrice: TenderPrice('0'),
+        tenderUnitPrice: 0,
       );
 
   factory TenderContract.noContract() => TenderContract.empty().copyWith(

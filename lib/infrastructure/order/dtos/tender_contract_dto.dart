@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tender_contract_dto.freezed.dart';
@@ -19,7 +20,9 @@ class TenderContractDto with _$TenderContractDto {
     @JsonKey(name: 'salesDistrict') required String salesDistrict,
     @JsonKey(name: 'tenderPackageDescription')
     required String tenderPackageDescription,
-    @JsonKey(name: 'tenderPrice') required String tenderPrice,
+    @StringToDoubleConverter()
+    @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+    required double tenderPrice,
     @JsonKey(name: 'pricingUnit') required int pricingUnit,
     @JsonKey(name: 'remainingTenderQuantity')
     required int remainingTenderQuantity,
@@ -29,7 +32,9 @@ class TenderContractDto with _$TenderContractDto {
     required String announcementLetterNumber,
     @JsonKey(name: 'isNearToExpire') required bool isNearToExpire,
     @JsonKey(name: 'contractPaymentTerm') required String contractPaymentTerm,
-    @JsonKey(name: 'tenderUnitPrice') required String tenderUnitPrice,
+    @StringToDoubleConverter()
+    @JsonKey(name: 'tenderUnitPrice', defaultValue: 0.0)
+    required double tenderUnitPrice,
   }) = _TenderContractDto;
 
   factory TenderContractDto.fromDomain(TenderContract tenderContract) {
@@ -43,7 +48,7 @@ class TenderContractDto with _$TenderContractDto {
       salesDistrict: tenderContract.salesDistrict.getOrDefaultValue(''),
       tenderPackageDescription:
           tenderContract.tenderPackageDescription.getOrDefaultValue(''),
-      tenderPrice: tenderContract.tenderPrice.getOrDefaultValue(''),
+      tenderPrice: tenderContract.tenderPrice,
       pricingUnit: tenderContract.pricingUnit,
       remainingTenderQuantity: tenderContract.remainingTenderQuantity,
       contractQuantity: tenderContract.contractQuantity,
@@ -54,7 +59,7 @@ class TenderContractDto with _$TenderContractDto {
       isNearToExpire: tenderContract.isNearToExpire,
       contractPaymentTerm:
           tenderContract.contractPaymentTerm.getOrDefaultValue(''),
-      tenderUnitPrice: tenderContract.tenderUnitPrice.getOrDefaultValue(''),
+      tenderUnitPrice: tenderContract.tenderUnitPrice,
     );
   }
 
@@ -67,7 +72,7 @@ class TenderContractDto with _$TenderContractDto {
       tenderVisaNumber: TenderContractNumber(tenderVisaNumber),
       salesDistrict: StringValue(salesDistrict),
       tenderPackageDescription: StringValue(tenderPackageDescription),
-      tenderPrice: TenderPrice(tenderPrice),
+      tenderPrice: tenderPrice,
       pricingUnit: pricingUnit,
       remainingTenderQuantity: remainingTenderQuantity,
       contractQuantity: contractQuantity,
@@ -78,7 +83,7 @@ class TenderContractDto with _$TenderContractDto {
       isNearToExpire: isNearToExpire,
       isTenderExpired: false,
       contractPaymentTerm: StringValue(contractPaymentTerm),
-      tenderUnitPrice: TenderPrice(tenderUnitPrice),
+      tenderUnitPrice: tenderUnitPrice,
     );
   }
 

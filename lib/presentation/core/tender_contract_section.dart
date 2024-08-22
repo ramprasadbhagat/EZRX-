@@ -70,7 +70,7 @@ class TenderContractSection extends StatelessWidget {
                       PriceComponent(
                         key: WidgetKeys.tenderContractPrice,
                         type: PriceStyle.tenderViewOrderByItemPrice,
-                        price: tenderContract.tenderPrice.getValue(),
+                        price: tenderContract.tenderPrice.toString(),
                         salesOrgConfig: context
                             .read<EligibilityBloc>()
                             .state

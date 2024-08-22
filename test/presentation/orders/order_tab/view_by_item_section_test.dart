@@ -494,7 +494,6 @@ void main() {
     testWidgets('Display tender information when collapsed', (tester) async {
       final fakeTenderOrderReason = TenderContractReason('fake-Reason');
       final fakeTenderContractNumber = TenderContractNumber('fake-Number');
-      final fakeTenderPrice = TenderPrice('11832000');
       final fakeTenderContractReference =
           TenderContractNumber('fake-Reference');
       final orderHistoryList = orderHistory.copyWith(
@@ -504,7 +503,7 @@ void main() {
               .copyWith(
                 tenderContractNumber: fakeTenderContractNumber,
                 tenderOrderReason: fakeTenderOrderReason,
-                tenderPrice: fakeTenderPrice,
+                tenderPrice: 11832000.0,
                 tenderContractReference: fakeTenderContractReference,
               ),
         ],
@@ -558,7 +557,7 @@ void main() {
     testWidgets('Display tender information when expanded', (tester) async {
       final fakeTenderOrderReason = TenderContractReason('fake-Reason');
       final fakeTenderContractNumber = TenderContractNumber('fake-Number');
-      final fakeTenderPrice = TenderPrice('11832000');
+      const fakeTenderPrice = 11832000.0;
       final fakeTenderContractReference =
           TenderContractNumber('fake-Reference');
       final orderHistoryList = orderHistory.copyWith(
@@ -616,7 +615,7 @@ void main() {
             (widget) =>
                 widget.key == WidgetKeys.tenderContractPrice &&
                 widget is PriceComponent &&
-                widget.price == fakeTenderPrice.getOrCrash(),
+                widget.price == fakeTenderPrice.toString(),
           ),
         ),
         findsOneWidget,
@@ -843,7 +842,6 @@ void main() {
         (tester) async {
       final fakeTenderOrderReason = TenderContractReason('fake-Reason');
       final fakeTenderContractNumber = TenderContractNumber('fake-Number');
-      final fakeTenderPrice = TenderPrice('11832000');
       final fakeTenderContractReference =
           TenderContractNumber('fake-Reference');
       final orderHistoryList = orderHistory.copyWith(
@@ -853,7 +851,7 @@ void main() {
               .copyWith(
                 tenderContractNumber: fakeTenderContractNumber,
                 tenderOrderReason: fakeTenderOrderReason,
-                tenderPrice: fakeTenderPrice,
+                tenderPrice: 11832000.0,
                 tenderContractReference: fakeTenderContractReference,
                 promoStatus: true,
                 isBundle: false,

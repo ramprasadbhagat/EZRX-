@@ -12,7 +12,10 @@ _$OrderHistoryDetailsTenderContractDtoImpl
         _$OrderHistoryDetailsTenderContractDtoImpl(
           contractNumber: json['contractNumber'] as String? ?? '',
           contractReference: json['contractReference'] as String? ?? '',
-          price: json['price'] as String? ?? '',
+          price: json['price'] == null
+              ? 0.0
+              : const StringToDoubleConverter()
+                  .fromJson(json['price'] as String),
           priceUnit: (json['priceUnit'] as num?)?.toInt() ?? 0,
           contractQuantity: (json['contractQuantity'] as num?)?.toInt() ?? 0,
           remainingQuantity: (json['remainingQuantity'] as num?)?.toInt() ?? 0,
@@ -29,7 +32,7 @@ Map<String, dynamic> _$$OrderHistoryDetailsTenderContractDtoImplToJson(
     <String, dynamic>{
       'contractNumber': instance.contractNumber,
       'contractReference': instance.contractReference,
-      'price': instance.price,
+      'price': const StringToDoubleConverter().toJson(instance.price),
       'priceUnit': instance.priceUnit,
       'contractQuantity': instance.contractQuantity,
       'remainingQuantity': instance.remainingQuantity,

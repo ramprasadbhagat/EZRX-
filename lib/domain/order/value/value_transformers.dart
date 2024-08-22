@@ -7,10 +7,6 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:flutter/material.dart';
 
-double totalPriceStringAsFixed(String value) {
-  return double.parse(value);
-}
-
 BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
   switch (calculation) {
     case '001':
@@ -284,14 +280,16 @@ String getDeliveryOptionIcon(String value) {
 String getDeliveryOptionDescription(String value) {
   final descriptions = {
     'standardDelivery': 'Receive your order in {number} business days.',
-    'requestDeliveryDate': 'Schedule your delivery date. Delivery can only be requested on available days on the calendar.',
-    'urgentDelivery': 'Get your items delivered in the fastest time possible. Only available on business days.',
+    'requestDeliveryDate':
+        'Schedule your delivery date. Delivery can only be requested on available days on the calendar.',
+    'urgentDelivery':
+        'Get your items delivered in the fastest time possible. Only available on business days.',
   };
 
   return descriptions[value] ?? '';
 }
 
-String getUrgentDeliveryTimePickerOptionTitle(String value){
+String getUrgentDeliveryTimePickerOptionTitle(String value) {
   final result = {
     'today': 'Today, 1PM - 6PM (order before 10:30 AM)',
     'tomorrow': 'Tomorrow, 9AM - 12AM (order before 4PM)',
@@ -301,7 +299,7 @@ String getUrgentDeliveryTimePickerOptionTitle(String value){
   return result[value] ?? '';
 }
 
-String getDeliveryOptionPrice(String value){
+String getDeliveryOptionPrice(String value) {
   final result = {
     'standardDelivery': 'FREE',
     'requestDeliveryDate': 'FREE',

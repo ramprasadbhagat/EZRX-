@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderHistoryDetailsTenderContract {
   TenderContractNumber get contractNumber => throw _privateConstructorUsedError;
   TenderContractReason get orderReason => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
   int get priceUnit => throw _privateConstructorUsedError;
   int get contractQuantity => throw _privateConstructorUsedError;
   int get remainingQuantity => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $OrderHistoryDetailsTenderContractCopyWith<$Res> {
   $Res call(
       {TenderContractNumber contractNumber,
       TenderContractReason orderReason,
-      String price,
+      double price,
       int priceUnit,
       int contractQuantity,
       int remainingQuantity,
@@ -96,7 +96,7 @@ class _$OrderHistoryDetailsTenderContractCopyWithImpl<$Res,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       priceUnit: null == priceUnit
           ? _value.priceUnit
           : priceUnit // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ abstract class _$$OrderHistoryDetailsTenderContractImplCopyWith<$Res>
   $Res call(
       {TenderContractNumber contractNumber,
       TenderContractReason orderReason,
-      String price,
+      double price,
       int priceUnit,
       int contractQuantity,
       int remainingQuantity,
@@ -199,7 +199,7 @@ class __$$OrderHistoryDetailsTenderContractImplCopyWithImpl<$Res>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       priceUnit: null == priceUnit
           ? _value.priceUnit
           : priceUnit // ignore: cast_nullable_to_non_nullable
@@ -264,7 +264,7 @@ class _$OrderHistoryDetailsTenderContractImpl
   @override
   final TenderContractReason orderReason;
   @override
-  final String price;
+  final double price;
   @override
   final int priceUnit;
   @override
@@ -350,7 +350,7 @@ abstract class _OrderHistoryDetailsTenderContract
   factory _OrderHistoryDetailsTenderContract(
           {required final TenderContractNumber contractNumber,
           required final TenderContractReason orderReason,
-          required final String price,
+          required final double price,
           required final int priceUnit,
           required final int contractQuantity,
           required final int remainingQuantity,
@@ -368,7 +368,7 @@ abstract class _OrderHistoryDetailsTenderContract
   @override
   TenderContractReason get orderReason;
   @override
-  String get price;
+  double get price;
   @override
   int get priceUnit;
   @override

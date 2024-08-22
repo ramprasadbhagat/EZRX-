@@ -163,7 +163,7 @@ void main() {
       telephoneNumber: fakePhoneNumber,
       tenderContractNumber: TenderContractNumber('0040026522'),
       tenderOrderReason: TenderContractReason('730'),
-      tenderPrice: TenderPrice('11832000'),
+      tenderPrice: 11832000.0,
       tenderContractReference: TenderContractNumber('HCM-01234'),
       batches: [
         Batches(

@@ -55,7 +55,7 @@ mixin _$OrderHistoryItem {
   TenderContractNumber get tenderContractReference =>
       throw _privateConstructorUsedError;
   int get tenderPriceUnit => throw _privateConstructorUsedError;
-  TenderPrice get tenderPrice => throw _privateConstructorUsedError;
+  double get tenderPrice => throw _privateConstructorUsedError;
   TenderContractReason get tenderOrderReason =>
       throw _privateConstructorUsedError;
   bool get isCovid => throw _privateConstructorUsedError;
@@ -114,7 +114,7 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       TenderContractNumber tenderContractNumber,
       TenderContractNumber tenderContractReference,
       int tenderPriceUnit,
-      TenderPrice tenderPrice,
+      double tenderPrice,
       TenderContractReason tenderOrderReason,
       bool isCovid,
       bool isTenderExpired,
@@ -330,7 +330,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       tenderPrice: null == tenderPrice
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
-              as TenderPrice,
+              as double,
       tenderOrderReason: null == tenderOrderReason
           ? _value.tenderOrderReason
           : tenderOrderReason // ignore: cast_nullable_to_non_nullable
@@ -427,7 +427,7 @@ abstract class _$$OrderHistoryItemImplCopyWith<$Res>
       TenderContractNumber tenderContractNumber,
       TenderContractNumber tenderContractReference,
       int tenderPriceUnit,
-      TenderPrice tenderPrice,
+      double tenderPrice,
       TenderContractReason tenderOrderReason,
       bool isCovid,
       bool isTenderExpired,
@@ -643,7 +643,7 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
       tenderPrice: null == tenderPrice
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
-              as TenderPrice,
+              as double,
       tenderOrderReason: null == tenderOrderReason
           ? _value.tenderOrderReason
           : tenderOrderReason // ignore: cast_nullable_to_non_nullable
@@ -810,7 +810,7 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
   @override
   final int tenderPriceUnit;
   @override
-  final TenderPrice tenderPrice;
+  final double tenderPrice;
   @override
   final TenderContractReason tenderOrderReason;
   @override
@@ -1016,7 +1016,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final TenderContractNumber tenderContractNumber,
       required final TenderContractNumber tenderContractReference,
       required final int tenderPriceUnit,
-      required final TenderPrice tenderPrice,
+      required final double tenderPrice,
       required final TenderContractReason tenderOrderReason,
       required final bool isCovid,
       required final bool isTenderExpired,
@@ -1098,7 +1098,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   int get tenderPriceUnit;
   @override
-  TenderPrice get tenderPrice;
+  double get tenderPrice;
   @override
   TenderContractReason get tenderOrderReason;
   @override

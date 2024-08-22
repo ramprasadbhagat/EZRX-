@@ -410,21 +410,6 @@ class OrderItemType extends ValueObject<String> {
   const OrderItemType._(this.value);
 }
 
-class TenderPrice extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory TenderPrice(String input) {
-    return TenderPrice._(Right(input));
-  }
-
-  double get tenderPrice => totalPriceStringAsFixed(value.getOrElse(() => '0'));
-
-  String get displayTenderPrice => value.getOrElse(() => '0');
-
-  const TenderPrice._(this.value);
-}
-
 class TenderContractNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -493,7 +478,6 @@ class TenderContractReason extends ValueObject<String> {
 
   const TenderContractReason._(this.value);
 }
-
 
 class CollectiveNumber extends ValueObject<String> {
   @override
@@ -844,7 +828,8 @@ class DeliveryOption extends ValueObject<String> {
 
   String get icon => getDeliveryOptionIcon(value.getOrElse(() => ''));
 
-  String get description => getDeliveryOptionDescription(value.getOrElse(() => ''));
+  String get description =>
+      getDeliveryOptionDescription(value.getOrElse(() => ''));
 
   String get price => getDeliveryOptionPrice(value.getOrElse(() => ''));
 }

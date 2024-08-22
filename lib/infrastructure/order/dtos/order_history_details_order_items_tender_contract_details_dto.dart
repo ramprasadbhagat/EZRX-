@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_order_items_tender_contract_details_dto.freezed.dart';
 part 'order_history_details_order_items_tender_contract_details_dto.g.dart';
@@ -14,7 +15,9 @@ class OrderHistoryDetailsTenderContractDto
     required String contractNumber,
     @JsonKey(name: 'contractReference', defaultValue: '')
     required String contractReference,
-    @JsonKey(name: 'price', defaultValue: '') required String price,
+    @StringToDoubleConverter()
+    @JsonKey(name: 'price', defaultValue: 0.0)
+    required double price,
     @JsonKey(name: 'priceUnit', defaultValue: 0) required int priceUnit,
     @JsonKey(name: 'contractQuantity', defaultValue: 0)
     required int contractQuantity,

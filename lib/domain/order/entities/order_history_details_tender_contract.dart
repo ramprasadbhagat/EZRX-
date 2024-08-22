@@ -12,7 +12,7 @@ class OrderHistoryDetailsTenderContract
   factory OrderHistoryDetailsTenderContract({
     required TenderContractNumber contractNumber,
     required TenderContractReason orderReason,
-    required String price,
+    required double price,
     required int priceUnit,
     required int contractQuantity,
     required int remainingQuantity,
@@ -28,7 +28,7 @@ class OrderHistoryDetailsTenderContract
       OrderHistoryDetailsTenderContract(
         contractNumber: TenderContractNumber(''),
         orderReason: TenderContractReason(''),
-        price: '',
+        price: 0.0,
         priceUnit: 0,
         contractQuantity: 0,
         remainingQuantity: 0,

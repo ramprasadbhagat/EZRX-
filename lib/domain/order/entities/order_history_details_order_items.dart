@@ -204,7 +204,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
           tenderContractDetails.contractReference,
         ),
         pricingUnit: tenderContractDetails.priceUnit,
-        tenderPrice: TenderPrice(tenderContractDetails.price),
+        tenderPrice: tenderContractDetails.price,
       );
   StringValue gethashId({required OrderNumber orderNumber}) => StringValue(
         '${orderNumber.value.getOrElse(() => '')}${lineNumber.value.getOrElse(() => '')}',

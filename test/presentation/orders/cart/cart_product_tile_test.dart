@@ -1310,7 +1310,7 @@ void main() {
                     contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
-                    tenderPrice: TenderPrice('11832000'),
+                    tenderPrice: 11832000.0,
                     contractReference: StringValue('fake-Reference'),
                     isTenderExpired: true,
                   ),
@@ -1348,7 +1348,7 @@ void main() {
                     contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
-                    tenderPrice: TenderPrice('11832000'),
+                    tenderPrice: 11832000.0,
                     contractReference: StringValue('fake-Reference'),
                     remainingTenderQuantity: 1,
                   ),
@@ -1379,8 +1379,8 @@ void main() {
                     contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
-                    tenderPrice: TenderPrice('11832000'),
-                    tenderUnitPrice: TenderPrice('118320'),
+                    tenderPrice: 11832000.0,
+                    tenderUnitPrice: 118320.0,
                     pricingUnit: 100,
                     contractReference: StringValue('fake-Reference'),
                     salesDistrict: StringValue('fake-SalesDistrict'),
@@ -1543,7 +1543,7 @@ void main() {
                     contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
-                    tenderPrice: TenderPrice('11832000'),
+                    tenderPrice: 11832000.0,
                     contractReference: StringValue('fake-Reference'),
                   ),
                   price: Price.empty().copyWith(
@@ -1579,7 +1579,7 @@ void main() {
                     contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
-                    tenderPrice: TenderPrice('11832000'),
+                    tenderPrice: 11832000.0,
                     contractReference: StringValue('fake-Reference'),
                   ),
                   price: Price.empty().copyWith(

@@ -16,7 +16,10 @@ _$TenderContractDtoImpl _$$TenderContractDtoImplFromJson(
       tenderVisaNumber: json['tenderVisaNumber'] as String,
       salesDistrict: json['salesDistrict'] as String,
       tenderPackageDescription: json['tenderPackageDescription'] as String,
-      tenderPrice: json['tenderPrice'] as String,
+      tenderPrice: json['tenderPrice'] == null
+          ? 0.0
+          : const StringToDoubleConverter()
+              .fromJson(json['tenderPrice'] as String),
       pricingUnit: (json['pricingUnit'] as num).toInt(),
       remainingTenderQuantity: (json['remainingTenderQuantity'] as num).toInt(),
       contractQuantity: (json['contractQuantity'] as num).toInt(),
@@ -24,7 +27,10 @@ _$TenderContractDtoImpl _$$TenderContractDtoImplFromJson(
       announcementLetterNumber: json['announcementLetterNumber'] as String,
       isNearToExpire: json['isNearToExpire'] as bool,
       contractPaymentTerm: json['contractPaymentTerm'] as String,
-      tenderUnitPrice: json['tenderUnitPrice'] as String,
+      tenderUnitPrice: json['tenderUnitPrice'] == null
+          ? 0.0
+          : const StringToDoubleConverter()
+              .fromJson(json['tenderUnitPrice'] as String),
     );
 
 Map<String, dynamic> _$$TenderContractDtoImplToJson(
@@ -37,7 +43,8 @@ Map<String, dynamic> _$$TenderContractDtoImplToJson(
       'tenderVisaNumber': instance.tenderVisaNumber,
       'salesDistrict': instance.salesDistrict,
       'tenderPackageDescription': instance.tenderPackageDescription,
-      'tenderPrice': instance.tenderPrice,
+      'tenderPrice':
+          const StringToDoubleConverter().toJson(instance.tenderPrice),
       'pricingUnit': instance.pricingUnit,
       'remainingTenderQuantity': instance.remainingTenderQuantity,
       'contractQuantity': instance.contractQuantity,
@@ -45,5 +52,6 @@ Map<String, dynamic> _$$TenderContractDtoImplToJson(
       'announcementLetterNumber': instance.announcementLetterNumber,
       'isNearToExpire': instance.isNearToExpire,
       'contractPaymentTerm': instance.contractPaymentTerm,
-      'tenderUnitPrice': instance.tenderUnitPrice,
+      'tenderUnitPrice':
+          const StringToDoubleConverter().toJson(instance.tenderUnitPrice),
     };

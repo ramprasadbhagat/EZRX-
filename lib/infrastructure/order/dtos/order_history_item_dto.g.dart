@@ -55,7 +55,10 @@ _$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
       tenderContractReference: json['tenderContractReference'] as String? ?? '',
       tenderOrderReason: json['tenderOrderReason'] as String? ?? '',
       tenderPriceUnit: (json['tenderPriceUnit'] as num?)?.toInt() ?? 0,
-      tenderPrice: json['tenderPrice'] as String? ?? '',
+      tenderPrice: json['tenderPrice'] == null
+          ? 0.0
+          : const StringToDoubleConverter()
+              .fromJson(json['tenderPrice'] as String),
       isTenderExpired: json['isTenderExpire'] as bool? ?? false,
       isCovid: json['isCovid'] as bool? ?? false,
       totalUnitPrice: (json['totalUnitPrice'] as num?)?.toDouble() ?? 0.0,
@@ -110,7 +113,8 @@ Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
       'tenderContractReference': instance.tenderContractReference,
       'tenderOrderReason': instance.tenderOrderReason,
       'tenderPriceUnit': instance.tenderPriceUnit,
-      'tenderPrice': instance.tenderPrice,
+      'tenderPrice':
+          const StringToDoubleConverter().toJson(instance.tenderPrice),
       'isTenderExpire': instance.isTenderExpired,
       'isCovid': instance.isCovid,
       'totalUnitPrice': instance.totalUnitPrice,

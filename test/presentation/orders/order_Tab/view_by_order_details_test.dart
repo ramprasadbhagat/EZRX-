@@ -2845,7 +2845,7 @@ void main() {
       final fakeTenderOrderReason = TenderContractReason('730');
       final fakeTenderContractNumber = TenderContractNumber('0040026522');
       final fakeTenderContractReference = TenderContractNumber('HCM-01234');
-      final fakeTenderPrice = TenderPrice('11832000');
+      const fakeTenderPrice = 11832000.0;
 
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -2856,7 +2856,7 @@ void main() {
                     OrderHistoryDetailsTenderContract.empty().copyWith(
                   contractNumber: fakeTenderContractNumber,
                   contractReference: fakeTenderContractReference.getValue(),
-                  price: fakeTenderPrice.getValue(),
+                  price: fakeTenderPrice,
                   orderReason: fakeTenderOrderReason,
                 ),
               ),
@@ -2918,7 +2918,6 @@ void main() {
       final fakeTenderOrderReason = TenderContractReason('');
       final fakeTenderContractNumber = TenderContractNumber('');
       final fakeTenderContractReference = TenderContractNumber('');
-      final fakeTenderPrice = TenderPrice('');
 
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -2940,7 +2939,7 @@ void main() {
                 totalPrice: 516,
                 tenderContractNumber: fakeTenderContractNumber,
                 tenderOrderReason: fakeTenderOrderReason,
-                tenderPrice: fakeTenderPrice,
+                tenderPrice: 10.0,
                 tenderContractReference: fakeTenderContractReference,
               ),
             ],
@@ -3038,7 +3037,7 @@ void main() {
       final fakeTenderOrderReason = TenderContractReason('730');
       final fakeTenderContractNumber = TenderContractNumber('0040026522');
       final fakeTenderContractReference = TenderContractNumber('HCM-01234');
-      final fakeTenderPrice = TenderPrice('11832000');
+      const fakeTenderPrice = 11832000.0;
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -3048,7 +3047,7 @@ void main() {
                     OrderHistoryDetailsTenderContract.empty().copyWith(
                   contractNumber: fakeTenderContractNumber,
                   contractReference: fakeTenderContractReference.getValue(),
-                  price: fakeTenderPrice.getValue(),
+                  price: fakeTenderPrice,
                   orderReason: fakeTenderOrderReason,
                 ),
                 promoStatus: true,

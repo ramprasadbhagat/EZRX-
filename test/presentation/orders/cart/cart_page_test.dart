@@ -4760,7 +4760,7 @@ void main() {
             tenderContract: TenderContract.empty().copyWith(
               tenderOrderReason: TenderContractReason('730'),
               contractNumber: TenderContractNumber('fake-Number'),
-              tenderPrice: TenderPrice('11832000'),
+              tenderPrice: 11832000.0,
               contractReference: StringValue('fake-Reference'),
               isTenderExpired: true,
             ),
@@ -4857,7 +4857,7 @@ void main() {
             tenderContract: TenderContract.empty().copyWith(
               tenderOrderReason: TenderContractReason('730'),
               contractNumber: TenderContractNumber('fake-Number'),
-              tenderPrice: TenderPrice('11832000'),
+              tenderPrice: 11832000.0,
               contractReference: StringValue('fake-Reference'),
               remainingTenderQuantity: 1,
             ),

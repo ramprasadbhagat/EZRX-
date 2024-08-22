@@ -316,8 +316,8 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('40'),
-            tenderUnitPrice: TenderPrice('20'),
+            tenderPrice: 40.0,
+            tenderUnitPrice: 20.0,
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -339,8 +339,8 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('40'),
-            tenderUnitPrice: TenderPrice('20'),
+            tenderPrice: 40.0,
+            tenderUnitPrice: 20.0,
             pricingUnit: 2,
           ),
         );
@@ -386,8 +386,8 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('40'),
-            tenderUnitPrice: TenderPrice('20'),
+            tenderPrice: 40.0,
+            tenderUnitPrice: 20.0,
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -410,8 +410,8 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('40'),
-            tenderUnitPrice: TenderPrice('20'),
+            tenderPrice: 40.0,
+            tenderUnitPrice: 20.0,
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -434,8 +434,8 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('40'),
-            tenderUnitPrice: TenderPrice('20'),
+            tenderPrice: 40.0,
+            tenderUnitPrice: 20.0,
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -455,8 +455,8 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('20'),
-            tenderUnitPrice: TenderPrice('10'),
+            tenderPrice: 20.0,
+            tenderUnitPrice: 10.0,
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -1534,8 +1534,9 @@ void main() {
           ),
           PriceAggregate.empty(),
           combo.copyWith(
-              salesOrgConfig: fakeMYSalesOrgConfigs,
-              comboMaterials: comboMaterialsWithAllOOO,),
+            salesOrgConfig: fakeMYSalesOrgConfigs,
+            comboMaterials: comboMaterialsWithAllOOO,
+          ),
         ];
 
         expect(list.preOrderItems, [
@@ -1545,8 +1546,9 @@ void main() {
             stockInfoList: stock(material.getMaterialNumber, false),
           ),
           combo.copyWith(
-              salesOrgConfig: fakeMYSalesOrgConfigs,
-              comboMaterials: comboMaterialsWithAllOOO,),
+            salesOrgConfig: fakeMYSalesOrgConfigs,
+            comboMaterials: comboMaterialsWithAllOOO,
+          ),
         ]);
       });
     });
@@ -2079,7 +2081,8 @@ void main() {
       //     var input = await File('assets/json/getMaterialPriceResponse.json').readAsString();
       // var map = jsonDecode(input);
       final data = json.decode(
-        await File('assets/json/common/getMaterialPriceResponse.json').readAsString(),
+        await File('assets/json/common/getMaterialPriceResponse.json')
+            .readAsString(),
       );
       final finalData = data['data']['price'];
       materialPriceListFromLocal =
@@ -2670,7 +2673,11 @@ void main() {
   group('Price Aggregate List Test -', () {
     test('Sort to display in cart page & checkout page', () {
       final remainedItems = fakePriceAggregateList
-          .where((e) => !e.materialInfo.type.typeBundle && !e.materialInfo.type.typeCombo)
+          .where(
+            (e) =>
+                !e.materialInfo.type.typeBundle &&
+                !e.materialInfo.type.typeCombo,
+          )
           .toList();
       final bundles = fakePriceAggregateList
           .where((e) => e.materialInfo.type.typeBundle)
@@ -2707,13 +2714,20 @@ void main() {
       );
 
       //EZRX-24264: do not group by manufacture when having deals item
-      final firstItem = fakePriceAggregateList[0]; // this is Material item of the same manufacturer
-      final secondItem = fakePriceAggregateList[1]; // this is Deals item of a different manufacturer
-      final thirdItem = fakePriceAggregateList[2]; // this is Material item of the same manufacturer
+      final firstItem = fakePriceAggregateList[
+          0]; // this is Material item of the same manufacturer
+      final secondItem = fakePriceAggregateList[
+          1]; // this is Deals item of a different manufacturer
+      final thirdItem = fakePriceAggregateList[
+          2]; // this is Material item of the same manufacturer
       final items = <PriceAggregate>[firstItem, secondItem, thirdItem];
       final sortedItems = items.sortToDisplay;
 
-      expect(sortedItems[0].materialInfo.getManufactured == sortedItems[1].materialInfo.getManufactured, true);
+      expect(
+        sortedItems[0].materialInfo.getManufactured ==
+            sortedItems[1].materialInfo.getManufactured,
+        true,
+      );
     });
 
     test('tenderContractSubmitted', () {

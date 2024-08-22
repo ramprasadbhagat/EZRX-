@@ -96,8 +96,9 @@ mixin _$OrderHistoryItemDto {
   String get tenderOrderReason => throw _privateConstructorUsedError;
   @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
   int get tenderPriceUnit => throw _privateConstructorUsedError;
-  @JsonKey(name: 'tenderPrice', defaultValue: '')
-  String get tenderPrice => throw _privateConstructorUsedError;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+  double get tenderPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCovid', defaultValue: false)
@@ -178,7 +179,9 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
       String tenderOrderReason,
       @JsonKey(name: 'tenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
-      @JsonKey(name: 'tenderPrice', defaultValue: '') String tenderPrice,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+      double tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
@@ -400,7 +403,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
       tenderPrice: null == tenderPrice
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       isTenderExpired: null == isTenderExpired
           ? _value.isTenderExpired
           : isTenderExpired // ignore: cast_nullable_to_non_nullable
@@ -492,7 +495,9 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
       String tenderOrderReason,
       @JsonKey(name: 'tenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
-      @JsonKey(name: 'tenderPrice', defaultValue: '') String tenderPrice,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+      double tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
@@ -712,7 +717,7 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
       tenderPrice: null == tenderPrice
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       isTenderExpired: null == isTenderExpired
           ? _value.isTenderExpired
           : isTenderExpired // ignore: cast_nullable_to_non_nullable
@@ -807,7 +812,9 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       required this.tenderOrderReason,
       @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
       required this.tenderPriceUnit,
-      @JsonKey(name: 'tenderPrice', defaultValue: '') required this.tenderPrice,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+      required this.tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required this.isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid,
@@ -945,8 +952,9 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
   final int tenderPriceUnit;
   @override
-  @JsonKey(name: 'tenderPrice', defaultValue: '')
-  final String tenderPrice;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+  final double tenderPrice;
   @override
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
   final bool isTenderExpired;
@@ -1199,8 +1207,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final String tenderOrderReason,
       @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
       required final int tenderPriceUnit,
-      @JsonKey(name: 'tenderPrice', defaultValue: '')
-      required final String tenderPrice,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+      required final double tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required final bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false)
@@ -1331,8 +1340,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
   int get tenderPriceUnit;
   @override
-  @JsonKey(name: 'tenderPrice', defaultValue: '')
-  String get tenderPrice;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+  double get tenderPrice;
   @override
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired;

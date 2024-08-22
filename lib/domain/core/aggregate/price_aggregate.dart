@@ -124,7 +124,7 @@ class PriceAggregate with _$PriceAggregate {
   bool get isTenderContractMandatoryButUnavailable =>
       salesOrgConfig.enableTenderOrders &&
       materialInfo.hasMandatoryTenderContract &&
-      tenderContract.isEmpty;    
+      tenderContract.isEmpty;
 
   bool get showErrorMessageForID =>
       salesOrgConfig.salesOrg.isID &&
@@ -178,7 +178,7 @@ class PriceAggregate with _$PriceAggregate {
               contractNumber: tenderContract.contractNumber,
               contractPONumber:
                   tenderContract.contractReference.getOrDefaultValue(''),
-              contractPrice: tenderContract.tenderPrice.tenderPrice,
+              contractPrice: tenderContract.tenderPrice,
               contractUnitOfMeasurement: tenderContract.pricingUnit,
               currency: salesOrgConfig.currency.code,
             )
@@ -245,8 +245,8 @@ class PriceAggregate with _$PriceAggregate {
   double get finalPrice {
     var finalPrice = 0.0;
 
-    if (tenderContract.tenderUnitPrice.tenderPrice != 0) {
-      finalPrice = tenderContract.tenderUnitPrice.tenderPrice;
+    if (tenderContract.tenderUnitPrice != 0) {
+      finalPrice = tenderContract.tenderUnitPrice;
     } else if (isSpecialOrderTypeNotTH) {
       finalPrice = 0.0;
     } else if (price.isDiscountEligible && !isSpecialOrderType) {

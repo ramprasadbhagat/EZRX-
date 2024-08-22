@@ -136,8 +136,8 @@ void main() {
   final fakeTenderContract = TenderContract.empty().copyWith(
     tenderOrderReason: TenderContractReason('730'),
     contractNumber: TenderContractNumber('fake-Number'),
-    tenderPrice: TenderPrice('11832000'),
-    tenderUnitPrice: TenderPrice('118320'),
+    tenderPrice: 11832000.0,
+    tenderUnitPrice: 118320.0,
     pricingUnit: 100,
     contractReference: StringValue('fake-Reference'),
     salesDistrict: StringValue('fake-SalesDistrict'),

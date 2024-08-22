@@ -112,8 +112,7 @@ class _ExpandedSection extends StatelessWidget {
       children: [
         _DetailFieldRow(
           leftTitle: 'Price',
-          leftValue:
-              cartItem.tenderContract.tenderUnitPrice.displayTenderPrice,
+          leftValue: cartItem.tenderContract.tenderUnitPrice.toString(),
           rightTitle: 'Quantity Available',
           rightValue:
               '${cartItem.tenderContract.remainingTenderQuantity}/${cartItem.tenderContract.contractQuantity}',

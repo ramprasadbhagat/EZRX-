@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/batches_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -79,7 +80,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     required String tenderOrderReason,
     @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
     required int tenderPriceUnit,
-    @JsonKey(name: 'tenderPrice', defaultValue: '') required String tenderPrice,
+    @StringToDoubleConverter()
+    @JsonKey(name: 'tenderPrice', defaultValue: 0.0)
+    required double tenderPrice,
     @JsonKey(name: 'isTenderExpire', defaultValue: false)
     required bool isTenderExpired,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
@@ -141,7 +144,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       tenderContractReference:
           orderHistoryItem.tenderContractReference.getOrDefaultValue(''),
       tenderPriceUnit: orderHistoryItem.tenderPriceUnit,
-      tenderPrice: orderHistoryItem.tenderPrice.getOrDefaultValue(''),
+      tenderPrice: orderHistoryItem.tenderPrice,
       tenderOrderReason:
           orderHistoryItem.tenderOrderReason.getOrDefaultValue(''),
       isTenderExpired: orderHistoryItem.isTenderExpired,
@@ -196,7 +199,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       tenderContractNumber: TenderContractNumber(tenderContractNumber),
       tenderContractReference: TenderContractNumber(tenderContractReference),
       tenderPriceUnit: tenderPriceUnit,
-      tenderPrice: TenderPrice(tenderPrice),
+      tenderPrice: tenderPrice,
       tenderOrderReason: TenderContractReason(tenderOrderReason),
       isTenderExpired: isTenderExpired,
       isCovid: isCovid,
