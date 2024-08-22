@@ -28,7 +28,7 @@ class Config {
   String channelName = 'eZRx notification';
 
   DateTime newReturnRequestFilterStartDate = DateTime(
-    DateTime.now().year - 2,
+    DateTime.now().year - 5,
     DateTime.now().month,
     DateTime.now().day,
   );
