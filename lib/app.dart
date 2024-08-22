@@ -148,6 +148,10 @@ Future<void> initialSetup({
     }
   } else {
     FlutterError.onError = (errorDetails) {
+      // Flutter re-thow all the image exceptions so we add this to ignore all the image resource exception that flutter re-throw. This is a temporary fix until Flutter resolves this issue.
+      if (errorDetails.library == 'image resource service') {
+        return;
+      }
       _crashlytics.recordFlutterFatalError(errorDetails);
     };
     // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
