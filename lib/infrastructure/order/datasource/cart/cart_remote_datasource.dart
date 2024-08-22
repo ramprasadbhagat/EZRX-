@@ -39,6 +39,7 @@ class CartRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final query = cartQueryMutation.cart(
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
+        remoteConfigService.enableProductTypeFilter,
       );
       final variables = {'language': language};
       final res = await httpService.request(
@@ -51,7 +52,7 @@ class CartRemoteDataSource {
           },
         ),
       );
-        _cartExceptionChecker(
+      _cartExceptionChecker(
         res: res,
       );
 
@@ -88,8 +89,14 @@ class CartRemoteDataSource {
       final enableMarketPlace =
           remoteConfigService.enableMarketPlaceMarkets.contains(market);
       final query = requestParams['Type'] == 'bundle'
-          ? cartQueryMutation.upsertCartItems(enableMarketPlace)
-          : cartQueryMutation.upsertCart(enableMarketPlace);
+          ? cartQueryMutation.upsertCartItems(
+              enableMarketPlace,
+              remoteConfigService.enableProductTypeFilter,
+            )
+          : cartQueryMutation.upsertCart(
+              enableMarketPlace,
+              remoteConfigService.enableProductTypeFilter,
+            );
 
       final res = await httpService.request(
         method: 'POST',
@@ -104,7 +111,7 @@ class CartRemoteDataSource {
         ),
       );
 
-       _cartExceptionChecker(
+      _cartExceptionChecker(
         res: res,
       );
 
@@ -126,6 +133,7 @@ class CartRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final query = cartQueryMutation.upsertCartItems(
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
+        remoteConfigService.enableProductTypeFilter,
       );
       final variables = {
         'itemInput': requestParams,
@@ -141,7 +149,7 @@ class CartRemoteDataSource {
         ),
       );
 
-        _cartExceptionChecker(
+      _cartExceptionChecker(
         res: res,
       );
       final productList =
@@ -178,10 +186,10 @@ class CartRemoteDataSource {
         ),
       );
 
-       _cartExceptionChecker(
+      _cartExceptionChecker(
         res: res,
       );
-      
+
       return AplSimulatorOrderDto.fromJson(res.data['data']['aplSimulateOrder'])
           .toDomain;
     });

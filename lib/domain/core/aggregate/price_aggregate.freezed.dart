@@ -35,7 +35,6 @@ mixin _$PriceAggregate {
       throw _privateConstructorUsedError;
   int get maximumQty => throw _privateConstructorUsedError;
   bool get is26SeriesMaterial => throw _privateConstructorUsedError;
-  bool get isGimmickMaterial => throw _privateConstructorUsedError;
   bool get isCovid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -66,7 +65,6 @@ abstract class $PriceAggregateCopyWith<$Res> {
       List<ComboMaterialItem> comboMaterials,
       int maximumQty,
       bool is26SeriesMaterial,
-      bool isGimmickMaterial,
       bool isCovid});
 
   $PriceCopyWith<$Res> get price;
@@ -107,7 +105,6 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? comboMaterials = null,
     Object? maximumQty = null,
     Object? is26SeriesMaterial = null,
-    Object? isGimmickMaterial = null,
     Object? isCovid = null,
   }) {
     return _then(_value.copyWith(
@@ -174,10 +171,6 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
       is26SeriesMaterial: null == is26SeriesMaterial
           ? _value.is26SeriesMaterial
           : is26SeriesMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isGimmickMaterial: null == isGimmickMaterial
-          ? _value.isGimmickMaterial
-          : isGimmickMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
       isCovid: null == isCovid
           ? _value.isCovid
@@ -269,7 +262,6 @@ abstract class _$$PriceAggregateImplCopyWith<$Res>
       List<ComboMaterialItem> comboMaterials,
       int maximumQty,
       bool is26SeriesMaterial,
-      bool isGimmickMaterial,
       bool isCovid});
 
   @override
@@ -315,7 +307,6 @@ class __$$PriceAggregateImplCopyWithImpl<$Res>
     Object? comboMaterials = null,
     Object? maximumQty = null,
     Object? is26SeriesMaterial = null,
-    Object? isGimmickMaterial = null,
     Object? isCovid = null,
   }) {
     return _then(_$PriceAggregateImpl(
@@ -383,10 +374,6 @@ class __$$PriceAggregateImplCopyWithImpl<$Res>
           ? _value.is26SeriesMaterial
           : is26SeriesMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      isGimmickMaterial: null == isGimmickMaterial
-          ? _value.isGimmickMaterial
-          : isGimmickMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
       isCovid: null == isCovid
           ? _value.isCovid
           : isCovid // ignore: cast_nullable_to_non_nullable
@@ -415,7 +402,6 @@ class _$PriceAggregateImpl extends _PriceAggregate {
       required final List<ComboMaterialItem> comboMaterials,
       required this.maximumQty,
       this.is26SeriesMaterial = false,
-      this.isGimmickMaterial = false,
       this.isCovid = false})
       : _stockInfoList = stockInfoList,
         _bonusSampleItems = bonusSampleItems,
@@ -480,14 +466,11 @@ class _$PriceAggregateImpl extends _PriceAggregate {
   final bool is26SeriesMaterial;
   @override
   @JsonKey()
-  final bool isGimmickMaterial;
-  @override
-  @JsonKey()
   final bool isCovid;
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty, is26SeriesMaterial: $is26SeriesMaterial, isGimmickMaterial: $isGimmickMaterial, isCovid: $isCovid)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty, is26SeriesMaterial: $is26SeriesMaterial, isCovid: $isCovid)';
   }
 
   @override
@@ -526,8 +509,6 @@ class _$PriceAggregateImpl extends _PriceAggregate {
                 other.maximumQty == maximumQty) &&
             (identical(other.is26SeriesMaterial, is26SeriesMaterial) ||
                 other.is26SeriesMaterial == is26SeriesMaterial) &&
-            (identical(other.isGimmickMaterial, isGimmickMaterial) ||
-                other.isGimmickMaterial == isGimmickMaterial) &&
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid));
   }
 
@@ -550,7 +531,6 @@ class _$PriceAggregateImpl extends _PriceAggregate {
       const DeepCollectionEquality().hash(_comboMaterials),
       maximumQty,
       is26SeriesMaterial,
-      isGimmickMaterial,
       isCovid);
 
   @JsonKey(ignore: true)
@@ -579,7 +559,6 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final List<ComboMaterialItem> comboMaterials,
       required final int maximumQty,
       final bool is26SeriesMaterial,
-      final bool isGimmickMaterial,
       final bool isCovid}) = _$PriceAggregateImpl;
   const _PriceAggregate._() : super._();
 
@@ -615,8 +594,6 @@ abstract class _PriceAggregate extends PriceAggregate {
   int get maximumQty;
   @override
   bool get is26SeriesMaterial;
-  @override
-  bool get isGimmickMaterial;
   @override
   bool get isCovid;
   @override

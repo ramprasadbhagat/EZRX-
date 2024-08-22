@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_condition_flag_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -62,6 +63,9 @@ class PriceDto with _$PriceDto {
     required bool isDiscountOverride,
     @JsonKey(name: 'isMOVExclusion', defaultValue: false)
     required bool isMOVExclusion,
+    @Default(PriceConditionFlagDto.empty)
+    @JsonKey(name: 'conditionFlags')
+    PriceConditionFlagDto conditionFlags,
   }) = _PriceDto;
 
   Price toDomain() => Price(
@@ -100,6 +104,7 @@ class PriceDto with _$PriceDto {
         comboDeal: comboDeal.toDomain,
         isDiscountOverride: isDiscountOverride,
         isMOVExclusion: isMOVExclusion,
+        isFOC: conditionFlags.isFOC,
       );
 
   factory PriceDto.fromDomain(Price price) {
@@ -135,6 +140,7 @@ class PriceDto with _$PriceDto {
       comboDeal: PriceComboDealDto.fromDomain(price.comboDeal),
       isDiscountOverride: price.isDiscountOverride,
       isMOVExclusion: price.isMOVExclusion,
+      conditionFlags: PriceConditionFlagDto(isFOC: price.isFOC),
     );
   }
 

@@ -33,14 +33,13 @@ class Price with _$Price {
     required bool overrideRulePresent,
     required List<PriceRule> overridenRules,
     required List<OverridenRuleTier> overridenRuleTier,
-    @Default(true) bool isValidMaterial,
-    @Default(false) bool isFOC,
     @Default(false) bool isPriceOverride,
     @Default(false) bool isDiscountOverride,
     required Zdp8OverrideValue zdp8Override,
     required PriceOverrideValue priceOverride,
     required PriceComboDeal comboDeal,
     required bool isMOVExclusion,
+    required bool isFOC,
   }) = _Price;
 
   factory Price.empty() => Price(
@@ -66,6 +65,7 @@ class Price with _$Price {
         priceOverride: PriceOverrideValue(0),
         comboDeal: PriceComboDeal.empty(),
         isMOVExclusion: false,
+        isFOC: false,
       );
 
   bool get isTireDiscountEligible => tiers.isNotEmpty;
@@ -95,9 +95,6 @@ class Price with _$Price {
   Iterable<BonusMaterial> get otherMaterialBonus => availableBonus.where(
         (BonusMaterial element) => element.materialNumber != materialNumber,
       );
-
-  bool get isFailurePrice =>
-      isValidMaterial && !isFOC && finalPrice == MaterialPrice.unavailable();
 
   bool get isCounterOfferRequested => isPriceOverride || isDiscountOverride;
 

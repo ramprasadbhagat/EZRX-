@@ -29,9 +29,10 @@ class MaterialPriceRemoteDataSource {
     required String customerCode,
     required List<String> materialNumbers,
     required String shipToCode,
+    required bool useNewEndpoint,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getMaterialPrice();
+      final queryData = queryMutation.getMaterialPrice(useNewEndpoint);
 
       final variables = {
         'salesOrganisation': salesOrgCode,
@@ -54,7 +55,7 @@ class MaterialPriceRemoteDataSource {
         }),
       );
       dataSourceExceptionHandler.handleExceptionChecker(res: res);
-      final priceData = res.data['data']['price'];
+      final priceData = res.data['data'][_bodyFieldName(useNewEndpoint)];
 
       return List.from(makeResponseCamelCase(jsonEncode(priceData)))
           .map((e) => PriceDto.fromJson(e).toDomain())
@@ -68,9 +69,10 @@ class MaterialPriceRemoteDataSource {
     required String materialNumber,
     required String shipToCode,
     required List<String> salesDeal,
+    required bool useNewEndpoint,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getMaterialPrice();
+      final queryData = queryMutation.getMaterialPrice(useNewEndpoint);
 
       final variables = {
         'salesOrganisation': salesOrgCode,
@@ -90,7 +92,7 @@ class MaterialPriceRemoteDataSource {
         }),
       );
       dataSourceExceptionHandler.handleExceptionChecker(res: res);
-      final priceData = res.data['data']['price'][0];
+      final priceData = res.data['data'][_bodyFieldName(useNewEndpoint)][0];
 
       return PriceDto.fromJson(makeResponseCamelCase(jsonEncode(priceData)))
           .toDomain();
@@ -103,9 +105,10 @@ class MaterialPriceRemoteDataSource {
     required String materialNumber,
     required String shipToCode,
     required bool exceedQty,
+    required bool useNewEndpoint,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getMaterialPrice();
+      final queryData = queryMutation.getMaterialPrice(useNewEndpoint);
 
       final variables = {
         'salesOrganisation': salesOrgCode,
@@ -126,12 +129,14 @@ class MaterialPriceRemoteDataSource {
       );
       dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
-      if (res.data['data']['price']?.isEmpty ?? true) {
+      if (res.data['data'][_bodyFieldName(useNewEndpoint)]?.isEmpty ?? true) {
         return Price.empty();
       }
 
       return PriceDto.fromJson(
-        makeResponseCamelCase(jsonEncode(res.data['data']['price'][0])),
+        makeResponseCamelCase(
+          jsonEncode(res.data['data'][_bodyFieldName(useNewEndpoint)][0]),
+        ),
       ).toDomain();
     });
   }
@@ -141,9 +146,10 @@ class MaterialPriceRemoteDataSource {
     required String customerCode,
     required Map<String, dynamic> materialQuery,
     required String shipToCode,
+    required bool useNewEndpoint,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getMaterialPrice();
+      final queryData = queryMutation.getMaterialPrice(useNewEndpoint);
       final variables = {
         'salesOrganisation': salesOrgCode,
         'customer': customerCode,
@@ -164,7 +170,7 @@ class MaterialPriceRemoteDataSource {
         onCustomExceptionHandler: _materialPriceExceptionChecker,
       );
 
-      final priceData = res.data['data']['price'];
+      final priceData = res.data['data'][_bodyFieldName(useNewEndpoint)];
 
       return List.from(makeResponseCamelCase(jsonEncode(priceData)))
           .map((e) => PriceDto.fromJson(e).toDomain())
@@ -179,4 +185,7 @@ class MaterialPriceRemoteDataSource {
       }
     }
   }
+
+  String _bodyFieldName(bool useNewEndpoint) =>
+      useNewEndpoint ? 'GetPriceList' : 'price';
 }

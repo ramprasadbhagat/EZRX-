@@ -12,22 +12,17 @@ import 'package:flutter_svg/svg.dart';
 
 class AddToCartErrorSection extends StatelessWidget {
   final String contentText;
-  final Function onProceed;
+
   const AddToCartErrorSection({
     super.key,
     required this.contentText,
-    required this.onProceed,
   });
 
   factory AddToCartErrorSection.forTenderContract({
-    required BuildContext context,
     required String contentText,
   }) =>
       AddToCartErrorSection(
         contentText: contentText,
-        onProceed: () => context.read<CartBloc>().add(
-              const CartEvent.clearCart(),
-            ),
       );
 
   factory AddToCartErrorSection.forAnimalHealth({
@@ -37,28 +32,21 @@ class AddToCartErrorSection extends StatelessWidget {
         contentText: context.tr(
           'Animal health materials cannot be ordered with regular materials. By proceeding, your existing cart will be cleared.',
         ),
-        onProceed: () => context.read<CartBloc>().add(
-              const CartEvent.clearCart(),
-            ),
       );
 
   factory AddToCartErrorSection.forCovid({
     required BuildContext context,
     required bool cartContainsFocProduct,
-  }) {
-    return AddToCartErrorSection(
-      contentText: cartContainsFocProduct
-          ? context.tr(
-              'Commercial materials cannot be added to cart with Covid-19 vaccines. By proceeding, your current cart will be cleared.',
-            )
-          : context.tr(
-              'Covid-19 vaccine cannot be added to cart with other commercial materials. By proceeding, your current cart will be cleared.',
-            ),
-      onProceed: () => context.read<CartBloc>().add(
-            const CartEvent.clearCart(),
-          ),
-    );
-  }
+  }) =>
+      AddToCartErrorSection(
+        contentText: cartContainsFocProduct
+            ? context.tr(
+                'Commercial materials cannot be added to cart with Covid-19 vaccines. By proceeding, your current cart will be cleared.',
+              )
+            : context.tr(
+                'Covid-19 vaccine cannot be added to cart with other commercial materials. By proceeding, your current cart will be cleared.',
+              ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +114,9 @@ class AddToCartErrorSection extends StatelessWidget {
                           width: double.infinity,
                           child: OutlinedButton(
                             key: WidgetKeys.cancelCovidMaterialAddToCart,
-                            onPressed: () =>
-                                state.isClearing ? null : context.router.maybePop(),
+                            onPressed: () => state.isClearing
+                                ? null
+                                : context.router.maybePop(),
                             child: Text(
                               context.tr('Cancel'),
                               style: Theme.of(context)
@@ -149,8 +138,11 @@ class AddToCartErrorSection extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             key: WidgetKeys.addToCartErrorSectionProceed,
-                            onPressed: () =>
-                                state.isClearing ? null : onProceed.call(),
+                            onPressed: () => state.isClearing
+                                ? null
+                                : context.read<CartBloc>().add(
+                                      const CartEvent.clearCart(),
+                                    ),
                             child: Text(
                               context.tr('Proceed'),
                               style: Theme.of(context)

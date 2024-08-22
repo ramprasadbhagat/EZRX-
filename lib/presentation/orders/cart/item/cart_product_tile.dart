@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/tender_tag_for_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
@@ -24,6 +25,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -256,28 +258,28 @@ class _MaterialDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: padding6,
+            spacing: padding6,
             children: [
-              Flexible(
-                child: Text(
-                  cartItem.materialInfo.combinationCode(
-                    showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
-                    showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
-                  ),
-                  key: WidgetKeys.cartItemProductMaterialNumber,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
+              Text(
+                cartItem.materialInfo.combinationCode(
+                  showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                  showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
                 ),
+                key: WidgetKeys.cartItemProductMaterialNumber,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.darkGray,
+                    ),
               ),
-              const SizedBox(
-                width: 4,
-              ),
+              if (cartItem.materialInfo.isPoison) ProductTag.poison(),
+              if (cartItem.materialInfo.isSampleMaterial) ProductTag.sample(),
+              if (cartItem.materialInfo.isGimmick) ProductTag.gimmickTag(),
               PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),
+
           Text(
             cartItem.materialInfo.displayDescription,
             key: WidgetKeys.cartItemProductMaterialDescription,

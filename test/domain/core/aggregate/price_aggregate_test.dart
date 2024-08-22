@@ -535,7 +535,6 @@ void main() {
           ),
           price: emptyPrice.copyWith(
             isValid: true,
-            isValidMaterial: true,
             finalPrice: MaterialPrice.unavailable(),
           ),
         );
@@ -567,21 +566,6 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           price: emptyPrice.copyWith(
             isValid: false,
-          ),
-        );
-        expect(
-          customPriceAggregate.display(PriceType.unitPriceTotal),
-          'Price Not Available',
-        );
-      },
-    );
-
-    test(
-      'display from PriceAggregate for price is not ValidMaterial',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          price: emptyPrice.copyWith(
-            isValidMaterial: false,
           ),
         );
         expect(

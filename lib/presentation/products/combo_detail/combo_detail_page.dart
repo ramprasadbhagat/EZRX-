@@ -127,7 +127,6 @@ class ComboDetailPage extends StatelessWidget with BottomsheetMixin {
                       info: comboDealMaterialDetailState
                               .items[materialPrice.key]?.materialInfo ??
                           MaterialInfo.empty(),
-                      isValidMaterial: materialPrice.value.isValidMaterial,
                     ),
                 },
               );

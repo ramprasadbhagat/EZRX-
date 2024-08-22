@@ -3844,7 +3844,8 @@ void main() {
           (tester) async {
         final mockItem = mockCartItems.first.copyWith(
           quantity: 1,
-          isGimmickMaterial: true,
+          materialInfo:
+              mockCartItems.first.materialInfo.copyWith(isGimmick: true),
           salesOrgConfig: fakeTWSalesOrgConfigs,
         );
         when(() => cartBloc.state).thenReturn(
@@ -3875,7 +3876,8 @@ void main() {
           (tester) async {
         final mockItem = mockCartItems.first.copyWith(
           quantity: 1,
-          isGimmickMaterial: true,
+          materialInfo:
+              mockCartItems.first.materialInfo.copyWith(isGimmick: true),
           salesOrgConfig: fakeTWSalesOrgConfigs,
         );
 
@@ -3910,7 +3912,8 @@ void main() {
           (tester) async {
         final mockItem = mockCartItems.first.copyWith(
           quantity: 1,
-          isGimmickMaterial: true,
+          materialInfo:
+              mockCartItems.first.materialInfo.copyWith(isGimmick: true),
           salesOrgConfig: fakeTWSalesOrgConfigs.copyWith(
             enableGimmickMaterial: false,
           ),

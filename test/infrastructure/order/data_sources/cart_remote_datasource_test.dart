@@ -42,6 +42,7 @@ void main() async {
   const fakeLanguage = 'fake-language';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
+  const fakeEnableProductTypeFilter = false;
   final remoteDataSource = CartRemoteDataSource(
     httpService: service,
     config: Config(),
@@ -51,7 +52,8 @@ void main() async {
   );
   when(() => remoteConfigService.enableMarketPlaceMarkets)
       .thenReturn(fakeEnableMarketPlaceMarkets);
-
+  when(() => remoteConfigService.enableProductTypeFilter)
+      .thenReturn(fakeEnableProductTypeFilter);
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   group(
@@ -81,8 +83,8 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode(
               {
-                'query':
-                    remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+                'query': remoteDataSource.cartQueryMutation
+                    .cart(fakeConfigValue, fakeEnableProductTypeFilter),
                 'variables': {'language': fakeLanguage},
               },
             ),
@@ -114,8 +116,8 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode(
               {
-                'query':
-                    remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+                'query': remoteDataSource.cartQueryMutation
+                    .cart(fakeConfigValue, fakeEnableProductTypeFilter),
                 'variables': {'language': fakeLanguage},
               },
             ),
@@ -152,7 +154,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation
+                  .cart(fakeConfigValue, fakeEnableProductTypeFilter),
               'variables': {'language': fakeLanguage},
             }),
           );
@@ -190,7 +193,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation
+                  .cart(fakeConfigValue, fakeEnableProductTypeFilter),
               'variables': {'language': fakeLanguage},
             }),
           );
@@ -218,7 +222,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation
+                  .cart(fakeConfigValue, fakeEnableProductTypeFilter),
               'variables': {'language': fakeLanguage},
             }),
           );
@@ -264,8 +269,10 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation
-                  .upsertCartItems(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation.upsertCartItems(
+                fakeConfigValue,
+                fakeEnableProductTypeFilter,
+              ),
               'variables': {
                 'itemInput': [{}],
               },
@@ -304,8 +311,10 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation
-                  .upsertCartItems(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation.upsertCartItems(
+                fakeConfigValue,
+                fakeEnableProductTypeFilter,
+              ),
               'variables': {
                 'itemInput': [{}],
               },
@@ -343,7 +352,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation
+                  .cart(fakeConfigValue, fakeEnableProductTypeFilter),
               'variables': {'language': fakeLanguage},
             }),
           );
@@ -381,8 +391,10 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation
-                  .upsertCartItems(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation.upsertCartItems(
+                fakeConfigValue,
+                fakeEnableProductTypeFilter,
+              ),
               'variables': {
                 'itemInput': [{}],
               },
@@ -424,8 +436,10 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation
-                  .upsertCartItems(fakeConfigValue),
+              'query': remoteDataSource.cartQueryMutation.upsertCartItems(
+                fakeConfigValue,
+                fakeEnableProductTypeFilter,
+              ),
               'variables': {
                 'itemInput': [{}],
               },
@@ -498,7 +512,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCart(true, fakeEnableProductTypeFilter),
               'variables': fakeQueryVariables,
             }),
           );
@@ -532,7 +547,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCart(false),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCart(false, fakeEnableProductTypeFilter),
               'variables': fakeQueryVariables,
             }),
           );
@@ -572,7 +588,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCartItems(true),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCartItems(true, fakeEnableProductTypeFilter),
               'variables': {
                 'itemInput': fakeQueryBundleVariables,
               },
@@ -612,7 +629,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCart(true, fakeEnableProductTypeFilter),
               'variables': fakeQueryVariables,
             }),
           );
@@ -649,7 +667,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCart(true, fakeEnableProductTypeFilter),
               'variables': fakeQueryVariables,
             }),
           );
@@ -678,7 +697,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCart(true),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCart(true, fakeEnableProductTypeFilter),
               'variables': fakeQueryVariables,
             }),
           );

@@ -91,6 +91,10 @@ mixin _$CartProductDto {
   bool get is26SeriesMaterial => throw _privateConstructorUsedError;
   @JsonKey(name: 'isGimmick', defaultValue: false)
   bool get isGimmick => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  bool get isPoison => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isSample', defaultValue: false)
+  bool get isSample => throw _privateConstructorUsedError;
   @JsonKey(name: 'tenderContractNumber', defaultValue: '')
   String get tenderContractNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'tenderOrderReason', defaultValue: '')
@@ -170,6 +174,8 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
       bool is26SeriesMaterial,
       @JsonKey(name: 'isGimmick', defaultValue: false) bool isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false) bool isPoison,
+      @JsonKey(name: 'isSample', defaultValue: false) bool isSample,
       @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       String tenderContractNumber,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
@@ -233,6 +239,8 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? materialGroup2 = null,
     Object? is26SeriesMaterial = null,
     Object? isGimmick = null,
+    Object? isPoison = null,
+    Object? isSample = null,
     Object? tenderContractNumber = null,
     Object? tenderOrderReason = null,
     Object? hasValidTenderContract = null,
@@ -377,6 +385,14 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.isGimmick
           : isGimmick // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSample: null == isSample
+          ? _value.isSample
+          : isSample // ignore: cast_nullable_to_non_nullable
+              as bool,
       tenderContractNumber: null == tenderContractNumber
           ? _value.tenderContractNumber
           : tenderContractNumber // ignore: cast_nullable_to_non_nullable
@@ -483,6 +499,8 @@ abstract class _$$CartProductDtoImplCopyWith<$Res>
       @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
       bool is26SeriesMaterial,
       @JsonKey(name: 'isGimmick', defaultValue: false) bool isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false) bool isPoison,
+      @JsonKey(name: 'isSample', defaultValue: false) bool isSample,
       @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       String tenderContractNumber,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
@@ -546,6 +564,8 @@ class __$$CartProductDtoImplCopyWithImpl<$Res>
     Object? materialGroup2 = null,
     Object? is26SeriesMaterial = null,
     Object? isGimmick = null,
+    Object? isPoison = null,
+    Object? isSample = null,
     Object? tenderContractNumber = null,
     Object? tenderOrderReason = null,
     Object? hasValidTenderContract = null,
@@ -690,6 +710,14 @@ class __$$CartProductDtoImplCopyWithImpl<$Res>
           ? _value.isGimmick
           : isGimmick // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSample: null == isSample
+          ? _value.isSample
+          : isSample // ignore: cast_nullable_to_non_nullable
+              as bool,
       tenderContractNumber: null == tenderContractNumber
           ? _value.tenderContractNumber
           : tenderContractNumber // ignore: cast_nullable_to_non_nullable
@@ -784,6 +812,8 @@ class _$CartProductDtoImpl extends _CartProductDto {
       @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
       required this.is26SeriesMaterial,
       @JsonKey(name: 'isGimmick', defaultValue: false) required this.isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false) required this.isPoison,
+      @JsonKey(name: 'isSample', defaultValue: false) required this.isSample,
       @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       required this.tenderContractNumber,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
@@ -926,6 +956,12 @@ class _$CartProductDtoImpl extends _CartProductDto {
   @JsonKey(name: 'isGimmick', defaultValue: false)
   final bool isGimmick;
   @override
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  final bool isPoison;
+  @override
+  @JsonKey(name: 'isSample', defaultValue: false)
+  final bool isSample;
+  @override
   @JsonKey(name: 'tenderContractNumber', defaultValue: '')
   final String tenderContractNumber;
   @override
@@ -946,7 +982,7 @@ class _$CartProductDtoImpl extends _CartProductDto {
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription, materialGroup4: $materialGroup4, materialGroup2: $materialGroup2, is26SeriesMaterial: $is26SeriesMaterial, isGimmick: $isGimmick, tenderContractNumber: $tenderContractNumber, tenderOrderReason: $tenderOrderReason, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, isCovid: $isCovid, isTenderExpired: $isTenderExpired)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription, materialGroup4: $materialGroup4, materialGroup2: $materialGroup2, is26SeriesMaterial: $is26SeriesMaterial, isGimmick: $isGimmick, isPoison: $isPoison, isSample: $isSample, tenderContractNumber: $tenderContractNumber, tenderOrderReason: $tenderOrderReason, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, isCovid: $isCovid, isTenderExpired: $isTenderExpired)';
   }
 
   @override
@@ -1020,14 +1056,17 @@ class _$CartProductDtoImpl extends _CartProductDto {
                 other.is26SeriesMaterial == is26SeriesMaterial) &&
             (identical(other.isGimmick, isGimmick) ||
                 other.isGimmick == isGimmick) &&
+            (identical(other.isPoison, isPoison) ||
+                other.isPoison == isPoison) &&
+            (identical(other.isSample, isSample) ||
+                other.isSample == isSample) &&
             (identical(other.tenderContractNumber, tenderContractNumber) ||
                 other.tenderContractNumber == tenderContractNumber) &&
             (identical(other.tenderOrderReason, tenderOrderReason) ||
                 other.tenderOrderReason == tenderOrderReason) &&
             (identical(other.hasValidTenderContract, hasValidTenderContract) ||
                 other.hasValidTenderContract == hasValidTenderContract) &&
-            (identical(other.hasMandatoryTenderContract,
-                    hasMandatoryTenderContract) ||
+            (identical(other.hasMandatoryTenderContract, hasMandatoryTenderContract) ||
                 other.hasMandatoryTenderContract ==
                     hasMandatoryTenderContract) &&
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
@@ -1073,6 +1112,8 @@ class _$CartProductDtoImpl extends _CartProductDto {
         materialGroup2,
         is26SeriesMaterial,
         isGimmick,
+        isPoison,
+        isSample,
         tenderContractNumber,
         tenderOrderReason,
         hasValidTenderContract,
@@ -1163,6 +1204,10 @@ abstract class _CartProductDto extends CartProductDto {
       required final bool is26SeriesMaterial,
       @JsonKey(name: 'isGimmick', defaultValue: false)
       required final bool isGimmick,
+      @JsonKey(name: 'isPoison', defaultValue: false)
+      required final bool isPoison,
+      @JsonKey(name: 'isSample', defaultValue: false)
+      required final bool isSample,
       @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       required final String tenderContractNumber,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
@@ -1283,6 +1328,12 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'isGimmick', defaultValue: false)
   bool get isGimmick;
+  @override
+  @JsonKey(name: 'isPoison', defaultValue: false)
+  bool get isPoison;
+  @override
+  @JsonKey(name: 'isSample', defaultValue: false)
+  bool get isSample;
   @override
   @JsonKey(name: 'tenderContractNumber', defaultValue: '')
   String get tenderContractNumber;

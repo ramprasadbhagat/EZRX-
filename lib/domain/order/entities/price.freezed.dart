@@ -35,14 +35,13 @@ mixin _$Price {
   List<PriceRule> get overridenRules => throw _privateConstructorUsedError;
   List<OverridenRuleTier> get overridenRuleTier =>
       throw _privateConstructorUsedError;
-  bool get isValidMaterial => throw _privateConstructorUsedError;
-  bool get isFOC => throw _privateConstructorUsedError;
   bool get isPriceOverride => throw _privateConstructorUsedError;
   bool get isDiscountOverride => throw _privateConstructorUsedError;
   Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
   PriceOverrideValue get priceOverride => throw _privateConstructorUsedError;
   PriceComboDeal get comboDeal => throw _privateConstructorUsedError;
   bool get isMOVExclusion => throw _privateConstructorUsedError;
+  bool get isFOC => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceCopyWith<Price> get copyWith => throw _privateConstructorUsedError;
@@ -72,14 +71,13 @@ abstract class $PriceCopyWith<$Res> {
       bool overrideRulePresent,
       List<PriceRule> overridenRules,
       List<OverridenRuleTier> overridenRuleTier,
-      bool isValidMaterial,
-      bool isFOC,
       bool isPriceOverride,
       bool isDiscountOverride,
       Zdp8OverrideValue zdp8Override,
       PriceOverrideValue priceOverride,
       PriceComboDeal comboDeal,
-      bool isMOVExclusion});
+      bool isMOVExclusion,
+      bool isFOC});
 
   $PriceComboDealCopyWith<$Res> get comboDeal;
 }
@@ -115,14 +113,13 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
     Object? overrideRulePresent = null,
     Object? overridenRules = null,
     Object? overridenRuleTier = null,
-    Object? isValidMaterial = null,
-    Object? isFOC = null,
     Object? isPriceOverride = null,
     Object? isDiscountOverride = null,
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
     Object? isMOVExclusion = null,
+    Object? isFOC = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -197,14 +194,6 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.overridenRuleTier
           : overridenRuleTier // ignore: cast_nullable_to_non_nullable
               as List<OverridenRuleTier>,
-      isValidMaterial: null == isValidMaterial
-          ? _value.isValidMaterial
-          : isValidMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFOC: null == isFOC
-          ? _value.isFOC
-          : isFOC // ignore: cast_nullable_to_non_nullable
-              as bool,
       isPriceOverride: null == isPriceOverride
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
@@ -228,6 +217,10 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
       isMOVExclusion: null == isMOVExclusion
           ? _value.isMOVExclusion
           : isMOVExclusion // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFOC: null == isFOC
+          ? _value.isFOC
+          : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -267,14 +260,13 @@ abstract class _$$PriceImplCopyWith<$Res> implements $PriceCopyWith<$Res> {
       bool overrideRulePresent,
       List<PriceRule> overridenRules,
       List<OverridenRuleTier> overridenRuleTier,
-      bool isValidMaterial,
-      bool isFOC,
       bool isPriceOverride,
       bool isDiscountOverride,
       Zdp8OverrideValue zdp8Override,
       PriceOverrideValue priceOverride,
       PriceComboDeal comboDeal,
-      bool isMOVExclusion});
+      bool isMOVExclusion,
+      bool isFOC});
 
   @override
   $PriceComboDealCopyWith<$Res> get comboDeal;
@@ -309,14 +301,13 @@ class __$$PriceImplCopyWithImpl<$Res>
     Object? overrideRulePresent = null,
     Object? overridenRules = null,
     Object? overridenRuleTier = null,
-    Object? isValidMaterial = null,
-    Object? isFOC = null,
     Object? isPriceOverride = null,
     Object? isDiscountOverride = null,
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
     Object? isMOVExclusion = null,
+    Object? isFOC = null,
   }) {
     return _then(_$PriceImpl(
       materialNumber: null == materialNumber
@@ -391,14 +382,6 @@ class __$$PriceImplCopyWithImpl<$Res>
           ? _value._overridenRuleTier
           : overridenRuleTier // ignore: cast_nullable_to_non_nullable
               as List<OverridenRuleTier>,
-      isValidMaterial: null == isValidMaterial
-          ? _value.isValidMaterial
-          : isValidMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFOC: null == isFOC
-          ? _value.isFOC
-          : isFOC // ignore: cast_nullable_to_non_nullable
-              as bool,
       isPriceOverride: null == isPriceOverride
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
@@ -422,6 +405,10 @@ class __$$PriceImplCopyWithImpl<$Res>
       isMOVExclusion: null == isMOVExclusion
           ? _value.isMOVExclusion
           : isMOVExclusion // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFOC: null == isFOC
+          ? _value.isFOC
+          : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -449,14 +436,13 @@ class _$PriceImpl extends _Price {
       required this.overrideRulePresent,
       required final List<PriceRule> overridenRules,
       required final List<OverridenRuleTier> overridenRuleTier,
-      this.isValidMaterial = true,
-      this.isFOC = false,
       this.isPriceOverride = false,
       this.isDiscountOverride = false,
       required this.zdp8Override,
       required this.priceOverride,
       required this.comboDeal,
-      required this.isMOVExclusion})
+      required this.isMOVExclusion,
+      required this.isFOC})
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
@@ -540,12 +526,6 @@ class _$PriceImpl extends _Price {
 
   @override
   @JsonKey()
-  final bool isValidMaterial;
-  @override
-  @JsonKey()
-  final bool isFOC;
-  @override
-  @JsonKey()
   final bool isPriceOverride;
   @override
   @JsonKey()
@@ -558,10 +538,12 @@ class _$PriceImpl extends _Price {
   final PriceComboDeal comboDeal;
   @override
   final bool isMOVExclusion;
+  @override
+  final bool isFOC;
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, isDiscountOverride: $isDiscountOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isMOVExclusion: $isMOVExclusion)';
+    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, isDiscountOverride: $isDiscountOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isMOVExclusion: $isMOVExclusion, isFOC: $isFOC)';
   }
 
   @override
@@ -601,9 +583,6 @@ class _$PriceImpl extends _Price {
                 .equals(other._overridenRules, _overridenRules) &&
             const DeepCollectionEquality()
                 .equals(other._overridenRuleTier, _overridenRuleTier) &&
-            (identical(other.isValidMaterial, isValidMaterial) ||
-                other.isValidMaterial == isValidMaterial) &&
-            (identical(other.isFOC, isFOC) || other.isFOC == isFOC) &&
             (identical(other.isPriceOverride, isPriceOverride) ||
                 other.isPriceOverride == isPriceOverride) &&
             (identical(other.isDiscountOverride, isDiscountOverride) ||
@@ -615,7 +594,8 @@ class _$PriceImpl extends _Price {
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
             (identical(other.isMOVExclusion, isMOVExclusion) ||
-                other.isMOVExclusion == isMOVExclusion));
+                other.isMOVExclusion == isMOVExclusion) &&
+            (identical(other.isFOC, isFOC) || other.isFOC == isFOC));
   }
 
   @override
@@ -639,14 +619,13 @@ class _$PriceImpl extends _Price {
         overrideRulePresent,
         const DeepCollectionEquality().hash(_overridenRules),
         const DeepCollectionEquality().hash(_overridenRuleTier),
-        isValidMaterial,
-        isFOC,
         isPriceOverride,
         isDiscountOverride,
         zdp8Override,
         priceOverride,
         comboDeal,
-        isMOVExclusion
+        isMOVExclusion,
+        isFOC
       ]);
 
   @JsonKey(ignore: true)
@@ -676,14 +655,13 @@ abstract class _Price extends Price {
       required final bool overrideRulePresent,
       required final List<PriceRule> overridenRules,
       required final List<OverridenRuleTier> overridenRuleTier,
-      final bool isValidMaterial,
-      final bool isFOC,
       final bool isPriceOverride,
       final bool isDiscountOverride,
       required final Zdp8OverrideValue zdp8Override,
       required final PriceOverrideValue priceOverride,
       required final PriceComboDeal comboDeal,
-      required final bool isMOVExclusion}) = _$PriceImpl;
+      required final bool isMOVExclusion,
+      required final bool isFOC}) = _$PriceImpl;
   const _Price._() : super._();
 
   @override
@@ -723,10 +701,6 @@ abstract class _Price extends Price {
   @override
   List<OverridenRuleTier> get overridenRuleTier;
   @override
-  bool get isValidMaterial;
-  @override
-  bool get isFOC;
-  @override
   bool get isPriceOverride;
   @override
   bool get isDiscountOverride;
@@ -738,6 +712,8 @@ abstract class _Price extends Price {
   PriceComboDeal get comboDeal;
   @override
   bool get isMOVExclusion;
+  @override
+  bool get isFOC;
   @override
   @JsonKey(ignore: true)
   _$$PriceImplCopyWith<_$PriceImpl> get copyWith =>

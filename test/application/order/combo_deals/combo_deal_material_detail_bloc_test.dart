@@ -140,7 +140,6 @@ void main() {
               price: materialPrice.value,
               info: items[materialPrice.key]?.materialInfo ??
                   MaterialInfo.empty(),
-              isValidMaterial: materialPrice.value.isValidMaterial,
             ),
           };
           materialsPrice.addAll(materialPriceMap);

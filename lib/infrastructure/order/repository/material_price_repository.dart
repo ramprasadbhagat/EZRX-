@@ -66,6 +66,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
             materialNumber: e,
             shipToCode: shipToInfo.shipToCustomerCode,
             salesDeal: salesDeal,
+            useNewEndpoint: salesOrganisation.salesOrg.isHK,
           );
           price.fold(
             (failure) {},
@@ -98,6 +99,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
         shipToCode: shipToInfo.shipToCustomerCode,
         materialNumber: materialNumber.getOrCrash(),
         exceedQty: exceedQty,
+        useNewEndpoint: salesOrganisation.salesOrg.isHK,
       );
 
       return Right(
@@ -114,6 +116,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
     required String materialNumber,
     required String shipToCode,
     required List<String> salesDeal,
+    required bool useNewEndpoint,
   }) async {
     try {
       final price = await remoteDataSource.getMaterialPrice(
@@ -122,6 +125,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
         materialNumber: materialNumber,
         shipToCode: shipToCode,
         salesDeal: salesDeal,
+        useNewEndpoint: useNewEndpoint,
       );
 
       return Right(
@@ -172,6 +176,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
         customerCode: customerCode,
         materialQuery: PriceDto.fromDomain(price).overrideQuery,
         shipToCode: shipToCode,
+        useNewEndpoint: salesOrganisation.salesOrg.isHK,
       );
 
       return Right(priceData.first);
@@ -210,6 +215,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
         shipToCode: shipToCode,
         materialQuery: PriceDto.fromDomain(price)
             .materialQueryWithExceedQty(exceedQuantity),
+        useNewEndpoint: salesOrganisation.salesOrg.isHK,
       );
 
       return Right(priceData.first);

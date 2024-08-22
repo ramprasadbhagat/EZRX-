@@ -56,6 +56,10 @@ _$PriceDtoImpl _$$PriceDtoImplFromJson(Map<String, dynamic> json) =>
               json['comboDeals'] as Map<String, dynamic>),
       isDiscountOverride: json['isDiscountOverride'] as bool? ?? false,
       isMOVExclusion: json['isMOVExclusion'] as bool? ?? false,
+      conditionFlags: json['conditionFlags'] == null
+          ? PriceConditionFlagDto.empty
+          : PriceConditionFlagDto.fromJson(
+              json['conditionFlags'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PriceDtoImplToJson(_$PriceDtoImpl instance) =>
@@ -85,4 +89,5 @@ Map<String, dynamic> _$$PriceDtoImplToJson(_$PriceDtoImpl instance) =>
       'comboDeals': instance.comboDeal.toJson(),
       'isDiscountOverride': instance.isDiscountOverride,
       'isMOVExclusion': instance.isMOVExclusion,
+      'conditionFlags': instance.conditionFlags.toJson(),
     };

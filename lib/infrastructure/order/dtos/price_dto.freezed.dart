@@ -69,6 +69,9 @@ mixin _$PriceDto {
   bool get isDiscountOverride => throw _privateConstructorUsedError;
   @JsonKey(name: 'isMOVExclusion', defaultValue: false)
   bool get isMOVExclusion => throw _privateConstructorUsedError;
+  @JsonKey(name: 'conditionFlags')
+  PriceConditionFlagDto get conditionFlags =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -119,10 +122,11 @@ abstract class $PriceDtoCopyWith<$Res> {
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
       bool isDiscountOverride,
-      @JsonKey(name: 'isMOVExclusion', defaultValue: false)
-      bool isMOVExclusion});
+      @JsonKey(name: 'isMOVExclusion', defaultValue: false) bool isMOVExclusion,
+      @JsonKey(name: 'conditionFlags') PriceConditionFlagDto conditionFlags});
 
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
+  $PriceConditionFlagDtoCopyWith<$Res> get conditionFlags;
 }
 
 /// @nodoc
@@ -162,6 +166,7 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
     Object? comboDeal = null,
     Object? isDiscountOverride = null,
     Object? isMOVExclusion = null,
+    Object? conditionFlags = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -260,6 +265,10 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
           ? _value.isMOVExclusion
           : isMOVExclusion // ignore: cast_nullable_to_non_nullable
               as bool,
+      conditionFlags: null == conditionFlags
+          ? _value.conditionFlags
+          : conditionFlags // ignore: cast_nullable_to_non_nullable
+              as PriceConditionFlagDto,
     ) as $Val);
   }
 
@@ -268,6 +277,14 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
   $PriceComboDealDtoCopyWith<$Res> get comboDeal {
     return $PriceComboDealDtoCopyWith<$Res>(_value.comboDeal, (value) {
       return _then(_value.copyWith(comboDeal: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PriceConditionFlagDtoCopyWith<$Res> get conditionFlags {
+    return $PriceConditionFlagDtoCopyWith<$Res>(_value.conditionFlags, (value) {
+      return _then(_value.copyWith(conditionFlags: value) as $Val);
     });
   }
 }
@@ -318,11 +335,13 @@ abstract class _$$PriceDtoImplCopyWith<$Res>
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
       bool isDiscountOverride,
-      @JsonKey(name: 'isMOVExclusion', defaultValue: false)
-      bool isMOVExclusion});
+      @JsonKey(name: 'isMOVExclusion', defaultValue: false) bool isMOVExclusion,
+      @JsonKey(name: 'conditionFlags') PriceConditionFlagDto conditionFlags});
 
   @override
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
+  @override
+  $PriceConditionFlagDtoCopyWith<$Res> get conditionFlags;
 }
 
 /// @nodoc
@@ -360,6 +379,7 @@ class __$$PriceDtoImplCopyWithImpl<$Res>
     Object? comboDeal = null,
     Object? isDiscountOverride = null,
     Object? isMOVExclusion = null,
+    Object? conditionFlags = null,
   }) {
     return _then(_$PriceDtoImpl(
       materialNumber: null == materialNumber
@@ -458,6 +478,10 @@ class __$$PriceDtoImplCopyWithImpl<$Res>
           ? _value.isMOVExclusion
           : isMOVExclusion // ignore: cast_nullable_to_non_nullable
               as bool,
+      conditionFlags: null == conditionFlags
+          ? _value.conditionFlags
+          : conditionFlags // ignore: cast_nullable_to_non_nullable
+              as PriceConditionFlagDto,
     ));
   }
 }
@@ -510,7 +534,9 @@ class _$PriceDtoImpl extends _PriceDto {
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
       required this.isDiscountOverride,
       @JsonKey(name: 'isMOVExclusion', defaultValue: false)
-      required this.isMOVExclusion})
+      required this.isMOVExclusion,
+      @JsonKey(name: 'conditionFlags')
+      this.conditionFlags = PriceConditionFlagDto.empty})
       : _rules = rules,
         _bonuses = bonuses,
         _tiers = tiers,
@@ -631,10 +657,13 @@ class _$PriceDtoImpl extends _PriceDto {
   @override
   @JsonKey(name: 'isMOVExclusion', defaultValue: false)
   final bool isMOVExclusion;
+  @override
+  @JsonKey(name: 'conditionFlags')
+  final PriceConditionFlagDto conditionFlags;
 
   @override
   String toString() {
-    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isDiscountOverride: $isDiscountOverride, isMOVExclusion: $isMOVExclusion)';
+    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isDiscountOverride: $isDiscountOverride, isMOVExclusion: $isMOVExclusion, conditionFlags: $conditionFlags)';
   }
 
   @override
@@ -685,7 +714,9 @@ class _$PriceDtoImpl extends _PriceDto {
             (identical(other.isDiscountOverride, isDiscountOverride) ||
                 other.isDiscountOverride == isDiscountOverride) &&
             (identical(other.isMOVExclusion, isMOVExclusion) ||
-                other.isMOVExclusion == isMOVExclusion));
+                other.isMOVExclusion == isMOVExclusion) &&
+            (identical(other.conditionFlags, conditionFlags) ||
+                other.conditionFlags == conditionFlags));
   }
 
   @JsonKey(ignore: true)
@@ -715,7 +746,8 @@ class _$PriceDtoImpl extends _PriceDto {
         priceOverride,
         comboDeal,
         isDiscountOverride,
-        isMOVExclusion
+        isMOVExclusion,
+        conditionFlags
       ]);
 
   @JsonKey(ignore: true)
@@ -780,7 +812,9 @@ abstract class _PriceDto extends PriceDto {
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
       required final bool isDiscountOverride,
       @JsonKey(name: 'isMOVExclusion', defaultValue: false)
-      required final bool isMOVExclusion}) = _$PriceDtoImpl;
+      required final bool isMOVExclusion,
+      @JsonKey(name: 'conditionFlags')
+      final PriceConditionFlagDto conditionFlags}) = _$PriceDtoImpl;
   const _PriceDto._() : super._();
 
   factory _PriceDto.fromJson(Map<String, dynamic> json) =
@@ -858,6 +892,9 @@ abstract class _PriceDto extends PriceDto {
   @override
   @JsonKey(name: 'isMOVExclusion', defaultValue: false)
   bool get isMOVExclusion;
+  @override
+  @JsonKey(name: 'conditionFlags')
+  PriceConditionFlagDto get conditionFlags;
   @override
   @JsonKey(ignore: true)
   _$$PriceDtoImplCopyWith<_$PriceDtoImpl> get copyWith =>

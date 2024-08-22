@@ -759,8 +759,6 @@ class _FooterState extends State<_Footer> {
                                     _handleCartFailure(
                                       context,
                                       failure,
-                                      quantityText:
-                                          _quantityEditingController.text,
                                       banner: widget.banner,
                                     );
                                   },
@@ -803,9 +801,6 @@ class _FooterState extends State<_Footer> {
                                               cartState: stateCart,
                                               price: price,
                                               banner: widget.banner,
-                                              quantityText:
-                                                  _quantityEditingController
-                                                      .text,
                                             );
                                           },
                                     child: Text(
@@ -955,13 +950,12 @@ void _handleCartFailure(
   BuildContext context,
   ApiFailure failure, {
   required EZReachBanner? banner,
-  required String quantityText,
 }) {
   if (failure == const ApiFailure.addAnimalHealthWithNormalProductToCart()) {
-    _showAnimalHealthWarningPage(
+    _showWarningWhenUpsert(
       context: context,
       banner: banner,
-      quantityText: quantityText,
+      widget: AddToCartErrorSection.forAnimalHealth(context: context),
     );
   }
 }
@@ -971,7 +965,6 @@ void _addToCart({
   required ProductDetailState state,
   required CartState cartState,
   required Price price,
-  required String quantityText,
   EZReachBanner? banner,
 }) {
   final tenderContractDetailState =
@@ -979,6 +972,7 @@ void _addToCart({
   final cartProducts = cartState.cartProducts;
   final isTenderEligible =
       context.read<EligibilityBloc>().state.salesOrgConfigs.enableTenderOrders;
+  final materialInfo = state.productDetailAggregate.materialInfo;
 
   if (isTenderEligible && tenderContractDetailState.isInsufficientQuantity) {
     CustomSnackBar(
@@ -999,37 +993,51 @@ void _addToCart({
     context: context,
   );
   if (isTenderEligible && tenderContractValidationMsg.isNotEmpty) {
-    _showTenderContractWarningPage(
+    _showWarningWhenUpsert(
       context: context,
-      contentText: tenderContractValidationMsg,
-      price: price,
-      quantityText: quantityText,
       banner: banner,
+      widget: AddToCartErrorSection.forTenderContract(
+        contentText: tenderContractValidationMsg,
+      ),
     );
 
     return;
   }
 
   if (cartProducts.isNotEmpty) {
-    if (state.productDetailAggregate.materialInfo.isFOCMaterial &&
+    if (materialInfo.isFOCMaterial &&
         !cartState.containFocMaterialInCartProduct) {
-      _showDetailsPage(
+      _showWarningForFOCMaterial(
         context: context,
         banner: banner,
       );
-    } else if (!state.productDetailAggregate.materialInfo.isFOCMaterial &&
+    } else if (!materialInfo.isFOCMaterial &&
         cartState.containFocMaterialInCartProduct) {
-      _showDetailsPage(
+      _showWarningForFOCMaterial(
         context: context,
         banner: banner,
+      );
+    } else if (materialInfo.isGimmick && cartProducts.containSampleMaterial) {
+      _showWarningWhenUpsert(
+        context: context,
+        widget: AddToCartErrorSection(
+          contentText: context.tr(
+            'Gimmick items cannot be ordered while sample items are in your cart. By proceeding, your current cart will be cleared.',
+          ),
+        ),
+      );
+    } else if (materialInfo.isSampleMaterial &&
+        cartProducts.containGimmickMaterial) {
+      _showWarningWhenUpsert(
+        context: context,
+        widget: AddToCartErrorSection(
+          contentText: context.tr(
+            'Sample items cannot be ordered while gimmick items are in your cart. By proceeding, your current cart will be cleared.',
+          ),
+        ),
       );
     } else {
-      final materialNumber = context
-          .read<ProductDetailBloc>()
-          .state
-          .productDetailAggregate
-          .materialInfo
-          .materialNumber;
+      final materialNumber = materialInfo.materialNumber;
       if (cartState.getCurrentComboItemByComboDealId(price.comboDeal.id) !=
           PriceAggregate.empty()) {
         _initComboDealAndNavigate(
@@ -1044,7 +1052,6 @@ void _addToCart({
           price: price,
           state: state,
           stateCart: cartState,
-          quantityText: quantityText,
           banner: banner,
           tenderContractState: tenderContractDetailState,
           isEditTender: isTenderEligible,
@@ -1057,7 +1064,6 @@ void _addToCart({
       price: price,
       state: state,
       stateCart: cartState,
-      quantityText: quantityText,
       banner: banner,
       tenderContractState: tenderContractDetailState,
     );
@@ -1070,12 +1076,12 @@ void upsertCart({
   required ProductDetailState state,
   required CartState stateCart,
   required TenderContractDetailState tenderContractState,
-  required String quantityText,
   EZReachBanner? banner,
   bool isEditTender = false,
 }) {
   final materialNumber =
       state.productDetailAggregate.materialInfo.materialNumber;
+  final eligiblityState = context.read<EligibilityBloc>().state;
   context.read<CartBloc>().add(
         CartEvent.upsertCart(
           priceAggregate: PriceAggregate.empty().copyWith(
@@ -1084,21 +1090,14 @@ void upsertCart({
                   stateCart.productCounterOfferDetails(materialNumber),
             ),
             price: price,
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
+            salesOrgConfig: eligiblityState.salesOrgConfigs,
             quantity: isEditTender
-                ? int.parse(
-                    quantityText,
-                  )
+                ? state.inputQty
                 : stateCart.getQuantityOfProduct(
                       productNumber: materialNumber,
                     ) +
-                    int.parse(
-                      quantityText,
-                    ),
-            bonusSampleItems: context.read<CartBloc>().state.productBonusList(
-                  materialNumber,
-                ),
+                    state.inputQty,
+            bonusSampleItems: stateCart.productBonusList(materialNumber),
             tenderContract: tenderContractState.currentTenderContract,
           ),
           banner: banner,
@@ -1153,8 +1152,23 @@ void _initComboDealAndNavigate({
   );
 }
 
-void _showDetailsPage({
+void _showWarningForFOCMaterial({
   required BuildContext context,
+  EZReachBanner? banner,
+}) =>
+    _showWarningWhenUpsert(
+      context: context,
+      banner: banner,
+      widget: AddToCartErrorSection.forCovid(
+        cartContainsFocProduct:
+            context.read<CartBloc>().state.containFocMaterialInCartProduct,
+        context: context,
+      ),
+    );
+
+void _showWarningWhenUpsert({
+  required BuildContext context,
+  required Widget widget,
   EZReachBanner? banner,
 }) {
   showModalBottomSheet(
@@ -1163,13 +1177,7 @@ void _showDetailsPage({
     enableDrag: false,
     isDismissible: false,
     clipBehavior: Clip.antiAliasWithSaveLayer,
-    builder: (_) {
-      return AddToCartErrorSection.forCovid(
-        cartContainsFocProduct:
-            context.read<CartBloc>().state.containFocMaterialInCartProduct,
-        context: context,
-      );
-    },
+    builder: (_) => widget,
   ).then((value) {
     if (value != null) {
       final productDetailsState = context.read<ProductDetailBloc>().state;
@@ -1183,10 +1191,9 @@ void _showDetailsPage({
       upsertCart(
         context: context,
         price: price,
-        state: context.read<ProductDetailBloc>().state,
+        state: productDetailsState,
         stateCart: context.read<CartBloc>().state,
         tenderContractState: context.read<TenderContractDetailBloc>().state,
-        quantityText: productDetailsState.inputQty.toString(),
         banner: banner,
       );
     }
@@ -1233,76 +1240,4 @@ String _checkValidTenderContractAndReturnMsg({
 
     return '';
   }
-}
-
-void _showTenderContractWarningPage({
-  required BuildContext context,
-  required String contentText,
-  required Price price,
-  required String quantityText,
-  EZReachBanner? banner,
-}) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    enableDrag: false,
-    isDismissible: false,
-    clipBehavior: Clip.antiAliasWithSaveLayer,
-    builder: (_) {
-      return AddToCartErrorSection.forTenderContract(
-        contentText: contentText,
-        context: context,
-      );
-    },
-  ).then((value) {
-    if (value != null) {
-      upsertCart(
-        context: context,
-        price: price,
-        state: context.read<ProductDetailBloc>().state,
-        stateCart: context.read<CartBloc>().state,
-        tenderContractState: context.read<TenderContractDetailBloc>().state,
-        quantityText: quantityText,
-        banner: banner,
-      );
-    }
-  });
-}
-
-void _showAnimalHealthWarningPage({
-  required BuildContext context,
-  required String quantityText,
-  EZReachBanner? banner,
-}) {
-  final productDetailState = context.read<ProductDetailBloc>().state;
-
-  final price = context.read<MaterialPriceBloc>().state.materialPrice[
-          productDetailState
-              .productDetailAggregate.materialInfo.materialNumber] ??
-      Price.empty();
-
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    enableDrag: false,
-    isDismissible: false,
-    clipBehavior: Clip.antiAliasWithSaveLayer,
-    builder: (_) {
-      return AddToCartErrorSection.forAnimalHealth(
-        context: context,
-      );
-    },
-  ).then((value) {
-    if (value != null) {
-      upsertCart(
-        context: context,
-        price: price,
-        state: productDetailState,
-        stateCart: context.read<CartBloc>().state,
-        tenderContractState: context.read<TenderContractDetailBloc>().state,
-        quantityText: quantityText,
-        banner: banner,
-      );
-    }
-  });
 }

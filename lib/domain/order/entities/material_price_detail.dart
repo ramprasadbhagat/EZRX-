@@ -13,7 +13,6 @@ class MaterialPriceDetail with _$MaterialPriceDetail {
   const factory MaterialPriceDetail({
     required Price price,
     required MaterialInfo info,
-    required bool isValidMaterial,
   }) = _MaterialPriceDetail;
 
   factory MaterialPriceDetail.defaultWithPrice({
@@ -21,7 +20,6 @@ class MaterialPriceDetail with _$MaterialPriceDetail {
     required Price price,
   }) =>
       MaterialPriceDetail(
-        isValidMaterial: false,
         info: MaterialInfo.empty().copyWith(
           materialNumber: query.value,
           materialDescription: query.description,
@@ -39,6 +37,5 @@ class MaterialPriceDetail with _$MaterialPriceDetail {
   factory MaterialPriceDetail.empty() => MaterialPriceDetail(
         price: Price.empty(),
         info: MaterialInfo.empty(),
-        isValidMaterial: false,
       );
 }

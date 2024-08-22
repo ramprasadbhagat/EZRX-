@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_condition_flag_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,6 +35,7 @@ void main() {
         overridenRuleTier: [],
         isDiscountOverride: false,
         isMOVExclusion: false,
+        conditionFlags: PriceConditionFlagDto.empty,
       );
     });
     test('Test get overridequery', () {

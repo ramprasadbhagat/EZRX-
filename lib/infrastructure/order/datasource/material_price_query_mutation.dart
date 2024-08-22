@@ -1,6 +1,6 @@
 class MaterialPriceQueryMutation {
   /* For fetching material price  */
-  String getMaterialPrice() {
+  String getMaterialPrice(bool useNewEndpoint) {
     return '''
       query price(
         \$customer: String!
@@ -8,7 +8,7 @@ class MaterialPriceQueryMutation {
         \$request: [PriceRequest!]!
         \$shipToCode: String!
         ) {
-          price(
+          ${useNewEndpoint ? 'GetPriceList' : 'price'}(
             customer: \$customer
             salesOrganisation: \$salesOrganisation
             request: \$request
@@ -121,6 +121,11 @@ class MaterialPriceQueryMutation {
                 Value
               }
             }
+            ${useNewEndpoint ? '''
+              ConditionFlags {
+                IsFOC
+              }
+            ''' : ''}
           }
         }
     ''';

@@ -101,6 +101,7 @@ void main() {
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-code',
           materialNumbers: [],
+          useNewEndpoint: false,
         ),
       ).thenAnswer((invocation) async => <Price>[]);
 
@@ -143,6 +144,7 @@ void main() {
         shipToCode: 'fake-ship-code',
         materialNumber: 'fake-number',
         salesDeal: [],
+        useNewEndpoint: false,
       ),
     ).thenAnswer(
       (invocation) async => Price.empty().copyWith(
@@ -182,6 +184,7 @@ void main() {
         shipToCode: mockShipToInfo.shipToCustomerCode,
         materialNumber: 'fake-number',
         salesDeal: salesDeal,
+        useNewEndpoint: false,
       ),
     ).thenAnswer(
       (invocation) async => price,
@@ -211,6 +214,7 @@ void main() {
         shipToCode: 'fake-ship-code',
         materialNumber: 'fake-number',
         exceedQty: true,
+        useNewEndpoint: false,
       ),
     ).thenAnswer(
       (invocation) async => Price.empty().copyWith(
@@ -243,6 +247,7 @@ void main() {
         shipToCode: 'fake-ship-code',
         materialNumber: 'fake-number',
         exceedQty: true,
+        useNewEndpoint: false,
       ),
     ).thenThrow(
       (invocation) async => MockException(),
@@ -306,6 +311,7 @@ void main() {
           materialQuery: PriceDto.fromDomain(
             fakePrice,
           ).overrideQuery,
+          useNewEndpoint: false,
         ),
       ).thenAnswer(
         (invocation) async => [fakePrice],
@@ -332,6 +338,7 @@ void main() {
           materialQuery: PriceDto.fromDomain(
             fakePrice,
           ).overrideQuery,
+          useNewEndpoint: false,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -480,6 +487,7 @@ void main() {
             materialQuery: PriceDto.fromDomain(
               fakePrice,
             ).materialQueryWithExceedQty(true),
+            useNewEndpoint: false,
           ),
         ).thenAnswer(
           (invocation) async => [fakePrice],
@@ -509,6 +517,7 @@ void main() {
             materialQuery: PriceDto.fromDomain(
               fakePrice,
             ).materialQueryWithExceedQty(true),
+            useNewEndpoint: false,
           ),
         ).thenThrow(
           (invocation) async => Exception('fake-error'),

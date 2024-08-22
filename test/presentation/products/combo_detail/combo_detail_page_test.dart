@@ -378,10 +378,8 @@ void main() {
             () => comboDetailMockBloc.add(
               ComboDealMaterialDetailEvent.setPriceInfo(
                 priceMap: {
-                  MaterialNumber('fake-material'): MaterialPriceDetail.empty()
-                      .copyWith(isValidMaterial: true),
-                  MaterialNumber('fake-material2'): MaterialPriceDetail.empty()
-                      .copyWith(isValidMaterial: true),
+                  MaterialNumber('fake-material'): MaterialPriceDetail.empty(),
+                  MaterialNumber('fake-material2'): MaterialPriceDetail.empty(),
                 },
               ),
             ),

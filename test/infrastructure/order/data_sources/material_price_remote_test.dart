@@ -71,7 +71,9 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(
+              false,
+            ),
             'variables': variables,
           }),
         );
@@ -81,6 +83,7 @@ void main() {
           materialNumbers: ['fake_material_no'],
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
+          useNewEndpoint: false,
         );
         final priceData = res['data']['price'];
 
@@ -116,7 +119,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(false),
             'variables': variables,
           }),
         );
@@ -127,6 +130,7 @@ void main() {
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
           salesDeal: [],
+          useNewEndpoint: false,
         );
         final priceData = res['data']['price'][0];
 
@@ -154,7 +158,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(false),
             'variables': variables,
           }),
         );
@@ -165,6 +169,7 @@ void main() {
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
+          useNewEndpoint: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -197,7 +202,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(false),
             'variables': variables,
           }),
         );
@@ -208,6 +213,7 @@ void main() {
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
+          useNewEndpoint: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -239,7 +245,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(false),
             'variables': variables,
           }),
         );
@@ -250,6 +256,7 @@ void main() {
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
           exceedQty: true,
+          useNewEndpoint: false,
         );
         final priceData = res['data']['price'][0];
 
@@ -282,7 +289,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(false),
             'variables': variables,
           }),
         );
@@ -293,6 +300,7 @@ void main() {
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
           exceedQty: true,
+          useNewEndpoint: false,
         );
 
         expect(
@@ -327,7 +335,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(false),
             'variables': variables,
           }),
         );
@@ -339,6 +347,7 @@ void main() {
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
           exceedQty: true,
+          useNewEndpoint: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -370,7 +379,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'query': remoteDataSource.queryMutation.getMaterialPrice(false),
             'variables': variables,
           }),
         );
@@ -382,6 +391,7 @@ void main() {
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-ship-to-code',
           exceedQty: true,
+          useNewEndpoint: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -419,7 +429,7 @@ void main() {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'query': remoteDataSource.queryMutation.getMaterialPrice(false),
               'variables': variables,
             }),
           );
@@ -429,6 +439,7 @@ void main() {
             materialQuery: {},
             salesOrgCode: '',
             shipToCode: '',
+            useNewEndpoint: false,
           );
 
           expect(
@@ -452,7 +463,7 @@ void main() {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'query': remoteDataSource.queryMutation.getMaterialPrice(false),
               'variables': {
                 'salesOrganisation': '',
                 'customer': '',
@@ -468,6 +479,7 @@ void main() {
             materialQuery: {},
             salesOrgCode: '',
             shipToCode: '',
+            useNewEndpoint: false,
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
@@ -493,7 +505,7 @@ void main() {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'query': remoteDataSource.queryMutation.getMaterialPrice(false),
               'variables': {
                 'salesOrganisation': '',
                 'customer': '',
@@ -509,6 +521,7 @@ void main() {
             materialQuery: {},
             salesOrgCode: '',
             shipToCode: '',
+            useNewEndpoint: false,
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
@@ -531,7 +544,7 @@ void main() {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'query': remoteDataSource.queryMutation.getMaterialPrice(false),
               'variables': {
                 'salesOrganisation': '',
                 'customer': '',
@@ -547,6 +560,7 @@ void main() {
             materialQuery: {},
             salesOrgCode: '',
             shipToCode: '',
+            useNewEndpoint: false,
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());

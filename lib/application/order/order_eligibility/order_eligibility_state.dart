@@ -265,14 +265,10 @@ class OrderEligibilityState with _$OrderEligibilityState {
       cartItems.every((element) => element.is26SeriesMaterial);
 
   String get gimmickMaterialCode => cartItems
-      .where((element) => element.isGimmickMaterial)
+      .where((element) => element.materialInfo.isGimmick)
       .map((e) => e.materialInfo.materialNumber.displayMatNo)
       .toList()
       .join(',');
-
-  bool get isGimmickMaterialPresentInCart =>
-      cartItems.isNotEmpty &&
-      cartItems.any((element) => element.isGimmickMaterial);
 
   bool get hasInvalidTenderMaterial =>
       cartItems.isNotEmpty && cartItems.containInvalidTenderContractMaterial;
@@ -281,8 +277,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       cartItems.isNotEmpty && cartItems.isMaxQtyExceedsForAnyTender;
 
   bool get isGimmickMaterialNotAllowed =>
-      (!configs.enableGimmickMaterial && isGimmickMaterialPresentInCart) ||
-      (!user.role.type.isSalesRepRole && isGimmickMaterialPresentInCart);
+      cartItems.containGimmickMaterial &&
+      (!configs.enableGimmickMaterial || !user.role.type.isSalesRepRole);
 
   bool get askUserToAddCommercialMaterial =>
       is26SeriesMaterialOnlyInCart ||
@@ -375,7 +371,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       cartItems.where((e) => e.hasSalesRepPrincipal).isNotEmpty;
 
   bool get _eligibleOrderType =>
-      user.selectedOrderType.isZPFC || user.selectedOrderType.isZPFC;
+      user.selectedOrderType.isZPFC || user.selectedOrderType.isZPFB;
 
   bool get _isCartItemsContainsFOCMaterial => cartItems
       .where((element) => element.materialInfo.isFOCMaterial)

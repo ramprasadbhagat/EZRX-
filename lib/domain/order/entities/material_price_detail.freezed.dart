@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MaterialPriceDetail {
   Price get price => throw _privateConstructorUsedError;
   MaterialInfo get info => throw _privateConstructorUsedError;
-  bool get isValidMaterial => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialPriceDetailCopyWith<MaterialPriceDetail> get copyWith =>
@@ -31,7 +30,7 @@ abstract class $MaterialPriceDetailCopyWith<$Res> {
           MaterialPriceDetail value, $Res Function(MaterialPriceDetail) then) =
       _$MaterialPriceDetailCopyWithImpl<$Res, MaterialPriceDetail>;
   @useResult
-  $Res call({Price price, MaterialInfo info, bool isValidMaterial});
+  $Res call({Price price, MaterialInfo info});
 
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get info;
@@ -52,7 +51,6 @@ class _$MaterialPriceDetailCopyWithImpl<$Res, $Val extends MaterialPriceDetail>
   $Res call({
     Object? price = null,
     Object? info = null,
-    Object? isValidMaterial = null,
   }) {
     return _then(_value.copyWith(
       price: null == price
@@ -63,10 +61,6 @@ class _$MaterialPriceDetailCopyWithImpl<$Res, $Val extends MaterialPriceDetail>
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      isValidMaterial: null == isValidMaterial
-          ? _value.isValidMaterial
-          : isValidMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 
@@ -95,7 +89,7 @@ abstract class _$$MaterialPriceDetailImplCopyWith<$Res>
       __$$MaterialPriceDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Price price, MaterialInfo info, bool isValidMaterial});
+  $Res call({Price price, MaterialInfo info});
 
   @override
   $PriceCopyWith<$Res> get price;
@@ -116,7 +110,6 @@ class __$$MaterialPriceDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? price = null,
     Object? info = null,
-    Object? isValidMaterial = null,
   }) {
     return _then(_$MaterialPriceDetailImpl(
       price: null == price
@@ -127,10 +120,6 @@ class __$$MaterialPriceDetailImplCopyWithImpl<$Res>
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      isValidMaterial: null == isValidMaterial
-          ? _value.isValidMaterial
-          : isValidMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -138,20 +127,17 @@ class __$$MaterialPriceDetailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MaterialPriceDetailImpl extends _MaterialPriceDetail {
-  const _$MaterialPriceDetailImpl(
-      {required this.price, required this.info, required this.isValidMaterial})
+  const _$MaterialPriceDetailImpl({required this.price, required this.info})
       : super._();
 
   @override
   final Price price;
   @override
   final MaterialInfo info;
-  @override
-  final bool isValidMaterial;
 
   @override
   String toString() {
-    return 'MaterialPriceDetail(price: $price, info: $info, isValidMaterial: $isValidMaterial)';
+    return 'MaterialPriceDetail(price: $price, info: $info)';
   }
 
   @override
@@ -160,13 +146,11 @@ class _$MaterialPriceDetailImpl extends _MaterialPriceDetail {
         (other.runtimeType == runtimeType &&
             other is _$MaterialPriceDetailImpl &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.info, info) || other.info == info) &&
-            (identical(other.isValidMaterial, isValidMaterial) ||
-                other.isValidMaterial == isValidMaterial));
+            (identical(other.info, info) || other.info == info));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, price, info, isValidMaterial);
+  int get hashCode => Object.hash(runtimeType, price, info);
 
   @JsonKey(ignore: true)
   @override
@@ -179,16 +163,13 @@ class _$MaterialPriceDetailImpl extends _MaterialPriceDetail {
 abstract class _MaterialPriceDetail extends MaterialPriceDetail {
   const factory _MaterialPriceDetail(
       {required final Price price,
-      required final MaterialInfo info,
-      required final bool isValidMaterial}) = _$MaterialPriceDetailImpl;
+      required final MaterialInfo info}) = _$MaterialPriceDetailImpl;
   const _MaterialPriceDetail._() : super._();
 
   @override
   Price get price;
   @override
   MaterialInfo get info;
-  @override
-  bool get isValidMaterial;
   @override
   @JsonKey(ignore: true)
   _$$MaterialPriceDetailImplCopyWith<_$MaterialPriceDetailImpl> get copyWith =>

@@ -90,6 +90,8 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
     required bool is26SeriesMaterial,
     @JsonKey(name: 'isGimmick', defaultValue: false) required bool isGimmick,
+    @JsonKey(name: 'isPoison', defaultValue: false) required bool isPoison,
+    @JsonKey(name: 'isSample', defaultValue: false) required bool isSample,
     @JsonKey(name: 'tenderContractNumber', defaultValue: '')
     required String tenderContractNumber,
     @JsonKey(name: 'tenderOrderReason', defaultValue: '')
@@ -143,6 +145,9 @@ class CartProductDto with _$CartProductDto {
       materialGroup4: MaterialGroup(materialGroup4),
       hasMandatoryTenderContract: hasMandatoryTenderContract,
       hasValidTenderContract: hasValidTenderContract,
+      isGimmick: isGimmick,
+      isPoison: isPoison,
+      isSampleMaterial: isSample,
     );
   }
 
@@ -169,11 +174,9 @@ class CartProductDto with _$CartProductDto {
       comboMaterials: comboMaterials.map((e) => e.toDomain(comboDeal)).toList(),
       maximumQty: maximumQty,
       is26SeriesMaterial: is26SeriesMaterial,
-      isGimmickMaterial: isGimmick,
       tenderContract: TenderContract.empty().copyWith(
         tenderOrderReason: TenderContractReason(tenderOrderReason),
-        contractNumber:
-            TenderContractNumber(tenderContractNumber),
+        contractNumber: TenderContractNumber(tenderContractNumber),
         isTenderExpired: isTenderExpired,
       ),
       isCovid: isCovid,

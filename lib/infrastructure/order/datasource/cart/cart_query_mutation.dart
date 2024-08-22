@@ -1,6 +1,9 @@
 class CartQueryMutation {
-  //TODO: Query IsGimmick, isSampleMaterial, isPoison
-  String cart(bool enableMarketplace) => '''
+  String cart(
+    bool enableMarketplace,
+    bool enableProductTypeFilter,
+  ) =>
+      '''
   fragment BundleMaterialsFields on Item {
     Type
     ProductID
@@ -41,70 +44,80 @@ class CartQueryMutation {
     remainingQty
     mov
     ${enableMarketplace ? 'isMarketPlace' : ''}
+    IsGimmick
+    ${enableProductTypeFilter? '''
+      IsPoison
+      IsSample
+    ''': ''}
     materialType
     suspensionStatus
     principalCutoffStatus
     warehouseStorageCondition
     ParentID
-  }
+  } 
   fragment ComboMaterialsFields on Item {
-  Type
-  ProductID
-  ItemSource
-  Quantity
-  CreatedAt
-  UpdatedAt
-  principalCode
-  principalName
-  materialNumber
-  materialDescription
-  therapeuticClass
-  itemBrand
-  governmentMaterialCode
-  defaultMaterialDescription
-  oldMaterialCode
-  materialGroup4
-  materialGroup2
-  taxClassification
-  unitOfMeasurement
-  itemRegistrationNumber
-  genericMaterialName
-  language
-  taxM1
-  taxes
-  isSampleMaterial
-  hidePrice
-  hasValidTenderContract
-  hasMandatoryTenderContract
-  isFOCMaterial
-  isFavourite
-  productCount
-  productAddedAt
-  productUpdatedAt
-  minimumQty
-  maximumQty
-  orderedQty
-  remainingQty
-  mov
-  ${enableMarketplace ? 'isMarketPlace' : ''}
-  materialType
-  suspensionStatus
-  principalCutoffStatus
-  warehouseStorageCondition
-  ParentID
-  Rate
-  ConditionNumber
-  Mandatory
-  Suffix
-  ListPrice
-  ItemCheck
-  Valid
-  SetNo
-  ComboDealType
-  IsComboEligible
-  FinalIndividualPrice
-  PrimaryMaterialNumber
-  __typename
+    Type
+    ProductID
+    ItemSource
+    Quantity
+    CreatedAt
+    UpdatedAt
+    principalCode
+    principalName
+    materialNumber
+    materialDescription
+    therapeuticClass
+    itemBrand
+    governmentMaterialCode
+    defaultMaterialDescription
+    oldMaterialCode
+    materialGroup4
+    materialGroup2
+    taxClassification
+    unitOfMeasurement
+    itemRegistrationNumber
+    genericMaterialName
+    language
+    taxM1
+    taxes
+    isSampleMaterial
+    hidePrice
+    hasValidTenderContract
+    hasMandatoryTenderContract
+    isFOCMaterial
+    isFavourite
+    productCount
+    productAddedAt
+    productUpdatedAt
+    minimumQty
+    maximumQty
+    orderedQty
+    remainingQty
+    mov
+    ${enableMarketplace ? 'isMarketPlace' : ''}
+    IsGimmick
+    ${enableProductTypeFilter? '''
+      IsPoison
+      IsSample
+    ''': ''}
+    materialType
+    suspensionStatus
+    principalCutoffStatus
+    warehouseStorageCondition
+    ParentID
+    Rate
+    ConditionNumber
+    Mandatory
+    Suffix
+    ListPrice
+    ItemCheck
+    Valid
+    SetNo
+    ComboDealType
+    IsComboEligible
+    FinalIndividualPrice
+    PrimaryMaterialNumber
+    __typename
 }
 
   query Cart(\$language: String) {
@@ -189,6 +202,10 @@ class CartQueryMutation {
       principalCutoffStatus
       warehouseStorageCondition
       IsGimmick
+      ${enableProductTypeFilter? '''
+        IsPoison
+        IsSample
+      ''': ''}
       tenderOrderReason
       TenderContractNumber
       is26SeriesMaterial
@@ -566,7 +583,11 @@ class CartQueryMutation {
     }
 ''';
 
-  String upsertCart(bool enableMarketplace) => '''
+  String upsertCart(
+    bool enableMarketplace,
+    bool enableProductTypeFilter,
+  ) =>
+      '''
     mutation UpsertCart(\$itemInput: ItemInput!) {
       upsertCart(itemInput: \$itemInput) {
         ID
@@ -576,6 +597,10 @@ class CartQueryMutation {
           tenderOrderReason
           isTenderExpired
           IsGimmick
+          ${enableProductTypeFilter? '''
+            IsPoison
+            IsSample
+          ''': ''}
           Type
           ProductID
           ItemSource
@@ -1112,7 +1137,11 @@ class CartQueryMutation {
     }
   ''';
 
-  String upsertCartItems(bool enableMarketplace) => '''
+  String upsertCartItems(
+    bool enableMarketplace,
+    bool enableProductTypeFilter,
+  ) =>
+      '''
 fragment ezrxItemsFields on Item {
   ProductID
   ItemSource
@@ -1155,6 +1184,10 @@ fragment ezrxItemsFields on Item {
   remainingQty
   mov
   IsGimmick
+  ${enableProductTypeFilter? '''
+    IsPoison
+    IsSample
+  ''': ''}
   is26SeriesMaterial
   isCovid
   ${enableMarketplace ? 'isMarketPlace' : ''}
@@ -1290,6 +1323,11 @@ fragment BundleMaterialsFields on Item {
   remainingQty
   mov
   ${enableMarketplace ? 'isMarketPlace' : ''}
+  IsGimmick
+  ${enableProductTypeFilter? '''
+    IsPoison
+    IsSample
+  ''': ''}
   materialType
   suspensionStatus
   principalCutoffStatus
@@ -1337,6 +1375,11 @@ fragment ComboMaterialsFields on Item {
   remainingQty
   mov
   ${enableMarketplace ? 'isMarketPlace' : ''}
+  IsGimmick
+  ${enableProductTypeFilter? '''
+    IsPoison
+    IsSample
+  ''': ''}
   materialType
   suspensionStatus
   principalCutoffStatus

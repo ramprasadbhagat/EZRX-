@@ -52,7 +52,6 @@ class PriceAggregate with _$PriceAggregate {
     required List<ComboMaterialItem> comboMaterials,
     required int maximumQty,
     @Default(false) bool is26SeriesMaterial,
-    @Default(false) bool isGimmickMaterial,
     @Default(false) bool isCovid,
   }) = _PriceAggregate;
 
@@ -87,7 +86,6 @@ class PriceAggregate with _$PriceAggregate {
         salesOrgConfig: salesOrgConfig,
         bonusSampleItems: bonusSampleItems,
         is26SeriesMaterial: is26SeriesMaterial,
-        isGimmickMaterial: isGimmickMaterial,
         tenderContract: tenderContract,
         isCovid: isCovid,
       );
@@ -450,6 +448,8 @@ class PriceAggregate with _$PriceAggregate {
 
     final showListPriceAsPriceNotAvailable =
         listPrice == 0 && priceType == PriceType.listPrice;
+
+    if (_displayPriceFree) return 'FREE';
 
     if (_displayPriceNotAvailable ||
         (!price.isValid && !applyCounterOfferOnFinalPrice) ||
@@ -991,7 +991,15 @@ class PriceAggregate with _$PriceAggregate {
       _displayPriceNotAvailable || !price.isValid;
 
   bool get _displayPriceNotAvailable =>
-      invalidPrice || price.finalPrice.isUnavailable || !price.isValidMaterial;
+      invalidPrice || price.finalPrice.isUnavailable;
+
+  bool get _displayPriceFree {
+    if (!price.finalPrice.isEmpty) return false;
+
+    return materialInfo.isGimmick ||
+        materialInfo.isSampleMaterial ||
+        price.isFOC;
+  }
 
   bool get _additionalBonusOverride => bonusSampleItems.any(
         (element) =>

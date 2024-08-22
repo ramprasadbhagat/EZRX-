@@ -1201,10 +1201,9 @@ void main() {
           final state = OrderEligibilityState.initial().copyWith(
             cartItems: [
               PriceAggregate.empty().copyWith(
-                isGimmickMaterial: true,
                 salesOrgConfig: fakeMYSalesOrgConfigs,
                 materialInfo: MaterialInfo.empty()
-                    .copyWith(materialNumber: materialNumber),
+                    .copyWith(materialNumber: materialNumber, isGimmick: true),
               ),
             ],
           );
