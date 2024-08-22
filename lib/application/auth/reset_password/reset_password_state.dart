@@ -14,7 +14,7 @@ class ResetPasswordState with _$ResetPasswordState {
     required bool isSubmitting,
     required Option<Either<ApiFailure, ResetPassword>>
         passwordResetFailureOrSuccessOption,
-    required ResetPasswordCred resetPasswordCred,
+    required String resetPasswordKey,
     required bool showErrorMessages,
   }) = _ResetPassword;
 
@@ -33,7 +33,7 @@ class ResetPasswordState with _$ResetPasswordState {
         isConfirmPasswordObscure: true,
         isSubmitting: false,
         showErrorMessages: false,
-        resetPasswordCred: ResetPasswordCred.empty(),
+        resetPasswordKey: '',
       );
 
   bool newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName({

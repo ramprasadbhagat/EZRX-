@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_forgot_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -58,7 +57,6 @@ class ForgotPasswordBloc
         final failureOrSuccess =
             await forgotPasswordRepository.requestResetPassword(
           username: state.username,
-          language: e.language,
         );
         if (isClosed) return;
         failureOrSuccess.fold(
@@ -75,6 +73,41 @@ class ForgotPasswordBloc
               resetPasswordFailureOrSuccessOption: optionOf(failureOrSuccess),
               showErrorMessages: false,
               resetPasswordResponse: resetPasswordResponse,
+            ),
+          ),
+        );
+      },
+      saveResetPasswordKey: (e) {
+        emit(
+          state.copyWith(
+            resetPasswordKey: e.key,
+          ),
+        );
+      },
+      validateResetPasswordKey: (_ValidateResetPasswordKey e) async {
+        emit(
+          state.copyWith(
+            isValidating: true,
+            resetPasswordKey: '',
+            resetPasswordFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess =
+            await forgotPasswordRepository.validateResetPasswordKey(
+          key: e.key,
+        );
+        if (isClosed) return;
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              resetPasswordFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isValidating: false,
+            ),
+          ),
+          (success) => emit(
+            state.copyWith(
+              resetPasswordKey: e.key,
+              isValidating: false,
             ),
           ),
         );

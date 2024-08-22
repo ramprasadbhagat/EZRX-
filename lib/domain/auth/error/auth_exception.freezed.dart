@@ -27,6 +27,7 @@ mixin _$AuthException {
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +41,7 @@ mixin _$AuthException {
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$AuthException {
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +75,8 @@ mixin _$AuthException {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,6 +95,7 @@ mixin _$AuthException {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -108,6 +114,7 @@ mixin _$AuthException {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -183,6 +190,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -199,6 +207,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -215,6 +224,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -240,6 +250,8 @@ class _$InvalidEmailAndPasswordCombinationImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -261,6 +273,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -282,6 +295,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -343,6 +357,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return accountLocked();
   }
@@ -359,6 +374,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return accountLocked?.call();
   }
@@ -375,6 +391,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -400,6 +417,8 @@ class _$AccountLockedImpl implements _AccountLocked {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return accountLocked(this);
   }
@@ -421,6 +440,7 @@ class _$AccountLockedImpl implements _AccountLocked {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return accountLocked?.call(this);
   }
@@ -442,6 +462,7 @@ class _$AccountLockedImpl implements _AccountLocked {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -502,6 +523,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return accountExpired();
   }
@@ -518,6 +540,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return accountExpired?.call();
   }
@@ -534,6 +557,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -559,6 +583,8 @@ class _$AccountExpiredImpl implements _AccountExpired {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return accountExpired(this);
   }
@@ -580,6 +606,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return accountExpired?.call(this);
   }
@@ -601,6 +628,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -661,6 +689,7 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return invalidUserName();
   }
@@ -677,6 +706,7 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return invalidUserName?.call();
   }
@@ -693,6 +723,7 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (invalidUserName != null) {
@@ -718,6 +749,8 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return invalidUserName(this);
   }
@@ -739,6 +772,7 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return invalidUserName?.call(this);
   }
@@ -760,6 +794,7 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (invalidUserName != null) {
@@ -820,6 +855,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return accountBlocked();
   }
@@ -836,6 +872,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return accountBlocked?.call();
   }
@@ -852,6 +889,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (accountBlocked != null) {
@@ -877,6 +915,8 @@ class _$AccountBlockedImpl implements _AccountBlocked {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return accountBlocked(this);
   }
@@ -898,6 +938,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return accountBlocked?.call(this);
   }
@@ -919,6 +960,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (accountBlocked != null) {
@@ -984,6 +1026,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginWithCurrentRole();
   }
@@ -1000,6 +1043,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginWithCurrentRole?.call();
   }
@@ -1016,6 +1060,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginWithCurrentRole != null) {
@@ -1041,6 +1086,8 @@ class _$CannotProxyLoginWithCurrentRoleImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginWithCurrentRole(this);
   }
@@ -1062,6 +1109,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginWithCurrentRole?.call(this);
   }
@@ -1083,6 +1131,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginWithCurrentRole != null) {
@@ -1147,6 +1196,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginRootAdmin();
   }
@@ -1163,6 +1213,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginRootAdmin?.call();
   }
@@ -1179,6 +1230,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginRootAdmin != null) {
@@ -1204,6 +1256,8 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginRootAdmin(this);
   }
@@ -1225,6 +1279,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginRootAdmin?.call(this);
   }
@@ -1246,6 +1301,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginRootAdmin != null) {
@@ -1311,6 +1367,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginZPAdminWhenIsZPAdmin();
   }
@@ -1327,6 +1384,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginZPAdminWhenIsZPAdmin?.call();
   }
@@ -1343,6 +1401,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginZPAdminWhenIsZPAdmin != null) {
@@ -1368,6 +1427,8 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginZPAdminWhenIsZPAdmin(this);
   }
@@ -1389,6 +1450,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginZPAdminWhenIsZPAdmin?.call(this);
   }
@@ -1410,6 +1472,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginZPAdminWhenIsZPAdmin != null) {
@@ -1476,6 +1539,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     required TResult Function() cannotProxyLoginRootAdmin,
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginFromDiffferentSalesOrg();
   }
@@ -1492,6 +1556,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult? Function()? cannotProxyLoginRootAdmin,
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginFromDiffferentSalesOrg?.call();
   }
@@ -1508,6 +1573,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult Function()? cannotProxyLoginRootAdmin,
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginFromDiffferentSalesOrg != null) {
@@ -1533,6 +1599,8 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginFromDiffferentSalesOrg(this);
   }
@@ -1554,6 +1622,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
   }) {
     return cannotProxyLoginFromDiffferentSalesOrg?.call(this);
   }
@@ -1575,6 +1644,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
         cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     required TResult orElse(),
   }) {
     if (cannotProxyLoginFromDiffferentSalesOrg != null) {
@@ -1588,4 +1658,173 @@ abstract class _CannotProxyLoginFromDiffferentSalesOrg
     implements AuthException {
   const factory _CannotProxyLoginFromDiffferentSalesOrg() =
       _$CannotProxyLoginFromDiffferentSalesOrgImpl;
+}
+
+/// @nodoc
+abstract class _$$PasswordResetKeyInvalidImplCopyWith<$Res> {
+  factory _$$PasswordResetKeyInvalidImplCopyWith(
+          _$PasswordResetKeyInvalidImpl value,
+          $Res Function(_$PasswordResetKeyInvalidImpl) then) =
+      __$$PasswordResetKeyInvalidImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PasswordResetKeyInvalidImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res, _$PasswordResetKeyInvalidImpl>
+    implements _$$PasswordResetKeyInvalidImplCopyWith<$Res> {
+  __$$PasswordResetKeyInvalidImplCopyWithImpl(
+      _$PasswordResetKeyInvalidImpl _value,
+      $Res Function(_$PasswordResetKeyInvalidImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$PasswordResetKeyInvalidImpl implements _PasswordResetKeyInvalid {
+  const _$PasswordResetKeyInvalidImpl();
+
+  @override
+  String toString() {
+    return 'AuthException.passwordResetKeyInvalid()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PasswordResetKeyInvalidImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetKeyInvalid,
+  }) {
+    return passwordResetKeyInvalid();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetKeyInvalid,
+  }) {
+    return passwordResetKeyInvalid?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetKeyInvalid,
+    required TResult orElse(),
+  }) {
+    if (passwordResetKeyInvalid != null) {
+      return passwordResetKeyInvalid();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
+  }) {
+    return passwordResetKeyInvalid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
+  }) {
+    return passwordResetKeyInvalid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
+    required TResult orElse(),
+  }) {
+    if (passwordResetKeyInvalid != null) {
+      return passwordResetKeyInvalid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PasswordResetKeyInvalid implements AuthException {
+  const factory _PasswordResetKeyInvalid() = _$PasswordResetKeyInvalidImpl;
 }

@@ -18,7 +18,7 @@ class ResetPasswordEvent with _$ResetPasswordEvent {
 
   const factory ResetPasswordEvent.initialize({
     required User user,
-    required ResetPasswordCred resetPasswordCred,
+    required String resetPasswordKey,
   }) = _Initialize;
 
   const factory ResetPasswordEvent.resetPassword() = _ResetPasswords;

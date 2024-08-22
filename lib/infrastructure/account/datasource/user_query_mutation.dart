@@ -48,7 +48,6 @@ class UserQueryMutation {
             mobileNumber
             countryCode
             acceptTC
-            isFirstLogin
             isResetUserPassword
             optIn
             optInTimestamp

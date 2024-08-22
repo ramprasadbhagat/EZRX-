@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -37,6 +35,7 @@ void main() {
   late DeepLinkingRepository repository;
   final fakeError = MockException(message: 'fake-exception');
   const domain = 'https://uat-my.ezrxplus.com';
+  const resetPasswordKey = 'reset-password-key';
 
   setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
@@ -357,33 +356,28 @@ void main() {
 
   group('Extract reset password credentials', () {
     final resetPasswordValidUri = Uri.parse(
-      '$domain/login/set-password?username%3DFakeUser%26token%3DFakeToken',
+      '$domain/login/set-password?key%3D$resetPasswordKey',
     );
     final resetPasswordInvalidUri = Uri.parse(
-      '$domain/login/set-password?username%3D%26token%3D',
+      '$domain/login/set-password?key%3D',
     );
     test('=> success', () {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      final result = repository.extractResetPasswordCred(
+      final result = repository.extractResetPasswordKey(
         link: resetPasswordValidUri,
       );
 
       expect(
         result,
-        Right<ApiFailure, ResetPasswordCred>(
-          ResetPasswordCred.empty().copyWith(
-            username: Username('FakeUser'),
-            token: StringValue('FakeToken'),
-          ),
-        ),
+        const Right<ApiFailure, String>(resetPasswordKey),
       );
     });
 
     test('=> fail', () {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      final result = repository.extractResetPasswordCred(
+      final result = repository.extractResetPasswordKey(
         link: resetPasswordInvalidUri,
       );
 

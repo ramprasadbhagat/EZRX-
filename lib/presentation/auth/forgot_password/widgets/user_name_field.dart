@@ -9,21 +9,7 @@ class _UsernameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
-      listenWhen: (previous, current) =>
-          context.router.current.name == ForgetPasswordPageRoute.name &&
-          previous.resetPasswordFailureOrSuccessOption !=
-              current.resetPasswordFailureOrSuccessOption,
-      listener: (context, state) {
-        state.resetPasswordFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) => ErrorUtils.handleApiFailure(context, failure),
-            (success) =>
-                context.router.push(const ForgetPasswordConfirmationPageRoute()),
-          ),
-        );
-      },
+    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
       buildWhen: (previous, current) =>
           previous.showErrorMessages != current.showErrorMessages,
       builder: (context, state) {

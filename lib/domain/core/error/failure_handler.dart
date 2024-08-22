@@ -29,6 +29,8 @@ class FailureHandler {
             const ApiFailure.cannotProxyLoginWithCurrentRole(),
         cannotProxyLoginZPAdminWhenIsZPAdmin: (_) =>
             const ApiFailure.cannotProxyLoginZPAdminWhenIsZPAdmin(),
+        passwordResetKeyInvalid: (_) =>
+            const ApiFailure.passwordResetKeyInvalid(),
       );
     } else if (error is UserException) {
       return error.map(

@@ -45,7 +45,7 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.redirectUserGuide() = _RedirectUserGuide;
   const factory DeepLinkingState.error(ApiFailure failure) = _Error;
   const factory DeepLinkingState.redirectResetPassword(
-    ResetPasswordCred resetPasswordCred,
+    String resetPasswordKey,
   ) = _RedirectResetPassword;
 
   const factory DeepLinkingState.redirectOrder() = _RedirectOrder;

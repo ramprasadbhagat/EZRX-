@@ -53,7 +53,6 @@ void main() {
             (server) => server.reply(
               200,
               res,
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -90,7 +89,6 @@ void main() {
                   },
                 },
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -125,7 +123,6 @@ void main() {
                   {'message': 'fake-error'},
                 ],
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -155,7 +152,6 @@ void main() {
             (server) => server.reply(
               204,
               {'data': []},
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -194,17 +190,19 @@ void main() {
             (server) => server.reply(
               200,
               res,
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': changePasswordRemoteDataSource.authQueryMutation
                   .resetPassword(),
+              'variables': {
+                'newPassword': 'password',
+                'resetPasswordToken': 'fake_token',
+              },
             }),
           );
 
           final result = await changePasswordRemoteDataSource.resetPassword(
-            username: 'username',
             newPassword: 'password',
             resetPasswordToken: 'fake_token',
           );
@@ -232,7 +230,6 @@ void main() {
                   },
                 },
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -243,7 +240,6 @@ void main() {
 
           await changePasswordRemoteDataSource
               .resetPassword(
-            username: 'username',
             newPassword: 'password',
             resetPasswordToken: 'fake_token',
           )
@@ -267,7 +263,6 @@ void main() {
                   {'message': 'fake-error'},
                 ],
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -278,7 +273,6 @@ void main() {
 
           await changePasswordRemoteDataSource
               .resetPassword(
-            username: 'username',
             newPassword: 'password',
             resetPasswordToken: 'fake_token',
           )
@@ -297,7 +291,6 @@ void main() {
             (server) => server.reply(
               204,
               {'data': []},
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -308,7 +301,6 @@ void main() {
 
           await changePasswordRemoteDataSource
               .resetPassword(
-            username: 'username',
             newPassword: 'password',
             resetPasswordToken: 'fake_token',
           )
@@ -336,7 +328,6 @@ void main() {
             (server) => server.reply(
               200,
               res,
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -373,7 +364,6 @@ void main() {
                   },
                 },
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -406,7 +396,6 @@ void main() {
                   {'message': 'fake-error'},
                 ],
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -434,7 +423,6 @@ void main() {
             (server) => server.reply(
               204,
               {'data': []},
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({

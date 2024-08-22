@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
@@ -59,6 +60,7 @@ import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
@@ -148,6 +150,7 @@ void main() {
   late PoAttachmentBloc poAttachmentBlocMock;
   late CustomerCodeConfig customerCodeConfig;
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
+  late ForgotPasswordBloc forgotPasswordBlocMock;
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -173,23 +176,11 @@ void main() {
   final valueVariantForResetPassword = ValueVariant<User>({
     User.empty().copyWith(
       id: 'fake-id',
-      isFirstLogin: false,
-      isResetUserPassword: false,
-    ),
-    User.empty().copyWith(
-      id: 'fake-id',
-      isFirstLogin: true,
-      isResetUserPassword: false,
-    ),
-    User.empty().copyWith(
-      id: 'fake-id',
-      isFirstLogin: false,
       isResetUserPassword: true,
     ),
     User.empty().copyWith(
       id: 'fake-id',
-      isFirstLogin: true,
-      isResetUserPassword: true,
+      isResetUserPassword: false,
     ),
   });
 
@@ -258,6 +249,7 @@ void main() {
       resetPasswordBlocMock = ResetPasswordBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
       paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
+      forgotPasswordBlocMock = ForgotPasswordBlocMock();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -343,6 +335,8 @@ void main() {
       when(() => paymentSummaryDetailsBlocMock.state)
           .thenReturn(PaymentSummaryDetailsState.initial());
       when(() => autoRouterMock.currentPath).thenReturn('/main');
+      when(() => forgotPasswordBlocMock.state)
+          .thenReturn(ForgotPasswordState.initial());
     });
 
     Future getWidget(tester) async {
@@ -479,6 +473,9 @@ void main() {
             ),
             BlocProvider<PoAttachmentBloc>(
               create: (context) => poAttachmentBlocMock,
+            ),
+            BlocProvider<ForgotPasswordBloc>(
+              create: (context) => forgotPasswordBlocMock,
             ),
           ],
           child: const SplashPage(),
@@ -1559,7 +1556,7 @@ void main() {
       (tester) async {
         final userVariant =
             valueVariantForResetPassword.currentValue ?? User.empty();
-        final isFirstLogin = userVariant.isFirstLogin;
+
         final isResetUserPassword = userVariant.isResetUserPassword;
         final expectedStates = [
           UserState.initial(),
@@ -1584,7 +1581,7 @@ void main() {
           const Duration(milliseconds: 500),
         ); //Welcome message delay duration
 
-        if (isFirstLogin || isResetUserPassword) {
+        if (isResetUserPassword) {
           verify(
             () => autoRouterMock.push(
               ResetPasswordPageRoute(
@@ -1661,7 +1658,6 @@ void main() {
         ),
       ).called(1);
     });
-
     testWidgets('Should refresh product tab when select new order type',
         (tester) async {
       final fakeEligibilityState = EligibilityState.initial().copyWith(
@@ -1693,6 +1689,54 @@ void main() {
             selectedMaterialFilter: MaterialFilter.empty(),
           ),
         ),
+      ).called(1);
+    });
+
+    testWidgets(' -> displays error message', (WidgetTester tester) async {
+      final expectedStates = [
+        ForgotPasswordState.initial(),
+        ForgotPasswordState.initial().copyWith(
+          resetPasswordFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('Fake-Error'),
+            ),
+          ),
+          isSubmitting: true,
+        ),
+      ];
+      whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      expect(find.text(('Fake-Error')), findsOneWidget);
+    });
+
+    testWidgets(
+        ' -> navigates to forgot password confirmation page successfully',
+        (WidgetTester tester) async {
+      final expectedStates = [
+        ForgotPasswordState.initial().copyWith(
+          resetPasswordFailureOrSuccessOption: none(),
+        ),
+        ForgotPasswordState.initial().copyWith(
+          resetPasswordFailureOrSuccessOption: optionOf(
+            Right(
+              ForgotPassword.empty().copyWith(
+                email: 'fake.username@email.com',
+                success: true,
+              ),
+            ),
+          ),
+        ),
+      ];
+      when(
+        () => autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
+      ).thenAnswer((_) async => true);
+      whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
       ).called(1);
     });
   });

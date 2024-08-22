@@ -32,6 +32,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.cannotProxyLoginFromDiffferentSalesOrg() =
       _CannotProxyLoginFromDiffferentSalesOrg;
   const factory ApiFailure.passwordResetFail() = _PasswordResetFail;
+  const factory ApiFailure.passwordResetKeyInvalid() = _PasswordResetKeyInvalid;
 
   // Bio failure
   const factory ApiFailure.deviceNotSupportBiometric() =
@@ -205,6 +206,7 @@ extension ApiFailureExt on ApiFailure {
           'Chat url is not available to submit ticket.',
         ),
         refreshTokenInvalid: (_) => const TRObject('Invalid Refresh Token'),
+        passwordResetKeyInvalid: (_) => const TRObject(''),
       );
   String get nonTranslatedFailureMessage {
     var fullMessage = failureMessage.message;

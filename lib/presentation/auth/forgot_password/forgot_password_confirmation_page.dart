@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -92,10 +91,8 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
                                       ..onTap = () => context
                                           .read<ForgotPasswordBloc>()
                                           .add(
-                                            ForgotPasswordEvent
-                                                .requestPasswordReset(
-                                              Language.english(),
-                                            ),
+                                            const ForgotPasswordEvent
+                                                .requestPasswordReset(),
                                           ),
                                   ),
                                 ],

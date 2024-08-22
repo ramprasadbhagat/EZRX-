@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.d
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
 
@@ -53,9 +52,8 @@ class ChangePasswordRepository implements IChangePasswordRepository {
 
   @override
   Future<Either<ApiFailure, ResetPassword>> resetPassword({
-    required StringValue token,
+    required String token,
     required Password newPassword,
-    required Username username,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -68,8 +66,7 @@ class ChangePasswordRepository implements IChangePasswordRepository {
     }
     try {
       final resetPasswordEntities = await remoteDataSource.resetPassword(
-        username: username.getOrCrash(),
-        resetPasswordToken: token.getOrCrash(),
+        resetPasswordToken: token,
         newPassword: newPassword.getOrCrash(),
       );
 

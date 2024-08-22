@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_item_params.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_params.dart';
@@ -66,6 +65,8 @@ void main() {
   const returnRequestLink = '/my-account/new-return-request';
   const raiseTicketLink = '/raise-ticket';
   final fakeEzrxLink = EzrxLink(raiseTicketLink);
+  const resetPasswordKey = 'fake-reset-password-key';
+
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
     chatBotService = ChatBotServiceMock();
@@ -1252,7 +1253,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => repository.extractResetPasswordCred(
+          () => repository.extractResetPasswordKey(
             link: Uri(
               path: '/login/set-password',
               host: 'uat-sg.ezrxplus.com',
@@ -1261,7 +1262,7 @@ void main() {
               scheme: 'https',
             ),
           ),
-        ).thenReturn(Right(ResetPasswordCred.empty()));
+        ).thenReturn(const Right(resetPasswordKey));
       },
       seed: () => DeepLinkingState.linkPending(
         EzrxLink(resetPasswordLink),
@@ -1274,7 +1275,7 @@ void main() {
         ),
       ),
       expect: () => [
-        DeepLinkingState.redirectResetPassword(ResetPasswordCred.empty()),
+        const DeepLinkingState.redirectResetPassword(resetPasswordKey),
       ],
     );
     blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -1285,7 +1286,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => repository.extractResetPasswordCred(
+          () => repository.extractResetPasswordKey(
             link: Uri(
               path: '/login/set-password',
               host: 'uat-sg.ezrxplus.com',

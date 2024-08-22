@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -91,7 +90,7 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
 
               return;
             } else if (link.isResetPassword) {
-              final failureOrSuccess = repository.extractResetPasswordCred(
+              final failureOrSuccess = repository.extractResetPasswordKey(
                 link: link.resetPasswordFilteredUri,
               );
 

@@ -6,7 +6,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -134,7 +134,7 @@ void main() {
       expect(
         find.descendant(
           of: resetPasswordButton,
-          matching: find.text('Reset Password'.tr()),
+          matching: find.text('Reset password'.tr()),
         ),
         findsOneWidget,
       );
@@ -194,7 +194,7 @@ void main() {
       expect(
         find.descendant(
           of: resetPasswordButton,
-          matching: find.text('Reset Password'.tr()),
+          matching: find.text('Reset password'.tr()),
         ),
         findsNothing,
       );
@@ -290,7 +290,7 @@ void main() {
       when(() => resetPasswordBlocMock.state).thenReturn(
         ResetPasswordState.initial().copyWith(
           showErrorMessages: true,
-          resetPasswordCred: ResetPasswordCred.empty().copyWith(
+          user: User.empty().copyWith(
             username: Username('test-P@5-'),
           ),
           newPassword: fakeInValidPassword,

@@ -85,8 +85,6 @@ mixin _$UserDto {
       name: 'acceptMPTC',
       readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
   String get acceptMPTC => throw _privateConstructorUsedError;
-  @JsonKey(name: 'isFirstLogin', defaultValue: false)
-  bool get isFirstLogin => throw _privateConstructorUsedError;
   @JsonKey(name: 'isResetUserPassword', defaultValue: false)
   bool get isResetUserPassword => throw _privateConstructorUsedError;
   @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
@@ -159,7 +157,6 @@ abstract class $UserDtoCopyWith<$Res> {
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       String acceptMPTC,
-      @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
       bool isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
@@ -212,7 +209,6 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
-    Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
     Object? privacyControl = null,
@@ -323,10 +319,6 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
               as String,
-      isFirstLogin: null == isFirstLogin
-          ? _value.isFirstLogin
-          : isFirstLogin // ignore: cast_nullable_to_non_nullable
-              as bool,
       isResetUserPassword: null == isResetUserPassword
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
@@ -431,7 +423,6 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       String acceptMPTC,
-      @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
       bool isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
@@ -485,7 +476,6 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
-    Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
     Object? privacyControl = null,
@@ -596,10 +586,6 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
               as String,
-      isFirstLogin: null == isFirstLogin
-          ? _value.isFirstLogin
-          : isFirstLogin // ignore: cast_nullable_to_non_nullable
-              as bool,
       isResetUserPassword: null == isResetUserPassword
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
@@ -667,21 +653,22 @@ class _$UserDtoImpl extends _UserDto {
           defaultValue: <PaymentAdviceExpiryNotificationDto>[])
       required final List<PaymentAdviceExpiryNotificationDto>
           paymentNotification,
-      @JsonKey(name: 'preferredLanguage', readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
+      @JsonKey(
+          name: 'preferredLanguage',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       required this.preferredLanguage,
       @JsonKey(
           name: 'supportedLanguages',
           readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
-      @JsonKey(name: 'MobileNumber', defaultValue: '')
+      @JsonKey(
+          name: 'MobileNumber', defaultValue: '')
       required this.mobileNumber,
       @JsonKey(
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       required this.acceptMPTC,
-      @JsonKey(name: 'isFirstLogin', defaultValue: false)
-      required this.isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
       required this.isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
@@ -817,9 +804,6 @@ class _$UserDtoImpl extends _UserDto {
       readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
   final String acceptMPTC;
   @override
-  @JsonKey(name: 'isFirstLogin', defaultValue: false)
-  final bool isFirstLogin;
-  @override
   @JsonKey(name: 'isResetUserPassword', defaultValue: false)
   final bool isResetUserPassword;
   @override
@@ -834,7 +818,7 @@ class _$UserDtoImpl extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl, selectedOrderType: $selectedOrderType)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl, selectedOrderType: $selectedOrderType)';
   }
 
   @override
@@ -893,8 +877,6 @@ class _$UserDtoImpl extends _UserDto {
                 other.mobileNumber == mobileNumber) &&
             (identical(other.acceptMPTC, acceptMPTC) ||
                 other.acceptMPTC == acceptMPTC) &&
-            (identical(other.isFirstLogin, isFirstLogin) ||
-                other.isFirstLogin == isFirstLogin) &&
             (identical(other.isResetUserPassword, isResetUserPassword) ||
                 other.isResetUserPassword == isResetUserPassword) &&
             (identical(other.isPPATriggerMaintained, isPPATriggerMaintained) ||
@@ -935,7 +917,6 @@ class _$UserDtoImpl extends _UserDto {
         const DeepCollectionEquality().hash(_supportedLanguages),
         mobileNumber,
         acceptMPTC,
-        isFirstLogin,
         isResetUserPassword,
         isPPATriggerMaintained,
         privacyControl,
@@ -1018,8 +999,6 @@ abstract class _UserDto extends UserDto {
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       required final String acceptMPTC,
-      @JsonKey(name: 'isFirstLogin', defaultValue: false)
-      required final bool isFirstLogin,
       @JsonKey(name: 'isResetUserPassword', defaultValue: false)
       required final bool isResetUserPassword,
       @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
@@ -1120,9 +1099,6 @@ abstract class _UserDto extends UserDto {
       name: 'acceptMPTC',
       readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
   String get acceptMPTC;
-  @override
-  @JsonKey(name: 'isFirstLogin', defaultValue: false)
-  bool get isFirstLogin;
   @override
   @JsonKey(name: 'isResetUserPassword', defaultValue: false)
   bool get isResetUserPassword;

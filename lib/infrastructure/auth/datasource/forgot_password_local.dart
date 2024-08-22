@@ -15,4 +15,14 @@ class ForgotPasswordLocalDataSource {
     return ForgotPasswordDto.fromJson(data['data']['requestResetPassword'])
         .toDomain();
   }
+
+  Future<bool> validateResetPasswordKey() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/validate_reset_password_key/validateResetPasswordKeyResponse.json',
+      ),
+    );
+
+    return data['data']['validateResetPasswordKey']['isValid'];
+  }
 }

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
@@ -435,6 +436,10 @@ class ViewByItemReturnFilterBlocMock
 class ReturnItemsFilterBlocMock
     extends MockBloc<ReturnItemsFilterEvent, ReturnItemsFilterState>
     implements ReturnItemsFilterBloc {}
+
+class ForgotPasswordBlocMock
+    extends MockBloc<ForgotPasswordEvent, ForgotPasswordState>
+    implements ForgotPasswordBloc {}
 
 /////////////////////////////////////////////////////////////////////////////
 

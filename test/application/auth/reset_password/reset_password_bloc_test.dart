@@ -4,10 +4,8 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -28,6 +26,7 @@ void main() {
   const validPassword = 'New12345678@';
   const oldPassword = 'old';
   const fakeUserName = 'fake-user';
+  const resetPasswordKey = 'fake-reset-password-key';
 
   final invalidResetPasswordState = resetPasswordState.copyWith(
     oldPassword: Password.login('old'),
@@ -53,11 +52,6 @@ void main() {
       validPassword,
       validPassword,
     ),
-  );
-
-  final resetPasswordCred = ResetPasswordCred.empty().copyWith(
-    token: StringValue('fake-token'),
-    username: Username('fake-user'),
   );
 
   final fakePassword = Password.confirm('new-password@N9', 'new-password@N9');
@@ -274,13 +268,13 @@ void main() {
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
         ResetPasswordEvent.initialize(
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
           user: User.empty(),
         ),
       ),
       expect: () => [
         ResetPasswordState.initial().copyWith(
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
         ),
       ],
     );
@@ -312,8 +306,7 @@ void main() {
       setUp: () {
         when(
           () => mockRepository.resetPassword(
-            token: StringValue('fake-token'),
-            username: Username('fake-user'),
+            token: resetPasswordKey,
             newPassword: fakePassword,
           ),
         ).thenAnswer(
@@ -325,7 +318,7 @@ void main() {
       seed: () => ResetPasswordState.initial().copyWith(
         newPassword: fakePassword,
         confirmPassword: fakePassword,
-        resetPasswordCred: resetPasswordCred,
+        resetPasswordKey: resetPasswordKey,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
         const ResetPasswordEvent.resetPassword(),
@@ -334,13 +327,13 @@ void main() {
         ResetPasswordState.initial().copyWith(
           newPassword: fakePassword,
           confirmPassword: fakePassword,
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
           isSubmitting: true,
         ),
         ResetPasswordState.initial().copyWith(
           newPassword: fakePassword,
           confirmPassword: fakePassword,
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
           passwordResetFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -358,8 +351,7 @@ void main() {
       setUp: () {
         when(
           () => mockRepository.resetPassword(
-            token: StringValue('fake-token'),
-            username: Username('fake-user'),
+            token: resetPasswordKey,
             newPassword: fakePassword,
           ),
         ).thenAnswer(
@@ -369,7 +361,7 @@ void main() {
       seed: () => ResetPasswordState.initial().copyWith(
         newPassword: fakePassword,
         confirmPassword: fakePassword,
-        resetPasswordCred: resetPasswordCred,
+        resetPasswordKey: resetPasswordKey,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
         const ResetPasswordEvent.resetPassword(),
@@ -378,7 +370,7 @@ void main() {
         ResetPasswordState.initial().copyWith(
           newPassword: fakePassword,
           confirmPassword: fakePassword,
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
           isSubmitting: true,
         ),
         ResetPasswordState.initial(),
@@ -423,7 +415,7 @@ void main() {
       seed: () => ResetPasswordState.initial().copyWith(
         newPassword: fakePassword,
         confirmPassword: fakePassword,
-        resetPasswordCred: resetPasswordCred,
+        resetPasswordKey: resetPasswordKey,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
         const ResetPasswordEvent.changePasswordForFirstTime(),
@@ -432,7 +424,7 @@ void main() {
         ResetPasswordState.initial().copyWith(
           newPassword: fakePassword,
           confirmPassword: fakePassword,
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
           isSubmitting: true,
         ),
         ResetPasswordState.initial(),
@@ -458,7 +450,7 @@ void main() {
       seed: () => ResetPasswordState.initial().copyWith(
         newPassword: fakePassword,
         confirmPassword: fakePassword,
-        resetPasswordCred: resetPasswordCred,
+        resetPasswordKey: resetPasswordKey,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
         const ResetPasswordEvent.changePasswordForFirstTime(),
@@ -467,13 +459,13 @@ void main() {
         ResetPasswordState.initial().copyWith(
           newPassword: fakePassword,
           confirmPassword: fakePassword,
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
           isSubmitting: true,
         ),
         ResetPasswordState.initial().copyWith(
           newPassword: fakePassword,
           confirmPassword: fakePassword,
-          resetPasswordCred: resetPasswordCred,
+          resetPasswordKey: resetPasswordKey,
           passwordResetFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),

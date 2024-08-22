@@ -18,4 +18,6 @@ class AuthException with _$AuthException {
       _CannotProxyLoginZPAdminWhenIsZPAdmin;
   const factory AuthException.cannotProxyLoginFromDiffferentSalesOrg() =
       _CannotProxyLoginFromDiffferentSalesOrg;
+  const factory AuthException.passwordResetKeyInvalid() =
+      _PasswordResetKeyInvalid;
 }

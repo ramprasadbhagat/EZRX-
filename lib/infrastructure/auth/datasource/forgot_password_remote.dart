@@ -24,12 +24,10 @@ class ForgotPasswordRemoteDataSource {
   });
   Future<ForgotPassword> requestResetPassword({
     required String username,
-    required String language,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final variable = {
         'username': username,
-        'language': language,
       };
       final res = await httpService.request(
         method: 'POST',
@@ -52,12 +50,37 @@ class ForgotPasswordRemoteDataSource {
     });
   }
 
+  Future<bool> validateResetPasswordKey({
+    required String key,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final variable = {
+        'key': key,
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode(
+          {
+            'query': authQueryMutation.validateResetPasswordKey(),
+            'variables': variable,
+          },
+        ),
+      );
+
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
+
+      return res.data['data']['validateResetPasswordKey']['isValid'];
+    });
+  }
+
   void _forgotPasswordExceptionChecker(Response<dynamic> res) {
     final isInvalidUser = res.data['errors'] != null &&
-        res.data['errors'].isNotEmpty && isEqualsIgnoreCase(
-      res.data['errors'][0]['message'],
-      'Invalid username or password',
-    );
+        res.data['errors'].isNotEmpty &&
+        isEqualsIgnoreCase(
+          res.data['errors'][0]['message'],
+          'Invalid username or password',
+        );
     if (isInvalidUser) {
       throw const AuthException.invalidUserName();
     }

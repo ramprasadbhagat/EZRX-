@@ -10,7 +10,7 @@ class DataSourceExceptionHandler {
     }
   }
 
-  bool _isServerResponseError({
+  bool isServerResponseError({
     required Response<dynamic> res,
     bool? additionalCondition,
   }) {
@@ -46,7 +46,7 @@ class DataSourceExceptionHandler {
     if (onCustomExceptionHandler != null) {
       onCustomExceptionHandler(res);
     }
-    if (_isServerResponseError(
+    if (isServerResponseError(
       res: res,
       additionalCondition: additionalCondition,
     )) {

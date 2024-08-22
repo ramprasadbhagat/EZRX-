@@ -40,7 +40,6 @@ class User with _$User {
     required List<Language> supportedLanguages,
     required PhoneNumber mobileNumber,
     required MarketPlaceTnCAcceptance acceptMPTC,
-    required bool isFirstLogin,
     required bool isResetUserPassword,
     required bool isPPATriggerMaintained,
     required PrivacyControl privacyControl,
@@ -74,13 +73,10 @@ class User with _$User {
         supportedLanguages: <Language>[],
         mobileNumber: PhoneNumber(''),
         acceptMPTC: MarketPlaceTnCAcceptance(''),
-        isFirstLogin: false,
         isResetUserPassword: false,
         isPPATriggerMaintained: false,
         privacyControl: PrivacyControl.empty(),
       );
-
-  bool get eligibleForResetPassword => isFirstLogin || isResetUserPassword;
 
   bool get userCanCreateOrder {
     // For Root / ZP admin the it will always return true

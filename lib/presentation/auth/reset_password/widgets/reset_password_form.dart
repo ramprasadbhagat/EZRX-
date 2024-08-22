@@ -22,7 +22,15 @@ class _ResetPasswordForm extends StatelessWidget {
                   ResetPasswordSuccessRoute(isFirstLogin: isFirstLogin),
                 ),
           (either) => either.fold(
-            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (failure) {
+              if (failure == const ApiFailure.passwordResetKeyInvalid()) {
+                context.router.push(const ResetPasswordLinkExpiredPageRoute());
+
+                return;
+              }
+
+              ErrorUtils.handleApiFailure(context, failure);
+            },
             (_) {},
           ),
         ),

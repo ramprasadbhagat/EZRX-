@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_login_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -30,6 +31,14 @@ class ResetPasswordPage extends StatelessWidget {
     return PopScope(
       canPop: !isFirstLogin,
       child: Scaffold(
+        appBar: isFirstLogin
+            ? null
+            : AppBar(
+                automaticallyImplyLeading: false,
+                elevation: 0,
+                backgroundColor: ZPColors.accentColor,
+                toolbarHeight: 1,
+              ),
         body: isFirstLogin
             ? _ResetPasswordPageBody.firstLogin(context: context)
             : _ResetPasswordPageBody.resetPassword(),
@@ -102,11 +111,7 @@ class _ResetPasswordPageBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: padding12),
             child: PasswordValidation(
-              user: context
-                  .read<ResetPasswordBloc>()
-                  .state
-                  .resetPasswordCred
-                  .toUser,
+              user: context.read<ResetPasswordBloc>().state.user,
             ),
           ),
           const SizedBox(height: padding12),

@@ -71,7 +71,6 @@ void main() {
 
           await remoteDataSource
               .requestResetPassword(
-            language: 'E',
             username: 'fake-username',
           )
               .onError((error, _) async {

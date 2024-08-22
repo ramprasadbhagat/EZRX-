@@ -90,8 +90,6 @@ class UserDto with _$UserDto {
       readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance,
     )
     required String acceptMPTC,
-    @JsonKey(name: 'isFirstLogin', defaultValue: false)
-    required bool isFirstLogin,
     @JsonKey(name: 'isResetUserPassword', defaultValue: false)
     required bool isResetUserPassword,
     @JsonKey(name: 'isPPATriggerMaintained', defaultValue: false)
@@ -137,7 +135,6 @@ class UserDto with _$UserDto {
       mobileNumber: user.mobileNumber.getOrDefaultValue(''),
       supportedLanguages: <String>[],
       acceptMPTC: user.acceptMPTC.getOrDefaultValue(''),
-      isFirstLogin: user.isFirstLogin,
       isResetUserPassword: user.isResetUserPassword,
       isPPATriggerMaintained: user.isPPATriggerMaintained,
       privacyControl: PrivacyControlDto.fromDomain(user.privacyControl),
@@ -168,7 +165,6 @@ class UserDto with _$UserDto {
     supportedLanguages: <String>[],
     salesOrganisations: <String>[],
     acceptMPTC: '',
-    isFirstLogin: false,
     isResetUserPassword: false,
     isPPATriggerMaintained: false,
     privacyControl: PrivacyControlDto.emptyPrivacyControlDto,
@@ -215,7 +211,6 @@ class UserDto with _$UserDto {
       mobileNumber: PhoneNumber(mobileNumber),
       supportedLanguages: supportedLanguages.map((e) => Language(e)).toList(),
       acceptMPTC: MarketPlaceTnCAcceptance(acceptMPTC),
-      isFirstLogin: isFirstLogin,
       isResetUserPassword: isResetUserPassword,
       isPPATriggerMaintained: isPPATriggerMaintained,
       privacyControl: PrivacyControl(

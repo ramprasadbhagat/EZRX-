@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/reset_password_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 
 class ChangePasswordRemoteDataSource {
   HttpService httpService;
@@ -49,7 +52,6 @@ class ChangePasswordRemoteDataSource {
   }
 
   Future<ResetPassword> resetPassword({
-    required String username,
     required String newPassword,
     required String resetPasswordToken,
   }) async {
@@ -61,7 +63,6 @@ class ChangePasswordRemoteDataSource {
           {
             'query': authQueryMutation.resetPassword(),
             'variables': {
-              'username': username,
               'newPassword': newPassword,
               'resetPasswordToken': resetPasswordToken,
             },
@@ -69,7 +70,11 @@ class ChangePasswordRemoteDataSource {
         ),
       );
 
-      dataSourceExceptionHandler.handleExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: (res) =>
+            _resetPasswordExceptionChecker(res: res),
+      );
 
       return ResetPasswordDto.fromJson(res.data['data']['resetPasswordV3'])
           .toDomain();
@@ -99,5 +104,19 @@ class ChangePasswordRemoteDataSource {
         res.data['data']['changePasswordFirstTime'],
       ).toDomain();
     });
+  }
+
+  void _resetPasswordExceptionChecker({
+    required Response<dynamic> res,
+  }) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res) &&
+        res.data['errors'][0]['message'] != null &&
+        res.data['errors'][0]['message'] is String &&
+        isEqualsIgnoreCase(
+          res.data['errors'][0]['message'],
+          'key not found',
+        )) {
+      throw const AuthException.passwordResetKeyInvalid();
+    }
   }
 }

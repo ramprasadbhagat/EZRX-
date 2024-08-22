@@ -612,8 +612,7 @@ mixin _$DeepLinkingState {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -654,8 +653,7 @@ mixin _$DeepLinkingState {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -696,8 +694,7 @@ mixin _$DeepLinkingState {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -906,8 +903,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -951,8 +947,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -996,8 +991,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -1256,8 +1250,7 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -1301,8 +1294,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -1346,8 +1338,7 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -1616,8 +1607,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -1661,8 +1651,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -1706,8 +1695,7 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -1976,8 +1964,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -2021,8 +2008,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -2066,8 +2052,7 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -2332,8 +2317,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -2377,8 +2361,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -2422,8 +2405,7 @@ class _$RedirectProductsTabImpl implements _RedirectProductsTab {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -2670,8 +2652,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -2715,8 +2696,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -2760,8 +2740,7 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -3017,8 +2996,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -3062,8 +3040,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -3107,8 +3084,7 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -3376,8 +3352,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -3421,8 +3396,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -3466,8 +3440,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -3733,8 +3706,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -3778,8 +3750,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -3823,8 +3794,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -4082,8 +4052,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -4127,8 +4096,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -4172,8 +4140,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -4392,8 +4359,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -4437,8 +4403,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -4482,8 +4447,7 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -4694,8 +4658,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -4739,8 +4702,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -4784,8 +4746,7 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -5023,8 +4984,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -5068,8 +5028,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -5113,8 +5072,7 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -5331,8 +5289,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -5376,8 +5333,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -5421,8 +5377,7 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -5669,8 +5624,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -5714,8 +5668,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -5759,8 +5712,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -5920,9 +5872,7 @@ abstract class _$$RedirectResetPasswordImplCopyWith<$Res> {
           $Res Function(_$RedirectResetPasswordImpl) then) =
       __$$RedirectResetPasswordImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ResetPasswordCred resetPasswordCred});
-
-  $ResetPasswordCredCopyWith<$Res> get resetPasswordCred;
+  $Res call({String resetPasswordKey});
 }
 
 /// @nodoc
@@ -5936,36 +5886,28 @@ class __$$RedirectResetPasswordImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? resetPasswordCred = null,
+    Object? resetPasswordKey = null,
   }) {
     return _then(_$RedirectResetPasswordImpl(
-      null == resetPasswordCred
-          ? _value.resetPasswordCred
-          : resetPasswordCred // ignore: cast_nullable_to_non_nullable
-              as ResetPasswordCred,
+      null == resetPasswordKey
+          ? _value.resetPasswordKey
+          : resetPasswordKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ResetPasswordCredCopyWith<$Res> get resetPasswordCred {
-    return $ResetPasswordCredCopyWith<$Res>(_value.resetPasswordCred, (value) {
-      return _then(_value.copyWith(resetPasswordCred: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
-  const _$RedirectResetPasswordImpl(this.resetPasswordCred);
+  const _$RedirectResetPasswordImpl(this.resetPasswordKey);
 
   @override
-  final ResetPasswordCred resetPasswordCred;
+  final String resetPasswordKey;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectResetPassword(resetPasswordCred: $resetPasswordCred)';
+    return 'DeepLinkingState.redirectResetPassword(resetPasswordKey: $resetPasswordKey)';
   }
 
   @override
@@ -5973,12 +5915,12 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RedirectResetPasswordImpl &&
-            (identical(other.resetPasswordCred, resetPasswordCred) ||
-                other.resetPasswordCred == resetPasswordCred));
+            (identical(other.resetPasswordKey, resetPasswordKey) ||
+                other.resetPasswordKey == resetPasswordKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, resetPasswordCred);
+  int get hashCode => Object.hash(runtimeType, resetPasswordKey);
 
   @JsonKey(ignore: true)
   @override
@@ -6015,8 +5957,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -6032,7 +5973,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function() redirectNewReturnRequest,
     required TResult Function(String chatUrl) redirectRaiseTicket,
   }) {
-    return redirectResetPassword(resetPasswordCred);
+    return redirectResetPassword(resetPasswordKey);
   }
 
   @override
@@ -6060,8 +6001,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -6077,7 +6017,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function()? redirectNewReturnRequest,
     TResult? Function(String chatUrl)? redirectRaiseTicket,
   }) {
-    return redirectResetPassword?.call(resetPasswordCred);
+    return redirectResetPassword?.call(resetPasswordKey);
   }
 
   @override
@@ -6105,8 +6045,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -6123,7 +6062,7 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult orElse(),
   }) {
     if (redirectResetPassword != null) {
-      return redirectResetPassword(resetPasswordCred);
+      return redirectResetPassword(resetPasswordKey);
     }
     return orElse();
   }
@@ -6251,10 +6190,10 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
 }
 
 abstract class _RedirectResetPassword implements DeepLinkingState {
-  const factory _RedirectResetPassword(
-      final ResetPasswordCred resetPasswordCred) = _$RedirectResetPasswordImpl;
+  const factory _RedirectResetPassword(final String resetPasswordKey) =
+      _$RedirectResetPasswordImpl;
 
-  ResetPasswordCred get resetPasswordCred;
+  String get resetPasswordKey;
   @JsonKey(ignore: true)
   _$$RedirectResetPasswordImplCopyWith<_$RedirectResetPasswordImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -6323,8 +6262,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -6368,8 +6306,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -6413,8 +6350,7 @@ class _$RedirectOrderImpl implements _RedirectOrder {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -6625,8 +6561,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -6670,8 +6605,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -6715,8 +6649,7 @@ class _$RedirectSettingImpl implements _RedirectSetting {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -6927,8 +6860,7 @@ class _$RedirectCartImpl implements _RedirectCart {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -6972,8 +6904,7 @@ class _$RedirectCartImpl implements _RedirectCart {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -7017,8 +6948,7 @@ class _$RedirectCartImpl implements _RedirectCart {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -7268,8 +7198,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -7313,8 +7242,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -7358,8 +7286,7 @@ class _$RedirectOrderItemDetailImpl implements _RedirectOrderItemDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -7576,8 +7503,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -7621,8 +7547,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -7666,8 +7591,7 @@ class _$RedirectTnCImpl implements _RedirectTnC {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -7878,8 +7802,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -7923,8 +7846,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -7968,8 +7890,7 @@ class _$RedirectPrivacyImpl implements _RedirectPrivacy {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -8181,8 +8102,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -8226,8 +8146,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -8271,8 +8190,7 @@ class _$RedirectAnnouncementImpl implements _RedirectAnnouncement {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -8483,8 +8401,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -8528,8 +8445,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -8573,8 +8489,7 @@ class _$RedirectArticleImpl implements _RedirectArticle {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -8785,8 +8700,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -8830,8 +8744,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -8875,8 +8788,7 @@ class _$RedirectReturnImpl implements _RedirectReturn {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -9127,8 +9039,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -9172,8 +9083,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -9217,8 +9127,7 @@ class _$RedirectZPCreditDetailImpl implements _RedirectZPCreditDetail {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -9440,8 +9349,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -9485,8 +9393,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -9530,8 +9437,7 @@ class _$RedirectClaimSubmissionImpl implements _RedirectClaimSubmission {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -9745,8 +9651,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -9790,8 +9695,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -9835,8 +9739,7 @@ class _$RedirectNewReturnRequestImpl implements _RedirectNewReturnRequest {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,
@@ -10074,8 +9977,7 @@ class _$RedirectRaiseTicketImpl implements _RedirectRaiseTicket {
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function() redirectUserGuide,
     required TResult Function(ApiFailure failure) error,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        redirectResetPassword,
+    required TResult Function(String resetPasswordKey) redirectResetPassword,
     required TResult Function() redirectOrder,
     required TResult Function() redirectSetting,
     required TResult Function() redirectCart,
@@ -10119,8 +10021,7 @@ class _$RedirectRaiseTicketImpl implements _RedirectRaiseTicket {
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function()? redirectUserGuide,
     TResult? Function(ApiFailure failure)? error,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult? Function(String resetPasswordKey)? redirectResetPassword,
     TResult? Function()? redirectOrder,
     TResult? Function()? redirectSetting,
     TResult? Function()? redirectCart,
@@ -10164,8 +10065,7 @@ class _$RedirectRaiseTicketImpl implements _RedirectRaiseTicket {
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function()? redirectUserGuide,
     TResult Function(ApiFailure failure)? error,
-    TResult Function(ResetPasswordCred resetPasswordCred)?
-        redirectResetPassword,
+    TResult Function(String resetPasswordKey)? redirectResetPassword,
     TResult Function()? redirectOrder,
     TResult Function()? redirectSetting,
     TResult Function()? redirectCart,

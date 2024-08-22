@@ -35,6 +35,7 @@ mixin _$ApiFailure {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -92,6 +93,7 @@ mixin _$ApiFailure {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -149,6 +151,7 @@ mixin _$ApiFailure {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -213,6 +216,8 @@ mixin _$ApiFailure {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -296,6 +301,7 @@ mixin _$ApiFailure {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -365,6 +371,7 @@ mixin _$ApiFailure {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -511,6 +518,7 @@ class _$OtherImpl implements _Other {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -571,6 +579,7 @@ class _$OtherImpl implements _Other {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -631,6 +640,7 @@ class _$OtherImpl implements _Other {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -701,6 +711,8 @@ class _$OtherImpl implements _Other {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -787,6 +799,7 @@ class _$OtherImpl implements _Other {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -859,6 +872,7 @@ class _$OtherImpl implements _Other {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1000,6 +1014,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1060,6 +1075,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1120,6 +1136,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1190,6 +1207,8 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -1276,6 +1295,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1348,6 +1368,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1463,6 +1484,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1523,6 +1545,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1583,6 +1606,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1653,6 +1677,8 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -1739,6 +1765,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1811,6 +1838,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1921,6 +1949,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1981,6 +2010,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -2041,6 +2071,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -2111,6 +2142,8 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -2197,6 +2230,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2269,6 +2303,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2379,6 +2414,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -2439,6 +2475,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -2499,6 +2536,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -2569,6 +2607,8 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -2655,6 +2695,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2727,6 +2768,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2841,6 +2883,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -2901,6 +2944,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -2961,6 +3005,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -3031,6 +3076,8 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -3117,6 +3164,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -3189,6 +3237,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -3305,6 +3354,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -3365,6 +3415,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -3425,6 +3476,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -3495,6 +3547,8 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -3581,6 +3635,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -3653,6 +3708,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -3764,6 +3820,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -3824,6 +3881,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -3884,6 +3942,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -3954,6 +4013,8 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -4040,6 +4101,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -4112,6 +4174,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -4222,6 +4285,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -4282,6 +4346,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -4342,6 +4407,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -4412,6 +4478,8 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -4498,6 +4566,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -4570,6 +4639,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -4680,6 +4750,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -4740,6 +4811,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -4800,6 +4872,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -4870,6 +4943,8 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -4956,6 +5031,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -5028,6 +5104,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -5139,6 +5216,7 @@ class _$RefreshTokenInvalidImpl implements _RefreshTokenInvalid {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -5199,6 +5277,7 @@ class _$RefreshTokenInvalidImpl implements _RefreshTokenInvalid {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -5259,6 +5338,7 @@ class _$RefreshTokenInvalidImpl implements _RefreshTokenInvalid {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -5329,6 +5409,8 @@ class _$RefreshTokenInvalidImpl implements _RefreshTokenInvalid {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -5415,6 +5497,7 @@ class _$RefreshTokenInvalidImpl implements _RefreshTokenInvalid {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -5487,6 +5570,7 @@ class _$RefreshTokenInvalidImpl implements _RefreshTokenInvalid {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -5598,6 +5682,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -5658,6 +5743,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -5718,6 +5804,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -5788,6 +5875,8 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -5874,6 +5963,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -5946,6 +6036,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -6061,6 +6152,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -6121,6 +6213,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -6181,6 +6274,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -6251,6 +6345,8 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -6337,6 +6433,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -6409,6 +6506,7 @@ class _$CannotProxyLoginWithCurrentRoleImpl
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -6523,6 +6621,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -6583,6 +6682,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -6643,6 +6743,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -6713,6 +6814,8 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -6799,6 +6902,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -6871,6 +6975,7 @@ class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -6986,6 +7091,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -7046,6 +7152,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -7106,6 +7213,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -7176,6 +7284,8 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -7262,6 +7372,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -7334,6 +7445,7 @@ class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -7450,6 +7562,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -7510,6 +7623,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -7570,6 +7684,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -7640,6 +7755,8 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -7726,6 +7843,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -7798,6 +7916,7 @@ class _$CannotProxyLoginFromDiffferentSalesOrgImpl
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -7909,6 +8028,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -7969,6 +8089,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -8029,6 +8150,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -8099,6 +8221,8 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -8185,6 +8309,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -8257,6 +8382,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -8310,6 +8436,474 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
 
 abstract class _PasswordResetFail implements ApiFailure {
   const factory _PasswordResetFail() = _$PasswordResetFailImpl;
+}
+
+/// @nodoc
+abstract class _$$PasswordResetKeyInvalidImplCopyWith<$Res> {
+  factory _$$PasswordResetKeyInvalidImplCopyWith(
+          _$PasswordResetKeyInvalidImpl value,
+          $Res Function(_$PasswordResetKeyInvalidImpl) then) =
+      __$$PasswordResetKeyInvalidImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PasswordResetKeyInvalidImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$PasswordResetKeyInvalidImpl>
+    implements _$$PasswordResetKeyInvalidImplCopyWith<$Res> {
+  __$$PasswordResetKeyInvalidImplCopyWithImpl(
+      _$PasswordResetKeyInvalidImpl _value,
+      $Res Function(_$PasswordResetKeyInvalidImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$PasswordResetKeyInvalidImpl implements _PasswordResetKeyInvalid {
+  const _$PasswordResetKeyInvalidImpl();
+
+  @override
+  String toString() {
+    return 'ApiFailure.passwordResetKeyInvalid()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PasswordResetKeyInvalidImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() refreshTokenInvalid,
+    required TResult Function() authenticationFailed,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() invalidDomain,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() creditDetailRoute,
+    required TResult Function() submitTicketRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function() scannedProductNotFound,
+    required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+    required TResult Function() attachmentDownloadError,
+    required TResult Function(String message) openDownloadedFileError,
+    required TResult Function() addAnimalHealthWithNormalProductToCart,
+    required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
+    required TResult Function() accountCreationIncomplete,
+  }) {
+    return passwordResetKeyInvalid();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? refreshTokenInvalid,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? invalidDomain,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? creditDetailRoute,
+    TResult? Function()? submitTicketRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function()? scannedProductNotFound,
+    TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+    TResult? Function()? attachmentDownloadError,
+    TResult? Function(String message)? openDownloadedFileError,
+    TResult? Function()? addAnimalHealthWithNormalProductToCart,
+    TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
+    TResult? Function()? accountCreationIncomplete,
+  }) {
+    return passwordResetKeyInvalid?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? refreshTokenInvalid,
+    TResult Function()? authenticationFailed,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? invalidDomain,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? creditDetailRoute,
+    TResult Function()? submitTicketRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function()? scannedProductNotFound,
+    TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    TResult Function()? attachmentDownloadError,
+    TResult Function(String message)? openDownloadedFileError,
+    TResult Function()? addAnimalHealthWithNormalProductToCart,
+    TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
+    TResult Function()? accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (passwordResetKeyInvalid != null) {
+      return passwordResetKeyInvalid();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_RefreshTokenInvalid value) refreshTokenInvalid,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_InvalidDomain value) invalidDomain,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_CreditDetailRoute value) creditDetailRoute,
+    required TResult Function(_SubmitTicketRoute value) submitTicketRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+    required TResult Function(_AttachmentDownloadError value)
+        attachmentDownloadError,
+    required TResult Function(_OpenDownloadedFileError value)
+        openDownloadedFileError,
+    required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
+        addAnimalHealthWithNormalProductToCart,
+    required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
+    required TResult Function(_AccountCreationIncomplete value)
+        accountCreationIncomplete,
+  }) {
+    return passwordResetKeyInvalid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_InvalidDomain value)? invalidDomain,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_CreditDetailRoute value)? creditDetailRoute,
+    TResult? Function(_SubmitTicketRoute value)? submitTicketRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult? Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult? Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+  }) {
+    return passwordResetKeyInvalid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_RefreshTokenInvalid value)? refreshTokenInvalid,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_InvalidDomain value)? invalidDomain,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_CreditDetailRoute value)? creditDetailRoute,
+    TResult Function(_SubmitTicketRoute value)? submitTicketRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (passwordResetKeyInvalid != null) {
+      return passwordResetKeyInvalid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PasswordResetKeyInvalid implements ApiFailure {
+  const factory _PasswordResetKeyInvalid() = _$PasswordResetKeyInvalidImpl;
 }
 
 /// @nodoc
@@ -8370,6 +8964,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -8430,6 +9025,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -8490,6 +9086,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -8560,6 +9157,8 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -8646,6 +9245,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -8718,6 +9318,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -8830,6 +9431,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -8890,6 +9492,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -8950,6 +9553,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -9020,6 +9624,8 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -9106,6 +9712,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -9178,6 +9785,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -9290,6 +9898,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -9350,6 +9959,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -9410,6 +10020,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -9480,6 +10091,8 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -9566,6 +10179,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -9638,6 +10252,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -9748,6 +10363,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -9808,6 +10424,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -9868,6 +10485,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -9938,6 +10556,8 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -10024,6 +10644,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -10096,6 +10717,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -10208,6 +10830,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -10268,6 +10891,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -10328,6 +10952,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -10398,6 +11023,8 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -10484,6 +11111,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -10556,6 +11184,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -10666,6 +11295,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -10726,6 +11356,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -10786,6 +11417,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -10856,6 +11488,8 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -10942,6 +11576,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -11014,6 +11649,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -11126,6 +11762,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -11186,6 +11823,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -11246,6 +11884,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -11316,6 +11955,8 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -11402,6 +12043,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -11474,6 +12116,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -11587,6 +12230,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -11647,6 +12291,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -11707,6 +12352,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -11777,6 +12423,8 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -11863,6 +12511,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -11935,6 +12584,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -12045,6 +12695,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -12105,6 +12756,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -12165,6 +12817,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -12235,6 +12888,8 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -12321,6 +12976,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -12393,6 +13049,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -12506,6 +13163,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -12566,6 +13224,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -12626,6 +13285,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -12696,6 +13356,8 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -12782,6 +13444,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -12854,6 +13517,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -12964,6 +13628,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -13024,6 +13689,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -13084,6 +13750,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -13154,6 +13821,8 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -13240,6 +13909,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -13312,6 +13982,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -13422,6 +14093,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -13482,6 +14154,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -13542,6 +14215,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -13612,6 +14286,8 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -13698,6 +14374,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -13770,6 +14447,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -13880,6 +14558,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -13940,6 +14619,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -14000,6 +14680,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -14070,6 +14751,8 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -14156,6 +14839,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -14228,6 +14912,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -14338,6 +15023,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -14398,6 +15084,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -14458,6 +15145,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -14528,6 +15216,8 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -14614,6 +15304,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -14686,6 +15377,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -14796,6 +15488,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -14856,6 +15549,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -14916,6 +15610,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -14986,6 +15681,8 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -15072,6 +15769,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -15144,6 +15842,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -15254,6 +15953,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -15314,6 +16014,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -15374,6 +16075,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -15444,6 +16146,8 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -15530,6 +16234,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -15602,6 +16307,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -15712,6 +16418,7 @@ class _$CreditDetailRouteImpl implements _CreditDetailRoute {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -15772,6 +16479,7 @@ class _$CreditDetailRouteImpl implements _CreditDetailRoute {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -15832,6 +16540,7 @@ class _$CreditDetailRouteImpl implements _CreditDetailRoute {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -15902,6 +16611,8 @@ class _$CreditDetailRouteImpl implements _CreditDetailRoute {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -15988,6 +16699,7 @@ class _$CreditDetailRouteImpl implements _CreditDetailRoute {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -16060,6 +16772,7 @@ class _$CreditDetailRouteImpl implements _CreditDetailRoute {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -16170,6 +16883,7 @@ class _$SubmitTicketRouteImpl implements _SubmitTicketRoute {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -16230,6 +16944,7 @@ class _$SubmitTicketRouteImpl implements _SubmitTicketRoute {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -16290,6 +17005,7 @@ class _$SubmitTicketRouteImpl implements _SubmitTicketRoute {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -16360,6 +17076,8 @@ class _$SubmitTicketRouteImpl implements _SubmitTicketRoute {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -16446,6 +17164,7 @@ class _$SubmitTicketRouteImpl implements _SubmitTicketRoute {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -16518,6 +17237,7 @@ class _$SubmitTicketRouteImpl implements _SubmitTicketRoute {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -16628,6 +17348,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -16688,6 +17409,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -16748,6 +17470,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -16818,6 +17541,8 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -16904,6 +17629,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -16976,6 +17702,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -17089,6 +17816,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -17149,6 +17877,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -17209,6 +17938,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -17279,6 +18009,8 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -17365,6 +18097,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -17437,6 +18170,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -17577,6 +18311,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -17637,6 +18372,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -17697,6 +18433,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -17767,6 +18504,8 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -17853,6 +18592,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -17925,6 +18665,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -18041,6 +18782,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -18101,6 +18843,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -18161,6 +18904,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -18231,6 +18975,8 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -18317,6 +19063,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -18389,6 +19136,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -18499,6 +19247,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -18559,6 +19308,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -18619,6 +19369,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -18689,6 +19440,8 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -18775,6 +19528,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -18847,6 +19601,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -18960,6 +19715,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -19020,6 +19776,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -19080,6 +19837,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -19150,6 +19908,8 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -19236,6 +19996,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -19308,6 +20069,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -19448,6 +20210,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -19508,6 +20271,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -19568,6 +20332,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -19638,6 +20403,8 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -19724,6 +20491,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -19796,6 +20564,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -19914,6 +20683,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -19974,6 +20744,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -20034,6 +20805,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -20104,6 +20876,8 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -20190,6 +20964,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -20262,6 +21037,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -20400,6 +21176,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -20460,6 +21237,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -20520,6 +21298,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -20590,6 +21369,8 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -20676,6 +21457,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -20748,6 +21530,7 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -20894,6 +21677,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -20954,6 +21738,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -21014,6 +21799,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -21084,6 +21870,8 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -21170,6 +21958,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -21242,6 +22031,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -21361,6 +22151,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -21421,6 +22212,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -21481,6 +22273,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -21551,6 +22344,8 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -21637,6 +22432,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -21709,6 +22505,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -21824,6 +22621,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -21884,6 +22682,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -21944,6 +22743,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -22014,6 +22814,8 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -22100,6 +22902,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -22172,6 +22975,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -22286,6 +23090,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -22346,6 +23151,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -22406,6 +23212,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -22476,6 +23283,8 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -22562,6 +23371,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -22634,6 +23444,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -22773,6 +23584,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -22833,6 +23645,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -22893,6 +23706,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -22963,6 +23777,8 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -23049,6 +23865,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -23121,6 +23938,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -23242,6 +24060,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -23302,6 +24121,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -23362,6 +24182,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -23432,6 +24253,8 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -23518,6 +24341,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -23590,6 +24414,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -23701,6 +24526,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -23761,6 +24587,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -23821,6 +24648,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -23891,6 +24719,8 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -23977,6 +24807,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -24049,6 +24880,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -24161,6 +24993,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -24221,6 +25054,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -24281,6 +25115,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -24351,6 +25186,8 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -24437,6 +25274,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -24509,6 +25347,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -24622,6 +25461,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
     required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
+    required TResult Function() passwordResetKeyInvalid,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -24682,6 +25522,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
+    TResult? Function()? passwordResetKeyInvalid,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -24742,6 +25583,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
     TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
+    TResult Function()? passwordResetKeyInvalid,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -24812,6 +25654,8 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
         cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_PasswordResetKeyInvalid value)
+        passwordResetKeyInvalid,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
@@ -24898,6 +25742,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -24970,6 +25815,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
         cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_PasswordResetKeyInvalid value)? passwordResetKeyInvalid,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,

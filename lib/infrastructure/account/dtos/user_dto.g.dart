@@ -60,7 +60,6 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
       acceptMPTC:
           JsonReadValueHelper.handleMarketPlaceTnCAcceptance(json, 'acceptMPTC')
               as String,
-      isFirstLogin: json['isFirstLogin'] as bool? ?? false,
       isResetUserPassword: json['isResetUserPassword'] as bool? ?? false,
       isPPATriggerMaintained: json['isPPATriggerMaintained'] as bool? ?? false,
       privacyControl: json['privacyControls'] == null
@@ -100,7 +99,6 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
       'supportedLanguages': instance.supportedLanguages,
       'MobileNumber': instance.mobileNumber,
       'acceptMPTC': instance.acceptMPTC,
-      'isFirstLogin': instance.isFirstLogin,
       'isResetUserPassword': instance.isResetUserPassword,
       'isPPATriggerMaintained': instance.isPPATriggerMaintained,
       'privacyControls': instance.privacyControl.toJson(),

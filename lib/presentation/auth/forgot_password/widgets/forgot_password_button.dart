@@ -16,9 +16,7 @@ class _ForgotPasswordButton extends StatelessWidget {
               : () {
                   FocusScope.of(context).unfocus();
                   context.read<ForgotPasswordBloc>().add(
-                        ForgotPasswordEvent.requestPasswordReset(
-                          Language.english(),
-                        ),
+                        const ForgotPasswordEvent.requestPasswordReset(),
                       );
                 },
           child: LoadingShimmer.withChild(

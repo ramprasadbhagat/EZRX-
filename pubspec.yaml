@@ -290,6 +290,7 @@ flutter:
     - assets/json/get_credit_limit/
     - assets/json/get_product/
     - assets/json/customer_open_items/
+    - assets/json/validate_reset_password_key/
     - assets/langs/
     - assets/html/
     - assets/html/id/

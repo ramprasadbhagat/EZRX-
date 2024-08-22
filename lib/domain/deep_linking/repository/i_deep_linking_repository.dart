@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -59,7 +58,7 @@ abstract class IDeepLinkingRepository {
 
   Either<ApiFailure, AppMarket> getCurrentMarket();
 
-  Either<ApiFailure, ResetPasswordCred> extractResetPasswordCred({
+  Either<ApiFailure, String> extractResetPasswordKey({
     required Uri link,
   });
 

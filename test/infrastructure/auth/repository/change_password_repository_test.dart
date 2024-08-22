@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
@@ -161,14 +160,12 @@ void main() {
           () => remoteDataSourceMock.resetPassword(
             newPassword: 'Pa55word@fake',
             resetPasswordToken: 'fake-token',
-            username: 'fake-username',
           ),
         ).thenAnswer((invocation) async => ResetPassword.empty());
 
         final result = await repository.resetPassword(
-          token: StringValue('fake-token'),
+          token: 'fake-token',
           newPassword: Password.confirm('Pa55word@fake', 'Pa55word@fake'),
-          username: Username('fake-username'),
         );
         expect(result.isRight(), true);
       },
@@ -183,14 +180,12 @@ void main() {
           () => remoteDataSourceMock.resetPassword(
             newPassword: 'Pa55word@fake',
             resetPasswordToken: 'fake-token',
-            username: 'fake-username',
           ),
         ).thenThrow(Exception('fake-error'));
 
         final result = await repository.resetPassword(
-          token: StringValue('fake-token'),
+          token: 'fake-token',
           newPassword: Password.confirm('Pa55word@fake', 'Pa55word@fake'),
-          username: Username('fake-username'),
         );
         expect(result.isLeft(), true);
         expect(

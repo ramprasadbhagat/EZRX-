@@ -3,7 +3,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_login_button.dart';
@@ -92,25 +91,6 @@ void main() {
         expect(find.byType(TextFormField), findsOneWidget);
         expect(find.text('Next'), findsOneWidget);
         expect(find.byType(BackToLogin), findsOneWidget);
-      });
-
-      testWidgets(' -> displays error message', (WidgetTester tester) async {
-        final expectedStates = [
-          ForgotPasswordState.initial(),
-          ForgotPasswordState.initial().copyWith(
-            resetPasswordFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Fake-Error'),
-              ),
-            ),
-            isSubmitting: true,
-          ),
-        ];
-        whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.text(('Fake-Error')), findsOneWidget);
       });
     });
 
@@ -252,49 +232,6 @@ void main() {
         );
       });
 
-      testWidgets(
-          ' -> navigates to forgot password confirmation page successfully',
-          (WidgetTester tester) async {
-        final expectedStates = [
-          ForgotPasswordState.initial(),
-          ForgotPasswordState.initial().copyWith(
-            username: Username('fake.username'),
-          ),
-          ForgotPasswordState.initial().copyWith(
-            username: Username('fake.username'),
-            isSubmitting: true,
-          ),
-          ForgotPasswordState.initial().copyWith(
-            username: Username('fake.username'),
-            resetPasswordResponse: ForgotPassword.empty().copyWith(
-              email: 'fake.username@email.com',
-              success: true,
-            ),
-            resetPasswordFailureOrSuccessOption: optionOf(
-              Right(
-                ForgotPassword.empty().copyWith(
-                  email: 'fake.username@email.com',
-                  success: true,
-                ),
-              ),
-            ),
-          ),
-        ];
-        when(
-          () =>
-              autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
-        ).thenAnswer((_) async => true);
-        whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        await tester.tap(find.text('Next'));
-        await tester.pumpAndSettle();
-
-        verify(
-          () =>
-              autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
-        ).called(1);
-      });
       group(' -> BackToLogin', () {
         testWidgets(' -> navigates back to login page',
             (WidgetTester tester) async {

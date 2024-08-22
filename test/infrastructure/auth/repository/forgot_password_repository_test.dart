@@ -2,7 +2,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_remote.dart';
@@ -24,7 +23,6 @@ void main() {
 
   final fakeUserName = Username('fake-user-name');
   final fakeError = Exception('fake-error');
-  final fakeLanguage = Language.english();
 
   setUpAll(
     () {
@@ -53,7 +51,6 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            language: fakeLanguage,
           );
           expect(result.isRight(), true);
         },
@@ -69,7 +66,6 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            language: fakeLanguage,
           );
           expect(result.isLeft(), true);
         },
@@ -83,7 +79,6 @@ void main() {
           when(
             () => remoteDataSourceMock.requestResetPassword(
               username: fakeUserName.getOrCrash(),
-              language: fakeLanguage.languageCode,
             ),
           ).thenAnswer(
             (invocation) async => ForgotPassword.empty().copyWith(
@@ -93,7 +88,6 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            language: fakeLanguage,
           );
           expect(result.isRight(), true);
         },
@@ -107,7 +101,6 @@ void main() {
           when(
             () => remoteDataSourceMock.requestResetPassword(
               username: fakeUserName.getOrCrash(),
-              language: fakeLanguage.languageCode,
             ),
           ).thenAnswer(
             (invocation) async => ForgotPassword.empty().copyWith(
@@ -117,7 +110,6 @@ void main() {
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            language: fakeLanguage,
           );
           expect(result.isLeft(), true);
         },
@@ -131,13 +123,11 @@ void main() {
           when(
             () => remoteDataSourceMock.requestResetPassword(
               username: fakeUserName.getOrCrash(),
-              language: fakeLanguage.languageCode,
             ),
           ).thenThrow((invocation) => fakeError);
 
           final result = await repository.requestResetPassword(
             username: fakeUserName,
-            language: fakeLanguage,
           );
           expect(result.isLeft(), true);
         },

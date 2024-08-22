@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -156,8 +155,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
         final failureOrSuccess = await changePasswordRepository.resetPassword(
           newPassword: state.newPassword,
-          token: state.resetPasswordCred.token,
-          username: state.resetPasswordCred.username,
+          token: state.resetPasswordKey,
         );
         if (isClosed) return;
         failureOrSuccess.fold(
@@ -208,10 +206,10 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           (resetPassword) => add(const _Clear()),
         );
       },
-      initialize: (_Initialize e) {
+      initialize: (e) {
         emit(
-          state.copyWith(
-            resetPasswordCred: e.resetPasswordCred,
+          ResetPasswordState.initial().copyWith(
+            resetPasswordKey: e.resetPasswordKey,
             user: e.user,
           ),
         );

@@ -5,7 +5,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_login_button.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_confirmation_page.dart';
@@ -166,7 +165,7 @@ void main() {
       expect(finder, findsOneWidget);
       verify(
         () => forgotPasswordBlocMock
-            .add(ForgotPasswordEvent.requestPasswordReset(Language.english())),
+            .add(const ForgotPasswordEvent.requestPasswordReset()),
       ).called(1);
     });
   });

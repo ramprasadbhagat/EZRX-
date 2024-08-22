@@ -39,7 +39,6 @@ mixin _$User {
   List<Language> get supportedLanguages => throw _privateConstructorUsedError;
   PhoneNumber get mobileNumber => throw _privateConstructorUsedError;
   MarketPlaceTnCAcceptance get acceptMPTC => throw _privateConstructorUsedError;
-  bool get isFirstLogin => throw _privateConstructorUsedError;
   bool get isResetUserPassword => throw _privateConstructorUsedError;
   bool get isPPATriggerMaintained => throw _privateConstructorUsedError;
   PrivacyControl get privacyControl => throw _privateConstructorUsedError;
@@ -76,7 +75,6 @@ abstract class $UserCopyWith<$Res> {
       List<Language> supportedLanguages,
       PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC,
-      bool isFirstLogin,
       bool isResetUserPassword,
       bool isPPATriggerMaintained,
       PrivacyControl privacyControl});
@@ -123,7 +121,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
-    Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
     Object? privacyControl = null,
@@ -217,10 +214,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
               as MarketPlaceTnCAcceptance,
-      isFirstLogin: null == isFirstLogin
-          ? _value.isFirstLogin
-          : isFirstLogin // ignore: cast_nullable_to_non_nullable
-              as bool,
       isResetUserPassword: null == isResetUserPassword
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
@@ -307,7 +300,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<Language> supportedLanguages,
       PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC,
-      bool isFirstLogin,
       bool isResetUserPassword,
       bool isPPATriggerMaintained,
       PrivacyControl privacyControl});
@@ -356,7 +348,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
-    Object? isFirstLogin = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
     Object? privacyControl = null,
@@ -450,10 +441,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
               as MarketPlaceTnCAcceptance,
-      isFirstLogin: null == isFirstLogin
-          ? _value.isFirstLogin
-          : isFirstLogin // ignore: cast_nullable_to_non_nullable
-              as bool,
       isResetUserPassword: null == isResetUserPassword
           ? _value.isResetUserPassword
           : isResetUserPassword // ignore: cast_nullable_to_non_nullable
@@ -496,7 +483,6 @@ class _$UserImpl extends _User {
       required final List<Language> supportedLanguages,
       required this.mobileNumber,
       required this.acceptMPTC,
-      required this.isFirstLogin,
       required this.isResetUserPassword,
       required this.isPPATriggerMaintained,
       required this.privacyControl})
@@ -571,8 +557,6 @@ class _$UserImpl extends _User {
   @override
   final MarketPlaceTnCAcceptance acceptMPTC;
   @override
-  final bool isFirstLogin;
-  @override
   final bool isResetUserPassword;
   @override
   final bool isPPATriggerMaintained;
@@ -581,7 +565,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, selectedOrderType: $selectedOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, selectedOrderType: $selectedOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl)';
   }
 
   @override
@@ -630,8 +614,6 @@ class _$UserImpl extends _User {
                 other.mobileNumber == mobileNumber) &&
             (identical(other.acceptMPTC, acceptMPTC) ||
                 other.acceptMPTC == acceptMPTC) &&
-            (identical(other.isFirstLogin, isFirstLogin) ||
-                other.isFirstLogin == isFirstLogin) &&
             (identical(other.isResetUserPassword, isResetUserPassword) ||
                 other.isResetUserPassword == isResetUserPassword) &&
             (identical(other.isPPATriggerMaintained, isPPATriggerMaintained) ||
@@ -665,7 +647,6 @@ class _$UserImpl extends _User {
         const DeepCollectionEquality().hash(_supportedLanguages),
         mobileNumber,
         acceptMPTC,
-        isFirstLogin,
         isResetUserPassword,
         isPPATriggerMaintained,
         privacyControl
@@ -702,7 +683,6 @@ abstract class _User extends User {
       required final List<Language> supportedLanguages,
       required final PhoneNumber mobileNumber,
       required final MarketPlaceTnCAcceptance acceptMPTC,
-      required final bool isFirstLogin,
       required final bool isResetUserPassword,
       required final bool isPPATriggerMaintained,
       required final PrivacyControl privacyControl}) = _$UserImpl;
@@ -752,8 +732,6 @@ abstract class _User extends User {
   PhoneNumber get mobileNumber;
   @override
   MarketPlaceTnCAcceptance get acceptMPTC;
-  @override
-  bool get isFirstLogin;
   @override
   bool get isResetUserPassword;
   @override

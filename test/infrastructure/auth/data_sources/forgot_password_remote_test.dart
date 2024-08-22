@@ -71,7 +71,6 @@ void main() {
           final result =
               await forgotPasswordRemoteDataSource.requestResetPassword(
             username: 'fake-user-name',
-            language: 'EN',
           );
 
           expect(
@@ -112,7 +111,6 @@ void main() {
           await forgotPasswordRemoteDataSource
               .requestResetPassword(
             username: 'fake-user-name',
-            language: 'EN',
           )
               .onError((error, _) async {
             expect(error, isA<AuthException>());
@@ -151,7 +149,6 @@ void main() {
           await forgotPasswordRemoteDataSource
               .requestResetPassword(
             username: 'fake-user-name',
-            language: 'EN',
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());

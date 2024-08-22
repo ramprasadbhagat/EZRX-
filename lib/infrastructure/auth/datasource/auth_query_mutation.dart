@@ -167,8 +167,8 @@ class AuthQueryMutation {
 
   String requestResetPassword() {
     return '''
-        mutation requestResetPasswordLink(\$username: String!, \$language: String!) {
-            requestResetPassword(username: \$username, language: \$language){
+        mutation requestResetPasswordLink(\$username: String!) {
+            requestResetPassword(username: \$username){
               success
               email
             }
@@ -178,9 +178,8 @@ class AuthQueryMutation {
 
   String resetPassword() {
     return '''
-        mutation resetPasswordV3(\$username: String!, \$newPassword: String!, \$resetPasswordToken: String!) {
+        mutation resetPasswordV3(\$newPassword: String!, \$resetPasswordToken: String) {
           resetPasswordV3(
-            username: \$username
             newPassword: \$newPassword
             resetPasswordToken: \$resetPasswordToken
           ){
@@ -199,6 +198,16 @@ class AuthQueryMutation {
     status
   }
 }
+    ''';
+  }
+
+  String validateResetPasswordKey() {
+    return '''
+      query validateResetPasswordKey(\$key: String!) {
+        validateResetPasswordKey(key: \$key) {
+          isValid
+        }
+      }
     ''';
   }
 }

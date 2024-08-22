@@ -2,11 +2,14 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/payments/claim_management/claim_management_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_item_params.dart';
@@ -63,7 +66,6 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/detai
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -180,20 +182,23 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 );
               },
               unauthenticated: (unauthState) {
+                final forgotPasswordState =
+                    context.read<ForgotPasswordBloc>().state;
                 _logout(context);
 
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
                     const LoginPageRoute(),
-                    if (context
-                        .read<ResetPasswordBloc>()
-                        .state
-                        .resetPasswordCred
-                        .isNotEmpty)
-                      ResetPasswordPageRoute(),
                   ],
                 );
+                if (forgotPasswordState.resetPasswordKey.isNotEmpty) {
+                  context.read<ForgotPasswordBloc>().add(
+                        ForgotPasswordEvent.validateResetPasswordKey(
+                          forgotPasswordState.resetPasswordKey,
+                        ),
+                      );
+                }
               },
               biometricDenied: (value) {
                 _showBioMetricPermissionDialog();
@@ -544,7 +549,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
               context.read<ResetPasswordBloc>().add(
                     ResetPasswordEvent.initialize(
-                      resetPasswordCred: ResetPasswordCred.empty(),
+                      resetPasswordKey: '',
                       user: state.user,
                     ),
                   );
@@ -920,21 +925,23 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);
               },
-              redirectResetPassword: (ResetPasswordCred resetPasswordCred) {
-                context.read<ResetPasswordBloc>().add(
-                      ResetPasswordEvent.initialize(
-                        resetPasswordCred: resetPasswordCred,
-                        user: resetPasswordCred.toUser,
+              redirectResetPassword: (String resetPasswordKey) {
+                if (context.read<AuthBloc>().state ==
+                    const AuthState.authenticated()) {
+                  context.read<ForgotPasswordBloc>().add(
+                        ForgotPasswordEvent.saveResetPasswordKey(
+                          resetPasswordKey,
+                        ),
+                      );
+                  context.read<AuthBloc>().add(const AuthEvent.logout());
+
+                  return;
+                }
+                context.read<ForgotPasswordBloc>().add(
+                      ForgotPasswordEvent.validateResetPasswordKey(
+                        resetPasswordKey,
                       ),
                     );
-                if (context
-                    .read<SalesOrgBloc>()
-                    .state
-                    .haveSelectedSalesOrganisation) {
-                  context.read<AuthBloc>().add(const AuthEvent.logout());
-                } else {
-                  context.router.push(ResetPasswordPageRoute());
-                }
               },
               redirectOrder: () {
                 if (!eligibilityState.user.userCanAccessOrderHistory) {
@@ -1144,6 +1151,52 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.isNetworkAvailable != current.isNetworkAvailable &&
               current.isNetworkAvailable,
           listener: (context, state) => locator<Upgrader>().updateVersionInfo(),
+        ),
+        BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
+          listenWhen: (previous, current) =>
+              previous.resetPasswordFailureOrSuccessOption !=
+              current.resetPasswordFailureOrSuccessOption,
+          listener: (context, state) {
+            state.resetPasswordFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  if (failure == const ApiFailure.passwordResetKeyInvalid()) {
+                    context.router
+                        .push(const ResetPasswordLinkExpiredPageRoute());
+
+                    return;
+                  }
+
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (success) => context.router
+                    .push(const ForgetPasswordConfirmationPageRoute()),
+              ),
+            );
+          },
+        ),
+        BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
+          listenWhen: (previous, current) =>
+              previous.isValidating != current.isValidating &&
+              !current.isValidating,
+          listener: (context, state) {
+            state.resetPasswordFailureOrSuccessOption.fold(
+              () {
+                context.read<ResetPasswordBloc>().add(
+                      ResetPasswordEvent.initialize(
+                        resetPasswordKey: state.resetPasswordKey,
+                        user: User.empty(),
+                      ),
+                    );
+                context
+                    .read<ForgotPasswordBloc>()
+                    .add(const ForgotPasswordEvent.initialized());
+                context.router.push(ResetPasswordPageRoute());
+              },
+              (_) {},
+            );
+          },
         ),
       ],
       child: const _Splash(),

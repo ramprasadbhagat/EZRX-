@@ -16,6 +16,10 @@ class AppRouter extends $AppRouter {
           page: ForgetPasswordConfirmationPageRoute.page,
         ),
         AutoRoute(
+          path: '/reset_password_link_expired',
+          page: ResetPasswordLinkExpiredPageRoute.page,
+        ),
+        AutoRoute(
           path: '/reset_password',
           page: ResetPasswordPageRoute.page,
         ),

@@ -20,21 +20,27 @@ mixin _$ForgotPasswordEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Language language) requestPasswordReset,
+    required TResult Function() requestPasswordReset,
+    required TResult Function(String key) saveResetPasswordKey,
+    required TResult Function(String key) validateResetPasswordKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Language language)? requestPasswordReset,
+    TResult? Function()? requestPasswordReset,
+    TResult? Function(String key)? saveResetPasswordKey,
+    TResult? Function(String key)? validateResetPasswordKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Language language)? requestPasswordReset,
+    TResult Function()? requestPasswordReset,
+    TResult Function(String key)? saveResetPasswordKey,
+    TResult Function(String key)? validateResetPasswordKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,9 @@ mixin _$ForgotPasswordEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ForgotPasswordEvent value) usernameChanged,
     required TResult Function(_RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(_SaveResetPasswordKey value) saveResetPasswordKey,
+    required TResult Function(_ValidateResetPasswordKey value)
+        validateResetPasswordKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +59,9 @@ mixin _$ForgotPasswordEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult? Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult? Function(_ValidateResetPasswordKey value)?
+        validateResetPasswordKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +69,8 @@ mixin _$ForgotPasswordEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult Function(_ValidateResetPasswordKey value)? validateResetPasswordKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +134,9 @@ class _$InitializedImpl implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Language language) requestPasswordReset,
+    required TResult Function() requestPasswordReset,
+    required TResult Function(String key) saveResetPasswordKey,
+    required TResult Function(String key) validateResetPasswordKey,
   }) {
     return initialized();
   }
@@ -130,7 +146,9 @@ class _$InitializedImpl implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Language language)? requestPasswordReset,
+    TResult? Function()? requestPasswordReset,
+    TResult? Function(String key)? saveResetPasswordKey,
+    TResult? Function(String key)? validateResetPasswordKey,
   }) {
     return initialized?.call();
   }
@@ -140,7 +158,9 @@ class _$InitializedImpl implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Language language)? requestPasswordReset,
+    TResult Function()? requestPasswordReset,
+    TResult Function(String key)? saveResetPasswordKey,
+    TResult Function(String key)? validateResetPasswordKey,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -155,6 +175,9 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ForgotPasswordEvent value) usernameChanged,
     required TResult Function(_RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(_SaveResetPasswordKey value) saveResetPasswordKey,
+    required TResult Function(_ValidateResetPasswordKey value)
+        validateResetPasswordKey,
   }) {
     return initialized(this);
   }
@@ -165,6 +188,9 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult? Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult? Function(_ValidateResetPasswordKey value)?
+        validateResetPasswordKey,
   }) {
     return initialized?.call(this);
   }
@@ -175,6 +201,8 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult Function(_ValidateResetPasswordKey value)? validateResetPasswordKey,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -256,7 +284,9 @@ class _$ForgotPasswordEventImpl implements _ForgotPasswordEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Language language) requestPasswordReset,
+    required TResult Function() requestPasswordReset,
+    required TResult Function(String key) saveResetPasswordKey,
+    required TResult Function(String key) validateResetPasswordKey,
   }) {
     return usernameChanged(usernameStr);
   }
@@ -266,7 +296,9 @@ class _$ForgotPasswordEventImpl implements _ForgotPasswordEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Language language)? requestPasswordReset,
+    TResult? Function()? requestPasswordReset,
+    TResult? Function(String key)? saveResetPasswordKey,
+    TResult? Function(String key)? validateResetPasswordKey,
   }) {
     return usernameChanged?.call(usernameStr);
   }
@@ -276,7 +308,9 @@ class _$ForgotPasswordEventImpl implements _ForgotPasswordEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Language language)? requestPasswordReset,
+    TResult Function()? requestPasswordReset,
+    TResult Function(String key)? saveResetPasswordKey,
+    TResult Function(String key)? validateResetPasswordKey,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -291,6 +325,9 @@ class _$ForgotPasswordEventImpl implements _ForgotPasswordEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ForgotPasswordEvent value) usernameChanged,
     required TResult Function(_RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(_SaveResetPasswordKey value) saveResetPasswordKey,
+    required TResult Function(_ValidateResetPasswordKey value)
+        validateResetPasswordKey,
   }) {
     return usernameChanged(this);
   }
@@ -301,6 +338,9 @@ class _$ForgotPasswordEventImpl implements _ForgotPasswordEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult? Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult? Function(_ValidateResetPasswordKey value)?
+        validateResetPasswordKey,
   }) {
     return usernameChanged?.call(this);
   }
@@ -311,6 +351,8 @@ class _$ForgotPasswordEventImpl implements _ForgotPasswordEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult Function(_ValidateResetPasswordKey value)? validateResetPasswordKey,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -335,8 +377,6 @@ abstract class _$$RequestPasswordResetImplCopyWith<$Res> {
   factory _$$RequestPasswordResetImplCopyWith(_$RequestPasswordResetImpl value,
           $Res Function(_$RequestPasswordResetImpl) then) =
       __$$RequestPasswordResetImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Language language});
 }
 
 /// @nodoc
@@ -346,62 +386,38 @@ class __$$RequestPasswordResetImplCopyWithImpl<$Res>
   __$$RequestPasswordResetImplCopyWithImpl(_$RequestPasswordResetImpl _value,
       $Res Function(_$RequestPasswordResetImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? language = null,
-  }) {
-    return _then(_$RequestPasswordResetImpl(
-      null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as Language,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$RequestPasswordResetImpl implements _RequestPasswordReset {
-  const _$RequestPasswordResetImpl(this.language);
-
-  @override
-  final Language language;
+  const _$RequestPasswordResetImpl();
 
   @override
   String toString() {
-    return 'ForgotPasswordEvent.requestPasswordReset(language: $language)';
+    return 'ForgotPasswordEvent.requestPasswordReset()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestPasswordResetImpl &&
-            (identical(other.language, language) ||
-                other.language == language));
+            other is _$RequestPasswordResetImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, language);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$RequestPasswordResetImplCopyWith<_$RequestPasswordResetImpl>
-      get copyWith =>
-          __$$RequestPasswordResetImplCopyWithImpl<_$RequestPasswordResetImpl>(
-              this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function(Language language) requestPasswordReset,
+    required TResult Function() requestPasswordReset,
+    required TResult Function(String key) saveResetPasswordKey,
+    required TResult Function(String key) validateResetPasswordKey,
   }) {
-    return requestPasswordReset(language);
+    return requestPasswordReset();
   }
 
   @override
@@ -409,9 +425,11 @@ class _$RequestPasswordResetImpl implements _RequestPasswordReset {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(Language language)? requestPasswordReset,
+    TResult? Function()? requestPasswordReset,
+    TResult? Function(String key)? saveResetPasswordKey,
+    TResult? Function(String key)? validateResetPasswordKey,
   }) {
-    return requestPasswordReset?.call(language);
+    return requestPasswordReset?.call();
   }
 
   @override
@@ -419,11 +437,13 @@ class _$RequestPasswordResetImpl implements _RequestPasswordReset {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function(Language language)? requestPasswordReset,
+    TResult Function()? requestPasswordReset,
+    TResult Function(String key)? saveResetPasswordKey,
+    TResult Function(String key)? validateResetPasswordKey,
     required TResult orElse(),
   }) {
     if (requestPasswordReset != null) {
-      return requestPasswordReset(language);
+      return requestPasswordReset();
     }
     return orElse();
   }
@@ -434,6 +454,9 @@ class _$RequestPasswordResetImpl implements _RequestPasswordReset {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ForgotPasswordEvent value) usernameChanged,
     required TResult Function(_RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(_SaveResetPasswordKey value) saveResetPasswordKey,
+    required TResult Function(_ValidateResetPasswordKey value)
+        validateResetPasswordKey,
   }) {
     return requestPasswordReset(this);
   }
@@ -444,6 +467,9 @@ class _$RequestPasswordResetImpl implements _RequestPasswordReset {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult? Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult? Function(_ValidateResetPasswordKey value)?
+        validateResetPasswordKey,
   }) {
     return requestPasswordReset?.call(this);
   }
@@ -454,6 +480,8 @@ class _$RequestPasswordResetImpl implements _RequestPasswordReset {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ForgotPasswordEvent value)? usernameChanged,
     TResult Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult Function(_ValidateResetPasswordKey value)? validateResetPasswordKey,
     required TResult orElse(),
   }) {
     if (requestPasswordReset != null) {
@@ -464,12 +492,320 @@ class _$RequestPasswordResetImpl implements _RequestPasswordReset {
 }
 
 abstract class _RequestPasswordReset implements ForgotPasswordEvent {
-  const factory _RequestPasswordReset(final Language language) =
-      _$RequestPasswordResetImpl;
+  const factory _RequestPasswordReset() = _$RequestPasswordResetImpl;
+}
 
-  Language get language;
+/// @nodoc
+abstract class _$$SaveResetPasswordKeyImplCopyWith<$Res> {
+  factory _$$SaveResetPasswordKeyImplCopyWith(_$SaveResetPasswordKeyImpl value,
+          $Res Function(_$SaveResetPasswordKeyImpl) then) =
+      __$$SaveResetPasswordKeyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String key});
+}
+
+/// @nodoc
+class __$$SaveResetPasswordKeyImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordEventCopyWithImpl<$Res, _$SaveResetPasswordKeyImpl>
+    implements _$$SaveResetPasswordKeyImplCopyWith<$Res> {
+  __$$SaveResetPasswordKeyImplCopyWithImpl(_$SaveResetPasswordKeyImpl _value,
+      $Res Function(_$SaveResetPasswordKeyImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = null,
+  }) {
+    return _then(_$SaveResetPasswordKeyImpl(
+      null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SaveResetPasswordKeyImpl implements _SaveResetPasswordKey {
+  const _$SaveResetPasswordKeyImpl(this.key);
+
+  @override
+  final String key;
+
+  @override
+  String toString() {
+    return 'ForgotPasswordEvent.saveResetPasswordKey(key: $key)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SaveResetPasswordKeyImpl &&
+            (identical(other.key, key) || other.key == key));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, key);
+
   @JsonKey(ignore: true)
-  _$$RequestPasswordResetImplCopyWith<_$RequestPasswordResetImpl>
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SaveResetPasswordKeyImplCopyWith<_$SaveResetPasswordKeyImpl>
+      get copyWith =>
+          __$$SaveResetPasswordKeyImplCopyWithImpl<_$SaveResetPasswordKeyImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(String usernameStr) usernameChanged,
+    required TResult Function() requestPasswordReset,
+    required TResult Function(String key) saveResetPasswordKey,
+    required TResult Function(String key) validateResetPasswordKey,
+  }) {
+    return saveResetPasswordKey(key);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(String usernameStr)? usernameChanged,
+    TResult? Function()? requestPasswordReset,
+    TResult? Function(String key)? saveResetPasswordKey,
+    TResult? Function(String key)? validateResetPasswordKey,
+  }) {
+    return saveResetPasswordKey?.call(key);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function()? requestPasswordReset,
+    TResult Function(String key)? saveResetPasswordKey,
+    TResult Function(String key)? validateResetPasswordKey,
+    required TResult orElse(),
+  }) {
+    if (saveResetPasswordKey != null) {
+      return saveResetPasswordKey(key);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_ForgotPasswordEvent value) usernameChanged,
+    required TResult Function(_RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(_SaveResetPasswordKey value) saveResetPasswordKey,
+    required TResult Function(_ValidateResetPasswordKey value)
+        validateResetPasswordKey,
+  }) {
+    return saveResetPasswordKey(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_ForgotPasswordEvent value)? usernameChanged,
+    TResult? Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult? Function(_ValidateResetPasswordKey value)?
+        validateResetPasswordKey,
+  }) {
+    return saveResetPasswordKey?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_ForgotPasswordEvent value)? usernameChanged,
+    TResult Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult Function(_ValidateResetPasswordKey value)? validateResetPasswordKey,
+    required TResult orElse(),
+  }) {
+    if (saveResetPasswordKey != null) {
+      return saveResetPasswordKey(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SaveResetPasswordKey implements ForgotPasswordEvent {
+  const factory _SaveResetPasswordKey(final String key) =
+      _$SaveResetPasswordKeyImpl;
+
+  String get key;
+  @JsonKey(ignore: true)
+  _$$SaveResetPasswordKeyImplCopyWith<_$SaveResetPasswordKeyImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ValidateResetPasswordKeyImplCopyWith<$Res> {
+  factory _$$ValidateResetPasswordKeyImplCopyWith(
+          _$ValidateResetPasswordKeyImpl value,
+          $Res Function(_$ValidateResetPasswordKeyImpl) then) =
+      __$$ValidateResetPasswordKeyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String key});
+}
+
+/// @nodoc
+class __$$ValidateResetPasswordKeyImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordEventCopyWithImpl<$Res,
+        _$ValidateResetPasswordKeyImpl>
+    implements _$$ValidateResetPasswordKeyImplCopyWith<$Res> {
+  __$$ValidateResetPasswordKeyImplCopyWithImpl(
+      _$ValidateResetPasswordKeyImpl _value,
+      $Res Function(_$ValidateResetPasswordKeyImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = null,
+  }) {
+    return _then(_$ValidateResetPasswordKeyImpl(
+      null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ValidateResetPasswordKeyImpl implements _ValidateResetPasswordKey {
+  const _$ValidateResetPasswordKeyImpl(this.key);
+
+  @override
+  final String key;
+
+  @override
+  String toString() {
+    return 'ForgotPasswordEvent.validateResetPasswordKey(key: $key)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ValidateResetPasswordKeyImpl &&
+            (identical(other.key, key) || other.key == key));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, key);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ValidateResetPasswordKeyImplCopyWith<_$ValidateResetPasswordKeyImpl>
+      get copyWith => __$$ValidateResetPasswordKeyImplCopyWithImpl<
+          _$ValidateResetPasswordKeyImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(String usernameStr) usernameChanged,
+    required TResult Function() requestPasswordReset,
+    required TResult Function(String key) saveResetPasswordKey,
+    required TResult Function(String key) validateResetPasswordKey,
+  }) {
+    return validateResetPasswordKey(key);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(String usernameStr)? usernameChanged,
+    TResult? Function()? requestPasswordReset,
+    TResult? Function(String key)? saveResetPasswordKey,
+    TResult? Function(String key)? validateResetPasswordKey,
+  }) {
+    return validateResetPasswordKey?.call(key);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function()? requestPasswordReset,
+    TResult Function(String key)? saveResetPasswordKey,
+    TResult Function(String key)? validateResetPasswordKey,
+    required TResult orElse(),
+  }) {
+    if (validateResetPasswordKey != null) {
+      return validateResetPasswordKey(key);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_ForgotPasswordEvent value) usernameChanged,
+    required TResult Function(_RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(_SaveResetPasswordKey value) saveResetPasswordKey,
+    required TResult Function(_ValidateResetPasswordKey value)
+        validateResetPasswordKey,
+  }) {
+    return validateResetPasswordKey(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_ForgotPasswordEvent value)? usernameChanged,
+    TResult? Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult? Function(_ValidateResetPasswordKey value)?
+        validateResetPasswordKey,
+  }) {
+    return validateResetPasswordKey?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_ForgotPasswordEvent value)? usernameChanged,
+    TResult Function(_RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(_SaveResetPasswordKey value)? saveResetPasswordKey,
+    TResult Function(_ValidateResetPasswordKey value)? validateResetPasswordKey,
+    required TResult orElse(),
+  }) {
+    if (validateResetPasswordKey != null) {
+      return validateResetPasswordKey(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ValidateResetPasswordKey implements ForgotPasswordEvent {
+  const factory _ValidateResetPasswordKey(final String key) =
+      _$ValidateResetPasswordKeyImpl;
+
+  String get key;
+  @JsonKey(ignore: true)
+  _$$ValidateResetPasswordKeyImplCopyWith<_$ValidateResetPasswordKeyImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -477,7 +813,9 @@ abstract class _RequestPasswordReset implements ForgotPasswordEvent {
 mixin _$ForgotPasswordState {
   Username get username => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get isValidating => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
+  String get resetPasswordKey => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get resetPasswordFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   ForgotPassword get resetPasswordResponse =>
@@ -497,7 +835,9 @@ abstract class $ForgotPasswordStateCopyWith<$Res> {
   $Res call(
       {Username username,
       bool isSubmitting,
+      bool isValidating,
       bool showErrorMessages,
+      String resetPasswordKey,
       Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption,
       ForgotPassword resetPasswordResponse});
 
@@ -519,7 +859,9 @@ class _$ForgotPasswordStateCopyWithImpl<$Res, $Val extends ForgotPasswordState>
   $Res call({
     Object? username = null,
     Object? isSubmitting = null,
+    Object? isValidating = null,
     Object? showErrorMessages = null,
+    Object? resetPasswordKey = null,
     Object? resetPasswordFailureOrSuccessOption = null,
     Object? resetPasswordResponse = null,
   }) {
@@ -532,10 +874,18 @@ class _$ForgotPasswordStateCopyWithImpl<$Res, $Val extends ForgotPasswordState>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
+      isValidating: null == isValidating
+          ? _value.isValidating
+          : isValidating // ignore: cast_nullable_to_non_nullable
+              as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      resetPasswordKey: null == resetPasswordKey
+          ? _value.resetPasswordKey
+          : resetPasswordKey // ignore: cast_nullable_to_non_nullable
+              as String,
       resetPasswordFailureOrSuccessOption: null ==
               resetPasswordFailureOrSuccessOption
           ? _value.resetPasswordFailureOrSuccessOption
@@ -568,7 +918,9 @@ abstract class _$$ForgotPasswordStateImplCopyWith<$Res>
   $Res call(
       {Username username,
       bool isSubmitting,
+      bool isValidating,
       bool showErrorMessages,
+      String resetPasswordKey,
       Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption,
       ForgotPassword resetPasswordResponse});
 
@@ -589,7 +941,9 @@ class __$$ForgotPasswordStateImplCopyWithImpl<$Res>
   $Res call({
     Object? username = null,
     Object? isSubmitting = null,
+    Object? isValidating = null,
     Object? showErrorMessages = null,
+    Object? resetPasswordKey = null,
     Object? resetPasswordFailureOrSuccessOption = null,
     Object? resetPasswordResponse = null,
   }) {
@@ -602,10 +956,18 @@ class __$$ForgotPasswordStateImplCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
+      isValidating: null == isValidating
+          ? _value.isValidating
+          : isValidating // ignore: cast_nullable_to_non_nullable
+              as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      resetPasswordKey: null == resetPasswordKey
+          ? _value.resetPasswordKey
+          : resetPasswordKey // ignore: cast_nullable_to_non_nullable
+              as String,
       resetPasswordFailureOrSuccessOption: null ==
               resetPasswordFailureOrSuccessOption
           ? _value.resetPasswordFailureOrSuccessOption
@@ -625,7 +987,9 @@ class _$ForgotPasswordStateImpl implements _ForgotPasswordState {
   const _$ForgotPasswordStateImpl(
       {required this.username,
       required this.isSubmitting,
+      required this.isValidating,
       required this.showErrorMessages,
+      required this.resetPasswordKey,
       required this.resetPasswordFailureOrSuccessOption,
       required this.resetPasswordResponse});
 
@@ -634,7 +998,11 @@ class _$ForgotPasswordStateImpl implements _ForgotPasswordState {
   @override
   final bool isSubmitting;
   @override
+  final bool isValidating;
+  @override
   final bool showErrorMessages;
+  @override
+  final String resetPasswordKey;
   @override
   final Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption;
   @override
@@ -642,7 +1010,7 @@ class _$ForgotPasswordStateImpl implements _ForgotPasswordState {
 
   @override
   String toString() {
-    return 'ForgotPasswordState(username: $username, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, resetPasswordFailureOrSuccessOption: $resetPasswordFailureOrSuccessOption, resetPasswordResponse: $resetPasswordResponse)';
+    return 'ForgotPasswordState(username: $username, isSubmitting: $isSubmitting, isValidating: $isValidating, showErrorMessages: $showErrorMessages, resetPasswordKey: $resetPasswordKey, resetPasswordFailureOrSuccessOption: $resetPasswordFailureOrSuccessOption, resetPasswordResponse: $resetPasswordResponse)';
   }
 
   @override
@@ -654,8 +1022,12 @@ class _$ForgotPasswordStateImpl implements _ForgotPasswordState {
                 other.username == username) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
+            (identical(other.isValidating, isValidating) ||
+                other.isValidating == isValidating) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
+            (identical(other.resetPasswordKey, resetPasswordKey) ||
+                other.resetPasswordKey == resetPasswordKey) &&
             (identical(other.resetPasswordFailureOrSuccessOption,
                     resetPasswordFailureOrSuccessOption) ||
                 other.resetPasswordFailureOrSuccessOption ==
@@ -669,7 +1041,9 @@ class _$ForgotPasswordStateImpl implements _ForgotPasswordState {
       runtimeType,
       username,
       isSubmitting,
+      isValidating,
       showErrorMessages,
+      resetPasswordKey,
       resetPasswordFailureOrSuccessOption,
       resetPasswordResponse);
 
@@ -685,7 +1059,9 @@ abstract class _ForgotPasswordState implements ForgotPasswordState {
   const factory _ForgotPasswordState(
           {required final Username username,
           required final bool isSubmitting,
+          required final bool isValidating,
           required final bool showErrorMessages,
+          required final String resetPasswordKey,
           required final Option<Either<ApiFailure, dynamic>>
               resetPasswordFailureOrSuccessOption,
           required final ForgotPassword resetPasswordResponse}) =
@@ -696,7 +1072,11 @@ abstract class _ForgotPasswordState implements ForgotPasswordState {
   @override
   bool get isSubmitting;
   @override
+  bool get isValidating;
+  @override
   bool get showErrorMessages;
+  @override
+  String get resetPasswordKey;
   @override
   Option<Either<ApiFailure, dynamic>> get resetPasswordFailureOrSuccessOption;
   @override

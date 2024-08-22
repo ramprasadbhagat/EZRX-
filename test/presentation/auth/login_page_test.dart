@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -49,6 +50,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 
+import '../../common_mock_data/mock_bloc.dart';
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
 
@@ -162,6 +164,7 @@ void main() {
   late ChatBotBloc chatBotBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
   late AupTcBloc aupTcBloc;
+  late ForgotPasswordBloc forgotPasswordBloc;
 
   final appMarketVariant = ValueVariant<AppMarket>(
     {
@@ -222,6 +225,7 @@ void main() {
       viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
       productDetailBloc = ProductDetailMockBloc();
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
+      forgotPasswordBloc = ForgotPasswordBlocMock();
       chatBotBloc = ChatBotMockBloc();
       aupTcBloc = AupTcBlocMock();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
@@ -262,6 +266,9 @@ void main() {
       when(() => chatBotBloc.state).thenReturn(ChatBotState.initial());
       when(() => aupTcBloc.state).thenReturn(
         AupTcState.initial(),
+      );
+      when(() => forgotPasswordBloc.state).thenReturn(
+        ForgotPasswordState.initial(),
       );
     });
 
@@ -468,6 +475,9 @@ void main() {
               ),
               BlocProvider<AupTcBloc>(
                 create: (context) => aupTcBloc,
+              ),
+              BlocProvider<ForgotPasswordBloc>(
+                create: (context) => forgotPasswordBloc,
               ),
             ],
             child: const SplashPage(),

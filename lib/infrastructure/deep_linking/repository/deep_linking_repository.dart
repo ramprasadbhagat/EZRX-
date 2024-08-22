@@ -6,7 +6,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -241,25 +240,21 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   }
 
   @override
-  Either<ApiFailure, ResetPasswordCred> extractResetPasswordCred({
+  Either<ApiFailure, String> extractResetPasswordKey({
     required Uri link,
   }) {
-    final uri = Uri.tryParse(Uri.decodeFull(link.toString()));
+    try {
+      final uri = Uri.tryParse(Uri.decodeFull(link.toString()));
 
-    final queryParameters = uri?.queryParameters ?? {};
-    if (!queryParameters.containsKey('username') ||
-        !queryParameters.containsKey('token')) {
-      return const Left(ApiFailure.passwordResetFail());
+      final queryParameters = uri?.queryParameters ?? {};
+      if ((queryParameters['key'] ?? '').isEmpty) {
+        return const Left(ApiFailure.passwordResetFail());
+      }
+
+      return Right(queryParameters['key']!);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
-
-    final setPassword = ResetPasswordCred(
-      username: Username(queryParameters['username'] ?? ''),
-      token: StringValue(queryParameters['token'] ?? ''),
-    );
-
-    return setPassword.isValid
-        ? Right(setPassword)
-        : const Left(ApiFailure.passwordResetFail());
   }
 
   @override

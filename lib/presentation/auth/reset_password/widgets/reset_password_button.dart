@@ -33,15 +33,15 @@ class _ResetPasswordButton extends StatelessWidget {
                       child: Text(
                         isFirstLogin
                             ? context.tr('Update password')
-                            : context.tr('Reset Password'),
+                            : context.tr('Reset password'),
                       ),
                     ),
                   ),
                   if (!isFirstLogin) ...[
                     const SizedBox(height: padding12),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: const BackToLogin(),
+                    const SizedBox(
+                      width: double.infinity,
+                      child: BackToLogin(),
                     ),
                   ],
                 ],
