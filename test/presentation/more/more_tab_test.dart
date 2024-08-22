@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
@@ -48,12 +49,14 @@ void main() {
   late AnnouncementBlocMock announcementBlocMock;
   late EZPointBlocMock eZPointBlocMock;
   late NotificationSettingsBlocMock notificationSettingsBlocMock;
+  late ChatBotMockBloc chatBotMockBloc;
   late AppRouter autoRouterMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory<EZPointBlocMock>(() => eZPointBlocMock);
+    locator.registerFactory<ChatBotMockBloc>(() => chatBotMockBloc);
     locator.registerLazySingleton(() => PackageInfoService());
     locator.registerFactory<NotificationSettingsBlocMock>(
       () => notificationSettingsBlocMock,
@@ -70,6 +73,7 @@ void main() {
     userBlocMock = UserBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     eligibilityBlocMock = EligibilityBlocMock();
+    chatBotMockBloc = ChatBotMockBloc();
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
     announcementBlocMock = AnnouncementBlocMock();
@@ -108,6 +112,9 @@ void main() {
           ),
           BlocProvider<NotificationSettingsBloc>(
             create: (context) => notificationSettingsBlocMock,
+          ),
+          BlocProvider<ChatBotBloc>(
+            create: (context) => chatBotMockBloc,
           ),
         ],
         child: const MoreTab(),
@@ -556,6 +563,49 @@ void main() {
         expect(paymentsTileFinder, findsOneWidget);
       },
     );
+
+    testWidgets(
+      ' -> Test Service tile buildWhen customerCodeConfig change',
+      (WidgetTester tester) async {
+        final expectedState = [
+          EligibilityState.initial(),
+          EligibilityState.initial().copyWith(
+            customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+              disableReturns: true,
+            ),
+          ),
+        ];
+
+        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedState));
+
+        await getWidget(tester);
+        await tester.pump();
+        final returnsTileFinder = find.byKey(WidgetKeys.returnsTile);
+        expect(returnsTileFinder, findsOneWidget);
+        final paymentsTileFinder = find.byKey(WidgetKeys.paymentsTile);
+        expect(paymentsTileFinder, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Test Setting tile buildWhen isLoginOnBehalf',
+      (WidgetTester tester) async {
+        final expectedState = [
+          UserState.initial(),
+          UserState.initial().copyWith(
+            isLoginOnBehalf: true,
+          ),
+        ];
+
+        whenListen(userBlocMock, Stream.fromIterable(expectedState));
+
+        await getWidget(tester);
+        await tester.pump();
+        final settingTileFinder = find.byKey(WidgetKeys.settingTile);
+        expect(settingTileFinder, findsOneWidget);
+      },
+    );
+
     testWidgets(
       ' -> Test Service tile',
       (WidgetTester tester) async {
@@ -631,6 +681,342 @@ void main() {
       },
     );
 
+    testWidgets(
+      ' -> Test FAQ tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final faqFinder = find.text('FAQ');
+        expect(faqFinder, findsOneWidget);
+        await tester.tap(faqFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'FAQPageRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test about us tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final aboutUsFinder = find.text('About us');
+        await tester.dragUntilVisible(
+          aboutUsFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
+        expect(aboutUsFinder, findsOneWidget);
+        await tester.tap(aboutUsFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'AboutUsPageRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test chat support tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final chatSupportFinder = find.text('Chat support');
+        await tester.dragUntilVisible(
+          chatSupportFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
+        expect(chatSupportFinder, findsOneWidget);
+        await tester.tap(chatSupportFinder);
+        await tester.pump();
+        verify(
+          () => chatBotMockBloc.add(
+            const ChatBotEvent.startChatbot(),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      ' -> Test term of use tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.text('Terms of use');
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'StaticHtmlViewerRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test privacy policy tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.text('Privacy policy');
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'StaticHtmlViewerRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test contact us tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.text('Contact us');
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'ContactUsPageRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test acceptable use policy tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.text('Acceptable Use Policy');
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'StaticHtmlViewerRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test order tab tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakePHSalesOrganisation,
+            user: fakeZPAdminUser,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.byKey(WidgetKeys.orderTile);
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pump();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'HomeNavigationTabbarRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test return tab tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeZPAdminUser,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.byKey(WidgetKeys.returnsTile);
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pump();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'ReturnRootRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test payment tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUserAccessMarketPlace,
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.byKey(WidgetKeys.paymentsTile);
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pump();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'PaymentPageRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test announcement article tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUserAccessMarketPlace,
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.byKey(WidgetKeys.announcementArticleTile);
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pump();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'AnnouncementsPageRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test profile tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUserAccessMarketPlace,
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.byKey(WidgetKeys.profileTile);
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pump();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'ProfilePageRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test security tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial(),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.byKey(WidgetKeys.securityTile);
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pump();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'ChangePasswordPageRoute');
+      },
+    );
+
+    testWidgets(
+      ' -> Test privacy consent tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial(),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final tileFinder = find.byKey(WidgetKeys.privacyConsentTile);
+        await tester.dragUntilVisible(
+          tileFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pump();
+        expect(tileFinder, findsOneWidget);
+        await tester.tap(tileFinder);
+        await tester.pump();
+        expect(autoRouterMock.current.name, 'PrivacyConsentPageRoute');
+      },
+    );
+
     group('-> MP payment tile', () {
       testWidgets('visible when user can access to marketplace',
           (tester) async {
@@ -702,5 +1088,34 @@ void main() {
 
       expect(find.byKey(WidgetKeys.securityTile), findsNothing);
     });
+
+    testWidgets(
+      ' -> Test logout tile',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeZPAdminUser,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final logoutTile = find.byKey(WidgetKeys.logOutTile);
+        await tester.dragUntilVisible(
+          logoutTile,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        expect(logoutTile, findsOneWidget);
+        await tester.tap(logoutTile);
+        await tester.pumpAndSettle();
+        verify(
+          () => authBlocMock.add(
+            const AuthEvent.logout(),
+          ),
+        ).called(1);
+      },
+    );
   });
 }

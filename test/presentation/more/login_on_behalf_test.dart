@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -21,6 +22,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -34,6 +36,13 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 
 class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
+
+class MockUsername extends Mock implements Username {
+  @override
+  String getOrDefaultValue(defaultValue) {
+    return value.fold((f) => defaultValue, id);
+  }
+}
 
 final locator = GetIt.instance;
 
@@ -49,7 +58,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    autoRouterMock = locator<AppRouter>();
+    autoRouterMock = AutoRouteMock();
     userBlocMock = UserBlocMock();
     eligibilityBlocMock = EligibilityBlockMock();
     proxyLoginFormBlocMock = ProxyLoginFormBlocMock();
@@ -150,6 +159,12 @@ void main() {
         find.byKey(WidgetKeys.loginOnBehalfCancelButtonKey),
         findsOneWidget,
       );
+      // verify button tap event
+      when(() => autoRouterMock.maybePop())
+          .thenAnswer((invocation) async => true);
+      await tester.tap(find.byKey(WidgetKeys.loginOnBehalfCancelButtonKey));
+      await tester.pumpAndSettle();
+      verify(() => autoRouterMock.maybePop()).called(1);
     });
     testWidgets('Proxy Login User Name Field test', (tester) async {
       when(() => userBlocMock.state).thenReturn(
@@ -237,6 +252,53 @@ void main() {
         final usernameErrorText =
             find.textContaining('Username cannot be empty.'.tr());
         expect(usernameErrorText, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Login Validation - Username is validated without error',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final textButtonFinder = find.byKey(WidgetKeys.loginOnBehalfButtonKey);
+        await tester.tap(textButtonFinder);
+        await tester.pumpAndSettle();
+        final proxyLoginUserNameField =
+            find.byKey(WidgetKeys.proxyLoginUserNameField);
+        expect(find.byKey(WidgetKeys.proxyLoginUserNameField), findsOneWidget);
+        await tester.enterText(proxyLoginUserNameField, 'fake_name');
+
+        final loginButtonFinder =
+            find.byKey(WidgetKeys.loginOnBehalfLoginButtonKey);
+        await tester.tap(loginButtonFinder);
+        await tester.pumpAndSettle();
+
+        final usernameErrorText =
+            find.textContaining('Username cannot be empty.'.tr());
+        expect(usernameErrorText, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Test Setting tile buildWhen isLoginOnBehalf',
+      (WidgetTester tester) async {
+        final expectedState = [
+          UserState.initial(),
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(type: RoleType('zp_admin')),
+            ),
+          ),
+        ];
+
+        whenListen(userBlocMock, Stream.fromIterable(expectedState));
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final textButtonFinder = find.byKey(WidgetKeys.loginOnBehalfButtonKey);
+        await tester.tap(textButtonFinder);
       },
     );
   });

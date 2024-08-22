@@ -8,6 +8,7 @@ import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_local.dar
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,6 +16,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:universal_io/io.dart';
 
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -47,12 +49,14 @@ void main() {
     );
     aboutUsBloc = AboutUsBlocMock();
     eligibilityBloc = EligibilityBlockMock();
-    appRouter = locator<AppRouter>();
+    appRouter = AutoRouteMock();
     aboutUs = (await AboutUsLocalDataSource()
             .getAboutUsStaticInfo(fakeSGSalesOrg.aboutUsMockFile))
         .copyWith(
       banner: BannerTemplate.empty(),
       ourPartners: MediaListTemplate.empty(),
+      certifications: SliderTemplate.empty()
+          .copyWith(certificates: [Certifications.empty()]),
     );
     when(() => eligibilityBloc.state).thenReturn(
       eligibilityState,
@@ -93,7 +97,9 @@ void main() {
 
       expect(find.byKey(WidgetKeys.loaderImage), findsOneWidget);
     });
-    testWidgets('Should show the layout when fetching success', (tester) async {
+    testWidgets(
+        'Should show the layout when fetching success with multiple partner',
+        (tester) async {
       when(() => aboutUsBloc.state).thenReturn(
         aboutUsState.copyWith(isFetching: false, aboutUsInfo: aboutUs),
       );
@@ -101,7 +107,13 @@ void main() {
         aboutUsBloc,
         Stream.fromIterable([
           aboutUsState.copyWith(isFetching: true),
-          aboutUsState.copyWith(isFetching: false, aboutUsInfo: aboutUs),
+          aboutUsState.copyWith(
+            isFetching: false,
+            aboutUsInfo: aboutUs.copyWith(
+              ourPartners: MediaListTemplate.empty()
+                  .copyWith(mediaItems: [const MediaItem(url: 'fake-url')]),
+            ),
+          ),
         ]),
       );
 
@@ -114,32 +126,48 @@ void main() {
         find.byKey(WidgetKeys.aboutUsCertificationsSection),
         findsOneWidget,
       );
-      await tester.drag(
-        find.byKey(WidgetKeys.aboutUsHeaderSection),
-        defaultScrollOffset,
+      expect(find.byKey(WidgetKeys.aboutUsHeaderSection), findsOneWidget);
+
+      // verify button on header section
+      when(
+        () => appRouter.push(
+          ContactUsPageRoute(appMarket: aboutUsState.salesOrg.appMarket),
+        ),
+      ).thenAnswer((_) => Future.value());
+      final buttonFinder = find.ancestor(
+        of: find.text(aboutUs.banner.buttonName),
+        matching: find.byType(ElevatedButton),
       );
+      await tester.tap(buttonFinder);
       await tester.pumpAndSettle();
+      verify(
+        () => appRouter.push(
+          ContactUsPageRoute(appMarket: aboutUsState.salesOrg.appMarket),
+        ),
+      ).called(1);
+
       expect(find.byKey(WidgetKeys.aboutUsWhoWeAreSection), findsOneWidget);
       await tester.dragUntilVisible(
         find.byKey(WidgetKeys.aboutUsOutPartnersSection),
         find.byKey(WidgetKeys.aboutUsListContent),
         defaultScrollOffset,
       );
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(
         find.byKey(WidgetKeys.aboutUsOutPartnersSection),
         findsOneWidget,
       );
+      // verify custom image display
+      expect(find.byKey(WidgetKeys.imageBanner), findsOneWidget);
       await tester.dragUntilVisible(
         find.byKey(WidgetKeys.aboutUsReachUsSection),
         find.byKey(WidgetKeys.aboutUsListContent),
         defaultScrollOffset,
       );
-      await tester.pumpAndSettle();
+      await tester.pump();
       expect(find.byKey(WidgetKeys.aboutUsReachUsSection), findsOneWidget);
     });
-
     testWidgets('Should show the empty layout when the info is empty',
         (tester) async {
       when(() => aboutUsBloc.state).thenReturn(
@@ -216,6 +244,25 @@ void main() {
       expect(find.byKey(WidgetKeys.aboutUsHeaderSection), findsNothing);
       expect(find.byKey(WidgetKeys.aboutUsCertificationsSection), findsNothing);
       expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+    });
+    testWidgets('Should not show error when api fold right unit',
+        (tester) async {
+      whenListen(
+        aboutUsBloc,
+        Stream.fromIterable([
+          aboutUsState.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+          aboutUsState.copyWith(
+            isFetching: false,
+            apiFailureOrSuccessOption: optionOf(const Right(unit)),
+          ),
+        ]),
+      );
+      await tester.pumpWidget(getWidgetToTest());
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.customSnackBar), findsNothing);
     });
     testWidgets('Should show button scroll to top when scroll down',
         (tester) async {
