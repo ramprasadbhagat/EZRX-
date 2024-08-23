@@ -4162,6 +4162,62 @@ void main() {
             },
           );
         });
+
+        group('External Sales Rep small order fee in SG market', () {
+          testWidgets(
+            ' -> isPPATriggerMaintained is True then click checkout; click agree to checkout page',
+            (WidgetTester tester) async {
+              final fakeExtSalesRep = fakeExternalSalesRepUser.copyWith(
+                isPPATriggerMaintained: true,
+              );
+              final mockItem = mockCartItems.first.copyWith(
+                tenderContract: TenderContract.empty(),
+                quantity: 1,
+                stockInfoList: [
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                    materialNumber: mockCartItems.first.getMaterialNumber,
+                    stockQuantity: 10,
+                  ),
+                ],
+                salesOrgConfig: fakeSGSalesOrgConfigs,
+              );
+              when(() => autoRouterMock.push(const CheckoutPageRoute()))
+                  .thenAnswer((invocation) => Future.value());
+              final orderEligibilityState =
+                  OrderEligibilityState.initial().copyWith(
+                user: fakeExtSalesRep,
+                salesOrg: fakeSGSalesOrganisation,
+                configs: fakeSGSalesOrgConfigsWithSmallOrderFee,
+                cartItems: [
+                  mockItem,
+                ],
+              );
+              when(() => cartBloc.state).thenReturn(
+                CartState.initial().copyWith(
+                  user: fakeExtSalesRep,
+                  cartProducts: [
+                    mockItem,
+                  ],
+                  salesOrganisation: fakeSGSalesOrganisation,
+                  config: fakeSGSalesOrgConfigsWithSmallOrderFee,
+                ),
+              );
+              when(() => orderEligibilityBlocMock.state).thenReturn(
+                orderEligibilityState,
+              );
+              await tester.pumpWidget(getWidget());
+              await tester.pump();
+              final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+              expect(checkoutButton, findsOneWidget);
+              expect(orderEligibilityState.isCheckoutDisabled, false);
+              await tester.tap(checkoutButton);
+              await tester.pumpAndSettle();
+              verify(() => autoRouterMock.push(const CheckoutPageRoute()))
+                  .called(1);
+            },
+          );
+        });
       });
       testWidgets(
         ' -> Stock Info banner visible in cart',

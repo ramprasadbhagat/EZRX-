@@ -559,6 +559,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
   bool get _extSalesRepMOVEligible =>
       cartItems.zpMaterialOnly.isMOVExclusion ||
       _isAuthorizedExternalSalesRep ||
+      user.isPPATriggerMaintained ||
       zpSubtotalInStockGreaterThanSAPMOV;
 
   SalesRepAuthorizedDetails get getSalesRepAuthorizedDetails {
