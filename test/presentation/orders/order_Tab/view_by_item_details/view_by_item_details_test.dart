@@ -869,6 +869,18 @@ void main() {
         );
       });
 
+      testWidgets('is not visible when detail is loading', (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            isDetailsLoading: true,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        expect(button, findsNothing);
+      });
+
       testWidgets(
           'is not visible when marketPlace is not enabled and the item is MP',
           (tester) async {

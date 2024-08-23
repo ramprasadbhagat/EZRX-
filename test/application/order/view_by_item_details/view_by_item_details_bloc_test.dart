@@ -1048,6 +1048,14 @@ void main() {
           ),
         ],
       );
+      group('test displayBuyAgainButton getter =>', () {
+        test('return false when isDetailsLoading is true', () {
+          final state = seedState.copyWith(
+            isDetailsLoading: true,
+          );
+          expect(state.displayBuyAgainButton, isFalse);
+        });
+      });
     },
   );
 }

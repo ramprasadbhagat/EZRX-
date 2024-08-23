@@ -84,51 +84,49 @@ class ViewByItemDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
-    return BlocProvider<ReOrderPermissionBloc>(
-      create: (context) => locator<ReOrderPermissionBloc>()
-        ..add(
-          ReOrderPermissionEvent.initialized(
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-            shipToInfo: eligibilityState.shipToInfo,
-            salesOrganisation: eligibilityState.salesOrganisation,
-            salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-            user: eligibilityState.user,
+    return BlocConsumer<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+      listenWhen: (previous, current) =>
+          previous.failureOrSuccessOption != current.failureOrSuccessOption ||
+          previous.isDetailsLoading != current.isDetailsLoading,
+      listener: (context, state) {
+        state.failureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) {},
           ),
-        ),
-      child: Scaffold(
-        appBar: CustomAppBar.commonAppBar(
-          title: Text(context.tr('Item Details')),
-          customerBlockedOrSuspended: eligibilityState.customerBlockOrSuspended,
-        ),
-        bottomNavigationBar:
-            context.read<ViewByItemDetailsBloc>().state.displayBuyAgainButton
-                ? const _BuyAgainButton()
-                : null,
-        body: BlocConsumer<ViewByItemDetailsBloc, ViewByItemDetailsState>(
-          listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption !=
-                  current.failureOrSuccessOption ||
-              previous.isDetailsLoading != current.isDetailsLoading,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
+        );
+      },
+      buildWhen: (previous, current) =>
+          previous.isStatusLoading != current.isStatusLoading ||
+          previous.isInvoiceLoading != current.isInvoiceLoading ||
+          previous.isDetailsLoading != current.isDetailsLoading ||
+          previous.orderHistorySelectedItem !=
+              current.orderHistorySelectedItem ||
+          previous.orderHistoryStatuses != current.orderHistoryStatuses,
+      builder: (context, state) {
+        return BlocProvider<ReOrderPermissionBloc>(
+          create: (context) => locator<ReOrderPermissionBloc>()
+            ..add(
+              ReOrderPermissionEvent.initialized(
+                customerCodeInfo: eligibilityState.customerCodeInfo,
+                shipToInfo: eligibilityState.shipToInfo,
+                salesOrganisation: eligibilityState.salesOrganisation,
+                salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+                user: eligibilityState.user,
               ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.isStatusLoading != current.isStatusLoading ||
-              previous.isInvoiceLoading != current.isInvoiceLoading ||
-              previous.isDetailsLoading != current.isDetailsLoading ||
-              previous.orderHistorySelectedItem !=
-                  current.orderHistorySelectedItem ||
-              previous.orderHistoryStatuses != current.orderHistoryStatuses,
-          builder: (context, state) {
-            return state.isDetailsLoading
+            ),
+          child: Scaffold(
+            appBar: CustomAppBar.commonAppBar(
+              title: Text(context.tr('Item Details')),
+              customerBlockedOrSuspended:
+                  eligibilityState.customerBlockOrSuspended,
+            ),
+            bottomNavigationBar:
+                state.displayBuyAgainButton ? const _BuyAgainButton() : null,
+            body: state.isDetailsLoading
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )
@@ -138,19 +136,20 @@ class ViewByItemDetailsPage extends StatelessWidget {
                     ),
                     invoiceDetailResponse: state.invoiceDetail,
                     isInvoiceLoading: state.isInvoiceLoading,
-                    onLoadMoreInvoices: () => context
-                        .read<ViewByItemDetailsBloc>()
-                        .add(const ViewByItemDetailsEvent.loadMoreInvoices()),
+                    onLoadMoreInvoices: () =>
+                        context.read<ViewByItemDetailsBloc>().add(
+                              const ViewByItemDetailsEvent.loadMoreInvoices(),
+                            ),
                     orderItemHistoryTab: const _OrderItemHistoryItemTab(),
                     lineNumberSelected: state.orderHistorySelectedItems
                         .map(
                           (e) => e.lineNumber,
                         )
                         .toList(),
-                  );
-          },
-        ),
-      ),
+                  ),
+          ),
+        );
+      },
     );
   }
 }

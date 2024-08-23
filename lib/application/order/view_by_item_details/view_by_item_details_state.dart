@@ -91,6 +91,10 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
       return false;
     }
 
+    if (isDetailsLoading) {
+      return false;
+    }
+
     return true;
   }
 }
