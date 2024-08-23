@@ -6,8 +6,11 @@ import 'package:ezrxmobile/domain/account/entities/privacy_control.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/privacy_consent/privacy_consent_page.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -92,6 +95,22 @@ void main() {
 
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
+
+          //Testing app bar
+          final commonAppBarFinder =
+              find.byKey(WidgetKeys.privacyConsentAppBarTitle);
+          final textFinder = find.descendant(
+            of: find.byType(CustomAppBar),
+            matching: find.text('Privacy consent'),
+          );
+          expect(textFinder, findsOneWidget);
+          final textStyle = tester.widget<Text>(commonAppBarFinder).style;
+          expect(textStyle!.fontSize, 18);
+          expect(
+            textStyle.fontWeight,
+            FontWeight.w600,
+          );
+
           final clearButtonFinder =
               find.byKey(WidgetKeys.privacyConsentClearButton);
           expect(clearButtonFinder, findsOneWidget);
@@ -189,9 +208,25 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
+
+          //Testing success snack bar
           final snackBarFinder =
               find.byKey(WidgetKeys.privacyConsentSuccessSnackBar);
-          expect(snackBarFinder, findsOneWidget);
+
+          final textFinder = find.descendant(
+            of: snackBarFinder,
+            matching: find.text('Privacy settings saved successfully'),
+          );
+          expect(textFinder, findsOneWidget);
+
+          final textStyle =
+              tester.widget<CustomSnackBar>(snackBarFinder).textStyle;
+
+          expect(textStyle!.fontSize, 14);
+          expect(
+            textStyle.color,
+            ZPColors.black,
+          );
         },
       );
 

@@ -24,7 +24,11 @@ class PrivacyConsentPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.privacyConsentPage,
       appBar: CustomAppBar.commonAppBar(
-        title: Text(context.tr('Privacy consent')),
+        title: Text(
+          context.tr('Privacy consent'),
+          style: Theme.of(context).textTheme.labelLarge,
+          key: WidgetKeys.privacyConsentAppBarTitle,
+        ),
         customerBlockedOrSuspended:
             context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
@@ -57,6 +61,7 @@ class PrivacyConsentPage extends StatelessWidget {
                 (_) {
                   CustomSnackBar(
                     key: WidgetKeys.privacyConsentSuccessSnackBar,
+                    textStyle: Theme.of(context).textTheme.titleSmall,
                     messageText:
                         context.tr('Privacy settings saved successfully'),
                   ).show(context);

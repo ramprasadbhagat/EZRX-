@@ -1652,6 +1652,7 @@ class WidgetKeys {
   // Privacy Consent Page
   //============================================================
   static Key privacyConsentPage = const Key('privacyConsentPage');
+  static Key privacyConsentAppBarTitle = const Key('privacyConsentAppBar');
   static Key privacyConsentSuccessSnackBar =
       const Key('privacyConsentSuccessSnackBar');
   static Key privacyConsentClearButton = const Key('privacyConsentClearButton');
