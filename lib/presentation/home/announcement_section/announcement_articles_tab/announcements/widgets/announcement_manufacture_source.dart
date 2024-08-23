@@ -33,11 +33,10 @@ class AnnouncementManufactureSource extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: displayDetails.join(' | '),
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: ZPColors.neutralsGrey1,
-                fontSize: 10,
-                fontWeight: FontWeight.w400,
-              ),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color: ZPColors.neutralsGrey1,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
     );

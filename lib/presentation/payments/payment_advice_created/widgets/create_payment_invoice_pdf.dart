@@ -19,6 +19,23 @@ import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 
 class CreatePaymentInvoicePdf {
+  pw.TextStyle get extraSmallPwTextStyle => const pw.TextStyle(
+        fontSize: 10,
+        letterSpacing: 0.25,
+      );
+
+  pw.TextStyle get smallPwTextStyle => extraSmallPwTextStyle.copyWith(
+        fontSize: 12,
+      );
+
+  pw.TextStyle get mediumPwTextStyle => extraSmallPwTextStyle.copyWith(
+        fontSize: 14,
+      );
+
+  pw.TextStyle get largePwTextStyle => extraSmallPwTextStyle.copyWith(
+        fontSize: 16,
+      );
+
   DateTimeStringValue expiryDate({
     required DateTimeStringValue valueDate,
     required int expiryDays,
@@ -78,16 +95,12 @@ class CreatePaymentInvoicePdf {
                 child: pw.Text(
                   cell,
                   style: isHeader
-                      ? pw.TextStyle(
-                          fontSize: 14,
+                      ? mediumPwTextStyle.copyWith(
                           color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
                           fontWeight: pw.FontWeight.bold,
-                          letterSpacing: 0.25,
                         )
-                      : pw.TextStyle(
-                          fontSize: 12,
+                      : smallPwTextStyle.copyWith(
                           color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
-                          letterSpacing: 0.25,
                         ),
                   maxLines: 1,
                   overflow: pw.TextOverflow.clip,
@@ -122,11 +135,9 @@ class CreatePaymentInvoicePdf {
             flex: 2,
             child: pw.Text(
               '${'Payment Advice'.tr()} $zzAdvice',
-              style: pw.TextStyle(
-                fontSize: 16,
+              style: largePwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.white.value),
                 fontWeight: pw.FontWeight.bold,
-                letterSpacing: 0.25,
               ),
               overflow: pw.TextOverflow.clip,
               maxLines: 1,
@@ -216,30 +227,24 @@ class CreatePaymentInvoicePdf {
           children: [
             pw.Text(
               customerName,
-              style: pw.TextStyle(
-                fontSize: 16,
+              style: largePwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
                 fontWeight: pw.FontWeight.bold,
-                letterSpacing: 0.25,
               ),
             ),
             pw.SizedBox(height: 4.0),
             pw.Text(
               shipToInfo.deliveryAddress,
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
-                letterSpacing: 0.25,
               ),
               maxLines: 2,
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
               '${'Customer Code'.tr()}: $payer',
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
@@ -259,21 +264,17 @@ class CreatePaymentInvoicePdf {
           children: [
             pw.Text(
               '${'Payment Amount'.tr()} (${paymentItems.first.transactionCurrency})',
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
               paymentDue.totalAmount,
-              style: pw.TextStyle(
-                fontSize: 16,
+              style: largePwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
                 fontWeight: pw.FontWeight.bold,
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
@@ -323,21 +324,17 @@ class CreatePaymentInvoicePdf {
           children: [
             pw.Text(
               'Date created'.tr(),
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
               createdDate.dateTimeOrNaString,
-              style: pw.TextStyle(
-                fontSize: 16,
+              style: largePwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
                 fontWeight: pw.FontWeight.bold,
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
@@ -356,21 +353,17 @@ class CreatePaymentInvoicePdf {
           children: [
             pw.Text(
               'Payment advice expiry date'.tr(),
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
               expiryDate.dateTimeOrNaString,
-              style: pw.TextStyle(
-                fontSize: 16,
+              style: largePwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
                 fontWeight: pw.FontWeight.bold,
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
@@ -386,21 +379,17 @@ class CreatePaymentInvoicePdf {
           children: [
             pw.Text(
               'Payment Method'.tr(),
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
             ),
             pw.Text(
               paymentMethod,
-              style: pw.TextStyle(
-                fontSize: 16,
+              style: largePwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
                 fontWeight: pw.FontWeight.bold,
-                letterSpacing: 0.25,
               ),
               maxLines: 1,
               overflow: pw.TextOverflow.clip,
@@ -467,10 +456,8 @@ class CreatePaymentInvoicePdf {
           child: pw.Center(
             child: pw.Text(
               footer,
-              style: pw.TextStyle(
-                fontSize: 10,
+              style: extraSmallPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.primary.value),
-                letterSpacing: 0.25,
               ),
             ),
           ),
@@ -482,27 +469,21 @@ class CreatePaymentInvoicePdf {
         children: [
           pw.Text(
             'For QR Code payment'.tr(),
-            style: pw.TextStyle(
-              fontSize: 16,
+            style: largePwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
               fontWeight: pw.FontWeight.bold,
-              letterSpacing: 0.25,
             ),
           ),
           pw.Text(
             '1. Log in to Banking App'.tr(),
-            style: pw.TextStyle(
-              fontSize: 14,
+            style: mediumPwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
-              letterSpacing: 0.25,
             ),
           ),
           pw.Text(
             '2. Scan below & Pay'.tr(),
-            style: pw.TextStyle(
-              fontSize: 14,
+            style: mediumPwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
-              letterSpacing: 0.25,
             ),
           ),
         ],
@@ -513,27 +494,21 @@ class CreatePaymentInvoicePdf {
         children: [
           pw.Text(
             'For Bank Transfer or UEN Payment'.tr(),
-            style: pw.TextStyle(
-              fontSize: 16,
+            style: largePwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
               fontWeight: pw.FontWeight.bold,
-              letterSpacing: 0.25,
             ),
           ),
           pw.Text(
             '1. Log in to Banking App or Online banking'.tr(),
-            style: pw.TextStyle(
-              fontSize: 14,
+            style: mediumPwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
-              letterSpacing: 0.25,
             ),
           ),
           pw.Text(
             '2. Select Bank Account Transfer or UEN payment'.tr(),
-            style: pw.TextStyle(
-              fontSize: 14,
+            style: mediumPwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
-              letterSpacing: 0.25,
             ),
           ),
         ],
@@ -544,28 +519,22 @@ class CreatePaymentInvoicePdf {
         children: [
           pw.Text(
             'For Bank-In Payment'.tr(),
-            style: pw.TextStyle(
-              fontSize: 16,
+            style: largePwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
               fontWeight: pw.FontWeight.bold,
-              letterSpacing: 0.25,
             ),
           ),
           pw.SizedBox(height: 5),
           pw.Text(
             '1. Log in to Banking App'.tr(),
-            style: pw.TextStyle(
-              fontSize: 14,
+            style: mediumPwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
-              letterSpacing: 0.25,
             ),
           ),
           pw.Text(
             '2. Scan below & Pay'.tr(),
-            style: pw.TextStyle(
-              fontSize: 14,
+            style: mediumPwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.primary.value),
-              letterSpacing: 0.25,
             ),
           ),
         ],
@@ -587,20 +556,16 @@ class CreatePaymentInvoicePdf {
             width: 135,
             child: pw.Text(
               key,
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.neutralsGrey1.value),
-                letterSpacing: 0.25,
               ),
             ),
           ),
           pw.Expanded(
             child: pw.Text(
               value,
-              style: pw.TextStyle(
-                fontSize: 14,
+              style: mediumPwTextStyle.copyWith(
                 color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
-                letterSpacing: 0.25,
               ),
               maxLines: 2,
             ),
@@ -690,11 +655,9 @@ class CreatePaymentInvoicePdf {
         children: [
           pw.Text(
             'Account Information'.tr(),
-            style: pw.TextStyle(
-              fontSize: 14,
+            style: mediumPwTextStyle.copyWith(
               color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
               fontWeight: pw.FontWeight.bold,
-              letterSpacing: 0.25,
             ),
           ),
           pw.SizedBox(height: 8),
@@ -751,20 +714,16 @@ class CreatePaymentInvoicePdf {
               width: 120,
               child: pw.Text(
                 title,
-                style: pw.TextStyle(
-                  fontSize: 14,
+                style: mediumPwTextStyle.copyWith(
                   color: PdfColor.fromInt(ZPColors.neutralsGrey1.value),
-                  letterSpacing: 0.25,
                 ),
               ),
             ),
             pw.Expanded(
               child: pw.Text(
                 value,
-                style: pw.TextStyle(
-                  fontSize: 14,
+                style: mediumPwTextStyle.copyWith(
                   color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
-                  letterSpacing: 0.25,
                 ),
                 maxLines: 2,
               ),
@@ -787,8 +746,7 @@ class CreatePaymentInvoicePdf {
               padding: const pw.EdgeInsets.symmetric(vertical: 3),
               child: pw.Text(
                 'or'.tr().toUpperCase(),
-                style: pw.TextStyle(
-                  fontSize: 16,
+                style: largePwTextStyle.copyWith(
                   color: PdfColor.fromInt(ZPColors.darkGray.value),
                 ),
               ),
@@ -803,10 +761,8 @@ class CreatePaymentInvoicePdf {
       );
 
   pw.Widget get _bankInNotes {
-    final normalNotesStyle = pw.TextStyle(
-      fontSize: 14,
+    final normalNotesStyle = mediumPwTextStyle.copyWith(
       color: PdfColor.fromInt(ZPColors.neutralsGrey1.value),
-      letterSpacing: 0.25,
     );
 
     return pw.Column(

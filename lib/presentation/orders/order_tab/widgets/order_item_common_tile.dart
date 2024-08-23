@@ -109,13 +109,9 @@ class OrderItemCommonTile extends StatelessWidget {
                           if (sellerName.isNotEmpty)
                             Text(
                               sellerName,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: ZPColors.neutralsGrey1,
-                                    fontSize: 10,
-                                  ),
+                              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                                color: ZPColors.neutralsGrey1,
+                              ),
                             ),
                           priceComponentSubtitle,
                         ],

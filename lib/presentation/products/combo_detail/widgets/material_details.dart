@@ -101,10 +101,9 @@ class _MaterialDetails extends StatelessWidget {
               Text(
                 comboItem.materialInfo.getManufactured,
                 key: WidgetKeys.manufacturerMaterials,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: 10,
-                      color: ZPColors.neutralsGrey1,
-                    ),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: ZPColors.neutralsGrey1,
+                ),
               ),
               if (context
                   .read<EligibilityBloc>()
@@ -113,10 +112,9 @@ class _MaterialDetails extends StatelessWidget {
                   .expiryDateDisplay)
                 Text(
                   '${context.tr('Expires')}: ${comboItem.stockInfo.expiryDate.dateOrNaString}',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 10,
-                        color: ZPColors.neutralsGrey1,
-                      ),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    color: ZPColors.neutralsGrey1,
+                  ),
                 ),
               _MaterialPriceSection(
                 comboItem: comboItem,

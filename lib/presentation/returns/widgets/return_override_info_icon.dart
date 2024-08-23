@@ -77,10 +77,9 @@ class ReturnOverrideInfoIcon extends StatelessWidget {
             Flexible(
               child: Text(
                 context.tr('Approver updated'),
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: ZPColors.nextTextBg,
-                      fontSize: 10,
-                    ),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: ZPColors.nextTextBg,
+                ),
               ),
             ),
           ],

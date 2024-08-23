@@ -63,7 +63,7 @@ class StaticHtmlViewerState extends State<StaticHtmlViewer> {
                   useWideViewPort: false,
                   enableViewportScale: true,
                   preferredContentMode: UserPreferredContentMode.RECOMMENDED,
-                  minimumFontSize: 14,
+                  minimumFontSize: Theme.of(context).textTheme.bodyMedium?.fontSize?.toInt(),
                   allowUniversalAccessFromFileURLs: true,
                 ),
                 onLoadStop: (controller, url) async {

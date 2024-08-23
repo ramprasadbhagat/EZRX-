@@ -25,7 +25,6 @@ class AnnouncementFilterBottomSheet extends StatelessWidget {
             child: Text(
               context.tr('Category'),
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
             ),

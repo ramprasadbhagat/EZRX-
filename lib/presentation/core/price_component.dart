@@ -225,8 +225,8 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
   var priceTextStyle = Theme.of(context).textTheme.labelSmall;
   switch (type) {
     case PriceStyle.comboSubTotalItemWithTax:
-      priceTextStyle = Theme.of(context).textTheme.labelSmall!.copyWith(
-            fontSize: 12,
+      priceTextStyle = Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontWeight: FontWeight.w600,
           );
       break;
     case PriceStyle.bundleFinalPrice:
@@ -244,9 +244,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       break;
     case PriceStyle.taxPrice:
     case PriceStyle.comboOfferPrice:
-      priceTextStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontSize: 12,
-          );
+      priceTextStyle = Theme.of(context).textTheme.bodySmall!.copyWith();
       break;
     case PriceStyle.totalPrice:
     case PriceStyle.credits:
@@ -273,8 +271,8 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       break;
     case PriceStyle.bundlePrice:
     case PriceStyle.productPrice:
-      priceTextStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
-            fontSize: 24,
+      priceTextStyle = Theme.of(context).textTheme.displayLarge?.copyWith(
+            fontWeight: FontWeight.w600,
           );
     case PriceStyle.bundleAddToCartPrice:
       priceTextStyle = Theme.of(context).textTheme.labelLarge;
@@ -292,14 +290,12 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       priceTextStyle = Theme.of(context).textTheme.bodyLarge!;
       break;
     case PriceStyle.counterOfferListPrice:
-      priceTextStyle = Theme.of(context).textTheme.bodySmall!.copyWith(
+      priceTextStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
             color: ZPColors.darkGray,
-            fontSize: 14,
           );
       break;
     case PriceStyle.deliveryOptionFee:
       priceTextStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontSize: 14,
             fontWeight: FontWeight.w700,
           );
       break;
@@ -343,8 +339,7 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.neutralsBlack,
           );
     case PriceStyle.taxPrice:
-      return Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontSize: 12,
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
           );
     case PriceStyle.grandTotalPrice:
@@ -352,9 +347,9 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.neutralsBlack,
           );
     case PriceStyle.bundlePrice:
-      return Theme.of(context).textTheme.labelLarge!.copyWith(
+      return Theme.of(context).textTheme.displayLarge!.copyWith(
             color: ZPColors.neutralsBlack,
-            fontSize: 24,
+            fontWeight: FontWeight.w600,
           );
     case PriceStyle.bundleAddToCartPrice:
       return Theme.of(context).textTheme.labelLarge!.copyWith(
@@ -366,9 +361,8 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           .labelSmall!
           .copyWith(color: ZPColors.primary);
     case PriceStyle.comboOfferPrice:
-      return Theme.of(context).textTheme.titleSmall!.copyWith(
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkerGrey,
-            fontSize: 12,
             decoration: TextDecoration.lineThrough,
           );
     case PriceStyle.comboOfferPriceDiscounted:
@@ -376,9 +370,8 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.darkerGrey,
           );
     case PriceStyle.comboSubTotalItemWithTax:
-      return Theme.of(context).textTheme.labelSmall!.copyWith(
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
-            fontSize: 12,
           );
     case PriceStyle.comboSubTotalExclTax:
       return Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -418,14 +411,12 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           .titleSmall!
           .copyWith(color: ZPColors.darkerGrey);
     case PriceStyle.counterOfferListPrice:
-      return Theme.of(context).textTheme.bodySmall!.copyWith(
+      return Theme.of(context).textTheme.bodyLarge!.copyWith(
             color: ZPColors.darkGray,
-            fontSize: 14,
           );
     case PriceStyle.productPrice:
-      return Theme.of(context).textTheme.titleLarge!.copyWith(
+      return Theme.of(context).textTheme.displayLarge!.copyWith(
             color: ZPColors.primary,
-            fontSize: 24,
           );
     case PriceStyle.returnBonusPrice:
     case PriceStyle.bundleCartPrice:

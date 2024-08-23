@@ -93,11 +93,9 @@ class BundleGridItem extends StatelessWidget {
                                   ? '${context.tr(materialInfo.manufacturerPrefix)}: '
                                   : '') +
                               materialInfo.getManufactured,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.neutralsGrey1,
-                                    fontSize: 10,
-                                  ),
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            color: ZPColors.neutralsGrey1,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           key: WidgetKeys.bundlesManufactured,
@@ -210,8 +208,7 @@ class _BundleMaterial extends StatelessWidget {
               materialData.defaultMaterialDescription,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style:
-                  Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10),
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ),
         ),

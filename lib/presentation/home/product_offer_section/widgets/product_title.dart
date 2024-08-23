@@ -74,11 +74,9 @@ class _ProductTile extends StatelessWidget {
                           ),
                           Text(
                             materialInfo.getManufactured,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: ZPColors.extraLightGrey4,
-                                      fontSize: 10,
-                                    ),
+                            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                              color: ZPColors.extraLightGrey4,
+                            ),
                             overflow: TextOverflow.ellipsis,
                           ),
                           Row(

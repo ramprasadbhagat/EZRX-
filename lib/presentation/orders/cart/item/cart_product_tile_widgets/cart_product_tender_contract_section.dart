@@ -209,10 +209,9 @@ class _DetailField extends StatelessWidget {
         children: [
           Text(
             context.tr(title),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 10,
-                  color: ZPColors.neutralsGrey1,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.neutralsGrey1,
+            ),
           ),
           !isPriceDisplay
               ? Text(

@@ -153,9 +153,8 @@ class _ItemSubTotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final txtStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+    final txtStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
           fontWeight: FontWeight.w400,
-          fontSize: 12,
           color: ZPColors.darkGray,
         );
 
@@ -175,9 +174,8 @@ class _ItemSubTotalSection extends StatelessWidget {
               Flexible(
                 child: Text(
                   context.tr('Item subtotal:'),
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
                         color: ZPColors.darkGray,
                       ),
                 ),

@@ -28,11 +28,10 @@ class DiscountTagWidget extends StatelessWidget {
             'percent': rateDisplay,
           },
         ),
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: ZPColors.lightBgYellow,
-            ),
+        style: Theme.of(context).textTheme.displaySmall?.copyWith(
+          fontWeight: FontWeight.w600,
+          color: ZPColors.lightBgYellow,
+        ),
       ),
     );
   }

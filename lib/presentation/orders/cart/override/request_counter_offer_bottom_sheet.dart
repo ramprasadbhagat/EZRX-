@@ -142,9 +142,8 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                             salesOrgConfig: eligibilityState.salesOrgConfigs,
                             price: cartItem.display(PriceType.listPrice),
                             priceLabelStyle:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
                                       color: ZPColors.darkGray,
-                                      fontSize: 14,
                                     ),
                             type: PriceStyle.counterOfferListPrice,
                           ),

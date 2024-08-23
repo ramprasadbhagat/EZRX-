@@ -8,10 +8,10 @@ class _ViewByItemFilterAppBar extends StatelessWidget {
     return AppBar(
       title: Text(
         context.tr('Filter'),
-        style: Theme.of(context)
-            .textTheme
-            .labelLarge
-            ?.copyWith(color: ZPColors.primary, fontSize: 20),
+        style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              color: ZPColors.primary,
+              fontWeight: FontWeight.w600,
+            ),
       ),
       automaticallyImplyLeading: false,
       centerTitle: false,

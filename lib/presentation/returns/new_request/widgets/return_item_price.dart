@@ -55,10 +55,9 @@ class ReturnItemPrice extends StatelessWidget {
         if (isPriceOverrideValid)
           Text(
             context.tr('Requested return value counter offer'),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                  fontSize: 10,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.darkGray,
+            ),
           ),
       ],
     );

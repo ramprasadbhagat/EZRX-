@@ -19,14 +19,11 @@ class SelectOrderTypeBottomSheet extends StatefulWidget {
   const SelectOrderTypeBottomSheet({super.key});
 
   @override
-  State<SelectOrderTypeBottomSheet> createState() =>
-      _SelectOrderTypeBottomSheetState();
+  State<SelectOrderTypeBottomSheet> createState() => _SelectOrderTypeBottomSheetState();
 }
 
-class _SelectOrderTypeBottomSheetState
-    extends State<SelectOrderTypeBottomSheet> {
-  late var selectedOrderType =
-      context.read<EligibilityBloc>().state.selectedOrderTypeInfo;
+class _SelectOrderTypeBottomSheetState extends State<SelectOrderTypeBottomSheet> {
+  late var selectedOrderType = context.read<EligibilityBloc>().state.selectedOrderTypeInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +42,13 @@ class _SelectOrderTypeBottomSheetState
                 padding: const EdgeInsets.symmetric(vertical: padding12),
                 child: Text(
                   context.tr('Change order type'),
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge
-                      ?.copyWith(fontSize: 20, color: ZPColors.primary),
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: ZPColors.primary,
+                      ),
                 ),
               ),
-              if (context.read<CartBloc>().state.cartProducts.isNotEmpty)
-                const _CartNotEmptyWarningMessage(),
+              if (context.read<CartBloc>().state.cartProducts.isNotEmpty) const _CartNotEmptyWarningMessage(),
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: padding12),
@@ -96,8 +92,7 @@ class _ConfirmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CartBloc, CartState>(
-      listenWhen: (previous, current) =>
-          previous.isClearing != current.isClearing && !current.isClearing,
+      listenWhen: (previous, current) => previous.isClearing != current.isClearing && !current.isClearing,
       listener: (context, state) {
         _backToHomePage(
           context,
@@ -107,12 +102,10 @@ class _ConfirmButton extends StatelessWidget {
           ),
         );
       },
-      buildWhen: (previous, current) =>
-          previous.isClearing != current.isClearing,
+      buildWhen: (previous, current) => previous.isClearing != current.isClearing,
       builder: (context, cartState) => BlocConsumer<UserBloc, UserState>(
         listenWhen: (previous, current) =>
-            previous.isSelectingOrderType != current.isSelectingOrderType &&
-            !current.isSelectingOrderType,
+            previous.isSelectingOrderType != current.isSelectingOrderType && !current.isSelectingOrderType,
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
             () {},
@@ -135,19 +128,16 @@ class _ConfirmButton extends StatelessWidget {
             ),
           );
         },
-        buildWhen: (previous, current) =>
-            previous.isSelectingOrderType != current.isSelectingOrderType,
+        buildWhen: (previous, current) => previous.isSelectingOrderType != current.isSelectingOrderType,
         builder: (context, userState) {
-          final isLoading =
-              userState.isSelectingOrderType || cartState.isClearing;
+          final isLoading = userState.isSelectingOrderType || cartState.isClearing;
 
           return ElevatedButton(
             key: WidgetKeys.confirmButton,
             onPressed: isLoading
                 ? null
                 : () {
-                    userState.user.selectedOrderType ==
-                            selectedOrderType.categoryId
+                    userState.user.selectedOrderType == selectedOrderType.categoryId
                         ? context.router.maybePop()
                         : context.read<UserBloc>().add(
                               UserEvent.selectOrderType(
@@ -223,13 +213,8 @@ class _OrderTypeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orderTypeList = context
-        .read<EligibilityBloc>()
-        .state
-        .salesOrgConfigs
-        .orderTypes
-        .where((e) => e.enabled)
-        .toList();
+    final orderTypeList =
+        context.read<EligibilityBloc>().state.salesOrgConfigs.orderTypes.where((e) => e.enabled).toList();
 
     return ListView.builder(
       shrinkWrap: true,

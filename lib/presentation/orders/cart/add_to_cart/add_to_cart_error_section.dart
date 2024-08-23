@@ -89,9 +89,9 @@ class AddToCartErrorSection extends StatelessWidget {
                 ),
                 Text(
                   context.tr('Proceed to add to cart?'),
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
                         color: ZPColors.primary,
-                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                       ),
                 ),
                 Padding(

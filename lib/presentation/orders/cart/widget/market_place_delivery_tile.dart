@@ -149,10 +149,10 @@ class _MarketPlaceDeliveryInfoSheet extends StatelessWidget {
                   const WidgetSpan(child: SizedBox(width: 4)),
                   TextSpan(text: context.tr(_titleText)),
                 ],
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(fontSize: 20, color: ZPColors.primary),
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: ZPColors.primary,
+                    ),
               ),
             ),
             const SizedBox(height: 8),

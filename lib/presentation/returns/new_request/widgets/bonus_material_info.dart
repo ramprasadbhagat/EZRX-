@@ -65,9 +65,8 @@ class BonusMaterialInfo extends StatelessWidget {
           ),
           Text(
             '${context.tr('Batch')}: ${data.displayBatch} - ${context.tr('Expires')}: ${data.displayExpiryDate}',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: ZPColors.darkGray,
-                  fontSize: 12,
                 ),
             key: WidgetKeys.returnBatchAndExpires,
           ),
@@ -99,10 +98,9 @@ class BonusMaterialInfo extends StatelessWidget {
             context.tr(
               'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
             ),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.changePasswordRecommendationColor,
-                  fontSize: 10,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.changePasswordRecommendationColor,
+            ),
           ),
         ],
       ),

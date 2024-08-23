@@ -155,9 +155,8 @@ class _ComboSubTotalSection extends StatelessWidget {
               ),
               Text(
                 ' (${comboMaterialItem.itemTaxPercentPadded}% tax)',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w400,
-                      fontSize: 12,
                       color: ZPColors.darkGray,
                     ),
               ),
@@ -231,10 +230,9 @@ class _MaterialDetails extends StatelessWidget {
           Text(
             comboMaterialItem.principalData.principalName.name,
             key: WidgetKeys.cartItemProductPrincipalName,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 10,
-                  color: ZPColors.neutralsGrey1,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.neutralsGrey1,
+            ),
           ),
           comboScheme.displayDiscountedPrice
               ? Row(

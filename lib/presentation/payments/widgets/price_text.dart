@@ -38,9 +38,8 @@ class PriceText extends StatelessWidget {
             ),
             Text(
               '${context.tr(title)} (${salesOrgConfig.currency.code})',
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: ZPColors.darkGray,
-                    fontSize: 11,
                   ),
               key: WidgetKeys.priceTextTitle,
             ),

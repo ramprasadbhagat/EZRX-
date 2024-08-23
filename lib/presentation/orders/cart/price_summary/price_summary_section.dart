@@ -217,10 +217,9 @@ class _TaxWidget extends StatelessWidget {
         if (cartState.salesOrganisation.salesOrg.showTaxDescription)
           Text(
             context.tr('Applies to materials with full tax'),
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                  fontSize: 10,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.neutralsBlack,
+            ),
           ),
       ],
     );

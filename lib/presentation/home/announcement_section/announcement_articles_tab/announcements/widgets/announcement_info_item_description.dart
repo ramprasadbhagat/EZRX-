@@ -19,10 +19,9 @@ class _AnnouncementInfoItemDescription extends StatelessWidget {
         children: [
           Text(
             releaseDate.dateTimeOrDashString,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: ZPColors.extraLightGrey4, fontSize: 10),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.extraLightGrey4,
+            ),
           ),
           Text(
             title,

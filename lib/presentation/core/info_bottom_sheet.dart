@@ -25,9 +25,9 @@ class InfoBottomSheet extends StatelessWidget {
           children: [
             Text(
               title,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
                     color: ZPColors.primary,
-                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
             ),
             const SizedBox(height: 8),

@@ -38,9 +38,9 @@ class IntroStep extends StatelessWidget {
             children: [
               Text(
                 context.tr(introObject.heading),
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       color: introObject.headingColor,
-                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
                     ),
               ),
               const SizedBox(

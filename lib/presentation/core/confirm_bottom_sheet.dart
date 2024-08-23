@@ -38,10 +38,9 @@ class ConfirmBottomSheet extends StatelessWidget {
               ),
             Text(
               context.tr(title),
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium
-                  ?.copyWith(color: ZPColors.primary, fontSize: 20),
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                    color: ZPColors.primary,
+                  ),
             ),
             const SizedBox(
               height: 8,

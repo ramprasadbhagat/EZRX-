@@ -10,9 +10,9 @@ class _Header extends StatelessWidget {
       contentPadding: const EdgeInsets.only(top: 10.0, right: 10.0),
       title: Text(
         _title(context),
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+        style: Theme.of(context).textTheme.displayMedium?.copyWith(
               color: ZPColors.primary,
-              fontSize: 20.0,
+              fontWeight: FontWeight.w600,
             ),
       ),
       leading: IconButton(

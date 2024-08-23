@@ -51,9 +51,8 @@ class MaterialInfoWidget extends StatelessWidget {
           ),
           Text(
             '${context.tr('Batch')}: ${data.displayBatch} - ${context.tr('Expires')}: ${data.displayExpiryDate}',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: ZPColors.darkGray,
-                  fontSize: 12,
                 ),
             key: WidgetKeys.returnBatchAndExpires,
           ),

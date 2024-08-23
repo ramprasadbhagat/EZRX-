@@ -17,9 +17,8 @@ class _StockQuantity extends StatelessWidget {
             child: Text(
               '${state.productDetailAggregate.stockInfo.stockQuantity} ${'Items Available'.tr()}',
               key: WidgetKeys.commonTileItemSubTitle,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.skyBlueColor,
-                    fontSize: 14,
                   ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

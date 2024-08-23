@@ -49,10 +49,9 @@ class OrderItemPrice extends StatelessWidget {
         if (showPreviousPrice)
           Text(
             context.tr('Requested counter offer'),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                  fontSize: 10,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.darkGray,
+            ),
           ),
       ],
     );

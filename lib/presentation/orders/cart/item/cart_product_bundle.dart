@@ -310,10 +310,9 @@ class _MaterialDetails extends StatelessWidget {
           Text(
             cartItem.getManufactured,
             key: WidgetKeys.cartItemProductPrincipalName,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 10.0,
-                  color: ZPColors.neutralsGrey1,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.neutralsGrey1,
+            ),
           ),
           CartBundleItemQuantitySection(
             cartItem: cartItem,

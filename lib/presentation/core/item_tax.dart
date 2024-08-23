@@ -20,9 +20,8 @@ class ItemTax extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final txtStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+    final txtStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
           fontWeight: FontWeight.w400,
-          fontSize: 12,
           color: ZPColors.darkGray,
         );
 

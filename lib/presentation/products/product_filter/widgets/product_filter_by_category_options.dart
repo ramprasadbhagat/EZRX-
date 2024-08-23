@@ -74,11 +74,10 @@ class _ManufacturerSection extends StatelessWidget {
                   ),
                   child: Text(
                     '${state.materialFilter.manufactureListSelected.length} ${context.tr('selected')}',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: ZPColors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: ZPColors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                     textAlign: TextAlign.center,
                     key: WidgetKeys.manufactureListSelectedLength,
                   ),
@@ -134,11 +133,10 @@ class _CountryOfOriginSection extends StatelessWidget {
                   ),
                   child: Text(
                     '${state.materialFilter.countryListSelected.length} ${context.tr('selected')}',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: ZPColors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: ZPColors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                     textAlign: TextAlign.center,
                     key: WidgetKeys.countryListSelectedLength,
                   ),

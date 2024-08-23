@@ -101,8 +101,7 @@ class InvoiceSummary extends StatelessWidget {
                 eligibilityState.salesOrgConfigs,
                 eligibilityState.salesOrgConfigs.salesOrg.smallOrderThreshold,
               )}',
-              style:
-                  Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10),
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ],
           if (eligibilityState.salesOrg.showManualFee)

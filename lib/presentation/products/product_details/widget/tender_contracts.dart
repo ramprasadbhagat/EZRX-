@@ -44,8 +44,7 @@ class _TenderContractsState extends State<TenderContracts> {
   Widget build(BuildContext context) {
     return BlocConsumer<TenderContractDetailBloc, TenderContractDetailState>(
       listenWhen: (previous, current) =>
-          previous.tenderContractList != current.tenderContractList &&
-          !current.isFetching,
+          previous.tenderContractList != current.tenderContractList && !current.isFetching,
       listener: (context, state) {
         _setDefaultTenderValue(
           context: context,
@@ -90,8 +89,7 @@ class _TenderContractsState extends State<TenderContracts> {
                             color: ZPColors.error,
                           ),
                           backgroundColor: ZPColors.errorSnackBarColor,
-                          messageText:
-                              context.tr('This is a mandatory contract'),
+                          messageText: context.tr('This is a mandatory contract'),
                         ).show(context);
 
                         return;
@@ -119,13 +117,11 @@ class _TenderContractsState extends State<TenderContracts> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemBuilder: (context, index) {
                     final currentContract = state.tenderContractList[index];
-                    final isSelected =
-                        currentContract == state.selectedTenderContract;
+                    final isSelected = currentContract == state.selectedTenderContract;
 
                     return InkWell(
                       key: WidgetKeys.materialTenderContractItem(
-                        currentContract
-                            .contractNumber.displayTenderContractNumber,
+                        currentContract.contractNumber.displayTenderContractNumber,
                         isSelected,
                       ),
                       onTap: () => context.read<TenderContractDetailBloc>().add(
@@ -138,13 +134,9 @@ class _TenderContractsState extends State<TenderContracts> {
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
-                          color: isSelected
-                              ? ZPColors.nextDiscountBG
-                              : ZPColors.tenderUnselectBg,
+                          color: isSelected ? ZPColors.nextDiscountBG : ZPColors.tenderUnselectBg,
                           border: Border.all(
-                            color: isSelected
-                                ? ZPColors.blueAccent
-                                : ZPColors.tenderUnselectBorder,
+                            color: isSelected ? ZPColors.blueAccent : ZPColors.tenderUnselectBorder,
                           ),
                         ),
                         child: Column(
@@ -157,18 +149,12 @@ class _TenderContractsState extends State<TenderContracts> {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          key: WidgetKeys
-                                              .materialTenderContractNumber,
-                                          currentContract.contractNumber
-                                              .displayTenderContractNumber,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall
-                                              ?.copyWith(
+                                          key: WidgetKeys.materialTenderContractNumber,
+                                          currentContract.contractNumber.displayTenderContractNumber,
+                                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                                 color: ZPColors.neutralsGrey1,
                                               ),
                                         ),
@@ -176,10 +162,7 @@ class _TenderContractsState extends State<TenderContracts> {
                                           fit: BoxFit.scaleDown,
                                           child: Text(
                                             '${currentContract.tenderOrderReason.displayTenderContractReason} - ${context.tr(currentContract.tenderOrderReason.tenderContractReasonTitle)}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall
-                                                ?.copyWith(
+                                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                                   color: ZPColors.neutralsBlack,
                                                 ),
                                           ),
@@ -190,26 +173,19 @@ class _TenderContractsState extends State<TenderContracts> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8),
                                     child: Radio(
-                                      key: WidgetKeys
-                                          .materialTenderContractRadio,
+                                      key: WidgetKeys.materialTenderContractRadio,
                                       value: currentContract,
-                                      fillColor: WidgetStateProperty
-                                          .resolveWith<Color>(
-                                        (Set<WidgetState> states) => isSelected
-                                            ? ZPColors.darkTeal
-                                            : ZPColors.elevatedDisableColor,
+                                      fillColor: WidgetStateProperty.resolveWith<Color>(
+                                        (Set<WidgetState> states) =>
+                                            isSelected ? ZPColors.darkTeal : ZPColors.elevatedDisableColor,
                                       ),
                                       visualDensity: const VisualDensity(
-                                        horizontal:
-                                            VisualDensity.minimumDensity,
+                                        horizontal: VisualDensity.minimumDensity,
                                         vertical: VisualDensity.minimumDensity,
                                       ),
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
+                                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                       groupValue: state.selectedTenderContract,
-                                      onChanged: (_) => context
-                                          .read<TenderContractDetailBloc>()
-                                          .add(
+                                      onChanged: (_) => context.read<TenderContractDetailBloc>().add(
                                             TenderContractDetailEvent.select(
                                               tenderContract: currentContract,
                                             ),
@@ -221,10 +197,7 @@ class _TenderContractsState extends State<TenderContracts> {
                             ),
                             Text(
                               context.tr('Price'),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.neutralsGrey1,
                                   ),
                             ),
@@ -249,33 +222,27 @@ class _TenderContractsState extends State<TenderContracts> {
                             ),
                             _DetailField(
                               title: 'Quantity Available',
-                              value:
-                                  '${currentContract.remainingTenderQuantity}/${currentContract.contractQuantity}',
+                              value: '${currentContract.remainingTenderQuantity}/${currentContract.contractQuantity}',
                             ),
                             _DetailField(
                               title: 'Expiry Date',
-                              value: currentContract
-                                  .contractExpiryDate.dateTimeOrDashString,
+                              value: currentContract.contractExpiryDate.dateTimeOrDashString,
                             ),
                             _DetailField(
                               title: 'Reference',
-                              value: currentContract
-                                  .contractReference.displayNAIfEmpty,
+                              value: currentContract.contractReference.displayNAIfEmpty,
                             ),
                             _DetailField(
                               title: 'Material Visa No.',
-                              value: currentContract
-                                  .tenderVisaNumber.displayTenderVisaNumber,
+                              value: currentContract.tenderVisaNumber.displayTenderVisaNumber,
                             ),
                             _DetailField(
                               title: 'Sale District',
-                              value: currentContract
-                                  .salesDistrict.displayNAIfEmpty,
+                              value: currentContract.salesDistrict.displayNAIfEmpty,
                             ),
                             _DetailField(
                               title: 'Announcement Letter No.',
-                              value: currentContract.announcementLetterNumber
-                                  .displayAnnouncementLetterNumber,
+                              value: currentContract.announcementLetterNumber.displayAnnouncementLetterNumber,
                             ),
                           ],
                         ),
@@ -336,15 +303,14 @@ class _DetailField extends StatelessWidget {
         children: [
           Text(
             context.tr(title),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 10,
-                  color: ZPColors.neutralsGrey1,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: ZPColors.neutralsGrey1,
+            ),
           ),
           Text(
             value,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  fontSize: 12,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.w600,
                   color: ZPColors.primary,
                 ),
           ),

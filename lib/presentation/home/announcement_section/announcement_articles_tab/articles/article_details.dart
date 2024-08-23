@@ -206,10 +206,9 @@ class _TitleSection extends StatelessWidget {
       children: [
         Text(
           article.publishedDate.dateOrDashString,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: ZPColors.neutralsGrey1,
-                fontSize: 10,
-              ),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color: ZPColors.neutralsGrey1,
+          ),
           key: WidgetKeys.articleDetailsTimeKey,
         ),
         Text(

@@ -198,11 +198,9 @@ class _ProductTile extends StatelessWidget {
                           ),
                           Text(
                             '${product.isMarketPlace ? '${context.tr('Sold by')}: ' : ''}${product.principalData.principalName.name}',
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: ZPColors.extraLightGrey4,
-                                      fontSize: 10,
-                                    ),
+                            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                              color: ZPColors.extraLightGrey4,
+                            ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],

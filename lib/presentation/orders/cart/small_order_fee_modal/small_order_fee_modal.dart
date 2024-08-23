@@ -25,9 +25,9 @@ class SmallOrderFeePage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
                 context.tr('Agree to small order fee?'),
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
                       color: ZPColors.primary,
-                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                     ),
               ),
             ),

@@ -83,8 +83,7 @@ class _CustomChip extends StatelessWidget {
         backgroundColor: isSelected ? ZPColors.primary : ZPColors.accentColor,
         label: Text(
           title,
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontSize: 12,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: isSelected ? ZPColors.accentColor : ZPColors.black,
               ),
         ),

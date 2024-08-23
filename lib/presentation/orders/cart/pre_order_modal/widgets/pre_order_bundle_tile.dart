@@ -169,10 +169,9 @@ class _PreOrderBundleMaterialTile extends StatelessWidget {
               Text(
                 bundleMaterial.getManufactured,
                 key: WidgetKeys.cartItemProductPrincipalName,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: 10.0,
-                      color: ZPColors.neutralsGrey1,
-                    ),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: ZPColors.neutralsGrey1,
+                ),
               ),
               const SizedBox(height: 4),
               Align(

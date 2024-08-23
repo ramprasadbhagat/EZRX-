@@ -345,9 +345,8 @@ class _ComboSubTotalSection extends StatelessWidget {
             children: [
               Text(
                 context.tr('Combo subtotal (excl. tax):'),
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w400,
-                      fontSize: 12,
                       color: ZPColors.darkGray,
                     ),
               ),

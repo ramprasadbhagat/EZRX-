@@ -203,9 +203,8 @@ class _Subtitle extends StatelessWidget {
                     Text(
                       tileBody3,
                       key: WidgetKeys.commonTileItemSubTitle,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
                             color: ZPColors.darkGray,
-                            fontSize: 10,
                           ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

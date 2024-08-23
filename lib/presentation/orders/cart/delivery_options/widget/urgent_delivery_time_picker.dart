@@ -77,10 +77,9 @@ class _UrgentDeliveryBottomSheetState
               padding: const EdgeInsets.symmetric(vertical: padding12),
               child: Text(
                 context.tr('Urgent delivery'),
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(fontSize: 20, color: ZPColors.primary),
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      color: ZPColors.primary,
+                    ),
               ),
             ),
             Flexible(

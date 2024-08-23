@@ -22,10 +22,9 @@ class CustomBadge extends StatelessWidget {
       key: WidgetKeys.customBadge,
       badgeContent: Text(
         count.toString(),
-        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontSize: 10,
-              color: ZPColors.white,
-            ),
+        style: Theme.of(context).textTheme.displaySmall?.copyWith(
+          color: ZPColors.white,
+        ),
       ),
       showBadge: count > 0,
       badgeStyle: const bd.BadgeStyle(

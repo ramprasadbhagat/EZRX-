@@ -193,11 +193,8 @@ class _BundleDetails extends StatelessWidget {
                       : Expanded(
                           child: Text(
                             material.name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(
-                                  fontSize: 20,
+                            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
                                 ),
                             key: WidgetKeys.bundleOfferName,
                           ),

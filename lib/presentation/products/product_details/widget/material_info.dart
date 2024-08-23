@@ -242,10 +242,9 @@ class _ExpiryDateWidget extends StatelessWidget {
                 context.tr(
                   'Expiry date displayed is for reference, actual product may vary',
                 ),
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: 10,
-                      color: ZPColors.darkGray,
-                    ),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
               ),
             ),
           ],

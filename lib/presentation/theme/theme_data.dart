@@ -175,6 +175,21 @@ NavigationRailThemeData _navigationRailTheme() {
 
 TextTheme _textTheme() {
   return ThemeData.light().textTheme.copyWith(
+        displayLarge: GoogleFonts.notoSans(
+          fontSize: 24,
+          color: ZPColors.black,
+          letterSpacing: 0.25,
+        ),
+        displayMedium: GoogleFonts.notoSans(
+          fontSize: 20,
+          color: ZPColors.black,
+          letterSpacing: 0.25,
+        ),
+        displaySmall: GoogleFonts.notoSans(
+          fontSize: 10,
+          color: ZPColors.black,
+          letterSpacing: 0.25,
+        ),
         titleLarge: GoogleFonts.notoSans(
           fontSize: 18,
           color: ZPColors.black,

@@ -155,11 +155,10 @@ class AnnouncementItem extends StatelessWidget {
                   child: Text(
                     item.releaseDate.dateTimeOrDashString,
                     key: WidgetKeys.announcementItemDateKey,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.neutralsGrey1,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: ZPColors.neutralsGrey1,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 Row(

@@ -28,10 +28,9 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                     child: Text(
                       details.releaseDate.dateTimeOrDashString,
                       key: WidgetKeys.announcementDetailDateKey,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.neutralsGrey1,
-                            fontSize: 10,
-                          ),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                        color: ZPColors.neutralsGrey1,
+                      ),
                     ),
                   ),
                   if (details.title.isNotEmpty)

@@ -31,8 +31,7 @@ class AttentionRow extends StatelessWidget {
           Expanded(
             child: Text(
               valueText.tr(),
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontSize: 12,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontStyle: FontStyle.italic,
                   ),
             ),

@@ -429,10 +429,9 @@ class _Description extends StatelessWidget {
               child: Text(
                 materialInfo.defaultMaterialDescription,
                 key: WidgetKeys.materialDetailsMaterialDescription,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(fontSize: 20),
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

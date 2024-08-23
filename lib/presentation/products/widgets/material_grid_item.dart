@@ -189,11 +189,9 @@ class MaterialGridItem extends StatelessWidget {
                                   ? '${context.tr(materialInfo.manufacturerPrefix)}: '
                                   : '') +
                               materialInfo.getManufactured,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.darkGray,
-                                    fontSize: 10,
-                                  ),
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            color: ZPColors.darkGray,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           key: WidgetKeys.manufacturerMaterials,

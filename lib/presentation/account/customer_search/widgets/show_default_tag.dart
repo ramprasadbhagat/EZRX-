@@ -10,10 +10,9 @@ class _ShowDefaultTag extends StatelessWidget {
       child: Chip(
         label: Text(
           context.tr('Default'),
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontSize: 10,
-                color: ZPColors.neutralsDarkBlack,
-              ),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color: ZPColors.neutralsDarkBlack,
+          ),
         ),
         labelPadding:
             const EdgeInsets.symmetric(horizontal: padding6, vertical: -2),

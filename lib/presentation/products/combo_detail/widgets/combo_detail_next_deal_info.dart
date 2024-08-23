@@ -75,12 +75,9 @@ class ComboDetailNextDealInfo extends StatelessWidget {
                       'discount': _buyMoreInfo.rateDisplay,
                     },
                   ),
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  fontSize: 10,
-                  color: _isBestDealAvailable
-                      ? ZPColors.bestDiscountTextBg
-                      : ZPColors.nextTextBg,
-                ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: _isBestDealAvailable ? ZPColors.bestDiscountTextBg : ZPColors.nextTextBg,
+            ),
           ),
         ],
       ),

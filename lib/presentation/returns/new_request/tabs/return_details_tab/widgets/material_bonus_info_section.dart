@@ -56,9 +56,9 @@ class _ToggleActiveButton extends StatelessWidget {
           children: [
             Text(
               context.tr('Include bonus'),
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ZPColors.neutralsBlack,
-                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600,
                   ),
             ),
             Theme(

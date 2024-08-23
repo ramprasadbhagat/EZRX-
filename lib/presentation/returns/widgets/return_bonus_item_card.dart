@@ -149,10 +149,9 @@ class _ReturnBonusItemSection extends StatelessWidget {
                 context.tr(
                   'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
                 ),
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.darkGray,
-                      fontSize: 10,
-                    ),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
               ),
             ],
           ),

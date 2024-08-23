@@ -33,9 +33,9 @@ class Logo extends StatelessWidget {
             Expanded(
               child: Text(
                 context.tr(title),
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      fontSize: 20,
-                    ),
+                style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],

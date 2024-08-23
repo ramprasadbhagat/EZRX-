@@ -66,11 +66,7 @@ class AupTCPage extends StatelessWidget {
                       isMarketPlace
                           ? RichText(
                               text: TextSpan(
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      fontSize: 20,
+                                style: Theme.of(context).textTheme.displayMedium?.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                 children: [
@@ -91,11 +87,7 @@ class AupTCPage extends StatelessWidget {
                             )
                           : Text(
                               context.tr('Welcome to eZRx+'),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                    fontSize: 20,
+                              style: Theme.of(context).textTheme.displayMedium?.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
@@ -107,7 +99,6 @@ class AupTCPage extends StatelessWidget {
                               : 'As a new user of eZRx+, we will require you to acknowledge the Terms of Use and Regional Privacy Policy before proceeding.',
                         ),
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontSize: 15,
                               fontWeight: FontWeight.w400,
                               color: ZPColors.neutralsGrey1,
                             ),

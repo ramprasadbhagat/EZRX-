@@ -16,9 +16,8 @@ class _PaymentVirtualAccountFailed extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               context.tr('Payment Failed!'),
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: ZPColors.primary,
-                    fontSize: 18,
                   ),
             ),
             const SizedBox(height: 8),

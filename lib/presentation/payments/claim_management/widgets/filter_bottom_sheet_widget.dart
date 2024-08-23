@@ -21,9 +21,9 @@ class ClaimManagementFilterBottomSheet extends StatelessWidget {
                 children: [
                   Text(
                     context.tr('Filter'),
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
                           color: ZPColors.primary,
-                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
                         ),
                   ),
                   IconButton(
