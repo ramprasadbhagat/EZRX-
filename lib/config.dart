@@ -10,6 +10,7 @@ class Config {
   int httpSendTimeout = 150000;
   int httpConnectTimeout = 150000;
   int httpReceiveTimeout = 150000;
+  int httpIdleTimeout = 15000;
   Duration dateRangePickerDuration = const Duration(days: 1095);
   int pageSize = 10;
   int productTabPageSize = 24;

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
@@ -24,7 +25,15 @@ class HttpService {
         sendTimeout: Duration(milliseconds: config.httpSendTimeout),
         connectTimeout: Duration(milliseconds: config.httpConnectTimeout),
         receiveTimeout: Duration(milliseconds: config.httpReceiveTimeout),
+        validateStatus: (int? status) => status != null && status > 0,
       ),
+    );
+    // https://github.com/cfug/dio/issues/2106
+    _dio.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () => HttpClient()
+        ..idleTimeout = Duration(
+          milliseconds: config.httpIdleTimeout,
+        ),
     );
     _dio.interceptors.addAll([
       ...interceptors,
@@ -37,9 +46,9 @@ class HttpService {
           responseBody: true,
           error: true,
           showProcessingTime: true,
-          showCUrl: false,
           convertFormData: true,
           canShowLog: kDebugMode,
+          showCUrl: false,
         ),
     ]);
   }
