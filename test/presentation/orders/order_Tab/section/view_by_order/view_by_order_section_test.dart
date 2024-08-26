@@ -353,7 +353,7 @@ void main() {
 
     testWidgets('Buy again button go to cart page', (tester) async {
       final deliveryInfo = DeliveryInfoData.empty();
-      when(() => autoRouterMock.isRouteActive( ViewByOrdersPageRoute.name))
+      when(() => autoRouterMock.isRouteActive(ViewByOrdersPageRoute.name))
           .thenReturn(true);
       when(() => mockViewByOrderBloc.state).thenReturn(
         ViewByOrderState.initial().copyWith(
@@ -927,6 +927,42 @@ void main() {
 
         expect(buyAgainButton, findsOneWidget);
       });
+    });
+
+    testWidgets('view by order with created date grouping', (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [
+              viewByOrder.orderHeaders.first.copyWith(
+                createdDate: DateTimeStringValue(
+                  DateTime.parse('2023-08-11')
+                      .add(const Duration(hours: 1))
+                      .toString(),
+                ),
+              ),
+              viewByOrder.orderHeaders.first.copyWith(
+                createdDate: DateTimeStringValue(
+                  DateTime.parse('2023-08-11')
+                      .add(const Duration(hours: 3))
+                      .toString(),
+                ),
+              ),
+              viewByOrder.orderHeaders.first.copyWith(
+                createdDate: DateTimeStringValue(
+                  DateTime.parse('2023-08-12').toString(),
+                ),
+              ),
+            ],
+          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final divider = find.byType(Divider);
+      expect(divider, findsOneWidget);
+      expect(viewByOrdersGroupKey, findsNWidgets(2));
     });
   });
 }

@@ -89,8 +89,8 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 
-  List<String> get poDocumentsName => orderHistoryDetailsPoDocuments.
-      map((obj) => obj.name).toList();
+  List<String> get poDocumentsName =>
+      orderHistoryDetailsPoDocuments.map((obj) => obj.name).toList();
 
   List<MaterialQueryInfo> get allItemQueryInfo => items
       .map(
@@ -255,11 +255,11 @@ extension ViewByOrderListExtension on List<OrderHistoryDetails> {
 
   List<ViewByOrdersGroup> get getViewByOrderGroupList {
     return List<OrderHistoryDetails>.from(this)
-        .groupListsBy((item) => item.createdDate)
+        .groupListsBy((item) => item.createdDate.apiDateTimeString)
         .entries
         .map(
           (entry) => ViewByOrdersGroup(
-            createdDate: entry.key,
+            createdDate: DateTimeStringValue(entry.key),
             orderHeaders: entry.value,
             principalName: PrincipalName(''),
             viewByOrderItem: <OrderHistoryDetailsOrderItem>[],
