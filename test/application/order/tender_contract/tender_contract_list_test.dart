@@ -22,11 +22,16 @@ void main() {
   final tenderContractListState = TenderContractListState.initial();
   const fakeError = ApiFailure.other('fake-error');
   final materialNumberMockData = MaterialNumber('fake-material-number');
+  final mockListTenderContractDetails =
+      <MaterialNumber, List<TenderContract>>{};
 
   setUpAll(() async {
     tenderContractMockRepository = MockTenderContractRepository();
     mockTenderContractList =
         await TenderContractLocalDataSource().getTenderContractDetails();
+    mockListTenderContractDetails.addAll({
+      materialNumberMockData: mockTenderContractList,
+    });
   });
 
   group('Tender Contract Bloc', () {
@@ -47,13 +52,13 @@ void main() {
       ),
       setUp: () async {
         when(
-          () => tenderContractMockRepository.getTenderContractDetails(
+          () => tenderContractMockRepository.getListTenderContractDetails(
             salesOrganisation: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            materialNumber: materialNumberMockData,
+            materialNumbers: [materialNumberMockData],
           ),
-        ).thenAnswer((_) async => Right(mockTenderContractList));
+        ).thenAnswer((_) async => Right(mockListTenderContractDetails));
       },
       act: (TenderContractListBloc bloc) => bloc.add(
         TenderContractListEvent.fetch(
@@ -66,9 +71,7 @@ void main() {
       expect: () => [
         tenderContractListState.copyWith(isFetching: true),
         tenderContractListState.copyWith(
-          tenderContracts: <MaterialNumber, List<TenderContract>>{
-            materialNumberMockData: mockTenderContractList,
-          },
+          tenderContracts: mockListTenderContractDetails,
         ),
       ],
     );
@@ -80,11 +83,11 @@ void main() {
       ),
       setUp: () async {
         when(
-          () => tenderContractMockRepository.getTenderContractDetails(
+          () => tenderContractMockRepository.getListTenderContractDetails(
             salesOrganisation: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            materialNumber: materialNumberMockData,
+            materialNumbers: [materialNumberMockData],
           ),
         ).thenAnswer((_) async => const Left(fakeError));
       },

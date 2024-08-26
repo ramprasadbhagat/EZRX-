@@ -39,7 +39,6 @@ class TenderContractListBloc
           ),
         );
 
-        final tenderContractMap = <MaterialNumber, List<TenderContract>>{};
         final fetchingMaterialNumbers = e.materialNumbers
             .where(
               (item) => !state.tenderContracts.containsKey(item),
@@ -55,41 +54,33 @@ class TenderContractListBloc
 
           return;
         }
-
-        for (final materialNumber in fetchingMaterialNumbers) {
-          final failureOrSuccess =
-              await tenderContractRepository.getTenderContractDetails(
-            materialNumber: materialNumber,
-            customerCodeInfo: e.customerCodeInfo,
-            salesOrganisation: e.salesOrganisation,
-            shipToInfo: e.shipToInfo,
-          );
-          if (isClosed) return;
-          failureOrSuccess.fold(
-            (failure) {
-              emit(
-                state.copyWith(
-                  apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                  isFetching: false,
-                ),
-              );
-            },
-            (tenderContractDetail) {
-              tenderContractMap.addAll(
-                {
-                  materialNumber: tenderContractDetail,
-                },
-              );
-              emit(
-                state.copyWith(
-                  tenderContracts: Map.from(state.tenderContracts)
-                    ..addAll(tenderContractMap),
-                  isFetching: false,
-                ),
-              );
-            },
-          );
-        }
+        final failureOrSuccess =
+            await tenderContractRepository.getListTenderContractDetails(
+          materialNumbers: fetchingMaterialNumbers,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        );
+        if (isClosed) return;
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (listTenderContractDetails) {
+            emit(
+              state.copyWith(
+                tenderContracts: Map.from(state.tenderContracts)
+                  ..addAll(listTenderContractDetails),
+                isFetching: false,
+              ),
+            );
+          },
+        );
       },
     );
   }

@@ -1,8 +1,4 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -12,6 +8,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_remot
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -27,15 +26,20 @@ void main() {
   late TenderContractLocalDataSource tenderContractLocalDataSource;
   late TenderContractRemoteDataSource tenderContractRemoteDataSource;
 
-  final mockSalesOrganisation = SalesOrganisation.empty();
-
-  final mockShipToInfo = ShipToInfo.empty().copyWith(
-    building: 'fakeBuilding',
-    shipToCustomerCode: 'fake-ship-to-customer-code',
+  final mockMaterialInfo = MaterialInfo.empty().copyWith(
+    materialNumber: MaterialNumber(
+      'fake-material-1',
+    ),
   );
-  final mockCustomerCodeInfo = CustomerCodeInfo.empty()
-      .copyWith(customerCodeSoldTo: 'fake-customer-code');
-  final mockMaterialInfo = MaterialInfo.empty();
+
+  final mockMaterialInfos = [
+    mockMaterialInfo,
+    MaterialInfo.empty().copyWith(
+      materialNumber: MaterialNumber(
+        'fake-material-2',
+      ),
+    ),
+  ];
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -57,9 +61,9 @@ void main() {
 
       final result = await tenderContractRepository.getTenderContractDetails(
         materialNumber: mockMaterialInfo.materialNumber,
-        customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
-        shipToInfo: mockShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeVNSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -73,9 +77,9 @@ void main() {
 
       final result = await tenderContractRepository.getTenderContractDetails(
         materialNumber: mockMaterialInfo.materialNumber,
-        customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
-        shipToInfo: mockShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeVNSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),
@@ -86,23 +90,18 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => tenderContractRemoteDataSource.getTenderContractDetails(
-          materialNumber: '',
-          salesOrg: '3050',
-          selectedCustomerCode: '',
-          shipTo: '',
+          materialNumber: mockMaterialInfo.materialNumber.getOrDefaultValue(''),
+          salesOrg: fakeVNSalesOrganisation.salesOrg.getValue(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenAnswer((invocation) async => <TenderContract>[]);
 
       final result = await tenderContractRepository.getTenderContractDetails(
-        materialNumber: mockMaterialInfo
-            .copyWith(
-              materialNumber: MaterialNumber(''),
-            )
-            .materialNumber,
-        customerCodeInfo: mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
-        salesOrganisation:
-            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('3050')),
-        shipToInfo: mockShipToInfo.copyWith(shipToCustomerCode: ''),
+        materialNumber: mockMaterialInfo.materialNumber,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeVNSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isRight(),
@@ -113,21 +112,60 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => tenderContractRemoteDataSource.getTenderContractDetails(
-          materialNumber: '',
-          salesOrg: '',
-          selectedCustomerCode: '',
-          shipTo: '',
+          materialNumber: mockMaterialInfo.materialNumber.getOrDefaultValue(''),
+          salesOrg: fakeVNSalesOrganisation.salesOrg.getValue(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
         ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await tenderContractRepository.getTenderContractDetails(
         materialNumber: mockMaterialInfo.materialNumber,
-        customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
-        shipToInfo: mockShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeVNSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
       );
       expect(
         result.isLeft(),
+        true,
+      );
+    });
+
+    test('get list tenderContractDetail successfully remote', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => tenderContractRemoteDataSource.getTenderContractDetails(
+          materialNumber:
+              mockMaterialInfos.first.materialNumber.getOrDefaultValue(''),
+          salesOrg: fakeVNSalesOrganisation.salesOrg.getValue(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
+        ),
+      ).thenAnswer((invocation) async => <TenderContract>[]);
+
+      when(
+        () => tenderContractRemoteDataSource.getTenderContractDetails(
+          materialNumber:
+              mockMaterialInfos.last.materialNumber.getOrDefaultValue(''),
+          salesOrg: fakeVNSalesOrganisation.salesOrg.getValue(),
+          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
+        ),
+      ).thenAnswer((invocation) async => <TenderContract>[]);
+
+      final result =
+          await tenderContractRepository.getListTenderContractDetails(
+        materialNumbers: mockMaterialInfos
+            .map(
+              (e) => e.materialNumber,
+            )
+            .toList(),
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeVNSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
+      );
+      expect(
+        result.isRight(),
         true,
       );
     });

@@ -13,4 +13,12 @@ abstract class ITenderContractRepository {
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
   });
+
+  Future<Either<ApiFailure, Map<MaterialNumber, List<TenderContract>>>>
+      getListTenderContractDetails({
+    required List<MaterialNumber> materialNumbers,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  });
 }

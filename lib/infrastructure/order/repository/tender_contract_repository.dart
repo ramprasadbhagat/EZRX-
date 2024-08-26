@@ -53,4 +53,36 @@ class TenderContractRepository implements ITenderContractRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, Map<MaterialNumber, List<TenderContract>>>>
+      getListTenderContractDetails({
+    required List<MaterialNumber> materialNumbers,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    try {
+      final futures = materialNumbers.map((materialNumber) async {
+        final tenderContractDetail = await getTenderContractDetails(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganisation: salesOrganisation,
+          shipToInfo: shipToInfo,
+          materialNumber: materialNumber,
+        );
+
+        return MapEntry(
+          materialNumber,
+          tenderContractDetail.getOrElse(() => []),
+        );
+      }).toList();
+
+      final tenderContractDetailsMap =
+          Map.fromEntries(await Future.wait(futures));
+
+      return right(tenderContractDetailsMap);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 }
