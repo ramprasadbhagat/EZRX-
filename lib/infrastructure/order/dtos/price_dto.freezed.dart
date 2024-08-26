@@ -30,6 +30,8 @@ mixin _$PriceDto {
   double get finalIndividualPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'finalTotalPrice', defaultValue: 0)
   double get finalTotalPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'discountedValue', defaultValue: 0)
+  double get discountedValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
   List<PriceRuleDto> get rules => throw _privateConstructorUsedError;
   @JsonKey(name: 'bonuses', defaultValue: <PriceBonusDto>[])
@@ -92,6 +94,7 @@ abstract class $PriceDtoCopyWith<$Res> {
       @JsonKey(name: 'finalIndividualPrice', defaultValue: 0)
       double finalIndividualPrice,
       @JsonKey(name: 'finalTotalPrice', defaultValue: 0) double finalTotalPrice,
+      @JsonKey(name: 'discountedValue', defaultValue: 0) double discountedValue,
       @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
       List<PriceRuleDto> rules,
       @JsonKey(name: 'bonuses', defaultValue: <PriceBonusDto>[])
@@ -147,6 +150,7 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
     Object? listPrice = null,
     Object? finalIndividualPrice = null,
     Object? finalTotalPrice = null,
+    Object? discountedValue = null,
     Object? rules = null,
     Object? bonuses = null,
     Object? tiers = null,
@@ -188,6 +192,10 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
       finalTotalPrice: null == finalTotalPrice
           ? _value.finalTotalPrice
           : finalTotalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountedValue: null == discountedValue
+          ? _value.discountedValue
+          : discountedValue // ignore: cast_nullable_to_non_nullable
               as double,
       rules: null == rules
           ? _value.rules
@@ -305,6 +313,7 @@ abstract class _$$PriceDtoImplCopyWith<$Res>
       @JsonKey(name: 'finalIndividualPrice', defaultValue: 0)
       double finalIndividualPrice,
       @JsonKey(name: 'finalTotalPrice', defaultValue: 0) double finalTotalPrice,
+      @JsonKey(name: 'discountedValue', defaultValue: 0) double discountedValue,
       @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
       List<PriceRuleDto> rules,
       @JsonKey(name: 'bonuses', defaultValue: <PriceBonusDto>[])
@@ -360,6 +369,7 @@ class __$$PriceDtoImplCopyWithImpl<$Res>
     Object? listPrice = null,
     Object? finalIndividualPrice = null,
     Object? finalTotalPrice = null,
+    Object? discountedValue = null,
     Object? rules = null,
     Object? bonuses = null,
     Object? tiers = null,
@@ -401,6 +411,10 @@ class __$$PriceDtoImplCopyWithImpl<$Res>
       finalTotalPrice: null == finalTotalPrice
           ? _value.finalTotalPrice
           : finalTotalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountedValue: null == discountedValue
+          ? _value.discountedValue
+          : discountedValue // ignore: cast_nullable_to_non_nullable
               as double,
       rules: null == rules
           ? _value._rules
@@ -499,6 +513,8 @@ class _$PriceDtoImpl extends _PriceDto {
       required this.finalIndividualPrice,
       @JsonKey(name: 'finalTotalPrice', defaultValue: 0)
       required this.finalTotalPrice,
+      @JsonKey(name: 'discountedValue', defaultValue: 0)
+      required this.discountedValue,
       @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
       required final List<PriceRuleDto> rules,
       @JsonKey(name: 'bonuses', defaultValue: <PriceBonusDto>[])
@@ -563,6 +579,9 @@ class _$PriceDtoImpl extends _PriceDto {
   @override
   @JsonKey(name: 'finalTotalPrice', defaultValue: 0)
   final double finalTotalPrice;
+  @override
+  @JsonKey(name: 'discountedValue', defaultValue: 0)
+  final double discountedValue;
   final List<PriceRuleDto> _rules;
   @override
   @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
@@ -663,7 +682,7 @@ class _$PriceDtoImpl extends _PriceDto {
 
   @override
   String toString() {
-    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isDiscountOverride: $isDiscountOverride, isMOVExclusion: $isMOVExclusion, conditionFlags: $conditionFlags)';
+    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, discountedValue: $discountedValue, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isDiscountOverride: $isDiscountOverride, isMOVExclusion: $isMOVExclusion, conditionFlags: $conditionFlags)';
   }
 
   @override
@@ -681,6 +700,8 @@ class _$PriceDtoImpl extends _PriceDto {
                 other.finalIndividualPrice == finalIndividualPrice) &&
             (identical(other.finalTotalPrice, finalTotalPrice) ||
                 other.finalTotalPrice == finalTotalPrice) &&
+            (identical(other.discountedValue, discountedValue) ||
+                other.discountedValue == discountedValue) &&
             const DeepCollectionEquality().equals(other._rules, _rules) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
             const DeepCollectionEquality().equals(other._tiers, _tiers) &&
@@ -728,6 +749,7 @@ class _$PriceDtoImpl extends _PriceDto {
         listPrice,
         finalIndividualPrice,
         finalTotalPrice,
+        discountedValue,
         const DeepCollectionEquality().hash(_rules),
         const DeepCollectionEquality().hash(_bonuses),
         const DeepCollectionEquality().hash(_tiers),
@@ -776,6 +798,8 @@ abstract class _PriceDto extends PriceDto {
       required final double finalIndividualPrice,
       @JsonKey(name: 'finalTotalPrice', defaultValue: 0)
       required final double finalTotalPrice,
+      @JsonKey(name: 'discountedValue', defaultValue: 0)
+      required final double discountedValue,
       @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
       required final List<PriceRuleDto> rules,
       @JsonKey(name: 'bonuses', defaultValue: <PriceBonusDto>[])
@@ -835,6 +859,9 @@ abstract class _PriceDto extends PriceDto {
   @override
   @JsonKey(name: 'finalTotalPrice', defaultValue: 0)
   double get finalTotalPrice;
+  @override
+  @JsonKey(name: 'discountedValue', defaultValue: 0)
+  double get discountedValue;
   @override
   @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
   List<PriceRuleDto> get rules;

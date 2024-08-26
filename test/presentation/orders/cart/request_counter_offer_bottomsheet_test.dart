@@ -1269,8 +1269,9 @@ void main() {
         (tester) async {
       final cartItem = cartItems.first.copyWith(
         price: cartItems.first.price.copyWith(
-          finalPrice: MaterialPrice(10),
           lastPrice: MaterialPrice(20),
+          finalPrice: MaterialPrice(10),
+          discountedValue: MaterialPrice(10),
         ),
         salesOrgConfig: fakeVNSalesOrgConfigs,
       );

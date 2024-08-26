@@ -14,6 +14,7 @@ _$PriceDtoImpl _$$PriceDtoImplFromJson(Map<String, dynamic> json) =>
       finalIndividualPrice:
           (json['finalIndividualPrice'] as num?)?.toDouble() ?? 0,
       finalTotalPrice: (json['finalTotalPrice'] as num?)?.toDouble() ?? 0,
+      discountedValue: (json['discountedValue'] as num?)?.toDouble() ?? 0,
       rules: (json['priceRules'] as List<dynamic>?)
               ?.map((e) => PriceRuleDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -69,6 +70,7 @@ Map<String, dynamic> _$$PriceDtoImplToJson(_$PriceDtoImpl instance) =>
       'listPrice': instance.listPrice,
       'finalIndividualPrice': instance.finalIndividualPrice,
       'finalTotalPrice': instance.finalTotalPrice,
+      'discountedValue': instance.discountedValue,
       'priceRules': instance.rules.map((e) => e.toJson()).toList(),
       'bonuses': instance.bonuses.map((e) => e.toJson()).toList(),
       'tieredPricing': instance.tiers.map((e) => e.toJson()).toList(),

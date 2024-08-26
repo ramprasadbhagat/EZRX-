@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
-import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/regexes.dart';
@@ -134,7 +133,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                           height: 5,
                         ),
                         if (cartItem.isListPriceNotAvailableForProduct ||
-                            !state.item.showMaterialListPrice)
+                            !state.hasDiscount)
                           PriceComponent(
                             key: WidgetKeys
                                 .counterOfferListPriceWithoutStrikeWidget,
@@ -146,25 +145,27 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                                       color: ZPColors.neutralsGrey1,
                                     ),
                             type: PriceStyle.counterOfferListPrice,
+                          )
+                        else ...[
+                          PriceComponent(
+                            key: WidgetKeys.counterOfferListPriceWidget,
+                            title: '${context.tr('List price')}: ',
+                            salesOrgConfig: eligibilityState.salesOrgConfigs,
+                            price: cartItem.display(PriceType.listPrice),
+                            type: PriceStyle.returnOriginPriceStrikeThrough,
+                            priceLabelStyle:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: ZPColors.neutralsGrey1,
+                                    ),
                           ),
-                        ListPriceStrikeThroughComponent(
-                          key: WidgetKeys.counterOfferListPriceWidget,
-                          priceAggregate: state.item,
-                          title: '${context.tr('List price')}: ',
-                          priceStyle: PriceStyle.returnOriginPriceStrikeThrough,
-                          priceLabelStyle:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    color: ZPColors.neutralsGrey1,
-                                  ),
-                        ),
-                        if (state.item.showMaterialListPrice)
                           PriceComponent(
                             key: WidgetKeys.counterOfferPriceWidget,
                             title: '${context.tr('Discounted price')}: ',
                             salesOrgConfig: eligibilityState.salesOrgConfigs,
-                            price: cartItem.display(PriceType.finalPrice),
+                            price: cartItem.display(PriceType.discountedPrice),
                             type: PriceStyle.cartMaterialUnitPrice,
                           ),
+                        ],
                         if (isPriceOverrideEnable)
                           _CounterOfferPriceTextField(
                             isDiscountOverrideEnable: isDiscountOverrideEnable,

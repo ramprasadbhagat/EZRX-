@@ -24,6 +24,16 @@ class __CounterOfferRemarksTextFieldState
   }
 
   @override
+  void didUpdateWidget(covariant _CounterOfferRemarksTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_remarksController.text != widget.remarks) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _remarksController.text = widget.remarks;
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _remarksController.dispose();
     super.dispose();

@@ -23,6 +23,7 @@ void main() {
         listPrice: 12,
         finalIndividualPrice: 12,
         finalTotalPrice: 12,
+        discountedValue: 10,
         additionalBonusEligible: false,
         isValid: false,
         isPriceOverride: true,

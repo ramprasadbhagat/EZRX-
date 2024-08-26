@@ -21,6 +21,7 @@ query price(
             OldMaterialCode
             ListPrice
             FinalIndividualPrice
+            DiscountedValue
             FinalTotalPrice
             IsMOVExclusion
             PriceRules {

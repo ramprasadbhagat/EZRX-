@@ -26,6 +26,8 @@ class PriceDto with _$PriceDto {
     required double finalIndividualPrice,
     @JsonKey(name: 'finalTotalPrice', defaultValue: 0)
     required double finalTotalPrice,
+    @JsonKey(name: 'discountedValue', defaultValue: 0)
+    required double discountedValue,
     @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
     required List<PriceRuleDto> rules,
     @JsonKey(name: 'bonuses', defaultValue: <PriceBonusDto>[])
@@ -74,6 +76,7 @@ class PriceDto with _$PriceDto {
         lastPrice: MaterialPrice(listPrice),
         finalPrice: MaterialPrice(finalIndividualPrice),
         finalTotalPrice: MaterialPrice(finalTotalPrice),
+        discountedValue: MaterialPrice(discountedValue),
         rules: rules.map((e) => e.toDomain()).toList(),
         tiers: tiers
             .map((e) => e.toDomain())
@@ -114,6 +117,7 @@ class PriceDto with _$PriceDto {
       listPrice: price.lastPrice.getOrDefaultValue(0),
       finalIndividualPrice: price.finalPrice.getOrDefaultValue(0),
       finalTotalPrice: price.finalTotalPrice.getOrDefaultValue(0),
+      discountedValue: price.discountedValue.getOrDefaultValue(0),
       rules: price.rules.map((e) => PriceRuleDto.fromDomain(e)).toList(),
       tiers: [
         PriceTierDto.fromDomain(

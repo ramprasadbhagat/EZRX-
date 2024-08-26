@@ -21,6 +21,7 @@ mixin _$Price {
   MaterialPrice get lastPrice => throw _privateConstructorUsedError;
   MaterialPrice get finalPrice => throw _privateConstructorUsedError;
   MaterialPrice get finalTotalPrice => throw _privateConstructorUsedError;
+  MaterialPrice get discountedValue => throw _privateConstructorUsedError;
   List<PriceRule> get rules => throw _privateConstructorUsedError;
   List<PriceTierItem> get tiers => throw _privateConstructorUsedError;
   List<PriceBonus> get bonuses => throw _privateConstructorUsedError;
@@ -58,6 +59,7 @@ abstract class $PriceCopyWith<$Res> {
       MaterialPrice lastPrice,
       MaterialPrice finalPrice,
       MaterialPrice finalTotalPrice,
+      MaterialPrice discountedValue,
       List<PriceRule> rules,
       List<PriceTierItem> tiers,
       List<PriceBonus> bonuses,
@@ -100,6 +102,7 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
     Object? lastPrice = null,
     Object? finalPrice = null,
     Object? finalTotalPrice = null,
+    Object? discountedValue = null,
     Object? rules = null,
     Object? tiers = null,
     Object? bonuses = null,
@@ -141,6 +144,10 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
       finalTotalPrice: null == finalTotalPrice
           ? _value.finalTotalPrice
           : finalTotalPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
+      discountedValue: null == discountedValue
+          ? _value.discountedValue
+          : discountedValue // ignore: cast_nullable_to_non_nullable
               as MaterialPrice,
       rules: null == rules
           ? _value.rules
@@ -247,6 +254,7 @@ abstract class _$$PriceImplCopyWith<$Res> implements $PriceCopyWith<$Res> {
       MaterialPrice lastPrice,
       MaterialPrice finalPrice,
       MaterialPrice finalTotalPrice,
+      MaterialPrice discountedValue,
       List<PriceRule> rules,
       List<PriceTierItem> tiers,
       List<PriceBonus> bonuses,
@@ -288,6 +296,7 @@ class __$$PriceImplCopyWithImpl<$Res>
     Object? lastPrice = null,
     Object? finalPrice = null,
     Object? finalTotalPrice = null,
+    Object? discountedValue = null,
     Object? rules = null,
     Object? tiers = null,
     Object? bonuses = null,
@@ -329,6 +338,10 @@ class __$$PriceImplCopyWithImpl<$Res>
       finalTotalPrice: null == finalTotalPrice
           ? _value.finalTotalPrice
           : finalTotalPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
+      discountedValue: null == discountedValue
+          ? _value.discountedValue
+          : discountedValue // ignore: cast_nullable_to_non_nullable
               as MaterialPrice,
       rules: null == rules
           ? _value._rules
@@ -423,6 +436,7 @@ class _$PriceImpl extends _Price {
       required this.lastPrice,
       required this.finalPrice,
       required this.finalTotalPrice,
+      required this.discountedValue,
       required final List<PriceRule> rules,
       required final List<PriceTierItem> tiers,
       required final List<PriceBonus> bonuses,
@@ -461,6 +475,8 @@ class _$PriceImpl extends _Price {
   final MaterialPrice finalPrice;
   @override
   final MaterialPrice finalTotalPrice;
+  @override
+  final MaterialPrice discountedValue;
   final List<PriceRule> _rules;
   @override
   List<PriceRule> get rules {
@@ -543,7 +559,7 @@ class _$PriceImpl extends _Price {
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, isDiscountOverride: $isDiscountOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isMOVExclusion: $isMOVExclusion, isFOC: $isFOC)';
+    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, discountedValue: $discountedValue, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, isDiscountOverride: $isDiscountOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isMOVExclusion: $isMOVExclusion, isFOC: $isFOC)';
   }
 
   @override
@@ -561,6 +577,8 @@ class _$PriceImpl extends _Price {
                 other.finalPrice == finalPrice) &&
             (identical(other.finalTotalPrice, finalTotalPrice) ||
                 other.finalTotalPrice == finalTotalPrice) &&
+            (identical(other.discountedValue, discountedValue) ||
+                other.discountedValue == discountedValue) &&
             const DeepCollectionEquality().equals(other._rules, _rules) &&
             const DeepCollectionEquality().equals(other._tiers, _tiers) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
@@ -606,6 +624,7 @@ class _$PriceImpl extends _Price {
         lastPrice,
         finalPrice,
         finalTotalPrice,
+        discountedValue,
         const DeepCollectionEquality().hash(_rules),
         const DeepCollectionEquality().hash(_tiers),
         const DeepCollectionEquality().hash(_bonuses),
@@ -642,6 +661,7 @@ abstract class _Price extends Price {
       required final MaterialPrice lastPrice,
       required final MaterialPrice finalPrice,
       required final MaterialPrice finalTotalPrice,
+      required final MaterialPrice discountedValue,
       required final List<PriceRule> rules,
       required final List<PriceTierItem> tiers,
       required final List<PriceBonus> bonuses,
@@ -674,6 +694,8 @@ abstract class _Price extends Price {
   MaterialPrice get finalPrice;
   @override
   MaterialPrice get finalTotalPrice;
+  @override
+  MaterialPrice get discountedValue;
   @override
   List<PriceRule> get rules;
   @override

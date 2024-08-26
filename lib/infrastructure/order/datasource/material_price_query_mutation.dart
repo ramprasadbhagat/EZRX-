@@ -19,6 +19,7 @@ class MaterialPriceQueryMutation {
             ListPrice
             FinalIndividualPrice
             FinalTotalPrice
+            DiscountedValue
             IsMOVExclusion
             PriceRules {
               Type

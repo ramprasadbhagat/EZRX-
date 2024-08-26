@@ -20,11 +20,12 @@ class PriceOverrideState with _$PriceOverrideState {
 
   bool get isPriceOverride =>
       item.materialInfo.counterOfferDetails.counterOfferPrice.isValid();
+
   bool get isDiscountOverride =>
       item.materialInfo.counterOfferDetails.discountOverridePercentage
           .isValid();
 
-  double get discountedPrice {
+  double get overridedPrice {
     final priceValue = isPriceOverride
         ? item.materialInfo.counterOfferDetails.counterOfferPrice.doubleValue
         : item.price.priceValueForDiscountOverride;
@@ -46,19 +47,21 @@ class PriceOverrideState with _$PriceOverrideState {
       return 'Not requested';
     }
 
-    return discountedPrice.toString();
+    return overridedPrice.toString();
   }
 
   bool get isInputFieldValid => isPriceOverride || isDiscountOverride;
 
-  bool get hasDiscount => item.showMaterialListPrice;
+  double get discountedPrice => item.price.discountedValue.getOrDefaultValue(0);
 
-  double get itemFinalPrice => hasDiscount ? item.finalPrice : item.listPrice;
+  bool get hasDiscount => discountedPrice > 0;
+
+  double get itemFinalPrice => hasDiscount ? discountedPrice : item.listPrice;
 
   bool get _hasPriceOrDiscountOverride => isPriceOverride || isDiscountOverride;
 
   bool get showWarningMessage =>
       _hasPriceOrDiscountOverride &&
       !item.materialInfo.hidePrice &&
-      discountedPrice > itemFinalPrice;
+      overridedPrice > itemFinalPrice;
 }

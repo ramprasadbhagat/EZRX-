@@ -480,6 +480,8 @@ class PriceAggregate with _$PriceAggregate {
       case PriceType.aplFinalPriceTotal:
         result = aplFinalPriceTotal;
         break;
+      case PriceType.discountedPrice:
+        result = price.discountedValue.getOrDefaultValue(0);
       case PriceType.listPrice:
       default:
         result = listPrice;
@@ -1021,4 +1023,5 @@ enum PriceType {
   unitPriceTotal,
   listPriceTotal,
   aplFinalPriceTotal,
+  discountedPrice,
 }
