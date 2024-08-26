@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_hk_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
@@ -768,6 +769,38 @@ void main() {
 
         modifyStateMaterial = modifyStateMaterial.copyWith(
           configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+        );
+      });
+
+      test('Enabled/Disabled based on HK order type', () {
+        final fakeState = OrderEligibilityState.initial().copyWith(
+          user: fakeSalesRepUser,
+          salesOrg: fakeHKSalesOrganisation,
+          configs: fakeHKSalesOrgConfigs,
+          cartItems: [
+            fakeCartItem.copyWith(tenderContract: TenderContract.empty()),
+          ],
+          grandTotal: fakeHKSalesOrgConfigs.minOrderAmount - 1,
+        );
+        expect(
+          fakeState.copyWith
+              .user(selectedOrderType: DocumentType.zpor())
+              .isMinOrderValuePassed,
+          false,
+        );
+
+        expect(
+          fakeState.copyWith
+              .user(selectedOrderType: DocumentType('zpfb'))
+              .isMinOrderValuePassed,
+          false,
+        );
+
+        expect(
+          fakeState.copyWith
+              .user(selectedOrderType: DocumentType('zpfc'))
+              .isMinOrderValuePassed,
+          false,
         );
       });
     });

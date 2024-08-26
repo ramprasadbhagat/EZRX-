@@ -184,6 +184,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get checkMOVonSubTotal => isTH || isSg;
 
+  bool get bypassMovWithEligibleOrderType => !isHK;
+
   String get maintenanceBannerPathId =>
       countryToMaintenanceBannerPathId(country);
 

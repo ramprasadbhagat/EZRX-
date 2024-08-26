@@ -371,7 +371,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       cartItems.where((e) => e.hasSalesRepPrincipal).isNotEmpty;
 
   bool get _eligibleOrderType =>
-      user.selectedOrderType.isZPFC || user.selectedOrderType.isZPFB;
+      (user.selectedOrderType.isZPFC || user.selectedOrderType.isZPFB) &&
+      salesOrg.salesOrg.bypassMovWithEligibleOrderType;
 
   bool get _isCartItemsContainsFOCMaterial => cartItems
       .where((element) => element.materialInfo.isFOCMaterial)
