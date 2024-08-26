@@ -1,42 +1,28 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../utils/widget_utils.dart';
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class MaterialPageXMock extends Mock implements AutoRoutePage {}
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
+import '../../../utils/widget_utils.dart';
 
 void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late MaterialListBloc materialListBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   final routeData = RouteData(
     stackKey: const Key(''),
     type: const RouteType.adaptive(),
@@ -48,7 +34,7 @@ void main() {
       ),
       key: const ValueKey('HomeTabRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
@@ -60,7 +46,7 @@ void main() {
     registerFallbackValue(const PageRouteInfo('HomeTabRoute'));
     materialListBlocMock = MaterialListBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
-    autoRouterMock = MockAppRouter();
+    autoRouterMock = AutoRouteMock();
     eligibilityBlocMock = EligibilityBlocMock();
     when(() => autoRouterMock.currentPath).thenReturn('home');
     when(() => autoRouterMock.current).thenReturn(routeData);

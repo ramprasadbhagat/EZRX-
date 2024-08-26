@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -16,13 +17,13 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -42,11 +43,10 @@ import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 void main() {
-  late MaterialListBlocMock materialListBlocMock;
-  late EligibilityBlocMock eligibilityBlocMock;
+  late MaterialListBloc materialListBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late ProductDetailBloc productDetailBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late MaterialResponse materialResponseMock;
   final routeData = RouteData(
     stackKey: const Key(''),
@@ -79,9 +79,11 @@ void main() {
     registerFallbackValue(const PageRouteInfo('HomeTabRoute'));
     locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
-    locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
+    locator
+        .registerLazySingleton<MaterialListBloc>(() => MaterialListBlocMock());
     locator.registerLazySingleton(() => PackageInfoService());
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
+    materialListBlocMock = locator<MaterialListBloc>();
   });
 
   setUp(() async {
@@ -90,7 +92,7 @@ void main() {
     productDetailBlocMock = ProductDetailBlocMock();
     when(() => autoRouterMock.currentPath).thenReturn('home');
     when(() => autoRouterMock.current).thenReturn(routeData);
-    materialListBlocMock = MaterialListBlocMock();
+
     when(() => materialListBlocMock.state)
         .thenReturn(MaterialListState.initial());
     eligibilityBlocMock = EligibilityBlocMock();
@@ -109,11 +111,11 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
-          BlocProvider<MaterialListBloc>(
-            create: (context) => materialListBlocMock,
-          ),
           BlocProvider<ProductDetailBloc>(
             create: (context) => productDetailBlocMock,
+          ),
+          BlocProvider<MaterialListBloc>(
+            create: (context) => materialListBlocMock,
           ),
         ],
         child: const Scaffold(body: BundleSection()),
@@ -123,17 +125,74 @@ void main() {
 
   group('Bundle Section Test', () {
     testWidgets(
+        'Do not call the initialized event when the EligibilityState is the EligibilityState.initial()',
+        (tester) async {
+      whenListen(
+        eligibilityBlocMock,
+        Stream.fromIterable([
+          EligibilityState.initial(),
+        ]),
+        initialState: EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          user: fakeClientUser.copyWith(preferredLanguage: Language('ZH')),
+        ),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => materialListBlocMock.add(
+          MaterialListEvent.initialized(
+            salesOrganisation: SalesOrganisation.empty(),
+            configs: SalesOrganisationConfigs.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            selectedMaterialFilter: MaterialFilter.empty().copyWith(
+              bundleOffers: true,
+            ),
+            user: User.empty(),
+          ),
+        ),
+      );
+    });
+    testWidgets(
       ' -> Find Bundle Section',
       (WidgetTester tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
+        whenListen(
+          eligibilityBlocMock,
+          Stream.fromIterable([
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeIDSalesOrganisation,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
+              user: fakeClientUser,
+              shipToInfo: fakeShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ]),
+          initialState: EligibilityState.initial().copyWith(
+            isLoadingCustomerCode: true,
           ),
         );
         await getWidget(tester);
-        await tester.pump();
+        await tester.pumpAndSettle();
         final bundleSectionFinder = find.byType(BundleSection);
         expect(bundleSectionFinder, findsOneWidget);
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.initialized(
+              salesOrganisation: fakeIDSalesOrganisation,
+              configs: fakeIDSalesOrgConfigs,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: fakeShipToInfo,
+              selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                bundleOffers: true,
+              ),
+              user: fakeClientUser,
+            ),
+          ),
+        ).called(1);
       },
     );
     testWidgets(
@@ -181,8 +240,8 @@ void main() {
     testWidgets(
       ' -> Bundle Section List item test regarding material data',
       (WidgetTester tester) async {
-        when(() => autoRouterMock.pushNamed(any()))
-            .thenAnswer((invocation) async => true);
+        when(() => autoRouterMock.navigate(const ProductsTabRoute()))
+            .thenAnswer((_) => Future.value());
         when(() => materialListBlocMock.state).thenReturn(
           MaterialListState.initial().copyWith(
             materialList: [
@@ -211,20 +270,40 @@ void main() {
           WidgetKeys.materialListBundleCard,
         );
         expect(bundlesListItemFinder, findsOneWidget);
+        await tester
+            .tap(find.byKey(WidgetKeys.sectionTileIcon('Bundles'.tr())));
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.fetch(
+              selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                bundleOffers: true,
+              ),
+            ),
+          ),
+        ).called(1);
+        verify(() => autoRouterMock.navigate(const ProductsTabRoute()))
+            .called(1);
       },
     );
 
     testWidgets(
       ' -> Find Bundle Code Inside Bundle Section',
       (WidgetTester tester) async {
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
+        whenListen(
+          materialListBlocMock,
+          Stream.fromIterable([
+            MaterialListState.initial().copyWith(
+              materialList: [materialResponseMock.products[1]],
+            ),
+          ]),
+          initialState: MaterialListState.initial().copyWith(
             materialList: [materialResponseMock.products[1]],
+            apiFailureOrSuccessOption: optionOf(const Right('')),
           ),
         );
 
         await getWidget(tester);
-        await tester.pump();
+        await tester.pumpAndSettle();
         final bundleCode = find.text(
           materialResponseMock.products[1].bundle.bundleCode,
         );
@@ -237,12 +316,22 @@ void main() {
       (WidgetTester tester) async {
         final bundle = materialResponseMock.products
             .firstWhere((e) => e.type.typeBundle && e.isMarketPlace);
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(materialList: [bundle]),
+
+        whenListen(
+          materialListBlocMock,
+          Stream.fromIterable([
+            MaterialListState.initial().copyWith(
+              materialList: [bundle],
+              apiFailureOrSuccessOption: optionOf(const Right('')),
+            ),
+          ]),
+          initialState: MaterialListState.initial().copyWith(
+            materialList: [bundle],
+          ),
         );
 
         await getWidget(tester);
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(find.byType(MarketPlaceLogo), findsOneWidget);
         expect(find.text('Sold by: ${bundle.manufactured}'), findsOne);
       },
@@ -308,42 +397,5 @@ void main() {
         expect(errorText, findsOneWidget);
       },
     );
-
-    testWidgets(
-        'Do not call the initialized event when the EligibilityState is the EligibilityState.initial()',
-        (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-          user: fakeClientUser.copyWith(preferredLanguage: Language('ZH')),
-        ),
-      );
-      final expectedState = [
-        EligibilityState.initial(),
-      ];
-      whenListen(
-        eligibilityBlocMock,
-        Stream.fromIterable(expectedState),
-      );
-      await getWidget(tester);
-      await tester.pump();
-      verifyNever(
-        () => materialListBlocMock.add(
-          MaterialListEvent.initialized(
-            salesOrganisation: SalesOrganisation.empty(),
-            configs: SalesOrganisationConfigs.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            selectedMaterialFilter: MaterialFilter.empty().copyWith(
-              bundleOffers: true,
-            ),
-            user: User.empty(),
-          ),
-        ),
-      );
-    });
   });
 }

@@ -22,6 +22,8 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -31,48 +33,20 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../common_mock_data/customer_code_mock.dart';
-import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
-import '../../common_mock_data/sales_organsiation_mock.dart';
-import '../../common_mock_data/user_mock.dart';
-import '../../utils/widget_utils.dart';
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class ProductDetailBlocMock
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-class ClevertapServiceMock extends Mock implements ClevertapService {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
+import '../../../utils/widget_utils.dart';
 
 void main() {
   late GetIt locator;
@@ -85,15 +59,16 @@ void main() {
   late CartBloc cartBloc;
   late List<MaterialInfo> fakeMaterialList;
   late AppRouter autoRouterMock;
+  late MixpanelService mixpanelServiceMock;
 
   setUpAll(() async {
     locator = GetIt.instance;
-    locator.registerLazySingleton(() => MockAppRouter());
+    locator.registerLazySingleton<AppRouter>(() => AutoRouteMock());
     locator.registerFactory(() => materialListBlocMock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator
         .registerLazySingleton<ClevertapService>(() => ClevertapServiceMock());
-    autoRouterMock = locator<MockAppRouter>();
+    autoRouterMock = locator<AppRouter>();
     eligibilityBlocMock = EligibilityBlocMock();
     materialPriceBlocMock = MaterialPriceBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
@@ -101,6 +76,7 @@ void main() {
     productDetailBlocMock = ProductDetailBlocMock();
     cartBloc = CartBlocMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    mixpanelServiceMock = locator<MixpanelService>();
     fakeMaterialList =
         (await MaterialListLocalDataSource().getProductList()).products;
   });
@@ -561,20 +537,19 @@ void main() {
           ),
         ];
 
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: fakeFavList,
-          ),
-        );
-
         final expectedState = [
           MaterialListState.initial().copyWith(
+            nextPageIndex: 1,
             materialList: [fakeFavList.first.copyWith(isFavourite: true)],
           ),
         ];
         whenListen(
           materialListBlocMock,
           Stream.fromIterable(expectedState),
+          initialState: MaterialListState.initial().copyWith(
+            materialList: fakeFavList,
+            apiFailureOrSuccessOption: optionOf(const Right('')),
+          ),
         );
         await tester.pumpWidget(getWUT());
         await tester.pump();
@@ -660,6 +635,42 @@ void main() {
           ),
         ),
       );
+    });
+
+    testWidgets('tap unfavorite button', (tester) async {
+      final material = fakeMaterialList.first.copyWith(isFavourite: true);
+      final favIcon = find.byKey(
+        WidgetKeys.favIcon(material.materialNumber.getOrDefaultValue('')),
+      );
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          materialList: [material],
+        ),
+      );
+      when(() => autoRouterMock.currentPath).thenReturn('fake-path');
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      await tester.tap(favIcon);
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: TrackingEvents.addProductToFavorite,
+          properties: {
+            TrackingProps.productName: material.displayDescription,
+            TrackingProps.productNumber: material.materialNumber.displayMatNo,
+            TrackingProps.productManufacturer: material.getManufactured,
+            TrackingProps.clickAt: RouterUtils.buildRouteTrackingName(
+              'fake-path',
+            ),
+          },
+        ),
+      ).called(1);
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.deleteFavourite(
+            item: material,
+          ),
+        ),
+      ).called(1);
     });
   });
 }

@@ -13,13 +13,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../presentation/home/carousel_banner/carousel_banner_tile_test.dart';
+import '../../../common_mock_data/mock_other.dart';
 
 void main() {
   late BannerRemoteDataSource remoteDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-
-  final service = MockHTTPService();
 
   final variables = {
     'getLiveCampaignInput': {
@@ -35,6 +33,8 @@ void main() {
     },
   };
 
+  final service = HTTPServiceMock();
+
   setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
     remoteDataSource = BannerRemoteDataSource(
@@ -48,8 +48,9 @@ void main() {
   group('Banner Remote Test', () {
     test('Get Banners', () async {
       final res = json.decode(
-        await rootBundle
-            .loadString('assets/json/get_EZ_reach_banner/getEZReachBannerResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/get_EZ_reach_banner/getEZReachBannerResponse.json',
+        ),
       );
 
       when(

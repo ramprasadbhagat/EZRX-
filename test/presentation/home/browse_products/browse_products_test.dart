@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -12,14 +13,15 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -30,47 +32,21 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class ProductDetailBlocMock
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class ClevertapServiceMock extends Mock implements ClevertapService {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
 void main() {
-  late MaterialListBlocMock materialListBlocMock;
-  late EligibilityBlocMock eligibilityBlocMock;
+  late MaterialListBloc materialListBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late ProductDetailBloc productDetailBlocMock;
-  late ProductImageBlocMock productImageBlocMock;
-  late UserBlocMock userBlocMock;
+  late ProductImageBloc productImageBlocMock;
+  late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   final routeData = RouteData(
     stackKey: const Key(''),
     type: const RouteType.adaptive(),
@@ -82,7 +58,7 @@ void main() {
       ),
       key: const ValueKey('HomeTabRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
@@ -90,14 +66,14 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     registerFallbackValue(const PageRouteInfo('HomeTabRoute'));
-    locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
   });
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    autoRouterMock = MockAppRouter();
+    autoRouterMock = AutoRouteMock();
     materialPriceBlocMock = MaterialPriceBlocMock();
     productDetailBlocMock = ProductDetailBlocMock();
     materialListBlocMock = MaterialListBlocMock();
@@ -214,6 +190,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           user: fakeClientUser.copyWith(preferredLanguage: Language('ZH')),
+          isLoadingCustomerCode: true,
         ),
       );
       final expectedState = [
@@ -239,6 +216,102 @@ void main() {
           ),
         ),
       );
+    });
+
+    testWidgets('tap browse product icon', (tester) async {
+      final materialList = [MaterialInfo.empty()];
+      final browseProductIcon =
+          find.byKey(WidgetKeys.sectionTileIcon('Browse products'.tr()));
+      whenListen(
+        materialListBlocMock,
+        Stream.fromIterable([
+          MaterialListState.initial().copyWith(
+            materialList: materialList,
+            selectedMaterialFilter:
+                MaterialFilter.empty().copyWith(isFavourite: true),
+            apiFailureOrSuccessOption: optionOf(const Right('')),
+          ),
+        ]),
+      );
+
+      when(() => autoRouterMock.navigate(const ProductsTabRoute()))
+          .thenAnswer((_) => Future.value());
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      verify(
+        () => materialPriceBlocMock.add(
+          MaterialPriceEvent.fetch(
+            comboDealEligible: false,
+            materials: materialList,
+          ),
+        ),
+      ).called(1);
+      expect(browseProductIcon, findsOneWidget);
+      await tester.tap(browseProductIcon);
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.fetch(
+            selectedMaterialFilter: MaterialFilter.empty(),
+          ),
+        ),
+      ).called(1);
+      verify(() => autoRouterMock.navigate(const ProductsTabRoute())).called(1);
+    });
+
+    testWidgets('tap product favorite icon', (tester) async {
+      final materialList = [MaterialInfo.empty()];
+      final favoriteIcon = find.byKey(WidgetKeys.favoritesIcon).first;
+      whenListen(
+        materialListBlocMock,
+        Stream.fromIterable([
+          MaterialListState.initial().copyWith(
+            materialList: materialList,
+          ),
+        ]),
+        initialState: MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(const Right('')),
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      await tester.tap(favoriteIcon);
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.addFavourite(
+            item: materialList.first,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('tap product unfavorite icon', (tester) async {
+      final materialList = [MaterialInfo.empty().copyWith(isFavourite: true)];
+      final favoriteIcon = find.byKey(WidgetKeys.favoritesIcon).first;
+      whenListen(
+        materialListBlocMock,
+        Stream.fromIterable([
+          MaterialListState.initial().copyWith(
+            materialList: materialList,
+          ),
+        ]),
+        initialState: MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(const Right('')),
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      await tester.tap(favoriteIcon);
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.deleteFavourite(
+            item: materialList.first,
+          ),
+        ),
+      ).called(1);
     });
   });
 }

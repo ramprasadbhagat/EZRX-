@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/combo_offers_section/combo_offers_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -18,43 +19,20 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MaterialFilterBlocMock
-    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
-    implements MaterialFilterBloc {}
 
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late AuthBloc authBlocMock;
-  late MaterialListBlocMock materialListBlocMock;
+  late MaterialListBloc materialListBlocMock;
   late UserBloc userBlocMock;
-  late EligibilityBlocMock eligibilityBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late MaterialFilterBloc materialFilterBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   final routeData = RouteData(
     stackKey: const Key(''),
     type: const RouteType.adaptive(),
@@ -66,7 +44,7 @@ void main() {
       stringMatch: 'home',
       key: const ValueKey('HomeTabRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
@@ -81,7 +59,7 @@ void main() {
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
     salesOrgBlocMock = SalesOrgBlocMock();
-    autoRouterMock = MockAppRouter();
+    autoRouterMock = AutoRouteMock();
     materialFilterBlocMock = MaterialFilterBlocMock();
     when(() => autoRouterMock.currentPath).thenReturn('home');
     when(() => autoRouterMock.current).thenReturn(routeData);
@@ -153,5 +131,33 @@ void main() {
         expect(comboOffersSectionFinder, findsOneWidget);
       },
     );
+
+    testWidgets('On tap combo deal button', (tester) async {
+      when(() => autoRouterMock.navigate(const ProductsTabRoute()))
+          .thenAnswer((_) => Future.value());
+      final exploreComboDealsButtton =
+          find.byKey(WidgetKeys.exploreComboDealsButtton);
+      await getWidget(tester);
+      await tester.pump();
+      await tester.tap(exploreComboDealsButtton);
+      verify(
+        () => materialFilterBlocMock.add(
+          MaterialFilterEvent.initSelectedMaterialFilter(
+            MaterialFilter.empty().copyWith(comboOffers: true),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.fetch(
+            selectedMaterialFilter:
+                MaterialFilter.empty().copyWith(comboOffers: true),
+          ),
+        ),
+      ).called(1);
+
+      verify(() => autoRouterMock.navigate(const ProductsTabRoute())).called(1);
+    });
   });
 }

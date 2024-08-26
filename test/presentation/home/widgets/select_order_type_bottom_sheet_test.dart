@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -17,9 +18,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../common_mock_data/mock_bloc.dart';
-import '../../common_mock_data/mock_other.dart';
-import '../../utils/widget_utils.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
+import '../../../utils/widget_utils.dart';
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -122,8 +123,17 @@ void main() async {
             .copyWith
             .user(selectedOrderType: fakeOrderType),
       );
-      when(() => userBlocMock.state).thenReturn(
-        UserState.initial().copyWith.user(selectedOrderType: fakeOrderType),
+      whenListen(
+        userBlocMock,
+        Stream.fromIterable([
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(selectedOrderType: fakeOrderType),
+          ),
+        ]),
+        initialState: UserState.initial().copyWith(
+          isSelectingOrderType: true,
+          failureOrSuccessOption: optionOf(const Right('')),
+        ),
       );
       await tester.pumpWidget(testWidget());
       await tester.pumpAndSettle();
