@@ -325,11 +325,24 @@ void main() {
             email: mockUser.email.getOrDefaultValue(''),
             role: mockUser.role.name,
             market: mockMarket.toUpperCase(),
+            phone: mockUser.phoneWithCountryCode,
           ),
         ).thenAnswer((_) => Future.value());
 
         final result = await repository.getUser();
         expect(result.isRight(), true);
+
+        // verify cleverTapService event
+        verify(
+          () => mockClevertapService.setUser(
+            name: mockUser.fullName.displayFullName,
+            username: mockUser.username.getOrDefaultValue(''),
+            email: mockUser.email.getOrDefaultValue(''),
+            role: mockUser.role.name,
+            market: mockMarket.toUpperCase(),
+            phone: mockUser.phoneWithCountryCode,
+          ),
+        ).called(1);
       },
     );
 

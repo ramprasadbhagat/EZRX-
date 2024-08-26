@@ -56,7 +56,8 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
-      mobileNumber: json['MobileNumber'] as String? ?? '',
+      mobileNumber: json['mobileNumber'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
       acceptMPTC:
           JsonReadValueHelper.handleMarketPlaceTnCAcceptance(json, 'acceptMPTC')
               as String,
@@ -97,7 +98,8 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
           instance.paymentNotification.map((e) => e.toJson()).toList(),
       'preferredLanguage': instance.preferredLanguage,
       'supportedLanguages': instance.supportedLanguages,
-      'MobileNumber': instance.mobileNumber,
+      'mobileNumber': instance.mobileNumber,
+      'countryCode': instance.countryCode,
       'acceptMPTC': instance.acceptMPTC,
       'isResetUserPassword': instance.isResetUserPassword,
       'isPPATriggerMaintained': instance.isPPATriggerMaintained,

@@ -39,6 +39,7 @@ class User with _$User {
     required Language preferredLanguage,
     required List<Language> supportedLanguages,
     required PhoneNumber mobileNumber,
+    required CountryCode countryCode,
     required MarketPlaceTnCAcceptance acceptMPTC,
     required bool isResetUserPassword,
     required bool isPPATriggerMaintained,
@@ -72,6 +73,7 @@ class User with _$User {
         preferredLanguage: Language.english(),
         supportedLanguages: <Language>[],
         mobileNumber: PhoneNumber(''),
+        countryCode: CountryCode(''),
         acceptMPTC: MarketPlaceTnCAcceptance(''),
         isResetUserPassword: false,
         isPPATriggerMaintained: false,
@@ -189,6 +191,9 @@ class User with _$User {
       role.type.isCustomer && disablePaymentAccess;
 
   bool get isMultiSalesOrgs => userSalesOrganisations.length > 1;
+
+  String get phoneWithCountryCode =>
+      '${countryCode.getOrDefaultValue('')}${mobileNumber.validPhoneNumber}';
 }
 
 enum _UserFile {

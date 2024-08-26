@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -171,5 +172,16 @@ void main() {
     expect(englishMarketUser.marketPlacePrivacyPolicyFile, path);
     expect(nonEnglishMarketUser.marketPlacePrivacyPolicyFile, path);
     expect(vnMarketUser.marketPlacePrivacyPolicyFile, path);
+  });
+
+  test('Phone number with country code', () {
+    const phoneNumber = '888888888';
+    const countryCode = '+84';
+
+    final userWithMobile = fakeClient.copyWith(
+      mobileNumber: PhoneNumber(phoneNumber),
+      countryCode: CountryCode(countryCode),
+    );
+    expect(userWithMobile.phoneWithCountryCode, '$countryCode$phoneNumber');
   });
 }

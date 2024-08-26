@@ -38,6 +38,7 @@ mixin _$User {
   Language get preferredLanguage => throw _privateConstructorUsedError;
   List<Language> get supportedLanguages => throw _privateConstructorUsedError;
   PhoneNumber get mobileNumber => throw _privateConstructorUsedError;
+  CountryCode get countryCode => throw _privateConstructorUsedError;
   MarketPlaceTnCAcceptance get acceptMPTC => throw _privateConstructorUsedError;
   bool get isResetUserPassword => throw _privateConstructorUsedError;
   bool get isPPATriggerMaintained => throw _privateConstructorUsedError;
@@ -74,6 +75,7 @@ abstract class $UserCopyWith<$Res> {
       Language preferredLanguage,
       List<Language> supportedLanguages,
       PhoneNumber mobileNumber,
+      CountryCode countryCode,
       MarketPlaceTnCAcceptance acceptMPTC,
       bool isResetUserPassword,
       bool isPPATriggerMaintained,
@@ -120,6 +122,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
+    Object? countryCode = null,
     Object? acceptMPTC = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
@@ -210,6 +213,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as CountryCode,
       acceptMPTC: null == acceptMPTC
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
@@ -299,6 +306,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       Language preferredLanguage,
       List<Language> supportedLanguages,
       PhoneNumber mobileNumber,
+      CountryCode countryCode,
       MarketPlaceTnCAcceptance acceptMPTC,
       bool isResetUserPassword,
       bool isPPATriggerMaintained,
@@ -347,6 +355,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
+    Object? countryCode = null,
     Object? acceptMPTC = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
@@ -437,6 +446,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as CountryCode,
       acceptMPTC: null == acceptMPTC
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
@@ -482,6 +495,7 @@ class _$UserImpl extends _User {
       required this.preferredLanguage,
       required final List<Language> supportedLanguages,
       required this.mobileNumber,
+      required this.countryCode,
       required this.acceptMPTC,
       required this.isResetUserPassword,
       required this.isPPATriggerMaintained,
@@ -555,6 +569,8 @@ class _$UserImpl extends _User {
   @override
   final PhoneNumber mobileNumber;
   @override
+  final CountryCode countryCode;
+  @override
   final MarketPlaceTnCAcceptance acceptMPTC;
   @override
   final bool isResetUserPassword;
@@ -565,7 +581,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, selectedOrderType: $selectedOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, selectedOrderType: $selectedOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, countryCode: $countryCode, acceptMPTC: $acceptMPTC, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl)';
   }
 
   @override
@@ -612,6 +628,8 @@ class _$UserImpl extends _User {
                 .equals(other._supportedLanguages, _supportedLanguages) &&
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
             (identical(other.acceptMPTC, acceptMPTC) ||
                 other.acceptMPTC == acceptMPTC) &&
             (identical(other.isResetUserPassword, isResetUserPassword) ||
@@ -646,6 +664,7 @@ class _$UserImpl extends _User {
         preferredLanguage,
         const DeepCollectionEquality().hash(_supportedLanguages),
         mobileNumber,
+        countryCode,
         acceptMPTC,
         isResetUserPassword,
         isPPATriggerMaintained,
@@ -682,6 +701,7 @@ abstract class _User extends User {
       required final Language preferredLanguage,
       required final List<Language> supportedLanguages,
       required final PhoneNumber mobileNumber,
+      required final CountryCode countryCode,
       required final MarketPlaceTnCAcceptance acceptMPTC,
       required final bool isResetUserPassword,
       required final bool isPPATriggerMaintained,
@@ -730,6 +750,8 @@ abstract class _User extends User {
   List<Language> get supportedLanguages;
   @override
   PhoneNumber get mobileNumber;
+  @override
+  CountryCode get countryCode;
   @override
   MarketPlaceTnCAcceptance get acceptMPTC;
   @override

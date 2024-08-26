@@ -83,8 +83,9 @@ class UserDto with _$UserDto {
       defaultValue: <String>[],
     )
     required List<String> supportedLanguages,
-    @JsonKey(name: 'MobileNumber', defaultValue: '')
+    @JsonKey(name: 'mobileNumber', defaultValue: '')
     required String mobileNumber,
+    @JsonKey(name: 'countryCode', defaultValue: '') required String countryCode,
     @JsonKey(
       name: 'acceptMPTC',
       readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance,
@@ -133,6 +134,7 @@ class UserDto with _$UserDto {
           .toList(),
       preferredLanguage: user.preferredLanguage.languageCode,
       mobileNumber: user.mobileNumber.getOrDefaultValue(''),
+      countryCode: user.countryCode.getOrDefaultValue(''),
       supportedLanguages: <String>[],
       acceptMPTC: user.acceptMPTC.getOrDefaultValue(''),
       isResetUserPassword: user.isResetUserPassword,
@@ -162,6 +164,7 @@ class UserDto with _$UserDto {
     paymentNotification: <PaymentAdviceExpiryNotificationDto>[],
     preferredLanguage: 'EN',
     mobileNumber: '',
+    countryCode: '',
     supportedLanguages: <String>[],
     salesOrganisations: <String>[],
     acceptMPTC: '',
@@ -209,6 +212,7 @@ class UserDto with _$UserDto {
       hasPriceOverride: hasPriceOverride,
       preferredLanguage: Language(preferredLanguage),
       mobileNumber: PhoneNumber(mobileNumber),
+      countryCode: CountryCode(countryCode),
       supportedLanguages: supportedLanguages.map((e) => Language(e)).toList(),
       acceptMPTC: MarketPlaceTnCAcceptance(acceptMPTC),
       isResetUserPassword: isResetUserPassword,

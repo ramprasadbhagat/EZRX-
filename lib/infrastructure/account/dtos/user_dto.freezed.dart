@@ -79,8 +79,10 @@ mixin _$UserDto {
       readValue: JsonReadValueHelper.handleSupportedLanguages,
       defaultValue: <String>[])
   List<String> get supportedLanguages => throw _privateConstructorUsedError;
-  @JsonKey(name: 'MobileNumber', defaultValue: '')
+  @JsonKey(name: 'mobileNumber', defaultValue: '')
   String get mobileNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'countryCode', defaultValue: '')
+  String get countryCode => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'acceptMPTC',
       readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
@@ -152,7 +154,8 @@ abstract class $UserDtoCopyWith<$Res> {
           readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       List<String> supportedLanguages,
-      @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
+      @JsonKey(name: 'mobileNumber', defaultValue: '') String mobileNumber,
+      @JsonKey(name: 'countryCode', defaultValue: '') String countryCode,
       @JsonKey(
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
@@ -208,6 +211,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
+    Object? countryCode = null,
     Object? acceptMPTC = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
@@ -315,6 +319,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
       acceptMPTC: null == acceptMPTC
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
@@ -418,7 +426,8 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       List<String> supportedLanguages,
-      @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
+      @JsonKey(name: 'mobileNumber', defaultValue: '') String mobileNumber,
+      @JsonKey(name: 'countryCode', defaultValue: '') String countryCode,
       @JsonKey(
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
@@ -475,6 +484,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
+    Object? countryCode = null,
     Object? acceptMPTC = null,
     Object? isResetUserPassword = null,
     Object? isPPATriggerMaintained = null,
@@ -582,6 +592,10 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
       acceptMPTC: null == acceptMPTC
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
@@ -663,8 +677,9 @@ class _$UserDtoImpl extends _UserDto {
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
       @JsonKey(
-          name: 'MobileNumber', defaultValue: '')
+          name: 'mobileNumber', defaultValue: '')
       required this.mobileNumber,
+      @JsonKey(name: 'countryCode', defaultValue: '') required this.countryCode,
       @JsonKey(
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
@@ -796,8 +811,11 @@ class _$UserDtoImpl extends _UserDto {
   }
 
   @override
-  @JsonKey(name: 'MobileNumber', defaultValue: '')
+  @JsonKey(name: 'mobileNumber', defaultValue: '')
   final String mobileNumber;
+  @override
+  @JsonKey(name: 'countryCode', defaultValue: '')
+  final String countryCode;
   @override
   @JsonKey(
       name: 'acceptMPTC',
@@ -818,7 +836,7 @@ class _$UserDtoImpl extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl, selectedOrderType: $selectedOrderType)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, countryCode: $countryCode, acceptMPTC: $acceptMPTC, isResetUserPassword: $isResetUserPassword, isPPATriggerMaintained: $isPPATriggerMaintained, privacyControl: $privacyControl, selectedOrderType: $selectedOrderType)';
   }
 
   @override
@@ -875,6 +893,8 @@ class _$UserDtoImpl extends _UserDto {
                 .equals(other._supportedLanguages, _supportedLanguages) &&
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
             (identical(other.acceptMPTC, acceptMPTC) ||
                 other.acceptMPTC == acceptMPTC) &&
             (identical(other.isResetUserPassword, isResetUserPassword) ||
@@ -916,6 +936,7 @@ class _$UserDtoImpl extends _UserDto {
         preferredLanguage,
         const DeepCollectionEquality().hash(_supportedLanguages),
         mobileNumber,
+        countryCode,
         acceptMPTC,
         isResetUserPassword,
         isPPATriggerMaintained,
@@ -993,8 +1014,10 @@ abstract class _UserDto extends UserDto {
           readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
-      @JsonKey(name: 'MobileNumber', defaultValue: '')
+      @JsonKey(name: 'mobileNumber', defaultValue: '')
       required final String mobileNumber,
+      @JsonKey(name: 'countryCode', defaultValue: '')
+      required final String countryCode,
       @JsonKey(
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
@@ -1092,8 +1115,11 @@ abstract class _UserDto extends UserDto {
       defaultValue: <String>[])
   List<String> get supportedLanguages;
   @override
-  @JsonKey(name: 'MobileNumber', defaultValue: '')
+  @JsonKey(name: 'mobileNumber', defaultValue: '')
   String get mobileNumber;
+  @override
+  @JsonKey(name: 'countryCode', defaultValue: '')
+  String get countryCode;
   @override
   @JsonKey(
       name: 'acceptMPTC',

@@ -366,6 +366,17 @@ class PhoneNumber extends ValueObject<String> {
   const PhoneNumber._(this.value);
 }
 
+class CountryCode extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CountryCode(String input) {
+    return CountryCode._(validateStringNotEmpty(input));
+  }
+
+  const CountryCode._(this.value);
+}
+
 class TemplateName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

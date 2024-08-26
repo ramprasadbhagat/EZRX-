@@ -41,6 +41,7 @@ class ClevertapService {
   Future<void> setUser({
     required String name,
     required String username,
+    required String phone,
     required String email,
     required String role,
     required String market,
@@ -50,6 +51,7 @@ class ClevertapService {
         'Name': name,
         'Identity': username,
         'Email': email,
+        'Phone': phone,
         'Role': role,
         'MSG-push': true,
         'market': market,
