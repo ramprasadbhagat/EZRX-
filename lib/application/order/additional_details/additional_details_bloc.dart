@@ -123,6 +123,7 @@ class AdditionalDetailsBloc
     emit(
       state.copyWith(
         focusTo: null,
+        isValidated: false,
       ),
     );
     final isCustomerPoReferenceValid = state.config.poNumberRequired.getValue()

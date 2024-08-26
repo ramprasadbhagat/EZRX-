@@ -273,6 +273,37 @@ void main() {
       );
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details Validate AdditionalDetails Form Success - after first time api failure ',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: StringValue('CO REF'),
+          ),
+          isValidated: true,
+          focusTo: null,
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            const AdditionalDetailsEvent.validateForm(),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: false,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: StringValue('CO REF'),
+            ),
+          ),
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: StringValue('CO REF'),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Validate AdditionalDetails Form failure when payment term is invalid',
         build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
