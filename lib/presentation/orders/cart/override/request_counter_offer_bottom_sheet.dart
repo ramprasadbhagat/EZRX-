@@ -143,7 +143,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                             price: cartItem.display(PriceType.listPrice),
                             priceLabelStyle:
                                 Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: ZPColors.darkGray,
+                                      color: ZPColors.neutralsGrey1,
                                     ),
                             type: PriceStyle.counterOfferListPrice,
                           ),
@@ -151,6 +151,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                           key: WidgetKeys.counterOfferListPriceWidget,
                           priceAggregate: state.item,
                           title: '${context.tr('List price')}: ',
+                          priceStyle: PriceStyle.returnOriginPriceStrikeThrough,
                           priceLabelStyle:
                               Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: ZPColors.neutralsGrey1,
@@ -162,10 +163,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                             title: '${context.tr('Discounted price')}: ',
                             salesOrgConfig: eligibilityState.salesOrgConfigs,
                             price: cartItem.display(PriceType.finalPrice),
-                            priceLabelStyle:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: ZPColors.neutralsGrey1,
-                                    ),
+                            type: PriceStyle.cartMaterialUnitPrice,
                           ),
                         if (isPriceOverrideEnable)
                           _CounterOfferPriceTextField(
@@ -298,7 +296,7 @@ class _CounterOfferWarningMessage extends StatelessWidget {
               color: ZPColors.warning,
             ),
             margin: const EdgeInsets.only(top: padding12),
-            mainColor: ZPColors.priceWarning,
+            mainColor: ZPColors.warningBg,
             textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: ZPColors.neutralsDarkBlack,
                   height: 2,

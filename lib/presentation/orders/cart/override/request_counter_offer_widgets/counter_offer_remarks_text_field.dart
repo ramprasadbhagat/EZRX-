@@ -39,8 +39,7 @@ class __CounterOfferRemarksTextFieldState
         fieldKey: WidgetKeys.counterOfferRemarksField,
         labelText: context.tr('Remarks'),
         decoration: InputDecoration(
-          hintText: 'Enter remarks (Optional)'.tr(),
-          helperText: 'Maximum: 132 characters'.tr(),
+          hintText: context.tr('Enter remarks (Optional)'),
         ),
         controller: _remarksController,
         onChanged: (value) {
@@ -49,6 +48,24 @@ class __CounterOfferRemarksTextFieldState
                   newRemarks: value,
                 ),
               );
+        },
+        buildCounter: (
+          context, {
+          required int currentLength,
+          required bool isFocused,
+          maxLength,
+        }) {
+          return SizedBox(
+            width: double.infinity,
+            child: Text(
+              context.tr(
+                'Maximum: {max} characters',
+                namedArgs: {
+                  'max': '$currentLength/$maxLength',
+                },
+              ),
+            ),
+          );
         },
         maxLines: 3,
         maxLength: 132,

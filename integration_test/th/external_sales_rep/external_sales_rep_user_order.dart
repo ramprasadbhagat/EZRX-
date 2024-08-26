@@ -2107,7 +2107,7 @@ void main() {
       requestCounterOfferRobot.verifyPriceText('');
       requestCounterOfferRobot.verifyRemarkTextField();
       requestCounterOfferRobot.verifyRemarkText('');
-      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage();
+      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage('');
       requestCounterOfferRobot.verifyConfirmButton();
       requestCounterOfferRobot.verifyCancelButton();
       await requestCounterOfferRobot.tapCancelButton();

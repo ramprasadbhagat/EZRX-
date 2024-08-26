@@ -1,4 +1,4 @@
-import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -12,17 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/mock_bloc.dart';
 import '../../../../common_mock_data/user_mock.dart';
 import '../../../../utils/widget_utils.dart';
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
 
 void main() {
   late AppRouter autoRouterMock;
@@ -111,6 +103,33 @@ void main() {
           tester.widget<TextFormField>(counterOfferFieldinder);
       await tester.pump();
       expect(counterOfferfield.controller?.text, '10.12');
+    });
+
+    testWidgets('Show maximum warning text for remark field', (tester) async {
+      const remarks = 'test';
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          user: fakeExternalSalesRepUser.copyWith(
+            hasPriceOverride: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final counterOfferRemarkField =
+          find.byKey(WidgetKeys.counterOfferRemarksField);
+      await tester.enterText(counterOfferRemarkField, remarks);
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'Maximum: {max} characters'.tr(
+            namedArgs: {
+              'max': '${remarks.length}/132',
+            },
+          ),
+        ),
+        findsOneWidget,
+      );
     });
   });
 }

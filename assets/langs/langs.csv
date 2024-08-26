@@ -609,7 +609,7 @@
 "Logged in on behalf of","Logged in on behalf of","เข้าสู่ระบบในนามของ","Logged in on behalf of","ကိုယ်စား အကောင့်ဝင်မည်","Logged in on behalf of","ចូល​ក្នុង​នាម​របស់","Masuk atas nama","Logged in on behalf of"
 "Enter counter offer price","Enter counter offer price","กรอกราคาเสนอขาย","輸入反提議價格","ပြန်လည်အဆိုပြုသောဈေးနှုန်းကိုထည့်ပါ","Nhập giá đề xuất đối thỏa","បញ្ចូលតម្លៃផ្តល់ជូនទៅបញ្ជរ","Masukkan harga penawaran","반대 제안 가격을 입력하세요"
 "Enter remarks (Optional)","Enter remarks (Optional)","ป้อนหมายเหตุ (ไม่บังคับ)","輸入備註（可選）","မှတ်ချက်များ (ရွေးချယ်နိုင်ပါသည်) ထည့်ပါ","Nhập ghi chú (Tùy chọn)","បញ្ចូលកំណត់សម្គាល់ (ជាជម្រើស)","Masukkan komentar (opsional)","비고 입력 (선택 사항)"
-"Maximum: 132 characters","Maximum: 132 characters","สูงสุด: 132 ตัวอักษร","最多：132 個字元","အများဆုံး: 132 အက္ခရာ","Tối đa: 132 ký rự","អតិបរមា៖ 132 តួអក្សរ","Maksimal: 132 karakter","최대: 132자"
+"Maximum: {max} characters","Maximum: {max} characters","สูงสุด: {max} ตัวอักษร","最多: {max} 字符","အများဆုံး: {max} အက္ခရာ","Tối đa: {max} ký tự","អតិបរិមា: {max} តួអក្សរ","Maksimal: {max} karakter","최대: {max} 자"
 "Counter offer","Counter offer","ต่อรองราคา","議價","ပြန်လည်ကမ်းလှမ်းခြင်း","Khuyến mãi","កន្លែងផ្តល់​ជូន","Penawaran balasan","Counter offer"
 "Bonus/sample item","Bonus/sample item","สินค้าโบนัส/สินค้าตัวอย่าง","贈品/樣品","အပိုပစ္စည်း/နမူနာပစ္စည်း","Sản phẩm thường/hàng mẫu","ចំនួនបន្ថែម / ផលិតផលគំរូ","Bonus/contoh item","Bonus/sample item"
 "Requested counter offer","Requested counter offer","ขอต่อรองราคา","議價需求","တောင်းဆိုထားသော တန်ပြန်ကမ်းလှမ်းမှု","Khuyến mãi yêu cầu","បានស្នើសុំការផ្តល់ជូន","Penawaran balasan yang diminta","Requested counter offer"

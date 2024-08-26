@@ -8,12 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ListPriceStrikeThroughComponent extends StatelessWidget {
   final PriceAggregate priceAggregate;
   final TextStyle? priceLabelStyle;
+  final PriceStyle? priceStyle;
   final String title;
 
   const ListPriceStrikeThroughComponent({
     super.key,
     required this.priceAggregate,
     this.priceLabelStyle,
+    this.priceStyle,
     this.title = '',
   });
 
@@ -28,7 +30,7 @@ class ListPriceStrikeThroughComponent extends StatelessWidget {
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: priceAggregate.display(PriceType.listPrice),
-                type: PriceStyle.materialListPriceStrikeThrough,
+                type: priceStyle ?? PriceStyle.materialListPriceStrikeThrough,
                 priceLabelStyle: priceLabelStyle,
               ),
               const SizedBox(width: 4),

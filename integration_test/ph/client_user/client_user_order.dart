@@ -2133,7 +2133,7 @@ void main() {
       requestCounterOfferRobot.verifyPriceText('');
       requestCounterOfferRobot.verifyRemarkTextField();
       requestCounterOfferRobot.verifyRemarkText('');
-      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage();
+      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage('');
       requestCounterOfferRobot.verifyConfirmButton();
       requestCounterOfferRobot.verifyCancelButton();
       await requestCounterOfferRobot.tapCancelButton();
@@ -3890,7 +3890,6 @@ void main() {
   });
 
   group('Privacy Consent -', () {
-
     testWidgets('EZRX-T2827 | Verify Privacy Consent Page', (tester) async {
       //navigate to page
       await pumpAppWithHomeScreen(tester);

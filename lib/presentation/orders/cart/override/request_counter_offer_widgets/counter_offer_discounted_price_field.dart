@@ -28,6 +28,7 @@ class _CounterOfferDiscountedPriceField extends StatelessWidget {
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: state.finalCounterOfferPrice,
+                type: PriceStyle.grandTotalPrice,
               ),
             ],
           ),

@@ -2566,7 +2566,7 @@ void main() {
       requestCounterOfferRobot.verifyPriceText('');
       requestCounterOfferRobot.verifyRemarkTextField();
       requestCounterOfferRobot.verifyRemarkText('');
-      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage();
+      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage('');
       requestCounterOfferRobot.verifyConfirmButton();
       requestCounterOfferRobot.verifyCancelButton();
       await requestCounterOfferRobot.tapCancelButton();
@@ -3768,7 +3768,7 @@ void main() {
 
       testWidgets(
         'EZRX-T2737 | Verify multiple batch and expiry in view by items detail',
-            (tester) async {
+        (tester) async {
           //init app
           await pumpAppWithHomeScreen(tester);
 

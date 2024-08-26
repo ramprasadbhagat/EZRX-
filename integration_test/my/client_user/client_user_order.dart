@@ -2243,7 +2243,7 @@ void main() {
       requestCounterOfferRobot.verifyPriceText('');
       requestCounterOfferRobot.verifyRemarkTextField();
       requestCounterOfferRobot.verifyRemarkText('');
-      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage();
+      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage('');
       requestCounterOfferRobot.verifyConfirmButton();
       requestCounterOfferRobot.verifyCancelButton();
       await requestCounterOfferRobot.tapCancelButton();
@@ -3156,7 +3156,8 @@ void main() {
         cartRobot.verifyMaterialQty(bundleMaterialNumber1, bundleMaterialQty1);
       });
 
-      testWidgets('EZRX-T2737 | Verify multiple batch and expiry in view by items detail',
+      testWidgets(
+          'EZRX-T2737 | Verify multiple batch and expiry in view by items detail',
           (tester) async {
         //init app
         await pumpAppWithHomeScreen(tester);
@@ -4131,7 +4132,6 @@ void main() {
   });
 
   group('Privacy Consent -', () {
-
     testWidgets('EZRX-T2827 | Verify Privacy Consent Page', (tester) async {
       //navigate to page
       await pumpAppWithHomeScreen(tester);

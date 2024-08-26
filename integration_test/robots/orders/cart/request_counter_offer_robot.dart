@@ -129,11 +129,17 @@ class RequestCounterOfferRobot {
     );
   }
 
-  void verifyRemarkMaximumLengthMessage() {
+  void verifyRemarkMaximumLengthMessage(String text) {
     expect(
       find.descendant(
         of: remarkTextField,
-        matching: find.text('Maximum: 132 characters'.tr()),
+        matching: find.text(
+          'Maximum: {max} characters'.tr(
+            namedArgs: {
+              'max': '${text.length}/132',
+            },
+          ),
+        ),
       ),
       findsOneWidget,
     );

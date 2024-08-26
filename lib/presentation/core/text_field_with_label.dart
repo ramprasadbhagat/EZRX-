@@ -27,6 +27,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.inputFormatters,
     this.onTapOutside,
     this.maxLength,
+    this.buildCounter,
   });
   final Key fieldKey;
   final String labelText;
@@ -50,6 +51,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TapRegionCallback? onTapOutside;
   final int? maxLength;
+  final InputCounterWidgetBuilder? buildCounter;
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +102,7 @@ class TextFieldWithLabel extends StatelessWidget {
           maxLength: maxLength,
           readOnly: readOnly,
           onTap: onTap,
+          buildCounter: buildCounter,
         ),
       ],
     );
