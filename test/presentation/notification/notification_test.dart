@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -646,6 +647,108 @@ void main() {
 
       final deleteIconFinder = find.byKey(WidgetKeys.notificationDeleteButton);
       expect(deleteIconFinder, findsNothing);
+    });
+
+    group('Customer code config - disablePayments', () {
+      testWidgets(
+        'Should navigate to payment detail when disablePayments is false',
+        (tester) async {
+          final notificationList = notifications.notificationData
+              .where((e) => e.isPaymentEligible)
+              .toList();
+          when(() => notificationBlocMock.state).thenReturn(
+            NotificationState.initial().copyWith(
+              notificationList:
+                  notifications.copyWith(notificationData: notificationList),
+              isFetching: false,
+              isReadNotification: true,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+                disablePayment: false,
+              ),
+              customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+                disablePayments: false,
+              ),
+              user: fakeClientUser.copyWith(
+                disablePaymentAccess: false,
+              ),
+              salesOrganisation: fakeEmptySalesOrganisation,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final itemKey = find.byKey(
+            WidgetKeys.genericKey(key: notificationList.first.description),
+          );
+
+          expect(itemKey, findsOneWidget);
+          await tester.tap(itemKey);
+          await tester.pump();
+          verify(
+            () => paymentSummaryDetailsBlockMock.add(
+              PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+                details: PaymentSummaryDetails.empty().copyWith(
+                  paymentBatchAdditionalInfo:
+                      notificationList.last.paymentBatchAdditionalInfo,
+                  zzAdvice: notificationList.last.paymentNumber,
+                ),
+                isMarketPlace: false,
+              ),
+            ),
+          ).called(1);
+          expect(
+            autoRouterMock.current.name,
+            PaymentSummaryDetailsPageRoute(isMarketPlace: false).routeName,
+          );
+        },
+        variant: salesOrgVariant,
+      );
+
+      testWidgets(
+        'Should show snackbar when tap on payment notification when disablePayments is true',
+        (tester) async {
+          final notificationList = notifications.notificationData
+              .where((e) => e.isPaymentEligible)
+              .toList();
+          when(() => notificationBlocMock.state).thenReturn(
+            NotificationState.initial().copyWith(
+              notificationList:
+                  notifications.copyWith(notificationData: notificationList),
+              isFetching: false,
+              isReadNotification: true,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+                disablePayment: false,
+              ),
+              customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+                disablePayments: true,
+              ),
+              salesOrganisation: fakeEmptySalesOrganisation,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final itemKey = find.byKey(
+            WidgetKeys.genericKey(key: notificationList.first.description),
+          );
+
+          expect(itemKey, findsOneWidget);
+          await tester.tap(itemKey);
+          await tester.pumpAndSettle();
+          expect(find.byType(CustomSnackBar), findsOneWidget);
+          expect(find.text("You don't have access"), findsOneWidget);
+        },
+      );
     });
 
     testWidgets('Show MP logo if item is from market place ', (tester) async {

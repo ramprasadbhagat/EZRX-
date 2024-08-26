@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CustomerCodeConfig {
   String get customerCode => throw _privateConstructorUsedError;
   bool get disableReturns => throw _privateConstructorUsedError;
+  bool get disablePayments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerCodeConfigCopyWith<CustomerCodeConfig> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $CustomerCodeConfigCopyWith<$Res> {
           CustomerCodeConfig value, $Res Function(CustomerCodeConfig) then) =
       _$CustomerCodeConfigCopyWithImpl<$Res, CustomerCodeConfig>;
   @useResult
-  $Res call({String customerCode, bool disableReturns});
+  $Res call({String customerCode, bool disableReturns, bool disablePayments});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$CustomerCodeConfigCopyWithImpl<$Res, $Val extends CustomerCodeConfig>
   $Res call({
     Object? customerCode = null,
     Object? disableReturns = null,
+    Object? disablePayments = null,
   }) {
     return _then(_value.copyWith(
       customerCode: null == customerCode
@@ -57,6 +59,10 @@ class _$CustomerCodeConfigCopyWithImpl<$Res, $Val extends CustomerCodeConfig>
       disableReturns: null == disableReturns
           ? _value.disableReturns
           : disableReturns // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disablePayments: null == disablePayments
+          ? _value.disablePayments
+          : disablePayments // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -70,7 +76,7 @@ abstract class _$$CustomerCodeConfigImplCopyWith<$Res>
       __$$CustomerCodeConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String customerCode, bool disableReturns});
+  $Res call({String customerCode, bool disableReturns, bool disablePayments});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$CustomerCodeConfigImplCopyWithImpl<$Res>
   $Res call({
     Object? customerCode = null,
     Object? disableReturns = null,
+    Object? disablePayments = null,
   }) {
     return _then(_$CustomerCodeConfigImpl(
       customerCode: null == customerCode
@@ -96,6 +103,10 @@ class __$$CustomerCodeConfigImplCopyWithImpl<$Res>
           ? _value.disableReturns
           : disableReturns // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePayments: null == disablePayments
+          ? _value.disablePayments
+          : disablePayments // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,17 +115,21 @@ class __$$CustomerCodeConfigImplCopyWithImpl<$Res>
 
 class _$CustomerCodeConfigImpl extends _CustomerCodeConfig {
   _$CustomerCodeConfigImpl(
-      {required this.customerCode, required this.disableReturns})
+      {required this.customerCode,
+      required this.disableReturns,
+      required this.disablePayments})
       : super._();
 
   @override
   final String customerCode;
   @override
   final bool disableReturns;
+  @override
+  final bool disablePayments;
 
   @override
   String toString() {
-    return 'CustomerCodeConfig(customerCode: $customerCode, disableReturns: $disableReturns)';
+    return 'CustomerCodeConfig(customerCode: $customerCode, disableReturns: $disableReturns, disablePayments: $disablePayments)';
   }
 
   @override
@@ -125,11 +140,14 @@ class _$CustomerCodeConfigImpl extends _CustomerCodeConfig {
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.disableReturns, disableReturns) ||
-                other.disableReturns == disableReturns));
+                other.disableReturns == disableReturns) &&
+            (identical(other.disablePayments, disablePayments) ||
+                other.disablePayments == disablePayments));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, customerCode, disableReturns);
+  int get hashCode =>
+      Object.hash(runtimeType, customerCode, disableReturns, disablePayments);
 
   @JsonKey(ignore: true)
   @override
@@ -142,13 +160,16 @@ class _$CustomerCodeConfigImpl extends _CustomerCodeConfig {
 abstract class _CustomerCodeConfig extends CustomerCodeConfig {
   factory _CustomerCodeConfig(
       {required final String customerCode,
-      required final bool disableReturns}) = _$CustomerCodeConfigImpl;
+      required final bool disableReturns,
+      required final bool disablePayments}) = _$CustomerCodeConfigImpl;
   _CustomerCodeConfig._() : super._();
 
   @override
   String get customerCode;
   @override
   bool get disableReturns;
+  @override
+  bool get disablePayments;
   @override
   @JsonKey(ignore: true)
   _$$CustomerCodeConfigImplCopyWith<_$CustomerCodeConfigImpl> get copyWith =>

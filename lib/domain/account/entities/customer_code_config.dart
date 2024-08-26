@@ -8,10 +8,12 @@ class CustomerCodeConfig with _$CustomerCodeConfig {
   factory CustomerCodeConfig({
     required String customerCode,
     required bool disableReturns,
+    required bool disablePayments,
   }) = _CustomerCodeConfig;
 
   factory CustomerCodeConfig.empty() => CustomerCodeConfig(
         customerCode: '',
         disableReturns: false,
+        disablePayments: false,
       );
 }

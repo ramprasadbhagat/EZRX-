@@ -11,6 +11,7 @@ _$CustomerCodeConfigDtoImpl _$$CustomerCodeConfigDtoImplFromJson(
     _$CustomerCodeConfigDtoImpl(
       customerCode: json['customerCode'] as String? ?? '',
       disableReturns: json['disableReturns'] as bool? ?? false,
+      disablePayments: json['disablePayments'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$CustomerCodeConfigDtoImplToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$CustomerCodeConfigDtoImplToJson(
     <String, dynamic>{
       'customerCode': instance.customerCode,
       'disableReturns': instance.disableReturns,
+      'disablePayments': instance.disablePayments,
     };

@@ -138,6 +138,7 @@ query customerInformationSearch(
       customerConfig(request: \$request ) {
         customerCode
         disableReturns
+        disablePayments
       }
     }
     ''';

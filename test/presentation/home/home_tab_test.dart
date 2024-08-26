@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
@@ -63,6 +64,7 @@ import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -668,6 +670,53 @@ void main() {
             findsNothing,
           );
         });
+      });
+
+      group('Customer code config - disablePayments', () {
+        testWidgets(
+          ' -> show homeQuickAccessPaymentsMenu for disablePayments is false',
+          (WidgetTester tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial().copyWith(
+                salesOrganisation: fakeSGSalesOrganisation,
+                salesOrgConfigs:
+                    fakeSGSalesOrgConfigs.copyWith(disablePayment: false),
+                customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+                  disablePayments: false,
+                ),
+                user: fakeClientUser.copyWith(disablePaymentAccess: false),
+              ),
+            );
+
+            await tester.pumpWidget(getWidget());
+            await tester.pump();
+            final homeQuickAccessPaymentsMenu =
+                find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
+            expect(homeQuickAccessPaymentsMenu, findsOneWidget);
+          },
+        );
+        testWidgets(
+          ' -> hide homeQuickAccessPaymentsMenu for disablePayments is true',
+          (WidgetTester tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial().copyWith(
+                salesOrganisation: fakeSGSalesOrganisation,
+                salesOrgConfigs:
+                    fakeSGSalesOrgConfigs.copyWith(disablePayment: false),
+                customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+                  disablePayments: true,
+                ),
+                user: fakeClientUser,
+              ),
+            );
+
+            await tester.pumpWidget(getWidget());
+            await tester.pump();
+            final homeQuickAccessPaymentsMenu =
+                find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
+            expect(homeQuickAccessPaymentsMenu, findsNothing);
+          },
+        );
       });
     });
 

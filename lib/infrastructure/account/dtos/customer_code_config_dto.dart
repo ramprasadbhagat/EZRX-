@@ -12,6 +12,8 @@ class CustomerCodeConfigDto with _$CustomerCodeConfigDto {
     required String customerCode,
     @JsonKey(name: 'disableReturns', defaultValue: false)
     required bool disableReturns,
+    @JsonKey(name: 'disablePayments', defaultValue: false)
+    required bool disablePayments,
   }) = _CustomerCodeConfigDto;
 
   factory CustomerCodeConfigDto.fromJson(Map<String, dynamic> json) =>
@@ -20,5 +22,6 @@ class CustomerCodeConfigDto with _$CustomerCodeConfigDto {
   CustomerCodeConfig get toDomain => CustomerCodeConfig(
         customerCode: customerCode,
         disableReturns: disableReturns,
+        disablePayments: disablePayments,
       );
 }

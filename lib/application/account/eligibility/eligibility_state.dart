@@ -68,7 +68,13 @@ class EligibilityState with _$EligibilityState {
       return false;
     }
 
-    if (user.isCustomerWithPaymentsDisable) return false;
+    if (customerCodeConfig.disablePayments) {
+      return false;
+    }
+
+    if (user.isCustomerWithPaymentsDisable) {
+      return false;
+    }
 
     return true;
   }
@@ -207,8 +213,7 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get bundleMaterialEnabled =>
-      !salesOrgConfigs.disableBundles &&
-      !salesOrgConfigs.disablePromotion;
+      !salesOrgConfigs.disableBundles && !salesOrgConfigs.disablePromotion;
 
   bool get isBundleMaterialEnable =>
       !salesOrgConfigs.disableBundles &&

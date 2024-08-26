@@ -12,7 +12,8 @@
             "priceOverride": false,
             "created_at": "",
             "updated_at": "",
-            "hasMarketPlaceAccess": false
+            "hasMarketPlaceAccess": false,
+            "disablePayments":false
         }
     }
 }

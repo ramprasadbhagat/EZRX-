@@ -1325,6 +1325,44 @@ void main() {
     },
   );
 
+  group('Customer config - ', () {
+    test(
+      'isPaymentEnable is true if disablePayments is false',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
+            disablePayment: false,
+          ),
+          customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+            disablePayments: false,
+          ),
+          user: fakeClientUser.copyWith(
+            disablePaymentAccess: false,
+          ),
+        );
+
+        expect(eligibilityState.isPaymentEnabled, true);
+      },
+    );
+
+    test(
+      'isPaymentEnable is false if disablePayments is true',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs.copyWith(
+            disablePayment: false,
+          ),
+          customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+            disablePayments: true,
+          ),
+          user: fakeClientUser,
+        );
+
+        expect(eligibilityState.isPaymentEnabled, false);
+      },
+    );
+  });
+
   test(
     'disable payment for rootadmin when disablePayment on',
     () {

@@ -12,6 +12,7 @@ query customerConfig($request: CustomerConfig!) {
     created_at
     updated_at
     hasMarketPlaceAccess
+    disablePayments
   }
 }
 
