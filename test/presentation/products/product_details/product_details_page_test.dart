@@ -1800,6 +1800,26 @@ void main() {
       });
 
       testWidgets(
+        'Test tap outside textField',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          final inputFinder =
+              find.byKey(WidgetKeys.productDetailQuantityTextKey);
+          await tester.enterText(inputFinder, '');
+          await tester.pump();
+
+          // Simulate a tap outside the TextField
+          await tester.tapAt(const Offset(10, 150));
+          await tester.pump();
+          expect(
+            tester.widget<TextFormField>(inputFinder).controller?.text,
+            '1',
+          );
+        },
+      );
+
+      testWidgets(
         'Test enter minimum quantity',
         (tester) async {
           await tester.pumpWidget(getScopedWidget());

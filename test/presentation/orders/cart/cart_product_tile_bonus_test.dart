@@ -378,6 +378,37 @@ void main() {
         ).called(1);
       });
 
+      testWidgets('cart Loading Item Quantity Input test', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: true,
+            cartProducts: [
+              cartItem.copyWith(
+                bonusSampleItems: cartItem.bonusSampleItems
+                    .map(
+                      (e) => e.copyWith(
+                        stockInfo: StockInfo.empty().copyWith(
+                          inStock: MaterialInStock('Yes'),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(
+          find.descendant(
+            of: find.byType(CartProductTileBonus),
+            matching: find.byType(CartItemQuantityInputShimmer),
+          ),
+          findsOneWidget,
+        );
+      });
+
       testWidgets(
           'Deal Bonus cannot be deleted if bonusOverride is disable from config',
           (tester) async {

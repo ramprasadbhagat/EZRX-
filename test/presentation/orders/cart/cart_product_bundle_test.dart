@@ -39,7 +39,6 @@ import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -386,10 +385,14 @@ void main() {
             cartProducts: [
               cartItem.copyWith(
                 bundle: cartItem.bundle.copyWith(
+                  materials: [
+                    cartItem.bundle.materials.first
+                        .copyWith(quantity: MaterialQty(2)),
+                  ],
                   bundleInformation: [
                     BundleInfo(
                       sequence: 1,
-                      quantity: 2,
+                      quantity: 3,
                       type: DiscountType('%'),
                       rate: 20,
                     ),
@@ -406,6 +409,18 @@ void main() {
         expect(
           find.textContaining('Minimum total purchase qty'),
           findsOneWidget,
+        );
+        // verify below minimum input text
+        final quantityInputTextKey =
+            find.byKey(WidgetKeys.quantityInputTextKey);
+        expect(quantityInputTextKey, findsOneWidget);
+        await tester.enterText(quantityInputTextKey, '1');
+        await tester.pump();
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+        expect(
+          tester.widget<TextFormField>(quantityInputTextKey).controller?.text,
+          '2',
         );
       });
     },

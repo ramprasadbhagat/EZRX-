@@ -138,7 +138,8 @@ void main() {
             .thenReturn(ProductDetailState.initial());
         when(() => bundleAddToCartBloc.state)
             .thenReturn(BundleAddToCartState.initial());
-        when(() => autoRouterMock.maybePop()).thenAnswer((invocation) async => true);
+        when(() => autoRouterMock.maybePop())
+            .thenAnswer((invocation) async => true);
         when(() => autoRouterMock.popForced())
             .thenAnswer((invocation) async => true);
       });
@@ -689,6 +690,16 @@ void main() {
             ),
           ),
         ).called(1);
+        // test on insert empty text input
+        await tester.enterText(bundleQuantityTextKey.first, '');
+        verifyNever(
+          () => bundleAddToCartBloc.add(
+            BundleAddToCartEvent.updateQuantity(
+              materialNumber: bundle.bundle.materials.first.materialNumber,
+              quantity: 1,
+            ),
+          ),
+        );
         expect(bundleAddToCartSheetSubmitButton, findsOneWidget);
         await tester.tap(bundleAddToCartSheetSubmitButton);
       });

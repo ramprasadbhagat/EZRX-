@@ -22,9 +22,9 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
 import '../../../../utils/widget_utils.dart';
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -143,7 +143,7 @@ void main() {
       },
     );
     testWidgets(
-      'When type is files cancle button tap',
+      'When type is files cancel button tap',
       (tester) async {
         await tester.pumpWidget(getWidget(type: PermissionType.files));
         await tester.pumpAndSettle();
@@ -159,8 +159,36 @@ void main() {
         );
       },
     );
+
     testWidgets(
-      'When type is camera cancle button tap',
+      'When type is files confirm button tap',
+      (tester) async {
+        const channel =
+            MethodChannel('flutter.baseflow.com/permissions/methods');
+        // Mock the method call for openAppSettings
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          channel,
+          (MethodCall methodCall) async {
+            return false;
+          },
+        );
+        await tester.pumpWidget(getWidget(type: PermissionType.files));
+        await tester.pumpAndSettle();
+        final cancelButton = find.byKey(
+          WidgetKeys.confirmButton,
+        );
+        expect(cancelButton, findsOneWidget);
+        await tester.tap(cancelButton);
+        await tester.pumpAndSettle();
+        expect(
+          autoRouterMock.pageCount,
+          0,
+        );
+      },
+    );
+
+    testWidgets(
+      'When type is camera cancel button tap',
       (tester) async {
         await tester.pumpWidget(getWidget(type: PermissionType.camera));
         await tester.pumpAndSettle();
@@ -179,23 +207,15 @@ void main() {
     testWidgets(
       'When type is camera confirm Button tap',
       (tester) async {
-        await tester.pumpWidget(getWidget(type: PermissionType.camera));
-        await tester.pumpAndSettle();
-        final confirmButton = find.byKey(
-          WidgetKeys.confirmButton,
+        const channel =
+            MethodChannel('flutter.baseflow.com/permissions/methods');
+        // Mock the method call for openAppSettings
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          channel,
+          (MethodCall methodCall) async {
+            return false;
+          },
         );
-        expect(confirmButton, findsOneWidget);
-        await tester.tap(confirmButton);
-        await tester.pumpAndSettle();
-        expect(
-          autoRouterMock.pageCount,
-          0,
-        );
-      },
-    );
-    testWidgets(
-      'When type is camera confirm Button tap',
-      (tester) async {
         await tester.pumpWidget(getWidget(type: PermissionType.camera));
         await tester.pumpAndSettle();
         final confirmButton = find.byKey(
