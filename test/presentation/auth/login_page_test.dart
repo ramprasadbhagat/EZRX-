@@ -498,6 +498,29 @@ void main() {
       expect(rememberPasswordCheckBox, findsNothing);
     });
 
+    testWidgets('Test user is not assigned to any sale orgs', (tester) async {
+      final expectedStates = [
+        LoginFormState.initial().copyWith(
+          authFailureOrSuccessOption: optionOf(
+            const Left(ApiFailure.accountCreationIncomplete()),
+          ),
+          showErrorMessages: true,
+        ),
+      ];
+
+      whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+
+      await tester.pumpWidget(loginTestPage());
+      await tester.pump();
+
+      final userIsNotAssignedSaleOrgsSnackBar = find.byKey(WidgetKeys.customSnackBar);
+
+      expect(userIsNotAssignedSaleOrgsSnackBar, findsNothing);
+      await tester.pump();
+
+      expect(userIsNotAssignedSaleOrgsSnackBar, findsOneWidget);
+    });
+
     testWidgets(
       'test onWillPop',
       (tester) async {

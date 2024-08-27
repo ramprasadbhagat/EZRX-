@@ -63,11 +63,16 @@ bool isJWTExpired(String token) {
   return DateTime.now().isAfter(expirationDate);
 }
 
-List getJWTSalesOrg(String token) {
-  if (token.isEmpty) return [];
+List<String> getJWTSalesOrg(String token) {
+  if (token.isEmpty) return <String>[];
   final payload = getJWTPayload(token);
+  final salesOrgs = List<String>.from(payload['salesOrgs']);
 
-  return payload['salesOrgs'];
+  if (salesOrgs.every((element) => element.trim().isEmpty)) {
+    return <String>[];
+  }
+
+  return salesOrgs;
 }
 
 String maskEmail(String email) {

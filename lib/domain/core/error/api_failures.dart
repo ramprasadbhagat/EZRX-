@@ -200,7 +200,7 @@ extension ApiFailureExt on ApiFailure {
         stockInfoNotAvailable: (_) =>
             const TRObject('Unable to get stock info'),
         accountCreationIncomplete: (_) => const TRObject(
-          'Your account creation is incomplete. Please contact the local customer service team for assistance.',
+          'Your account creation is incomplete with missing sales organisation setup. Please contact the local customer service team for assistance.',
         ),
         submitTicketRoute: (_) => const TRObject(
           'Chat url is not available to submit ticket.',

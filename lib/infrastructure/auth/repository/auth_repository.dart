@@ -17,7 +17,6 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
-
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -166,6 +165,10 @@ class AuthRepository implements IAuthRepository {
         oktaAccessToken: token,
         fcmToken: fcmToken,
       );
+
+      if (login.access.salesOrgs.isEmpty) {
+        return const Left(ApiFailure.accountCreationIncomplete());
+      }
       _registerMixpanelSuperProperties(login.user);
       mixpanelService.trackEvent(
         eventName: TrackingEvents.successfulLogin,

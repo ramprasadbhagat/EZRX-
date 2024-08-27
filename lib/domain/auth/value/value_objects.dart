@@ -206,7 +206,7 @@ class JWT extends ValueObject<String> {
     return isJWTExpired(value.getOrElse(() => ''));
   }
 
-  List get salesOrgs {
+  List<String> get salesOrgs {
     return getJWTSalesOrg(value.getOrElse(() => ''));
   }
 
