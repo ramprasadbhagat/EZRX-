@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ class OrderSuccessRobot extends CommonRobot {
   final orderIdText = find.byKey(WidgetKeys.orderSuccessOrderId);
   final zpOrderIdSection = find.byKey(WidgetKeys.orderSuccessZPOrderNumbers);
   final mpOrderIdSection = find.byKey(WidgetKeys.orderSuccessMPOrderNumbers);
+  final orderItem = find.byType(CommonTileItem);
 
   void verifyPage() {
     expect(find.byKey(WidgetKeys.orderSuccess), findsOneWidget);
@@ -263,7 +266,7 @@ class OrderSuccessRobot extends CommonRobot {
 
   void verifyMaterialUnitPrice(String price, {bool isFree = false}) {
     final label = find.descendant(
-      of: _verifyingItem,
+      of: orderItem.at(_getMaterialIndex(isBonus: isFree)),
       matching: find.byKey(WidgetKeys.orderItemUnitPrice),
     );
     expect(
@@ -292,7 +295,7 @@ class OrderSuccessRobot extends CommonRobot {
 
   void verifyMaterialTotalPrice(String price, {bool isFree = false}) {
     final label = find.descendant(
-      of: _verifyingItem,
+      of: orderItem.at(_getMaterialIndex(isBonus: isFree)),
       matching: find.byKey(WidgetKeys.orderSuccessItemTotalPrice),
     );
     expect(
@@ -448,12 +451,99 @@ class OrderSuccessRobot extends CommonRobot {
     );
   }
 
-  double get getMaterialUnitPrice {
+  double getMaterialUnitPrice({bool isBonus = false}) {
     final priceWidgetFinder = find.descendant(
-      of: _verifyingItem,
+      of: orderItem.at(_getMaterialIndex(isBonus: isBonus)),
       matching: find.byKey(WidgetKeys.orderItemUnitPrice),
     );
     final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
     return priceString.extractDouble;
+  }
+
+  void _verifyItemComponent(
+    Finder finder, {
+    bool isMarketPlace = false,
+  }) {
+    final materialSection = find.byKey(
+      isMarketPlace
+          ? WidgetKeys.orderSuccessMPItemsSection
+          : WidgetKeys.orderSuccessZPItemsSection,
+    );
+    expect(
+      find.descendant(of: materialSection, matching: finder),
+      findsOneWidget,
+    );
+  }
+
+  int _getMaterialIndex({required bool isBonus}) {
+    for (var i = 0; i < orderItem.evaluate().length; i++) {
+      final isBonusMaterialPresent = find
+          .descendant(
+            of: orderItem.at(i),
+            matching: find.descendant(
+              of: find.descendant(
+                of: orderItem.at(i),
+                matching: find.byKey(WidgetKeys.commonTileItemStatusLabel),
+              ),
+              matching: find.text('Bonus'.tr()),
+            ),
+          )
+          .evaluate()
+          .isNotEmpty;
+
+      if ((isBonus && isBonusMaterialPresent) ||
+          (!isBonus && !isBonusMaterialPresent)) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
+  Future<void> verifyItemComponent({
+    bool isBonus = false,
+    required int qty,
+    String price = '',
+  }) async {
+    final item = orderItem.at(_getMaterialIndex(isBonus: isBonus));
+    await scrollEnsureFinderVisible(item);
+    _verifyItemComponent(item);
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.commonTileItemTitle),
+      ),
+    );
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.commonTileItemLabel),
+      ),
+    );
+    _verifyItemComponent(
+      find.descendant(
+        of: item,
+        matching: find.byType(ProductImage),
+      ),
+    );
+    final cartItemProductQty = find.descendant(
+      of: item,
+      matching: find.byKey(WidgetKeys.cartItemProductQty),
+    );
+    expect(
+      tester.widget<Text>(cartItemProductQty).data,
+      contains(qty.toString()),
+    );
+    final orderSuccessItemTotalPrice = find.descendant(
+      of: orderItem.at(_getMaterialIndex(isBonus: isBonus)),
+      matching: find.byKey(WidgetKeys.orderSuccessItemTotalPrice),
+    );
+    expect(
+      find.descendant(
+        of: orderSuccessItemTotalPrice,
+        matching: find.text(isBonus ? 'FREE'.tr() : price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
   }
 }

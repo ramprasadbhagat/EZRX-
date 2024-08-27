@@ -2115,7 +2115,7 @@ void main() {
       await orderSuccessRobot.startVerifyMaterial(index: 0);
       orderSuccessRobot.verifyMaterialNumber(materialNumber);
       orderSuccessRobot.verifyMateriaDescription(materialName);
-      final materialUnitPrice = orderSuccessRobot.getMaterialUnitPrice;
+      final materialUnitPrice = orderSuccessRobot.getMaterialUnitPrice();
       final totalPrice = materialUnitPrice * qty;
       await orderSuccessRobot
           .verifySubTotal((materialUnitPrice * qty).priceDisplay(currency));
@@ -2158,7 +2158,7 @@ void main() {
       orderSuccessRobot.verifyItemQty(qty);
       orderSuccessRobot.verifyMaterialOnOfferTag();
       final bonusMaterialNumberUnitPrice =
-          orderSuccessRobot.getMaterialUnitPrice;
+          orderSuccessRobot.getMaterialUnitPrice();
       final totalPrice =
           (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
       final grandTotalPrice = (bonusMaterialNumberUnitPrice * qty)
@@ -2644,7 +2644,7 @@ void main() {
           materialNumber,
         );
         orderSuccessRobot.verifyMateriaDescription(materialName);
-        final materialUnitPrice = orderSuccessRobot.getMaterialUnitPrice;
+        final materialUnitPrice = orderSuccessRobot.getMaterialUnitPrice();
         final price = (materialUnitPrice * qty).priceDisplay(currency);
         final grandTotal = (materialUnitPrice * qty)
             .includeTax(taxForMaterial)

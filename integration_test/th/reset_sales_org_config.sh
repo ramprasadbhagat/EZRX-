@@ -59,7 +59,7 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-th.ezrxplus.com/a
       "enableSpecialInstructions": true,
       "enableReferenceNote": true,
       "displayOrderDiscount": false,
-      "enableIRN": true,
+      "enableIRN": false,
       "enableTaxClassification": false,
       "enableTaxAtTotalLevelOnly": false,
       "displayItemTaxBreakdown": true,
