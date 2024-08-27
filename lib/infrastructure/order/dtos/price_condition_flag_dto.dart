@@ -13,5 +13,5 @@ class PriceConditionFlagDto with _$PriceConditionFlagDto {
   factory PriceConditionFlagDto.fromJson(Map<String, dynamic> json) =>
       _$PriceConditionFlagDtoFromJson(json);
 
-  static const empty = PriceConditionFlagDto(isFOC: true);
+  static const empty = PriceConditionFlagDto(isFOC: false);
 }
