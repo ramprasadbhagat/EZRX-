@@ -73,6 +73,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           configs: state.salesOrgConfig,
           totalTax: value.totalTax,
           salesRepAuthorizedDetails: value.salesRepAuthorizedDetails,
+          deliveryOption: value.deliveryOption,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -91,6 +92,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
                 isConfirming: true,
                 submitOrderResponse: submitOrderResponse,
                 orderHistoryDetailsList: <OrderHistoryDetails>[],
+                cartItems: <PriceAggregate>[],
               ),
             );
           },
@@ -101,6 +103,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           state.copyWith(
             apiFailureOrSuccessOption: none(),
             isConfirming: true,
+            cartItems: e.priceAggregate,
           ),
         );
 

@@ -91,7 +91,9 @@ void main() {
           };
 
           final res = json.decode(
-            await rootBundle.loadString('assets/json/submit_order/submitOrderResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/submit_order/submitOrderResponse.json',
+            ),
           );
 
           dioAdapter.onPost(

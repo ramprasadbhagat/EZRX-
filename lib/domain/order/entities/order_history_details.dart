@@ -33,7 +33,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required DateTimeStringValue createdDate,
     required String eZRXNumber,
     required StringValue orderBy,
-    required String referenceNotes,
+    required StringValue referenceNotes,
     required OrderNumber
         orderNumber, //used for orderHistory api in view vy order section
     required String soldTo,
@@ -68,7 +68,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         expectedDeliveryDate: DateTimeStringValue(''),
         eZRXNumber: '',
         orderBy: StringValue(''),
-        referenceNotes: '',
+        referenceNotes: StringValue(''),
         companyName: CompanyName(''),
         orderNumber: OrderNumber(''),
         poReference: StringValue(''),
@@ -268,4 +268,6 @@ extension ViewByOrderListExtension on List<OrderHistoryDetails> {
         )
         .toList();
   }
+
+  bool get containInQueueOrder => any((e) => e.processingStatus.isInQueue);
 }

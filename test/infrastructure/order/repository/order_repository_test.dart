@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
+import 'package:ezrxmobile/domain/core/entities/po_documents.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
@@ -321,6 +322,7 @@ void main() {
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
       salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+      deliveryOption: '',
     );
     expect(
       result,
@@ -415,6 +417,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -474,6 +477,7 @@ void main() {
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
       salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+      deliveryOption: '',
     );
     expect(
       result,
@@ -503,6 +507,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -543,6 +548,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -581,6 +587,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -624,6 +631,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -681,6 +689,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -742,6 +751,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -799,6 +809,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -875,6 +886,7 @@ void main() {
           mpSmallOrderFee: 0,
           zpSmallOrderFee: 0,
           salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+          deliveryOption: '',
         );
         expect(
           result,
@@ -917,6 +929,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -1036,6 +1049,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -1091,6 +1105,7 @@ void main() {
           mpSmallOrderFee: 0,
           zpSmallOrderFee: 0,
           salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+          deliveryOption: '',
         );
 
         expect(result, Right(submitOrderResponseMock));
@@ -1188,6 +1203,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -1266,6 +1282,7 @@ void main() {
         mpSmallOrderFee: 0,
         zpSmallOrderFee: 0,
         salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+        deliveryOption: '',
       );
       expect(
         result,
@@ -1319,6 +1336,7 @@ void main() {
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
       salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+      deliveryOption: '',
     );
 
     expect(result, Right(submitOrderResponseMock));
@@ -1365,6 +1383,7 @@ void main() {
       mpSmallOrderFee: 200,
       zpSmallOrderFee: 100,
       salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+      deliveryOption: '',
     );
 
     expect(result, Right(submitOrderResponseMock));
@@ -1419,6 +1438,94 @@ void main() {
       salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty().copyWith(
         sendPayload: true,
       ),
+      deliveryOption: '',
+    );
+
+    expect(result, Right(submitOrderResponseMock));
+  });
+
+  test('submit order with delivery option in payload', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+    final submitOrderWithSalesrepAuthorizedDetail =
+        SubmitOrderDto.fromDomain(submitOrderMock).toJson()
+          ..addAll({'deliveryOption': 'fake-option'});
+    when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+    when(
+      () => encryption.encryptionData(
+        data: submitOrderWithSalesrepAuthorizedDetail,
+        secretKey: fakeSecretKey,
+      ),
+    ).thenReturn(orderEncryptionMock);
+    when(
+      () => orderRemoteDataSource.submitOrder(
+        orderEncryption: orderEncryptionMock,
+        enableMarketPlace: fakeConfigValue,
+      ),
+    ).thenAnswer((_) async => submitOrderResponseMock);
+
+    final result = await orderRepository.submitOrder(
+      shipToInfo: mockShipToInfo,
+      user: fakeClientUser,
+      cartProducts: cartMaterials,
+      grandTotal: 100.0,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: fakeSalesOrganisation,
+      data: deliveryInfoData,
+      configs: fakePHSalesOrgConfigs,
+      orderValue: 100.0,
+      totalTax: 100,
+      aplSmallOrderFee: 12500.0,
+      mpSmallOrderFee: 0,
+      zpSmallOrderFee: 0,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+      deliveryOption: 'fake-option',
+    );
+
+    expect(result, Right(submitOrderResponseMock));
+  });
+
+  test('submit order with poison attachment included in payload', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    final poAttachment = PoDocuments.empty().copyWith(url: 'fake-url');
+    final submitOrderWithSalesrepAuthorizedDetail = SubmitOrderDto.fromDomain(
+      submitOrderMock.copyWith(
+        poDocuments: [poAttachment.copyWith(isPoison: true)],
+      ),
+    ).toJson();
+    when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+    when(
+      () => encryption.encryptionData(
+        data: submitOrderWithSalesrepAuthorizedDetail,
+        secretKey: fakeSecretKey,
+      ),
+    ).thenReturn(orderEncryptionMock);
+    when(
+      () => orderRemoteDataSource.submitOrder(
+        orderEncryption: orderEncryptionMock,
+        enableMarketPlace: fakeConfigValue,
+      ),
+    ).thenAnswer((_) async => submitOrderResponseMock);
+
+    final result = await orderRepository.submitOrder(
+      shipToInfo: mockShipToInfo,
+      user: fakeClientUser,
+      cartProducts: cartMaterials,
+      grandTotal: 100.0,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: fakeSalesOrganisation,
+      data: deliveryInfoData.copyWith(
+        poisonRefDocumentsIncluded: true,
+        poDocuments: [poAttachment],
+      ),
+      configs: fakePHSalesOrgConfigs,
+      orderValue: 100.0,
+      totalTax: 100,
+      aplSmallOrderFee: 12500.0,
+      mpSmallOrderFee: 0,
+      zpSmallOrderFee: 0,
+      salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+      deliveryOption: '',
     );
 
     expect(result, Right(submitOrderResponseMock));
@@ -1470,6 +1577,7 @@ void main() {
       mpSmallOrderFee: 0,
       zpSmallOrderFee: 0,
       salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+      deliveryOption: '',
     );
 
     expect(result, Right(submitOrderResponseMock));

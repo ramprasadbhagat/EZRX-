@@ -119,7 +119,7 @@ class OrderHeaderSection extends StatelessWidget {
                 const SizedBox(height: 5),
                 BalanceTextRow(
                   keyText: context.tr('Reference note'),
-                  valueText: orderDetails.referenceNotes,
+                  valueText: orderDetails.referenceNotes.displayNAIfEmpty,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,

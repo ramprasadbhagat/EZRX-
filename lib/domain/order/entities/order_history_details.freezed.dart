@@ -32,7 +32,7 @@ mixin _$OrderHistoryDetails {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get eZRXNumber => throw _privateConstructorUsedError;
   StringValue get orderBy => throw _privateConstructorUsedError;
-  String get referenceNotes => throw _privateConstructorUsedError;
+  StringValue get referenceNotes => throw _privateConstructorUsedError;
   OrderNumber get orderNumber =>
       throw _privateConstructorUsedError; //used for orderHistory api in view vy order section
   String get soldTo => throw _privateConstructorUsedError;
@@ -81,7 +81,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       DateTimeStringValue createdDate,
       String eZRXNumber,
       StringValue orderBy,
-      String referenceNotes,
+      StringValue referenceNotes,
       OrderNumber orderNumber,
       String soldTo,
       String shipTo,
@@ -208,7 +208,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
       referenceNotes: null == referenceNotes
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -312,7 +312,7 @@ abstract class _$$OrderHistoryDetailsImplCopyWith<$Res>
       DateTimeStringValue createdDate,
       String eZRXNumber,
       StringValue orderBy,
-      String referenceNotes,
+      StringValue referenceNotes,
       OrderNumber orderNumber,
       String soldTo,
       String shipTo,
@@ -438,7 +438,7 @@ class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
       referenceNotes: null == referenceNotes
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -577,7 +577,7 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
   @override
   final StringValue orderBy;
   @override
-  final String referenceNotes;
+  final StringValue referenceNotes;
   @override
   final OrderNumber orderNumber;
 //used for orderHistory api in view vy order section
@@ -761,7 +761,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final DateTimeStringValue createdDate,
       required final String eZRXNumber,
       required final StringValue orderBy,
-      required final String referenceNotes,
+      required final StringValue referenceNotes,
       required final OrderNumber orderNumber,
       required final String soldTo,
       required final String shipTo,
@@ -811,7 +811,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   StringValue get orderBy;
   @override
-  String get referenceNotes;
+  StringValue get referenceNotes;
   @override
   OrderNumber get orderNumber;
   @override //used for orderHistory api in view vy order section

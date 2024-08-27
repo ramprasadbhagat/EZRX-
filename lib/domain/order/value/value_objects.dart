@@ -850,13 +850,13 @@ class UrgentDeliveryTimePickerOption extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory UrgentDeliveryTimePickerOption.today() =>
-      UrgentDeliveryTimePickerOption('today');
+      UrgentDeliveryTimePickerOption('todayUrgentDelivery');
 
   factory UrgentDeliveryTimePickerOption.tomorrow() =>
-      UrgentDeliveryTimePickerOption('tomorrow');
+      UrgentDeliveryTimePickerOption('tomorrowUrgentDelivery');
 
   factory UrgentDeliveryTimePickerOption.saturday() =>
-      UrgentDeliveryTimePickerOption('saturday');
+      UrgentDeliveryTimePickerOption('saturdayUrgentDelivery');
 
   factory UrgentDeliveryTimePickerOption(String input) =>
       UrgentDeliveryTimePickerOption._(validateStringNotEmpty(input));

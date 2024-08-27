@@ -341,7 +341,7 @@ void main() {
 
       testWidgets('Order Detail Header', (tester) async {
         final fakeRequestedDeliveryDate = DateTimeStringValue('2023-09-11');
-        const fakeReferenceNotes = 'fake-ref-note';
+        final fakeReferenceNotes = StringValue('fake-ref-note');
         final fakeOrderHistoryDetailsPaymentTerm =
             OrderHistoryDetailsPaymentTerm.empty();
         final fakeInstruction = StringValue('fake-instruction');
@@ -379,7 +379,7 @@ void main() {
           find.byKey(
             WidgetKeys.balanceTextRow(
               'Reference note'.tr(),
-              fakeReferenceNotes,
+              fakeReferenceNotes.getOrCrash(),
             ),
           ),
           findsOneWidget,
@@ -2320,7 +2320,7 @@ void main() {
           (invocation) => OrderSummaryState.initial().copyWith(
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
-                referenceNotes: 'fake-reference-notes',
+                referenceNotes: StringValue('fake-reference-notes'),
               ),
             ],
           ),
@@ -2358,7 +2358,7 @@ void main() {
             (invocation) => OrderSummaryState.initial().copyWith(
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
-                  referenceNotes: 'fake-reference-notes',
+                  referenceNotes: StringValue('fake-reference-notes'),
                 ),
               ],
             ),
@@ -2381,7 +2381,7 @@ void main() {
           (invocation) => OrderSummaryState.initial().copyWith(
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
-                referenceNotes: 'fake-reference-notes',
+                referenceNotes: StringValue('fake-reference-notes'),
               ),
             ],
           ),
@@ -2671,10 +2671,67 @@ void main() {
         },
       );
     });
+
+    testWidgets('Shoud display refresh banner when order is in queue',
+        (tester) async {
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          orderHistoryDetailsList: [
+            fakeOrderHistoryList
+                .firstWhere((e) => e.processingStatus.isInQueue),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessRefreshWarning),
+          matching: find.text(
+            'Please refresh the screen or tap on queue number to get the Order ID.',
+            findRichText: true,
+          ),
+        ),
+        findsOne,
+      );
+      await tester.dragUntilVisible(
+        find.byKey(WidgetKeys.scrollList),
+        find.byKey(WidgetKeys.orderSuccessItemTotalQty),
+        const Offset(0, -200),
+      );
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSuccessRefreshWarning),
+          matching: find.text(
+            'Please refresh the screen to get accurate value.',
+            findRichText: true,
+          ),
+        ),
+        findsOne,
+      );
+      final widget = find.byWidgetPredicate(
+        (w) =>
+            w is RichText &&
+            w.text.toPlainText() ==
+                'Please refresh the screen to get accurate value.' &&
+            tapTextSpan(w, 'refresh the screen'),
+      );
+      expect(widget, findsOne);
+      await tester.pumpAndSettle();
+      verify(
+        () => orderSummaryBlocMock.add(
+          const OrderSummaryEvent.orderConfirmationDetail(
+            priceAggregate: <PriceAggregate>[],
+          ),
+        ),
+      ).called(1);
+    });
   });
 }
 
-bool findTextAndTap(InlineSpan visitor, String text) {
+bool _findTextAndTap(InlineSpan visitor, String text) {
   if (visitor is TextSpan && visitor.text == text) {
     (visitor.recognizer as TapGestureRecognizer).onTap!();
 
@@ -2686,6 +2743,6 @@ bool findTextAndTap(InlineSpan visitor, String text) {
 
 bool tapTextSpan(RichText richText, String text) {
   return !richText.text.visitChildren(
-    (visitor) => findTextAndTap(visitor, text),
+    (visitor) => _findTextAndTap(visitor, text),
   );
 }

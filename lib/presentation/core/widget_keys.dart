@@ -864,6 +864,8 @@ class WidgetKeys {
   //  Order success
   //============================================================
   static const Key orderSuccess = Key('orderSuccessKey');
+  static const Key orderSuccessRefreshWarning =
+      Key('orderSuccessRefreshWarning');
   static const Key recentlyOrder = Key('recentlyOrder');
   static const Key filterOrderIcon = Key('filterOrderIcon');
   static const Key orderSuccessMessage = Key('orderSuccessMessage');

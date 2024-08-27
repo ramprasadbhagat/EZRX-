@@ -9,11 +9,13 @@ class PoDocuments with _$PoDocuments {
     required String url,
     required String name,
     required FileSize size,
+    required bool isPoison,
   }) = _PoDocuments;
   factory PoDocuments.empty() => PoDocuments(
         url: '',
         name: '',
         size: FileSize(0),
+        isPoison: false,
       );
 }
 

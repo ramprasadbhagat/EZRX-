@@ -63,8 +63,7 @@ class _DeliveryOptionCard extends StatelessWidget {
               else
                 BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
                   buildWhen: (previous, current) =>
-                      previous.currentUrgentDeliverFee !=
-                      current.currentUrgentDeliverFee,
+                      previous.urgentDeliveryFee != current.urgentDeliveryFee,
                   builder: (context, state) => PriceComponent(
                     key: WidgetKeys.priceSummaryGrandTotal,
                     salesOrgConfig: state.configs,
@@ -75,7 +74,7 @@ class _DeliveryOptionCard extends StatelessWidget {
                       deliveryOption.price,
                       namedArgs: {
                         'urgentDeliveryPrice':
-                            state.currentUrgentDeliverFee.toString(),
+                            state.urgentDeliveryFee.toString(),
                       },
                     ),
                   ),

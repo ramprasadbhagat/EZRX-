@@ -75,6 +75,7 @@ void main() {
     url: 'fake-path',
     name: 'fake-name',
     size: FileSize(256),
+    isPoison: false,
   );
 
   setUpAll(() async {

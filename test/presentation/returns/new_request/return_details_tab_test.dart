@@ -1476,6 +1476,7 @@ void main() {
         name: 'fake-file',
         url: 'fake-path',
         size: FileSize(1),
+        isPoison: false,
       );
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(

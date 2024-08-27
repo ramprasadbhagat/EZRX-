@@ -7,19 +7,18 @@ class _UrgentDeliveryTimePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
       buildWhen: (previous, current) =>
-          previous.selectedUrgentDeliveryTime !=
-          current.selectedUrgentDeliveryTime,
+          previous.urgentDeliveryOption != current.urgentDeliveryOption,
       builder: (context, state) => InkWell(
         onTap: () => showModalBottomSheet(
           context: context,
           builder: (_) => _UrgentDeliveryBottomSheet(
-            selectedDeliveryTime: state.selectedUrgentDeliveryTime,
+            selectedOption: state.urgentDeliveryOption,
           ),
         ).then((value) {
-          if (value is String) {
+          if (value is UrgentDeliveryTimePickerOption) {
             context
                 .read<OrderEligibilityBloc>()
-                .add(OrderEligibilityEvent.updateUrgentDeliveryFee(value));
+                .add(OrderEligibilityEvent.updateUrgentDeliveryOption(value));
           }
         }),
         child: Container(
@@ -33,7 +32,7 @@ class _UrgentDeliveryTimePicker extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  state.selectedUrgentDeliveryTime,
+                  state.urgentDeliveryOption.title,
                   style: Theme.of(context).textTheme.titleMedium,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -51,9 +50,9 @@ class _UrgentDeliveryTimePicker extends StatelessWidget {
 }
 
 class _UrgentDeliveryBottomSheet extends StatefulWidget {
-  final String selectedDeliveryTime;
+  final UrgentDeliveryTimePickerOption selectedOption;
 
-  const _UrgentDeliveryBottomSheet({required this.selectedDeliveryTime});
+  const _UrgentDeliveryBottomSheet({required this.selectedOption});
 
   @override
   State<_UrgentDeliveryBottomSheet> createState() =>
@@ -62,7 +61,7 @@ class _UrgentDeliveryBottomSheet extends StatefulWidget {
 
 class _UrgentDeliveryBottomSheetState
     extends State<_UrgentDeliveryBottomSheet> {
-  late var _selectedDeliveryTime = widget.selectedDeliveryTime;
+  late var _selectedDeliveryTime = widget.selectedOption;
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +85,10 @@ class _UrgentDeliveryBottomSheetState
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: padding12),
                 child: _UrgentDeliveryTimeList(
-                  onSelectDeliveryTime: (value) => setState(() {
+                  onSelect: (value) => setState(() {
                     _selectedDeliveryTime = value;
                   }),
-                  selectedDeliveryTime: _selectedDeliveryTime,
+                  selectedOption: _selectedDeliveryTime,
                 ),
               ),
             ),
@@ -122,46 +121,46 @@ class _UrgentDeliveryBottomSheetState
 }
 
 class _UrgentDeliveryTimeList extends StatelessWidget {
-  final String selectedDeliveryTime;
-  final Function(String deliveryTime) onSelectDeliveryTime;
+  final UrgentDeliveryTimePickerOption selectedOption;
+  final Function(UrgentDeliveryTimePickerOption value) onSelect;
 
   const _UrgentDeliveryTimeList({
-    required this.selectedDeliveryTime,
-    required this.onSelectDeliveryTime,
+    required this.selectedOption,
+    required this.onSelect,
   });
 
   @override
   Widget build(BuildContext context) {
     final salesOrganisationConfigs =
         context.read<OrderEligibilityBloc>().state.configs;
-    final urgentDeliveryOptionTitlesList =
-        salesOrganisationConfigs.urgentDeliveryOptionTitlesList;
+    final urgentDeliveryOptions =
+        salesOrganisationConfigs.urgentDeliveryOptions;
 
     return ListView.builder(
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final option = urgentDeliveryOptionTitlesList[index];
+        final option = urgentDeliveryOptions[index];
 
         return ListTileTheme(
           horizontalTitleGap: 4,
-          child: RadioListTile<String>(
+          child: RadioListTile<UrgentDeliveryTimePickerOption>(
             contentPadding: EdgeInsets.zero,
             title: Text(
-              option,
+              option.title,
               style: Theme.of(context).textTheme.titleSmall,
             ),
             controlAffinity: ListTileControlAffinity.leading,
             dense: true,
             visualDensity: VisualDensity.compact,
             onChanged: (value) {
-              if (value != null) onSelectDeliveryTime.call(value);
+              if (value != null) onSelect.call(value);
             },
-            groupValue: selectedDeliveryTime,
+            groupValue: selectedOption,
             value: option,
           ),
         );
       },
-      itemCount: urgentDeliveryOptionTitlesList.length,
+      itemCount: urgentDeliveryOptions.length,
     );
   }
 }

@@ -20,13 +20,13 @@ class _OrderSuccessMaterialSection extends StatelessWidget {
           .map(
             (item) => Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+                  const EdgeInsets.symmetric(horizontal: padding12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: _verticalPadding),
+                        const EdgeInsets.symmetric(vertical: padding12),
                     child: isMarketPlace
                         ? MarketPlaceSellerTitle(
                             sellerName: item.principalName.name,
@@ -81,7 +81,7 @@ class _MaterialItem extends StatelessWidget {
           materialInfo: orderItem.priceAggregate.materialInfo,
         ),
       ),
-      margin: const EdgeInsets.symmetric(vertical: _verticalPadding),
+      margin: const EdgeInsets.symmetric(vertical: padding12),
       materialNumber: orderItem.materialNumber,
       label: orderItem.combinationCode(
         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,

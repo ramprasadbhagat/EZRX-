@@ -386,6 +386,7 @@ void main() {
               data: DeliveryInfoData.empty()
                   .copyWith(contactPerson: StringValue('fakeInput')),
               salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+              deliveryOption: '',
             ),
           ),
         ).called(1);

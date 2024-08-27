@@ -74,6 +74,8 @@ class _CheckoutFooterSection extends StatelessWidget {
                               .deliveryInfoData,
                           salesRepAuthorizedDetails: orderEligibilityState
                               .getSalesRepAuthorizedDetails,
+                          deliveryOption:
+                              orderEligibilityState.submittedDeliveryOption,
                         ),
                       );
                 } else {

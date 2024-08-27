@@ -291,9 +291,9 @@ String getDeliveryOptionDescription(String value) {
 
 String getUrgentDeliveryTimePickerOptionTitle(String value) {
   final result = {
-    'today': 'Today, 1PM - 6PM (order before 10:30 AM)',
-    'tomorrow': 'Tomorrow, 9AM - 12AM (order before 4PM)',
-    'saturday': 'Saturday, 9AM - 1PM (order before 4PM)',
+    'todayUrgentDelivery': 'Today, 1PM - 6PM (order before 10:30 AM)',
+    'tomorrowUrgentDelivery': 'Tomorrow, 9AM - 12AM (order before 4PM)',
+    'saturdayUrgentDelivery': 'Saturday, 9AM - 1PM (order before 4PM)',
   };
 
   return result[value] ?? '';

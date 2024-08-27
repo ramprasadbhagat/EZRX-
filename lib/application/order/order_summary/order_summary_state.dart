@@ -10,6 +10,7 @@ class OrderSummaryState with _$OrderSummaryState {
     required bool isConfirming,
     required SubmitOrderResponse submitOrderResponse,
     required List<OrderHistoryDetails> orderHistoryDetailsList,
+    required List<PriceAggregate> cartItems,
     required User user,
     required ShipToInfo shipToInfo,
     required CustomerCodeInfo customerCodeInfo,
@@ -29,6 +30,7 @@ class OrderSummaryState with _$OrderSummaryState {
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrgConfig: SalesOrganisationConfigs.empty(),
         salesOrganisation: SalesOrganisation.empty(),
+        cartItems: <PriceAggregate>[],
         isExpanded: false,
       );
 

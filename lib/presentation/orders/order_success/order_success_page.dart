@@ -43,6 +43,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_pric
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,13 +54,18 @@ part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_summary.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_header.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_message.dart';
-
-const _horizontalPadding = 12.0;
-const _verticalPadding = 12.0;
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_refresh_warning.dart';
 
 @RoutePage()
-class OrderSuccessPage extends StatelessWidget {
+class OrderSuccessPage extends StatefulWidget {
   const OrderSuccessPage({super.key});
+
+  @override
+  State<OrderSuccessPage> createState() => _OrderSuccessPageState();
+}
+
+class _OrderSuccessPageState extends State<OrderSuccessPage> {
+  var isFirstFetch = true;
 
   @override
   Widget build(BuildContext context) {
@@ -84,29 +90,31 @@ class OrderSuccessPage extends StatelessWidget {
         currentPath: context.router.currentPath,
         child: BlocListener<OrderSummaryBloc, OrderSummaryState>(
           listenWhen: (previous, current) =>
-              previous.isConfirming != current.isConfirming,
+              previous.isConfirming != current.isConfirming &&
+              !current.isConfirming,
           listener: (context, state) {
-            if (!state.isConfirming) {
-              context.read<ViewByOrderBloc>().add(
-                    ViewByOrderEvent.fetch(
-                      filter: ViewByOrdersFilter.empty(),
-                      searchKey: SearchKey.empty(),
-                      isDetailsPage: false,
-                    ),
-                  );
-              context.read<ViewByItemsBloc>().add(
-                    ViewByItemsEvent.fetch(
-                      viewByItemFilter: ViewByItemFilter.empty(),
-                      searchKey: SearchKey.empty(),
-                    ),
-                  );
-              CustomSnackBar(
-                messageText: context.tr('Order submitted'),
-              ).show(context);
+            if (isFirstFetch) {
+              isFirstFetch = false;
               context
                   .read<CartBloc>()
                   .add(const CartEvent.fetchProductsAddedToCart());
+              CustomSnackBar(
+                messageText: context.tr('Order submitted'),
+              ).show(context);
             }
+            context.read<ViewByOrderBloc>().add(
+                  ViewByOrderEvent.fetch(
+                    filter: ViewByOrdersFilter.empty(),
+                    searchKey: SearchKey.empty(),
+                    isDetailsPage: false,
+                  ),
+                );
+            context.read<ViewByItemsBloc>().add(
+                  ViewByItemsEvent.fetch(
+                    viewByItemFilter: ViewByItemFilter.empty(),
+                    searchKey: SearchKey.empty(),
+                  ),
+                );
           },
           child: const _BodyContent(),
         ),
@@ -140,7 +148,7 @@ class _BodyContent extends StatelessWidget {
                 key: WidgetKeys.scrollList,
                 shrinkWrap: true,
                 children: [
-                  const SizedBox(height: 8),
+                  const SizedBox(height: padding6),
                   _OrderSuccessMessage(
                     orderStatus: state.orderHistoryDetails.processingStatus,
                   ),
@@ -149,17 +157,15 @@ class _BodyContent extends StatelessWidget {
                       key: WidgetKeys.orderSuccessDetail,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 20.0,
-                        ),
+                        const SizedBox(height: padding24),
                         _OrderSuccessHeader(
                           orderHeader: state.orderHistoryDetails,
                           orderHistoryList: state.orderHistoryDetailsList,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 16,
+                            horizontal: padding12,
+                            vertical: padding12,
                           ),
                           child: AddressInfoSection.order(),
                         ),
@@ -170,7 +176,7 @@ class _BodyContent extends StatelessWidget {
                           color: ZPColors.extraLightGrey2,
                         ),
                         const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          padding: EdgeInsets.symmetric(horizontal: padding12),
                           child: PayerInformation(expanded: false),
                         ),
                         const Divider(
@@ -189,8 +195,8 @@ class _BodyContent extends StatelessWidget {
                         const _Divider(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: _verticalPadding,
-                            horizontal: _horizontalPadding,
+                            vertical: padding12,
+                            horizontal: padding12,
                           ),
                           child: Text(
                             '${context.tr('Your items')} (${allItems.length})',
@@ -206,7 +212,7 @@ class _BodyContent extends StatelessWidget {
                         if (zpBundles.isNotEmpty && zpMaterials.isNotEmpty)
                           const Padding(
                             padding: EdgeInsets.symmetric(
-                              horizontal: _horizontalPadding,
+                              horizontal: padding12,
                             ),
                             child: _Divider(),
                           ),
@@ -217,15 +223,15 @@ class _BodyContent extends StatelessWidget {
                         if (zpItems.isNotEmpty && mpItems.isNotEmpty)
                           const Padding(
                             padding: EdgeInsets.symmetric(
-                              horizontal: _horizontalPadding,
+                              horizontal: padding12,
                             ),
                             child: _Divider(),
                           ),
                         if (mpItems.isNotEmpty) ...[
-                          const SizedBox(height: 12),
+                          const SizedBox(height: padding12),
                           const Padding(
                             padding: EdgeInsets.symmetric(
-                              horizontal: _horizontalPadding,
+                              horizontal: padding12,
                             ),
                             child: MarketPlaceTitleWithLogo(showToolTip: true),
                           ),
@@ -236,7 +242,7 @@ class _BodyContent extends StatelessWidget {
                           if (mpBundles.isNotEmpty && mpMaterials.isNotEmpty)
                             const Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: _horizontalPadding,
+                                horizontal: padding12,
                               ),
                               child: _Divider(),
                             ),
@@ -264,7 +270,7 @@ class _Divider extends StatelessWidget {
       indent: 0,
       endIndent: 0,
       thickness: 1,
-      height: _verticalPadding * 2,
+      height: padding24,
       color: ZPColors.extraLightGrey2,
     );
   }

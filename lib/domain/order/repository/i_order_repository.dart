@@ -27,6 +27,7 @@ abstract class IOrderRepository {
     required DeliveryInfoData data,
     required SalesOrganisationConfigs configs,
     required SalesRepAuthorizedDetails salesRepAuthorizedDetails,
+    required String deliveryOption,
   });
 
   Future<Either<ApiFailure, List<OrderHistoryDetails>>>

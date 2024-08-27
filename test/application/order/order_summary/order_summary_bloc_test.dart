@@ -104,6 +104,7 @@ void main() {
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
             salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+            deliveryOption: 'fake-option',
           ),
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
@@ -128,6 +129,7 @@ void main() {
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
             salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+            deliveryOption: 'fake-option',
           ),
         );
       },
@@ -165,6 +167,7 @@ void main() {
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
             salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+            deliveryOption: 'fake-option',
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),
@@ -191,6 +194,7 @@ void main() {
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
             salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+            deliveryOption: 'fake-option',
           ),
         );
       },
@@ -251,6 +255,7 @@ void main() {
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
             salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+            deliveryOption: 'fake-option',
           ),
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
@@ -298,6 +303,7 @@ void main() {
             mpSmallOrderFee: 13,
             zpSmallOrderFee: 14.5,
             salesRepAuthorizedDetails: SalesRepAuthorizedDetails.empty(),
+            deliveryOption: 'fake-option',
           ),
         );
       },
@@ -368,15 +374,24 @@ void main() {
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
           isConfirming: true,
+          cartItems: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(quantity: 2),
+          ],
         ),
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
           isConfirming: true,
           orderHistoryDetailsList: [orderHistoryDetails],
+          cartItems: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(quantity: 2),
+          ],
         ),
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
           orderHistoryDetailsList: [orderHistoryDetails],
+          cartItems: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(quantity: 2),
+          ],
         ),
       ],
     );
@@ -424,11 +439,17 @@ void main() {
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
           isConfirming: true,
+          cartItems: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(quantity: 2),
+          ],
         ),
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Some Error'))),
+          cartItems: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(quantity: 2),
+          ],
         ),
       ],
     );

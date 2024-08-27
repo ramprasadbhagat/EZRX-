@@ -10,7 +10,7 @@ class _OrderSuccessBundleSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       key: WidgetKeys.viewByOrderDetailItemsSection,
-      padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+      padding: const EdgeInsets.symmetric(horizontal: padding12),
       child: Column(
         children:
             bundleItems.map((e) => _BundleTile(viewByOrdersGroup: e)).toList(),
@@ -30,7 +30,7 @@ class _BundleTile extends StatelessWidget {
     final configs = context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return CustomCard(
-      margin: const EdgeInsets.symmetric(vertical: _verticalPadding),
+      margin: const EdgeInsets.symmetric(vertical: padding12),
       key: WidgetKeys.cartItemBundleTile(
         viewByOrdersGroup.parentId.getOrDefaultValue(''),
       ),

@@ -17,7 +17,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
     required double mpSubtotal,
     required double subTotal,
     required bool showErrorMessage,
-    required double currentUrgentDeliverFee,
+    required UrgentDeliveryTimePickerOption urgentDeliveryOption,
     required String selectedRequestDeliveryDate,
   }) = _OrderEligibilityState;
 
@@ -34,7 +34,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
         zpSubtotal: 0,
         subTotal: 0,
         showErrorMessage: false,
-        currentUrgentDeliverFee: 0.0,
+        urgentDeliveryOption: UrgentDeliveryTimePickerOption(''),
         selectedRequestDeliveryDate: '',
       );
 
@@ -585,13 +585,26 @@ class OrderEligibilityState with _$OrderEligibilityState {
       deliveryOption == DeliveryOption.requestDeliveryDate() &&
       selectedRequestDeliveryDate.isEmpty;
 
-  String get selectedUrgentDeliveryTime =>
-      configs.urgentDeliveryOptionTitlesList.elementAtOrNull(
-        configs.deliveryFeesList.indexOf(currentUrgentDeliverFee),
-      ) ??
-      '';
+  String get submittedDeliveryOption => configs.displayDeliveryOptions
+      ? deliveryOption == DeliveryOption.urgentDelivery()
+          ? urgentDeliveryOption.getOrDefaultValue('')
+          : deliveryOption.getOrDefaultValue('')
+      : '';
 
-  double get deliveryFee => deliveryOption == DeliveryOption.urgentDelivery()
-      ? currentUrgentDeliverFee
-      : 0;
+  double get deliveryFee =>
+      deliveryOption == DeliveryOption.urgentDelivery() ? urgentDeliveryFee : 0;
+
+  double get urgentDeliveryFee {
+    if (urgentDeliveryOption == UrgentDeliveryTimePickerOption.today()) {
+      return configs.todayDeliveryFee;
+    }
+    if (urgentDeliveryOption == UrgentDeliveryTimePickerOption.tomorrow()) {
+      return configs.tomorrowDeliveryFee;
+    }
+    if (urgentDeliveryOption == UrgentDeliveryTimePickerOption.saturday()) {
+      return configs.saturdayDeliveryFee;
+    }
+
+    return 0.0;
+  }
 }

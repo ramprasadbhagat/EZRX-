@@ -37,7 +37,9 @@ class DeliveryInfoData with _$DeliveryInfoData {
         orderHistoryDetails.orderHistoryDetailsSpecialInstructions
             .getOrDefaultValue(''),
       ),
-      referenceNote: StringValue.trimmed(orderHistoryDetails.referenceNotes),
+      referenceNote: StringValue.trimmed(
+        orderHistoryDetails.referenceNotes.getOrDefaultValue(''),
+      ),
       // collectiveNumber: CollectiveNumber(''),
       paymentTerm: PaymentTerm(
         '${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermCode.getOrDefaultValue('')}-${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermDescription.getOrDefaultValue('')}',

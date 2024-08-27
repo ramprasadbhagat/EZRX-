@@ -5220,7 +5220,7 @@ void main() {
           ]) {
             expect(
               find.descendant(
-                of: find.byType(RadioListTile<String>),
+                of: find.byType(RadioListTile<UrgentDeliveryTimePickerOption>),
                 matching: find.text(option),
               ),
               findsOne,

@@ -17,7 +17,7 @@ class _OrderSuccessMessage extends StatelessWidget {
           fit: BoxFit.fitHeight,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: padding12),
           child: Text(
             '${context.tr(orderStatus.orderConfirmationPrefixMessage)} ${context.read<EligibilityBloc>().state.user.email.maskedValue} ${context.tr(orderStatus.orderConfirmationSuffixMessage)}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -25,11 +25,9 @@ class _OrderSuccessMessage extends StatelessWidget {
                 ),
           ),
         ),
-        const SizedBox(
-          height: 10.0,
-        ),
+        const SizedBox(height: padding12),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: padding12),
           child: ListTile(
             tileColor: ZPColors.lightBlueColor,
             shape: RoundedRectangleBorder(
@@ -64,8 +62,8 @@ class _OrderSuccessMessage extends StatelessWidget {
                           color: ZPColors.extraDarkGreen,
                         ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap =
-                          () => context.router.navigateNamed('/main/orders_tab'),
+                      ..onTap = () =>
+                          context.router.navigateNamed('/main/orders_tab'),
                   ),
                 ],
               ),

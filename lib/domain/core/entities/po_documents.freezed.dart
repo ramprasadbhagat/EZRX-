@@ -19,6 +19,7 @@ mixin _$PoDocuments {
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   FileSize get size => throw _privateConstructorUsedError;
+  bool get isPoison => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PoDocumentsCopyWith<PoDocuments> get copyWith =>
@@ -31,7 +32,7 @@ abstract class $PoDocumentsCopyWith<$Res> {
           PoDocuments value, $Res Function(PoDocuments) then) =
       _$PoDocumentsCopyWithImpl<$Res, PoDocuments>;
   @useResult
-  $Res call({String url, String name, FileSize size});
+  $Res call({String url, String name, FileSize size, bool isPoison});
 }
 
 /// @nodoc
@@ -50,6 +51,7 @@ class _$PoDocumentsCopyWithImpl<$Res, $Val extends PoDocuments>
     Object? url = null,
     Object? name = null,
     Object? size = null,
+    Object? isPoison = null,
   }) {
     return _then(_value.copyWith(
       url: null == url
@@ -64,6 +66,10 @@ class _$PoDocumentsCopyWithImpl<$Res, $Val extends PoDocuments>
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as FileSize,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -76,7 +82,7 @@ abstract class _$$PoDocumentsImplCopyWith<$Res>
       __$$PoDocumentsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String url, String name, FileSize size});
+  $Res call({String url, String name, FileSize size, bool isPoison});
 }
 
 /// @nodoc
@@ -93,6 +99,7 @@ class __$$PoDocumentsImplCopyWithImpl<$Res>
     Object? url = null,
     Object? name = null,
     Object? size = null,
+    Object? isPoison = null,
   }) {
     return _then(_$PoDocumentsImpl(
       url: null == url
@@ -107,6 +114,10 @@ class __$$PoDocumentsImplCopyWithImpl<$Res>
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as FileSize,
+      isPoison: null == isPoison
+          ? _value.isPoison
+          : isPoison // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -114,7 +125,11 @@ class __$$PoDocumentsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PoDocumentsImpl extends _PoDocuments {
-  _$PoDocumentsImpl({required this.url, required this.name, required this.size})
+  _$PoDocumentsImpl(
+      {required this.url,
+      required this.name,
+      required this.size,
+      required this.isPoison})
       : super._();
 
   @override
@@ -123,10 +138,12 @@ class _$PoDocumentsImpl extends _PoDocuments {
   final String name;
   @override
   final FileSize size;
+  @override
+  final bool isPoison;
 
   @override
   String toString() {
-    return 'PoDocuments(url: $url, name: $name, size: $size)';
+    return 'PoDocuments(url: $url, name: $name, size: $size, isPoison: $isPoison)';
   }
 
   @override
@@ -136,11 +153,13 @@ class _$PoDocumentsImpl extends _PoDocuments {
             other is _$PoDocumentsImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.size, size) || other.size == size));
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.isPoison, isPoison) ||
+                other.isPoison == isPoison));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, url, name, size);
+  int get hashCode => Object.hash(runtimeType, url, name, size, isPoison);
 
   @JsonKey(ignore: true)
   @override
@@ -153,7 +172,8 @@ abstract class _PoDocuments extends PoDocuments {
   factory _PoDocuments(
       {required final String url,
       required final String name,
-      required final FileSize size}) = _$PoDocumentsImpl;
+      required final FileSize size,
+      required final bool isPoison}) = _$PoDocumentsImpl;
   _PoDocuments._() : super._();
 
   @override
@@ -162,6 +182,8 @@ abstract class _PoDocuments extends PoDocuments {
   String get name;
   @override
   FileSize get size;
+  @override
+  bool get isPoison;
   @override
   @JsonKey(ignore: true)
   _$$PoDocumentsImplCopyWith<_$PoDocumentsImpl> get copyWith =>

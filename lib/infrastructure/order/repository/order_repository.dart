@@ -90,6 +90,7 @@ class OrderRepository implements IOrderRepository {
     required DeliveryInfoData data,
     required SalesOrganisationConfigs configs,
     required SalesRepAuthorizedDetails salesRepAuthorizedDetails,
+    required String deliveryOption,
   }) async {
     final submitOrder = _getSubmitOrderRequest(
       shipToInfo: shipToInfo,
@@ -130,6 +131,9 @@ class OrderRepository implements IOrderRepository {
         } else {
           submitOrderData.addAll({'deliveryFee': aplSmallOrderFee.toString()});
         }
+      }
+      if (deliveryOption.isNotEmpty) {
+        submitOrderData.addAll({'deliveryOption': deliveryOption});
       }
       if (submitOrder.orderType.isNotEmpty) {
         submitOrderData.addAll({'orderType': submitOrder.orderType});
@@ -543,7 +547,9 @@ class OrderRepository implements IOrderRepository {
       blockOrder: configs.enablePrincipalList,
       // && cartItems.any((item) => item.checkSalesCutOff)
       products: _getMaterialInfoList(cartProducts: cartProducts),
-      poDocuments: data.poDocuments,
+      poDocuments: data.poDocuments
+          .map((e) => e.copyWith(isPoison: data.poisonRefDocumentsIncluded))
+          .toList(),
       orderValue: orderValue,
       totalTax: totalTax,
       language: user.settings.languagePreference.languageCode,

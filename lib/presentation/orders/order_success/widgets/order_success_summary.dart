@@ -12,21 +12,19 @@ class _OrderSuccessSummary extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
 
-    return ListTile(
+    return Container(
       key: WidgetKeys.orderSuccessOrderSummarySection,
-      minVerticalPadding: 25.0,
-      title: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
-        child: Text(
-          context.tr('Order summary'),
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: ZPColors.black,
-              ),
-        ),
-      ),
-      subtitle: Column(
+      padding: const EdgeInsets.all(padding12),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            context.tr('Order summary'),
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: ZPColors.black,
+                ),
+          ),
+          const SizedBox(height: padding24),
           if (orderHistoryDetailList.mpOrderOnly.isNotEmpty) ...[
             Row(
               key: WidgetKeys.checkoutSummaryZPSubTotal,
@@ -47,7 +45,7 @@ class _OrderSuccessSummary extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: padding6),
             Row(
               key: WidgetKeys.checkoutSummaryMPSubTotal,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +65,7 @@ class _OrderSuccessSummary extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: padding6),
           ],
           Row(
             key: WidgetKeys.orderSuccessSubTotal,
@@ -91,7 +89,7 @@ class _OrderSuccessSummary extends StatelessWidget {
           ),
           if (eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)
             Padding(
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: padding6),
               child: Row(
                 key: WidgetKeys.orderSummaryTax,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -117,12 +115,7 @@ class _OrderSuccessSummary extends StatelessWidget {
                   : orderEligibilityState.smallOrderFee,
               showMessage: false,
             ),
-          const Divider(
-            indent: 0,
-            endIndent: 0,
-            thickness: 0.5,
-            height: 15,
-          ),
+          const _Divider(),
           Row(
             key: WidgetKeys.orderSuccessGrandTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,7 +133,7 @@ class _OrderSuccessSummary extends StatelessWidget {
           ),
           if (eligibilityState.salesOrg.showTotalSaving)
             Padding(
-              padding: const EdgeInsets.only(top: 4.0),
+              padding: const EdgeInsets.only(top: padding6),
               child: Row(
                 key: WidgetKeys.orderSummaryTotalSaving,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,9 +152,16 @@ class _OrderSuccessSummary extends StatelessWidget {
                 ],
               ),
             ),
+          if (orderHistoryDetailList.containInQueueOrder)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: padding6),
+              child: _OrderSuccessRefreshWarning(
+                description: 'Please {actionName} to get accurate value.',
+              ),
+            ),
           if (orderHistoryDetailList.allItems.containsMaterialsWithInvalidPrice)
             const PriceNotAvailableMessage(
-              margin: EdgeInsets.symmetric(vertical: 8),
+              margin: EdgeInsets.symmetric(vertical: padding6),
             ),
         ],
       ),

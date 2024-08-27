@@ -20,53 +20,58 @@ class _OrderSuccessHeader extends StatelessWidget {
     final zpOrders = orderHistoryList.zpOrderOnly;
     final mpOrders = orderHistoryList.mpOrderOnly;
 
-    return ListTile(
-      minVerticalPadding: 15.0,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-      tileColor: ZPColors.primary,
-      title: Column(
+    return Container(
+      padding: const EdgeInsets.all(padding12),
+      color: ZPColors.primary,
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: mpOrders.isNotEmpty
-            ? [
-                if (zpOrders.isNotEmpty)
-                  _OrderNumberList(
-                    key: WidgetKeys.orderSuccessZPOrderNumbers,
-                    prefix: 'ZP',
-                    orderStatus: orderHeader.processingStatus,
-                    orderNumber: zpOrders.map((e) => e.orderNumber).toList(),
-                  ),
-                if (zpOrders.isNotEmpty && mpOrders.isNotEmpty)
-                  const SizedBox(height: 16),
-                if (mpOrders.isNotEmpty)
-                  _OrderNumberList(
-                    key: WidgetKeys.orderSuccessMPOrderNumbers,
-                    prefix: 'MP',
-                    orderStatus: orderHeader.processingStatus,
-                    orderNumber: mpOrders.map((e) => e.orderNumber).toList(),
-                  ),
-              ]
-            : [
-                _OrderNumberList(
-                  orderStatus: orderHeader.processingStatus,
-                  orderNumber: [orderHeader.orderNumber],
-                ),
-              ],
-      ),
-      subtitle: Column(
         children: [
-          const SizedBox(height: 16),
+          if (orderHistoryList.containInQueueOrder)
+            const Padding(
+              padding: EdgeInsets.only(bottom: padding12),
+              child: _OrderSuccessRefreshWarning(
+                description:
+                    'Please {actionName} or tap on queue number to get the Order ID.',
+              ),
+            ),
+          ...mpOrders.isNotEmpty
+              ? [
+                  if (zpOrders.isNotEmpty)
+                    _OrderNumberList(
+                      key: WidgetKeys.orderSuccessZPOrderNumbers,
+                      prefix: 'ZP',
+                      orderStatus: orderHeader.processingStatus,
+                      orderNumber: zpOrders.map((e) => e.orderNumber).toList(),
+                    ),
+                  if (zpOrders.isNotEmpty && mpOrders.isNotEmpty)
+                    const SizedBox(height: padding12),
+                  if (mpOrders.isNotEmpty)
+                    _OrderNumberList(
+                      key: WidgetKeys.orderSuccessMPOrderNumbers,
+                      prefix: 'MP',
+                      orderStatus: orderHeader.processingStatus,
+                      orderNumber: mpOrders.map((e) => e.orderNumber).toList(),
+                    ),
+                ]
+              : [
+                  _OrderNumberList(
+                    orderStatus: orderHeader.processingStatus,
+                    orderNumber: [orderHeader.orderNumber],
+                  ),
+                ],
+          const SizedBox(height: padding12),
           BalanceTextRow(
             keyFlex: keyFlex,
             valueFlex: valueFlex,
-            keyText: 'Order Date'.tr(),
+            keyText: context.tr('Order Date'),
             keyTextStyle: textStyle,
-            valueText: orderHeader.createdDate.dateString,
+            valueText: orderHeader.createdDate.dateOrNaString,
             valueTextStyle: textStyle,
           ),
           BalanceTextRow(
             keyFlex: keyFlex,
             valueFlex: valueFlex,
-            keyText: 'PO reference'.tr(),
+            keyText: context.tr('PO reference'),
             keyTextStyle: textStyle,
             valueText: orderHeader.poReference.displayNAIfEmpty,
             valueTextStyle: textStyle,
@@ -77,7 +82,7 @@ class _OrderSuccessHeader extends StatelessWidget {
               valueFlex: valueFlex,
               keyText: context.tr('Request delivery date'),
               keyTextStyle: textStyle,
-              valueText: orderHeader.requestedDeliveryDate.dateString,
+              valueText: orderHeader.requestedDeliveryDate.dateOrNaString,
               valueTextStyle: textStyle,
             ),
           if (eligibilityState.salesOrgConfigs.enableReferenceNote)
@@ -86,7 +91,7 @@ class _OrderSuccessHeader extends StatelessWidget {
               valueFlex: valueFlex,
               keyText: context.tr('Reference note'),
               keyTextStyle: textStyle,
-              valueText: orderHeader.referenceNotes,
+              valueText: orderHeader.referenceNotes.displayNAIfEmpty,
               valueTextStyle: textStyle,
             ),
           if (!eligibilityState.disablePaymentTermsDisplayForCustomer)

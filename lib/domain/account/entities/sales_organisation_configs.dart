@@ -330,38 +330,17 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   double get zpMinOrderAmount =>
       enableSmallOrderFee ? sapMinOrderAmount : minOrderAmount;
 
-  double get getDeliveryFee {
-    if (enableTodayUrgentDelivery) {
-      return todayDeliveryFee;
-    }
-    if (enableTomorrowUrgentDelivery) {
-      return tomorrowDeliveryFee;
-    }
-    if (enableSaturdayUrgentDelivery) {
-      return saturdayDeliveryFee;
-    }
-
-    return 0.0;
-  }
-
   bool get displayDeliveryOptions =>
       enableDeliveryOptions &&
       (enableStandardDelivery ||
           enableRequestDeliveryDate ||
           enableUrgentDelivery);
 
-  List<double> get deliveryFeesList => [
-        if (enableTodayUrgentDelivery) todayDeliveryFee,
-        if (enableTomorrowUrgentDelivery) tomorrowDeliveryFee,
-        if (enableSaturdayUrgentDelivery) saturdayDeliveryFee,
-      ];
-
-  List<String> get urgentDeliveryOptionTitlesList => [
-        if (enableTodayUrgentDelivery)
-          UrgentDeliveryTimePickerOption.today().title,
+  List<UrgentDeliveryTimePickerOption> get urgentDeliveryOptions => [
+        if (enableTodayUrgentDelivery) UrgentDeliveryTimePickerOption.today(),
         if (enableTomorrowUrgentDelivery)
-          UrgentDeliveryTimePickerOption.tomorrow().title,
+          UrgentDeliveryTimePickerOption.tomorrow(),
         if (enableSaturdayUrgentDelivery)
-          UrgentDeliveryTimePickerOption.saturday().title,
+          UrgentDeliveryTimePickerOption.saturday(),
       ];
 }

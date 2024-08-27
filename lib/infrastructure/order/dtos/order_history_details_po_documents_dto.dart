@@ -29,6 +29,9 @@ class PoDocumentsDto with _$PoDocumentsDto {
       readValue: JsonReadValueHelper.readUrl,
     )
     required String path,
+    @Default(PoDocumentFlagsDto.empty)
+    @JsonKey(name: 'flags')
+    PoDocumentFlagsDto flags,
   }) = _PoDocumentsDto;
   factory PoDocumentsDto.fromDomain(
     PoDocuments orderHistoryDetailsPODocuments,
@@ -37,19 +40,31 @@ class PoDocumentsDto with _$PoDocumentsDto {
       url: orderHistoryDetailsPODocuments.url,
       name: orderHistoryDetailsPODocuments.name,
       path: orderHistoryDetailsPODocuments.url,
+      flags:
+          PoDocumentFlagsDto(isPoison: orderHistoryDetailsPODocuments.isPoison),
     );
   }
 
-  PoDocuments toDomain() {
-    return PoDocuments(
-      url: url,
-      name: name,
-      size: FileSize(0),
-    );
-  }
+  PoDocuments toDomain() => PoDocuments(
+        url: url,
+        name: name,
+        size: FileSize(0),
+        isPoison: flags.isPoison,
+      );
 
-  factory PoDocumentsDto.fromJson(
-    Map<String, dynamic> json,
-  ) =>
+  factory PoDocumentsDto.fromJson(Map<String, dynamic> json) =>
       _$PoDocumentsDtoFromJson(json);
+}
+
+@freezed
+class PoDocumentFlagsDto with _$PoDocumentFlagsDto {
+  const PoDocumentFlagsDto._();
+  const factory PoDocumentFlagsDto({
+    @JsonKey(name: 'isPoison', defaultValue: false) required bool isPoison,
+  }) = _PoDocumentFlagsDto;
+
+  factory PoDocumentFlagsDto.fromJson(Map<String, dynamic> json) =>
+      _$PoDocumentFlagsDtoFromJson(json);
+
+  static const empty = PoDocumentFlagsDto(isPoison: false);
 }

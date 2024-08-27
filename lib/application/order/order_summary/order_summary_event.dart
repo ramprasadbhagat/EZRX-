@@ -20,6 +20,7 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required double totalTax,
     required DeliveryInfoData data,
     required SalesRepAuthorizedDetails salesRepAuthorizedDetails,
+    required String deliveryOption,
   }) = _SubmitOrder;
 
   const factory OrderSummaryEvent.orderConfirmationDetail({
