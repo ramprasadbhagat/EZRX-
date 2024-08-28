@@ -35,4 +35,7 @@ class ViewByItemsState with _$ViewByItemsState {
         searchKey: SearchKey.empty(),
         appliedFilter: ViewByItemFilter.empty(),
       );
+
+  bool get hasSearchFilter =>
+      searchKey.validateNotEmpty || appliedFilter.appliedFilterCount > 0;
 }

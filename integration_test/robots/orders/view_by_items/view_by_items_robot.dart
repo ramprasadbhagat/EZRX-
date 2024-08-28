@@ -141,11 +141,6 @@ class ViewByItemsRobot extends CommonRobot {
     expect(orderGroups, findsNothing);
     expect(orderItems, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
-    expect(find.text('No orders found'.tr()), findsOneWidget);
-    expect(
-      find.text(noRecordFoundDefaultSubTitle),
-      findsOneWidget,
-    );
     expect(find.byKey(WidgetKeys.startBrowsingViewByItem), findsOneWidget);
   }
 

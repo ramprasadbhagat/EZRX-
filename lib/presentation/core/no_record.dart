@@ -25,13 +25,18 @@ class NoRecordFound extends StatelessWidget {
   final Widget actionButton;
   final Widget? subTitleWidget;
 
-  factory NoRecordFound.ordersHistory(BuildContext context, String searchKey) =>
+  factory NoRecordFound.ordersHistory(
+    BuildContext context,
+    bool hasSearchFilter,
+  ) =>
       NoRecordFound(
-        title: 'No orders found',
-        subTitle: searchKey.isNotEmpty
-            ? 'Try adjusting your search or filter selection to find what you’re looking for'
-            : 'Items ordered on eZRx+ will be shown here',
-        svgImage: SvgImage.emptyBox,
+        title: hasSearchFilter
+            ? 'Hmm, that didn’t match anything.'
+            : 'Hmm, looks like you don’t have any orders here.',
+        subTitle: hasSearchFilter
+            ? 'Try adjusting your search or filter to find what you’re looking for'
+            : 'Items ordered on eZRx will appear here',
+        svgImage: hasSearchFilter ? SvgImage.searchLogo : SvgImage.emptyBox,
         actionButton: ElevatedButton(
           key: WidgetKeys.startBrowsingViewByItem,
           style: ElevatedButton.styleFrom(

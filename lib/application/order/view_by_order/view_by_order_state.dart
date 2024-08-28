@@ -59,4 +59,7 @@ class ViewByOrderState with _$ViewByOrderState {
 
     return true;
   }
+
+  bool get hasSearchFilter =>
+      searchKey.validateNotEmpty || appliedFilter.appliedFilterCount > 0;
 }

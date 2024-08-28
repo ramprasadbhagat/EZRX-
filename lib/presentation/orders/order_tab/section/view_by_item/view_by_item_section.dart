@@ -60,7 +60,7 @@ class ViewByItemsPage extends StatelessWidget {
           dismissOnDrag: true,
           noRecordFoundWidget: NoRecordFound.ordersHistory(
             context,
-            state.searchKey.searchValueOrEmpty,
+            state.hasSearchFilter,
           ),
           onRefresh: () {
             context

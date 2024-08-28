@@ -23,6 +23,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/view_by_item_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
@@ -179,8 +180,16 @@ void main() {
       );
       expect(noRecordFound, findsOneWidget);
       expect(
+        (tester.widget(noRecordFound) as NoRecordFound).svgImage,
+        SvgImage.emptyBox,
+      );
+      expect(
+        (tester.widget(noRecordFound) as NoRecordFound).title,
+        'Hmm, looks like you don’t have any orders here.',
+      );
+      expect(
         (tester.widget(noRecordFound) as NoRecordFound).subTitle,
-        'Items ordered on eZRx+ will be shown here',
+        'Items ordered on eZRx will appear here',
       );
     });
 
@@ -199,8 +208,16 @@ void main() {
       );
       expect(noRecordFound, findsOneWidget);
       expect(
+        (tester.widget(noRecordFound) as NoRecordFound).svgImage,
+        SvgImage.searchLogo,
+      );
+      expect(
+        (tester.widget(noRecordFound) as NoRecordFound).title,
+        'Hmm, that didn’t match anything.',
+      );
+      expect(
         (tester.widget(noRecordFound) as NoRecordFound).subTitle,
-        'Try adjusting your search or filter selection to find what you’re looking for',
+        'Try adjusting your search or filter to find what you’re looking for',
       );
     });
 
