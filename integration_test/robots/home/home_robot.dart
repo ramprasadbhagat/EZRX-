@@ -43,7 +43,7 @@ class HomeRobot extends CommonRobot {
   final bundlesItem = find.byKey(WidgetKeys.materialListBundleCard);
   final recentlyOrderedList = find.byKey(WidgetKeys.listRecentlyOrdered);
   final browseProductsList = find.byKey(WidgetKeys.browseProductsList);
-  final announcementsList = find.byKey(WidgetKeys.announcementsList);
+  final announcementsList = find.byKey(WidgetKeys.announcementItemDateKey);
   final productImage = find.byKey(WidgetKeys.productImage);
   final productStockLabel = find.byKey(WidgetKeys.materialListStockLabel);
   final productDescription = find.byKey(WidgetKeys.nameCart);
@@ -176,6 +176,7 @@ class HomeRobot extends CommonRobot {
   Future<void> tapProductsOnOfferIcon() async {
     final iconArrow =
         find.byKey(WidgetKeys.sectionTileIcon('Products on offer'.tr()));
+    await scrollEnsureFinderVisible(iconArrow);
     await tester.tap(iconArrow);
     await tester.pumpAndSettle();
   }

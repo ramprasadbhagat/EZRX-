@@ -3,8 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
@@ -87,7 +85,7 @@ void main() {
   //New Return Request step - 1
   final fromDateForStep1 = DateTime(2023, 5, 29);
   final toDateForStep1 = DateTime(2023, 6, 1);
-  const validSearchKeyForStep1 = 'COZAAR';
+  const validSearchKeyForStep1 = '21041821';
   const inValidSearchKey = '1';
   const noResultSearchKey = 'asdasfxzc';
 
@@ -166,6 +164,8 @@ void main() {
       toDate: toDateToNextForStep2,
     );
     await newReturnRobot.tapApply();
+    await commonRobot.searchWithKeyboardAction(materialId);
+
     await newReturnRobot.tapItemAt(index: 0);
     await newReturnRobot.tapNextButton();
   }
@@ -280,9 +280,9 @@ void main() {
       //verify
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
-      await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-      await commonRobot.searchWithSearchIcon(materialName);
+      await commonRobot.searchWithKeyboardAction(materialName);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductNameVisible(materialName);
@@ -682,7 +682,7 @@ void main() {
         toDate: toDate,
       );
       await returnsByRequestFilterRobot.tapApplyButton();
-      await commonRobot.searchWithSearchIcon(returnId);
+      await commonRobot.searchWithKeyboardAction(returnId);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByRequestRobot.verifyReturnsWithIdVisible(returnId);
@@ -1108,22 +1108,23 @@ void main() {
     });
 
     testWidgets(
-        'EZRX-T559 | Verify return step 2 of 3 Fill in return detail when include bonusn',
-        (tester) async {
-      await pumpAppWithLogin(tester);
-      await goToNewRequest();
+      'EZRX-T559 | Verify return step 2 of 3 Fill in return detail when include bonus',
+      (tester) async {
+        await pumpAppWithLogin(tester);
+        await goToNewRequest();
 
-      await newReturnRobot.tapFilterIcon();
-      await newReturnRobot.tapReset();
-      await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
-      await commonRobot.closeAnnouncementAlertDialog();
-      await newReturnRobot.tapItemAt(index: 0);
-      await newReturnRobot.tapNextButton();
-      newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
-        materialNumber,
-        materialName,
-      );
-    });
+        await newReturnRobot.tapFilterIcon();
+        await newReturnRobot.tapReset();
+        await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
+        await commonRobot.closeAnnouncementAlertDialog();
+        await newReturnRobot.tapItemAt(index: 0);
+        await newReturnRobot.tapNextButton();
+        newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
+          '21041821',
+          '190 NIQUITIN MINT LOZENGES2MG',
+        );
+      },
+    );
   });
 
   group('New Return Request - step - 3 - ', () {

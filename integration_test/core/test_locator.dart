@@ -1,5 +1,3 @@
-
-
 import 'package:get_it/get_it.dart';
 
 import 'infrastructure/infra_core/dio_service/dio_service.dart';

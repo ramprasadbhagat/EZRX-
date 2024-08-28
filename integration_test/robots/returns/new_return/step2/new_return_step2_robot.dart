@@ -49,7 +49,8 @@ class NewReturnStep2Robot extends CommonRobot {
     String materialName,
   ) {
     expect(find.text(materialNumber), findsWidgets);
-    expect(find.text(materialName), findsWidgets);
+    //TODO Marin BE having this issue https://zuelligpharma.atlassian.net/browse/EZRX-25948
+    // expect(find.text(materialName), findsWidgets);
     expect(newRequestStep2ItemImage, findsWidgets);
     expect(newRequestStep2ItemproductImage, findsWidgets);
     expect(newRequestStep2QuantityAndPrice, findsWidgets);
@@ -219,7 +220,8 @@ class NewReturnStep2Robot extends CommonRobot {
 
   void verifyNextToStep3(String materialNumber, String materialName) {
     expect(find.text(materialNumber), findsWidgets);
-    expect(find.text(materialName), findsWidgets);
+    //TODO Marin BE having this issue https://zuelligpharma.atlassian.net/browse/EZRX-25948
+    // expect(find.text(materialName), findsWidgets);
   }
 
   Future<void> deleteItem() async {

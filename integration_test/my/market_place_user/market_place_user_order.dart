@@ -116,9 +116,6 @@ void main() {
   const sameSellerMPMaterialName = 'DROP SHIPMENT TEST MATERIAL 24NB';
   const sameSellerMPMaterialPrice = 5000.00;
 
-  const oosMPMaterialNumber = '23358745';
-  const oosMPMaterialSeller = 'MUNDIPHARMA PHARMACEUTICALS';
-
   const bonusMPMaterialNumber = '23357261';
   const bonusMPMaterialSeller = 'Actavis Hong Kong Ltd';
   const bonusMPMaterialName = 'DROP SHIPMENT TEST MATERIAL 22NB';
@@ -949,6 +946,12 @@ void main() {
       const mpMaterialNumber = '23357280';
       final qty = (mpMOV / mpMaterialPrice).ceil();
 
+      const oosMPMaterialNumber = '21041761';
+      const oosMPMaterialPrice = 9;
+      const oosMPMaterialSeller = 'MUNDIPHARMA PHARMACEUTICALS';
+      const oosMPMaterialManufacture = 'GLAXOSMITHKLINE CONSUMER';
+      const oosQty = 100;
+
       await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
 
@@ -967,65 +970,46 @@ void main() {
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
       // Verify MP materials in cart
+
       await cartRobot.verifySellerName(oosMPMaterialSeller);
       await cartRobot.verifyMaterial(oosMPMaterialNumber);
       cartRobot.verifyMaterialOOSPreOrderStatus(oosMPMaterialNumber);
-      await cartRobot.changeMaterialQty(oosMPMaterialNumber, qty);
-      cartRobot.verifyMaterialQty(oosMPMaterialNumber, qty);
-      // cartRobot.verifyMaterialUnitPrice(
-      //   oosMPMaterialNumber,
-      //   oosMPMaterialPrice.priceDisplay(currency),
-      // );
-      // cartRobot.verifyMaterialTotalPrice(oosMPMaterialNumber, totalPrice);
-      // Verify oos pre order modal
+      await cartRobot.changeMaterialQty(oosMPMaterialNumber, oosQty);
+      cartRobot.verifyMaterialQty(oosMPMaterialNumber, oosQty);
       await cartRobot.tapCheckoutButton();
       oosPreOrderRobot.verifyManufacturerLabel(
-        oosMPMaterialSeller,
-        isMarketPlace: true,
+        oosMPMaterialManufacture,
+        isMarketPlace: false,
       );
       oosPreOrderRobot.verifyMaterial(oosMPMaterialNumber, qty);
       await oosPreOrderRobot.tapContinueButton();
       // Verify checkout components
       await checkoutRobot.verifyMarketPlaceDeliveryInfo([oosMPMaterialSeller]);
-      // await checkoutRobot.verifyYoursItemLabel(1);
       await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyMarketPlaceSection();
       await checkoutRobot.verifySellerName(oosMPMaterialSeller);
       await checkoutRobot.verifyMaterial(oosMPMaterialNumber);
       checkoutRobot.verifyMaterialQty(oosMPMaterialNumber, qty);
-      // checkoutRobot.verifyMaterialUnitPrice(
-      //   oosMPMaterialNumber,
-      //   oosMPMaterialPrice.priceDisplay(currency),
-      // );
-      // checkoutRobot.verifyMaterialTotalPrice(oosMPMaterialNumber, totalPrice);
-      await checkoutRobot.verifyZPSubTotalLabel(0.priceDisplay(currency));
-      // await checkoutRobot.verifyMPSubTotalLabel(totalPrice);
-      // await checkoutRobot.verifySubTotalLabel(totalPrice);
-      // await checkoutRobot.verifyGrandTotalLabel(totalPrice);
-      // Verify order success components
+
+      await checkoutRobot.verifyZPSubTotalLabel(
+        (oosMPMaterialPrice * oosQty).priceDisplay(currency),
+      );
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
-      orderSuccessRobot.verifyMarketPlaceOrderId(0, 1);
+      orderSuccessRobot.verifyMarketPlaceOrderId(1, 1);
       await orderSuccessRobot
           .verifyMarketPlaceDeliveryInfo([oosMPMaterialSeller]);
-      await orderSuccessRobot.verifyZPSubTotal(0.priceDisplay(currency));
-      // await orderSuccessRobot.verifyMPSubTotal(totalPrice);
-      // await orderSuccessRobot.verifySubTotal(totalPrice);
-      // await orderSuccessRobot.verifyGrandTotal(totalPrice);
-      // await orderSuccessRobot.verifyOrderItemTotalQty(1);
+      await orderSuccessRobot.verifyZPSubTotal(
+        (oosMPMaterialPrice * oosQty).priceDisplay(currency),
+      );
       await orderSuccessRobot.verifyOrderItemTotalQty(2);
       await orderSuccessRobot.verifyMarketPlaceSection();
       await orderSuccessRobot.verifySellerName(oosMPMaterialSeller);
       await orderSuccessRobot.startVerifyMaterial(
-        // index: 0,
-        index: 1,
+        index: 0,
         isMarketPlace: true,
       );
-      orderSuccessRobot.verifyMaterialNumber(oosMPMaterialNumber);
-      // orderSuccessRobot.verifyItemQty(qty);
-      // orderSuccessRobot
-      //     .verifyMaterialUnitPrice(oosMPMaterialPrice.priceDisplay(currency));
-      // orderSuccessRobot.verifyMaterialTotalPrice(totalPrice);
+      orderSuccessRobot.verifyMaterialNumber(mpMaterialNumber);
     });
 
     testWidgets('EZRX-1998 | Verify order with MP bonus offer material',
@@ -1559,66 +1543,72 @@ void main() {
     final toDate = DateTime.now();
 
     group('View by item -', () {
-      testWidgets('EZRX-T1986 | Verify search and filter MP item',
-          (tester) async {
-        final statusesFilter = ['Order created', 'In Queue', 'Pending'];
+      testWidgets(
+        'EZRX-T1986 | Verify search and filter MP item',
+            (tester) async {
+          final statusesFilter = [
+            'Order created',
+            'Picking in progress',
+            'Pending release',
+          ];
 
-        await pumpAppWithHomeScreen(tester);
+          await pumpAppWithHomeScreen(tester);
 
-        await homeRobot.navigateToScreen(NavigationTab.orders);
-        ordersRootRobot.verifyViewByItemsPage();
-        ordersRootRobot.verifyFilterApplied(0);
-        // Verify filter ZP order
-        await ordersRootRobot.tapFilterButton();
-        viewByItemsFilterRobot.verifyDefaultFilterApplied();
-        viewByItemsFilterRobot.verifyOrderTypeFilter();
-        await viewByItemsFilterRobot.tapOrderTypeFilter('ZP items');
-        await viewByItemsFilterRobot.tapApplyButton();
-        ordersRootRobot.verifyFilterApplied(0);
-        viewByItemsRobot.verifyMarketPlaceLogo(isVisible: false);
-        await commonRobot.searchWithSearchIcon(mpMaterialNumber);
-        viewByItemsRobot.verifyNoRecordFound();
-        await commonRobot.autoSearch(mpMaterialName);
-        viewByItemsRobot.verifyNoRecordFound();
-        await commonRobot.searchWithKeyboardAction(mpMaterialSeller);
-        viewByItemsRobot.verifyNoRecordFound();
-        await commonRobot.tapClearSearch();
-        // Verify filter MP order
-        await ordersRootRobot.tapFilterButton();
-        await viewByItemsFilterRobot.tapOrderTypeFilter('MP items');
-        await viewByItemsFilterRobot.tapApplyButton();
-        viewByItemsRobot.verifyMarketPlaceLogo(isVisible: true);
-        await commonRobot.searchWithSearchIcon(mpMaterialNumber);
-        viewByItemsRobot.verifyOrdersWithProductCode(mpMaterialNumber);
-        await commonRobot.autoSearch(mpMaterialName);
-        viewByItemsRobot.verifyOrdersWithProductName(mpMaterialName);
-        await commonRobot.searchWithKeyboardAction(mpMaterialSeller);
-        viewByItemsRobot.verifyOrderGroups();
-        await commonRobot.tapClearSearch();
-        await ordersRootRobot.tapFilterButton();
-        await viewByItemsFilterRobot.tapFromDateField();
-        await commonRobot.setDateRangePickerValue(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
-        await viewByItemsFilterRobot.tapApplyButton();
-        ordersRootRobot.verifyFilterApplied(1);
-        viewByItemsRobot.verifyOrderGroupInDateRange(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
-        await ordersRootRobot.tapFilterButton();
-        for (final status in statusesFilter) {
-          await viewByItemsFilterRobot.tapStatusCheckbox(status);
-        }
-        await viewByItemsFilterRobot.tapApplyButton();
-        ordersRootRobot.verifyFilterApplied(2);
-        viewByItemsRobot.verifyOrderWithStatus(statusesFilter);
-        // Verify filter not visible in non-marketplace
-        await commonRobot.changeDeliveryAddress(nonMPShipToCode);
-        await ordersRootRobot.tapFilterButton();
-        viewByItemsFilterRobot.verifyOrderTypeFilter(isVisible: false);
-      });
+          await homeRobot.navigateToScreen(NavigationTab.orders);
+          ordersRootRobot.verifyViewByItemsPage();
+          ordersRootRobot.verifyFilterApplied(0);
+          // Verify filter ZP order
+          await ordersRootRobot.tapFilterButton();
+          viewByItemsFilterRobot.verifyDefaultFilterApplied();
+          viewByItemsFilterRobot.verifyOrderTypeFilter();
+          await viewByItemsFilterRobot.tapOrderTypeFilter('ZP items');
+          await viewByItemsFilterRobot.tapApplyButton();
+          ordersRootRobot.verifyFilterApplied(0);
+          viewByItemsRobot.verifyMarketPlaceLogo(isVisible: false);
+          await commonRobot.searchWithSearchIcon(mpMaterialNumber);
+          viewByItemsRobot.verifyNoRecordFound();
+          await commonRobot.autoSearch(mpMaterialName);
+          viewByItemsRobot.verifyNoRecordFound();
+          await commonRobot.searchWithKeyboardAction(mpMaterialSeller);
+          viewByItemsRobot.verifyNoRecordFound();
+          await commonRobot.tapClearSearch();
+          // Verify filter MP order
+          await ordersRootRobot.tapFilterButton();
+          await viewByItemsFilterRobot.tapOrderTypeFilter('MP items');
+          await viewByItemsFilterRobot.tapApplyButton();
+          viewByItemsRobot.verifyMarketPlaceLogo(isVisible: true);
+          await commonRobot.searchWithSearchIcon(mpMaterialNumber);
+          viewByItemsRobot.verifyOrdersWithProductCode(mpMaterialNumber);
+          await commonRobot.autoSearch(mpMaterialName);
+          viewByItemsRobot.verifyOrdersWithProductName(mpMaterialName);
+          await commonRobot.searchWithKeyboardAction(mpMaterialSeller);
+          viewByItemsRobot.verifyOrderGroups();
+          await commonRobot.tapClearSearch();
+          await ordersRootRobot.tapFilterButton();
+          await viewByItemsFilterRobot.tapFromDateField();
+          await commonRobot.setDateRangePickerValue(
+            fromDate: fromDate,
+            toDate: toDate,
+          );
+          await viewByItemsFilterRobot.tapApplyButton();
+          ordersRootRobot.verifyFilterApplied(1);
+          viewByItemsRobot.verifyOrderGroupInDateRange(
+            fromDate: fromDate,
+            toDate: toDate,
+          );
+          await ordersRootRobot.tapFilterButton();
+          for (final status in statusesFilter) {
+            await viewByItemsFilterRobot.tapStatusCheckbox(status);
+          }
+          await viewByItemsFilterRobot.tapApplyButton();
+          ordersRootRobot.verifyFilterApplied(2);
+          viewByItemsRobot.verifyOrderWithStatus(statusesFilter);
+          // Verify filter not visible in non-marketplace
+          await commonRobot.changeDeliveryAddress(nonMPShipToCode);
+          await ordersRootRobot.tapFilterButton();
+          viewByItemsFilterRobot.verifyOrderTypeFilter(isVisible: false);
+        },
+      );
 
       testWidgets('EZRX-T1987 | Verify MP material + buy again in item detail',
           (tester) async {
@@ -1642,10 +1632,8 @@ void main() {
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(mpMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
-        viewByItemsDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
-        await viewByItemsDetailRobot.verifyOtherItemsComponent(
-          isVisible: false,
-        );
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        // viewByItemsDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         await viewByItemsDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(mpMaterialNumber);
@@ -1675,12 +1663,8 @@ void main() {
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMPMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
-        viewByItemsDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemBonusLabel();
-        viewByItemsDetailRobot.verifyOtherItemFreePrice();
-        viewByItemsDetailRobot.verifyOtherItemQty(bonusQty);
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        // viewByItemsDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         // Verify bonus material
         await viewByItemsDetailRobot.tapToBackScreen();
         viewByItemsRobot.verifyBonusLabel();
@@ -1695,11 +1679,7 @@ void main() {
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMPMaterialNumber);
-        viewByItemsDetailRobot.verifyQty(bonusQty);
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemOfferTag();
-        viewByItemsDetailRobot.verifyOtherItemQty(qty);
+        viewByItemsDetailRobot.verifyQty(bonusQty, isBonus: true);
         // Verify buy again
         await viewByItemsDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
@@ -1811,7 +1791,8 @@ void main() {
         await viewByOrdersDetailRobot.startVerifyMaterial(mpMaterialNumber);
         viewByOrdersDetailRobot.verifyQty(qty);
         viewByOrdersDetailRobot.verifyMaterialTotalPrice(totalPrice);
-        viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        // viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         await viewByOrdersDetailRobot.tapVerifyingItem();
         // Verify navigate to item detail
         viewByItemsDetailRobot
@@ -1819,7 +1800,8 @@ void main() {
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(mpMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
-        viewByItemsDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        //viewByItemsDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         await viewByItemsDetailRobot.tapToBackScreen();
         // Verify buy again from order detail
         await viewByOrdersDetailRobot.tapBuyAgainButton();
@@ -1869,7 +1851,8 @@ void main() {
             .startVerifyMaterial(bonusMPMaterialNumber);
         viewByOrdersDetailRobot.verifyQty(qty);
         viewByOrdersDetailRobot.verifyOfferTag();
-        viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        // viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         viewByOrdersDetailRobot.verifyMaterialTotalPrice(totalPrice);
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
@@ -1886,7 +1869,8 @@ void main() {
         );
         viewByOrdersDetailRobot.verifyQty(bonusQty);
         viewByOrdersDetailRobot.verifyBonusTag();
-        viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        // viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         viewByOrdersDetailRobot.verifyMaterialTotalPrice(
           0.priceDisplay(currency),
           isFree: true,
@@ -1896,7 +1880,7 @@ void main() {
             .verifyMarketPlaceLogoWithSeller(bonusMPMaterialSeller);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMPMaterialNumber);
-        viewByItemsDetailRobot.verifyQty(bonusQty);
+        viewByItemsDetailRobot.verifyQty(bonusQty, isBonus: true);
         viewByItemsDetailRobot.verifyBonusLabel();
         await viewByItemsDetailRobot.tapToBackScreen();
         // Verify buy again from order detail
@@ -1973,7 +1957,8 @@ void main() {
           mpBundleMaterialNumber1,
         );
         viewByOrdersDetailRobot.verifyQty(bundleMaterialQty1);
-        viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        // viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
         viewByItemsDetailRobot
@@ -1988,7 +1973,8 @@ void main() {
           mpBundleMaterialNumber2,
         );
         viewByOrdersDetailRobot.verifyQty(bundleMaterialQty2);
-        viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
+        //TODO Martin blocked by https://zuelligpharma.atlassian.net/browse/EZRX-26134
+        // viewByOrdersDetailRobot.verifyBatchExpiryDate(StockInfo.empty());
         // Verify buy again from order detail
         await viewByOrdersDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();

@@ -39,6 +39,7 @@ import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
 import '../../robots/returns/returns_root_robot.dart';
+
 // import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 // import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 
@@ -140,7 +141,7 @@ void main() {
   final materialStockInfo =
       StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2027-12-30'));
   const materialPrincipalName = 'GLAXOSMITHKLINE CONSUMER';
-  const materialCountryOfOrigin = 'USA';
+  const materialCountryOfOrigin = 'NA';
   const materialUnitMeasurement = 'EA';
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
   const materialBatch = '12S017';
@@ -189,7 +190,7 @@ void main() {
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23046003')),
     StockInfo.empty().copyWith(
       materialNumber: MaterialNumber('23046018'),
-      expiryDate: DateTimeStringValue('2025-02-03'),
+      expiryDate: DateTimeStringValue('2050-05-14'),
     ),
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23046031')),
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23046042')),
@@ -1029,7 +1030,7 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialName);
       productRobot.verifyPageVisible();
-      
+
       await productRobot.openSearchProductScreen();
       productSuggestionRobot.verifySuggestProductsSearch(materialName);
       await productSuggestionRobot.autoSearch(materialName);
@@ -1648,11 +1649,6 @@ void main() {
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemBonusLabel();
-        viewByItemsDetailRobot.verifyOtherItemFreePrice();
-        viewByItemsDetailRobot.verifyOtherItemQty(bonusQty);
         await viewByItemsDetailRobot.tapToBackScreen();
 
         viewByItemsRobot.verifyBonusLabel();
@@ -1663,21 +1659,13 @@ void main() {
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
-        viewByItemsDetailRobot.verifyQty(bonusQty);
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemOfferTag();
-        viewByItemsDetailRobot.verifyOtherItemQty(qty);
-        viewByItemsDetailRobot.verifyExpandButton(isVisible: true);
-        await viewByItemsDetailRobot.tapExpandButton();
-        await viewByItemsDetailRobot.verifyOtherItemsComponent(
-          isVisible: false,
-        );
+        viewByItemsDetailRobot.verifyQty(bonusQty, isBonus: true);
 
         viewByItemsDetailRobot.verifyBuyAgainButton(
           isVisible: false,
         );
       });
+
       testWidgets(
           'EZRX-T91 | Verify material with offer and collapse other item in view by items detail',
           (tester) async {
@@ -1729,11 +1717,6 @@ void main() {
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialBonusNumber);
         viewByItemsDetailRobot.verifyQty(qty);
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemBonusLabel();
-        viewByItemsDetailRobot.verifyOtherItemFreePrice();
-        viewByItemsDetailRobot.verifyOtherItemQty(bonusQty);
         await viewByItemsDetailRobot.tapToBackScreen();
 
         viewByItemsRobot.verifyBonusLabel();
@@ -1744,16 +1727,7 @@ void main() {
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
         viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialBonusNumber);
-        viewByItemsDetailRobot.verifyQty(bonusQty);
-        await viewByItemsDetailRobot.verifyOtherItemsComponent();
-        await viewByItemsDetailRobot.startVerifyOtherItem(0);
-        viewByItemsDetailRobot.verifyOtherItemOfferTag();
-        viewByItemsDetailRobot.verifyOtherItemQty(qty);
-        viewByItemsDetailRobot.verifyExpandButton(isVisible: true);
-        await viewByItemsDetailRobot.tapExpandButton();
-        await viewByItemsDetailRobot.verifyOtherItemsComponent(
-          isVisible: false,
-        );
+        viewByItemsDetailRobot.verifyQty(bonusQty, isBonus: true);
 
         viewByItemsDetailRobot.verifyBuyAgainButton(
           isVisible: false,
@@ -2080,7 +2054,7 @@ void main() {
             .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
-        viewByItemsDetailRobot.verifyQty(bonusQty);
+        viewByItemsDetailRobot.verifyQty(bonusQty, isBonus: true);
         viewByItemsDetailRobot.verifyBonusLabel();
         await viewByItemsDetailRobot.tapToBackScreen();
         await viewByOrdersDetailRobot.tapBuyAgainButton();

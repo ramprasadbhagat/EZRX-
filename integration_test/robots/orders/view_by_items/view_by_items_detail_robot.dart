@@ -147,7 +147,13 @@ class ViewByItemsDetailRobot extends CommonRobot {
     return -1;
   }
 
+  Future<void> scrollToItemDetailSection() async {
+    await scrollEnsureFinderVisible(find.byType(ItemDetailsSection));
+    await tester.pump();
+  }
+  
   Future<void> verifyItemComponent({bool isBonus = false}) async {
+    await scrollToItemDetailSection();
     final item = orderItem.at(_getMaterialIndex(isBonus: isBonus));
     await scrollEnsureFinderVisible(item);
     _verifyItemComponent(item);

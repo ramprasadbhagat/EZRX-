@@ -84,11 +84,11 @@ void main() {
   final toDateForStep1 = DateTime.now().subtract(const Duration(days: 2));
   final fromDateToNext = DateTime(2023, 5, 29);
   final toDateToNext = DateTime(2023, 8, 29);
-  const validSearchKeyForStep1 = 'OXY';
+  const validSearchKeyForStep1 = 'LEMON';
   const inValidSearchKey = '1';
   const noResultSearchKey = 'asdasfxzc';
-  const materialNumberWithBonus = '23071095';
-  const materialNameWithBonus = 'OXY 10 LOTION10G';
+  const materialNumberWithBonus = '21253447';
+  const materialNameWithBonus = '21019687 STREPSILS HONEY LEMON 24S';
 
   //
   const exceedReturnQuantity = '100';
@@ -274,9 +274,9 @@ void main() {
       //verify
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
-      await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-      await commonRobot.searchWithSearchIcon(materialName);
+      await commonRobot.searchWithKeyboardAction(materialName);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductNameVisible(materialName);
@@ -360,14 +360,15 @@ void main() {
       await commonRobot.searchWithKeyboardAction(returnIdWithBonus);
       returnsByItemsRobot.verifyReturnsWithIdVisible(returnIdWithBonus);
       returnsByItemsRobot.verifyReturnItemWithBonusVisible();
-      await returnsByItemsRobot.tapFirstReturn();
+      await returnsByItemsRobot.tapFirstReturnBonusItem();
       returnsByItemsDetailRobot.verifyDeliveryToVisible(shipToCode);
       returnsByItemsDetailRobot.verifyCustomerCodeVisible(customerCode);
       returnsByItemsDetailRobot.verifyReturnAddressVisible(shipToAddress);
       await returnsByItemsDetailRobot.tapToShowDetailForBonus();
       returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
       await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
-      returnsByItemsDetailRobot.verifyMaterialVisibleWithBonus(
+
+      returnsByItemsDetailRobot.verifyOnlyBonusMaterial(
         bonusMaterialNumber,
         bonusMaterialQty,
         bonusMaterialPrice.priceDisplay(currency),
@@ -692,7 +693,7 @@ void main() {
       returnsRootRobot.verifyTabBarVisible();
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
-      await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await returnsByRequestRobot.tapFilterButton();
       await returnsByRequestFilterRobot.tapFromDateField();
@@ -701,7 +702,7 @@ void main() {
         toDate: toDate,
       );
       await returnsByRequestFilterRobot.tapApplyButton();
-      await commonRobot.searchWithSearchIcon(returnId);
+      await commonRobot.searchWithKeyboardAction(returnId);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByRequestRobot.verifyReturnsWithIdVisible(returnId);

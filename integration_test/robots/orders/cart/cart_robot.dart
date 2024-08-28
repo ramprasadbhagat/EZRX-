@@ -419,6 +419,7 @@ class CartRobot extends CommonRobot {
       of: _materialItem(materialNumber),
       matching: find.byKey(WidgetKeys.quantityInputTextKey),
     );
+    await scrollEnsureFinderVisible(textField);
     await tester.tap(textField);
     await tester.enterText(textField, qty.toString());
     await tester.testTextInput.receiveAction(TextInputAction.done);

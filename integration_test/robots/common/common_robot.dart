@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'enum.dart';
 import 'extension.dart';
@@ -475,5 +477,12 @@ class CommonRobot {
     );
     await scrollEnsureFinderVisible(label);
     expect(label, findsOne);
+  }
+
+  Future forceLogout() async {
+    final BuildContext context =
+        tester.element(find.byWidgetPredicate((widget) => true).last);
+    context.read<AuthBloc>().add(const AuthEvent.logout());
+    await tester.pumpAndSettle();
   }
 }

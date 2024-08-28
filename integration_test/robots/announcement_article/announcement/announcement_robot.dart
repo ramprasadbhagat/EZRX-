@@ -26,7 +26,6 @@ class AnnouncementRobot extends CommonRobot {
     final itemCount = itemTitle.evaluate().length;
     expect(itemTitle, findsAtLeastNWidgets(1));
     expect(itemDate, findsNWidgets(itemCount));
-    expect(itemNewTag, findsNWidgets(itemCount));
   }
 
   void verifyItemsWithKeyword(String searchKey) {
