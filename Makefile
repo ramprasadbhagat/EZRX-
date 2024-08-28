@@ -14,15 +14,12 @@ SALESORGCONFIG := reset_sales_org_config.sh
 
 app_setup:
 	@if [ $(FLAVOR) != "mock" ]; then\
-        $(MAKE) remove_json_assets;\
+        bash scripts/remove_assets_json.sh;\
     fi
 	$(MAKE) flutter_install
 	@if [ $(PLATFORM) = "ios" ]; then\
         $(MAKE) clean_ios;\
     fi
-remove_json_assets:
-	@sed -i.backup '/- assets\/json\//d' 'pubspec.yaml'
-	@rm 'pubspec.yaml.backup'
 flutter_install:
 	@brew tap leoafarias/fvm && brew install fvm && echo Y | fvm global 3.22.1 && fvm flutter clean && fvm flutter pub get
 clean_ios:

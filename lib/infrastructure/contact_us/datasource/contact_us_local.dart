@@ -8,7 +8,7 @@ class ContactUsDetailsLocalDataSource {
   Future<ContactUsDetails> getContactUsDetails(String country) async {
     final res = json.decode(
       await rootBundle.loadString(
-        'assets/json/contact_us/market_static_content/contactUs${country}marketStaticContent.json',
+        'assets/json/market_static_content/contact_us/contactUs${country}marketStaticContent.json',
       ),
     );
 

@@ -172,6 +172,10 @@ flutter:
     - assets/images/default_banners/
     - assets/images/seals/
     - assets/json/
+    - assets/json/market_static_content/
+    - assets/json/market_static_content/about_us/
+    - assets/json/market_static_content/contact_us/
+    - assets/json/market_static_content/faq/
     - assets/json/return_request_information_v2/
     - assets/json/get_material_bundle_list/
     - assets/json/payment_attachment/
@@ -213,7 +217,6 @@ flutter:
     - assets/json/favourite_materials/
     - assets/json/get_claim_submissions/
     - assets/json/contact_us/
-    - assets/json/contact_us/market_static_content/
     - assets/json/login_ad/
     - assets/json/announcement_article_tag/
     - assets/json/create_draft_order/
@@ -231,7 +234,6 @@ flutter:
     - assets/json/get_combo_deal_for_material/
     - assets/json/create_favourite_material/
     - assets/json/user/
-    - assets/json/faq_market_static_content/
     - assets/json/get_customer_information/
     - assets/json/change_password/
     - assets/json/get_EZ_reach_banner/
@@ -266,7 +268,6 @@ flutter:
     - assets/json/submit_order/
     - assets/json/proxy_user/
     - assets/json/about_us/
-    - assets/json/about_us/market_static_content/
     - assets/json/get_zyllem_v2/
     - assets/json/delete_file/
     - assets/json/get_all_products/

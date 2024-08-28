@@ -59,7 +59,7 @@ void main() {
       test('Get About Us Static Info Success', () async {
         final res = json.decode(
           await rootBundle.loadString(
-            'assets/json/about_us/market_static_content/aboutUs${country}marketStaticContent.json',
+            'assets/json/market_static_content/about_us/aboutUs${country}marketStaticContent.json',
           ),
         );
         final variables = {

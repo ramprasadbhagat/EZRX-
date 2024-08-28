@@ -8,7 +8,7 @@ class FAQInfoLocalDataSource {
   Future<FAQInfo> getFAQInfo(String country) async {
     final res = json.decode(
       await rootBundle.loadString(
-        'assets/json/faq_market_static_content/faq${country}marketStaticContent.json',
+        'assets/json/market_static_content/faq/faq${country}marketStaticContent.json',
       ),
     );
 
