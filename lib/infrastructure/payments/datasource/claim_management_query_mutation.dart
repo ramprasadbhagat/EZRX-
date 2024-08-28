@@ -29,8 +29,8 @@ class ClaimManagementQueryMutation {
 
   String submitClaim() {
     return '''
-    mutation submitClaim(\$submitInput: SubmitClaimRequest!) {
-      submitClaim(input: \$submitInput){
+    mutation submitClaim(\$input: SubmitClaimRequest!) {
+      submitClaim(input: \$input){
         success
         message
       }

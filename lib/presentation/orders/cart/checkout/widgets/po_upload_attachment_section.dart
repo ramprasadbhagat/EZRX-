@@ -121,6 +121,7 @@ class _PoUploadButton extends StatelessWidget {
                     context.read<PoAttachmentBloc>().add(
                           PoAttachmentEvent.pickFile(
                             uploadOptionType: option,
+                            submitTicketFileExtension: false,
                           ),
                         ),
               ),

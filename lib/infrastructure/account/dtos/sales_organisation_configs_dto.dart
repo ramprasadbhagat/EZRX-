@@ -191,6 +191,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     required int poReferenceLength,
     @JsonKey(name: 'referenceNoteLength', defaultValue: 0) 
     required int referenceNoteLength,
+    @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+    required bool showEZCSTickets,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -293,6 +295,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       saturdayDeliveryFee: configs.saturdayDeliveryFee,
       poReferenceLength: configs.poReferenceLength,
       referenceNoteLength: configs.referenceNoteLength,
+      showEZCSTickets: configs.showEZCSTickets,
     );
   }
 
@@ -394,6 +397,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       tomorrowDeliveryFee: tomorrowDeliveryFee,
       poReferenceLength: poReferenceLength,
       referenceNoteLength: referenceNoteLength,
+      showEZCSTickets: showEZCSTickets,
     );
   }
 

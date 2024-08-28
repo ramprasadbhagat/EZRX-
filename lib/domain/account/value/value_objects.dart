@@ -348,6 +348,9 @@ class RoleType extends ValueObject<String> {
   String get smallOrderFeeRole =>
       transformToSmallOrderFeeRole(value.getOrElse(() => ''));
 
+  String get submitTicketRole =>
+      transformToSubmitTicketRole(value.getOrElse(() => ''));
+
   const RoleType._(this.value);
 }
 
@@ -600,4 +603,116 @@ class MarketPlaceTnCAcceptance extends ValueObject<String> {
   int get apiValue => int.tryParse(getOrDefaultValue('')) ?? 0;
 
   const MarketPlaceTnCAcceptance._(this.value);
+}
+
+class CustomerTicketType extends ValueObject<String> {
+  static final supportedTypes = [
+    CustomerTicketType.creditCustomerAccount(),
+    CustomerTicketType.orderRelated(),
+    CustomerTicketType.others(),
+    CustomerTicketType.systemApplications(),
+  ];
+
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerTicketType(String input) =>
+      CustomerTicketType._(validateStringNotEmpty(input));
+
+  factory CustomerTicketType.creditCustomerAccount() =>
+      CustomerTicketType('credit / customer account');
+
+  factory CustomerTicketType.orderRelated() =>
+      CustomerTicketType('order related');
+
+  factory CustomerTicketType.others() => CustomerTicketType('others');
+
+  factory CustomerTicketType.systemApplications() =>
+      CustomerTicketType('system applications');
+
+  bool get isCreditCustomerAccount =>
+      this == CustomerTicketType.creditCustomerAccount();
+
+  bool get isOrderRelated => this == CustomerTicketType.orderRelated();
+
+  String get customerTicketTitle =>
+      getCustomerTicketTypeDisplay(getOrDefaultValue(''));
+
+  bool get isEmpty => getOrDefaultValue('').isEmpty;
+
+  const CustomerTicketType._(this.value);
+}
+
+class CustomerTicketSubCategoryType extends ValueObject<String> {
+  static final supportedTypes = [
+    CustomerTicketSubCategoryType.accountOpeningCreation(),
+    CustomerTicketSubCategoryType.accountStatusUpdate(),
+    CustomerTicketSubCategoryType.creditFacility(),
+    CustomerTicketSubCategoryType.doctorAPCPharmacistLicense(),
+    CustomerTicketSubCategoryType.payment(),
+    CustomerTicketSubCategoryType.requestForInvoiceCnCopy(),
+    CustomerTicketSubCategoryType.statementOfAccount(),
+  ];
+
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerTicketSubCategoryType(String input) =>
+      CustomerTicketSubCategoryType._(validateStringNotEmpty(input));
+
+  factory CustomerTicketSubCategoryType.accountOpeningCreation() =>
+      CustomerTicketSubCategoryType('account opening/creation - credit');
+
+  factory CustomerTicketSubCategoryType.accountStatusUpdate() =>
+      CustomerTicketSubCategoryType('account status/update - collection');
+
+  factory CustomerTicketSubCategoryType.creditFacility() =>
+      CustomerTicketSubCategoryType('credit facility - credit');
+
+  factory CustomerTicketSubCategoryType.doctorAPCPharmacistLicense() =>
+      CustomerTicketSubCategoryType("doctor's apc/pharmacist license - credit");
+
+  factory CustomerTicketSubCategoryType.payment() =>
+      CustomerTicketSubCategoryType('payment - collection');
+
+  factory CustomerTicketSubCategoryType.requestForInvoiceCnCopy() =>
+      CustomerTicketSubCategoryType(
+        'request for invoice / cn copy - collection',
+      );
+
+  factory CustomerTicketSubCategoryType.statementOfAccount() =>
+      CustomerTicketSubCategoryType('statement of account - collection');
+
+  String get customerTicketSubCategoryTitle =>
+      getCustomerTicketSubCategoryTypeDisplay(getOrDefaultValue(''));
+
+  const CustomerTicketSubCategoryType._(this.value);
+}
+
+class TicketPriority extends ValueObject<int> {
+  static final supportedTypes = [
+    TicketPriority.low(),
+    TicketPriority.medium(),
+    TicketPriority.high(),
+    TicketPriority.urgent(),
+  ];
+
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory TicketPriority(int input) => TicketPriority._(Right(input));
+
+  factory TicketPriority.low() => TicketPriority(1);
+
+  factory TicketPriority.medium() => TicketPriority(2);
+
+  factory TicketPriority.high() => TicketPriority(3);
+
+  factory TicketPriority.urgent() => TicketPriority(4);
+
+  int get apiValue => getOrDefaultValue(1);
+
+  String get priorityTitle => getPriorityTitleDisplay(apiValue);
+
+  const TicketPriority._(this.value);
 }

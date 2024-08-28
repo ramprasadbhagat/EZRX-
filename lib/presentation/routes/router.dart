@@ -340,6 +340,10 @@ class AppRouter extends $AppRouter {
           page: NationalPrivacyCommissionPageRoute.page,
           transitionsBuilder: TransitionsBuilders.slideBottom,
         ),
+        AutoRoute(
+          page: SubmitTicketPageRoute.page,
+          path: '/submit_ticket',
+        ),
       ];
 }
 

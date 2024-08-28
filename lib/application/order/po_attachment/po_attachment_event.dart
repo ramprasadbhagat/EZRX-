@@ -11,6 +11,7 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
   }) = _OpenFile;
   const factory PoAttachmentEvent.pickFile({
     required UploadOptionType uploadOptionType,
+    required bool submitTicketFileExtension,
   }) = _PickFile;
   const factory PoAttachmentEvent.uploadFile({
     required User user,

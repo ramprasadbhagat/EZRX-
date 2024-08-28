@@ -353,6 +353,22 @@ String transformToSmallOrderFeeRole(String roleType) {
   }
 }
 
+String transformToSubmitTicketRole(String roleType) {
+  switch (roleType) {
+    case 'root_admin':
+    case 'zp_admin':
+      return 'Admin';
+    case 'client_user':
+    case 'client_admin':
+      return 'Customer';
+    case 'internal_sales_rep':
+    case 'external_sales_rep':
+      return 'Client Representative';
+    default:
+      return '';
+  }
+}
+
 bool isZero(int value) => value == 0;
 
 String currencySymbol(String currency) {
@@ -627,3 +643,45 @@ bool checkIfCustomerIsBlocked(String value) =>
     isEqualsIgnoreCase(value, 'blocked');
 
 bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';
+
+String getCustomerTicketTypeDisplay(String customerTicketType) {
+  final customerTicketTypeMap = {
+    'credit / customer account': 'Credit / Customer Account',
+    'order related': 'Order Related',
+    'others': 'Others',
+    'system applications': 'System Applications',
+  };
+
+  return customerTicketTypeMap[customerTicketType.toLowerCase()] ?? 'Unknown';
+}
+
+String getCustomerTicketSubCategoryTypeDisplay(
+  String customerTicketSubCategory,
+) {
+  final customerTicketSubCategoryTypeMap = {
+    'account opening/creation - credit': 'Account Opening/Creation - Credit',
+    'account status/update - collection': 'Account Status/Update - Collection',
+    'credit facility - credit': 'Credit Facility - Credit',
+    "doctor's apc/pharmacist license - credit":
+        "Doctor's APC/Pharmacist License - Credit",
+    'payment - collection': 'Payment - Collection',
+    'request for invoice / cn copy - collection':
+        'Request for Invoice / CN Copy - Collection',
+    'statement of account - collection': 'Statement of Account - Collection',
+  };
+
+  return customerTicketSubCategoryTypeMap[
+          customerTicketSubCategory.toLowerCase()] ??
+      'Unknown';
+}
+
+String getPriorityTitleDisplay(int priority) {
+  final priorityTitleToPriorityMap = {
+    1: 'Low',
+    2: 'Medium',
+    3: 'High',
+    4: 'Urgent',
+  };
+
+  return priorityTitleToPriorityMap[priority] ?? 'Unknown';
+}

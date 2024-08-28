@@ -112,6 +112,7 @@ mixin _$SalesOrganisationConfigs {
   double get saturdayDeliveryFee => throw _privateConstructorUsedError;
   int get poReferenceLength => throw _privateConstructorUsedError;
   int get referenceNoteLength => throw _privateConstructorUsedError;
+  bool get showEZCSTickets => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -215,7 +216,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       double tomorrowDeliveryFee,
       double saturdayDeliveryFee,
       int poReferenceLength,
-      int referenceNoteLength});
+      int referenceNoteLength,
+      bool showEZCSTickets});
 }
 
 /// @nodoc
@@ -323,6 +325,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? saturdayDeliveryFee = null,
     Object? poReferenceLength = null,
     Object? referenceNoteLength = null,
+    Object? showEZCSTickets = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -689,6 +692,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.referenceNoteLength
           : referenceNoteLength // ignore: cast_nullable_to_non_nullable
               as int,
+      showEZCSTickets: null == showEZCSTickets
+          ? _value.showEZCSTickets
+          : showEZCSTickets // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -793,7 +800,8 @@ abstract class _$$SalesOrganisationConfigsImplCopyWith<$Res>
       double tomorrowDeliveryFee,
       double saturdayDeliveryFee,
       int poReferenceLength,
-      int referenceNoteLength});
+      int referenceNoteLength,
+      bool showEZCSTickets});
 }
 
 /// @nodoc
@@ -900,6 +908,7 @@ class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
     Object? saturdayDeliveryFee = null,
     Object? poReferenceLength = null,
     Object? referenceNoteLength = null,
+    Object? showEZCSTickets = null,
   }) {
     return _then(_$SalesOrganisationConfigsImpl(
       enableIRN: null == enableIRN
@@ -1266,6 +1275,10 @@ class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
           ? _value.referenceNoteLength
           : referenceNoteLength // ignore: cast_nullable_to_non_nullable
               as int,
+      showEZCSTickets: null == showEZCSTickets
+          ? _value.showEZCSTickets
+          : showEZCSTickets // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1365,7 +1378,8 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
       required this.tomorrowDeliveryFee,
       required this.saturdayDeliveryFee,
       required this.poReferenceLength,
-      required this.referenceNoteLength})
+      required this.referenceNoteLength,
+      required this.showEZCSTickets})
       : _principalList = principalList,
         _smallOrderFeeUserRoles = smallOrderFeeUserRoles,
         _mpSmallOrderFeeUserRoles = mpSmallOrderFeeUserRoles,
@@ -1588,10 +1602,12 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
   final int poReferenceLength;
   @override
   final int referenceNoteLength;
+  @override
+  final bool showEZCSTickets;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep, enableDeliveryOptions: $enableDeliveryOptions, disclaimer: $disclaimer, enableStandardDelivery: $enableStandardDelivery, standardDeliveryDays: $standardDeliveryDays, enableRequestDeliveryDate: $enableRequestDeliveryDate, selectableDeliveryDays: $selectableDeliveryDays, enableUrgentDelivery: $enableUrgentDelivery, enableTodayUrgentDelivery: $enableTodayUrgentDelivery, enableTomorrowUrgentDelivery: $enableTomorrowUrgentDelivery, enableSaturdayUrgentDelivery: $enableSaturdayUrgentDelivery, todayDeliveryFee: $todayDeliveryFee, tomorrowDeliveryFee: $tomorrowDeliveryFee, saturdayDeliveryFee: $saturdayDeliveryFee, poReferenceLength: $poReferenceLength, referenceNoteLength: $referenceNoteLength)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep, enableDeliveryOptions: $enableDeliveryOptions, disclaimer: $disclaimer, enableStandardDelivery: $enableStandardDelivery, standardDeliveryDays: $standardDeliveryDays, enableRequestDeliveryDate: $enableRequestDeliveryDate, selectableDeliveryDays: $selectableDeliveryDays, enableUrgentDelivery: $enableUrgentDelivery, enableTodayUrgentDelivery: $enableTodayUrgentDelivery, enableTomorrowUrgentDelivery: $enableTomorrowUrgentDelivery, enableSaturdayUrgentDelivery: $enableSaturdayUrgentDelivery, todayDeliveryFee: $todayDeliveryFee, tomorrowDeliveryFee: $tomorrowDeliveryFee, saturdayDeliveryFee: $saturdayDeliveryFee, poReferenceLength: $poReferenceLength, referenceNoteLength: $referenceNoteLength, showEZCSTickets: $showEZCSTickets)';
   }
 
   @override
@@ -1717,7 +1733,8 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
             (identical(other.tomorrowDeliveryFee, tomorrowDeliveryFee) || other.tomorrowDeliveryFee == tomorrowDeliveryFee) &&
             (identical(other.saturdayDeliveryFee, saturdayDeliveryFee) || other.saturdayDeliveryFee == saturdayDeliveryFee) &&
             (identical(other.poReferenceLength, poReferenceLength) || other.poReferenceLength == poReferenceLength) &&
-            (identical(other.referenceNoteLength, referenceNoteLength) || other.referenceNoteLength == referenceNoteLength));
+            (identical(other.referenceNoteLength, referenceNoteLength) || other.referenceNoteLength == referenceNoteLength) &&
+            (identical(other.showEZCSTickets, showEZCSTickets) || other.showEZCSTickets == showEZCSTickets));
   }
 
   @override
@@ -1813,7 +1830,8 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
         tomorrowDeliveryFee,
         saturdayDeliveryFee,
         poReferenceLength,
-        referenceNoteLength
+        referenceNoteLength,
+        showEZCSTickets
       ]);
 
   @JsonKey(ignore: true)
@@ -1917,7 +1935,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final double tomorrowDeliveryFee,
       required final double saturdayDeliveryFee,
       required final int poReferenceLength,
-      required final int referenceNoteLength}) = _$SalesOrganisationConfigsImpl;
+      required final int referenceNoteLength,
+      required final bool showEZCSTickets}) = _$SalesOrganisationConfigsImpl;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -2102,6 +2121,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   int get poReferenceLength;
   @override
   int get referenceNoteLength;
+  @override
+  bool get showEZCSTickets;
   @override
   @JsonKey(ignore: true)
   _$$SalesOrganisationConfigsImplCopyWith<_$SalesOrganisationConfigsImpl>

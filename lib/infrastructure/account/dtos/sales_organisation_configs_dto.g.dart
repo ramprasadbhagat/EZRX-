@@ -142,6 +142,7 @@ _$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
           (json['tomorrowDeliveryFee'] as num?)?.toDouble() ?? 0.0,
       poReferenceLength: (json['poReferenceLength'] as num?)?.toInt() ?? 0,
       referenceNoteLength: (json['referenceNoteLength'] as num?)?.toInt() ?? 0,
+      showEZCSTickets: json['showEZCSTickets'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
@@ -241,4 +242,5 @@ Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
       'tomorrowDeliveryFee': instance.tomorrowDeliveryFee,
       'poReferenceLength': instance.poReferenceLength,
       'referenceNoteLength': instance.referenceNoteLength,
+      'showEZCSTickets': instance.showEZCSTickets,
     };

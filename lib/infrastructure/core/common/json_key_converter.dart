@@ -21,18 +21,46 @@ dynamic makeResponseCamelCase(String resp) {
 
 dynamic valueOrNullToJson(String value) => value.isNotEmpty ? value : null;
 
-  Map<String, String> mapFilterFieldData({
-    required String field,
-    required String date,
-    required String type,
-  }) {
-    final dataMap = <String, String>{};
-    dataMap.putIfAbsent('field', () => field);
-    dataMap.putIfAbsent('value', () => date);
-    dataMap.putIfAbsent('type', () => type);
+Map<String, String> mapFilterFieldData({
+  required String field,
+  required String date,
+  required String type,
+}) {
+  final dataMap = <String, String>{};
+  dataMap.putIfAbsent('field', () => field);
+  dataMap.putIfAbsent('value', () => date);
+  dataMap.putIfAbsent('type', () => type);
 
-    return dataMap;
+  return dataMap;
+}
+
+List<MapEntry<String, String>> mapJsonToFormData({
+  required Map<String, dynamic> data,
+}) {
+  final list = <MapEntry<String, String>>[];
+
+  for (final firstEntry in data.entries) {
+    if (firstEntry.value is Map) {
+      for (final secondEntry in firstEntry.value.entries) {
+        list.add(
+          MapEntry<String, String>(
+            '${firstEntry.key}[${secondEntry.key}]',
+            secondEntry.value.toString(),
+          ),
+        );
+      }
+    } else {
+      list.add(
+        MapEntry<String, String>(
+          firstEntry.key,
+          firstEntry.value.toString(),
+        ),
+      );
+    }
   }
+
+  return list;
+}
 
 class StringToDoubleConverter extends JsonConverter<double, String> {
   const StringToDoubleConverter();

@@ -141,6 +141,7 @@ class SalesOrgQueryMutation {
     }
     ${enableReferenceLength ? 'poReferenceLength' : ''}
     ${enableReferenceLength ? 'referenceNoteLength' : ''}
+    showEZCSTickets
   }
 }
 

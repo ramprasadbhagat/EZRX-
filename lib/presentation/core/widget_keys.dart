@@ -205,6 +205,7 @@ class WidgetKeys {
   static const Key securityTile = Key('securityTile');
   static const Key notificationTile = Key('notificationTile');
   static const Key privacyConsentTile = Key('privacyConsentTile');
+  static const Key ezcsTicketTile = Key('ezcsTicketTile');
   static const Key contactUsTile = Key('contactUsTile');
   static const Key acceptableUsePolicy = Key('acceptableUsePolicy');
   static const Key userGuideTile = Key('userGuideTile');
@@ -1803,4 +1804,24 @@ class WidgetKeys {
   static const Key uploadDocumentItem = Key('uploadDocumentItem');
   static const Key uploadDocumentDeleteButton =
       Key('uploadDocumentDeleteButton');
+
+  //============================================================
+  //  Submit Ticket
+  //============================================================
+  static const Key submitTicketDisclaimerCheckbox =
+      Key('submitTicketDisclaimerCheckbox');
+  static const Key submitTicketSubjectTextField =
+      Key('submitTicketSubjectTextField');
+  static const Key submitTicketDescriptionTextField =
+      Key('submitTicketDescriptionTextField');
+  static const Key submitTicketSubCategoryDropdown =
+      Key('submitTicketSubCategoryDropdown');
+  static const Key submitTicketOrderNumberTextField =
+      Key('submitTicketOrderNumberTextField');
+  static const Key submitTicketProductNameTextField =
+      Key('submitTicketProductNameTextField');
+  static const Key submitTicketProductSKUTextField =
+      Key('submitTicketProductSKUTextField');
+  static const Key submitTicketQuantityOrderedTextField =
+      Key('submitTicketQuantityOrderedTextField');
 }

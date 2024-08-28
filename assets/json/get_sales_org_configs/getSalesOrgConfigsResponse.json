@@ -165,7 +165,8 @@
           }
         ],
         "poReferenceLength": 0,
-        "referenceNoteLength": 0
+        "referenceNoteLength": 0,
+        "showEZCSTickets": true
       }
     ]
   }

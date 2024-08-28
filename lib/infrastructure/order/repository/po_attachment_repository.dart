@@ -16,7 +16,6 @@ import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/take_picture_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:open_file_safe/open_file_safe.dart' as ofs;
@@ -231,6 +230,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   @override
   Future<Either<ApiFailure, List<PlatformFile>>> pickFiles({
     required UploadOptionType uploadOptionType,
+    required bool submitTicketFileExtension,
   }) async {
     try {
       if (uploadOptionType == UploadOptionType.takePhoto) {
@@ -258,7 +258,9 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
               ? FileType.custom
               : FileType.image,
           allowedExtensions: uploadOptionType == UploadOptionType.file
-              ? locator<Config>().allowedExtensions
+              ? submitTicketFileExtension
+                  ? config.allowedExtensionsEzcsTicket
+                  : config.allowedExtensions
               : null,
         );
         final files = List<PlatformFile>.from(result?.files ?? [])

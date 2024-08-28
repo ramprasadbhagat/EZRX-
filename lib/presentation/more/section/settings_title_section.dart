@@ -27,16 +27,18 @@ class SettingsTile extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.isLoginOnBehalf != current.isLoginOnBehalf,
           builder: (context, state) {
+            final eligibilityState = context.read<EligibilityBloc>().state;
+
             return Column(
               children: [
                 MoreDetailsTile.profile(context),
                 if (!state.isLoginOnBehalf) MoreDetailsTile.security(context),
-                if (context
-                    .read<EligibilityBloc>()
-                    .state
-                    .isNotificationSettingsEnable)
+                if (eligibilityState.isNotificationSettingsEnable)
                   MoreDetailsTile.notifications(context),
                 MoreDetailsTile.privacyConsent(context),
+                if (eligibilityState.salesOrgConfigs.showEZCSTickets)
+                  MoreDetailsTile.eZCSTickets(context),
+
                 // MoreDetailsTile.privacy(), //  implement yet
               ].map((item) {
                 return ListTile(

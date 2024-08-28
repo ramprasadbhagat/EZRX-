@@ -129,6 +129,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             final pickFilesFailureOrSuccess =
                 await poAttachmentRepository.pickFiles(
               uploadOptionType: e.uploadOptionType,
+              submitTicketFileExtension: e.submitTicketFileExtension,
             );
             await pickFilesFailureOrSuccess.fold(
               (failure) async {

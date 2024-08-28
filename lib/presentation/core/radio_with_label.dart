@@ -6,6 +6,7 @@ class RadioWithLabel<T> extends StatelessWidget {
   final T groupValue;
   final Function(T value) onChanged;
   final String title;
+  final double spacing;
 
   const RadioWithLabel({
     super.key,
@@ -13,6 +14,7 @@ class RadioWithLabel<T> extends StatelessWidget {
     required this.groupValue,
     required this.onChanged,
     required this.title,
+    this.spacing = 3,
   });
 
   @override
@@ -34,7 +36,7 @@ class RadioWithLabel<T> extends StatelessWidget {
                 onChanged: null,
               ),
             ),
-            const SizedBox(width: 3),
+            SizedBox(width: spacing),
             Text(title, style: Theme.of(context).textTheme.titleMedium),
           ],
         ),

@@ -28,6 +28,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.onTapOutside,
     this.maxLength,
     this.buildCounter,
+    this.labelStyle,
   });
   final Key fieldKey;
   final String labelText;
@@ -52,6 +53,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final TapRegionCallback? onTapOutside;
   final int? maxLength;
   final InputCounterWidgetBuilder? buildCounter;
+  final TextStyle? labelStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class TextFieldWithLabel extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: labelText,
-            style: Theme.of(context).textTheme.labelSmall,
+            style: labelStyle ?? Theme.of(context).textTheme.labelSmall,
             children: <TextSpan>[
               if (mandatory)
                 TextSpan(

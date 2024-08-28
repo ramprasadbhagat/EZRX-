@@ -107,6 +107,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required double saturdayDeliveryFee,
     required int poReferenceLength,
     required int referenceNoteLength,
+    required bool showEZCSTickets,
   }) = _SalesOrganisationConfigs;
 
   //ignore:long-method
@@ -202,6 +203,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         tomorrowDeliveryFee: 0,
         referenceNoteLength: 0,
         poReferenceLength: 0,
+        showEZCSTickets: false,
       );
 
   bool get shouldDisplayVATInPercentage =>

@@ -28,8 +28,11 @@ class AddressInfoSection extends StatelessWidget {
   factory AddressInfoSection.returnRequest() =>
       const AddressInfoSection._(actionText: 'Return for');
 
-  factory AddressInfoSection.noAction() =>
-      const AddressInfoSection._(actionText: '');
+  factory AddressInfoSection.noAction({Color? customerNameTextColor}) =>
+      AddressInfoSection._(
+        actionText: '',
+        customerNameTextColor: customerNameTextColor,
+      );
 
   factory AddressInfoSection.greenBackground({
     EdgeInsets padding = EdgeInsets.zero,

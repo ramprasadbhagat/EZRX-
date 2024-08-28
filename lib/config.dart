@@ -312,6 +312,18 @@ class Config {
         'png',
       ];
 
+  List<String> get allowedExtensionsEzcsTicket => [
+        'jpg',
+        'pdf',
+        'png',
+        'jpeg',
+        'doc',
+        'docx',
+        'xls',
+        'xlsx',
+        'zip',
+      ];
+
   //============================================================
   //  Payment advice logo
   //

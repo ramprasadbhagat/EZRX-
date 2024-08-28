@@ -571,6 +571,7 @@ void main() {
       );
       final result = await poAttachmentRepository.pickFiles(
         uploadOptionType: UploadOptionType.gallery,
+        submitTicketFileExtension: false,
       );
       expect(
         result.isLeft(),
@@ -585,6 +586,7 @@ void main() {
       );
       final result = await poAttachmentRepository.pickFiles(
         uploadOptionType: UploadOptionType.gallery,
+        submitTicketFileExtension: false,
       );
       expect(
         result.isRight(),
@@ -607,6 +609,7 @@ void main() {
       );
       final result = await poAttachmentRepository.pickFiles(
         uploadOptionType: UploadOptionType.gallery,
+        submitTicketFileExtension: false,
       );
       expect(
         result.getOrElse(
@@ -618,7 +621,7 @@ void main() {
       );
     });
 
-    test('pickFiles success', () async {
+    test('pickFiles success with normal allowedExtensions', () async {
       when(() => mockConfig.allowedExtensions).thenReturn(['jpg']);
       when(
         () => filePickerServiceMock.pickFiles(
@@ -635,6 +638,39 @@ void main() {
       );
       final result = await poAttachmentRepository.pickFiles(
         uploadOptionType: UploadOptionType.file,
+        submitTicketFileExtension: false,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(
+        result.getOrElse(
+          () => [],
+        ),
+        [fakePlatformFile],
+      );
+    });
+
+    test('pickFiles success with ezcs ticket file extension', () async {
+      when(() => mockConfig.allowedExtensionsEzcsTicket)
+          .thenReturn(['jpg,zip,png']);
+      when(
+        () => filePickerServiceMock.pickFiles(
+          allowMultiple: true,
+          fileType: FileType.custom,
+          allowedExtensions: ['jpg,zip,png'],
+        ),
+      ).thenAnswer(
+        (invocation) async => FilePickerResult(
+          [
+            fakePlatformFile,
+          ],
+        ),
+      );
+      final result = await poAttachmentRepository.pickFiles(
+        uploadOptionType: UploadOptionType.file,
+        submitTicketFileExtension: true,
       );
       expect(
         result.isRight(),
@@ -658,6 +694,7 @@ void main() {
           );
           final result = await poAttachmentRepository.pickFiles(
             uploadOptionType: UploadOptionType.takePhoto,
+            submitTicketFileExtension: false,
           );
           final fileList = [
             PlatformFile(

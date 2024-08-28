@@ -210,6 +210,8 @@ mixin _$SalesOrganisationConfigsDto {
   int get poReferenceLength => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNoteLength', defaultValue: 0)
   int get referenceNoteLength => throw _privateConstructorUsedError;
+  @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+  bool get showEZCSTickets => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -387,7 +389,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'poReferenceLength', defaultValue: 0)
       int poReferenceLength,
       @JsonKey(name: 'referenceNoteLength', defaultValue: 0)
-      int referenceNoteLength});
+      int referenceNoteLength,
+      @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+      bool showEZCSTickets});
 }
 
 /// @nodoc
@@ -494,6 +498,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? tomorrowDeliveryFee = null,
     Object? poReferenceLength = null,
     Object? referenceNoteLength = null,
+    Object? showEZCSTickets = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -856,6 +861,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.referenceNoteLength
           : referenceNoteLength // ignore: cast_nullable_to_non_nullable
               as int,
+      showEZCSTickets: null == showEZCSTickets
+          ? _value.showEZCSTickets
+          : showEZCSTickets // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -1031,7 +1040,9 @@ abstract class _$$SalesOrganisationConfigsDtoImplCopyWith<$Res>
       @JsonKey(name: 'poReferenceLength', defaultValue: 0)
       int poReferenceLength,
       @JsonKey(name: 'referenceNoteLength', defaultValue: 0)
-      int referenceNoteLength});
+      int referenceNoteLength,
+      @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+      bool showEZCSTickets});
 }
 
 /// @nodoc
@@ -1137,6 +1148,7 @@ class __$$SalesOrganisationConfigsDtoImplCopyWithImpl<$Res>
     Object? tomorrowDeliveryFee = null,
     Object? poReferenceLength = null,
     Object? referenceNoteLength = null,
+    Object? showEZCSTickets = null,
   }) {
     return _then(_$SalesOrganisationConfigsDtoImpl(
       disableProcessingStatus: null == disableProcessingStatus
@@ -1499,6 +1511,10 @@ class __$$SalesOrganisationConfigsDtoImplCopyWithImpl<$Res>
           ? _value.referenceNoteLength
           : referenceNoteLength // ignore: cast_nullable_to_non_nullable
               as int,
+      showEZCSTickets: null == showEZCSTickets
+          ? _value.showEZCSTickets
+          : showEZCSTickets // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1683,7 +1699,9 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'poReferenceLength', defaultValue: 0)
       required this.poReferenceLength,
       @JsonKey(name: 'referenceNoteLength', defaultValue: 0)
-      required this.referenceNoteLength})
+      required this.referenceNoteLength,
+      @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+      required this.showEZCSTickets})
       : _principalList = principalList,
         _smallOrderFeeUserRoles = smallOrderFeeUserRoles,
         _mpSmallOrderFeeUserRoles = mpSmallOrderFeeUserRoles,
@@ -2003,10 +2021,13 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'referenceNoteLength', defaultValue: 0)
   final int referenceNoteLength;
+  @override
+  @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+  final bool showEZCSTickets;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, movThreshold: $movThreshold, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpMovThreshold: $mpMovThreshold, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep, disclaimer: $disclaimer, enableDeliveryOptions: $enableDeliveryOptions, enableRequestDeliveryDate: $enableRequestDeliveryDate, enableSaturdayUrgentDelivery: $enableSaturdayUrgentDelivery, enableStandardDelivery: $enableStandardDelivery, enableTodayUrgentDelivery: $enableTodayUrgentDelivery, enableTomorrowUrgentDelivery: $enableTomorrowUrgentDelivery, enableUrgentDelivery: $enableUrgentDelivery, saturdayDeliveryFee: $saturdayDeliveryFee, selectableDeliveryDays: $selectableDeliveryDays, standardDeliveryDays: $standardDeliveryDays, todayDeliveryFee: $todayDeliveryFee, tomorrowDeliveryFee: $tomorrowDeliveryFee, poReferenceLength: $poReferenceLength, referenceNoteLength: $referenceNoteLength)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, movThreshold: $movThreshold, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpMovThreshold: $mpMovThreshold, orderTypes: $orderTypes, authorizedExtSalesRep: $authorizedExtSalesRep, disclaimer: $disclaimer, enableDeliveryOptions: $enableDeliveryOptions, enableRequestDeliveryDate: $enableRequestDeliveryDate, enableSaturdayUrgentDelivery: $enableSaturdayUrgentDelivery, enableStandardDelivery: $enableStandardDelivery, enableTodayUrgentDelivery: $enableTodayUrgentDelivery, enableTomorrowUrgentDelivery: $enableTomorrowUrgentDelivery, enableUrgentDelivery: $enableUrgentDelivery, saturdayDeliveryFee: $saturdayDeliveryFee, selectableDeliveryDays: $selectableDeliveryDays, standardDeliveryDays: $standardDeliveryDays, todayDeliveryFee: $todayDeliveryFee, tomorrowDeliveryFee: $tomorrowDeliveryFee, poReferenceLength: $poReferenceLength, referenceNoteLength: $referenceNoteLength, showEZCSTickets: $showEZCSTickets)';
   }
 
   @override
@@ -2131,7 +2152,8 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
             (identical(other.todayDeliveryFee, todayDeliveryFee) || other.todayDeliveryFee == todayDeliveryFee) &&
             (identical(other.tomorrowDeliveryFee, tomorrowDeliveryFee) || other.tomorrowDeliveryFee == tomorrowDeliveryFee) &&
             (identical(other.poReferenceLength, poReferenceLength) || other.poReferenceLength == poReferenceLength) &&
-            (identical(other.referenceNoteLength, referenceNoteLength) || other.referenceNoteLength == referenceNoteLength));
+            (identical(other.referenceNoteLength, referenceNoteLength) || other.referenceNoteLength == referenceNoteLength) &&
+            (identical(other.showEZCSTickets, showEZCSTickets) || other.showEZCSTickets == showEZCSTickets));
   }
 
   @JsonKey(ignore: true)
@@ -2227,7 +2249,8 @@ class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
         todayDeliveryFee,
         tomorrowDeliveryFee,
         poReferenceLength,
-        referenceNoteLength
+        referenceNoteLength,
+        showEZCSTickets
       ]);
 
   @JsonKey(ignore: true)
@@ -2430,8 +2453,9 @@ abstract class _SalesOrganisationConfigsDto
       @JsonKey(name: 'poReferenceLength', defaultValue: 0)
       required final int poReferenceLength,
       @JsonKey(name: 'referenceNoteLength', defaultValue: 0)
-      required final int
-          referenceNoteLength}) = _$SalesOrganisationConfigsDtoImpl;
+      required final int referenceNoteLength,
+      @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+      required final bool showEZCSTickets}) = _$SalesOrganisationConfigsDtoImpl;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -2712,6 +2736,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'referenceNoteLength', defaultValue: 0)
   int get referenceNoteLength;
+  @override
+  @JsonKey(name: 'showEZCSTickets', defaultValue: false)
+  bool get showEZCSTickets;
   @override
   @JsonKey(ignore: true)
   _$$SalesOrganisationConfigsDtoImplCopyWith<_$SalesOrganisationConfigsDtoImpl>

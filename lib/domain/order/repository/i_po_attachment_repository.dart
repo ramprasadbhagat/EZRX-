@@ -27,6 +27,7 @@ abstract class IpoAttachmentRepository {
 
   Future<Either<ApiFailure, List<PlatformFile>>> pickFiles({
     required UploadOptionType uploadOptionType,
+    required bool submitTicketFileExtension,
   });
 
   Future<Either<ApiFailure, PermissionStatus>> downloadPermission();

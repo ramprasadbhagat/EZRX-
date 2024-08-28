@@ -294,6 +294,7 @@ void main() {
         act: (bloc) => bloc.add(
           const PoAttachmentEvent.pickFile(
             uploadOptionType: UploadOptionType.file,
+            submitTicketFileExtension: false,
           ),
         ),
         expect: () => [
@@ -317,6 +318,7 @@ void main() {
           when(
             () => poAttachmentRepository.pickFiles(
               uploadOptionType: UploadOptionType.file,
+              submitTicketFileExtension: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -338,6 +340,7 @@ void main() {
         act: (bloc) => bloc.add(
           const PoAttachmentEvent.pickFile(
             uploadOptionType: UploadOptionType.file,
+            submitTicketFileExtension: false,
           ),
         ),
         expect: () => [
@@ -361,6 +364,7 @@ void main() {
           when(
             () => poAttachmentRepository.pickFiles(
               uploadOptionType: UploadOptionType.file,
+              submitTicketFileExtension: false,
             ),
           ).thenAnswer(
             (invocation) async => const Right([]),
@@ -380,6 +384,7 @@ void main() {
         act: (bloc) => bloc.add(
           const PoAttachmentEvent.pickFile(
             uploadOptionType: UploadOptionType.file,
+            submitTicketFileExtension: false,
           ),
         ),
         expect: () => [
@@ -395,6 +400,7 @@ void main() {
           when(
             () => poAttachmentRepository.pickFiles(
               uploadOptionType: UploadOptionType.file,
+              submitTicketFileExtension: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(listFile),
@@ -414,6 +420,7 @@ void main() {
         act: (bloc) => bloc.add(
           const PoAttachmentEvent.pickFile(
             uploadOptionType: UploadOptionType.file,
+            submitTicketFileExtension: false,
           ),
         ),
         expect: () => [

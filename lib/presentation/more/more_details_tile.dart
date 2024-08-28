@@ -285,4 +285,16 @@ class MoreDetailsTile {
           context.navigateTo(const PrivacyConsentPageRoute());
         },
       );
+  factory MoreDetailsTile.eZCSTickets(BuildContext context) => MoreDetailsTile(
+        icon: const Icon(
+          Icons.confirmation_number_outlined,
+          color: ZPColors.greenIconColor,
+        ),
+        key: WidgetKeys.ezcsTicketTile,
+        label: 'eZCS Tickets',
+        onTap: () {
+          //TODO(Hob): Navigate to eZCS tickets listing
+          context.navigateTo(SubmitTicketPageRoute(chatUrl: ''));
+        },
+      );
 }

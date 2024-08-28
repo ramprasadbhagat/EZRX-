@@ -114,6 +114,7 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     standardDeliveryDays
     todayDeliveryFee
     tomorrowDeliveryFee
+    showEZCSTickets
     }
     poReferenceLength
     referenceNoteLength

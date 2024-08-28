@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/account/notification_settings/notificatio
 import 'package:ezrxmobile/application/account/privacy_consent/privacy_consent_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
+import 'package:ezrxmobile/application/account/submit_ticket/bloc/submit_ticket_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_attachment_bloc/announcement_attachment_bloc.dart';
@@ -120,6 +121,9 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_re
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/ezcs_ticket_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/ezcs_ticket_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/ezcs_ticket_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
@@ -140,6 +144,7 @@ import 'package:ezrxmobile/infrastructure/account/repository/contact_us_reposito
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_license_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/ez_point_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/ezcs_ticket_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/notification_settings_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
@@ -2947,6 +2952,40 @@ void setupLocator() {
     () => NewClaimSubmissionBloc(
       config: locator<Config>(),
       claimManagementRepository: locator<ClaimManagementRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  EZCS Ticket
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => EZCSTicketLocalDataSource());
+
+  locator.registerLazySingleton(() => EZCSTicketQueryMutation());
+
+  locator.registerLazySingleton(
+    () => EZCSTicketRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      ezcsTicketQueryMutation: locator<EZCSTicketQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => EZCSTicketRepository(
+      config: locator<Config>(),
+      localDataSource: locator<EZCSTicketLocalDataSource>(),
+      remoteDataSource: locator<EZCSTicketRemoteDataSource>(),
+      fileSystemHelper: locator<FileSystemHelper>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => SubmitTicketBloc(
+      ezcsTicketRepository: locator<EZCSTicketRepository>(),
+      config: locator<Config>(),
     ),
   );
 }

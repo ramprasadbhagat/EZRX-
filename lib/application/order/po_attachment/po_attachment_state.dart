@@ -50,4 +50,11 @@ extension PoAttachmentListExtension on List<PlatformFile> {
         (PlatformFile element) =>
             element.size > (maximumUploadSize * pow(1024, 2)),
       );
+
+  bool totalFilesExceed(int maximumUploadSize) {
+    final totalFilesSize =
+        fold(0, (previousValue, element) => previousValue + element.size);
+
+    return totalFilesSize > (maximumUploadSize * pow(1024, 2));
+  }
 }

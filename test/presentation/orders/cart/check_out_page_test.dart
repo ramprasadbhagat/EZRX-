@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_rep_authorized_details.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -102,6 +103,7 @@ void main() {
   late AplSimulatorOrder aplSimulatorOrder;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
+  final config = ConfigMock();
   final checkoutPageRouteRouteData = RouteData(
     stackKey: const Key(''),
     type: const RouteType.adaptive(),
@@ -148,6 +150,9 @@ void main() {
   );
 
   setUpAll(() async {
+    locator.registerFactory<Config>(() => config);
+    when(() => config.maximumUploadSize).thenReturn(20);
+
     locator.registerFactory(() => AutoRouteMock());
     locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
 
@@ -1766,6 +1771,7 @@ void main() {
           () => poAttachmentBloc.add(
             const PoAttachmentEvent.pickFile(
               uploadOptionType: UploadOptionType.gallery,
+              submitTicketFileExtension: false,
             ),
           ),
         ).called(1);
@@ -1780,6 +1786,7 @@ void main() {
           () => poAttachmentBloc.add(
             const PoAttachmentEvent.pickFile(
               uploadOptionType: UploadOptionType.file,
+              submitTicketFileExtension: false,
             ),
           ),
         ).called(1);
@@ -1794,6 +1801,7 @@ void main() {
           () => poAttachmentBloc.add(
             const PoAttachmentEvent.pickFile(
               uploadOptionType: UploadOptionType.takePhoto,
+              submitTicketFileExtension: false,
             ),
           ),
         ).called(1);
