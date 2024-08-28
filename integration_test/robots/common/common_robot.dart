@@ -150,8 +150,11 @@ class CommonRobot {
     }
   }
 
-  Future<void> verifySnackbarVisible() async {
-    expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+  Future<void> verifySnackbarVisible({bool isVisible = true}) async {
+    expect(
+      find.byKey(WidgetKeys.customSnackBar),
+      isVisible ? findsOneWidget : findsNothing,
+    );
     await tester.pumpAndSettle();
   }
 

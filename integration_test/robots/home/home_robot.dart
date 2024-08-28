@@ -152,7 +152,7 @@ class HomeRobot extends CommonRobot {
 
   Future<void> tapRecentlyOrderIcon() async {
     final iconArrow =
-        find.byKey(WidgetKeys.sectionTileIcon('Recently ordered'.tr()));
+        find.byKey(WidgetKeys.sectionTileIcon('Your recent order items'.tr()));
     await tester.tap(iconArrow);
     await tester.pumpAndSettle();
   }

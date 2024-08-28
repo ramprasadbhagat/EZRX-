@@ -39,6 +39,10 @@ class NewPaymentStep2Robot {
       find.textContaining('Select credit (Optional)'.tr()),
       findsOneWidget,
     );
+    expect(
+      find.byKey(WidgetKeys.searchBar),
+      findsOneWidget,
+    );
     expect(checkAllWidget, findsOneWidget);
     expect(
       find.textContaining(price.priceFormatted, findRichText: true),

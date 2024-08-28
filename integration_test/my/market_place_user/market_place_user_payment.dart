@@ -166,7 +166,7 @@ void main() {
       paymentSummaryRobot.verifyPageVisible();
       await commonRobot.tapToBackScreen();
       await paymentHomeRobot.tapNewPayment();
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
       newPaymentRobot.verifyMarketPlaceLogo();
       await newPaymentRobot.tapCloseButton();
       await paymentHomeRobot.tapToBackScreen();
@@ -199,7 +199,7 @@ void main() {
         accountInvoiceRobot.verifyFilterApplied(1);
         //Verify navigate new payment
         await accountInvoiceRobot.tapNewPaymentButton();
-        newPaymentRobot.verifyPage();
+        await newPaymentRobot.verifyPage();
         newPaymentRobot.verifyMarketPlaceLogo();
         await newPaymentRobot.tapCloseButton();
         //Verify search
@@ -305,7 +305,7 @@ void main() {
         accountCreditsRobot.verifyFilterAppliedCount(1);
         //Verify navigate new payment
         await accountCreditsRobot.tapPaymentButton();
-        newPaymentRobot.verifyPage();
+        await newPaymentRobot.verifyPage();
         newPaymentRobot.verifyMarketPlaceLogo();
         await newPaymentRobot.tapCloseButton();
         //Verify search
@@ -402,7 +402,7 @@ void main() {
         accountSummaryTabRobot.verifyFilterApplied(1);
         //Verify navigate new payment
         await accountSummaryTabRobot.tapNewPaymentButton();
-        newPaymentRobot.verifyPage();
+        await newPaymentRobot.verifyPage();
         newPaymentRobot.verifyMarketPlaceLogo();
         await newPaymentRobot.tapCloseButton();
         //Verify search
@@ -486,7 +486,7 @@ void main() {
       paymentSummaryRobot.verifyFilterApplied(1);
       //Verify navigate new payment
       await paymentSummaryRobot.tapNewPaymentButton();
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
       newPaymentRobot.verifyMarketPlaceLogo();
       await newPaymentRobot.tapCloseButton();
       //Verify search
@@ -563,7 +563,7 @@ void main() {
       await pumpAppWithMarketPlacePaymentScreen(tester);
 
       await paymentHomeRobot.tapNewPayment();
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
       newPaymentRobot.verifyMarketPlaceLogo();
       //Filter invoice
       newPaymentStep1Robot.verifyFilterApplied(1);
@@ -634,7 +634,7 @@ void main() {
       await pumpAppWithMarketPlacePaymentScreen(tester);
 
       await paymentHomeRobot.tapNewPayment();
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
       newPaymentRobot.verifyMarketPlaceLogo();
       //Filter to get invoice
       await newPaymentStep1Robot.clickFilter();
@@ -646,7 +646,7 @@ void main() {
       await newPaymentStep1Robot.tapApplyFilter();
       //Select invoice
       await newPaymentStep1Robot.tapNextButton();
-      newPaymentStep1Robot.verifyPage();
+      await newPaymentStep1Robot.verifyPage();
       newPaymentStep1Robot.verifyCheckboxStatus(false);
       await newPaymentStep1Robot.clickFirstItem();
       newPaymentStep1Robot.collectTheFirstItem();
@@ -686,7 +686,7 @@ void main() {
       await newPaymentStep1Robot.clickFirstItem();
       newPaymentRobot.verifyCreditAmountGreaterInvoiceAmount();
       await newPaymentStep1Robot.tapNextButton();
-      newPaymentStep1Robot.verifyPage();
+      await newPaymentStep1Robot.verifyPage();
       await newPaymentStep1Robot.tapAllCheckbox();
       newPaymentRobot.verifyCreditAmountGreaterInvoiceAmount(isVisible: false);
       await newPaymentStep1Robot.tapAllCheckbox();

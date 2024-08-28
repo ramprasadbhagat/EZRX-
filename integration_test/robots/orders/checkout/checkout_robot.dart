@@ -845,4 +845,13 @@ class CheckoutRobot extends CommonRobot {
     final priceString = tester.widget<PriceComponent>(priceWidgetFinder).price;
     return priceString.extractDouble;
   }
+
+  Future<bool> isErrorSnackBarAppears(String containedMessage) async {
+    final finder = find.descendant(
+      of: customSnackBar,
+      matching: find.textContaining(containedMessage),
+    );
+    await tester.pumpUntilVisible(finder, maxIteration: 3);
+    return finder.evaluate().isNotEmpty;
+  }
 }

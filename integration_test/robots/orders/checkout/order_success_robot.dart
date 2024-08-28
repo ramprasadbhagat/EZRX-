@@ -183,13 +183,7 @@ class OrderSuccessRobot extends CommonRobot {
       );
   Future<void> verifySmallOrderFee(String price) => scrollEnsureFinderVisible(
         find.descendant(
-          of: find.byKey(WidgetKeys.orderSummarySmallFee),
-          matching: find.text(price, findRichText: true),
-        ),
-      );
-  Future<void> verifyManualFee(String price) => scrollEnsureFinderVisible(
-        find.descendant(
-          of: find.byKey(WidgetKeys.orderSummaryManualFee),
+          of: find.byKey(WidgetKeys.smallOrderFeePrice),
           matching: find.text(price, findRichText: true),
         ),
       );

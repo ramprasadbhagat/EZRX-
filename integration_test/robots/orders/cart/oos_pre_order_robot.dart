@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,6 +17,14 @@ class OOSPreOrderRobot {
   final materialDetailsStock = find.byKey(WidgetKeys.materialDetailsStock);
 
   bool get isSheetVisible => bottomSheet.evaluate().isNotEmpty;
+
+  bool get isOosPreOrderMaterial => find
+      .descendant(
+        of: find.byType(StatusLabel),
+        matching: find.text('OOS-Preorder'.tr()),
+      )
+      .evaluate()
+      .isNotEmpty;
 
   void verifySheet({required bool isVisible}) {
     expect(bottomSheet, isVisible ? findsOneWidget : findsNothing);

@@ -32,7 +32,8 @@ class NewPaymentStep1Robot {
   String invoiceIdPrice = '';
   String govIdForVn = '';
 
-  void verifyPage() {
+  Future<void> verifyPage() async {
+    await tester.pumpUntilVisible(outstandingInvoicesPage, maxIteration: 5);
     expect(outstandingInvoicesPage, findsOneWidget);
   }
 

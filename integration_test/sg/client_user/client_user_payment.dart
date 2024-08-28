@@ -181,7 +181,7 @@ void main() {
       await commonRobot.tapToBackScreen();
 
       await paymentHomeRobot.tapNewPayment();
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
     });
   });
 
@@ -244,7 +244,7 @@ void main() {
       //verify
       accountInvoiceRobot.verifyNewPaymentButton();
       await accountInvoiceRobot.tapNewPaymentButton();
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
     });
 
     testWidgets('EZRX-T131 | Verify filter tune icon - all features',
@@ -822,7 +822,7 @@ void main() {
       await accountCreditsRobot.tapPaymentButton();
 
       //verify new payment page
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
 
       //close
       await newPaymentRobot.tapCloseButton();
@@ -1378,7 +1378,7 @@ void main() {
       await accountSummaryTabRobot.tapNewPaymentButton();
 
       //verify new payment page
-      newPaymentRobot.verifyPage();
+      await newPaymentRobot.verifyPage();
 
       //close
       await newPaymentRobot.tapCloseButton();
@@ -1921,7 +1921,7 @@ void main() {
 
   //     soaRootRobot.verifySOANewPaymentButton();
   //     await soaRootRobot.tapSOANewPaymentButton();
-  //     newPaymentRobot.verifyPage();
+  //   await newPaymentRobot.verifyPage();
   //   });
 
   //   testWidgets('EZRX-T263 | Verify pull to refresh Feature', (tester) async {
@@ -1961,7 +1961,7 @@ void main() {
       await homeRobot.tapPaymentQuickAccess();
       paymentHomeRobot.verifyPage();
       await paymentHomeRobot.tapNewPayment();
-      newPaymentStep1Robot.verifyPage();
+      await newPaymentStep1Robot.verifyPage();
     }
 
     group('Step 1 - ', () {

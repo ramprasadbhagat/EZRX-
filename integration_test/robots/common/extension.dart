@@ -23,7 +23,9 @@ extension NumExt on num {
   String priceDisplay(String currency) => '$currency $priceFormatted';
   String priceDisplayForID(String currency) => '$currency $priceFormattedForID';
 
-  num includeTaxForID(num tax) => this + taxValue(tax).floorToDouble();
+  num includeTaxForID(num tax) => this + taxValueForID(tax);
+
+  num taxValueForID(num tax) => taxValue(tax).floorToDouble();
 
   num includeTax(num tax) => this + taxValue(tax);
 

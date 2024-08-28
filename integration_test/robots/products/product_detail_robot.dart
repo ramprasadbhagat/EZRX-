@@ -432,6 +432,14 @@ class ProductDetailRobot extends CommonRobot {
       .evaluate()
       .isNotEmpty;
 
+  bool get isOutOfStockMaterial => find
+      .descendant(
+        of: find.byType(StatusLabel),
+        matching: find.text('Out of stock'.tr()),
+      )
+      .evaluate()
+      .isNotEmpty;
+
   void verifyAddToCartButtonDisable() {
     final addToCartElevatedButton = tester.widget<ElevatedButton>(
       find.descendant(

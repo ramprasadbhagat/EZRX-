@@ -3,13 +3,17 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/extension.dart';
+
 class NewPaymentRobot {
   final WidgetTester tester;
 
   NewPaymentRobot(this.tester);
 
-  void verifyPage() {
-    expect(find.byKey(WidgetKeys.newPaymentPage), findsOneWidget);
+  Future<void> verifyPage() async {
+    final newPaymentPage = find.byKey(WidgetKeys.newPaymentPage);
+    await tester.pumpUntilVisible(newPaymentPage, maxIteration: 5);
+    expect(newPaymentPage, findsOneWidget);
   }
 
   Future<void> tapCloseButton() async {

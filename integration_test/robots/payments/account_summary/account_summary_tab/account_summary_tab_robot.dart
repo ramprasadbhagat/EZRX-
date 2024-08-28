@@ -32,6 +32,15 @@ class AccountSummaryTabRobot extends CommonRobot {
     expect(_allSummaryPage, findsOneWidget);
   }
 
+  bool get isNoRecordFound {
+    final widget = find.descendant(
+      of: _allSummaryPage,
+      matching: find.byType(NoRecordFound),
+    );
+
+    return widget.evaluate().isNotEmpty;
+  }
+
   void verifyFilterButton() {
     expect(_filterButton, findsOneWidget);
   }
