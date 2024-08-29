@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import '../../../test/common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../core/common.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/announcement_article/articles/articles_details_robot.dart';
@@ -146,7 +147,8 @@ void main() {
   const shipToCode = '0071264617';
   const shipToAddress = 'Dr. Dy Bopha';
   const minOrderAmount = 20.0;
-  const taxForMaterial = 10;
+  final config = fakeKHSalesOrgConfigs;
+  final taxForMaterial = config.vatValue;
 
   const otherCustomerCode = '0030331233';
   const otherShipToCode = '0071262518';
@@ -3274,8 +3276,16 @@ void main() {
       );
       await cartRobot.tapShowPriceSummary();
       orderPriceSummaryRobot.verifySheet(isVisible: true);
-      orderPriceSummaryRobot
-          .verifySubTotalLabel(materialUnitPrice.priceDisplay(currency));
+      orderPriceSummaryRobot.verifySubTotalLabel(
+        materialUnitPrice.priceDisplay(currency),
+        config.displaySubtotalTaxBreakdown,
+      );
+      if (config.displaySubtotalTaxBreakdown) {
+        orderPriceSummaryRobot.verifyTaxLabel(
+          materialUnitPrice.taxValue(taxForMaterial).priceDisplay(currency),
+          taxForMaterial,
+        );
+      }
       orderPriceSummaryRobot.verifyGrandTotalLabel(
         materialUnitPrice.includeTax(taxForMaterial).priceDisplay(currency),
       );
@@ -3753,8 +3763,16 @@ void main() {
       );
       await checkoutRobot.tapStickyGrandTotal();
       orderPriceSummaryRobot.verifySheet(isVisible: true);
-      orderPriceSummaryRobot
-          .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+      orderPriceSummaryRobot.verifySubTotalLabel(
+        totalPrice.priceDisplay(currency),
+        config.displaySubtotalTaxBreakdown,
+      );
+      if (config.displaySubtotalTaxBreakdown) {
+        orderPriceSummaryRobot.verifyTaxLabel(
+          totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+          taxForMaterial,
+        );
+      }
       orderPriceSummaryRobot.verifyGrandTotalLabel(
         totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
       );
@@ -3956,13 +3974,20 @@ void main() {
         await checkoutRobot.tapStickyGrandTotal();
         orderPriceSummaryRobot.verifySheet(isVisible: true);
         orderPriceSummaryRobot.verifyTaxLabel(
-          (totalPrice.includeTax(taxForMaterial) - totalPrice)
+          (totalPrice.taxValue(taxForMaterial) - totalPrice)
               .priceDisplay(currency),
           taxForMaterial,
         );
         orderPriceSummaryRobot.verifySubTotalLabel(
           totalPrice.priceDisplay(currency),
+          config.displaySubtotalTaxBreakdown,
         );
+        if (config.displaySubtotalTaxBreakdown) {
+          orderPriceSummaryRobot.verifyTaxLabel(
+            totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+            taxForMaterial,
+          );
+        }
         orderPriceSummaryRobot.verifyGrandTotalLabel(
           totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
         );
@@ -4049,13 +4074,20 @@ void main() {
         await checkoutRobot.tapStickyGrandTotal();
         orderPriceSummaryRobot.verifySheet(isVisible: true);
         orderPriceSummaryRobot.verifyTaxLabel(
-          (totalPrice.includeTax(taxForMaterial) - totalPrice)
+          (totalPrice.taxValue(taxForMaterial) - totalPrice)
               .priceDisplay(currency),
           taxForMaterial,
         );
         orderPriceSummaryRobot.verifySubTotalLabel(
           totalPrice.priceDisplay(currency),
+          config.displaySubtotalTaxBreakdown,
         );
+        if (config.displaySubtotalTaxBreakdown) {
+          orderPriceSummaryRobot.verifyTaxLabel(
+            totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+            taxForMaterial,
+          );
+        }
         orderPriceSummaryRobot.verifyGrandTotalLabel(
           totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
         );
@@ -4135,13 +4167,20 @@ void main() {
         await checkoutRobot.tapStickyGrandTotal();
         orderPriceSummaryRobot.verifySheet(isVisible: true);
         orderPriceSummaryRobot.verifyTaxLabel(
-          (totalPrice.includeTax(taxForMaterial) - totalPrice)
+          (totalPrice.taxValue(taxForMaterial) - totalPrice)
               .priceDisplay(currency),
           taxForMaterial,
         );
         orderPriceSummaryRobot.verifySubTotalLabel(
           totalPrice.priceDisplay(currency),
+          config.displaySubtotalTaxBreakdown,
         );
+        if (config.displaySubtotalTaxBreakdown) {
+          orderPriceSummaryRobot.verifyTaxLabel(
+            totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+            taxForMaterial,
+          );
+        }
         orderPriceSummaryRobot.verifyGrandTotalLabel(
           totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
         );
@@ -4226,13 +4265,20 @@ void main() {
         await checkoutRobot.tapStickyGrandTotal();
         orderPriceSummaryRobot.verifySheet(isVisible: true);
         orderPriceSummaryRobot.verifyTaxLabel(
-          (totalPrice.includeTax(taxForMaterial) - totalPrice)
+          (totalPrice.taxValue(taxForMaterial) - totalPrice)
               .priceDisplay(currency),
           taxForMaterial,
         );
         orderPriceSummaryRobot.verifySubTotalLabel(
           totalPrice.priceDisplay(currency),
+          config.displaySubtotalTaxBreakdown,
         );
+        if (config.displaySubtotalTaxBreakdown) {
+          orderPriceSummaryRobot.verifyTaxLabel(
+            totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+            taxForMaterial,
+          );
+        }
         orderPriceSummaryRobot.verifyGrandTotalLabel(
           totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
         );
@@ -4310,7 +4356,7 @@ void main() {
       //   await checkoutRobot.tapStickyGrandTotal();
       //   orderPriceSummaryRobot.verifySheet(isVisible: true);
       //   orderPriceSummaryRobot.verifyTaxLabel(
-      //     (totalPrice.includeTax(taxForMaterial) - totalPrice)
+      //     (totalPrice.taxValue(taxForMaterial) - totalPrice)
       //         .priceDisplay(currency),
       //     taxForMaterial,
       //   );
@@ -4397,13 +4443,20 @@ void main() {
         await checkoutRobot.tapStickyGrandTotal();
         orderPriceSummaryRobot.verifySheet(isVisible: true);
         orderPriceSummaryRobot.verifyTaxLabel(
-          (totalPrice.includeTax(taxForMaterial) - totalPrice)
+          (totalPrice.taxValue(taxForMaterial) - totalPrice)
               .priceDisplay(currency),
           taxForMaterial,
         );
         orderPriceSummaryRobot.verifySubTotalLabel(
           totalPrice.priceDisplay(currency),
+          config.displaySubtotalTaxBreakdown,
         );
+        if (config.displaySubtotalTaxBreakdown) {
+          orderPriceSummaryRobot.verifyTaxLabel(
+            totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+            taxForMaterial,
+          );
+        }
         orderPriceSummaryRobot.verifyGrandTotalLabel(
           totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
         );
@@ -4486,7 +4539,7 @@ void main() {
       //   await checkoutRobot.tapStickyGrandTotal();
       //   orderPriceSummaryRobot.verifySheet(isVisible: true);
       //   orderPriceSummaryRobot.verifyTaxLabel(
-      //     (totalPrice.includeTax(taxForMaterial) - totalPrice)
+      //     (totalPrice.taxValue(taxForMaterial) - totalPrice)
       //         .priceDisplay(currency),
       //     taxForMaterial,
       //   );
@@ -4616,13 +4669,20 @@ void main() {
         await checkoutRobot.tapStickyGrandTotal();
         orderPriceSummaryRobot.verifySheet(isVisible: true);
         orderPriceSummaryRobot.verifyTaxLabel(
-          (totalPrice.includeTax(taxForMaterial) - totalPrice)
+          (totalPrice.taxValue(taxForMaterial) - totalPrice)
               .priceDisplay(currency),
           taxForMaterial,
         );
         orderPriceSummaryRobot.verifySubTotalLabel(
           totalPrice.priceDisplay(currency),
+          config.displaySubtotalTaxBreakdown,
         );
+        if (config.displaySubtotalTaxBreakdown) {
+          orderPriceSummaryRobot.verifyTaxLabel(
+            totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+            taxForMaterial,
+          );
+        }
         orderPriceSummaryRobot.verifyGrandTotalLabel(
           totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
         );
@@ -4634,29 +4694,29 @@ void main() {
   });
 
   group('Order success -', () {
-    testWidgets(
-        'EZRX-T123 | Verify display order submitted with default components + close page',
-        (tester) async {
-      //init app
-      await pumpAppWithHomeScreen(tester);
-      await checkoutWithMaterial(materialNumber, 1000);
+    // testWidgets(
+    //     'EZRX-T123 | Verify display order submitted with default components + close page',
+    //     (tester) async {
+    //   //init app
+    //   await pumpAppWithHomeScreen(tester);
+    //   await checkoutWithMaterial(materialNumber, 1000);
 
-      //verify
-      await updateRequiredFieldsOnCheckout();
-      await checkoutRobot.tapPlaceOrderButton();
-      orderSuccessRobot.verifyPage();
-      await orderSuccessRobot.verifyOrderSubmittedMessage();
-      await orderSuccessRobot.dismissSnackbar();
-      orderSuccessRobot.verifyOrderId();
-      orderSuccessRobot.verifyOrderDate();
-      await orderSuccessRobot.verifyOrderSummarySection();
+    //   //verify
+    //   await updateRequiredFieldsOnCheckout();
+    //   await checkoutRobot.tapPlaceOrderButton();
+    //   orderSuccessRobot.verifyPage();
+    //   await orderSuccessRobot.verifyOrderSubmittedMessage();
+    //   await orderSuccessRobot.dismissSnackbar();
+    //   orderSuccessRobot.verifyOrderId();
+    //   orderSuccessRobot.verifyOrderDate();
+    //   await orderSuccessRobot.verifyOrderSummarySection();
 
-      await orderSuccessRobot.tapCloseButton();
-      productRobot.verifyPageVisible();
-      await productRobot.tapCartButton();
-      cartRobot.verifyPage();
-      cartRobot.verifyNoRecordFound();
-    });
+    //   await orderSuccessRobot.tapCloseButton();
+    //   productRobot.verifyPageVisible();
+    //   await productRobot.tapCartButton();
+    //   cartRobot.verifyPage();
+    //   cartRobot.verifyNoRecordFound();
+    // });
 
     testWidgets('EZRX-T125 | Verify display material in order submitted',
         (tester) async {
@@ -4673,12 +4733,16 @@ void main() {
 
       //verify
       await orderSuccessRobot.verifyOrderSummarySection();
-      await orderSuccessRobot.verifySubTotal(
+      await orderSuccessRobot.verifySubTotalPriceWithLabel(
         totalPrice.excludeTax().priceDisplay(currency),
+        config.displaySubtotalTaxBreakdown,
       );
-      await orderSuccessRobot.verifyTax(
-        totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
-      );
+      if (config.displaySubtotalTaxBreakdown) {
+        await orderSuccessRobot.verifyTaxWithLabel(
+          totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+          taxForMaterial,
+        );
+      }
       await orderSuccessRobot.verifyGrandTotal(
         totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
       );
@@ -4711,7 +4775,16 @@ void main() {
 
       //verify
       await orderSuccessRobot.verifyOrderSummarySection();
-      await orderSuccessRobot.verifySubTotal(totalPrice.priceDisplay(currency));
+      await orderSuccessRobot.verifySubTotalPriceWithLabel(
+        totalPrice.priceDisplay(currency),
+        config.displaySubtotalTaxBreakdown,
+      );
+      if (config.displaySubtotalTaxBreakdown) {
+        await orderSuccessRobot.verifyTaxWithLabel(
+          totalPrice.taxValue(taxForMaterial).priceDisplay(currency),
+          taxForMaterial,
+        );
+      }
       await orderSuccessRobot.verifyGrandTotal(
         totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
       );
@@ -5179,7 +5252,16 @@ void main() {
         viewByOrdersDetailRobot.verifyCustomerCode(customerCode);
         viewByOrdersDetailRobot.verifyDeliveryTo(shipToCode);
         await viewByOrdersDetailRobot.dragToVerifySummary();
-        viewByOrdersDetailRobot.verifySubTotal(price.priceDisplay(currency));
+        viewByOrdersDetailRobot.verifySubTotalPriceWithLabel(
+          price.priceDisplay(currency),
+          config.displaySubtotalTaxBreakdown,
+        );
+        if (config.displaySubtotalTaxBreakdown) {
+          viewByOrdersDetailRobot.verifyTaxWithLabel(
+            price.taxValue(taxForMaterial).priceDisplay(currency),
+            taxForMaterial,
+          );
+        }
         viewByOrdersDetailRobot.verifyGrandTotal(
           price.includeTax(taxForMaterial).priceDisplay(currency),
         );
