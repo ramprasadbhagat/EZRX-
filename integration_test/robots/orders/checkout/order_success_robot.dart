@@ -206,7 +206,8 @@ class OrderSuccessRobot extends CommonRobot {
         ),
       );
   Future<void> verifyTaxWithLabel(
-    String price, {
+    String price,
+    num taxPercentage, {
     bool isMaterialTax = false,
   }) async {
     await scrollEnsureFinderVisible(_taxFinder);
@@ -223,7 +224,9 @@ class OrderSuccessRobot extends CommonRobot {
       expect(
         find.descendant(
           of: _taxFinder,
-          matching: find.textContaining(price, findRichText: true),
+          matching: find.text(
+            '${'Tax at'.tr()} ${taxPercentage.toDouble()}%:',
+          ),
         ),
         findsOneWidget,
       );

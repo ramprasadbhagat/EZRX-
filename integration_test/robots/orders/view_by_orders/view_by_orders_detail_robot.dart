@@ -137,7 +137,7 @@ class ViewByOrdersDetailRobot extends CommonRobot {
       expect(
         find.descendant(
           of: taxFinder,
-          matching: find.textContaining('${'Tax at'.tr()} $tax%'),
+          matching: find.textContaining('${'Tax at'.tr()} ${tax.toDouble()}%'),
         ),
         findsOneWidget,
       );
