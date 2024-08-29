@@ -21,6 +21,9 @@ class OrderSuccessRobot extends CommonRobot {
   final mpOrderIdSection = find.byKey(WidgetKeys.orderSuccessMPOrderNumbers);
   final orderItem = find.byType(CommonTileItem);
 
+  final Finder _subTotalFinder = find.byKey(WidgetKeys.orderSuccessSubTotal);
+  final Finder _taxFinder = find.byKey(WidgetKeys.orderSummaryTax);
+
   void verifyPage() {
     expect(find.byKey(WidgetKeys.orderSuccess), findsOneWidget);
   }
@@ -148,26 +151,53 @@ class OrderSuccessRobot extends CommonRobot {
         find.byKey(WidgetKeys.orderSuccessOrderSummarySection),
       );
 
-  Future<void> verifyMPSubTotal(String price) => scrollEnsureFinderVisible(
-        find.descendant(
-          of: find.byKey(WidgetKeys.checkoutSummaryMPSubTotal),
-          matching: find.text(price, findRichText: true),
-        ),
-      );
+  Future<void> verifyMPSubTotal(String price, bool isTaxExclude) async {
+    final finder = find.byKey(WidgetKeys.checkoutSummaryMPSubTotal);
+    await scrollEnsureFinderVisible(finder);
+    _verifyLabel(
+      finder,
+      'Subtotal (${isTaxExclude ? 'excl' : 'incl'}.tax):',
+    );
+    await scrollEnsureFinderVisible(
+      find.descendant(
+        of: find.byKey(WidgetKeys.checkoutSummaryMPSubTotal),
+        matching: find.text(price, findRichText: true),
+      ),
+    );
+  }
 
-  Future<void> verifyZPSubTotal(String price) => scrollEnsureFinderVisible(
-        find.descendant(
-          of: find.byKey(WidgetKeys.checkoutSummaryZPSubTotal),
-          matching: find.text(price, findRichText: true),
-        ),
-      );
+  Future<void> verifyZPSubTotal(String price, bool isTaxExclude) async {
+    final finder = find.byKey(WidgetKeys.checkoutSummaryZPSubTotal);
+    await scrollEnsureFinderVisible(finder);
+    _verifyLabel(
+      finder,
+      'Subtotal (${isTaxExclude ? 'excl' : 'incl'}.tax):',
+    );
+    await scrollEnsureFinderVisible(
+      find.descendant(
+        of: finder,
+        matching: find.text(price, findRichText: true),
+      ),
+    );
+  }
 
-  Future<void> verifySubTotal(String price) => scrollEnsureFinderVisible(
-        find.descendant(
-          of: find.byKey(WidgetKeys.orderSuccessSubTotal),
-          matching: find.text(price, findRichText: true),
-        ),
-      );
+  Future<void> verifySubTotalPriceWithLabel(
+    String price,
+    bool isTaxExclude,
+  ) async {
+    await scrollEnsureFinderVisible(_subTotalFinder);
+    _verifyLabel(
+      _subTotalFinder,
+      '${'Subtotal (${isTaxExclude ? 'excl' : 'incl'}.tax)'.tr()}:',
+    );
+    expect(
+      find.descendant(
+        of: _subTotalFinder,
+        matching: find.text(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
 
   Future<void> verifyGrandTotal(String price) => scrollEnsureFinderVisible(
         find.descendant(
@@ -175,12 +205,31 @@ class OrderSuccessRobot extends CommonRobot {
           matching: find.text(price, findRichText: true),
         ),
       );
-  Future<void> verifyTax(String price) => scrollEnsureFinderVisible(
+  Future<void> verifyTaxWithLabel(
+    String price, {
+    bool isMaterialTax = false,
+  }) async {
+    await scrollEnsureFinderVisible(_taxFinder);
+    expect(
+      find.descendant(
+        of: _taxFinder,
+        matching: find.text(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+    if (isMaterialTax) {
+      _verifyLabel(_taxFinder, 'Tax'.tr());
+    } else {
+      expect(
         find.descendant(
-          of: find.byKey(WidgetKeys.orderSummaryTax),
-          matching: find.text(price, findRichText: true),
+          of: _taxFinder,
+          matching: find.textContaining(price, findRichText: true),
         ),
+        findsOneWidget,
       );
+    }
+  }
+
   Future<void> verifySmallOrderFee(String price) => scrollEnsureFinderVisible(
         find.descendant(
           of: find.byKey(WidgetKeys.smallOrderFeePrice),
@@ -287,7 +336,24 @@ class OrderSuccessRobot extends CommonRobot {
     );
   }
 
-  void verifyMaterialTotalPrice(String price, {bool isFree = false}) {
+  void verifyBonusMaterialTotalPriceForID(String price) {
+    final label = find.descendant(
+      of: _verifyingItem,
+      matching: find.byKey(WidgetKeys.orderSuccessItemTotalPrice),
+    );
+    expect(
+      find.descendant(
+        of: label,
+        matching: find.text(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyMaterialTotalPrice(
+    String price, {
+    bool isFree = false,
+  }) {
     final label = find.descendant(
       of: orderItem.at(_getMaterialIndex(isBonus: isFree)),
       matching: find.byKey(WidgetKeys.orderSuccessItemTotalPrice),
@@ -473,14 +539,11 @@ class OrderSuccessRobot extends CommonRobot {
     for (var i = 0; i < orderItem.evaluate().length; i++) {
       final isBonusMaterialPresent = find
           .descendant(
-            of: orderItem.at(i),
-            matching: find.descendant(
-              of: find.descendant(
-                of: orderItem.at(i),
-                matching: find.byKey(WidgetKeys.commonTileItemStatusLabel),
-              ),
-              matching: find.text('Bonus'.tr()),
+            of: find.descendant(
+              of: orderItem.at(i),
+              matching: find.byKey(WidgetKeys.commonTileItemStatusLabel),
             ),
+            matching: find.text('Bonus'.tr()),
           )
           .evaluate()
           .isNotEmpty;
@@ -536,6 +599,18 @@ class OrderSuccessRobot extends CommonRobot {
       find.descendant(
         of: orderSuccessItemTotalPrice,
         matching: find.text(isBonus ? 'FREE'.tr() : price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void _verifyLabel(Finder finder, String label) {
+    expect(
+      find.descendant(
+        of: finder,
+        matching: find.textContaining(
+          label,
+        ),
       ),
       findsOneWidget,
     );

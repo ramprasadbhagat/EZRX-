@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import '../../../test/common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../core/common.dart';
 // import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 // import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
@@ -112,7 +113,8 @@ void main() {
   const materialUnitMeasurement = 'BOX';
   const materialCountryOfOrigin = 'NA';
   var materialUnitPrice = 0.0;
-  const taxPercentage = 11;
+  final config = fakeIDSalesOrgConfigs;
+  final taxPercentage = config.vatValue;
   var smallOrderFee = 0.0;
 
   const multiImageMaterialNumber = 'TNACNESPLNP';
@@ -1479,8 +1481,16 @@ void main() {
           .verifyStickyGrandTotal(grandTotalPrice.priceDisplayForID(currency));
       await checkoutRobot.tapStickyGrandTotal();
       orderPriceSummaryRobot.verifySheet(isVisible: true);
-      orderPriceSummaryRobot
-          .verifySubTotalLabel(totalPrice.priceDisplayForID(currency));
+      orderPriceSummaryRobot.verifySubTotalLabel(
+        totalPrice.priceDisplayForID(currency),
+        config.displaySubtotalTaxBreakdown,
+      );
+      if (config.displaySubtotalTaxBreakdown) {
+        orderPriceSummaryRobot.verifyTaxLabel(
+          totalPrice.taxValueForID(taxPercentage).priceDisplayForID(currency),
+          taxPercentage,
+        );
+      }
       orderPriceSummaryRobot
           .verifySmallOrderFeeLabel(smallOrderFee.priceDisplayForID(currency));
       orderPriceSummaryRobot
@@ -1630,10 +1640,11 @@ void main() {
 
       //verify
       await orderSuccessRobot.verifyOrderSummarySection();
-      await orderSuccessRobot.verifySubTotal(
+      await orderSuccessRobot.verifySubTotalPriceWithLabel(
         totalPrice.priceDisplayForID(currency),
+        config.displaySubtotalTaxBreakdown,
       );
-      await orderSuccessRobot.verifyTax(
+      await orderSuccessRobot.verifyTaxWithLabel(
         totalPrice.taxValueForID(taxPercentage).priceDisplayForID(currency),
       );
       await orderSuccessRobot
@@ -1667,8 +1678,10 @@ void main() {
 
       //verify
       await orderSuccessRobot.verifyOrderSummarySection();
-      await orderSuccessRobot
-          .verifySubTotal(totalPrice.priceDisplayForID(currency));
+      await orderSuccessRobot.verifySubTotalPriceWithLabel(
+        totalPrice.priceDisplayForID(currency),
+        config.displaySubtotalTaxBreakdown,
+      );
       await orderSuccessRobot.verifyGrandTotal(
         grandTotalPrice.floor().priceDisplayForID(currency),
       );
@@ -1688,7 +1701,7 @@ void main() {
       orderSuccessRobot.verifyMateriaDescription(bonusMaterialName);
       orderSuccessRobot.verifyItemQty(qty);
       orderSuccessRobot.verifyMaterialBonusTag(isVisible: false);
-      orderSuccessRobot.verifyMaterialTotalPrice(
+      orderSuccessRobot.verifyBonusMaterialTotalPriceForID(
         0.priceDisplayForID(currency),
       );
     });
@@ -2160,6 +2173,53 @@ void main() {
     });
 
     group('View by order detail -', () {
+      testWidgets(
+          'EZRX-T88 | Verify view by order detail with default components',
+          (tester) async {
+        const qty = 2;
+
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        await checkoutWithMaterial(materialNumber, qty);
+        await placeOrderWithValidPO(materialNumber, 1);
+        final price = materialUnitPrice * qty;
+        await orderSuccessRobot.tapCloseButton();
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+
+        //verify
+        await commonRobot.pullToRefresh();
+        final orderId = viewByOrdersRobot.getOrderIdText(index: 0);
+        await viewByOrdersRobot.tapFirstOrder();
+        viewByOrdersDetailRobot.verifyOrderId(orderId);
+        viewByOrdersDetailRobot.verifyOrderDate();
+        viewByOrdersDetailRobot.verifyPoReference(poReference);
+        viewByOrdersDetailRobot.verifyOrderAddress(shipToAddress);
+        viewByOrdersDetailRobot.verifyCustomerCode(customerCode);
+        viewByOrdersDetailRobot.verifyDeliveryTo(shipToCode);
+        await viewByOrdersDetailRobot.dragToVerifySummary();
+        viewByOrdersDetailRobot.verifySubTotalPriceWithLabel(
+          price.priceDisplayForID(currency),
+          config.displaySubtotalTaxBreakdown,
+        );
+        if (config.displaySubtotalTaxBreakdown) {
+          viewByOrdersDetailRobot.verifyTaxWithLabel(
+            price.taxValueForID(taxPercentage).priceDisplayForID(currency),
+            taxPercentage.toDouble(),
+          );
+        }
+        viewByOrdersDetailRobot.verifyGrandTotal(
+          price.includeTaxForID(taxPercentage).priceDisplayForID(currency),
+        );
+        await viewByOrdersDetailRobot.dragToVerifyItemsSection();
+        await viewByOrdersDetailRobot.startVerifyMaterial(materialNumber);
+        viewByOrdersDetailRobot.verifyQty(qty);
+        viewByOrdersDetailRobot.verifyMaterialTotalPrice(
+          price.priceDisplayForID(currency),
+        );
+        viewByOrdersDetailRobot.verifyBuyAgainButton();
+      });
+
       testWidgets(
           'EZRX-T1518 | Verify License Expired banner is visible in View by order details page',
           (tester) async {

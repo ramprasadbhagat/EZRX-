@@ -108,9 +108,13 @@ class ViewByOrdersDetailRobot extends CommonRobot {
   Future<void> dragToVerifyItems() =>
       scrollEnsureFinderVisible(find.byKey(WidgetKeys.viewByOrderOrderItems));
 
-  void verifySubTotal(String value) {
+  void verifySubTotalPriceWithLabel(String value, bool isTaxExclude) {
     final subTotalWidget = find.byKey(WidgetKeys.viewByOrderSubtotalKey);
     expect(subTotalWidget, findsOneWidget);
+    _verifyLabel(
+      subTotalWidget,
+      '${'Subtotal (${isTaxExclude ? 'excl' : 'incl'}.tax)'.tr()}:',
+    );
     expect(
       find.descendant(
         of: subTotalWidget,
@@ -120,16 +124,31 @@ class ViewByOrdersDetailRobot extends CommonRobot {
     );
   }
 
-  void verifyTax(String value) {
+  void verifyTaxWithLabel(
+    String price,
+    num tax, {
+    bool isMaterialTax = false,
+  }) {
     final taxFinder = find.byKey(WidgetKeys.viewByOrderTaxKey);
     expect(taxFinder, findsOneWidget);
-    expect(
-      find.descendant(
-        of: taxFinder,
-        matching: find.text(value, findRichText: true),
-      ),
-      findsOneWidget,
-    );
+    if (isMaterialTax) {
+      _verifyLabel(taxFinder, 'Tax'.tr());
+    } else {
+      expect(
+        find.descendant(
+          of: taxFinder,
+          matching: find.textContaining('${'Tax at'.tr()} $tax%'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: taxFinder,
+          matching: find.text(price, findRichText: true),
+        ),
+        findsOneWidget,
+      );
+    }
   }
 
   void verifyGrandTotal(String value) {
@@ -146,13 +165,13 @@ class ViewByOrdersDetailRobot extends CommonRobot {
 
   void verifyOrderSummaryComponentVisibleForID(String value) {
     final subTotalWidget = find.byKey(WidgetKeys.viewByOrderIdSubtotalKey);
-    final viewByOrderIdTaxKey = find.byKey(WidgetKeys.viewByOrderIdTaxKey);
+    final viewByOrderIdTaxKey = find.byKey(WidgetKeys.viewByOrderTaxKey);
     final viewByOrderIdSmallOrderFeeKey =
         find.byKey(WidgetKeys.viewByOrderIdSmallOrderFeeKey);
     final viewByOrderIdManualFeeKey =
         find.byKey(WidgetKeys.viewByOrderIdManualFeeKey);
     final viewByOrderIdGrandTotalKey =
-        find.byKey(WidgetKeys.viewByOrderIdGrandTotalKey);
+        find.byKey(WidgetKeys.viewByOrderGrandTotalKey);
     final viewByOrderIdTotalSavingsKey =
         find.byKey(WidgetKeys.viewByOrderIdTotalSavingsKey);
     expect(subTotalWidget, findsOneWidget);
@@ -318,5 +337,17 @@ class ViewByOrdersDetailRobot extends CommonRobot {
       return '';
     }
     return contactNumberText;
+  }
+
+  void _verifyLabel(Finder finder, String label) {
+    expect(
+      find.descendant(
+        of: finder,
+        matching: find.textContaining(
+          label,
+        ),
+      ),
+      findsOneWidget,
+    );
   }
 }

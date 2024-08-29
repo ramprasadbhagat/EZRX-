@@ -324,7 +324,8 @@ class OrderRepository implements IOrderRepository {
         TrackingProps.paymentTerm: orderDetail.orderHistoryDetailsPaymentTerm
             .paymentTermCode.displayPaymentTermCode,
         TrackingProps.poDocuments: orderDetail.poDocumentsName,
-        TrackingProps.referenceNote: orderDetail.referenceNotes,
+        TrackingProps.referenceNote:
+            orderDetail.referenceNotes.displayNAIfEmpty,
         TrackingProps.totalTax: orderDetail.totalTax,
         TrackingProps.username: user.username.getOrDefaultValue(''),
         TrackingProps.orderReason: orderDetail.orderReason,

@@ -1551,9 +1551,6 @@ class WidgetKeys {
   static Key viewByOrderOrderNumberButton =
       const Key('viewByOrderOrderNumberButton');
   static Key viewByOrderIdSubtotalKey = const Key('viewByOrderIdSubtotalKey');
-  static Key viewByOrderIdTaxKey = const Key('viewByOrderIdTaxKey');
-  static Key viewByOrderIdGrandTotalKey =
-      const Key('viewByOrderIdGrandTotalKey');
   static Key viewByOrderIdTotalSavingsKey =
       const Key('viewByOrderIdTotalSavingsKey');
   static Key viewByOrderIdManualFeeKey = const Key('viewByOrderIdManualFeeKey');

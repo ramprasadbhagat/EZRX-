@@ -1656,7 +1656,7 @@ void main() {
         );
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.viewByOrderIdTaxKey),
+            of: find.byKey(WidgetKeys.viewByOrderTaxKey),
             matching: find.text('Tax at 11.0%:'),
           ),
           findsOneWidget,
@@ -1676,7 +1676,7 @@ void main() {
         );
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.viewByOrderIdGrandTotalKey),
+            of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
             matching: find.textContaining('Grand total:'),
           ),
           findsOneWidget,
@@ -1961,11 +1961,7 @@ void main() {
         final hideTaxRate = find.text(
           'Tax:',
         );
-        final taxSection = find.byKey(
-          currentSalesOrg.isID
-              ? WidgetKeys.viewByOrderIdTaxKey
-              : WidgetKeys.viewByOrderTaxKey,
-        );
+        final taxSection = find.byKey(WidgetKeys.viewByOrderTaxKey);
         expect(
           find.descendant(
             of: taxSection,
@@ -1992,11 +1988,8 @@ void main() {
         );
 
         //grand total price
-        final grandTotalFinder = find.byKey(
-          currentSalesOrg.isID
-              ? WidgetKeys.viewByOrderIdGrandTotalKey
-              : WidgetKeys.viewByOrderGrandTotalKey,
-        );
+        final grandTotalFinder =
+            find.byKey(WidgetKeys.viewByOrderGrandTotalKey);
 
         expect(
           find.descendant(

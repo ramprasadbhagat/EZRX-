@@ -50,7 +50,7 @@ class OrderSummarySection extends StatelessWidget {
           if (eligibilityState.salesOrg.isID) ...[
             const SizedBox(height: 10),
             _PriceTile(
-              key: WidgetKeys.viewByOrderIdTaxKey,
+              key: WidgetKeys.viewByOrderTaxKey,
               orderNumber: orderDetails.orderNumber,
               title: '${context.tr('Tax at')} ${orderDetails.taxRate}%',
               value: orderDetails.totalTax,
@@ -80,7 +80,7 @@ class OrderSummarySection extends StatelessWidget {
             ),
             const _SectionDivider(),
             _PriceTile(
-              key: WidgetKeys.viewByOrderIdGrandTotalKey,
+              key: WidgetKeys.viewByOrderGrandTotalKey,
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Grand total'),
               value: orderDetails.totalValue,
